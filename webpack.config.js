@@ -3,9 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const entryPath = ".";
 
 module.exports = {
-  entry: `./${entryPath}/app/index.ts`,
+  entry: {
+    style: `./${entryPath}/app/style.ts`,
+    signIn: `./app/signIn.ts`
+  },
   output: {
-    filename: "out.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, `${entryPath}/build`)
   },
   devServer: {

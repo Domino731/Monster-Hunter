@@ -1,21 +1,46 @@
-.form{
-    &__container{
+.auth {
     
-    background-color: #2a2a72;
-    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
-    height: 100vh;
-    width: 100%;  
+    &__title {
+        font-size: 61px;
+        color: $color-green;
+        font-style: italic;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-align: center;
+        padding-top: 30px;
+        -webkit-text-stroke: 2px black;
+        text-shadow: 4px 4px $color-black;
+        z-index: 4;
+    
     }
-  &__element{
-      margin: 10px;
-      width: 430px;
-      height: 102px;
-      border: 2px solid red;
-      img{
-          width: 100%;
-          height: 100%;
-          object-fit: fill;
-      }
-  } 
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
+    &__item{
+        width: 560px;
+    }
+    &__itemTitle{
+        font-size: 50px;
+        color: $color-blue;
+        font-style: italic;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-align: center;
+        padding-top: 30px;
+        -webkit-text-stroke: 2px black;
+        text-shadow: 4px 4px $color-black;
+        z-index: 4;
+    }
+    &__form {
+        margin: 10px;
+        width: 100%;
+        height: 102px;
+        border: 2px solid red;
+    
+    }
 }
