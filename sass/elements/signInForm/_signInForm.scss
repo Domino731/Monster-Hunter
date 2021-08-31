@@ -24,8 +24,16 @@
         width: 560px;
         border-radius: 28px;
         padding: 10px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(6px);
+        transition: 0.4s;
+        &-login{
+           height: 423px;
+        }
+
+        &:hover{
+            background: rgba(255, 255, 255, 0.4);
+        }
     }
     &__itemTitle {
         font-size: 50px;
@@ -105,9 +113,15 @@
                 letter-spacing: 0.25rem;
                 box-shadow: 47px 4px #96a1a8 inset, -47px 4px #96a1a8 inset;
                 cursor: pointer;
-
             }
         }
+    }
+
+    &__freepikAttribute{
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }
 .auth__inputWrapper {

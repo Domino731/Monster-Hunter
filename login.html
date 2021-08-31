@@ -19,6 +19,7 @@
     body {
       background-image: url(./images/summer_landscape.jpg);
       background-size: cover;
+      background-repeat: no-repeat;
       height: 100vh;
       width: 100%;
     }
@@ -31,7 +32,7 @@
     <div class="auth__container">
 
 
-      <div class="auth__item">
+      <div class="auth__item auth__item-login">
         <h2 class="auth__itemTitle">Login</h2>
         <form class="auth__form">
 
@@ -43,24 +44,56 @@
 
 
           <div class="auth__inputWrapper auth__inputWrapper-left">
-            <label>E-mail
-              <input type="password" name="password" placeholder="password">
+            <label>Password
+              <input type="password" name="password" placeholder="Password">
             </label>
           </div>
 
           <div class="auth__submitWrapper">
-             <div></div>
-                  <button>Login</button>
-             <div></div>
+            <div></div>
+            <button>Login</button>
+            <div></div>
           </div>
         </form>
-
-
       </div>
 
       <div class="auth__item">
         <h2 class="auth__itemTitle">Register</h2>
         <form class="auth__form">
+
+
+          <div class="auth__inputWrapper">
+            <label>E-mail
+              <input type="email" name="eMail" placeholder="E-mail">
+            </label>
+          </div>
+
+
+          <div class="auth__inputWrapper auth__inputWrapper-left">
+            <label>Password
+              <input type="password" name="password" placeholder="Password">
+            </label>
+          </div>
+
+          <div class="auth__inputWrapper auth__inputWrapper-left">
+            <label>Repeat password
+              <input type="password" name="repeatPassword" placeholder="Repeat password">
+            </label>
+          </div>
+
+
+          <div class="auth__inputWrapper">
+            <label>Nickname
+              <input type="email" name="nickname" placeholder="Nickname">
+            </label>
+          </div>
+
+          <div class="auth__submitWrapper">
+            <div></div>
+            <button>Register</button>
+            <div></div>
+          </div>
+
 
         </form>
       </div>
@@ -68,9 +101,9 @@
     </div>
   </main>
 
-  <footer>
+  <div class="auth__freepikAttribute">
     <a href='https://www.freepik.com/vectors/summer'>Summer vector created by upklyak - www.freepik.com</a>
-  </footer>
+  </div>
   <script src="build/style.js"></script>
   <script src="build/signIn.js"></script>
 </body>
