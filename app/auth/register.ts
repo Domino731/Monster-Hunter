@@ -1,6 +1,7 @@
 import { AuthForm } from "./authForm";
 import { includeNumber, isUpper } from '../functions/other';
 import validator from 'validator';
+import {auth, db} from "../firebase";
 
 export class Register extends AuthForm {
 
@@ -32,8 +33,27 @@ export class Register extends AuthForm {
         }
     }
 
+    // creating new user with his own data in firestore
     authAction() {
-        console.log("correct data");
+        auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
+        .then((cred) => {
+            console.log(cred)
+            return db.collection("users")
+            .doc(cred.uid)
+            .set({
+                nick: this.data.nickname,
+                level: 1
+            });
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode, errorMessage)
+            if(errorCode === "auth/email-already-in-use"){
+                this.invalid.eMail.innerText = "This e-mail is already in use.";
+                this.input.eMail.style.borderBottomColor = "#e63946";
+            }
+          });
     }
     setErrors() {
         // checking email
