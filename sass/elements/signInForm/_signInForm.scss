@@ -25,7 +25,7 @@
         border-radius: 28px;
         padding: 10px;
         background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(12px);
         transition: 0.4s;
         &-login{
            height: 423px;
@@ -144,7 +144,7 @@
         height: 38px;
         width: 270px;
         transition: 0.4s;
-        background: none;
+        background: transparent;
         font-size: 1.5rem;
         border: none;
         border-bottom: 5px solid $color-gold;
