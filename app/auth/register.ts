@@ -35,6 +35,11 @@ export class Register extends AuthForm {
 
     // creating new user with his own data in firestore
     authAction() {
+        // hide button and show loading
+        this.btn.style.display = "none";
+        this.loading.style.display = "block";
+
+        // create new user in firebase
         auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
         .then((cred) => {
             console.log(cred)
@@ -54,6 +59,10 @@ export class Register extends AuthForm {
                 this.input.eMail.style.borderBottomColor = "#e63946";
             }
           });
+
+          // show button and hide loading
+          this.loading.style.display = "none";
+          this.btn.style.display = "block";
     }
     setErrors() {
         // checking email
@@ -123,10 +132,10 @@ export class Register extends AuthForm {
             || this.data.nickname.length <= 4
 
         ) {
-            this.invalidData = true
+            this.invalidData = true;
         }
         else {
-            this.invalidData = false
+            this.invalidData = false;
         }
     }
 

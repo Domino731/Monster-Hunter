@@ -3,6 +3,7 @@ export abstract class AuthForm {
     protected inputs: NodeListOf<Element> | null;
     protected root: HTMLElement;
     protected btn: HTMLElement;
+    protected loading: HTMLElement;
     protected invalidData: boolean;
     protected data: {
         eMail: string
@@ -15,6 +16,7 @@ export abstract class AuthForm {
         this.root = document.querySelector(root)
         this.inputs = this.root.querySelectorAll("input")
         this.btn = this.root.querySelector(".auth__submitWrapper button")
+        this.loading = this.root.querySelector(".auth__loading")
         this.data = {
             eMail: "",
             password: "",
