@@ -166,7 +166,7 @@
         height: 38px;
         width: 270px;
         transition: 0.4s;
-        background: transparent;
+        background: none !important;
         font-size: 1.5rem;
         border: none;
         border-bottom: 5px solid $color-gold;
@@ -176,6 +176,9 @@
             color: inherit;
         }
     }
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #a2abb8 inset;
+      }
 }
 
 
@@ -190,6 +193,6 @@
         left: 33px;
     }
     .register__error{
-        left: 335px;
+        left: 250px;
     }
 }

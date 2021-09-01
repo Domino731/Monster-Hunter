@@ -1,10 +1,10 @@
 export abstract class AuthForm {
 
-    inputs: NodeListOf<Element> | null;
-    root: HTMLElement;
-    btn: HTMLElement;
-    invalidData: boolean;
-    data: {
+    protected inputs: NodeListOf<Element> | null;
+    protected root: HTMLElement;
+    protected btn: HTMLElement;
+    protected invalidData: boolean;
+    protected data: {
         eMail: string
         password: string
         repeatPassword?: string
