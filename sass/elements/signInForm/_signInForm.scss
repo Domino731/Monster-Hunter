@@ -14,7 +14,7 @@
     }
     &__container {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         width: 1500px;
         margin-left: auto;
         margin-right: auto;
@@ -28,7 +28,7 @@
         backdrop-filter: blur(12px);
         transition: 0.4s;
         &-login {
-            height: 478px;
+            height: 500px;
         }
 
         &:hover {
@@ -141,6 +141,7 @@
         background-image: url("/images/form_loadingIcon.png");
         background-size: cover;
     }
+
 }
 
 .login__invalidData {
@@ -148,7 +149,6 @@
     font-weight: 600;
     letter-spacing: 0.063rem;
     font-size: 17px;
-    padding: 0.875rem 0px;
     display: block;
     text-align: center;
 }
@@ -213,7 +213,22 @@
     }
 }
 
-
+.recoverPassword{
+    width: 184px;
+    text-align: center;
+    padding: 0.188rem;
+    margin: 0 auto;
+    font-size: 1.063rem;
+    color: #4e5a61;
+    transition: 0.2s;
+    &:hover{
+        letter-spacing: 0.063rem;
+        cursor: pointer;
+    }
+}
+#auth-resetPassword{
+   display: none;
+}
 @keyframes an__auth--loading{
     100%{
         transform: rotate(360deg);

@@ -32,7 +32,7 @@
     <div class="auth__container">
 
 
-      <div class="auth__item auth__item-login">
+      <div class="auth__item auth__item-login" id="auth-login">
         <h2 class="auth__itemTitle">Login</h2>
         <form class="auth__form" id="form__login">
 
@@ -51,8 +51,6 @@
 
           <strong class="login__invalidData" id="login__invalidData-password"></strong>
           <div class="auth__submitWrapper">
-
-
             <div class="auth__submitWrapper">
               <div class="tower"></div>
               <div class="wall">
@@ -61,13 +59,16 @@
               </div>
               <div class="tower"></div>
             </div>
-
-
           </div>
+
+          <div class="recoverPassword" id="auth-forgotPassword">
+            I forgot my password
+          </div>
+
         </form>
       </div>
 
-      <div class="auth__item">
+      <div class="auth__item" id="auth-register">
         <h2 class="auth__itemTitle">Register</h2>
         <form class="auth__form" id="form__register">
 
@@ -115,10 +116,36 @@
             <div class="tower"></div>
           </div>
 
+  
 
         </form>
       </div>
 
+      <div class="auth__item auth__item-login" id="auth-resetPassword">
+        <h2 class="auth__itemTitle">Reset password</h2>
+        <form class="auth__form" id="form__login">
+
+          <div class="auth__inputWrapper">
+            <label>E-mail
+              <input type="email" name="eMail" placeholder="E-mail">
+            </label>
+          </div>
+
+          <strong class="login__invalidData" id="login__invalidData-passwordReset"></strong>
+
+            <div class="auth__submitWrapper">
+              <div class="tower"></div>
+              <div class="wall">
+                <button id="btn__login" type="button">Login</button>
+                <div class="auth__loading"></div>
+              </div>
+              <div class="tower"></div>
+            </div>
+
+        
+
+        </form>
+      </div>
     </div>
   </main>
 
