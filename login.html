@@ -49,6 +49,7 @@
             </label>
           </div>
 
+          <strong class="login__invalidData" id="login__invalidData-password">Invalid data - password</strong>
           <div class="auth__submitWrapper">
             <div></div>
             <button id="btn__login">Login</button>
@@ -63,6 +64,7 @@
 
 
           <div class="auth__inputWrapper">
+            <strong class="register__error" id="register__invalidData-email">Invalid email</strong>
             <label>E-mail
               <input type="email" name="eMail" placeholder="E-mail">
             </label>
@@ -73,19 +75,26 @@
             <label>Password
               <input type="password" name="password" placeholder="Password">
             </label>
+            <span class="register__requirement" id="register__invalidData-password">*Password should have at least 6
+              characters, 1 capital letter, 1 number.</span>
           </div>
 
           <div class="auth__inputWrapper auth__inputWrapper-left">
+
             <label>Repeat password
               <input type="password" name="repeatPassword" placeholder="Repeat password">
             </label>
+            <strong class="register__error" id="register__invalidData-repeatPassword">Invalid password</strong>
           </div>
 
 
           <div class="auth__inputWrapper">
+
             <label>Nickname
               <input type="email" name="nickname" placeholder="Nickname">
             </label>
+            <span class="register__requirement" id="register__invalidData-nickanem">*Nickname should be at least 4
+              characters long.</span>
           </div>
 
           <div class="auth__submitWrapper">

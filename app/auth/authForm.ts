@@ -72,7 +72,5 @@ export abstract class AuthForm {
     init() {
         this.addInputEvents();
         this.addButtonEvent();
-        console.log(this.inputs);
-        console.log(this.btn);
     };
 }

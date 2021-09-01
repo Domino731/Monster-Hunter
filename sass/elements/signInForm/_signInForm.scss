@@ -28,7 +28,7 @@
         backdrop-filter: blur(12px);
         transition: 0.4s;
         &-login{
-           height: 423px;
+           height: 478px;
         }
 
         &:hover{
@@ -116,7 +116,6 @@
             }
         }
     }
-
     &__freepikAttribute{
         margin-top: 40px;
         width: 100%;
@@ -124,6 +123,36 @@
         justify-content: center;
     }
 }
+
+
+.login__invalidData{
+   color: $color-red;
+   font-weight: bold;
+   letter-spacing: 0.063rem;
+   font-size: 1.25rem;
+   padding: 0.875rem 0px;
+   display: block;
+   text-align: center;
+}
+
+.register{
+    &__requirement{
+        position: absolute;
+        font-size: 0.813rem;
+        top: 76px;
+        left: 125px;
+        color: $color-black;
+    }
+    &__error{
+        position: absolute;
+        font-size: 0.813rem;
+        top: 76px;
+        left: 129px;
+        color: $color-red;
+    }
+}
+
+
 .auth__inputWrapper {
     position: relative;
     label {
@@ -132,13 +161,6 @@
         font-size: 0;
         top: 28px;
         left: 119px;
-    }
-    span {
-        color: $color-blue;
-        font-size: 1.5rem;
-        display: block;
-        transform: translate(15px, -34px);
-        transition: 0.4s;
     }
     input {
         height: 38px;
@@ -155,11 +177,19 @@
         }
     }
 }
+
+
 .auth__inputWrapper-left {
     label {
         left: 168px;
     }
     input {
         text-align: right;
+    }
+    .register__requirement{
+        left: 33px;
+    }
+    .register__error{
+        left: 335px;
     }
 }
