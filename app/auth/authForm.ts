@@ -66,7 +66,7 @@ export abstract class AuthForm {
     addButtonEvent() {
         this.btn.addEventListener("click", (e: Event) => {
             e.preventDefault();
-            this.invalidData ? this.authAction() : this.setErrors()
+            this.invalidData ? this.setErrors() : this.authAction()
         });
     }
     init() {
