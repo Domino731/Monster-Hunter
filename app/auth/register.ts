@@ -49,6 +49,10 @@ export class Register extends AuthForm {
                 nick: this.data.nickname,
                 level: 1
             });
+
+             // redirect user to main page
+             location.href = '/';
+             
           })
           .catch((error) => {
             const errorCode = error.code;

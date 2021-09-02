@@ -27,6 +27,9 @@ export class Login extends AuthForm {
         auth.signInWithEmailAndPassword(this.data.eMail, this.data.password)
         .then(()=>{
             console.log("successful login")
+
+            // redirect user to main page
+            location.href = '/';
         })
         .catch((error)=>{
             

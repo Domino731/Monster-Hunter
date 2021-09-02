@@ -5,7 +5,8 @@ const entryPath = ".";
 module.exports = {
   entry: {
     style: `./${entryPath}/app/style.ts`,
-    signIn: `./app/signIn.ts`
+    signIn: `./app/signIn.ts`,
+    index: `./app/index.ts`
   },
   output: {
     filename: "[name].js",
