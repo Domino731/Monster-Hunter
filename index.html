@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -11,27 +12,92 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,900;1,600;1,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,900;1,600;1,700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="build/style.css" type="text/css">
 </head>
-<body>
-<div class="game__root">
-   <nav class="nav">
-     <ul class="nav__list">
-       <li class="nav__item"><a href="/missions" class="nav__link" data-link>Missions</a></li>
-       <li class="nav__item"><a href="/profile" class="nav__link" data-link>My profile</a></li>
-       <li class="nav__item"><a href="/blacksmith" class="nav__link" data-link>Blacksmith</a></li>
-       <li class="nav__item"><a href="/wizard" class="nav__link" data-link>Wizard</a></li>
-       <li class="nav__item"><a href="/inbox" class="nav__link" data-link>Inbox</a></li>
-       <li class="nav__item"><a href="/pets" class="nav__link" data-link>Pets</a></li>
-       <li class="nav__item"><a href="/stats" class="nav__link" data-link>Stats</a></li>
-     </ul>
-   </nav>
 
-   <main id="game__view"></main>
-</div>
-<script src="build/style.js"></script>
-<script src="build/index.js"></script>
+<body>
+  <div class="game__root">
+    <nav class="nav">
+      <div class="nav__titleWrapper">Monster <br> Hunter</div>
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="/missions" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_mission.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-mission">Missions</div>
+          </a>
+
+        </li>
+        <li class="nav__item">
+          <a href="/profile" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_profile.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-profile">My profile</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/blacksmith" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_blacksmith.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-blacksmith">Blacksmith</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/wizard" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_wizard.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-wizard">Wizard</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/inbox" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_inbox.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-inbox">Inbox</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/pets" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_pets.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-pets">Pets</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/stats" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_friends.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-friends">Friends</div>
+          </a>
+        </li>
+        <li class="nav__item"><a href="/stats" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_search.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-search">Search friend</div>
+
+          </a></li>
+        <li class="nav__item">
+
+          <a href="/stats" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_guard.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-guard">Guard</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="/stats" class="nav__link" data-link>
+            <div class="nav__icon"><img src="/images/menu_settings.png" alt="mace"></div>
+            <div class="nav__itemText nav__itemText-account">Account</div>
+          </a>
+        </li>
+        <li class="nav__item">
+          <div class="nav__link">
+          <div class="nav__itemText nav__itemText-reverse">Logout</div>
+          <div class="nav__icon"><img src="/images/menu_logout.png" alt="mace"></div>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <main id="game__view"></main>
+  </div>
+  <script src="build/style.js"></script>
+  <script src="build/index.js"></script>
 </body>
 
 </html>

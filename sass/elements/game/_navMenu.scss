@@ -1,16 +1,144 @@
-.nav{
+.nav {
     width: 20%;
     height: 100%;
-    background: green;
-    font-size: 24px;
-    &__list{
+    background: $color-gray_dark;
+    font-size: 2.5rem;
+    &__titleWrapper{
+        margin-top: 10px;
+        height: 90px;
+        font-weight: bold;
+        font-family: $fontFamily-medivalSharp;
+        font-size: 44px;
+        text-align: center;
+        letter-spacing: 0.313rem;
+        color: $color-red;
+    }
+    &__list {
         margin-top: 10px;
     }
-    &__item{
-        margin-top: 24px;
-        padding: 4px 20px;
+    &__item {
+        padding: 0 10px;
+        margin-top: 10px;
+        height: 61px;
     }
-    &__link{
-        color: red;
+    &__link {
+        color: $color-gray_dark;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__icon {
+        width: 61px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        background: $color-white;
+        border-radius: 50%;
+        padding: 2px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__itemText {
+        position: relative;
+        z-index: 0;
+        height: calc(100% - 61px);
+        margin-left: -15px;
+        padding: 0.375rem;
+        padding-left: 20px;
+        width: 100%;
+        background: $color-white;
+        border-radius: 0 30px 30px 0;
+        font-size: 1.438rem;
+        overflow: hidden;
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: red;
+            bottom: -34px;
+            right: -100%;
+            transform: rotate(21deg);
+            transition: 0.4s;
+        }
+        &:hover::after {
+            right: 0;
+        }
+
+        &-reverse {
+            border-radius: 30px 0 0 30px;
+            margin-left: 0;
+            margin-right: -20px;
+            padding-right: 22px;
+            text-align: right;
+            text-decoration: underline;
+            &::after{
+                left: -100%;
+                 background: #e04f5f;
+            }
+             &:hover{
+                cursor: pointer;
+            }
+            &:hover::after {
+                left: -2px;
+            }
+        }
+        &-mission {
+            &::after {
+                background: #ffdc00;
+            }
+        }
+        &-profile {
+            &::after {
+                background: #e80457;
+            }
+        }
+        &-blacksmith {
+            &::after {
+                background: #95d600;
+            }
+        }
+        &-wizard {
+            &::after {
+                background: #65b0fb;
+            }
+        }
+        &-inbox {
+            &::after {
+                background: #ffb600;
+            }
+        }
+        &-pets {
+            &::after {
+                background: #1ab975;
+            }
+        }
+        &-friends {
+            &::after {
+                background: #813788;
+            }
+        }
+        &-search {
+            &::after {
+                background: #ffc91b;
+            }
+        }
+        &-guard {
+            &::after {
+                background: #ff9e22;
+                
+            }
+        }
+        &-account {
+            &::after {
+                background: #ff9f00;
+            }
+        }
     }
 }

@@ -4,38 +4,32 @@ export const router = async () => {
     const routes: route[] = [
         {
             path: "/Missions",
-            //@ts-ignore
-            view: Profile
+            view:  new Profile()
         },
         {
             path: "/Profile",
-            //@ts-ignore
-            view: Profile
+            view: new Profile()
         },
         {
             path: "/Blacksmith",
-             //@ts-ignore
-            view: Profile
+            view: new Profile()
         },
         {
             path: "/Wizard",
-             //@ts-ignore
-            view: Profile
+
+            view: new Profile()
         },
         {
             path: "/Inbox",
-             //@ts-ignore
-            view: Profile
+            view: new Profile()
         },
         {
             path: "/Pets",
-             //@ts-ignore
-            view: Profile
+            view: new Profile()
         },
         {
             path: "/Stats",
-             //@ts-ignore
-            view: Profile
+            view: new Profile()
         }
     ]
 
@@ -51,50 +45,32 @@ export const router = async () => {
     let match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)
 
     // if there is no go to default route -> /profile
-    if(!match){
+    if (!match) {
 
         match = {
-        //@ts-ignore
-          route: new routes[0].view(),
-          isMatch: true
-        }
-    }
-    
-    
-      
-    
-    // document.querySelector("#game__view").innerHTML =  view.render()
-}
+            route: routes[0].view,
+            isMatch: true
+        };
+    };
+};
 
 /**
  * 
  * @param url - url needed to change the history state
  */
- const navigateTo = (url: string) => {
+const navigateTo = (url: string) => {
     history.pushState(null, null, url);
-    return router()
-    
-  }
+    return router();
+};
 
-  export class Router{
-      constructor(){
-        this.init()
-      }
 
-      init(){
-          document.addEventListener("click", (e)=> {
-            console.log(123)
-          })
-      }
-  }
+export const initRouter = () => {
+    document.addEventListener("click", (e: any) => {
+        if (e.target.matches("[data-link]")) {
+            e.preventDefault();
+            navigateTo(e.target.href);
+        };
+    });
 
-  export const initRouter = () => {
-      document.addEventListener("click", (e: any) => {
-          if(e.target.matches("[data-link]")){
-                 e.preventDefault();
-                 navigateTo(e.target.href)
-          }
-      })
-
-      window.addEventListener("popstate", router)
-  }
+    window.addEventListener("popstate", router);
+};
