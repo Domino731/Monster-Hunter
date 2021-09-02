@@ -121,28 +121,33 @@
         </form>
       </div>
 
+
+
       <div class="auth__item auth__item-login" id="auth-resetPassword">
-        <h2 class="auth__itemTitle">Reset password</h2>
-        <form class="auth__form" id="form__login">
+        <form class="auth__form" id="form__reset">
 
           <div class="auth__inputWrapper">
             <label>E-mail
-              <input type="email" name="eMail" placeholder="E-mail">
+              <input type="email" name="eMail" placeholder="E-mail" id="resetPassword-input">
             </label>
           </div>
 
-          <strong class="login__invalidData" id="login__invalidData-passwordReset"></strong>
+          <strong class="login__invalidData" id="passwordReset-invalidData"></strong>
 
             <div class="auth__submitWrapper">
               <div class="tower"></div>
               <div class="wall">
-                <button id="btn__login" type="button">Login</button>
+                <button id="btn__resetPassword" type="button">Reset password </button>
                 <div class="auth__loading"></div>
               </div>
               <div class="tower"></div>
             </div>
 
-        
+            <div class="recoverPassword" id="auth-backToForms">
+              Back
+            </div>
+
+
 
         </form>
       </div>
