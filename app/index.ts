@@ -1,8 +1,10 @@
 import { auth } from './firebase/index';
+import {  initRouter } from './router/router';
+
 window.addEventListener('DOMContentLoaded', (event) => {
     auth.onAuthStateChanged(user => {
         if(user){
-            console.log(true)
+            initRouter();
         }
         else {
             // redirect user to main page
