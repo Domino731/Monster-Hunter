@@ -11,7 +11,10 @@ export class PasswordReset {
         action: HTMLElement
     }
     private input : HTMLInputElement
-    private invalid : HTMLElement
+    private notifications: {
+        invalid : HTMLElement
+        correct: HTMLElement
+    }
     constructor() {
         this.forms = {
             login: document.getElementById("auth-login"),
@@ -24,7 +27,11 @@ export class PasswordReset {
             action: document.querySelector("#btn__resetPassword")
         }
         this.input = document.querySelector("#resetPassword-input")
-        this.invalid = document.querySelector("#passwordReset-invalidData")
+        this.notifications = {
+          invalid: document.querySelector("#passwordReset-invalidData"),
+          correct: document.querySelector("#passwordReset-correctData")
+        }
+        
         this.init()
     }
 
@@ -48,7 +55,7 @@ export class PasswordReset {
 
     removeErrorsEvent(){
         this.input.addEventListener("keyup", ()=>{
-            this.invalid.innerText = "";
+            this.notifications.invalid.innerText = "";
             this.input.style.borderBottomColor = "#ffcd00";
         })
     }
@@ -58,10 +65,11 @@ export class PasswordReset {
             e.preventDefault();
              auth.sendPasswordResetEmail(this.input.value)
              .then(()=>{
-
+                this.notifications.correct.innerText = "Check your inbox for further instructions"
              })
              .catch((err) => {
-                 this.invalid.innerText = "Invalid e-mail"
+                 console.error(err)
+                 this.notifications.invalid.innerText = "Invalid e-mail"
                  this.input.style.borderBottomColor = "#e63946"
              })
         })

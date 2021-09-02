@@ -146,13 +146,20 @@
 
 }
 
-.login__invalidData {
-    color: $color-red;
+.auth__notification {
+    
     font-weight: 600;
     letter-spacing: 0.063rem;
     font-size: 17px;
     display: block;
     text-align: center;
+    &-error{
+       color: $color-red;
+    }
+    
+    &-correct{
+        color: $color-green;
+    }
 }
 
 .register {
