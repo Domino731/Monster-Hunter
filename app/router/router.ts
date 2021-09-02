@@ -1,18 +1,41 @@
 import { route } from './../types';
-
+import { Profile } from '../views/profile';
 export const router = async () => {
     const routes: route[] = [
         {
-            path: "/profile",
-            view: () => console.log("my profile")
+            path: "/Missions",
+            //@ts-ignore
+            view: Profile
         },
         {
-            path: "/wizard",
-            view: () => console.log("wizard")
+            path: "/Profile",
+            //@ts-ignore
+            view: Profile
         },
         {
-            path: "/blacksmith",
-            view: () => console.log("blacksmith")
+            path: "/Blacksmith",
+             //@ts-ignore
+            view: Profile
+        },
+        {
+            path: "/Wizard",
+             //@ts-ignore
+            view: Profile
+        },
+        {
+            path: "/Inbox",
+             //@ts-ignore
+            view: Profile
+        },
+        {
+            path: "/Pets",
+             //@ts-ignore
+            view: Profile
+        },
+        {
+            path: "/Stats",
+             //@ts-ignore
+            view: Profile
         }
     ]
 
@@ -31,12 +54,16 @@ export const router = async () => {
     if(!match){
 
         match = {
-          route: routes[0],
+        //@ts-ignore
+          route: new routes[0].view(),
           isMatch: true
         }
     }
-
-    console.log(match.route.view())
+    
+    
+      
+    
+    // document.querySelector("#game__view").innerHTML =  view.render()
 }
 
 /**
