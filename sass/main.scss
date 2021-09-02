@@ -1,7 +1,10 @@
 body{
-    background-color: aqua
+    background-color: rgb(234, 236, 236)
 }
 @import "./generic/reset";
 @import "./settings/colors";
 @import "./settings/all";
 @import "./elements/signInForm/signInForm";
+
+@import "./elements/game/general";
+@import "./elements/game/navMenu";

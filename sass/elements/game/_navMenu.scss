@@ -1,0 +1,16 @@
+.nav{
+    width: 20%;
+    height: 100%;
+    background: green;
+    font-size: 24px;
+    &__list{
+        margin-top: 10px;
+    }
+    &__item{
+        margin-top: 24px;
+        padding: 4px 20px;
+    }
+    &__link{
+        color: red;
+    }
+}
