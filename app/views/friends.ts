@@ -7,7 +7,7 @@ export class Friends {
     }
 
     async render() {
-        this.root.innerHTML = "<h1>Friends<h1>";
+        this.root.innerHTML = `<button>  </button>`;
     }
 
     init() {

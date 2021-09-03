@@ -1,0 +1,299 @@
+.profile {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.3);
+    background-image: url("/images/background_profile.jpg");
+    background-size: 100% 100%;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    &::after {
+        content: "";
+        z-index: 0;
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(3px);
+        top: 0;
+        left: 0;
+    }
+    &__item {
+        padding: 10px;
+        width: 50%;
+        z-index: 1;
+        &:first-child {
+            border-right: 6px solid $color-gray_dark;
+        }
+    }
+    &__equipment {
+        height: 60%;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 10px solid $color-gold;
+    }
+    &__equipmentItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("/images/profile_frame_item.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        &-helmet {
+            grid-row: 1/1;
+            grid-column: 1/1;
+        }
+        &-armor {
+            grid-row: 2/2;
+            grid-column: 1/1;
+        }
+        &-gloves {
+            grid-row: 3/3;
+            grid-column: 1/1;
+        }
+        &-weapon {
+            grid-row: 1/1;
+            grid-column: 4/4;
+        }
+        &-shield {
+            grid-row: 2/2;
+            grid-column: 4/4;
+        }
+        &-special {
+            grid-row: 3/3;
+            grid-column: 4/4;
+        }
+    }
+    &__portrait {
+        background-image: url("/images/profile_frame_portrait.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 120% 100%;
+        grid-column: 2/4;
+        grid-row: 1/3;
+    }
+    &__info {
+        grid-column: 2/4;
+        grid-row: 3/4;
+    }
+    &__level {
+        width: 90%;
+        margin: 10px auto;
+        height: 47px;
+        border: 4px solid $color-black;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.4);
+    }
+    &__nickname {
+        width: 89%;
+        display: block;
+        background: $color-white;
+        margin: 0 auto;
+        font-size: 1.5rem;
+        padding: 2px 4px;
+        text-align: center;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 0.125rem;
+        box-shadow: 0 0 13px $color-red;
+        text-shadow: 1px 1px $color-red;
+    }
+    &__equipmentIcon {
+        width: 43%;
+        height: auto;
+        object-fit: cover;
+    }
+    &__description {
+        width: 90%;
+        margin: 10px auto;
+        height: 30%;
+        border: 5px solid $color-red;
+        border-radius: 8px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        box-shadow: 0 0 3px $color-black;
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            top: -13px;
+            left: -27px;
+            border-radius: 15px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url("/images/profile_description_ribbon.png");
+        }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            top: -13px;
+            right: -27px;
+            border-radius: 15px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url("/images/profile_description_ribbon.png");
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            outline: none;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 1.438rem;
+            letter-spacing: 0.063rem;
+            line-height: 1.563rem;
+            font-family: $fontFamily-medivalSharp;
+        }
+    }
+
+    &__backpack {
+        height: 320px;
+    }
+    &__backpackRow {
+        display: flex;
+    }
+    &__backpackItem {
+        width: 148px;
+        height: 148px;
+        border-left: 3px solid $color-gray_dark;
+        border-top: 3px solid $color-gray_dark;
+        transition: 0.3s;
+        &:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+        }
+    }
+    &__general {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__generalItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 151px;
+    }
+
+    &__generalImg {
+        border: 7px solid $color-wood-dark;
+        width: 120px;
+        height: 120px;
+        border-radius: 90px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 3px $color-black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 90%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+    &__generalText {
+        width: 120px;
+        text-align: center;
+        overflow: hidden;
+        margin-top: 0.563rem;
+        padding: 0.375rem 0;
+        background-color: $color-wood-dark;
+        color: $color-gold;
+        font-weight: 600;
+        letter-spacing: 0.063rem;
+        border-radius: 3px;
+    }
+}
+.profile__backpackRow {
+    &:first-child .profile__backpackItem:last-child {
+        border-right: 3px solid $color-gray_dark;
+    }
+    &:last-child .profile__backpackItem {
+        border-bottom: 3px solid $color-gray_dark;
+    }
+    &:last-child .profile__backpackItem:last-child {
+        border-right: 3px solid $color-gray_dark;
+    }
+}
+
+.profile__stats {
+    box-sizing: border-box;
+    margin-top: 10px;
+    border-radius: 10px;
+    height: 30%;
+    width: 100%;
+    background: $color-gray_dark;
+    color: $color-gold;
+    font-size: 1.563rem;
+    padding: 25px 0;
+    padding-left: 5px;
+    border: 3px solid $color-gold;
+    box-shadow: 0 0 3px $color-black;
+    table{
+        width: 93%;
+        height: 100%;
+        margin-top: -10px;
+    }
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+    td{
+        padding: 0;
+    }
+    tr{
+      max-height: 30px;
+      margin-left: 0.5rem;
+    }
+    img {
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+}
+.profile__item--name {
+    display: flex;
+    align-items: center;
+    color: $color-red;
+    font-weight: 700;
+    letter-spacing: 0.063rem;
+}
+.profile__item--nameBlue{
+  color: $color-blue !important;
+  text-decoration-color: $color-blue ;
+  margin-left: 0.5rem;
+}
+.profile__item--cost {
+    display: flex;
+    align-items: center;
+
+}
+
+.profile__item--amount {
+    color: $color-gold;
+    text-decoration: underline;
+    text-decoration-color: $color-gold;
+}
+.profile__item--buyBtn{
+    div{
+       padding: 0 10px;
+       text-align: center;
+       background: $color-red;
+       color: $color-white; 
+       border-radius: 8px;
+    }
+}

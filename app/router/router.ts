@@ -55,7 +55,6 @@ export const router = async () => {
 
     // test each router for potential match
     const potentialMatches = routes.map(route => {
-        console.log(location.pathname, route.path)
         return {
             route: route,
             isMatch: location.pathname === route.path
@@ -98,6 +97,6 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-
+    const x = new Profile()
     window.addEventListener("popstate", router);
 };

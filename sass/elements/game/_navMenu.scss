@@ -53,6 +53,7 @@
         border-radius: 0 30px 30px 0;
         font-size: 1.438rem;
         overflow: hidden;
+        color: $color-gray_dark;
         &::after {
             content: "";
             display: block;

@@ -1,10 +1,13 @@
-.game__root{
-    display: flex;
+.game__root {
+    max-width: 1980px;
     height: 100vh;
+    display: flex;
+    margin: 0 auto;
 }
 
-#game__view{
-    width: 80%;
+#game__view {
+    overflow: hidden;
+    height: 900px;
+    width: 80vw;
     height: 100%;
-    background: rebeccapurple;
 }

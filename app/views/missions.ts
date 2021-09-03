@@ -7,7 +7,7 @@ export class Missions {
     }
 
     async render() {
-        this.root.innerHTML = "<h1>Missions<h1>";
+        this.root.innerHTML = `<button>${window.innerHeight}</button>`;
     }
 
     init() {
