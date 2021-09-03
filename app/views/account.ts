@@ -1,4 +1,4 @@
-export class Profile {
+export class Account {
 
     private root: HTMLElement
     constructor() {
@@ -7,10 +7,11 @@ export class Profile {
     }
 
     async render() {
-        this.root.innerHTML = "<h1>Profile<h1>"
+        this.root.innerHTML = "<h1>Account<h1>"
     }
 
     init() {
+        console.log(this.root)
        this.render();
     }
 }

@@ -1,40 +1,61 @@
+import { Blacksmith } from './../views/blacksmith';
 import { route } from './../types';
 import { Profile } from '../views/profile';
+import { Missions } from '../views/missions';
+import { Wizard } from '../views/wizard';
+import { Inbox } from '../views/inbox';
+import { Pets } from '../views/pets';
+import { Account } from '../views/account';
+import { Friends } from '../views/friends';
+import { SearchFriend } from '../views/searchFriend';
+import { Guard } from '../views/guard';
 export const router = async () => {
     const routes: route[] = [
         {
-            path: "/Missions",
-            view:  new Profile()
+            path: "/missions",
+            view: Missions
         },
         {
-            path: "/Profile",
-            view: new Profile()
+            path: "/profile",
+            view: Profile
         },
         {
-            path: "/Blacksmith",
-            view: new Profile()
+            path: "/blacksmith",
+            view: Blacksmith
         },
         {
-            path: "/Wizard",
-
-            view: new Profile()
+            path: "/wizard",
+            view: Wizard
         },
         {
-            path: "/Inbox",
-            view: new Profile()
+            path: "/inbox",
+            view: Inbox
         },
         {
-            path: "/Pets",
-            view: new Profile()
+            path: "/pets",
+            view: Pets
         },
         {
-            path: "/Stats",
-            view: new Profile()
+            path: "/friends",
+            view: Friends
+        },
+        {
+            path: "/search",
+            view: SearchFriend
+        },
+        {
+            path: "/guard",
+            view: Guard
+        },
+        {
+            path: "/settings",
+            view: Account
         }
     ]
 
     // test each router for potential match
     const potentialMatches = routes.map(route => {
+        console.log(location.pathname, route.path)
         return {
             route: route,
             isMatch: location.pathname === route.path
@@ -44,14 +65,20 @@ export const router = async () => {
 
     let match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)
 
-    // if there is no go to default route -> /profile
-    if (!match) {
-
+    // find index of specific route in routes array, then create new object and insert html code.
+    const routeIndex = routes.indexOf(routes.find(el => el.path === match.route.path))
+    if (match) {
         match = {
-            route: routes[0].view,
+            route: new routes[routeIndex].view,
+            isMatch: true
+        }
+    }
+    else {
+        match = {
+            route: new routes[0].view,
             isMatch: true
         };
-    };
+    }
 };
 
 /**

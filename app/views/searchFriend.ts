@@ -1,4 +1,4 @@
-export class Profile {
+export class SearchFriend {
 
     private root: HTMLElement
     constructor() {
@@ -7,7 +7,7 @@ export class Profile {
     }
 
     async render() {
-        this.root.innerHTML = "<h1>Profile<h1>"
+        this.root.innerHTML = "<h1>Search your friends<h1>";
     }
 
     init() {
