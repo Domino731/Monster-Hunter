@@ -7,7 +7,7 @@ export class Profile {
     }
 
     async render() {
-        this.root.innerHTML = `<div class='profile'> 
+        this.root.innerHTML = `<section class='game__section profile'> 
                  
              <div class='profile__item'>
                 <div class='profile__equipment'>
@@ -151,7 +151,7 @@ export class Profile {
              </div>
  
     
-        </div>`
+        </section>`
     }
 
     init() {

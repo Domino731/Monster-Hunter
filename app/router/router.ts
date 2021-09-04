@@ -97,6 +97,6 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Profile()
+    const x = new Pets()
     window.addEventListener("popstate", router);
 };
