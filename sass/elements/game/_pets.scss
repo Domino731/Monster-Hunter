@@ -1,4 +1,41 @@
 .pets{
     background-image: url("/images/pets_background.jpg");
     display: flex;
+    justify-content: space-evenly;
+    &__item{
+        z-index: 3;
+        width: 20%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    &__img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    &__name{
+        padding: 0.313rem 0;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 2.375rem;
+        margin-top: 10px;
+        &-cat{
+            background: #f7c4db;
+            color: #c56cb7
+        }
+        &-scorpion{
+            background: #b77158;
+            color: #3b4456;
+        }
+        &-cheetah{
+            background: #fbd476;
+            color: #cca75e;
+        }
+        &-dragon{
+            background: #f47a6e;
+            color: #b4453f;
+        }
+    }
 }
