@@ -97,6 +97,6 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Pets()
+    const x = new Blacksmith()
     window.addEventListener("popstate", router);
 };

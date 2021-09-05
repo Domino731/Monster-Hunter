@@ -1,0 +1,20 @@
+.blacksmith {
+    height: 100%;
+    display: flex;
+    &__item{
+        width: 50%;
+        height: 100%;
+    }
+    &__shop {
+        background: gray;
+
+    }
+    &__hero {
+        background: red;
+
+    }
+    &__service {
+        background: green;
+
+    }
+}
