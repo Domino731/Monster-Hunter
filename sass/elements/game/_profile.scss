@@ -142,6 +142,10 @@
 
     &__backpack {
         height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     &__backpackRow {
         display: flex;

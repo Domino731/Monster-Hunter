@@ -1,20 +1,35 @@
 .blacksmith {
     height: 100%;
     display: flex;
+    background-image: url('/images/background_blacksmith.jpg');
+    background-size: 100% 100%;
+    position: relative;
+
     &__item{
         width: 50%;
         height: 100%;
+        padding: 10px;
+        z-index: 2;
+        border: 2px solid red;
     }
-    &__shop {
-        background: gray;
-
-    }
-    &__hero {
+    &__character {
         background: red;
-
     }
-    &__service {
-        background: green;
-
+    &__shop{
+    }
+    &__shopRow{
+        display: flex;
+        justify-content: space-evenly;
+        height: 50%;
+        &:last-child{
+            margin-top: 10px;
+        }
+    }
+    &__shopItem{
+        width: 223px;
+        height: 223px;
+        
+        background-image: url('/images/blacksmith_item_frame.png');
+        background-size: 100% 100%;
     }
 }
