@@ -1,0 +1,109 @@
+.missions {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-image: url("/images/background_missions.jpg");
+    background-size: 100% 50%;
+    background-repeat: no-repeat;
+    background-position: top;
+    &__characterWrapper {
+        grid-column: 1/2;
+        grid-row: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100%;
+    }
+    &__details {
+        grid-column: 2/3;
+        grid-row: 1/1;
+        padding: 15px;
+    }
+    &__list {
+        grid-column: 1/-1;
+        grid-row: 2/2;
+        background: #cb8252;
+        border: 13px solid #805333;
+        box-shadow: 13px 13px #a56a43 inset, -5px -5px #a56a43 inset;
+    }
+    &__listWrapper {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 12px;
+    }
+    &__title {
+        text-align: center;
+        margin-top: 30px;
+        font-family: $fontFamily-medivalSharp;
+        font-size: 45px;
+        font-weight: bold;
+        letter-spacing: 0.125rem;
+    }
+    &__papyrus {
+        width: 19%;
+        height: auto;
+        object-fit: cover;
+        transition: 0.5s;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.mission {
+    &__character {
+        height: auto;
+        width: 50%;
+        object-fit: cover;
+    }
+    &__informations{
+       height: 100%;
+       position: relative;
+    }
+    &__textWrapper{
+      padding: 10px;
+      height: 85%;
+      margin: 0 auto;
+    }
+    &__text{
+        width: 100%;
+        height: 100%;
+        background: red;
+    }
+}
+
+.textRool {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 26px;
+    background-color: #c48958;
+    border-radius: 25px;
+    position: relative;
+    box-shadow: -115px 0  #b27a49 inset;
+
+    &-bottom{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 50px;
+        width: 30px;
+        background: #e4b052;
+    }
+    &::before {
+        border-radius: 15px 0 0 15px;
+        left: 21px;
+    }
+    &::after{
+        border-radius:0 15px 15px 0;
+        right: 21px;
+    }
+}
+
