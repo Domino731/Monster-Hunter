@@ -62,17 +62,77 @@
        position: relative;
     }
     &__textWrapper{
-      padding: 10px;
-      height: 85%;
-      margin: 0 auto;
+      position: relative;
+      height: 0%;
+      animation: 1s  showPapyrus forwards ease-in-out;
     }
     &__text{
-        width: 100%;
+        width: 73%;
         height: 100%;
-        background: red;
+        margin: 0 auto;
+        clip-path: polygon(100% 100%, 95% 94%, 100% 92%, 100% 75%, 97% 71%, 100% 69%, 100% 35%, 96% 31%, 100% 26%, 100% 0%, 0% 0%, 0% 41%, 3% 44%, 0% 47%, 0% 100%);
+        background: #ffeed2;
+        box-shadow: -36px 0 #f7dab4 inset;
+        padding: 0 41px;
+        padding-top: 0.75rem;
+        font-family: $fontFamily-medivalSharp;
+    }
+    &__title{
+      
+       font-size: 2.313rem;
+       font-weight: bold;
+    }
+    &__description{
+        font-size: 1.125rem;
+        font-weight: bold;
+        margin-top: 0.5rem;
+    }
+    &__detailsWrapper{
+       margin-top: 0.625rem;
+    }
+
+    &__detail{
+        display: flex;
+        align-items: center;
+        font-size: 1.125rem;
+        margin-top: 0.75rem;
+    }
+
+    &__detailImg{
+        width: 37px;
+        height: auto;
+        object-fit: cover;
+    }
+    &__detailName{
+      margin-left: 0.5rem;
+      font-weight: 900;
+    }
+    &__detailResult{
+        margin-left: 0.5rem;
+    }
+    &__acceptBtn{
+        background: transparent;
+        font-size: 1.375rem;
+        border: none;
+        outline: none;
+        position: relative;
+        background: #c48958;
+        color: #e4b052;
+        padding: 0.313rem 0.75rem;
+        border-radius: 0.625rem;
+        margin-top: 0.625rem;
+        transition: 0.2s;
+        &:hover{
+            cursor: pointer;
+            letter-spacing: 0.065rem;
+        }
     }
 }
-
+@keyframes showPapyrus{
+    100%{
+        height: 90%;
+    }
+}
 .textRool {
     display: flex;
     align-items: center;
@@ -82,10 +142,10 @@
     border-radius: 25px;
     position: relative;
     box-shadow: -115px 0  #b27a49 inset;
-
+    z-index: 2;
     &-bottom{
         position: absolute;
-        bottom: 0;
+        bottom: -13px;
         left: 0;
     }
     &::before,

@@ -1,3 +1,4 @@
+const text = "Lorem iporci p.it ante. Praeseida nec enim et consectetur. Pellentesque ornare pellentesque maximus. Donec ullamcorper eu massa eget aliquet. Vivamus mollis mi libero, id interdum massa congue non. Quisque non urna et lacus volutpat pulvinar."
 export class Missions {
 
     private root: HTMLElement
@@ -6,6 +7,7 @@ export class Missions {
         this.init();
     }
 
+    
     async render() {
         this.root.innerHTML = `<section class='missions'>
             <div class='missions__characterWrapper'>
@@ -15,11 +17,35 @@ export class Missions {
                <div class='mission__informations'>
                  <div class='textRool'></div>
 
-
                  <div class='mission__textWrapper'>
-                   <div class='mission__text'> </div>
-                  <div class='textRool textRool-bottom'></div>
+                 <div class='mission__text'>
+                   <h2 class='mission__title'>Dark unicorn</h2>
+                   <p class='mission__description'>
+                   ${text}
+                   </p>
+                   <div class='mission__detailsWrapper'>
+                       <div class='mission__detail'>
+                         <img class='mission__detailImg' src='./images/coin.png' alt='coin'/>
+                         <span class='mission__detailName'>Coins: </span>
+                         <strong class='mission__detailResult'>12044</strong>
+                       </div>
+                       <div class='mission__detail'>
+                         <img class='mission__detailImg' src='./images/mission_detail_increase.png' alt='Level increase'/>
+                         <span class='mission__detailName'>Experience: </span>
+                         <strong class='mission__detailResult'>125</strong>
+                       </div>
+                       <div class='mission__detail'>
+                         <img class='mission__detailImg' src='./images/mission_detail_hourglass.png' alt='hourglass'/>
+                         <span class='mission__detailName'>Time: </span>
+                         <strong class='mission__detailResult'>10m.</strong>
+                       </div>
+                   </div>
+                   <button class='mission__acceptBtn'>Accept this mission</button>
                  </div>
+                   <div class='textRool textRool-bottom' ></div>
+                 </div>
+                  
+                 
                </div>
               
             </div>
