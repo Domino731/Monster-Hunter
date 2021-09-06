@@ -11,7 +11,9 @@ export class Missions {
     async render() {
         this.root.innerHTML = `<section class='missions'>
             <div class='missions__characterWrapper'>
+            <div class='missions__willingnessBar'></div>
               <img class='mission__character' alt='character' src='./images/mission_character_1.png'>
+              <span></span>
             </div>
             <div class='missions__details'>
                <div class='mission__informations'>
