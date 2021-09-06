@@ -56,15 +56,15 @@ export class Blacksmith {
            
            </div>
 
-           <div class='blacksmith__item'> 
-               <div class='blacksmith__character'>
-                                     
+              <div class='blacksmith__item blacksmith__shop'> 
+               <div class='blacksmith__characterWrapper'>
+                    <img class='blacksmith__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>          
                 </div>
     
-                <div class='blacksmith__shop'>
+                <div class='blacksmith__itemsList'>
                    <div class='blacksmith__shopRow'> 
                       <div class='blacksmith__shopItem'>
-                         
+                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters' class='blacksmith__weapon'/>
                       </div>
                       <div class='blacksmith__shopItem'>
                          
