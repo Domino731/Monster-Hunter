@@ -35,7 +35,7 @@ export class Blacksmith {
                    </div>
                 </div>           
            
-                 <div class='profile__backpack '>
+            <div class='profile__backpack'>
                 <div class='profile__backpackRow'>
                    <div class='profile__backpackItem'> </div>
                    <div class='profile__backpackItem'> </div>
@@ -56,32 +56,32 @@ export class Blacksmith {
            
            </div>
 
-              <div class='blacksmith__item blacksmith__shop'> 
-               <div class='blacksmith__characterWrapper'>
-                    <img class='blacksmith__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>          
+              <div class='blacksmith__item market__shop'> 
+               <div class='market__characterWrapper'>
+                    <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>          
                 </div>
     
-                <div class='blacksmith__itemsList'>
-                   <div class='blacksmith__shopRow'> 
-                      <div class='blacksmith__shopItem'>
-                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters' class='blacksmith__weapon'/>
+                <div class='market__itemsList'>
+                   <div class='market__shopRow'> 
+                      <div class='market__shopFrame blacksmith__frame'>
+                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters' class='market__weapon'/>
                       </div>
-                      <div class='blacksmith__shopItem'>
+                      <div class='market__shopFrame blacksmith__frame'>
                          
                       </div>
-                      <div class='blacksmith__shopItem'>
+                      <div class='market__shopFrame blacksmith__frame'>
                          
                       </div>
                    </div>
 
-                <div class='blacksmith__shopRow'> 
-                   <div class='blacksmith__shopItem'>
+                <div class='market__shopRow'> 
+                   <div class='market__shopFrame blacksmith__frame'>
                          
                    </div>
-                   <div class='blacksmith__shopItem'>
+                   <div class='market__shopFrame blacksmith__frame'>
                    
                    </div>
-                   <div class='blacksmith__shopItem'>
+                   <div class='market__shopFrame blacksmith__frame'>
                    
                    </div>
                 </div>

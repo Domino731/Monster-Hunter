@@ -1,10 +1,10 @@
-.blacksmith {
+.wizard{
     height: 100%;
     display: flex;
-    background-image: url('/images/background_blacksmith.jpg');
+    background-image: url('/images/background_wizard.jpg');
     background-size: 100% 100%;
     position: relative;
-
+    
     &__item{
         width: 50%;
         height: 100%;
@@ -14,7 +14,13 @@
             border-right: 6px solid $color-gray_dark;
         }
     }
+
+    &__shopWrapper{
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-end;
+    }
     &__frame{
-        background-image: url('/images/blacksmith_item_frame.png');
+        background-image: url('/images/wizard_item_frame.png');
     }
 }

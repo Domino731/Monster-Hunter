@@ -97,6 +97,6 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Blacksmith()
+    const x = new Wizard()
     window.addEventListener("popstate", router);
 };
