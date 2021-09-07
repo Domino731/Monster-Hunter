@@ -97,6 +97,6 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Missions()
+    const x = new Guard()
     window.addEventListener("popstate", router);
 };
