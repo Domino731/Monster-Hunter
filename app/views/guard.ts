@@ -28,16 +28,26 @@ export class Guard {
               <div class='range'>
 
                 <div class='sliderValue'>
-                  <span id='slider_value'>100</span>
+                  <span id='slider_value'>1h</span>
                 </div>
 
-                <div class='field'>
-                   <div class='value left'>0</div>
-                   <input type='range' name='guard_time_slider' id='guard_input_slider' min='1' max='10' value='1'>
-                   <div class='value right'>100</div>
+                <div class='field'>        
+                   <input type='range' name='guard_time_slider' class='field__progressBar-1' id='guard_input_slider' min='1' max='10' value='1'>
                 </div>
+                
               </div>
+
+               <div class='guard__award'>
+                 <img src='./images/guard_reward_icon.png' alt='King' class='guard__awardIcon'/>
+                 <strong class='guard__awardAmount'>Reward: 123</strong>
+               </div>
+ 
+               <div class='guard__acceptBtnWrapper'> 
+                 <button class='guard__acceptBtn'>START</button>
+               </div>
              </div>
+
+            
            </div>
         </section>`;
 
@@ -50,7 +60,7 @@ export class Guard {
 
             // set text inside span to notify user about selected guard time
             const input = e.target as HTMLInputElement
-            this.sliderValue.innerText = input.value
+            this.sliderValue.innerText = input.value + 'h'
             
             // change style
             const styleLeft: number = parseInt(input.value) * 10;
@@ -58,11 +68,12 @@ export class Guard {
                  this.sliderValue.style.left = styleLeft - 10 + '%'
             } 
             else if (styleLeft > 50){
-                this.sliderValue.style.left = styleLeft - 5 + '%'
+                this.sliderValue.style.left = styleLeft - 9 + '%'
             }
             else{
-                this.sliderValue.style.left = '45%'
+                this.sliderValue.style.left = '40%'
             }
+            this.inputSlider.className = `field__progressBar-${input.value}`
             
         };
     }

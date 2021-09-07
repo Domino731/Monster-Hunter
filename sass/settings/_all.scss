@@ -3,6 +3,7 @@ $fontFamily-kanit: 'Kanit', sans-serif;
 $fontFamily-medivalSharp: 'MedievalSharp', cursive;
 body{
     font-family: 'Kanit', sans-serif;
+    color: $color-black;
 }
 .transparent{
     &::after{
