@@ -46,4 +46,90 @@
         word-spacing: 0.125rem;
         line-height: 1.25rem;
     }
+    &__inputWrapper{
+       height: 80px;
+       width: 100%;
+       background: red;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       position: relative;
+    }
+    &__inputSliderValue{
+     position: relative;
+    }
+
+    &__inputField{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        height: 3px;
+        background: #ddd;
+        width: 100%;
+        border-radius: 3px;
+        input{
+            appearance: none;
+        }
+    }
+    &__inputValue{
+        position: absolute;
+        &-left{
+            left: -30px;
+        }
+        &-right{
+          right: -30px;
+        }
+    }
+    .range{
+        height: 80px;
+        width: 100%;
+        background: white;
+    }
+    .field{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        input{
+            position: relative;
+            appearance: none;
+            width: 100%;
+            background: #ddd;
+            border: none;
+            &::-webkit-slider-thumb{
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                background: red;
+                
+            }
+        }
+    }
+    .value{
+        position: absolute;
+
+    }
+    .left{
+        left: -43px;
+    }
+    .right{
+        right: -43px;
+    }
+    .sliderValue{
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        span{
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: red;
+            left: 0%;
+
+        }
+    }
 }
