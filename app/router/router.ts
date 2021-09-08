@@ -97,6 +97,8 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Guard()
+    const x = new Friends()
     window.addEventListener("popstate", router);
 };
+
+// <a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>
