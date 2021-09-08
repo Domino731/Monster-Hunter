@@ -126,6 +126,21 @@ export class Friends {
 
              </div>
            </div>
+
+           <div class='friends__list'>
+             <div class='friends__item'> 
+               <div class='friend'> 
+                 <div class='friend__portraitWrapper'>
+                   <img src='./images/hero_portraits/human_1.png' alt='portait' class='friend__portrait'/>
+                 </div>
+                 <h2 class='friend__name'>MMMMMMMMMMMMMMMM</h2>
+                 <div class='friend__levelWrapper'> 
+                   <img src='./images/friends_icon_level.png' alt='level' class='friend__levelIcon'/>
+                   <strong class='friend__level'>LEVEL: 125</strong>
+                 </div>
+               </div>
+             </div>
+           </div>
         </section>`;
     }
 
