@@ -1,3 +1,4 @@
+import { auth } from '../firebase/index';
 export abstract class AuthForm {
 
     protected inputs: NodeListOf<Element> | null;
@@ -51,7 +52,7 @@ export abstract class AuthForm {
 
     addInputEvents() {
         this.inputs.forEach(el => {
-            el.addEventListener("keyup", (e: Event) => {
+            el.addEventListener("keyup", () => {
                 const { name, value } = el as HTMLInputElement
                 this.data = {
                     eMail: this.data.eMail,
