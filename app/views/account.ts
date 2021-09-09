@@ -94,8 +94,7 @@ export class Account {
 
     // adding event for each input, which is responsible to changing data
     changeDataEvent() {
-        this.dom.updateFormInputs.forEach(el => el.addEventListener("keyup", () => {
-            el.addEventListener("keyup", () => {
+        this.dom.updateFormInputs.forEach(el => el.addEventListener("change", () => {
                 const { name, value } = el as HTMLInputElement
                 this.data = {
                     email: this.data.email,
@@ -104,7 +103,6 @@ export class Account {
                     [name]: value
                 }
                 this.dom.errorWrapper.style.display = "none"
-            });
         }));
     };
 
