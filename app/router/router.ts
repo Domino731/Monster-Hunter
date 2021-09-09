@@ -48,7 +48,7 @@ export const router = async () => {
             view: Guard
         },
         {
-            path: "/settings",
+            path: "/account",
             view: Account
         }
     ]

@@ -60,14 +60,14 @@
         &::after {
             bottom: 0;
             left: 0;
-            border-left: 6px solid #3a86ff;
-            border-bottom: 6px solid #3a86ff;
+            border-left: 6px solid $color-blue;
+            border-bottom: 6px solid $color-blue;
         }
         &::before {
             top: 0;
             right: 0;
-            border-right: 6px solid #3a86ff;
-            border-top: 6px solid #3a86ff;
+            border-right: 6px solid $color-blue;
+            border-top: 6px solid $color-blue;
         }
         &:hover::after,
         &:hover::before {
@@ -125,14 +125,14 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        border-bottom: 10px solid #3a86ff;
+        border-bottom: 10px solid $color-blue;
         width: 90%;
     }
     &__friendCircle {
         width: 370px;
         height: 370px;
         border-radius: 50%;
-        background: #3a86ff;
+        background: $color-blue;
         transform: translate(45px, -10px);
         border: 6px solid $color-gold;
     }
@@ -247,11 +247,11 @@
         }
         
         i{
-            color:#3a86ff;
+            color:$color-blue;
             margin-right: 0.313rem;
         }
         a {
-            color: #3a86ff;
+            color: $color-blue;
         }
         p{
             margin-top: 0.5rem;
