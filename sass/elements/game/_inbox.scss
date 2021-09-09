@@ -55,7 +55,7 @@
             position: absolute;
             width: 37px;
             height: 68px;
-            transition: 0.3s;
+            transition: 0.4s;
         }
         &::after {
             bottom: 0;
@@ -110,14 +110,14 @@
 }
 //#3a86ff
 .mail {
+    // for friend request
     height: 100%;
     background: $color-white;
-    backdrop-filter: blur(12px);
-    padding: 25px 0;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
     &__friendHeaderWrapper {
         height: 456px;
         margin: 0 auto;
@@ -138,7 +138,7 @@
     }
     &__friendPortait {
         position: absolute;
-        
+
         height: 320px;
         width: auto;
         object-fit: cover;
@@ -146,7 +146,6 @@
         transform: translate(-85px, 26px);
     }
     &__friendTitle {
-        
         font-weight: 700;
         font-size: 1.875rem;
         margin-top: 3px;
@@ -189,7 +188,7 @@
         position: absolute;
         overflow: hidden;
         bottom: 0;
-        span{
+        span {
             position: absolute;
             display: block;
             width: 100%;
@@ -202,6 +201,63 @@
             width: 100%;
             height: auto;
             object-fit: cover;
+        }
+    }
+
+    // for mail
+    &__header {
+        position: relative;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        span {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 10px;
+            bottom: 0;
+
+            background: $color-white;
+            box-shadow: 0 5px 19px 36px $color-white;
+            z-index: 3;
+        }
+    }
+    &__title {
+        font-weight: 700;
+        font-size: 2.188rem;
+        letter-spacing: 0.125rem;
+        word-spacing: 0.188rem;
+        width: 90%;
+        text-align: left;
+        text-decoration: underline;
+        text-decoration-color: #ff006e;
+    }
+    &__content {
+        margin-top: 10px;
+        width: 90%;
+        font-size: 1.375rem;
+        h3 {
+            font-size: 1.563rem;
+            font-weight: 500;
+            margin-top: 0.313rem;
+            margin-bottom: 0.188rem;
+        }
+        
+        i{
+            color:#3a86ff;
+            margin-right: 0.313rem;
+        }
+        a {
+            color: #3a86ff;
+        }
+        p{
+            margin-top: 0.5rem;
+        }
+        strong{
+            font-style: italic;
         }
     }
 }
