@@ -97,7 +97,7 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new SearchFriend()
+    const x = new Inbox()
     window.addEventListener("popstate", router);
 };
 
