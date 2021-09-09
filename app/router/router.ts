@@ -97,7 +97,7 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-    const x = new Inbox()
+    const x = new Account()
     window.addEventListener("popstate", router);
 };
 

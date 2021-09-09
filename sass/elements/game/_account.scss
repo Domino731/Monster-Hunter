@@ -1,0 +1,89 @@
+.account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url('/images/background_account.jpg');
+    background-size: 100% 100%;
+    &__item{
+        padding: 5px 10px;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(2px);
+        border-radius: 20px;
+    }
+    &__nick{
+        font-size: 44px;
+        letter-spacing: 0.25rem;
+        word-spacing: 0.188rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #ffcd00;
+        -webkit-text-stroke: 1px #03071e;
+    }
+    &__element{
+        height: 66px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 21px;
+        box-sizing: border-box;
+    }
+    &__elementIcon{
+        height: 100%;
+        width: 66px;
+        border-radius: 80px;
+        padding: 4px;
+        background: $color-white;
+        z-index: 1;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &__elementContent{
+        width: 78%;
+        height: 50px;
+        background: $color-white;
+        transform: translateX(-15px);
+        border-radius: 0 30px 30px 0;
+        padding-left: 15px;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        border: none;
+        font-size: 1.375rem;
+        overflow: hidden;
+        font-family: $fontFamily-kanit;
+        outline: none;
+        box-sizing: border-box;
+        &-email{
+            &:focus{
+                border: 4px solid #5f98d1;
+            }
+        }
+        &-password{
+            &:focus{
+                border: 4px solid #7343dd;
+            }
+        }
+    }
+    &__btn{
+        width: 100%;
+        background-color: $color-blue;
+        color: $color-white;
+        margin: 1.5rem 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+        border-radius: 40px;
+        letter-spacing: 0.063rem;
+        transition: 0.2s;
+        padding: 0.313rem 0;
+        border: none;
+        &:hover{
+            cursor: pointer;
+            border: 2px solid $color-gold;
+            letter-spacing: 0.125rem;
+        }
+    }
+}
