@@ -22,7 +22,7 @@ export class Inbox {
                  <div class='inbox__listDate'>Yesterday </br> 12:30<div>
                </li>
                <li class='inbox__listItem'>
-               <h2 class='inbox__listTitle'>Invitation to friends</h2>
+               <h2 class='inbox__listTitle'>Friend request</h2>
                <strong class='inbox__listSubTitle'>From darthVader89</strong>
                <div class='inbox__listDate'>09.09.2021<div>
              </li>
@@ -31,7 +31,25 @@ export class Inbox {
 
 
            <div class='inbox__item'>
-           
+             <div class='mail'>
+                <div class='mail__friendHeaderWrapper'> 
+                   
+                  <img src='./images/hero_portraits/human_1.png' alt='portait' class='mail__friendPortait'/>
+                  <div class='mail__friendCircle'></div>
+                </div>
+
+                <h2 class='mail__friendTitle'> <span>DarthVader</span> sends you a friend request</h2>
+                <div class='mail__FriendActionBar'>
+                  <button class='mail__friendBtn mail__friendBtn-accept'>Accept</button>
+                  <button class='mail__friendBtn mail__friendBtn-reject'>Reject</button>
+                </div>
+
+                <div class='mail__friendBottomWrapper'> 
+                    <span></span>
+                <img src='./images/mail_background_friend_request.jpg'/>
+              
+                </div>
+             </div>
            </div>
         </section>`;
     }
@@ -41,4 +59,8 @@ export class Inbox {
     }
 }
 
+//dragon
 //<a href='https://www.freepik.com/vectors/character'>Character vector created by macrovector - www.freepik.com</a>
+
+// blue bg
+//<a href='https://www.freepik.com/vectors/abstract'>Abstract vector created by upklyak - www.freepik.com</a>
