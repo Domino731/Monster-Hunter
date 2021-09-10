@@ -1,7 +1,7 @@
-import { potion } from '../../types';
+import { Potion } from '../../types';
 
 // this array contains data about potions - cost, name, src, properties
-const potionsData: potion[] = [
+const potionsData: Potion[] = [
     {
         type: 'potion',
         name: 'Decoction of cactus',

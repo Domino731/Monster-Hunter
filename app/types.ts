@@ -2,7 +2,7 @@ export interface route{
     path: string,
     view: any
 }
-export interface potion{
+export interface Potion{
     type: 'potion',
     src: string,
     name: string,
@@ -15,8 +15,23 @@ export interface potion{
         luck: number | null
     }
 }
-export interface chestPlate{
+export interface ChestPlate{
     type: 'chestPlate',
+    name: string,
+    rarity: 'common' | 'legendary',
+    src: string,
+    description?: string,
+    initialCost: number,
+    properties: {
+        strength: number | null,
+        physicalEndurance: number | null,
+        defence: number | null,
+        luck: number | null
+    }
+}
+
+export interface Gloves{
+    type: 'gloves',
     name: string,
     rarity: 'common' | 'legendary',
     src: string,
