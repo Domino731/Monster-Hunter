@@ -241,13 +241,169 @@ export const weaponsData : ShopItem[] = [
         type: 'weapon',
         rarity: 'common',
         name: 'Venom Greatsword',
-        src: './images/shop/weapons/venom_ greatsword.png',
+        src: './images/shop/weapons/venom_greatsword.png',
         initialCost: 75,
         properties: {
             strength: 10,
             physicalEndurance: 10,
             defence: null,
             luck: 55
+        }
+    },
+
+    // legendary
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: 'Blood Infused Quickblade',
+        description: 'Made of mountain emerald and black magic',
+        src: './images/shop/weapons/blood_infused_quickblade.png',
+        initialCost: 130,
+        properties: {
+            strength: 80,
+            physicalEndurance: null,
+            defence: 20,
+            luck: 30
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Destiny's Song`,
+        description: `I've already seen this somewhere`,
+        src: './images/shop/weapons/destinys_song.png',
+        initialCost: 120,
+        properties: {
+            strength: 50,
+            physicalEndurance: 10,
+            defence: 50,
+            luck: 10
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Dire Steel Crusader`,
+        description: 'Perfect for a Friday night monster party',
+        src: './images/shop/weapons/dire_steel_crusader.png',
+        initialCost: 140,
+        properties: {
+            strength: 30,
+            physicalEndurance: 100,
+            defence: 10,
+            luck: null
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Heartless Copper Slicer`,
+        description: 'Small but crazy',
+        src: './images/shop/weapons/heartless_copper_slicer.png',
+        initialCost: 120,
+        properties: {
+            strength: 90,
+            physicalEndurance: 15,
+            defence: 5,
+            luck: 10
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Memory of Shadow Strikes`,
+        description: 'Stolen from a sale, but still usable',
+        src: './images/shop/weapons/memory_of_shadow_strikes.png',
+        initialCost: 170,
+        properties: {
+            strength: 120,
+            physicalEndurance: 20,
+            defence: 20,
+            luck: 10
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Scar`,
+        description: 'So beautiful sword that monsters want to be cut with it',
+        src: './images/shop/weapons/scar.png',
+        initialCost: 160,
+        properties: {
+            strength: 50,
+            physicalEndurance: 50,
+            defence: 10,
+            luck: 50
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Voice of Light's Hope`,
+        description: 'Classic of classics',
+        src: './images/shop/weapons/voice_of_lights_hope.png',
+        initialCost: 130,
+        properties: {
+            strength: 100,
+            physicalEndurance: 5,
+            defence: 5,
+            luck: 5
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Dark Side Laser`,
+        description: `Just Dark side`,
+        src: './images/shop/weapons/red_laser.png',
+        initialCost: 300,
+        properties: {
+            strength: 300,
+            physicalEndurance: null,
+            defence: null,
+            luck: null
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Light Side Laser`,
+        description: `Just Light side`,
+        src: './images/shop/weapons/blue_laser.png',
+        initialCost: 300,
+        properties: {
+            strength: null,
+            physicalEndurance: null,
+            defence: 300,
+            luck: null
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Happy Slicer`,
+        description: `Always smiling :)`,
+        src: './images/shop/weapons/happy_sword.png',
+        initialCost: 200,
+        properties: {
+            strength: 100,
+            physicalEndurance: null,
+            defence: 100,
+            luck: null
+        }
+    },
+    {
+        type: 'weapon',
+        rarity: 'legendary',
+        name: `Power of whole universe`,
+        description: `Yes, it's the best sword in the whole game, I didn't get the graphics or the name wrong, the real power is in your head.`,
+        src: './images/shop/weapons/wooden_sword.png',
+        initialCost: 100000,
+        properties: {
+            strength: 250,
+            physicalEndurance: 250,
+            defence: 250,
+            luck: 250
         }
     },
 ]

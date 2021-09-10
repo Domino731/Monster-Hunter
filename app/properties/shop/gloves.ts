@@ -4,7 +4,7 @@ export const glovesData: Gloves[] = [
     // common items
     {
         type: 'gloves',
-        name: 'Camo gloves',
+        name: 'Camo Gloves',
         rarity: 'common',
         src: './images/shop/gloves/camo_gloves.png',
         initialCost: 20,
@@ -18,7 +18,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Frosty gloves',
+        name: 'Frosty Gloves',
         rarity: 'common',
         src: './images/shop/gloves/frosty_gloves.png',
         initialCost: 30,
@@ -32,7 +32,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Frosty gloves',
+        name: 'Frosty Gloves',
         rarity: 'common',
         src: './images/shop/gloves/frosty_gloves.png',
         initialCost: 50,
@@ -47,7 +47,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Heat gloves',
+        name: 'Heat Gloves',
         rarity: 'common',
         src: './images/shop/gloves/heat_gloves.png',
         initialCost: 30,
@@ -61,7 +61,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Fast gloves',
+        name: 'Fast Gloves',
         rarity: 'common',
         src: './images/shop/gloves/fast_gloves.png',
         initialCost: 50,
@@ -75,7 +75,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Racing gloves',
+        name: 'Racing Gloves',
         rarity: 'common',
         src: './images/shop/gloves/racing_gloves.png',
         initialCost: 40,
@@ -89,7 +89,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Stylish gloves',
+        name: 'Stylish Gloves',
         rarity: 'common',
         src: './images/shop/gloves/stylish_gloves.png',
         initialCost: 40,
@@ -104,7 +104,7 @@ export const glovesData: Gloves[] = [
     
     {
         type: 'gloves',
-        name: 'Sport gloves',
+        name: 'Sport Gloves',
         rarity: 'common',
         src: './images/shop/gloves/sport_gloves.png',
         initialCost: 40,
@@ -118,7 +118,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Climbing gloves',
+        name: 'Climbing Gloves',
         rarity: 'common',
         src: './images/shop/gloves/climbing_gloves.png',
         initialCost: 100,
@@ -133,7 +133,7 @@ export const glovesData: Gloves[] = [
     // legendary
     {
         type: 'gloves',
-        name: 'Boxing gloves',
+        name: 'Boxing Gloves',
         description: 'Useful when you get bored with a classic sword',
         rarity: 'legendary',
         src: './images/shop/gloves/boxing_gloves.png',
@@ -148,7 +148,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Football gloves',
+        name: 'Football Gloves',
         description: 'The only thing that matters there is luck',
         rarity: 'legendary',
         src: './images/shop/gloves/football_gloves.png',
@@ -163,7 +163,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Happy gloves',
+        name: 'Happy Gloves',
         description: 'In combat, they are no longer so happy',
         rarity: 'legendary',
         src: './images/shop/gloves/happy_gloves.png',
@@ -178,7 +178,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Electric gloves',
+        name: 'Electric Gloves',
         description: 'Hi my name is....',
         rarity: 'legendary',
         src: './images/shop/gloves/electric_gloves.png',
@@ -193,7 +193,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Wired gloves',
+        name: 'Wired Gloves',
         description: 'Created by lightning on Mount Everest',
         rarity: 'legendary',
         src: './images/shop/gloves/wired_gloves.png',
@@ -208,7 +208,7 @@ export const glovesData: Gloves[] = [
 
     {
         type: 'gloves',
-        name: 'Robot gloves',
+        name: 'Robot Gloves',
         description: 'Others have cheats, you have this special gloves',
         rarity: 'legendary',
         src: './images/shop/gloves/robot_gloves.png',

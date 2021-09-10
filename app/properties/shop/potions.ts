@@ -4,7 +4,7 @@ import { Potion } from '../../types';
 const potionsData: Potion[] = [
     {
         type: 'potion',
-        name: 'Decoction of cactus',
+        name: 'Decoction of Cactus',
         description: 'Straight from Texas',
         src: './images/shop/potions/physicalEndurance.png',
         initialCost: 5,
@@ -18,7 +18,7 @@ const potionsData: Potion[] = [
 
     {
         type: 'potion',
-        name: 'Kraken blood',
+        name: 'Kraken Blood',
         description: 'It was not easy',
         src: './images/shop/potions/strength.png',
         initialCost: 5,
@@ -31,7 +31,7 @@ const potionsData: Potion[] = [
     },
     {
         type: 'potion',
-        name: 'Magic of the forest',
+        name: 'Magic of the Forest',
         description: 'Good thing the witch was asleep',
         src: './images/shop/potions/defence.png',
         initialCost: 5,
@@ -44,7 +44,7 @@ const potionsData: Potion[] = [
     },
     {
         type: 'potion',
-        name: 'Liquid moon powder',
+        name: 'Liquid Moon Powder',
         description: 'Imported from Area 51, aliens are still looking for it',
         src: './images/shop/potions/superPotion.png',
         initialCost: 5,
@@ -57,7 +57,7 @@ const potionsData: Potion[] = [
     },
     {
         type: 'potion',
-        name: 'Mountain rose',
+        name: 'Mountain Rose',
         description: 'Passed down from generation to generation, and the power is the same.',
         src: './images/shop/potions/luck.png',
         initialCost: 5,

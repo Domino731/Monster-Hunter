@@ -3,7 +3,7 @@ export const chestplatesData: ChestPlate[] = [
     {
         type: "chestPlate",
         rarity: 'common',
-        name: 'Steel of sea',
+        name: 'Steel of sSea',
         src: './images/shop/chestPlates/steel_of_sea.png',
         initialCost: 2,
         properties: {
@@ -16,7 +16,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Forest guard',
+        name: 'Forest Guard',
         rarity: 'common',
         src: './images/shop/chestPlates/forest_guard.png',
         initialCost: 6,
@@ -30,7 +30,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Moon rider',
+        name: 'Moon Rider',
         rarity: 'common',
         src: './images/shop/chestPlates/moon_rider.png',
         initialCost: 24,
@@ -44,7 +44,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Interdimensional traveller',
+        name: 'Interdimensional Traveller',
         rarity: 'common',
         src: './images/shop/chestPlates/interdimensional_traveller.png',
         initialCost: 50,
@@ -59,7 +59,7 @@ export const chestplatesData: ChestPlate[] = [
     
     {
         type: "chestPlate",
-        name: 'Castle runner',
+        name: 'Castle Runner',
         rarity: 'common',
         src: './images/shop/chestPlates/castle_runner.png',
         initialCost: 40,
@@ -73,7 +73,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Heavy weight',
+        name: 'Heavy Weight',
         rarity: 'common',
         src: './images/shop/chestPlates/heavy_weight.png',
         initialCost: 60,
@@ -87,7 +87,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Climbing mantis',
+        name: 'Climbing Mantis',
         rarity: 'common',
         src: './images/shop/chestPlates/climbing_mantis.png',
         initialCost: 60,
@@ -104,7 +104,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Cyberpunk wind',
+        name: 'Cyberpunk Wind',
         description: 'Elegant jacket straight from the future, light and airy with a nice neon collar that will make monsters blind.',
         rarity: 'legendary',
         src: './images/shop/chestPlates/cyberpunk_wind.png',
@@ -120,7 +120,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Golden luck',
+        name: 'Golden Luck',
         description: `And they say that gold doesn't make you happy, it's true, but this golden armour will make every monster want to catch you and you won't be bored.`,
         rarity: 'legendary',
         src: './images/shop/chestPlates/golden_luck.png',
@@ -137,7 +137,7 @@ export const chestplatesData: ChestPlate[] = [
     
     {
         type: "chestPlate",
-        name: 'Light warrior',
+        name: 'Light Warrior',
         description: 'Armour ideal for gamers, it is transparent and rgb lights illumination. It may not add anything to your stats but it has lights and looks great. ',
         rarity: 'legendary',
         src: './images/shop/chestPlates/light_warrior.png',
@@ -152,7 +152,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Night ninja',
+        name: 'Night Ninja',
         description: 'Straight from Mauna Loa. Created on a volcanic rock, flooded with lava',
         rarity: 'legendary',
         src: './images/shop/chestPlates/night_ninja.png',
@@ -167,7 +167,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Fit shadow',
+        name: 'Fit Shadow',
         description: 'fits better than your own skin',
         rarity: 'legendary',
         src: './images/shop/chestPlates/fit_shadow.png',
@@ -197,7 +197,7 @@ export const chestplatesData: ChestPlate[] = [
 
     {
         type: "chestPlate",
-        name: 'Samurai blood',
+        name: 'Samurai Blood',
         description: 'Blinds others with its brilliance, and makes others jealous',
         rarity: 'legendary',
         src: './images/shop/chestPlates/samurai_blood.png',

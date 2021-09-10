@@ -32,7 +32,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'Dark_nightmare',
+        name: 'Dark Nightmare',
         src: './images/shop/helmets/dark_nightmare.png',
         initialCost: 50,
         properties: {
@@ -47,7 +47,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'Door opener',
+        name: 'Door Opener',
         src: './images/shop/helmets/door_opener.png',
         initialCost: 60,
         properties: {
@@ -61,7 +61,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'Full focus',
+        name: 'Full Focus',
         src: './images/shop/helmets/full_focus.png',
         initialCost: 40,
         properties: {
@@ -75,7 +75,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'Night rider',
+        name: 'Night Rider',
         src: './images/shop/helmets/night_rider.png',
         initialCost: 50,
         properties: {
@@ -89,7 +89,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'Super vision',
+        name: 'Super Vision',
         src: './images/shop/helmets/super_vision.png',
         initialCost: 40,
         properties: {
@@ -103,7 +103,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'common',
-        name: 'True warrior',
+        name: 'True Warrior',
         src: './images/shop/helmets/true_warrior.png',
         initialCost: 40,
         properties: {
@@ -134,7 +134,7 @@ export const helmetsData: ShopItem[] = [
         type: 'helmet',
         rarity: 'legendary',
         description: 'A beautiful helmet with a very weak air intakes, causes desire to finish off your opponent as quickly as possible and take this helmet off you head',
-        name: 'Super warrior',
+        name: 'Super Warrior',
         src: './images/shop/helmets/super_warrior.png',
         initialCost: 100,
         properties: {
@@ -148,7 +148,7 @@ export const helmetsData: ShopItem[] = [
         type: 'helmet',
         rarity: 'legendary',
         description: `Is there anything more beautiful than technology? Of course there is, this helmet is filled with technology and spoils so often you can't afford a new one`,
-        name: 'Future view',
+        name: 'Future View',
         src: './images/shop/helmets/future_view.png',
         initialCost: 130,
         properties: {
@@ -162,7 +162,7 @@ export const helmetsData: ShopItem[] = [
         type: 'helmet',
         rarity: 'legendary',
         description: `Made of gold, that's all you know, and looks cool`,
-        name: 'Golden head',
+        name: 'Golden Head',
         src: './images/shop/helmets/golden_head.png',
         initialCost: 150,
         properties: {
@@ -177,7 +177,7 @@ export const helmetsData: ShopItem[] = [
         type: 'helmet',
         rarity: 'legendary',
         description: `Useful at night when you can't see anything, when you put him on your head you still can't see anything but if you hit your head on a tree you won't feel anything`,
-        name: 'Dark knight',
+        name: 'Dark Knight',
         src: './images/shop/helmets/dark_knight.png',
         initialCost: 130,
         properties: {
@@ -191,7 +191,7 @@ export const helmetsData: ShopItem[] = [
         type: 'helmet',
         rarity: 'legendary',
         description: `Not worth the price, adds nothing to the stats but looks good and has rgb lighting`,
-        name: 'PCMR helmet',
+        name: 'PCMR Helmet',
         src: './images/shop/helmets/pcmr_helmet.png',
         initialCost: 1000,
         properties: {
