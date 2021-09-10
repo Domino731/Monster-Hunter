@@ -44,3 +44,17 @@ export interface Gloves{
         luck: number | null
     }
 }
+export interface ShopItem{
+    type: 'helmet',
+    name: string,
+    rarity: 'common' | 'legendary',
+    src: string,
+    description?: string,
+    initialCost: number,
+    properties: {
+        strength: number | null,
+        physicalEndurance: number | null,
+        defence: number | null,
+        luck: number | null
+    }
+}
