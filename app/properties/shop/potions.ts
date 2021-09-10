@@ -6,7 +6,7 @@ const potionsData: potion[] = [
         type: 'potion',
         name: 'Decoction of cactus',
         description: 'Straight from Texas',
-        src: './images/physicalEndurance.png',
+        src: './images/shop/potions/physicalEndurance.png',
         initialCost: 5,
         properties: {
             physicalEndurance: 10,
@@ -20,7 +20,7 @@ const potionsData: potion[] = [
         type: 'potion',
         name: 'Kraken blood',
         description: 'It was not easy',
-        src: './images/strength.png',
+        src: './images/shop/potions/strength.png',
         initialCost: 5,
         properties: {
             strength: 10,
@@ -33,7 +33,7 @@ const potionsData: potion[] = [
         type: 'potion',
         name: 'Magic of the forest',
         description: 'Good thing the witch was asleep',
-        src: './images/defence.png',
+        src: './images/shop/potions/defence.png',
         initialCost: 5,
         properties: {
             defence: 10,
@@ -46,7 +46,7 @@ const potionsData: potion[] = [
         type: 'potion',
         name: 'Liquid moon powder',
         description: 'Imported from Area 51, aliens are still looking for it',
-        src: './images/superPotion.png',
+        src: './images/shop/potions/superPotion.png',
         initialCost: 5,
         properties: {
             physicalEndurance: 15,
@@ -59,14 +59,13 @@ const potionsData: potion[] = [
         type: 'potion',
         name: 'Mountain rose',
         description: 'Passed down from generation to generation, and the power is the same.',
-        src: './images/luck.png',
+        src: './images/shop/potions/luck.png',
         initialCost: 5,
         properties: {
             luck: 10,
             physicalEndurance: 0,
             strength: 0,
             defence: 0
-
         }
     },
 ];
