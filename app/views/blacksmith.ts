@@ -8,8 +8,14 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 export class Blacksmith {
 
    private root: HTMLElement
+   private dom: {
+      marketSlots: NodeListOf<Element> | null
+   }
    constructor() {
       this.root = document.getElementById("game__view")
+      this.dom = {
+         marketSlots: document.querySelectorAll("#market_slots .market__slot")
+      }
       this.init();
    }
 
@@ -68,28 +74,40 @@ export class Blacksmith {
                     <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>          
                 </div>
     
-                <div class='market__itemsList'>
+                <div class='market__itemsList' id='market_slots'>
                    <div class='market__shopRow'> 
                       <div class='market__shopFrame blacksmith__frame'>
-                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters' class='market__weapon'/>
+                        <div class='market__slot'>
+                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters'/>
+                        </div>  
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
-                         
+                        <div class='market__slot'>
+                       
+                        </div> 
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
-                         
+                        <div class='market__slot'>
+                        
+                        </div> 
                       </div>
                    </div>
 
                 <div class='market__shopRow'> 
                    <div class='market__shopFrame blacksmith__frame'>
-                         
+                        <div class='market__slot'>
+                          
+                        </div> 
                    </div>
                    <div class='market__shopFrame blacksmith__frame'>
-                   
+                        <div class='market__slot'>
+                     
+                        </div> 
                    </div>
                    <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slot'>
                    
+                        </div> 
                    </div>
                 </div>
                 </div>
@@ -103,6 +121,8 @@ export class Blacksmith {
 
 
    setShop() {
+
+      /////////////////// creating shop items array /////////////////////////
 
       // array with shop items, base on which shop will be created
       let shopItems: ShopItem[] = []
@@ -139,11 +159,18 @@ export class Blacksmith {
 
        // shuffle the shopItems array
        shopItems = shopItems.sort(() => Math.random() - .5)
-       console.log(shopItems)
+
+       console.log(this.dom.marketSlots)
+       //////////////// rendering shop ////////////////////////////////
+ 
+       this.dom.marketSlots.forEach(el => console.log(el))
+       
    }
 
    getDOMElements() {
-
+      this.dom = {
+         marketSlots: document.querySelectorAll("#market_slots .market__slot")
+      }
    }
    initScripts() {
       this.setShop();

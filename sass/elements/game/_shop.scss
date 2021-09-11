@@ -1,47 +1,55 @@
-.market{
+.market {
     &__characterWrapper {
         height: 40%;
         display: flex;
         justify-content: center;
     }
-    &__characterImg{
+    &__characterImg {
         width: auto;
         height: 100%;
         object-fit: cover;
     }
-    &__shop{
+    &__shop {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
     }
-    &__itemsList{
+    &__itemsList {
         margin-bottom: 57px;
-    
     }
 
-    &__shopRow{
+    &__shopRow {
         display: flex;
         justify-content: space-evenly;
         height: 50%;
-        &:last-child{
+        &:last-child {
             margin-top: 10px;
         }
     }
-    &__shopFrame{
+    &__shopFrame {
         width: 170px;
-        height: 170px;     
+        height: 170px;
         background-size: 100% 100%;
         padding: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    &__weapon{
-        width: 66%;
-        height: auto;
-        object-fit: cover;
-        &-wizard{
-            width: 45%;
+    &__slot {
+        display: flex;
+        justify-content: center;
+        img {
+            width: 83%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        
+        &-wizard {
+            img{
+              width: 45%;  
+            }
+            
         }
     }
 }

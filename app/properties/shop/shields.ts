@@ -13,7 +13,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 10,
             luck: 10
-        }
+        },
+        id: '4ed68396-4dbe-44c3-b330-3240f85a375e'
     },
 
     {
@@ -27,7 +28,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 10,
             luck: 20
-        }
+        },
+        id: 'fde5a925-18ed-4bdb-8aec-74f94ec29c03'
     },
 
     {
@@ -41,7 +43,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 30,
             luck: 30
-        }
+        },
+        id: '7b32fe2c-e930-4ecd-8435-c17a5ea11b58'
     },
 
     
@@ -56,7 +59,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 60,
             luck: null
-        }
+        },
+        id: 'a97c3288-63ad-4fe1-8a21-552eb323e043'
     },
 
     {
@@ -70,7 +74,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 20,
             luck: 10
-        }
+        },
+        id: '756140a9-9613-481d-819a-f58a6b0e19fa'
     },
 
     {
@@ -84,7 +89,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: null
-        }
+        },
+        id: '0a11d865-0df5-40ea-a12e-90cbb78842d0'
     },
 
     {
@@ -98,7 +104,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 10,
             luck: 40
-        }
+        },
+        id: '9b44c27c-cc15-483a-8d0d-1ce1ce3f3f62'
     },
 
     {
@@ -112,7 +119,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: 20
-        }
+        },
+        id: '6ba7e35b-a965-44b8-b8e2-748d0bc63657'
     },
 
     {
@@ -126,7 +134,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 70,
             luck: null
-        }
+        },
+        id: 'a0335e26-4d79-4c80-9514-b8bb570dd04c'
     },
 
 
@@ -145,7 +154,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 90,
             luck: null
-        }
+        },
+        id: '6ac498c4-c420-4057-8bd5-46f4bc861eaa'
     },
 
     {
@@ -160,7 +170,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 100,
             luck: 20
-        }
+        },
+        id: '32f314e9-f472-4987-8f95-af0668b2c543'
     },
 
     {
@@ -175,7 +186,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 140,
             luck: null
-        }
+        },
+        id: '357e6434-d2f3-4cbf-b7dd-73cf95e29fa3'
     },
 
     {
@@ -190,7 +202,8 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: 20,
             defence: 30,
             luck: null
-        }
+        },
+        id: 'f481aad5-10b4-4dfa-9f76-429e469b0760'
     },
 
     {
@@ -205,6 +218,7 @@ export const shieldsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: '50ebdd07-8ed0-448c-a763-0239323728d6'
     },
 ]

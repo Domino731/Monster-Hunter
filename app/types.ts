@@ -57,4 +57,5 @@ export interface ShopItem{
         defence: number | null,
         luck: number | null
     }
+    id: string
 }

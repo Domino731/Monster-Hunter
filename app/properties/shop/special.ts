@@ -13,7 +13,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 15,
             defence: null,
             luck: 15
-        }
+        },
+        id: '006761fc-3478-40b5-9161-0eb0ad69828f'
     },
     {
         type: 'special',
@@ -27,7 +28,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: 80
-        }
+        },
+        id: 'bd33272c-2424-4645-a1b8-269f55b749be'
     },
     {
         type: 'special',
@@ -41,7 +43,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 50,
             defence: null,
             luck: null
-        }
+        },
+        id: '55f2a756-682d-4e88-8ffb-4ebfeb2aed66'
     },
     {
         type: 'special',
@@ -55,7 +58,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 20,
             defence: 20,
             luck: 20
-        }
+        },
+        id: 'f420df5a-8ede-4872-ba86-0370e35dd49d'
     },
     {
         type: 'special',
@@ -69,7 +73,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 90,
             defence: null,
             luck: null
-        }
+        },
+        id: '1d77c1b4-226a-4a00-833a-db1a876aa031'
     },
     {
         type: 'special',
@@ -83,7 +88,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 40,
             defence: 40,
             luck: 40
-        }
+        },
+        id: '25f5a332-6640-4605-a625-23b0a9d60e1c'
     },
     {
         type: 'special',
@@ -97,7 +103,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 10
-        }
+        },
+        id: '6f21084d-208a-4439-8743-ff2a00dd1df5'
     },
     {
         type: 'special',
@@ -111,7 +118,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 10
-        }
+        },
+        id: '388ce7e6-f1cd-4c3d-a6bf-6dfa491a2023'
     },
     {
         type: 'special',
@@ -125,7 +133,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: '70c90957-7262-4974-a34c-9efd7886962c'
     },
     {
         type: 'special',
@@ -139,7 +148,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 90,
             luck: null
-        }
+        },
+        id: '4180cb65-7d07-4c4f-b620-7cac77ad466d'
     },
     {
         type: 'special',
@@ -153,7 +163,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 120,
             defence: null,
             luck: null
-        }
+        },
+        id: 'b78fc21a-9132-4181-b7b7-bf77d71ea20f'
     },
     {
         type: 'special',
@@ -167,7 +178,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 50,
             defence: 50,
             luck: null
-        }
+        },
+        id: '00c71a5f-c772-47a0-8290-c0d6b4bd5c62'
     },
     {
         type: 'special',
@@ -181,7 +193,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: 80,
             defence: 30,
             luck: null
-        }
+        },
+        id: '2c41ccc2-1947-45ca-8532-39ce4198c408'
     },
     {
         type: 'special',
@@ -195,7 +208,8 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 50
-        }
+        },
+        id: 'c8888dc-3197-41c7-b257-6915178d90c0'
     },
     {
         type: 'special',
@@ -209,6 +223,7 @@ export const specialItemsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 100,
             luck: 100
-        }
+        },
+        id: 'ddd3d033-d97c-470f-b376-20db1730d5c3'
     },
 ]

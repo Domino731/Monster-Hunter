@@ -13,7 +13,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 5,
             defence: 10,
             luck: 10
-        }
+        },
+        id: '62c2705c-4c39-46e6-9d61-081549312f08'
     },
 
     {
@@ -27,7 +28,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 10,
             luck: 10
-        }
+        },
+        id: 'c1ef879c-7357-4e90-8876-97cd18d4118f'
     },
     {
         type: 'weapon',
@@ -40,7 +42,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 20
-        }
+        },
+        id: '13dcfcc0-c994-4be2-9491-029c40f0f547'
     },
     {
         type: 'weapon',
@@ -53,7 +56,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 15,
             defence: 15,
             luck: 5
-        }
+        },
+        id: '79e4cb9e-a57f-4e41-932d-53a8c74fef1d'
     },
     {
         type: 'weapon',
@@ -66,7 +70,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 20
-        }
+        },
+        id: '6e88a8b0-70cc-4468-b95a-6a34a250459b'
     },
     {
         type: 'weapon',
@@ -79,7 +84,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: '80b92b3d-dd88-43ec-9ac4-cdf42e5f98f7'
     },
     {
         type: 'weapon',
@@ -92,7 +98,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 20,
             defence: null,
             luck: 10
-        }
+        },
+        id: 'c4065ce2-dbc4-4150-819a-9d8542719021'
     },
     {
         type: 'weapon',
@@ -105,7 +112,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 30,
             defence: null,
             luck: 5
-        }
+        },
+        id: '5d03ab72-f197-4cf8-ab9e-3a9696572a6f'
     },
     {
         type: 'weapon',
@@ -118,7 +126,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 20,
             defence: 5,
             luck: 20
-        }
+        },
+        id: 'ef8dcfab-7779-408b-bdde-faaddc83c761'
     },
     {
         type: 'weapon',
@@ -131,7 +140,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 15,
             luck: null
-        }
+        },
+        id: '9fa7d603-d4a4-4f14-892c-eb0282ac5b30'
     },
     {
         type: 'weapon',
@@ -144,7 +154,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 25,
             defence: 5,
             luck: null
-        }
+        },
+        id: 'f6aea361-f886-4583-881e-396a79605642'
     },
     {
         type: 'weapon',
@@ -157,7 +168,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 30,
             defence: null,
             luck: null
-        }
+        },
+        id: 'b66c4aa2-52df-4fcb-8763-85cf0dd5878b'
     },
     {
         type: 'weapon',
@@ -170,7 +182,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 5,
             luck: 5
-        }
+        },
+        id: '5ff9ffd9-2744-4937-a9b6-0fbed6633068'
     },
     {
         type: 'weapon',
@@ -183,7 +196,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 50
-        }
+        },
+        id: '3998f24a-4a9c-48a2-b0a8-29c381f4696f'
     },
     {
         type: 'weapon',
@@ -196,7 +210,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 5,
             defence: 5,
             luck: 5
-        }
+        },
+        id: 'e2d0a501-451e-454f-8e39-98f2d12d55f0'
     },
     {
         type: 'weapon',
@@ -209,7 +224,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 25,
             defence: 25,
             luck: null
-        }
+        },
+        id: 'cb0b8e86-9b45-4887-92d6-f1abf9ff913c'
     },
     {
         type: 'weapon',
@@ -222,7 +238,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: 5
-        }
+        },
+        id: '5f698b40-3136-4ed3-b0ba-eb61d0ef6e8b'
     },
     {
         type: 'weapon',
@@ -235,7 +252,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: null,
             luck: 55
-        }
+        },
+        id: '2dcd70d4-0461-4147-b065-610c26323531'
     },
     {
         type: 'weapon',
@@ -248,7 +266,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: null,
             luck: 55
-        }
+        },
+        id: '86dae6a4-cf8a-460b-b2a7-78e7406b5ae8'
     },
 
     // legendary
@@ -264,7 +283,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: 30
-        }
+        },
+        id: '9c312ec0-02a9-44ac-99fa-a52d0a3b9109'
     },
     {
         type: 'weapon',
@@ -278,7 +298,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 10,
             defence: 50,
             luck: 10
-        }
+        },
+        id: '74b01b95-9380-462a-b3ff-5c9eda500ba7'
     },
     {
         type: 'weapon',
@@ -292,7 +313,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 100,
             defence: 10,
             luck: null
-        }
+        },
+        id: '654c25d4-a92b-4419-b1ed-5825cd0bb468'
     },
     {
         type: 'weapon',
@@ -306,7 +328,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 15,
             defence: 5,
             luck: 10
-        }
+        },
+        id: '3fbc9f18-6f3d-4f3d-9084-30fb0b9eacc6'
     },
     {
         type: 'weapon',
@@ -320,7 +343,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 20,
             defence: 20,
             luck: 10
-        }
+        },
+        id: 'cfcc2db7-2b9d-4293-93b0-120cbf57306c'
     },
     {
         type: 'weapon',
@@ -334,7 +358,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 50,
             defence: 10,
             luck: 50
-        }
+        },
+        id: '7c9dc4e9-5915-44fb-82f0-e1bd2600495b'
     },
     {
         type: 'weapon',
@@ -348,7 +373,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 5,
             defence: 5,
             luck: 5
-        }
+        },
+        id: '9cb2455e-17a0-4fb4-a385-e10d43d050f4'
     },
     {
         type: 'weapon',
@@ -362,7 +388,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: 'e8f73ed7-81f0-4940-92b7-517674ddc166'
     },
     {
         type: 'weapon',
@@ -376,7 +403,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 300,
             luck: null
-        }
+        },
+        id: '45b16d2a-cb00-42c1-87fb-a4cd0e458e13'
     },
     {
         type: 'weapon',
@@ -390,7 +418,8 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: null,
             defence: 100,
             luck: null
-        }
+        },
+        id: 'cf1f5051-754b-402d-8f48-2b78119e69e3'
     },
     {
         type: 'weapon',
@@ -404,6 +433,7 @@ export const weaponsData : ShopItem[] = [
             physicalEndurance: 250,
             defence: 250,
             luck: 250
-        }
+        },
+        id: '143f458f-6210-4d72-9c93-221a01047e7d'
     },
 ]

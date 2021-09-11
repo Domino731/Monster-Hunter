@@ -12,7 +12,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 50,
             defence: null,
             luck: null
-        }
+        },
+        id: '546263f6-52df-47c5-81c6-169f06b0d107'
     },
 
     {
@@ -26,7 +27,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 15,
             defence: 15,
             luck: null
-        }
+        },
+        id: '9925fa36-6b8b-42af-a508-b59c38434448'
     },
 
     {
@@ -40,7 +42,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: 20
-        }
+        },
+        id: '438c85ad-ba49-45a2-9c1a-d1dcbfdf6100'
     },
 
     
@@ -55,7 +58,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 30,
             luck: null
-        }
+        },
+        id: 'da1cdb9d-1e00-43bb-a296-a5053dee00ee'
     },
 
     {
@@ -69,7 +73,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 20,
             luck: 20
-        }
+        },
+        id: '1dca39d6-e322-488a-80e6-e44032db47e1'
     },
 
     {
@@ -83,7 +88,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 25,
             luck: null
-        }
+        },
+        id: '7f4a46a3-f031-4e44-8751-fb7037179df7'
     },
 
     {
@@ -97,7 +103,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 40,
             luck: null
-        }
+        },
+        id: 'b0a6cb0f-9525-4b49-8809-68efbfdbe012'
     },
 
     {
@@ -111,7 +118,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 10,
             defence: 10,
             luck: 10
-        }
+        },
+        id: 'bc398265-4c7f-4f59-85d0-d2d0a9cb03ba'
     },
 
     {
@@ -125,7 +133,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 10,
             luck: 20
-        }
+        },
+        id: '111ef6cd-d18a-40b7-8e34-59c8b91e4d2e'
     },
 
     // legendary items
@@ -142,7 +151,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: 50,
             luck: null
-        }
+        },
+        id: '90801753-94ab-48a5-89bc-ff855b748d6d'
     },
     {
         type: 'helmet',
@@ -156,7 +166,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 30,
             defence: 30,
             luck: 40
-        }
+        },
+        id: 'c16b07d1-b0a6-429f-af7b-0c291e565ea7'
     },
     {
         type: 'helmet',
@@ -170,7 +181,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 20,
             defence: 90,
             luck: 20
-        }
+        },
+        id: 'ac96566f-b7e9-458b-9c8b-e09bd3853134'
     },
 
     {
@@ -185,7 +197,8 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: 10,
             defence: 60,
             luck: 30
-        }
+        },
+        id: '861a1ade-d969-4107-85ef-14e1193deb60'
     },
     {
         type: 'helmet',
@@ -199,6 +212,7 @@ export const helmetsData: ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: 'bd01be59-ec34-415b-af5b-40892bd1a5a7'
     },
 ]

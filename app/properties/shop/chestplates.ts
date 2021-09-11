@@ -11,7 +11,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: null,
             defence: null,
             luck: null
-        }
+        },
+        id: 'a34cb696-a8e2-47fb-9784-74be6e922347'
     },
 
     {
@@ -25,7 +26,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 2,
             defence: null,
             luck: null
-        }
+        },
+        id: 'f3587feb-e40e-416c-9a74-312ca3fcb3a5'
     },
 
     {
@@ -39,7 +41,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 10,
             defence: 10,
             luck: null
-        }
+        },
+        id: '271b6cfd-5539-4e49-a77e-ef50cd23d6b3'
     },
 
     {
@@ -53,7 +56,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 20,
             defence: 10,
             luck: 20
-        }
+        },
+        id: '2c0fbabd-ac53-449e-b81c-8975e455363f'
     },
 
     
@@ -68,7 +72,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 40,
             defence: 0,
             luck: 0
-        }
+        },
+        id: '62b05c2e-6c79-4482-828f-3bc6b24fa7f2'
     },
 
     {
@@ -82,7 +87,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 0,
             defence: 50,
             luck: 0
-        }
+        },
+        id: '5d80c17f-b6f2-47d0-9bda-16db695670b0'
     },
 
     {
@@ -96,7 +102,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 20,
             defence: 0,
             luck: 40
-        }
+        },
+        id: '6aa20525-b324-4b7f-a205-afa3e185a049'
     },
 
 
@@ -114,7 +121,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 70,
             defence: 40,
             luck: 10
-        }
+        },
+        id: '489e2553-433b-4576-bdd2-1c786b59e1e8'
     },
 
 
@@ -130,7 +138,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 40,
             defence: 0,
             luck: 40
-        }
+        },
+        id: '8b502483-10a9-422e-9cf1-447040552051'
     },
 
 
@@ -147,7 +156,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 0,
             defence: 0,
             luck: 0
-        }
+        },
+        id: 'bb5e5637-f891-4e88-b380-a73931b0eb76'
     },
 
     {
@@ -162,7 +172,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 20,
             defence: 30,
             luck: 5
-        }
+        },
+        id: '0464b0f3-6d8c-46a3-bdf2-71e8367ccb5b'
     },
 
     {
@@ -177,7 +188,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 90,
             defence: 15,
             luck: 0
-        }
+        },
+        id: '2bc1b3f0-5f81-4217-b58e-31b8e93a63e4'
     },
 
     {
@@ -192,7 +204,8 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 40,
             defence: 40,
             luck: 0
-        }
+        },
+        id: '32af90dc-0a1f-45ec-b378-202e29d06f62'
     },
 
     {
@@ -207,6 +220,7 @@ export const chestplatesData: ShopItem[] = [
             physicalEndurance: 100,
             defence: 100,
             luck: 100
-        }
+        },
+        id: 'b56aded7-e786-494b-8ee2-e9e63681e82b'
     },
 ]
