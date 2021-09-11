@@ -78,7 +78,7 @@ export class Blacksmith {
                    <div class='market__shopRow'> 
                       <div class='market__shopFrame blacksmith__frame'>
                         <div class='market__slot'>
-                          <img src='./images/weapon_sword_diamond.png' alt='frer of monsters'/>
+                          
                         </div>  
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
@@ -163,7 +163,10 @@ export class Blacksmith {
        console.log(this.dom.marketSlots)
        //////////////// rendering shop ////////////////////////////////
  
-       this.dom.marketSlots.forEach(el => console.log(el))
+       this.dom.marketSlots.forEach((el, num) => el.innerHTML = `
+       <img src='${shopItems[num].src}'/>
+       
+       `);
        
    }
 
