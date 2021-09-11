@@ -93,10 +93,16 @@ export class Blacksmith {
     
         </section>`;
     }
-    
+    getDOMElements(){
 
+    }
+    initScripts(){
+
+    }
     init() {
        this.render();
+       this.getDOMElements();
+       this.initScripts();
     }
 }
 

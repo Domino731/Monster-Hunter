@@ -1,5 +1,5 @@
-import { ChestPlate } from '../../types';
-export const chestplatesData: ChestPlate[] = [
+import { ShopItem } from '../../types';
+export const chestplatesData: ShopItem[] = [
     {
         type: "chestPlate",
         rarity: 'common',

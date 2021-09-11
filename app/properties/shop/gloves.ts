@@ -1,5 +1,5 @@
-import { Gloves } from '../../types';
-export const glovesData: Gloves[] = [
+import { ShopItem } from '../../types';
+export const glovesData: ShopItem[] = [
 
     // common items
     {
