@@ -1,7 +1,7 @@
 import { ShopItem } from '../../types';
 
 // this array contains data about potions - cost, name, src, properties
-const potionsData: ShopItem[] = [
+export const potionsData: ShopItem[] = [
     {
         type: 'potion',
         rarity: 'common',

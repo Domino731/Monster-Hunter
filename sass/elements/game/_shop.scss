@@ -3,17 +3,19 @@
         height: 336px;
         display: flex;
         justify-content: center;
-        border: 3px solid red;
+        transition: 0.5s;
     }
     &__characterImg {
         transition: 0.5s;
         width: auto;
         height: 100%;
         object-fit: cover;
+        transition: 0.5s;
     }
     &__character {
         height: 100%;
         position: relative;
+        transition: 0.5s;
         &::after {
             content: "";
             display: block;
@@ -86,6 +88,7 @@
         border-radius: 18px;
         animation: 0.6s an__blacksmith_messageCloud forwards;
         position: relative;
+        transition: 0.5s;
         &::after {
             content: "";
             display: block;
@@ -96,8 +99,6 @@
             height: 160px;
             background: $color-white;
             clip-path: polygon(98% 64%, 0 0, 0 36%);
-            transform: scale(0%);
-            animation: 0.6s an__blacksmith_messageCloud forwards;
             z-index: 2;
         }
     }

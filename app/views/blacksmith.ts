@@ -5,20 +5,24 @@ import { glovesData } from '../properties/shop/gloves';
 import { weaponsData } from '../properties/shop/weapons';
 import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
+import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
+import { allMarketItems } from '../properties/shop/allMarketItems';
 export class Blacksmith {
 
    private root: HTMLElement
    private test: any
    private dom: {
+      market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
-      itemInfoBox: HTMLElement | null
+      itemLabel: HTMLElement | null
    }
    constructor() {
       this.root = document.getElementById("game__view"),
-      this.test = true
+         this.test = true
       this.dom = {
+         market:  document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
-         itemInfoBox: document.querySelector('#blacksmith_item_info')
+         itemLabel: document.querySelector('#blacksmith_item_label')
       }
       this.init();
    }
@@ -76,47 +80,11 @@ export class Blacksmith {
               <div class='blacksmith__item market__shop'> 
                <div class='market__characterWrapper'>
 
+                 <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'>asdasd</div> 
             
-                 <div class='market__itemInfoWrapper'> 
-                     <div class='market__itemInfo' id='blacksmith_item_info'>
-                 <h3 class='market__itemTitle market__itemTitle-legendary'>blood infused quickblade</h3>
-                 <strong class='market__itemRarity market__itemRarity-legendary'>Common</strong>
-                 <p class='market__itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem rloerm lorem lorem lorelo mrelo lorem lorem lorem ,lorem'</p>
-                 <table class='market__itemStats'>
-                   <tbody>
-                     <tr>
-                       <td>Strength</td>
-                       <td>20 <strong>/+10</td>
-                     </tr>
-                     <tr>
-                       <td>Physical endurance</td>
-                       <td>20</td>
-                     </tr>
-                     <tr>
-                       <td>Defence</td>
-                       <td>20</td>
-                     </tr>
-                     <tr>
-                       <td>Luck</td>
-                       <td>20</td>
-                     </tr>
-                   </tbody>
-                 </table>
-             
-                 <div class='market__itemPriceWrapper'>
-                   <img class='market__itemPriceIcon' src='./images/coin.png' alt='coin'/>
-                   <strong class='market__itemPrice'>2000</strong>
-                 </div>
-
-               </div>
-                 </div>  
-
-
-                     
-                
-                     <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
+                                     
+                 <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
          
-                         
                 </div>
     
                 <div class='market__itemsList' id='market_slots'>
@@ -199,42 +167,53 @@ export class Blacksmith {
       // random shield
       randomItems.push(getRandomShopItem(shieldsData));
 
-       // push last item to shopItems array
-       shopItems.push(getRandomShopItem(randomItems))
+      // push last item to shopItems array
+      shopItems.push(getRandomShopItem(randomItems))
 
-       // shuffle the shopItems array
-       shopItems = shopItems.sort(() => Math.random() - .5)
+      // shuffle the shopItems array
+      shopItems = shopItems.sort(() => Math.random() - .5)
 
-       console.log(this.dom.marketSlots)
-       //////////////// rendering shop ////////////////////////////////
- 
-       this.dom.marketSlots.forEach((el, num) => {
-          
-          const slot = el as HTMLElement
-         
-         
-         // slot.addEventListener('mouseover', ()=> {
-         //    console.log(123)
-         //    this.dom.itemInfoBox.style.display = 'block'
-         // })
-         // slot.addEventListener('mouseleave', ()=> {
-         //    console.log(1233333)
-         //   this.dom.itemInfoBox.style.display = 'none'
-        
-         // })
       
-        slot.dataset.id = shopItems[num].id
+      //////////////// rendering shop ////////////////////////////////
+
+      this.dom.market.addEventListener('mouseleave', ()=> {
+         this.dom.itemLabel.classList.add('disabled')
+      })
+
+
+      this.dom.marketSlots.forEach((el, num) => {
+         const slot = el as HTMLElement;
+         slot.dataset.itemId = shopItems[num].id;
+         slot.innerHTML = `<img src='${shopItems[num].src}'/>`;
+
+
+         slot.addEventListener('mouseover', () => {
+            // find specific item, in order to create label of this item
+            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)] ;
+            // set the item label
+            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem);
+            // show item label
+            this.dom.itemLabel.classList.remove('disabled');
+            
+         })
+
          
-         slot.innerHTML = `<img src='${shopItems[num].src}' data-itemID='${shopItems[num].id}'/>`
-       });
-       
+      });
+
    }
 
-   
+
+
+
+
+
+
+
    getDOMElements() {
       this.dom = {
+         market:  document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
-         itemInfoBox: document.querySelector('#blacksmith_item_info')
+         itemLabel: document.querySelector('#blacksmith_item_label')
       }
    }
    initScripts() {
@@ -275,7 +254,7 @@ export class Blacksmith {
 //                      </tr>
 //                    </tbody>
 //                  </table>
-             
+
 //                  <div class='market__itemPriceWrapper'>
 //                    <img class='market__itemPriceIcon' src='./images/coin.png' alt='coin'/>
 //                    <strong class='market__itemPrice'>2000</strong>
