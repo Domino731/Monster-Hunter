@@ -20,7 +20,7 @@ export class Blacksmith {
       this.root = document.getElementById("game__view"),
          this.test = true
       this.dom = {
-         market:  document.querySelector("#market_slots"),
+         market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label')
       }
@@ -30,23 +30,23 @@ export class Blacksmith {
    async render() {
       this.root.innerHTML = `<section class='blacksmith transparent'>
            <div class='blacksmith__item'>
-                <div class='profile__equipment'>
-                   <div class='profile__equipmentItem profile__equipmentItem-helmet'> 
+                <div class='profile__equipment' id='equipment_slots'>
+                   <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
                       <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
                    </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-armor'> 
+                   <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'> 
                       <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon">
                    </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-gloves'> 
+                   <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'> 
                       <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
                    </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-weapon'> 
+                   <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'> 
                       <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
                    </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-shield'> 
+                   <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'> 
                       <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
                    </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-special'> 
+                   <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'> 
                       <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
                    </div>
                    <div class='profile__portrait'> </div>
@@ -173,10 +173,10 @@ export class Blacksmith {
       // shuffle the shopItems array
       shopItems = shopItems.sort(() => Math.random() - .5)
 
-      
+
       //////////////// rendering shop ////////////////////////////////
 
-      this.dom.market.addEventListener('mouseleave', ()=> {
+      this.dom.market.addEventListener('mouseleave', () => {
          this.dom.itemLabel.classList.add('disabled')
       })
 
@@ -186,18 +186,32 @@ export class Blacksmith {
          slot.dataset.itemId = shopItems[num].id;
          slot.innerHTML = `<img src='${shopItems[num].src}'/>`;
 
+         // find specific item, in order to create label of this item
+         const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)];
 
+         // specific item slot in equipment, needed to add pulse animation
+         const itemSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = "${marketItem.type}"]`);
+
+         // hover actions
          slot.addEventListener('mouseover', () => {
-            // find specific item, in order to create label of this item
-            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)] ;
+
             // set the item label
             this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem);
+            // show slot in equipment by adding pulse animation
+            itemSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+
             // show item label
             this.dom.itemLabel.classList.remove('disabled');
-            
+
          })
 
-         
+         // removing hover effects
+         slot.addEventListener('mouseleave', () => {
+
+            // remove pulse effect
+            itemSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+         })
+
       });
 
    }
@@ -211,7 +225,7 @@ export class Blacksmith {
 
    getDOMElements() {
       this.dom = {
-         market:  document.querySelector("#market_slots"),
+         market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label')
       }
@@ -228,36 +242,3 @@ export class Blacksmith {
 
 // <a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>
 
-
-
-// <div class='market__itemInfo' id='blacksmith_item_info'>
-//                  <h3 class='market__itemTitle'>blood infused quickblade</h3>
-//                  <strong class='market__itemRarity market__itemRarity-common'>Common</strong>
-//                  <p class='market__itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem rloerm lorem lorem lorelo mrelo lorem lorem lorem ,lorem'</p>
-//                  <table class='market__itemStats'>
-//                    <tbody>
-//                      <tr>
-//                        <td>Strength</td>
-//                        <td>20</td>
-//                      </tr>
-//                      <tr>
-//                        <td>Physical endurance</td>
-//                        <td>20</td>
-//                      </tr>
-//                      <tr>
-//                        <td>Defence</td>
-//                        <td>20</td>
-//                      </tr>
-//                      <tr>
-//                        <td>Luck</td>
-//                        <td>20</td>
-//                      </tr>
-//                    </tbody>
-//                  </table>
-
-//                  <div class='market__itemPriceWrapper'>
-//                    <img class='market__itemPriceIcon' src='./images/coin.png' alt='coin'/>
-//                    <strong class='market__itemPrice'>2000</strong>
-//                  </div>
-
-//                </div>

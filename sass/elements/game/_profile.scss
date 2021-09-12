@@ -87,6 +87,10 @@
         width: 43%;
         height: auto;
         object-fit: cover;
+        &-pulse{
+            animation: 1s an__equipmentIcon infinite alternate-reverse;
+        }
+        
     }
     &__description {
         width: 90%;
@@ -282,5 +286,14 @@
        background: $color-red;
        color: $color-white; 
        border-radius: 8px;
+    }
+}
+
+@keyframes an__equipmentIcon {
+    0%{
+        transform: scale(40%);
+    }
+    100%{
+        transform: scale(100%);
     }
 }

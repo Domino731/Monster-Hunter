@@ -1,6 +1,5 @@
 import { ShopItem } from '../../types';
 export const getBlacksmithItemLabel = (item: ShopItem) => {
-  console.log(item.description)
     return `
               <div class='market__itemInfo' id='blacksmith_item_info'>
                  <h3 class='market__itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
