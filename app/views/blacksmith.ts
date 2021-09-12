@@ -32,7 +32,7 @@ export class Blacksmith {
            <div class='blacksmith__item'>
                 <div class='profile__equipment' id='equipment_slots'>
                    <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
-                      <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
+                      <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'>
                    </div>
                    <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'> 
                       <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon">
@@ -189,14 +189,15 @@ export class Blacksmith {
          // find specific item, in order to create label of this item
          const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)];
 
-         // specific item slot in equipment, needed to add pulse animation
+         // specific item slot in equipment, needed to add pulse animation and compare items
          const itemSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = "${marketItem.type}"]`);
 
          // hover actions
          slot.addEventListener('mouseover', () => {
 
             // set the item label
-            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem);
+            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, itemSlot.firstElementChild as HTMLElement);
+
             // show slot in equipment by adding pulse animation
             itemSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
 
