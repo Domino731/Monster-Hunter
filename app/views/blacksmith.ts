@@ -8,13 +8,17 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 export class Blacksmith {
 
    private root: HTMLElement
+   private test: any
    private dom: {
-      marketSlots: NodeListOf<Element> | null
+      marketSlots: NodeListOf<Element> | null,
+      itemInfoBox: HTMLElement | null
    }
    constructor() {
-      this.root = document.getElementById("game__view")
+      this.root = document.getElementById("game__view"),
+      this.test = true
       this.dom = {
-         marketSlots: document.querySelectorAll("#market_slots .market__slot")
+         marketSlots: document.querySelectorAll("#market_slots .market__slot"),
+         itemInfoBox: document.querySelector('#blacksmith_item_info')
       }
       this.init();
    }
@@ -71,14 +75,55 @@ export class Blacksmith {
 
               <div class='blacksmith__item market__shop'> 
                <div class='market__characterWrapper'>
-                    <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>          
+
+            
+                 <div class='market__itemInfoWrapper'> 
+                     <div class='market__itemInfo' id='blacksmith_item_info'>
+                 <h3 class='market__itemTitle market__itemTitle-legendary'>blood infused quickblade</h3>
+                 <strong class='market__itemRarity market__itemRarity-legendary'>Common</strong>
+                 <p class='market__itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem rloerm lorem lorem lorelo mrelo lorem lorem lorem ,lorem'</p>
+                 <table class='market__itemStats'>
+                   <tbody>
+                     <tr>
+                       <td>Strength</td>
+                       <td>20 <strong>/+10</td>
+                     </tr>
+                     <tr>
+                       <td>Physical endurance</td>
+                       <td>20</td>
+                     </tr>
+                     <tr>
+                       <td>Defence</td>
+                       <td>20</td>
+                     </tr>
+                     <tr>
+                       <td>Luck</td>
+                       <td>20</td>
+                     </tr>
+                   </tbody>
+                 </table>
+             
+                 <div class='market__itemPriceWrapper'>
+                   <img class='market__itemPriceIcon' src='./images/coin.png' alt='coin'/>
+                   <strong class='market__itemPrice'>2000</strong>
+                 </div>
+
+               </div>
+                 </div>  
+
+
+                     
+                
+                     <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
+         
+                         
                 </div>
     
                 <div class='market__itemsList' id='market_slots'>
                    <div class='market__shopRow'> 
                       <div class='market__shopFrame blacksmith__frame'>
                         <div class='market__slot'>
-                          
+                            <img src='./images/shop/weapons/dire_steel_crusader.png'/> 
                         </div>  
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
@@ -163,16 +208,33 @@ export class Blacksmith {
        console.log(this.dom.marketSlots)
        //////////////// rendering shop ////////////////////////////////
  
-       this.dom.marketSlots.forEach((el, num) => el.innerHTML = `
-       <img src='${shopItems[num].src}'/>
-       
-       `);
+       this.dom.marketSlots.forEach((el, num) => {
+          
+          const slot = el as HTMLElement
+         
+         
+         // slot.addEventListener('mouseover', ()=> {
+         //    console.log(123)
+         //    this.dom.itemInfoBox.style.display = 'block'
+         // })
+         // slot.addEventListener('mouseleave', ()=> {
+         //    console.log(1233333)
+         //   this.dom.itemInfoBox.style.display = 'none'
+        
+         // })
+      
+        slot.dataset.id = shopItems[num].id
+         
+         slot.innerHTML = `<img src='${shopItems[num].src}' data-itemID='${shopItems[num].id}'/>`
+       });
        
    }
 
+   
    getDOMElements() {
       this.dom = {
-         marketSlots: document.querySelectorAll("#market_slots .market__slot")
+         marketSlots: document.querySelectorAll("#market_slots .market__slot"),
+         itemInfoBox: document.querySelector('#blacksmith_item_info')
       }
    }
    initScripts() {
@@ -187,3 +249,36 @@ export class Blacksmith {
 
 // <a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>
 
+
+
+// <div class='market__itemInfo' id='blacksmith_item_info'>
+//                  <h3 class='market__itemTitle'>blood infused quickblade</h3>
+//                  <strong class='market__itemRarity market__itemRarity-common'>Common</strong>
+//                  <p class='market__itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem rloerm lorem lorem lorelo mrelo lorem lorem lorem ,lorem'</p>
+//                  <table class='market__itemStats'>
+//                    <tbody>
+//                      <tr>
+//                        <td>Strength</td>
+//                        <td>20</td>
+//                      </tr>
+//                      <tr>
+//                        <td>Physical endurance</td>
+//                        <td>20</td>
+//                      </tr>
+//                      <tr>
+//                        <td>Defence</td>
+//                        <td>20</td>
+//                      </tr>
+//                      <tr>
+//                        <td>Luck</td>
+//                        <td>20</td>
+//                      </tr>
+//                    </tbody>
+//                  </table>
+             
+//                  <div class='market__itemPriceWrapper'>
+//                    <img class='market__itemPriceIcon' src='./images/coin.png' alt='coin'/>
+//                    <strong class='market__itemPrice'>2000</strong>
+//                  </div>
+
+//                </div>
