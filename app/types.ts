@@ -63,6 +63,7 @@ export interface UserData {
     level: number,
     nick: string,
     guardPayment: number,
+    coins: number,
     rawStats: {
         strength: number 
         physicalEndurance: number 

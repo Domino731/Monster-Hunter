@@ -253,17 +253,24 @@ export class Blacksmith extends View {
       this.dom.marketSlots.forEach(el => el.addEventListener('dragend', () => {
          // remove item shrink
          el.classList.remove('dragging')
+
+         const element: HTMLElement = el as HTMLElement
+         
       }))
 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', ()=> {
          const element: HTMLElement = el as HTMLElement
-
+         const elementImg: HTMLElement = el.firstElementChild as HTMLElement
           // set slot name
          hoveredEquipmentSlotName = element.dataset.slotName
 
          // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
          if(draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null){
-            element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`
+
+            // prevent of item dupilcations
+            if(selectedItem.id !== elementImg.dataset.currentItemId){
+               element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
+            }
          }
       
       }))
