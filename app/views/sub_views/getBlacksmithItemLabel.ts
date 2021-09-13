@@ -79,7 +79,7 @@ export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement)
 
                    ${item.properties.strength !== null ? `<tr>
                        <td>Strength</td>
-                       <td>${item.properties.strength} ${compareItem.properties.strength !== null ? compareStats(item, compareItem, 'strength') : ''}</td>
+                       <td>${item.properties.strength} ${compareItem.properties.strength !== null ? compareStats(item.properties.strength, compareItem.properties.strength) : ''}</td>
                      </tr>` : ''}
                  
                       
@@ -87,21 +87,21 @@ export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement)
                     ${item.properties.physicalEndurance !== null ? 
                       `<tr>
                         <td>Physical endurance</td>
-                        <td>${item.properties.physicalEndurance} ${compareItem.properties.physicalEndurance !== null ? compareStats(item, compareItem, 'physicalEndurance') : ''}</td>
+                        <td>${item.properties.physicalEndurance} ${compareItem.properties.physicalEndurance !== null ? compareStats(item.properties.physicalEndurance, compareItem.properties.physicalEndurance) : ''}</td>
                        </tr>` 
                      : ``}   
                     
                      ${item.properties.defence !== null ? ` 
                      <tr>
                        <td>Defence</td>
-                       <td>${item.properties.defence} ${compareItem.properties.defence !== null ? compareStats(item, compareItem, 'defence') : ''}</td>
+                       <td>${item.properties.defence} ${compareItem.properties.defence !== null ? compareStats(item.properties.defence, compareItem.properties.defence) : ''}</td>
                      </tr>` 
                      : ``}
                      
                      ${item.properties.luck !== null ? `
                      <tr>
                        <td>Luck</td>
-                       <td>${item.properties.luck} ${compareItem.properties.luck !== null ? compareStats(item, compareItem, 'luck') : ''}</td>
+                       <td>${item.properties.luck} ${compareItem.properties.luck !== null ? compareStats(item.properties.luck, compareItem.properties.luck) : ''}</td>
                      </tr>
                      `
                     : ``}

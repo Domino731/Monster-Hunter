@@ -51,10 +51,10 @@ export class Register extends AuthForm {
                 guardPayment: 30,
                 gold: 100,
                 rawStats: {
-                    defence: 10,
-                    luck: 10,
-                    physicalEndurance: 10,
-                    strength: 10
+                    defence: 50,
+                    luck: 50,
+                    physicalEndurance: 50,
+                    strength: 50
                 }
             });
 
