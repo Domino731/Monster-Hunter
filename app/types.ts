@@ -59,3 +59,13 @@ export interface ShopItem{
     }
     id: string
 }
+export interface UserData {
+    level: number,
+    nick: string,
+    rawStats: {
+        strength: number 
+        physicalEndurance: number 
+        defence: number
+        luck: number
+    }
+}

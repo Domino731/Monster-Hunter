@@ -56,8 +56,7 @@ export class Register extends AuthForm {
                 }
             });
 
-             // redirect user to main page
-             location.href = '/';
+        
              
           })
           .catch((error) => {

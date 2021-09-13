@@ -1,4 +1,4 @@
-import { ShopItem } from '../types';
+import { ShopItem, UserData } from '../types';
 import { chestplatesData } from '../properties/shop/chestplates';
 import { helmetsData } from '../properties/shop/helmets';
 import { glovesData } from '../properties/shop/gloves';
@@ -8,10 +8,11 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
 import { allMarketItems } from '../properties/shop/allMarketItems';
 import { setItemStats } from '../functions/setItemStats';
+import { getUserData } from '../firebase/operations';
 export class Blacksmith {
 
    private root: HTMLElement
-   private test: any
+   private userData: UserData
    private dom: {
       market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
@@ -19,7 +20,7 @@ export class Blacksmith {
    }
    constructor() {
       this.root = document.getElementById("game__view"),
-         this.test = true
+      this.userData = getUserData()
       this.dom = {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
