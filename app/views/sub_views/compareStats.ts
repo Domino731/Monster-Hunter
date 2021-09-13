@@ -17,14 +17,13 @@
 import { ShopItem } from '../../types';
 export const compareStats = (item: ShopItem, compareItem: ShopItem | undefined, key: 'strength' | 'physicalEndurance' | 'defence' | 'luck'): string => {
     if (compareItem !== undefined &&  item !== undefined && item.properties[key] !== null && compareItem.properties[key] !== null) {
-        const x = item.properties[key] - compareItem.properties[key]
-        console.log(x)
+        const difference = item.properties[key] - compareItem.properties[key]
         if (item.properties[key] !== null && compareItem.properties[key] !== null && item.properties[key] > compareItem.properties[key]) {
             
-            return `<strong class='better'>/ +${x}</strong>`
+            return `<strong class='better'>/ +${difference}</strong>`
         }
         else if (item.properties[key] !== null && compareItem.properties[key] !== null && item.properties[key] < compareItem.properties[key]) {
-            return `<strong class='worse'>/ ${x}</strong>`
+            return `<strong class='worse'>/ ${difference}</strong>`
         }
     }
 

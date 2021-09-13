@@ -60,9 +60,12 @@
     &__slot {
         display: flex;
         justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
         img {
-            width: 83%;
-            height: auto;
+            width: auto;
+            height: 74%;
             object-fit: cover;
         }
 
@@ -180,7 +183,10 @@
         font-size: 1.438rem;
         letter-spacing: 0.063rem;
     }
-   
+}
+.dragging{
+    width: 70%;
+    height: 70%;
 }
 
 @keyframes an__blacksmith_messageCloud {

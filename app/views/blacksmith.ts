@@ -14,14 +14,16 @@ export class Blacksmith extends View {
    private dom: {
       market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
-      itemLabel: HTMLElement | null
+      itemLabel: HTMLElement | null,
+      equipmentSlots: NodeListOf<Element> | null
    }
    constructor() {
       super(),
       this.dom = {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
-         itemLabel: document.querySelector('#blacksmith_item_label')
+         itemLabel: document.querySelector('#blacksmith_item_label'),
+         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]')
       }
    }
 
@@ -88,17 +90,17 @@ export class Blacksmith extends View {
                 <div class='market__itemsList' id='market_slots'>
                    <div class='market__shopRow'> 
                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                             <img src='./images/shop/weapons/dire_steel_crusader.png'/> 
                         </div>  
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                        
                         </div> 
                       </div>
                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                         
                         </div> 
                       </div>
@@ -106,17 +108,17 @@ export class Blacksmith extends View {
 
                 <div class='market__shopRow'> 
                    <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                           
                         </div> 
                    </div>
                    <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                      
                         </div> 
                    </div>
                    <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot'>
+                        <div class='market__slot' draggable='true'>
                    
                         </div> 
                    </div>
@@ -193,6 +195,8 @@ export class Blacksmith extends View {
          const slot = el as HTMLElement;
          slot.dataset.itemId = shopItems[num].id;
          slot.innerHTML = `<img src='${shopItems[num].src}'/>`;
+         slot.dataset.slotName = shopItems[num].type
+
 
          // find specific item, in order to create label of this item
          const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)];
@@ -225,8 +229,45 @@ export class Blacksmith extends View {
 
    }
 
+   dragEventForMarketSlots(){
+
+       // name of slot which is currently dragging
+      let draggedSlotName : string | null = null;
+      // name of slot which is currently hovered
+      let hoveredEquipmentSlotName : string | null = null;
+      // actual selected item 
+      let selectedItem: ShopItem | null = null;
+
+      this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
+         const element: HTMLElement = el as HTMLElement
+         // adding class which is responsible to shrink dragging element
+         el.classList.add('dragging');
+         // set slot name
+         draggedSlotName = element.dataset.slotName;
+         // find current item, in order to add him to equipment,
+         // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
+         selectedItem = allMarketItems[allMarketItems.findIndex(el => el.id === element.dataset.itemId)];
+      }))
 
 
+      this.dom.marketSlots.forEach(el => el.addEventListener('dragend', () => {
+         // remove item shrink
+         el.classList.remove('dragging')
+      }))
+
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', ()=> {
+         const element: HTMLElement = el as HTMLElement
+
+          // set slot name
+         hoveredEquipmentSlotName = element.dataset.slotName
+
+         // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
+         if(draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null){
+            element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`
+         }
+      
+      }))
+   }
 
 
 
@@ -234,7 +275,8 @@ export class Blacksmith extends View {
       this.dom = {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
-         itemLabel: document.querySelector('#blacksmith_item_label')
+         itemLabel: document.querySelector('#blacksmith_item_label'),
+         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]')
       }
    }
 
@@ -242,6 +284,7 @@ export class Blacksmith extends View {
 
    initScripts() {
       this.setShop();
+      this.dragEventForMarketSlots();
    }
 }
 

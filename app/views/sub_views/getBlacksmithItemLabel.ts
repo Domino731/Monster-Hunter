@@ -4,7 +4,7 @@ import { compareStats } from './compareStats';
 export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement) => {
 
     const compareItem: ShopItem | undefined =  allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.currentItemId)];  
-       console.log(compareItem)
+
        if(compareItem === undefined){
          return `
               <div class='market__itemInfo' id='blacksmith_item_info'>
