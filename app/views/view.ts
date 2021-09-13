@@ -44,9 +44,11 @@ export class View{
 
     // initialization 
     init(){
-       this.render();
-       this.getDOMElements();
-       this.getUserData()
-       .then(() => this.initScripts());
+      this.getUserData()
+       .then(() => {   
+          this.render();
+          this.getDOMElements();
+          this.initScripts()
+       });
     }
 }

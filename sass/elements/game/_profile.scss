@@ -87,10 +87,9 @@
         width: 43%;
         height: auto;
         object-fit: cover;
-        &-pulse{
+        &-pulse {
             animation: 1s an__equipmentIcon infinite alternate-reverse;
         }
-        
     }
     &__description {
         width: 90%;
@@ -205,6 +204,36 @@
         letter-spacing: 0.063rem;
         border-radius: 3px;
     }
+    &__goldBar{
+        height: 36px;
+        width: 90%;
+        background: $color-gray_dark;
+        margin: 10px auto;
+         display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.313rem 0;
+        border-radius: 50px;
+    }
+    &__goldIcon{
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+       
+    }
+    &__goldAmount{
+        font-weight: 900;
+        letter-spacing: 0.063rem;
+        color: $color-gold;
+         font-size: 1.5rem;
+         margin-left: 0.563rem;
+         &-noAfford{
+            text-shadow: 0.188rem 0.188rem 0.125rem $color-error;
+         }
+         &-afford{
+            text-shadow: 0.188rem 0.188rem 0.125rem $color-green;
+         }
+    }
 }
 .profile__backpackRow {
     &:first-child .profile__backpackItem:last-child {
@@ -231,7 +260,7 @@
     padding-left: 5px;
     border: 3px solid $color-gold;
     box-shadow: 0 0 3px $color-black;
-    table{
+    table {
         width: 93%;
         height: 100%;
         margin-top: -10px;
@@ -241,12 +270,12 @@
         vertical-align: middle;
         border-color: inherit;
     }
-    td{
+    td {
         padding: 0;
     }
-    tr{
-      max-height: 30px;
-      margin-left: 0.5rem;
+    tr {
+        max-height: 30px;
+        margin-left: 0.5rem;
     }
     img {
         width: 20px;
@@ -256,6 +285,13 @@
         margin-right: 0.5rem;
     }
 }
+
+@keyframes an__notAfford{
+    100%{
+        background: $color-error;
+        opacity: 0.1;
+    }
+}
 .profile__item--name {
     display: flex;
     align-items: center;
@@ -263,15 +299,14 @@
     font-weight: 700;
     letter-spacing: 0.063rem;
 }
-.profile__item--nameBlue{
-  color: $color-blue !important;
-  text-decoration-color: $color-blue ;
-  margin-left: 0.5rem;
+.profile__item--nameBlue {
+    color: $color-blue !important;
+    text-decoration-color: $color-blue;
+    margin-left: 0.5rem;
 }
 .profile__item--cost {
     display: flex;
     align-items: center;
-
 }
 
 .profile__item--amount {
@@ -279,21 +314,21 @@
     text-decoration: underline;
     text-decoration-color: $color-gold;
 }
-.profile__item--buyBtn{
-    div{
-       padding: 0 10px;
-       text-align: center;
-       background: $color-red;
-       color: $color-white; 
-       border-radius: 8px;
+.profile__item--buyBtn {
+    div {
+        padding: 0 10px;
+        text-align: center;
+        background: $color-red;
+        color: $color-white;
+        border-radius: 8px;
     }
 }
 
 @keyframes an__equipmentIcon {
-    0%{
+    0% {
         transform: scale(40%);
     }
-    100%{
+    100% {
         transform: scale(100%);
     }
 }

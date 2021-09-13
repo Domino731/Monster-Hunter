@@ -15,7 +15,8 @@ export class Blacksmith extends View {
       market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
       itemLabel: HTMLElement | null,
-      equipmentSlots: NodeListOf<Element> | null
+      equipmentSlots: NodeListOf<Element> | null,
+      goldAmount: HTMLElement | null
    }
    constructor() {
       super(),
@@ -23,7 +24,8 @@ export class Blacksmith extends View {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label'),
-         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]')
+         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
+         goldAmount: document.querySelector('#blacksmith_gold_amount')
       }
    }
 
@@ -53,6 +55,10 @@ export class Blacksmith extends View {
                    <div class='profile__info'>
                       <div class='profile__level'>  </div>
                       <strong class='profile__nickname'>nickname</strong>
+                      <div class='profile__goldBar'> 
+                         <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
+                         <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${this.userData.gold}</strong>
+                      </div>
                    </div>
                 </div>           
            
@@ -80,7 +86,7 @@ export class Blacksmith extends View {
               <div class='blacksmith__item market__shop'> 
                <div class='market__characterWrapper'>
 
-                 <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'>asdasd</div> 
+                 <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'></div> 
             
                                      
                  <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
@@ -185,12 +191,6 @@ export class Blacksmith extends View {
 
       //////////////// rendering shop ////////////////////////////////
 
-      this.dom.market.addEventListener('mouseleave', () => {
-         this.dom.itemLabel.classList.add('disabled')
-      })
-
-      //setItemStats()
-
       this.dom.marketSlots.forEach((el, num) => {
          const slot = el as HTMLElement;
          slot.dataset.itemId = shopItems[num].id;
@@ -206,9 +206,13 @@ export class Blacksmith extends View {
 
          // hover actions
          slot.addEventListener('mouseover', () => {
-
+           // check if user have enough gold to buy new item and class
+            this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
+            this.dom.goldAmount.classList.add(this.userData.gold >=  marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
             // set the item label
             this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, itemSlot.firstElementChild as HTMLElement);
+
+           
 
             // show slot in equipment by adding pulse animation
             itemSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
@@ -226,6 +230,13 @@ export class Blacksmith extends View {
          })
 
       });
+
+      // removing effects 
+      this.dom.market.addEventListener('mouseleave', () => {
+         this.dom.itemLabel.classList.add('disabled')
+         this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
+         
+      })
 
    }
 
@@ -283,7 +294,8 @@ export class Blacksmith extends View {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label'),
-         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]')
+         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
+         goldAmount: document.querySelector('#blacksmith_gold_amount')
       }
    }
 

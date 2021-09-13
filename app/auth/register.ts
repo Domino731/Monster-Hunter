@@ -49,7 +49,7 @@ export class Register extends AuthForm {
                 nick: this.data.nickname,
                 level: 1,
                 guardPayment: 30,
-                coins: 100,
+                gold: 100,
                 rawStats: {
                     defence: 10,
                     luck: 10,
