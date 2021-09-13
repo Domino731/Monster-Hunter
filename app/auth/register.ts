@@ -47,7 +47,13 @@ export class Register extends AuthForm {
             .doc(cred.uid)
             .set({
                 nick: this.data.nickname,
-                level: 1
+                level: 1,
+                rawStats: {
+                    defence: 10,
+                    luck: 10,
+                    physicalEndurance: 10,
+                    strength: 10
+                }
             });
 
              // redirect user to main page

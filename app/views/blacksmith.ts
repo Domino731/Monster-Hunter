@@ -7,6 +7,7 @@ import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
 import { allMarketItems } from '../properties/shop/allMarketItems';
+import { setItemStats } from '../functions/setItemStats';
 export class Blacksmith {
 
    private root: HTMLElement
@@ -180,6 +181,7 @@ export class Blacksmith {
          this.dom.itemLabel.classList.add('disabled')
       })
 
+      setItemStats()
 
       this.dom.marketSlots.forEach((el, num) => {
          const slot = el as HTMLElement;
