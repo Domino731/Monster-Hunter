@@ -8,28 +8,25 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
 import { allMarketItems } from '../properties/shop/allMarketItems';
 import { setItemStats } from '../functions/setItemStats';
-import { getUserData } from '../firebase/operations';
-export class Blacksmith {
+import { db, auth } from '../firebase/index'
+import { View } from './view';
+export class Blacksmith extends View {
 
-   private root: HTMLElement
-   private userData: UserData
    private dom: {
       market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
       itemLabel: HTMLElement | null
    }
    constructor() {
-      this.root = document.getElementById("game__view"),
-      this.userData = getUserData()
+      super(),
       this.dom = {
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label')
       }
-      this.init();
    }
 
-   async render() {
+   render() {
       this.root.innerHTML = `<section class='blacksmith transparent'>
            <div class='blacksmith__item'>
                 <div class='profile__equipment' id='equipment_slots'>
@@ -172,8 +169,15 @@ export class Blacksmith {
       // push last item to shopItems array
       shopItems.push(getRandomShopItem(randomItems))
 
+
       // shuffle the shopItems array
       shopItems = shopItems.sort(() => Math.random() - .5)
+
+      // set the item stats
+      shopItems.forEach(el => {
+         console.log(this.userData)
+         //el.properties.strength = setItemStats(12, 30)
+      })
 
 
       //////////////// rendering shop ////////////////////////////////
@@ -182,7 +186,7 @@ export class Blacksmith {
          this.dom.itemLabel.classList.add('disabled')
       })
 
-      setItemStats()
+      //setItemStats()
 
       this.dom.marketSlots.forEach((el, num) => {
          const slot = el as HTMLElement;
@@ -225,8 +229,6 @@ export class Blacksmith {
 
 
 
-
-
    getDOMElements() {
       this.dom = {
          market: document.querySelector("#market_slots"),
@@ -234,14 +236,11 @@ export class Blacksmith {
          itemLabel: document.querySelector('#blacksmith_item_label')
       }
    }
+
    initScripts() {
       this.setShop();
    }
-   init() {
-      this.render();
-      this.getDOMElements();
-      this.initScripts();
-   }
+
 }
 
 // <a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>

@@ -62,6 +62,7 @@ export interface ShopItem{
 export interface UserData {
     level: number,
     nick: string,
+    guardPayment: number,
     rawStats: {
         strength: number 
         physicalEndurance: number 

@@ -1,9 +1,9 @@
 // this function sets item statistics
-export const setItemStats = () : number => {
+export const setItemStats = (itemStatistic: number, userRawStatistic: number) : number => {
 
     // calculate new stat based on raw user statistics
-    const userRaw: number = 1230;
-    const itemPercentage: number = 40;
+    const userRaw: number = userRawStatistic;
+    const itemPercentage: number = itemStatistic;
 
     // percentage of userRaw
     const newStat: number = ((userRaw / 100) * itemPercentage) / 2;

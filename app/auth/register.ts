@@ -48,6 +48,7 @@ export class Register extends AuthForm {
             .set({
                 nick: this.data.nickname,
                 level: 1,
+                guardPayment: 30,
                 rawStats: {
                     defence: 10,
                     luck: 10,
