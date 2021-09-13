@@ -7,9 +7,8 @@ import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
 import { allMarketItems } from '../properties/shop/allMarketItems';
-import { setItemStats } from '../functions/setItemStats';
-import { db, auth } from '../firebase/index'
 import { View } from './view';
+import { setItemStats } from '../functions/setItemStats';
 export class Blacksmith extends View {
 
    private dom: {
@@ -175,8 +174,10 @@ export class Blacksmith extends View {
 
       // set the item stats
       shopItems.forEach(el => {
-         console.log(this.userData)
-         //el.properties.strength = setItemStats(12, 30)
+         el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength) ,
+         el.properties.defence =  setItemStats(el.properties.defence, this.userData.rawStats.defence),
+         el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
+         el.properties.luck =  setItemStats(el.properties.luck, this.userData.rawStats.luck)
       })
 
 
@@ -237,10 +238,11 @@ export class Blacksmith extends View {
       }
    }
 
+
+
    initScripts() {
       this.setShop();
    }
-
 }
 
 // <a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>

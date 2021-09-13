@@ -1,9 +1,9 @@
 import { UserData } from '../types';
 import { db, auth } from '../firebase/index'
 
-export abstract class View{
-     userData: UserData | null
-     root: HTMLElement
+export class View{
+     protected userData: UserData | null
+     protected root: HTMLElement
     constructor(){
         this.userData = null
         this.root = document.getElementById("game__view")
