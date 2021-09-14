@@ -40,32 +40,32 @@ export class Blacksmith extends View {
                 <div class='profile__equipment' id='equipment_slots'>
 
                      <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
-                       <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'>
+                       <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'/>
                      </div>
                
 
                    <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'> 
-                      <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon">
+                      <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon"/>
                    </div>
 
 
                    <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'> 
-                      <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
+                      <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon"/>
                    </div>
 
 
                    <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'> 
-                      <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
+                      <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon"/>
                    </div>
 
 
                    <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'> 
-                      <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
+                      <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
                    </div>
 
 
                    <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'> 
-                      <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
+                      <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon"/>
                    </div>
 
 
@@ -180,6 +180,11 @@ export class Blacksmith extends View {
    }
 
 
+
+
+
+
+
    getShopItems(): ShopItem[] {
       if (this.userData.shop.blacksmith !== null) {
          return this.userData.shop.blacksmith
@@ -238,6 +243,11 @@ export class Blacksmith extends View {
       }
    }
 
+
+
+
+
+
    setShop() {
 
       const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
@@ -260,7 +270,7 @@ export class Blacksmith extends View {
             slotChild.innerHTML = `<img src='${shopItems[num].src}'/>`;
             slotChild.dataset.slotName = shopItems[num].type
          }
-         else{
+         else {
             slotChild.innerHTML = `<img src='./images/market_sold_out.png'/>`;
          }
 
@@ -315,6 +325,11 @@ export class Blacksmith extends View {
 
    }
 
+
+
+
+
+
    getAvailbleMarketPicks(): AvailableMarketPicks[] {
       if (this.userData.shopPicks.blacksmith !== null) {
          return this.userData.shopPicks.blacksmith;
@@ -333,6 +348,11 @@ export class Blacksmith extends View {
          return availablePicks;
       }
    }
+
+
+
+
+
 
 
    dragEventForMarketSlots() {
@@ -411,8 +431,9 @@ export class Blacksmith extends View {
 
 
 
-               // check if market slot  has available pick, if yes then add new item into this slot, else show sold out icon
+               // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
                if (picks > 0) {
+
                   // set new item in this slot
                   const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
 
@@ -420,7 +441,20 @@ export class Blacksmith extends View {
                   parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
                   <img src='${newMarketItem.src}'/>
                </div>`;
+
+                  const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
+                  if (equipmentItemIndex > -1) {
+                     this.userData.equipmentItems[equipmentItemIndex] = marketItem;
+                     updateUserData(this.userData);
+                  }
+                  else {
+                     this.userData.equipmentItems.push(marketItem);
+                     updateUserData(this.userData)
+                  }
                }
+
+
+
                else if (picks <= 0) {
                   // inject sold out icon into market slot
                   parent.innerHTML = `<div class='market__slot'>
@@ -451,14 +485,20 @@ export class Blacksmith extends View {
    }
 
 
+
+
+   setUserEquipment(){
+      this.userData.equipmentItems.forEach(el => {
+         const equipmentSlot: HTMLElement =  document.querySelector(`#equipment_slots div[data-slot-name = '${el.type}']`);
+         equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}'/>`
+      })
+   }
    setGoldAmount() {
       this.dom.goldAmount.innerText = `${this.userData.gold}`
    }
-   dataChange() {
+   onDataChange() {
       this.setGoldAmount();
    }
-
-
    getDOMElements() {
       this.dom = {
          market: document.querySelector("#market_slots"),
@@ -469,10 +509,8 @@ export class Blacksmith extends View {
          goldBar: document.querySelector('#blacksmith_gold_bar')
       }
    }
-
-
-
    initScripts() {
+      this.setUserEquipment();
       this.setShop();
       this.dragEventForMarketSlots();
    }

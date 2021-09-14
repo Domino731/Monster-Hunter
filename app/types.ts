@@ -79,7 +79,11 @@ export interface UserData {
         defence: number
         luck: number
     }
+    equipmentItems: ShopItem[]
 }
+
+
+
 export interface AvailableMarketPicks {
     picks: number,
     index: number

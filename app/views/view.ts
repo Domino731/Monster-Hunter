@@ -31,11 +31,11 @@ export class View {
             snapshot.docChanges.forEach((change) => {
                if (change.type === "modified") {
                   this.userData = change.doc.data() as UserData;
-                  this.dataChange();
+                  this.onDataChange();
                }
                if (change.type === "removed") {
                   this.userData = change.doc.data() as UserData;
-                  this.dataChange();
+                  this.onDataChange();
                }
             });
          });
@@ -43,7 +43,7 @@ export class View {
 
 
    // abstact method which is responsible for operations when data has changed
-   dataChange(){
+   onDataChange(){
       window.alert('This method (dataChange) should be implemented in  inheriting class')
    }
    // abstact method which is responsible for injecting html code into game root
