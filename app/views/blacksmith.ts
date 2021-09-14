@@ -258,17 +258,24 @@ export class Blacksmith extends View {
 
       // name of slot which is currently dragging
       let draggedSlotName: string | null = null;
+      // actual dragged element
+      let draggedElement: HTMLElement | null = null
+      // actual selected item data
+      let selectedItem: ShopItem | null = null;
       // name of slot which is currently hovered
       let hoveredEquipmentSlotName: string | null = null;
-      // actual selected item 
-      let selectedItem: ShopItem | null = null;
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
          const element: HTMLElement = el as HTMLElement
+         // set actual dragged element
+         draggedElement = element;
+
          // adding class which is responsible to shrink dragging element
          el.classList.add('dragging');
+
          // set slot name
          draggedSlotName = element.dataset.slotName;
+
          // find current item, in order to add him to equipment,
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
          selectedItem = allMarketItems[allMarketItems.findIndex(el => el.id === element.dataset.itemId)];
@@ -303,10 +310,15 @@ export class Blacksmith extends View {
                // set this item in user equipment
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
 
-               
+               // set new item in this slot
+               const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
+               const parent: HTMLElement = draggedElement.parentElement
+               parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
+                  <img src='${newMarketItem.src}'/>
+               </div>`
             }
             // user doesn't have enough gold
-            else if(selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold){
+            else if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold) {
                // set class responsible for gold bar animation, to notify user that he cant buy this item
                this.dom.goldBar.classList.add('profile__goldBar-noAfford')
 
