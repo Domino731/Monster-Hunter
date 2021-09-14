@@ -16,8 +16,10 @@ export class Blacksmith extends View {
       marketSlots: NodeListOf<Element> | null,
       itemLabel: HTMLElement | null,
       equipmentSlots: NodeListOf<Element> | null,
-      goldAmount: HTMLElement | null
+      goldAmount: HTMLElement | null,
+      goldBar: HTMLElement | null
    }
+   private market: ShopItem[]
    constructor() {
       super(),
          this.dom = {
@@ -25,8 +27,10 @@ export class Blacksmith extends View {
             marketSlots: document.querySelectorAll("#market_slots .market__slot"),
             itemLabel: document.querySelector('#blacksmith_item_label'),
             equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
-            goldAmount: document.querySelector('#blacksmith_gold_amount')
+            goldAmount: document.querySelector('#blacksmith_gold_amount'),
+            goldBar: document.querySelector('#blacksmith_gold_bar')
          }
+      this.market = []
    }
 
    render() {
@@ -55,7 +59,7 @@ export class Blacksmith extends View {
                    <div class='profile__info'>
                       <div class='profile__level'>  </div>
                       <strong class='profile__nickname'>nickname</strong>
-                      <div class='profile__goldBar'> 
+                      <div class='profile__goldBar' id='blacksmith_gold_bar'> 
                          <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
                          <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${this.userData.gold}</strong>
                       </div>
@@ -176,7 +180,6 @@ export class Blacksmith extends View {
       // push last item to shopItems array
       shopItems.push(getRandomShopItem(randomItems))
 
-
       // shuffle the shopItems array
       shopItems = shopItems.sort(() => Math.random() - .5)
 
@@ -188,6 +191,8 @@ export class Blacksmith extends View {
             el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
       })
 
+      // set today's market in oroder to access it later, in order to see if you can afford it (in dragEventForMarketSlots method).
+      this.market = shopItems
 
       //////////////// rendering shop ////////////////////////////////
 
@@ -211,7 +216,7 @@ export class Blacksmith extends View {
          slot.addEventListener('mouseover', () => {
 
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
-            const equipmentSlot : HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
 
             // check if user have enough gold to buy new item and class
             this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
@@ -231,8 +236,8 @@ export class Blacksmith extends View {
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
 
-             // find specific slot in equipment which is equal to current shop item type, needed to add pulse animation
-             const equipmentSlot : HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+            // find specific slot in equipment which is equal to current shop item type, needed to add pulse animation
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
 
             // remove pulse effect
             equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
@@ -281,15 +286,32 @@ export class Blacksmith extends View {
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
          const element: HTMLElement = el as HTMLElement
          const elementImg: HTMLElement = el.firstElementChild as HTMLElement
+
          // set slot name
          hoveredEquipmentSlotName = element.dataset.slotName
 
          // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
          if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null) {
 
+            // find current market item to check if the user has enough gold bo buy
+            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === selectedItem.id)];
+
             // prevent of item dupilcations
-            if (selectedItem.id !== elementImg.dataset.currentItemId) {
+            // check if user has enough gold to buy, if he has enough add this item to his equipment, and update his profile on firestore -> update gold and equipment
+            if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost <= this.userData.gold) {
+
+               // set this item in user equipment
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
+
+               
+            }
+            // user doesn't have enough gold
+            else if(selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold){
+               // set class responsible for gold bar animation, to notify user that he cant buy this item
+               this.dom.goldBar.classList.add('profile__goldBar-noAfford')
+
+               // and remove above animation after 1s
+               this.dom.goldBar.classList.remove('profile__goldBar-noAfford')
             }
          }
 
@@ -304,7 +326,8 @@ export class Blacksmith extends View {
          marketSlots: document.querySelectorAll("#market_slots .market__slot"),
          itemLabel: document.querySelector('#blacksmith_item_label'),
          equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
-         goldAmount: document.querySelector('#blacksmith_gold_amount')
+         goldAmount: document.querySelector('#blacksmith_gold_amount'),
+         goldBar: document.querySelector('#blacksmith_gold_bar')
       }
    }
 
