@@ -16,7 +16,7 @@
         grid-template-columns: repeat(4, 1fr);
         border-bottom: 10px solid $color-gold;
     }
- 
+
     &__equipmentItem {
         display: flex;
         justify-content: center;
@@ -50,6 +50,7 @@
             grid-column: 4/4;
         }
     }
+
     &__portrait {
         background-image: url("/images/profile_frame_portrait.png");
         background-repeat: no-repeat;
@@ -59,8 +60,64 @@
         grid-row: 1/3;
     }
     &__info {
+        position: relative;
         grid-column: 2/4;
         grid-row: 3/4;
+    }
+    &__itemSpecs {
+        padding: 10px;
+        border-radius: 18px;
+        width: 325px;
+        background-color: $color-gray_dark;
+        transform: translate(40px, 40px);
+        position: absolute;
+        table{
+            color: $color-white;
+        }
+        &-common {
+            border: 4px solid $color-blue;
+        }
+        &-legendary {
+            border: 4px solid $color-gold;
+        }
+        .itemTitle {
+            color: $color-white;
+        }
+        .itemRarity {
+            color: $color-white;
+            border-top: 2px solid $color-gold;
+        }
+        .itemDsc {
+            color: $color-white;
+        }
+    
+    }
+    &__equipmentItemSellWrapper{
+        height: 30px;
+         background: $color-white;
+         border-radius: 18px;
+         margin-top: 0.25rem;
+         padding: 0.188rem;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         transition: 0.2s;
+         &:hover{
+             cursor: pointer;
+             box-shadow: 0 0 0 0.125rem $color-gold inset;
+         }
+    }
+    &__equipmentItemSellIcon{
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+    }
+    &__equipmentItemSellPrice{
+        margin-left: 0.438rem;
+        font-weight: 900;
+        color: $color-gold;
+        font-size: 1.438rem;
+        letter-spacing: 0.063rem;
     }
     &__level {
         width: 90%;
@@ -205,39 +262,49 @@
         letter-spacing: 0.063rem;
         border-radius: 3px;
     }
-    &__goldBar{
+    &__goldBar {
         height: 36px;
         width: 90%;
         background: $color-gray_dark;
         margin: 10px auto;
-         display: flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         padding: 0.313rem 0;
         border-radius: 50px;
-        &-noAfford{
+        &-noAfford {
             animation: 1s an__goldBar infinite alternate-reverse;
         }
-        
     }
-    &__goldIcon{
+    &__goldIcon {
         height: 100%;
         width: auto;
         object-fit: cover;
-       
     }
-    &__goldAmount{
+    &__goldAmount {
         font-weight: 900;
         letter-spacing: 0.063rem;
         color: $color-gold;
-         font-size: 1.5rem;
-         margin-left: 0.563rem;
-         &-noAfford{
+        font-size: 1.5rem;
+        margin-left: 0.563rem;
+        &-noAfford {
             text-shadow: 0.188rem 0.188rem 0.125rem $color-error;
-         }
-         &-afford{
+        }
+        &-afford {
             text-shadow: 0.188rem 0.188rem 0.125rem $color-green;
-         }
+        }
+    }
+
+    &__goldSubstract {
+        z-index: 4;
+        text-align: center;
+        font-weight: 900;
+        letter-spacing: 0.063rem;
+        color: $color-error;
+        font-size: 1.5rem;
+        transform: translateY(-4px);
+        -webkit-text-stroke: 0.063rem $color-gray_dark;
+        animation: 1.5s an__goldSubstract infinite;
     }
 }
 .profile__backpackRow {
@@ -291,8 +358,8 @@
     }
 }
 
-@keyframes an__notAfford{
-    100%{
+@keyframes an__notAfford {
+    100% {
         background: $color-error;
         opacity: 0.1;
     }
@@ -337,8 +404,13 @@
         transform: scale(100%);
     }
 }
-@keyframes an__goldBar{
+@keyframes an__goldBar {
     100% {
-        box-shadow: 0 0  0 40px $color-red inset;
+        box-shadow: 0 0 0 40px $color-red inset;
+    }
+}
+@keyframes an__goldSubstract {
+    100% {
+        transform: translateY(100px);
     }
 }

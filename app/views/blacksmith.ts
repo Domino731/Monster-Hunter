@@ -18,7 +18,8 @@ export class Blacksmith extends View {
       itemLabel: HTMLElement | null,
       equipmentSlots: NodeListOf<Element> | null,
       goldAmount: HTMLElement | null,
-      goldBar: HTMLElement | null
+      goldBar: HTMLElement | null,
+      goldSubstract: HTMLElement | null
    }
    private market: ShopItem[]
    constructor() {
@@ -29,7 +30,8 @@ export class Blacksmith extends View {
             itemLabel: document.querySelector('#blacksmith_item_label'),
             equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
             goldAmount: document.querySelector('#blacksmith_gold_amount'),
-            goldBar: document.querySelector('#blacksmith_gold_bar')
+            goldBar: document.querySelector('#blacksmith_gold_bar'),
+            goldSubstract: document.querySelector('#blacksmith_gold_substract')
          }
       this.market = []
    }
@@ -40,7 +42,7 @@ export class Blacksmith extends View {
                 <div class='profile__equipment' id='equipment_slots'>
 
                      <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
-                       <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'/>
+                       <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon"/>
                      </div>
                
 
@@ -72,12 +74,61 @@ export class Blacksmith extends View {
 
                    <div class='profile__portrait'> </div>
                    <div class='profile__info'>
+
+
+
+
+                      <div class='profile__itemSpecs profile__itemSpecs-common'>
+                          <h3 class='market__itemTitle itemTitle market__itemTitle-common'>Super mega destroyer mega</h3>
+                          <strong class='market__itemRarity market__itemRarity-common itemRarity'>Common</strong>
+                          <p class='market__itemDsc itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem' </p>
+
+
+                          <table class='market__itemStats itemStats'>
+                          <tbody>
+       
+       
+                           <tr>
+                              <td>Strength</td>
+                              <td>123</td>
+                            </tr>
+                        
+                            <tr>
+                              <td>Physical endurance</td>
+                              <td>123</td>
+                            </tr>
+                             
+                            <tr>
+                              <td>Defence</td>
+                              <td>123</td>
+                            </tr>
+                                                                                                                    
+                            <tr>
+                              <td>Luck</td>
+                              <td>123</td>
+                            </tr
+                            
+       
+       
+                          </tbody>
+                        </table>
+
+                        <div class='profile__equipmentItemSellWrapper'> 
+                          <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
+                          <strong class='profile__equipmentItemSellPrice'>50</strong>
+                        </div>
+                      </div>
+
+
+
+
                       <div class='profile__level'>  </div>
                       <strong class='profile__nickname'>nickname</strong>
                       <div class='profile__goldBar' id='blacksmith_gold_bar'> 
                          <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
                          <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${this.userData.gold}</strong>
                       </div>
+                      <div class='profile__goldSubstract disabled' id='blacksmith_gold_substract'></div>
                    </div>
                 </div>           
            
@@ -433,15 +484,38 @@ export class Blacksmith extends View {
 
                // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
                if (picks > 0) {
-
+                  // find index of old item in order to replace him by new created one, and to update shop
+                  const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+                  
                   // set new item in this slot
                   const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
+
+                  // set item statistics
+                  newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+                  newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                  newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                  newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+
+                 this.market[oldItemIndex] = newMarketItem;
+               
 
                   // inject new item into market slot
                   parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
                   <img src='${newMarketItem.src}'/>
-               </div>`;
+                  </div>`;
 
+                  // substract gold and show animation
+                  this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+                  this.dom.goldSubstract.classList.remove('disabled');
+
+                  // remove above animation after 1.3s
+                  setTimeout(()=> {
+                     this.dom.goldSubstract.classList.add('disabled');
+                     this.dom.goldSubstract.innerText = ``;
+                  }, 1300);
+
+
+                  // update user equipment
                   const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
                   if (equipmentItemIndex > -1) {
                      this.userData.equipmentItems[equipmentItemIndex] = marketItem;
@@ -488,6 +562,7 @@ export class Blacksmith extends View {
 
 
    setUserEquipment(){
+      console.log(this.dom.goldSubstract)
       this.userData.equipmentItems.forEach(el => {
          const equipmentSlot: HTMLElement =  document.querySelector(`#equipment_slots div[data-slot-name = '${el.type}']`);
          equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}'/>`
@@ -506,7 +581,8 @@ export class Blacksmith extends View {
          itemLabel: document.querySelector('#blacksmith_item_label'),
          equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
          goldAmount: document.querySelector('#blacksmith_gold_amount'),
-         goldBar: document.querySelector('#blacksmith_gold_bar')
+         goldBar: document.querySelector('#blacksmith_gold_bar'),
+         goldSubstract: document.querySelector('#blacksmith_gold_substract')
       }
    }
    initScripts() {
