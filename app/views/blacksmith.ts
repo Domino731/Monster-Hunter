@@ -20,13 +20,13 @@ export class Blacksmith extends View {
    }
    constructor() {
       super(),
-      this.dom = {
-         market: document.querySelector("#market_slots"),
-         marketSlots: document.querySelectorAll("#market_slots .market__slot"),
-         itemLabel: document.querySelector('#blacksmith_item_label'),
-         equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
-         goldAmount: document.querySelector('#blacksmith_gold_amount')
-      }
+         this.dom = {
+            market: document.querySelector("#market_slots"),
+            marketSlots: document.querySelectorAll("#market_slots .market__slot"),
+            itemLabel: document.querySelector('#blacksmith_item_label'),
+            equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
+            goldAmount: document.querySelector('#blacksmith_gold_amount')
+         }
    }
 
    render() {
@@ -182,10 +182,10 @@ export class Blacksmith extends View {
 
       // set the item stats
       shopItems.forEach(el => {
-         el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength) ,
-         el.properties.defence =  setItemStats(el.properties.defence, this.userData.rawStats.defence),
-         el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
-         el.properties.luck =  setItemStats(el.properties.luck, this.userData.rawStats.luck)
+         el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength),
+            el.properties.defence = setItemStats(el.properties.defence, this.userData.rawStats.defence),
+            el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
+            el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
       })
 
 
@@ -193,31 +193,37 @@ export class Blacksmith extends View {
 
       this.dom.marketSlots.forEach((el, num) => {
          const slot = el as HTMLElement;
+
+         //equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
+
          slot.dataset.itemId = shopItems[num].id;
          slot.innerHTML = `<img src='${shopItems[num].src}'/>`;
          slot.dataset.slotName = shopItems[num].type
 
 
+
          // find specific item, in order to create label of this item
          const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)];
 
-         // specific item slot in equipment, needed to add pulse animation and compare items
-         const itemSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = "${marketItem.type}"]`);
+
 
          // hover actions
          slot.addEventListener('mouseover', () => {
-           // check if user have enough gold to buy new item and class
-            this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
-            this.dom.goldAmount.classList.add(this.userData.gold >=  marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
-            // set the item label
-            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, itemSlot.firstElementChild as HTMLElement);
 
-           
+            // find specific slot in equipment which is equal to current shop item type, needed to compare items
+            const equipmentSlot : HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+
+            // check if user have enough gold to buy new item and class
+            this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
+            this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
+
+            // set the item label
+            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, equipmentSlot.firstElementChild as HTMLElement);
 
             // show slot in equipment by adding pulse animation
-            itemSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+            equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
 
-            // show item label
+            // show the item label
             this.dom.itemLabel.classList.remove('disabled');
 
          })
@@ -225,8 +231,11 @@ export class Blacksmith extends View {
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
 
+             // find specific slot in equipment which is equal to current shop item type, needed to add pulse animation
+             const equipmentSlot : HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+
             // remove pulse effect
-            itemSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+            equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
          })
 
       });
@@ -235,17 +244,17 @@ export class Blacksmith extends View {
       this.dom.market.addEventListener('mouseleave', () => {
          this.dom.itemLabel.classList.add('disabled')
          this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
-         
+
       })
 
    }
 
-   dragEventForMarketSlots(){
+   dragEventForMarketSlots() {
 
-       // name of slot which is currently dragging
-      let draggedSlotName : string | null = null;
+      // name of slot which is currently dragging
+      let draggedSlotName: string | null = null;
       // name of slot which is currently hovered
-      let hoveredEquipmentSlotName : string | null = null;
+      let hoveredEquipmentSlotName: string | null = null;
       // actual selected item 
       let selectedItem: ShopItem | null = null;
 
@@ -266,24 +275,24 @@ export class Blacksmith extends View {
          el.classList.remove('dragging')
 
          const element: HTMLElement = el as HTMLElement
-         
+
       }))
 
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', ()=> {
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
          const element: HTMLElement = el as HTMLElement
          const elementImg: HTMLElement = el.firstElementChild as HTMLElement
-          // set slot name
+         // set slot name
          hoveredEquipmentSlotName = element.dataset.slotName
 
          // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
-         if(draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null){
+         if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null) {
 
             // prevent of item dupilcations
-            if(selectedItem.id !== elementImg.dataset.currentItemId){
+            if (selectedItem.id !== elementImg.dataset.currentItemId) {
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
             }
          }
-      
+
       }))
    }
 
