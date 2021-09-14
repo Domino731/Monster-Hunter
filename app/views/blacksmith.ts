@@ -354,7 +354,7 @@ export class Blacksmith extends View {
       this.dom.market.addEventListener('mouseleave', () => {
          this.dom.itemLabel.classList.add('disabled')
          this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
-
+      
       })
 
    }
@@ -544,9 +544,8 @@ export class Blacksmith extends View {
 
 
    labelForEquipmentEvent() {
-
-
-      // add label
+  
+      //  add label
       this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseover", () => {
 
          
@@ -556,14 +555,15 @@ export class Blacksmith extends View {
          //find specific item, in order to create label of this item
          const itemData: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
          this.dom.equipmentLabel.root.classList.add(itemData.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+         this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${itemData.type}`)
          this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(itemData);
          this.dom.equipmentLabel.root.classList.remove('disabled')
       }))
 
       // remove label
       this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseleave", () => {
-         this.dom.equipmentLabel.root.classList.add('disabled');
-         this.dom.equipmentLabel.root.classList.remove('profile__itemSpecs-legendary', 'profile__itemSpecs-common');
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         
       }))
    }
 

@@ -69,17 +69,78 @@
         border-radius: 18px;
         width: 325px;
         background-color: $color-gray_dark;
-        transform: translate(40px, 40px);
         position: absolute;
-        table{
-            color: $color-white;
-        }
+
         &-common {
             border: 4px solid $color-blue;
         }
         &-legendary {
             border: 4px solid $color-gold;
         }
+        &::after{
+            width: 30px;
+            height: 30px;
+            content: '';
+            position: absolute;
+            display: block;
+             background: $color-gray_dark;
+        }
+
+
+        &-helmet{
+            transform: translate(17px, -348px);
+            &::after{       
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+            }
+        }
+        &-weapon{
+            transform: translate(17px, -348px);
+            &::after{
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+        }
+
+
+        &-chestPlate{
+            transform: translate(17px, -152px);
+            &::after{
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+            }
+        }
+ 
+        &-shield{
+            transform: translate(17px, -152px);
+            &::after{
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+        }
+
+        &-gloves{
+            transform: translate(17px, 30px);
+            &::after{
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+            }
+        }
+
+        &-special{
+            transform: translate(17px, 30px);
+            &::after{          
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+        }
+
         .itemTitle {
             color: $color-white;
         }
@@ -90,29 +151,31 @@
         .itemDsc {
             color: $color-white;
         }
-    
+        table {
+            color: $color-white;
+        }
     }
-    &__equipmentItemSellWrapper{
+    &__equipmentItemSellWrapper {
         height: 30px;
-         background: $color-white;
-         border-radius: 18px;
-         margin-top: 0.25rem;
-         padding: 0.188rem;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         transition: 0.2s;
-         &:hover{
-             cursor: pointer;
-             box-shadow: 0 0 0 0.125rem $color-gold inset;
-         }
+        background: $color-white;
+        border-radius: 18px;
+        margin-top: 0.25rem;
+        padding: 0.188rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 0 0.125rem $color-gold inset;
+        }
     }
-    &__equipmentItemSellIcon{
+    &__equipmentItemSellIcon {
         height: 100%;
         width: auto;
         object-fit: cover;
     }
-    &__equipmentItemSellPrice{
+    &__equipmentItemSellPrice {
         margin-left: 0.438rem;
         font-weight: 900;
         color: $color-gold;
