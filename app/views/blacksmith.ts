@@ -556,14 +556,25 @@ export class Blacksmith extends View {
 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
-         clearInterval(toogleLabel)
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-         this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-         this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
-         this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-         this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
-         this.dom.equipmentLabel.root.classList.remove('disabled')
+         clearInterval(toogleLabel)
+      
+         if(element.dataset.currentItemId === undefined){
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         }
+         if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
+
+
+            this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+            this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
+            this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+            this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
+            this.dom.equipmentLabel.root.classList.remove('disabled')
+         }
+
+
+
       }))
 
       // remove label with delay -> after 1s
@@ -591,17 +602,17 @@ export class Blacksmith extends View {
          const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`)
 
          // add gold from item sell to user account
-          this.userData.gold += parseInt((currentItem.initialCost * 0.4).toFixed())
-          updateUserData(this.userData)
+         this.userData.gold += parseInt((currentItem.initialCost * 0.4).toFixed())
+         updateUserData(this.userData)
 
-          // remove this item from user equipment
-          const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id)
-          if (itemIndex > -1) {
+         // remove this item from user equipment
+         const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id)
+         if (itemIndex > -1) {
             this.userData.equipmentItems.splice(itemIndex, 1);
-          }
+         }
 
-          //upadte user profile
-          updateUserData(this.userData);
+         //upadte user profile
+         updateUserData(this.userData);
 
          // remove item graphic and set default icon
          equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
