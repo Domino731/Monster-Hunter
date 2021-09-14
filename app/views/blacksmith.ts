@@ -1,4 +1,4 @@
-import { ShopItem, UserData } from '../types';
+import { AvailableMarketPicks, ShopItem, UserData } from '../types';
 import { chestplatesData } from '../properties/shop/chestplates';
 import { helmetsData } from '../properties/shop/helmets';
 import { glovesData } from '../properties/shop/gloves';
@@ -180,56 +180,64 @@ export class Blacksmith extends View {
    }
 
 
+   getShopItems(): ShopItem[] {
+      if (this.userData.shop !== null) {
+         return this.userData.shop
+      }
+      else {
+         // array with shop items, base on which shop will be created
+         let shopItems: ShopItem[] = []
+
+         // pushing random equipment items
+
+         // random helmet
+         shopItems.push(getRandomShopItem(helmetsData));
+         // random chest plate
+         shopItems.push(getRandomShopItem(chestplatesData));
+         // random gloves
+         shopItems.push(getRandomShopItem(glovesData));
+         // random weapon
+         shopItems.push(getRandomShopItem(weaponsData));
+         // random shield
+         shopItems.push(getRandomShopItem(shieldsData));
+
+         // Blacksmith shop has 6 slots, shopItems array has only 5 items, so its need to get one more random item 
+         const randomItems: ShopItem[] = [];
+
+         // random helmet
+         randomItems.push(getRandomShopItem(helmetsData));
+         // random chest plate
+         randomItems.push(getRandomShopItem(chestplatesData));
+         // random gloves
+         randomItems.push(getRandomShopItem(glovesData));
+         // random weapon
+         randomItems.push(getRandomShopItem(weaponsData));
+         // random shield
+         randomItems.push(getRandomShopItem(shieldsData));
+
+         // push last item to shopItems array
+         shopItems.push(getRandomShopItem(randomItems));
+
+         // shuffle the shopItems array
+         shopItems = shopItems.sort(() => Math.random() - .5);
+
+         // set the item stats
+         shopItems.forEach(el => {
+            el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength),
+               el.properties.defence = setItemStats(el.properties.defence, this.userData.rawStats.defence),
+               el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
+               el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
+         });
+         return shopItems;
+      }
+   }
+
    setShop() {
-
-      /////////////////// creating shop items array /////////////////////////
-
-      // array with shop items, base on which shop will be created
-      let shopItems: ShopItem[] = []
-
-      // pushing random equipment items
-
-      // random helmet
-      shopItems.push(getRandomShopItem(helmetsData));
-      // random chest plate
-      shopItems.push(getRandomShopItem(chestplatesData));
-      // random gloves
-      shopItems.push(getRandomShopItem(glovesData));
-      // random weapon
-      shopItems.push(getRandomShopItem(weaponsData));
-      // random shield
-      shopItems.push(getRandomShopItem(shieldsData));
-
-      // Blacksmith shop has 6 slots, shopItems array has only 5 items, so its need to get one more random item 
-      const randomItems: ShopItem[] = [];
-
-      // random helmet
-      randomItems.push(getRandomShopItem(helmetsData));
-      // random chest plate
-      randomItems.push(getRandomShopItem(chestplatesData));
-      // random gloves
-      randomItems.push(getRandomShopItem(glovesData));
-      // random weapon
-      randomItems.push(getRandomShopItem(weaponsData));
-      // random shield
-      randomItems.push(getRandomShopItem(shieldsData));
-
-      // push last item to shopItems array
-      shopItems.push(getRandomShopItem(randomItems))
-
-      // shuffle the shopItems array
-      shopItems = shopItems.sort(() => Math.random() - .5)
-
-      // set the item stats
-      shopItems.forEach(el => {
-         el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength),
-            el.properties.defence = setItemStats(el.properties.defence, this.userData.rawStats.defence),
-            el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
-            el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
-      })
+      const shopItems: ShopItem[] = this.getShopItems();
 
       // set today's market in oroder to access it later, in order to see if you can afford it (in dragEventForMarketSlots method).
       this.market = shopItems
+
 
       //////////////// rendering shop ////////////////////////////////
 
@@ -271,8 +279,8 @@ export class Blacksmith extends View {
          slot.addEventListener('mouseleave', () => {
 
             const currentItem = slot.firstElementChild as HTMLElement
-             // find specific item, in order to remove pulse animation
-             const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
+            // find specific item, in order to remove pulse animation
+            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
 
             // find specific slot in equipment which is equal to current shop item type, needed to remove pulse animation
             const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
@@ -294,19 +302,34 @@ export class Blacksmith extends View {
 
    dragEventForMarketSlots() {
 
+      const availablePicks: AvailableMarketPicks[] = []
+
+      this.dom.marketSlots.forEach((el, num) => {
+         availablePicks.push({
+            slot: el as HTMLElement,
+            picks: 2,
+            index: num
+         })
+      });
+
+      // currently selected market slot
+      let selectedMarketSlot: HTMLElement | null = null;
       // name of slot which is currently dragging
       let draggedSlotName: string | null = null;
-      // actual dragged element
+      // currently dragged element
       let draggedElement: HTMLElement | null = null
-      // actual selected item data
+      // currently selected item data
       let selectedItem: ShopItem | null = null;
       // name of slot which is currently hovered
       let hoveredEquipmentSlotName: string | null = null;
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
-         
-         const element: HTMLElement = el.firstElementChild as HTMLElement
-         // set actual dragged element
+
+         const element: HTMLElement = el.firstElementChild as HTMLElement;
+
+         // set currently seleted market slot
+         selectedMarketSlot = el as HTMLElement;
+         // set currently dragged element
          draggedElement = element;
 
          // adding class which is responsible to shrink dragging element
@@ -344,35 +367,67 @@ export class Blacksmith extends View {
             // check if user has enough gold to buy, if he has enough add this item to his equipment, and update his profile on firestore -> update gold and equipment
             if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost <= this.userData.gold) {
 
+               // need to inject new item or display sold out icon depending on slot pick amount
+               const parent: HTMLElement = draggedElement.parentElement;
+
                // set this item in user equipment
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
 
                // update user data -> subtract the price of item from user's gold 
-               this.userData.gold -= marketItem.initialCost
-               updateUserData(this.userData);
-               
-               // set new item in this slot
-               const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
-               const parent: HTMLElement = draggedElement.parentElement
+               // this.userData.gold -= marketItem.initialCost;
+               // updateUserData(this.userData);
 
-               parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
+
+               // each market slot have only 2 picks in day, when user buy new item, substract one pick
+               availablePicks[availablePicks.findIndex(el => el.slot === selectedMarketSlot)].picks -= 1;
+               const picks: number = availablePicks[availablePicks.findIndex(el => el.slot === selectedMarketSlot)].picks;
+               console.log(picks)
+
+
+               // check if market slot  has available pick, if yes then add new item into this slot, else show sold out icon
+
+               if (picks > 0) {
+                  // set new item in this slot
+                  const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
+
+                  // inject new item into market slot
+                  parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
                   <img src='${newMarketItem.src}'/>
-               </div>`
+               </div>`;
+               }
+               else if (picks <= 0) {
+                  // inject sold out icon into market slot
+                  parent.innerHTML = `<div class='market__slot'>
+                     <img src='./images/market_sold_out.png'/>
+                     </div>`;
+               }
 
             }
+
+
             // user doesn't have enough gold
             else if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold) {
                // set class responsible for gold bar animation, to notify user that he cant buy this item
                this.dom.goldBar.classList.add('profile__goldBar-noAfford')
 
                // and remove above animation after 1s
-               this.dom.goldBar.classList.remove('profile__goldBar-noAfford')
+               setTimeout(() => {
+                  this.dom.goldBar.classList.remove('profile__goldBar-noAfford')
+               }, 1000)
+
             }
          }
 
       }))
    }
 
+
+   setGoldAmount() {
+      this.dom.goldAmount.innerText = `${this.userData.gold}`
+   }
+   dataChange() {
+      this.setGoldAmount();
+   }
 
 
    getDOMElements() {

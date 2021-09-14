@@ -64,10 +64,16 @@ export interface UserData {
     nick: string,
     guardPayment: number,
     gold: number,
+    shop: null | ShopItem[],
     rawStats: {
         strength: number 
         physicalEndurance: number 
         defence: number
         luck: number
     }
+}
+export interface AvailableMarketPicks {
+    slot: HTMLElement,
+    picks: number,
+    index: number
 }
