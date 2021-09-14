@@ -11,6 +11,7 @@ import { View } from './view';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
+import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 export class Blacksmith extends View {
 
    private dom: {
@@ -25,6 +26,7 @@ export class Blacksmith extends View {
          root: HTMLElement,
          sellBtn: HTMLElement
          labelWrapper: HTMLElement
+         sellBtnPrice: HTMLElement
       }
    }
    private market: ShopItem[]
@@ -41,7 +43,8 @@ export class Blacksmith extends View {
             equipmentLabel: {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
-               labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper')
+               labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
+               sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice')
             }
          }
       this.market = []
@@ -354,7 +357,7 @@ export class Blacksmith extends View {
       this.dom.market.addEventListener('mouseleave', () => {
          this.dom.itemLabel.classList.add('disabled')
          this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
-      
+
       })
 
    }
@@ -544,27 +547,68 @@ export class Blacksmith extends View {
 
 
    labelForEquipmentEvent() {
-  
-      //  add label
-      this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseover", () => {
 
-         
+      let toogleLabel;
+
+      //  add label
+      let currentItem: ShopItem | null = null;
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
+
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
-   
+         clearInterval(toogleLabel)
          //find specific item, in order to create label of this item
-         const itemData: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-         this.dom.equipmentLabel.root.classList.add(itemData.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-         this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${itemData.type}`)
-         this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(itemData);
+         currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
+         this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+         this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
+         this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+         this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
          this.dom.equipmentLabel.root.classList.remove('disabled')
       }))
 
-      // remove label
-      this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseleave", () => {
-         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-         
+      // remove label with delay -> after 1s
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
+
+         toogleLabel = setInterval(() => {
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         }, 1000);
+
       }))
+
+      // keep displaying label when user  focus is on label
+      this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
+         clearInterval(toogleLabel)
+      })
+      // else hide label
+      this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+      })
+      //<img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
+      // event on item sell btn
+      this.dom.equipmentLabel.sellBtn.addEventListener('click', () => {
+
+         // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`)
+
+         // add gold from item sell to user account
+          this.userData.gold += parseInt((currentItem.initialCost * 0.4).toFixed())
+          updateUserData(this.userData)
+
+          // remove this item from user equipment
+          const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id)
+          if (itemIndex > -1) {
+            this.userData.equipmentItems.splice(itemIndex, 1);
+          }
+
+          //upadte user profile
+          updateUserData(this.userData);
+
+         // remove item graphic and set default icon
+         equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+
+         // remove label
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+      })
    }
 
 
@@ -608,7 +652,8 @@ export class Blacksmith extends View {
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
-            labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper')
+            labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
+            sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice')
          }
       }
    }
