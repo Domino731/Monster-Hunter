@@ -9,6 +9,7 @@ import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
 import { allMarketItems } from '../properties/shop/allMarketItems';
 import { View } from './view';
 import { setItemStats } from '../functions/setItemStats';
+import { updateUserData } from '../firebase/operations';
 export class Blacksmith extends View {
 
    private dom: {
@@ -346,6 +347,10 @@ export class Blacksmith extends View {
                // set this item in user equipment
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
 
+               // update user data -> subtract the price of item from user's gold 
+               this.userData.gold -= marketItem.initialCost
+               updateUserData(this.userData);
+               
                // set new item in this slot
                const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
                const parent: HTMLElement = draggedElement.parentElement
