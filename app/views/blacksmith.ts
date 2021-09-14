@@ -10,6 +10,7 @@ import { allMarketItems } from '../properties/shop/allMarketItems';
 import { View } from './view';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
+import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 export class Blacksmith extends View {
 
    private dom: {
@@ -20,6 +21,11 @@ export class Blacksmith extends View {
       goldAmount: HTMLElement | null,
       goldBar: HTMLElement | null,
       goldSubstract: HTMLElement | null
+      equipmentLabel: {
+         root: HTMLElement,
+         sellBtn: HTMLElement
+         labelWrapper: HTMLElement
+      }
    }
    private market: ShopItem[]
    constructor() {
@@ -31,7 +37,12 @@ export class Blacksmith extends View {
             equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
             goldAmount: document.querySelector('#blacksmith_gold_amount'),
             goldBar: document.querySelector('#blacksmith_gold_bar'),
-            goldSubstract: document.querySelector('#blacksmith_gold_substract')
+            goldSubstract: document.querySelector('#blacksmith_gold_substract'),
+            equipmentLabel: {
+               root: document.querySelector('#blacksmith_equipment__item_label'),
+               sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
+               labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper')
+            }
          }
       this.market = []
    }
@@ -78,45 +89,17 @@ export class Blacksmith extends View {
 
 
 
-                      <div class='profile__itemSpecs profile__itemSpecs-common'>
-                          <h3 class='market__itemTitle itemTitle market__itemTitle-common'>Super mega destroyer mega</h3>
-                          <strong class='market__itemRarity market__itemRarity-common itemRarity'>Common</strong>
-                          <p class='market__itemDsc itemDsc'>'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem' </p>
+                      <div class='profile__itemSpecs disabled' id='blacksmith_equipment__item_label'>
 
-
-                          <table class='market__itemStats itemStats'>
-                          <tbody>
-       
-       
-                           <tr>
-                              <td>Strength</td>
-                              <td>123</td>
-                            </tr>
-                        
-                            <tr>
-                              <td>Physical endurance</td>
-                              <td>123</td>
-                            </tr>
-                             
-                            <tr>
-                              <td>Defence</td>
-                              <td>123</td>
-                            </tr>
-                                                                                                                    
-                            <tr>
-                              <td>Luck</td>
-                              <td>123</td>
-                            </tr
-                            
-       
-       
-                          </tbody>
-                        </table>
+                      <div id='blacksmith_equipment_label_wrapper'> 
+                      
+                      </div>
 
                         <div class='profile__equipmentItemSellWrapper'> 
                           <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
                           <strong class='profile__equipmentItemSellPrice'>50</strong>
                         </div>
+
                       </div>
 
 
@@ -486,18 +469,18 @@ export class Blacksmith extends View {
                if (picks > 0) {
                   // find index of old item in order to replace him by new created one, and to update shop
                   const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
-                  
+
                   // set new item in this slot
                   const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
 
                   // set item statistics
                   newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-                  newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                  newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                  newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+                     newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                     newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                     newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
 
-                 this.market[oldItemIndex] = newMarketItem;
-               
+                  this.market[oldItemIndex] = newMarketItem;
+
 
                   // inject new item into market slot
                   parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
@@ -509,7 +492,7 @@ export class Blacksmith extends View {
                   this.dom.goldSubstract.classList.remove('disabled');
 
                   // remove above animation after 1.3s
-                  setTimeout(()=> {
+                  setTimeout(() => {
                      this.dom.goldSubstract.classList.add('disabled');
                      this.dom.goldSubstract.innerText = ``;
                   }, 1300);
@@ -560,11 +543,50 @@ export class Blacksmith extends View {
 
 
 
+   labelForEquipmentEvent() {
 
-   setUserEquipment(){
+
+      // add label
+      this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseover", () => {
+
+         
+         const element: HTMLElement = el.firstElementChild as HTMLElement;
+
+   
+         //find specific item, in order to create label of this item
+         const itemData: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
+         this.dom.equipmentLabel.root.classList.add(itemData.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+         this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(itemData);
+         this.dom.equipmentLabel.root.classList.remove('disabled')
+      }))
+
+      // remove label
+      this.dom.equipmentSlots.forEach(el => el.addEventListener("mouseleave", () => {
+         this.dom.equipmentLabel.root.classList.add('disabled');
+         this.dom.equipmentLabel.root.classList.remove('profile__itemSpecs-legendary', 'profile__itemSpecs-common');
+      }))
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   setUserEquipment() {
       console.log(this.dom.goldSubstract)
       this.userData.equipmentItems.forEach(el => {
-         const equipmentSlot: HTMLElement =  document.querySelector(`#equipment_slots div[data-slot-name = '${el.type}']`);
+         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${el.type}']`);
          equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}'/>`
       })
    }
@@ -582,13 +604,19 @@ export class Blacksmith extends View {
          equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
          goldAmount: document.querySelector('#blacksmith_gold_amount'),
          goldBar: document.querySelector('#blacksmith_gold_bar'),
-         goldSubstract: document.querySelector('#blacksmith_gold_substract')
+         goldSubstract: document.querySelector('#blacksmith_gold_substract'),
+         equipmentLabel: {
+            root: document.querySelector('#blacksmith_equipment__item_label'),
+            sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
+            labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper')
+         }
       }
    }
    initScripts() {
       this.setUserEquipment();
       this.setShop();
       this.dragEventForMarketSlots();
+      this.labelForEquipmentEvent();
    }
 }
 
