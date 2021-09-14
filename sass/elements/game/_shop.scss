@@ -57,6 +57,12 @@
         justify-content: center;
         align-items: center;
     }
+    &__slotWrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
     &__slot {
         display: flex;
         justify-content: center;

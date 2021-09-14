@@ -24,7 +24,7 @@ export class Blacksmith extends View {
       super(),
          this.dom = {
             market: document.querySelector("#market_slots"),
-            marketSlots: document.querySelectorAll("#market_slots .market__slot"),
+            marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
             itemLabel: document.querySelector('#blacksmith_item_label'),
             equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
             goldAmount: document.querySelector('#blacksmith_gold_amount'),
@@ -37,24 +37,38 @@ export class Blacksmith extends View {
       this.root.innerHTML = `<section class='blacksmith transparent'>
            <div class='blacksmith__item'>
                 <div class='profile__equipment' id='equipment_slots'>
-                   <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
-                      <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'>
-                   </div>
+
+                     <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
+                       <img src='${helmetsData[5].src}' class="profile__equipmentIcon" data-current-item-id='${helmetsData[5].id}'>
+                     </div>
+               
+
                    <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'> 
                       <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon">
                    </div>
+
+
                    <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'> 
                       <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
                    </div>
+
+
                    <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'> 
                       <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
                    </div>
+
+
                    <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'> 
                       <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
                    </div>
+
+
                    <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'> 
                       <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
                    </div>
+
+
+
                    <div class='profile__portrait'> </div>
                    <div class='profile__info'>
                       <div class='profile__level'>  </div>
@@ -99,39 +113,61 @@ export class Blacksmith extends View {
     
                 <div class='market__itemsList' id='market_slots'>
                    <div class='market__shopRow'> 
+
                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
-                            <img src='./images/shop/weapons/dire_steel_crusader.png'/> 
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
+                          
+                          </div>  
                         </div>  
                       </div>
-                      <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
-                       
-                        </div> 
+
+                       <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
+                          
+                          </div>  
+                        </div>  
                       </div>
-                      <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
-                        
-                        </div> 
+
+
+                       <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
+                          
+                          </div>  
+                        </div>  
                       </div>
+
+
                    </div>
 
                 <div class='market__shopRow'> 
-                   <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
+                     <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
                           
-                        </div> 
-                   </div>
-                   <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
-                     
-                        </div> 
-                   </div>
-                   <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slot' draggable='true'>
-                   
-                        </div> 
-                   </div>
+                          </div>  
+                        </div>  
+                      </div>
+
+
+                     <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
+                          
+                          </div>  
+                        </div>  
+                      </div>
+
+                     <div class='market__shopFrame blacksmith__frame'>
+                        <div class='market__slotWrapper'>  
+                          <div class='market__slot' draggable='true'>
+                          
+                          </div>  
+                        </div>  
+                      </div>
+
                 </div>
                 </div>
            
@@ -196,27 +232,29 @@ export class Blacksmith extends View {
 
       //////////////// rendering shop ////////////////////////////////
 
+      console.log(document.querySelectorAll('.market__slotWrapper'))
+
+
       this.dom.marketSlots.forEach((el, num) => {
+
          const slot = el as HTMLElement;
+         const slotChild = slot.firstElementChild as HTMLElement
 
-         //equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
-
-         slot.dataset.itemId = shopItems[num].id;
-         slot.innerHTML = `<img src='${shopItems[num].src}'/>`;
-         slot.dataset.slotName = shopItems[num].type
-
-
-
-         // find specific item, in order to create label of this item
-         const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === slot.dataset.itemId)];
-
-
+         slotChild.dataset.itemId = shopItems[num].id;
+         slotChild.innerHTML = `<img src='${shopItems[num].src}'/>`;
+         slotChild.dataset.slotName = shopItems[num].type
 
          // hover actions
          slot.addEventListener('mouseover', () => {
 
+            const currentItem = slot.firstElementChild as HTMLElement
+            // find specific item, in order to create label of this item
+            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
+
+            console.log(marketItem)
+
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
 
             // check if user have enough gold to buy new item and class
             this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
@@ -236,7 +274,7 @@ export class Blacksmith extends View {
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
 
-            // find specific slot in equipment which is equal to current shop item type, needed to add pulse animation
+            // find specific slot in equipment which is equal to current shop item type, needed to remove pulse animation
             const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
 
             // remove pulse effect
@@ -266,7 +304,9 @@ export class Blacksmith extends View {
       let hoveredEquipmentSlotName: string | null = null;
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
-         const element: HTMLElement = el as HTMLElement
+         
+         const element: HTMLElement = el.firstElementChild as HTMLElement
+         console.log(element)
          // set actual dragged element
          draggedElement = element;
 
@@ -285,8 +325,6 @@ export class Blacksmith extends View {
       this.dom.marketSlots.forEach(el => el.addEventListener('dragend', () => {
          // remove item shrink
          el.classList.remove('dragging')
-
-         const element: HTMLElement = el as HTMLElement
 
       }))
 
@@ -313,9 +351,11 @@ export class Blacksmith extends View {
                // set new item in this slot
                const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
                const parent: HTMLElement = draggedElement.parentElement
+               console.log(parent)
                parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
                   <img src='${newMarketItem.src}'/>
                </div>`
+
             }
             // user doesn't have enough gold
             else if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold) {
@@ -335,7 +375,7 @@ export class Blacksmith extends View {
    getDOMElements() {
       this.dom = {
          market: document.querySelector("#market_slots"),
-         marketSlots: document.querySelectorAll("#market_slots .market__slot"),
+         marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
          itemLabel: document.querySelector('#blacksmith_item_label'),
          equipmentSlots: document.querySelectorAll('#equipment_slots div[data-slot-name]'),
          goldAmount: document.querySelector('#blacksmith_gold_amount'),
