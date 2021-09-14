@@ -1,3 +1,4 @@
+import { Blacksmith } from './views/blacksmith';
 export interface route{
     path: string,
     view: any
@@ -64,7 +65,14 @@ export interface UserData {
     nick: string,
     guardPayment: number,
     gold: number,
-    shop: null | ShopItem[],
+    shop: {
+        blacksmith: null | ShopItem[],
+        wizard: null | ShopItem[]
+    },
+    shopPicks: {
+        blacksmith: null |  AvailableMarketPicks[],
+        wizard: null |  AvailableMarketPicks[]
+    }
     rawStats: {
         strength: number 
         physicalEndurance: number 
@@ -73,7 +81,6 @@ export interface UserData {
     }
 }
 export interface AvailableMarketPicks {
-    slot: HTMLElement,
     picks: number,
     index: number
 }

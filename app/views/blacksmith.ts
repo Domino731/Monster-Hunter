@@ -181,8 +181,8 @@ export class Blacksmith extends View {
 
 
    getShopItems(): ShopItem[] {
-      if (this.userData.shop !== null) {
-         return this.userData.shop
+      if (this.userData.shop.blacksmith !== null) {
+         return this.userData.shop.blacksmith
       }
       else {
          // array with shop items, base on which shop will be created
@@ -228,11 +228,20 @@ export class Blacksmith extends View {
                el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
                el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
          });
+
+         // update user data in firestore with this shop items
+         this.userData.shop.blacksmith = shopItems;
+         updateUserData(this.userData)
+
+
          return shopItems;
       }
    }
 
    setShop() {
+
+      const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
+
       const shopItems: ShopItem[] = this.getShopItems();
 
       // set today's market in oroder to access it later, in order to see if you can afford it (in dragEventForMarketSlots method).
@@ -246,9 +255,15 @@ export class Blacksmith extends View {
          const slot = el as HTMLElement;
          const slotChild = slot.firstElementChild as HTMLElement
 
-         slotChild.dataset.itemId = shopItems[num].id;
-         slotChild.innerHTML = `<img src='${shopItems[num].src}'/>`;
-         slotChild.dataset.slotName = shopItems[num].type
+         if (availablePicks[num].picks > 0) {
+            slotChild.dataset.itemId = shopItems[num].id;
+            slotChild.innerHTML = `<img src='${shopItems[num].src}'/>`;
+            slotChild.dataset.slotName = shopItems[num].type
+         }
+         else{
+            slotChild.innerHTML = `<img src='./images/market_sold_out.png'/>`;
+         }
+
 
          // hover actions
          slot.addEventListener('mouseover', () => {
@@ -300,17 +315,29 @@ export class Blacksmith extends View {
 
    }
 
+   getAvailbleMarketPicks(): AvailableMarketPicks[] {
+      if (this.userData.shopPicks.blacksmith !== null) {
+         return this.userData.shopPicks.blacksmith;
+      }
+      else {
+
+         const availablePicks: AvailableMarketPicks[] = []
+
+         this.dom.marketSlots.forEach((el, num) => {
+            availablePicks.push({
+               picks: 2,
+               index: num
+            })
+         });
+
+         return availablePicks;
+      }
+   }
+
+
    dragEventForMarketSlots() {
 
-      const availablePicks: AvailableMarketPicks[] = []
-
-      this.dom.marketSlots.forEach((el, num) => {
-         availablePicks.push({
-            slot: el as HTMLElement,
-            picks: 2,
-            index: num
-         })
-      });
+      const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
 
       // currently selected market slot
       let selectedMarketSlot: HTMLElement | null = null;
@@ -374,18 +401,17 @@ export class Blacksmith extends View {
                element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
 
                // update user data -> subtract the price of item from user's gold 
-               // this.userData.gold -= marketItem.initialCost;
-               // updateUserData(this.userData);
-
+               this.userData.gold -= marketItem.initialCost;
+               updateUserData(this.userData);
 
                // each market slot have only 2 picks in day, when user buy new item, substract one pick
-               availablePicks[availablePicks.findIndex(el => el.slot === selectedMarketSlot)].picks -= 1;
-               const picks: number = availablePicks[availablePicks.findIndex(el => el.slot === selectedMarketSlot)].picks;
-               console.log(picks)
+               const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
+               availablePicks[slotIndex].picks -= 1;
+               const picks: number = availablePicks[slotIndex].picks;
+
 
 
                // check if market slot  has available pick, if yes then add new item into this slot, else show sold out icon
-
                if (picks > 0) {
                   // set new item in this slot
                   const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
@@ -402,6 +428,9 @@ export class Blacksmith extends View {
                      </div>`;
                }
 
+               // save picks into user data in firestore
+               this.userData.shopPicks.blacksmith = availablePicks;
+               updateUserData(this.userData);
             }
 
 

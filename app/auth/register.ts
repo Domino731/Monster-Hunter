@@ -55,7 +55,15 @@ export class Register extends AuthForm {
                     luck: 50,
                     physicalEndurance: 50,
                     strength: 50
-                }
+                },
+                shop: {
+                    blacksmith: null ,
+                    wizard: null
+                },
+                shopPicks: {
+                    blacksmith: null ,
+                    wizard: null
+                },
             });
 
         
