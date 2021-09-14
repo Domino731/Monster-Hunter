@@ -232,9 +232,6 @@ export class Blacksmith extends View {
 
       //////////////// rendering shop ////////////////////////////////
 
-      console.log(document.querySelectorAll('.market__slotWrapper'))
-
-
       this.dom.marketSlots.forEach((el, num) => {
 
          const slot = el as HTMLElement;
@@ -250,8 +247,6 @@ export class Blacksmith extends View {
             const currentItem = slot.firstElementChild as HTMLElement
             // find specific item, in order to create label of this item
             const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
-
-            console.log(marketItem)
 
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
             const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
@@ -274,8 +269,12 @@ export class Blacksmith extends View {
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
 
+            const currentItem = slot.firstElementChild as HTMLElement
+             // find specific item, in order to remove pulse animation
+             const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
+
             // find specific slot in equipment which is equal to current shop item type, needed to remove pulse animation
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${shopItems[num].type}]`)
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
 
             // remove pulse effect
             equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
@@ -306,7 +305,6 @@ export class Blacksmith extends View {
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
          
          const element: HTMLElement = el.firstElementChild as HTMLElement
-         console.log(element)
          // set actual dragged element
          draggedElement = element;
 
@@ -351,7 +349,7 @@ export class Blacksmith extends View {
                // set new item in this slot
                const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
                const parent: HTMLElement = draggedElement.parentElement
-               console.log(parent)
+
                parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
                   <img src='${newMarketItem.src}'/>
                </div>`
