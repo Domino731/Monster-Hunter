@@ -107,7 +107,7 @@ export class Blacksmith extends View {
                this.dom.backpackLabel.moveItemError.innerText = '';
                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
                this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot${slot.dataset.backpackSlot}`)
-
+               this.dom.backpackLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`
                this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
                // this.dom.backpackLabel.root.classList.add('')
                this.dom.backpackLabel.root.classList.remove('disabled')
@@ -137,6 +137,7 @@ export class Blacksmith extends View {
       this.dom.backpackLabel.root.addEventListener('mouseleave', () => {
          this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
       });
+
       // replace item in equipment
       this.dom.backpackLabel.moveItem.addEventListener('click', () => {
          equipmentSlot.innerHTML = `<img src='${currentItem.src}' class='profile__equipmentIcon' data-current-item-id='${currentItem.id}'/>`
@@ -156,18 +157,32 @@ export class Blacksmith extends View {
             this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
          }
          else {
-             // remove item from backpack
+            // remove item from backpack
             this.userData.backpackItems.splice(backpackItemIndex, 1);
             // add new item to equipment
             this.userData.equipmentItems.push(currentItem);
             updateUserData(this.userData);
             this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
          }
-
-
-
-
       })
+
+      // sell item
+      this.dom.backpackLabel.sellBtn.addEventListener('click', () => {
+         this.userData.gold += parseFloat((currentItem.initialCost * 0.4).toFixed());
+         //remove this item from user backpack
+         const itemIndex = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
+         if (itemIndex > -1) {
+            this.userData.backpackItems.splice(itemIndex, 1);
+         }
+
+         // remove all item graphics from backpack
+         
+
+         // update user data, and set new backpack
+         this.setUserBackpack();
+         updateUserData(this.userData);
+      })
+
    }
 
    labelForEquipmentEvent() {
@@ -277,8 +292,6 @@ export class Blacksmith extends View {
       });
    }
 
-
-
    getShopItems(): ShopItem[] {
       if (this.userData.shop.blacksmith !== null) {
          return this.userData.shop.blacksmith
@@ -368,16 +381,16 @@ export class Blacksmith extends View {
          slot.addEventListener('mouseover', () => {
 
             const slotElement = slot.firstElementChild as HTMLElement;
-            
+
 
             // find specific item, in order to create label of this item
             const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === slotElement.dataset.itemId)];
-           
+
 
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
             const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
             const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
-           
+
             // check if user have enough gold to buy new item and class
             this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
             this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
@@ -590,7 +603,11 @@ export class Blacksmith extends View {
    }
 
    setUserBackpack() {
-      console.log(12)
+      // clear previous 
+      this.dom.backpackSlots.forEach(el => {
+         el.innerHTML = ''
+      })
+      
       this.userData.backpackItems.forEach((el, num) => {
          this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
       })
