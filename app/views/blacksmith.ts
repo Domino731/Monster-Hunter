@@ -86,9 +86,14 @@ export class Blacksmith extends View {
       this.dom.backpackSlots.forEach(el => {
 
          el.addEventListener('mouseover', () => {
-            const element: HTMLElement = el.firstElementChild as HTMLElement
+            const slot: HTMLElement = el as HTMLElement;
+            const element: HTMLElement = el.firstElementChild as HTMLElement;
+            clearInterval(toogleLabel)
+            if(element === null){
+               this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+            }
             if (element !== null) {
-               clearInterval(toogleLabel)
+
                //find specific item, in order to create label of this item
                currentItem = this.userData.backpackItems[this.userData.backpackItems.findIndex(el => el.id === element.dataset.backpackItemId)];
                // find specific slot in equipment which is equal to current shop item type, needed to compare items
@@ -97,17 +102,26 @@ export class Blacksmith extends View {
                equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
                // remove error
                this.dom.backpackLabel.moveItemError.innerText = '';
-
-
+               this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+               this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot${slot.dataset.backpackSlot}`)
+               // this.dom.backpackLabel.root.classList.add('')
+               this.dom.backpackLabel.root.classList.remove('disabled')
 
             }
 
          })
 
+         // remove label with delay -> after 0.8s
          el.addEventListener('mouseleave', () => {
+            // hide label
+            toogleLabel = setInterval(() => {
+               this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+            }, 800);
             // remove pulse effect
             equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
-         })
+         });
+
+
       })
    }
 

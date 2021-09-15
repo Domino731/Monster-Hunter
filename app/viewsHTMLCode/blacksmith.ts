@@ -78,7 +78,7 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
 
 
    <div>
-   <div class='profile__itemSpecs profile__itemSpecs-backpackSlot10' id='blacksmith_backpack_item_label'>
+   <div class='profile__itemSpecs disabled profile__itemSpecs-backpackSlot10' id='blacksmith_backpack_item_label'>
 
    <div id='blacksmith_backpack_label_wrapper'> 
    
@@ -137,18 +137,18 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
    </div>    
    <div class='profile__backpack' id='blacksmith_equipment_slots'>
        <div class='profile__backpackRow'>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='1'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='2'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='3'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='4'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='5'> </div>
        </div>
        <div class='profile__backpackRow'>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
-          <div class='profile__backpackItem'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='6'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='7'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='8'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='9'> </div>
+          <div class='profile__backpackItem' data-backpack-slot='10'> </div>
        </div>
 
   </div>
