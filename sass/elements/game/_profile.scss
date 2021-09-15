@@ -155,7 +155,7 @@
             color: $color-white;
         }
     }
-    &__equipmentActionWrapper{
+    &__actionWrapper{
         height: 30px;
         background: $color-white;
         border-radius: 18px;
@@ -178,12 +178,20 @@
           letter-spacing: 0.125rem;
         }
     }
-    &__equipmentActionName{
+    &__actionName{
         margin-left: 0.438rem;
         font-weight: 700;
         color: $color-gray_dark;
         font-size: 1.438rem;
        
+    }
+    &__actionError{
+        display: block;
+        color: $color-error;
+        font-weight: 600;
+        font-size: 19px;
+        letter-spacing: 0.063rem;
+        text-align: center;
     }
 
     &__equipmentItemSellWrapper {

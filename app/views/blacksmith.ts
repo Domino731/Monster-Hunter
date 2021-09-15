@@ -28,6 +28,7 @@ export class Blacksmith extends View {
          labelWrapper: HTMLElement
          sellBtnPrice: HTMLElement
          moveItem: HTMLElement
+         moveItemError: HTMLElement
       }
       backpackSlots: NodeListOf<Element>
    }
@@ -47,7 +48,8 @@ export class Blacksmith extends View {
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
                labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
                sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice'),
-               moveItem: document.querySelector('#blacksmith_equipment_move_item_btn')
+               moveItem: document.querySelector('#blacksmith_equipment_move_item_btn'),
+               moveItemError: document.querySelector('#blacksmith_equipment_move_item_error')
             },
             backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
          }
@@ -102,12 +104,12 @@ export class Blacksmith extends View {
                       
                       </div>
 
-
-                       <div class='profile__equipmentActionWrapper' id='blacksmith_equipment_move_item_btn'>
+                       <div class='profile__actionError' id='blacksmith_equipment_move_item_error'></div>
+                       <div class='profile__actionWrapper' id='blacksmith_equipment_move_item_btn'>
                           <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
-                          <strong class='profile__equipmentActionName'>Move to backpack</strong>
+                          <strong class='profile__actionName'>Move to backpack</strong>
                         </div>
-
+                         
                         
                         <div class='profile__equipmentItemSellWrapper'> 
                           <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
@@ -574,6 +576,9 @@ export class Blacksmith extends View {
 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
+         // remove error
+         this.dom.equipmentLabel.moveItemError.innerText = ''
+
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
          clearInterval(toogleLabel)
@@ -640,21 +645,31 @@ export class Blacksmith extends View {
       // moving item into user's backpack
       this.dom.equipmentLabel.moveItem.addEventListener('click', () => {
 
-         // find the specific  equipment slot which is needed to inject new html code later -> set default icon
-         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
-         // remove item graphic and set default icon
-         equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+         // check if user have free slot in backpack (backpack have 10 slots)
+         if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+            // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
+            // remove item graphic and set default icon
+            equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
 
-         // remove this item from user equipment
-         const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
-         if (itemIndex > -1) {
-            this.userData.equipmentItems.splice(itemIndex, 1);
+            // remove this item from user equipment
+            const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
+            if (itemIndex > -1) {
+               this.userData.equipmentItems.splice(itemIndex, 1);
+            }
+
+            // add current item to user's backpack
+            this.userData.backpackItems.push(currentItem);
+            updateUserData(this.userData);
+
+            // hide label
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
          }
 
-         // add current item to user's backpack
-         this.userData.backpackItems.push(currentItem);
-         updateUserData(this.userData);
-      })
+        else{
+          this.dom.equipmentLabel.moveItemError.innerText = 'Your backpack is full'
+        }
+      });
    }
 
 
@@ -664,10 +679,12 @@ export class Blacksmith extends View {
 
 
 
-   setUserBackpack(){
-     this.userData.backpackItems.forEach((el, num) => {
-       this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}'/>`  
-     })
+   setUserBackpack() {
+      console.log(this.userData.backpackItems.length)
+      console.log(this.dom.backpackSlots.length)
+      this.userData.backpackItems.forEach((el, num) => {
+         this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}'/>`
+      })
    }
 
    setUserEquipment() {
@@ -697,7 +714,8 @@ export class Blacksmith extends View {
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
             labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
             sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice'),
-            moveItem: document.querySelector('#blacksmith_equipment_move_item_btn')
+            moveItem: document.querySelector('#blacksmith_equipment_move_item_btn'),
+            moveItemError: document.querySelector('#blacksmith_equipment_move_item_error')
          },
          backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
       }
