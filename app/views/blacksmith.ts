@@ -38,6 +38,7 @@ export class Blacksmith extends View {
          sellBtnPrice: HTMLElement
          moveItem: HTMLElement
          moveItemError: HTMLElement
+         replaceIcon: HTMLImageElement
       }
       backpackSlots: NodeListOf<Element>
    }
@@ -66,7 +67,8 @@ export class Blacksmith extends View {
                labelWrapper: document.querySelector('#blacksmith_backpack_label_wrapper'),
                sellBtnPrice: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellPrice'),
                moveItem: document.querySelector('#blacksmith_backpack_move_item_btn'),
-               moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value')
+               moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value'),
+               replaceIcon: document.querySelector('#blacksmith_backpack_replace_item_icon')
             },
             backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
          }
@@ -89,7 +91,8 @@ export class Blacksmith extends View {
             const slot: HTMLElement = el as HTMLElement;
             const element: HTMLElement = el.firstElementChild as HTMLElement;
             clearInterval(toogleLabel)
-            if(element === null){
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+            if (element === null) {
                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
             }
             if (element !== null) {
@@ -104,6 +107,8 @@ export class Blacksmith extends View {
                this.dom.backpackLabel.moveItemError.innerText = '';
                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
                this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot${slot.dataset.backpackSlot}`)
+
+               this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
                // this.dom.backpackLabel.root.classList.add('')
                this.dom.backpackLabel.root.classList.remove('disabled')
 
@@ -120,6 +125,46 @@ export class Blacksmith extends View {
             // remove pulse effect
             equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
          });
+      })
+
+
+      // keep displaying label on focus
+      this.dom.backpackLabel.root.addEventListener('mouseover', () => {
+         clearInterval(toogleLabel)
+         this.dom.backpackLabel.root.classList.remove('disabled')
+      });
+      // remove leave when focus was losed
+      this.dom.backpackLabel.root.addEventListener('mouseleave', () => {
+         this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+      });
+      // replace item in equipment
+      this.dom.backpackLabel.moveItem.addEventListener('click', () => {
+         equipmentSlot.innerHTML = `<img src='${currentItem.src}' class='profile__equipmentIcon' data-current-item-id='${currentItem.id}'/>`
+
+         const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
+         const backpackItemIndex: number = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
+         console.log(equipmentItemIndex)
+         if (equipmentItemIndex !== -1) {
+            // remove item from backpack
+            this.userData.backpackItems.splice(backpackItemIndex, 1);
+            // add to backpack new equipment item (which is replaced by new) 
+            this.userData.backpackItems.push(this.userData.equipmentItems[equipmentItemIndex])
+            // add to equipment selected item
+            this.userData.equipmentItems[equipmentItemIndex] = currentItem;
+            // update user's data in firestore
+            updateUserData(this.userData);
+            this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+         }
+         else {
+             // remove item from backpack
+            this.userData.backpackItems.splice(backpackItemIndex, 1);
+            // add new item to equipment
+            this.userData.equipmentItems.push(currentItem);
+            updateUserData(this.userData);
+            this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+         }
+
+
 
 
       })
@@ -134,10 +179,11 @@ export class Blacksmith extends View {
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
+         // hide backpack label
+         this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
 
          // remove error
          this.dom.equipmentLabel.moveItemError.innerText = ''
-
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
          clearInterval(toogleLabel)
@@ -540,8 +586,7 @@ export class Blacksmith extends View {
    }
 
    setUserBackpack() {
-      console.log(this.userData.backpackItems.length)
-      console.log(this.dom.backpackSlots.length)
+      console.log(12)
       this.userData.backpackItems.forEach((el, num) => {
          this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
       })
@@ -586,7 +631,8 @@ export class Blacksmith extends View {
             labelWrapper: document.querySelector('#blacksmith_backpack_label_wrapper'),
             sellBtnPrice: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellPrice'),
             moveItem: document.querySelector('#blacksmith_backpack_move_item_btn'),
-            moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value')
+            moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value'),
+            replaceIcon: document.querySelector('#blacksmith_backpack_replace_item_icon')
          },
          backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
       }

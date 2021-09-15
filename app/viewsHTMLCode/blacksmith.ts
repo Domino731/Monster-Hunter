@@ -120,8 +120,8 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
    
    <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
    <div class='profile__actionWrapper' id='blacksmith_backpack_move_item_btn'>
-     <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
-     <strong class='profile__actionName'>Move to backpack</strong>
+     <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='blacksmith_backpack_replace_item_icon'/>
+     <strong class='profile__actionName'>Replace</strong>
    </div>
              
    <div class='profile__equipmentItemSellWrapper'> 

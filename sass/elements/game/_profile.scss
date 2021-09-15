@@ -306,8 +306,10 @@
         justify-content: center;
         align-items: center;
         position: relative;
+       
         .profile__itemSpecs {
             position: absolute;
+            z-index: 10;
             top: 0;
             left: 0;
         }
@@ -471,7 +473,7 @@
         margin-right: 0.5rem;
     }
 }
-#blacksmith_backpack_item_label {
+#blacksmith_backpack_item_label, #blacksmith_equipment__item_label {
     z-index: 10;
 }
 @keyframes an__notAfford {
