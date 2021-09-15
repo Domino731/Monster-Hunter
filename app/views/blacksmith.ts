@@ -13,6 +13,7 @@ import { updateUserData } from '../firebase/operations';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
+import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 export class Blacksmith extends View {
 
    private dom: {
@@ -96,9 +97,13 @@ export class Blacksmith extends View {
                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
             }
             if (element !== null) {
+               
 
                //find specific item, in order to create label of this item
                currentItem = this.userData.backpackItems[this.userData.backpackItems.findIndex(el => el.id === element.dataset.backpackItemId)];
+
+               const equipmentItem: ShopItem | null = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === currentItem.type )];
+               console.log(equipmentItem)
                // find specific slot in equipment which is equal to current shop item type, needed to compare items
                equipmentSlot = document.querySelector(`#equipment_slots div[data-slot-name = ${currentItem.type}]`)
                // show slot in equipment by adding pulse animation
@@ -109,7 +114,7 @@ export class Blacksmith extends View {
                this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot${slot.dataset.backpackSlot}`)
                this.dom.backpackLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`
                this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-               // this.dom.backpackLabel.root.classList.add('')
+               this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
                this.dom.backpackLabel.root.classList.remove('disabled')
 
             }
