@@ -2,6 +2,7 @@ import { UserData } from '../types';
 export const getBlacksmithHTMLCode = (data: UserData) => {
   return `<section class='blacksmith transparent'>
   <div class='blacksmith__item'>
+   <div class='game__errorWrapper'> kjkjk</div>
        <div class='profile__equipment' id='equipment_slots'>
 
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
@@ -135,7 +136,7 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
 
 
    </div>    
-   <div class='profile__backpack' id='blacksmith_equipment_slots'>
+   <div class='profile__backpack' id='blacksmith_backpack_slots'>
        <div class='profile__backpackRow'>
           <div class='profile__backpackItem' data-backpack-slot='1'> </div>
           <div class='profile__backpackItem' data-backpack-slot='2'> </div>
@@ -159,7 +160,7 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
   
   </div>
 
-     <div class='blacksmith__item market__shop'> 
+     <div class='blacksmith__item market__shop' id='blacksmith_shop_wrapper'> 
       <div class='market__characterWrapper'>
 
         <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'></div> 

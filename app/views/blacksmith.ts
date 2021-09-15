@@ -6,7 +6,7 @@ import { weaponsData } from '../properties/shop/weapons';
 import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
-import { allMarketItems } from '../properties/shop/allMarketItems';
+import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 import { View } from './view';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
@@ -15,7 +15,6 @@ import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 export class Blacksmith extends View {
-
    private dom: {
       market: HTMLElement | null,
       marketSlots: NodeListOf<Element> | null,
@@ -24,6 +23,9 @@ export class Blacksmith extends View {
       goldAmount: HTMLElement | null,
       goldBar: HTMLElement | null,
       goldSubstract: HTMLElement | null
+      backpackSlots: NodeListOf<Element>
+      backpack: HTMLElement
+      body: HTMLElement
       equipmentLabel: {
          root: HTMLElement,
          sellBtn: HTMLElement
@@ -41,7 +43,7 @@ export class Blacksmith extends View {
          moveItemError: HTMLElement
          replaceIcon: HTMLImageElement
       }
-      backpackSlots: NodeListOf<Element>
+
    }
    private market: ShopItem[]
    constructor() {
@@ -54,6 +56,8 @@ export class Blacksmith extends View {
             goldAmount: document.querySelector('#blacksmith_gold_amount'),
             goldBar: document.querySelector('#blacksmith_gold_bar'),
             goldSubstract: document.querySelector('#blacksmith_gold_substract'),
+            backpack: document.querySelector('#blacksmith_backpack_slots'),
+            body: document.querySelector(`body`),
             equipmentLabel: {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
@@ -71,7 +75,7 @@ export class Blacksmith extends View {
                moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value'),
                replaceIcon: document.querySelector('#blacksmith_backpack_replace_item_icon')
             },
-            backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
+            backpackSlots: document.querySelectorAll('#blacksmith_backpack_slots .profile__backpackItem')
          }
       this.market = []
    }
@@ -97,12 +101,12 @@ export class Blacksmith extends View {
                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
             }
             if (element !== null) {
-               
+
 
                //find specific item, in order to create label of this item
                currentItem = this.userData.backpackItems[this.userData.backpackItems.findIndex(el => el.id === element.dataset.backpackItemId)];
 
-               const equipmentItem: ShopItem | null = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === currentItem.type )];
+               const equipmentItem: ShopItem | null = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)];
                console.log(equipmentItem)
                // find specific slot in equipment which is equal to current shop item type, needed to compare items
                equipmentSlot = document.querySelector(`#equipment_slots div[data-slot-name = ${currentItem.type}]`)
@@ -180,12 +184,12 @@ export class Blacksmith extends View {
             this.userData.backpackItems.splice(itemIndex, 1);
          }
 
-         // remove all item graphics from backpack
-         
-
          // update user data, and set new backpack
          this.setUserBackpack();
          updateUserData(this.userData);
+
+         // remove label
+         this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
       })
 
    }
@@ -346,7 +350,7 @@ export class Blacksmith extends View {
                el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
          });
 
-         // update user data in firestore with this shop items
+         //update user data in firestore with this shop items
          this.userData.shop.blacksmith = shopItems;
          updateUserData(this.userData)
 
@@ -391,38 +395,34 @@ export class Blacksmith extends View {
             // find specific item, in order to create label of this item
             const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === slotElement.dataset.itemId)];
 
+            if (marketItem !== undefined) {
+               // find specific slot in equipment which is equal to current shop item type, needed to compare items
+               const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
+               const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
 
-            // find specific slot in equipment which is equal to current shop item type, needed to compare items
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
-            const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+               // check if user have enough gold to buy new item and class
+               this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
+               this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 
-            // check if user have enough gold to buy new item and class
-            this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
-            this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
+               // set the item label
+               this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
-            // set the item label
-            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+               // show slot in equipment by adding pulse animation
+               equipmentSlot.classList.add("profile__equipmentIcon-pulse");
 
-            // show slot in equipment by adding pulse animation
-            equipmentSlot.classList.add("profile__equipmentIcon-pulse");
+               // show the item label
+               this.dom.itemLabel.classList.remove('disabled');
+            }
 
-            // show the item label
-            this.dom.itemLabel.classList.remove('disabled');
 
          })
 
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
-
-            const currentItem = slot.firstElementChild as HTMLElement
-            // find specific item, in order to remove pulse animation
-            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
-
-            // find specific slot in equipment which is equal to current shop item type, needed to remove pulse animation
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
-
-            // remove pulse effect
-            equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+            const equipmentSlots = document.querySelectorAll(`#equipment_slots div[data-slot-name]`)
+            equipmentSlots.forEach(el => {
+               el.firstElementChild.classList.remove("profile__equipmentIcon-pulse")
+            })
          })
 
       });
@@ -487,7 +487,7 @@ export class Blacksmith extends View {
 
          // find current item, in order to add him to equipment,
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
-         selectedItem = allMarketItems[allMarketItems.findIndex(el => el.id === element.dataset.itemId)];
+         selectedItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === element.dataset.itemId)];
       }))
 
 
@@ -508,7 +508,7 @@ export class Blacksmith extends View {
          if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null) {
 
             // find current market item to check if the user has enough gold bo buy
-            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === selectedItem.id)];
+            const marketItem: ShopItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === selectedItem.id)];
 
             // prevent of item dupilcations
             // check if user has enough gold to buy, if he has enough add this item to his equipment, and update his profile on firestore -> update gold and equipment
@@ -537,7 +537,7 @@ export class Blacksmith extends View {
                   const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
                   // set new item in this slot
-                  const newMarketItem: ShopItem = allMarketItems[Math.floor(Math.random() * allMarketItems.length)];
+                  const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
 
                   // set item statistics
                   newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
@@ -575,16 +575,6 @@ export class Blacksmith extends View {
                      updateUserData(this.userData)
                   }
                }
-
-
-
-               else if (picks <= 0) {
-                  // inject sold out icon into market slot
-                  parent.innerHTML = `<div class='market__slot'>
-                     <img src='./images/market_sold_out.png'/>
-                     </div>`;
-               }
-
                // save picks into user data in firestore
                this.userData.shopPicks.blacksmith = availablePicks;
                updateUserData(this.userData);
@@ -605,6 +595,96 @@ export class Blacksmith extends View {
          }
 
       }))
+
+
+
+
+
+
+
+
+
+      this.dom.backpack.addEventListener('mouseover', () => {
+
+
+
+         if (selectedItem !== null) {
+
+            // check if user have free slot in backpack (backpack have 10 slots)
+            if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+
+               // each market slot have only 2 picks in day, when user buy new item, substract one pick
+               const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
+               const picks: number = availablePicks[slotIndex].picks;
+
+               // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
+               if (picks > 0) {
+
+                  // check if user have enough gold
+                  if (this.userData.gold >= selectedItem.initialCost) {
+                     // update user data -> subtract the price of item from user's gold 
+                     this.userData.gold -= selectedItem.initialCost;
+                     // find index of old item in order to replace him by new created one, and to update shop
+                     const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+                     // set new item in this slot
+                     const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+                     // set item statistics
+                     newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+                        newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                        newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                        newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+
+                     // substract gold and show animation
+                     this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+                     this.dom.goldSubstract.classList.remove('disabled');
+
+                     // remove above animation after 1.3s
+                     setTimeout(() => {
+                        this.dom.goldSubstract.classList.add('disabled');
+                        this.dom.goldSubstract.innerText = ``;
+                     }, 1300);
+                     this.market[oldItemIndex] = newMarketItem;
+                     this.userData.backpackItems.push(selectedItem);
+                     console.log(availablePicks)
+                     // save picks into user data in firestore
+                     availablePicks[slotIndex].picks -= 1;
+                     this.userData.shopPicks.blacksmith = availablePicks;
+                     updateUserData(this.userData);
+                  }
+               }
+            }
+            else{
+               console.log('no availble space in backpack')
+            }
+         }
+
+      })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      this.dom.body.addEventListener('mouseover', () => {
+         selectedMarketSlot = null;
+         draggedSlotName = null;
+         draggedElement = null
+         selectedItem = null;
+         hoveredEquipmentSlotName = null;
+      })
    }
 
    setUserBackpack() {
@@ -612,7 +692,7 @@ export class Blacksmith extends View {
       this.dom.backpackSlots.forEach(el => {
          el.innerHTML = ''
       })
-      
+
       this.userData.backpackItems.forEach((el, num) => {
          this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
       })
@@ -630,6 +710,7 @@ export class Blacksmith extends View {
    }
 
    onDataChange() {
+      this.setShop();
       this.setGoldAmount();
       this.setUserBackpack();
    }
@@ -643,6 +724,8 @@ export class Blacksmith extends View {
          goldAmount: document.querySelector('#blacksmith_gold_amount'),
          goldBar: document.querySelector('#blacksmith_gold_bar'),
          goldSubstract: document.querySelector('#blacksmith_gold_substract'),
+         backpack: document.querySelector('#blacksmith_backpack_slots'),
+         body: document.querySelector(`body`),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
@@ -650,6 +733,7 @@ export class Blacksmith extends View {
             sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice'),
             moveItem: document.querySelector('#blacksmith_equipment_move_item_btn'),
             moveItemError: document.querySelector('#blacksmith_equipment_move_item_error')
+
          },
          backpackLabel: {
             root: document.querySelector('#blacksmith_backpack_item_label'),
@@ -660,7 +744,7 @@ export class Blacksmith extends View {
             moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value'),
             replaceIcon: document.querySelector('#blacksmith_backpack_replace_item_icon')
          },
-         backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
+         backpackSlots: document.querySelectorAll('#blacksmith_backpack_slots .profile__backpackItem')
       }
    }
 
