@@ -25,7 +25,8 @@ export class Blacksmith extends View {
       goldSubstract: HTMLElement | null
       backpackSlots: NodeListOf<Element>
       backpack: HTMLElement
-      body: HTMLElement
+      body: HTMLElement,
+      error: HTMLElement,
       equipmentLabel: {
          root: HTMLElement,
          sellBtn: HTMLElement
@@ -58,6 +59,7 @@ export class Blacksmith extends View {
             goldSubstract: document.querySelector('#blacksmith_gold_substract'),
             backpack: document.querySelector('#blacksmith_backpack_slots'),
             body: document.querySelector(`body`),
+            error: document.querySelector('#blacksmith__error'),
             equipmentLabel: {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
@@ -606,8 +608,6 @@ export class Blacksmith extends View {
 
       this.dom.backpack.addEventListener('mouseover', () => {
 
-
-
          if (selectedItem !== null) {
 
             // check if user have free slot in backpack (backpack have 10 slots)
@@ -653,8 +653,16 @@ export class Blacksmith extends View {
                   }
                }
             }
+            // if the backpack doesnt have free slot show error 
             else{
-               console.log('no availble space in backpack')
+                this.dom.error.innerText = 'Your backpack is full';
+                this.dom.error.classList.remove('disabled');
+
+                // remove error after 3.5s
+                setTimeout(()=> {
+                  this.dom.error.innerText = '';
+                  this.dom.error.classList.add('disabled');
+                },3500)
             }
          }
 
@@ -726,6 +734,7 @@ export class Blacksmith extends View {
          goldSubstract: document.querySelector('#blacksmith_gold_substract'),
          backpack: document.querySelector('#blacksmith_backpack_slots'),
          body: document.querySelector(`body`),
+         error: document.querySelector('#blacksmith__error'),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
