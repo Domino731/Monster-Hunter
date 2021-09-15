@@ -1,11 +1,11 @@
 import { ShopItem } from '../../types';
 import { allMarketItems } from '../../properties/shop/allMarketItems';
 import { compareStats } from './compareStats';
-export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement) => {
+export const getBlacksmithItemLabel = (item: ShopItem, currentItem: ShopItem) => {
 
-    const compareItem: ShopItem | undefined =  allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.currentItemId)];  
+ 
 
-       if(compareItem === undefined){
+       if(currentItem === undefined){
          return `
               <div class='market__itemInfo' id='blacksmith_item_info'>
                  <h3 class='market__itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
@@ -79,7 +79,7 @@ export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement)
 
                    ${item.properties.strength !== null ? `<tr>
                        <td>Strength</td>
-                       <td>${item.properties.strength} ${compareItem.properties.strength !== null ? compareStats(item.properties.strength, compareItem.properties.strength) : ''}</td>
+                       <td>${item.properties.strength} ${currentItem.properties.strength !== null ? compareStats(item.properties.strength, currentItem.properties.strength) : ''}</td>
                      </tr>` : ''}
                  
                       
@@ -87,21 +87,21 @@ export const getBlacksmithItemLabel = (item: ShopItem, currentItem: HTMLElement)
                     ${item.properties.physicalEndurance !== null ? 
                       `<tr>
                         <td>Physical endurance</td>
-                        <td>${item.properties.physicalEndurance} ${compareItem.properties.physicalEndurance !== null ? compareStats(item.properties.physicalEndurance, compareItem.properties.physicalEndurance) : ''}</td>
+                        <td>${item.properties.physicalEndurance} ${currentItem.properties.physicalEndurance !== null ? compareStats(item.properties.physicalEndurance, currentItem.properties.physicalEndurance) : ''}</td>
                        </tr>` 
                      : ``}   
                     
                      ${item.properties.defence !== null ? ` 
                      <tr>
                        <td>Defence</td>
-                       <td>${item.properties.defence} ${compareItem.properties.defence !== null ? compareStats(item.properties.defence, compareItem.properties.defence) : ''}</td>
+                       <td>${item.properties.defence} ${currentItem.properties.defence !== null ? compareStats(item.properties.defence, currentItem.properties.defence) : ''}</td>
                      </tr>` 
                      : ``}
                      
                      ${item.properties.luck !== null ? `
                      <tr>
                        <td>Luck</td>
-                       <td>${item.properties.luck} ${compareItem.properties.luck !== null ? compareStats(item.properties.luck, compareItem.properties.luck) : ''}</td>
+                       <td>${item.properties.luck} ${currentItem.properties.luck !== null ? compareStats(item.properties.luck, currentItem.properties.luck) : ''}</td>
                      </tr>
                      `
                     : ``}

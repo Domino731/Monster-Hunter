@@ -367,22 +367,26 @@ export class Blacksmith extends View {
          // hover actions
          slot.addEventListener('mouseover', () => {
 
-            const currentItem = slot.firstElementChild as HTMLElement
+            const slotElement = slot.firstElementChild as HTMLElement;
+            
+
             // find specific item, in order to create label of this item
-            const marketItem: ShopItem = allMarketItems[allMarketItems.findIndex(el => el.id === currentItem.dataset.itemId)];
+            const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === slotElement.dataset.itemId)];
+           
 
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}]`)
-
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
+            const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+           
             // check if user have enough gold to buy new item and class
             this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
             this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 
             // set the item label
-            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, equipmentSlot.firstElementChild as HTMLElement);
+            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
             // show slot in equipment by adding pulse animation
-            equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+            equipmentSlot.classList.add("profile__equipmentIcon-pulse");
 
             // show the item label
             this.dom.itemLabel.classList.remove('disabled');
