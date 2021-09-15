@@ -12,6 +12,7 @@ import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
+import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
 export class Blacksmith extends View {
 
    private dom: {
@@ -23,6 +24,14 @@ export class Blacksmith extends View {
       goldBar: HTMLElement | null,
       goldSubstract: HTMLElement | null
       equipmentLabel: {
+         root: HTMLElement,
+         sellBtn: HTMLElement
+         labelWrapper: HTMLElement
+         sellBtnPrice: HTMLElement
+         moveItem: HTMLElement
+         moveItemError: HTMLElement
+      }
+      backpackLabel: {
          root: HTMLElement,
          sellBtn: HTMLElement
          labelWrapper: HTMLElement
@@ -51,194 +60,162 @@ export class Blacksmith extends View {
                moveItem: document.querySelector('#blacksmith_equipment_move_item_btn'),
                moveItemError: document.querySelector('#blacksmith_equipment_move_item_error')
             },
+            backpackLabel: {
+               root: document.querySelector('#blacksmith_backpack_item_label'),
+               sellBtn: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellWrapper'),
+               labelWrapper: document.querySelector('#blacksmith_backpack_label_wrapper'),
+               sellBtnPrice: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellPrice'),
+               moveItem: document.querySelector('#blacksmith_backpack_move_item_btn'),
+               moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value')
+            },
             backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
          }
       this.market = []
    }
 
    render() {
-      this.root.innerHTML = `<section class='blacksmith transparent'>
-           <div class='blacksmith__item'>
-                <div class='profile__equipment' id='equipment_slots'>
-
-                     <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
-                       <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon"/>
-                     </div>
-               
-
-                   <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'> 
-                      <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon"/>
-                   </div>
-
-
-                   <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'> 
-                      <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon"/>
-                   </div>
-
-
-                   <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'> 
-                      <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon"/>
-                   </div>
-
-
-                   <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'> 
-                      <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
-                   </div>
-
-
-                   <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'> 
-                      <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon"/>
-                   </div>
-
-
-
-                   <div class='profile__portrait'> </div>
-                   <div class='profile__info'>
-
-
-
-
-                      <div class='profile__itemSpecs disabled' id='blacksmith_equipment__item_label'>
-
-                      <div id='blacksmith_equipment_label_wrapper'> 
-                      
-                      </div>
-
-                       <div class='profile__actionError' id='blacksmith_equipment_move_item_error'></div>
-                       <div class='profile__actionWrapper' id='blacksmith_equipment_move_item_btn'>
-                          <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
-                          <strong class='profile__actionName'>Move to backpack</strong>
-                        </div>
-                         
-                        
-                        <div class='profile__equipmentItemSellWrapper'> 
-                          <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
-                          <strong class='profile__equipmentItemSellPrice' id='blacksmith_sell_item_value'></strong>
-                        </div>
-
-                       
-
-                      </div>
-
-
-
-
-                      <div class='profile__level'>  </div>
-                      <strong class='profile__nickname'>nickname</strong>
-                      <div class='profile__goldBar' id='blacksmith_gold_bar'> 
-                         <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
-                         <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${this.userData.gold}</strong>
-                      </div>
-
-
-
-                      <div class='profile__goldSubstract disabled' id='blacksmith_gold_substract'></div>
-                   </div>
-                </div>           
-           
-            <div class='profile__backpack' id='blacksmith_equipment_slots'>
-                <div class='profile__backpackRow'>
-                   <div class='profile__backpackItem'>
-                       
-                   </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                </div>
-                <div class='profile__backpackRow'>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                   <div class='profile__backpackItem'> </div>
-                </div>
-           </div>
-    
-    
-           
-           </div>
-
-              <div class='blacksmith__item market__shop'> 
-               <div class='market__characterWrapper'>
-
-                 <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'></div> 
-            
-                                     
-                 <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
-         
-                </div>
-    
-                <div class='market__itemsList' id='market_slots'>
-                   <div class='market__shopRow'> 
-
-                      <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-
-                       <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-
-                   </div>
-
-                <div class='market__shopRow'> 
-                     <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-
-                     <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-                     <div class='market__shopFrame blacksmith__frame'>
-                        <div class='market__slotWrapper'>  
-                          <div class='market__slot' draggable='true'>
-                          
-                          </div>  
-                        </div>  
-                      </div>
-
-                </div>
-                </div>
-           
-           </div>
-             
-
-    
-        </section>`;
+      this.root.innerHTML = getBlacksmithHTMLCode(this.userData);
    }
 
 
+   labelForBackpackEvent() {
+
+      let currentItem: ShopItem | null = null;
+      let equipmentSlot: HTMLElement | null = null;
+      let toogleLabel;
+      this.dom.backpackSlots.forEach(el => {
+
+         el.addEventListener('mouseover', () => {
+            const element: HTMLElement = el.firstElementChild as HTMLElement
+            if (element !== null) {
+               clearInterval(toogleLabel)
+               //find specific item, in order to create label of this item
+               currentItem = this.userData.backpackItems[this.userData.backpackItems.findIndex(el => el.id === element.dataset.backpackItemId)];
+               // find specific slot in equipment which is equal to current shop item type, needed to compare items
+               equipmentSlot = document.querySelector(`#equipment_slots div[data-slot-name = ${currentItem.type}]`)
+               // show slot in equipment by adding pulse animation
+               equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+               // remove error
+               this.dom.backpackLabel.moveItemError.innerText = '';
 
 
+
+            }
+
+         })
+
+         el.addEventListener('mouseleave', () => {
+            // remove pulse effect
+            equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+         })
+      })
+   }
+
+   labelForEquipmentEvent() {
+
+      let toogleLabel;
+
+      //  add label
+      let currentItem: ShopItem | null = null;
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
+
+         const element: HTMLElement = el.firstElementChild as HTMLElement;
+
+         // remove error
+         this.dom.equipmentLabel.moveItemError.innerText = ''
+
+         //find specific item, in order to create label of this item
+         currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
+         clearInterval(toogleLabel)
+
+         if (element.dataset.currentItemId === undefined) {
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         }
+         if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
+
+            this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+            this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
+            this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+            this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
+            this.dom.equipmentLabel.root.classList.remove('disabled')
+         }
+      }))
+
+      // remove label with delay -> after 1s
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
+
+         toogleLabel = setInterval(() => {
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         }, 1000);
+      }))
+
+      // keep displaying label when user  focus is on label
+      this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
+         clearInterval(toogleLabel)
+      })
+
+      // else hide label
+      this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+      })
+      //<img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
+      // event on item sell btn
+      this.dom.equipmentLabel.sellBtn.addEventListener('click', () => {
+
+         // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`)
+
+         // add gold from item sell to user account
+         this.userData.gold += parseInt((currentItem.initialCost * 0.4).toFixed())
+         updateUserData(this.userData)
+
+         // remove this item from user equipment
+         const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id)
+         if (itemIndex > -1) {
+            this.userData.equipmentItems.splice(itemIndex, 1);
+         }
+
+         //upadte user profile
+         updateUserData(this.userData);
+
+         // remove item graphic and set default icon
+         equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+
+         // remove label
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+      })
+
+
+      // moving item into user's backpack
+      this.dom.equipmentLabel.moveItem.addEventListener('click', () => {
+
+         // check if user have free slot in backpack (backpack have 10 slots)
+         if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+            // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
+            // remove item graphic and set default icon
+            equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+
+            // remove this item from user equipment
+            const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
+            if (itemIndex > -1) {
+               this.userData.equipmentItems.splice(itemIndex, 1);
+            }
+
+            // add current item to user's backpack
+            this.userData.backpackItems.push(currentItem);
+            updateUserData(this.userData);
+
+            // hide label
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+         }
+
+         // notify user about no available in backpack
+         else {
+            this.dom.equipmentLabel.moveItemError.innerText = 'Your backpack is full'
+         }
+      });
+   }
 
 
 
@@ -299,11 +276,6 @@ export class Blacksmith extends View {
          return shopItems;
       }
    }
-
-
-
-
-
 
    setShop() {
 
@@ -382,11 +354,6 @@ export class Blacksmith extends View {
 
    }
 
-
-
-
-
-
    getAvailbleMarketPicks(): AvailableMarketPicks[] {
       if (this.userData.shopPicks.blacksmith !== null) {
          return this.userData.shopPicks.blacksmith;
@@ -405,12 +372,6 @@ export class Blacksmith extends View {
          return availablePicks;
       }
    }
-
-
-
-
-
-
 
    dragEventForMarketSlots() {
 
@@ -564,126 +525,11 @@ export class Blacksmith extends View {
       }))
    }
 
-
-
-   labelForEquipmentEvent() {
-
-      let toogleLabel;
-
-      //  add label
-      let currentItem: ShopItem | null = null;
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
-
-         const element: HTMLElement = el.firstElementChild as HTMLElement;
-
-         // remove error
-         this.dom.equipmentLabel.moveItemError.innerText = ''
-
-         //find specific item, in order to create label of this item
-         currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-         clearInterval(toogleLabel)
-
-         if (element.dataset.currentItemId === undefined) {
-            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-         }
-         if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
-
-
-            this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-            this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
-            this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-            this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
-            this.dom.equipmentLabel.root.classList.remove('disabled')
-         }
-      }))
-
-      // remove label with delay -> after 1s
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
-
-         toogleLabel = setInterval(() => {
-            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-         }, 1000);
-      }))
-
-      // keep displaying label when user  focus is on label
-      this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
-         clearInterval(toogleLabel)
-      })
-
-      // else hide label
-      this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
-         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      })
-      //<img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
-      // event on item sell btn
-      this.dom.equipmentLabel.sellBtn.addEventListener('click', () => {
-
-         // find the specific  equipment slot which is needed to inject new html code later -> set default icon
-         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`)
-
-         // add gold from item sell to user account
-         this.userData.gold += parseInt((currentItem.initialCost * 0.4).toFixed())
-         updateUserData(this.userData)
-
-         // remove this item from user equipment
-         const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id)
-         if (itemIndex > -1) {
-            this.userData.equipmentItems.splice(itemIndex, 1);
-         }
-
-         //upadte user profile
-         updateUserData(this.userData);
-
-         // remove item graphic and set default icon
-         equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
-
-         // remove label
-         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      })
-
-
-      // moving item into user's backpack
-      this.dom.equipmentLabel.moveItem.addEventListener('click', () => {
-
-         // check if user have free slot in backpack (backpack have 10 slots)
-         if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
-            // find the specific  equipment slot which is needed to inject new html code later -> set default icon
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
-            // remove item graphic and set default icon
-            equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
-
-            // remove this item from user equipment
-            const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
-            if (itemIndex > -1) {
-               this.userData.equipmentItems.splice(itemIndex, 1);
-            }
-
-            // add current item to user's backpack
-            this.userData.backpackItems.push(currentItem);
-            updateUserData(this.userData);
-
-            // hide label
-            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-         }
-
-        else{
-          this.dom.equipmentLabel.moveItemError.innerText = 'Your backpack is full'
-        }
-      });
-   }
-
-
-
-
-
-
-
-
    setUserBackpack() {
       console.log(this.userData.backpackItems.length)
       console.log(this.dom.backpackSlots.length)
       this.userData.backpackItems.forEach((el, num) => {
-         this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}'/>`
+         this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
       })
    }
 
@@ -693,13 +539,16 @@ export class Blacksmith extends View {
          equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}' draggable='true'/>`
       })
    }
+
    setGoldAmount() {
       this.dom.goldAmount.innerText = `${this.userData.gold}`
    }
+
    onDataChange() {
       this.setGoldAmount();
       this.setUserBackpack();
    }
+
    getDOMElements() {
       this.dom = {
          market: document.querySelector("#market_slots"),
@@ -717,15 +566,25 @@ export class Blacksmith extends View {
             moveItem: document.querySelector('#blacksmith_equipment_move_item_btn'),
             moveItemError: document.querySelector('#blacksmith_equipment_move_item_error')
          },
+         backpackLabel: {
+            root: document.querySelector('#blacksmith_backpack_item_label'),
+            sellBtn: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellWrapper'),
+            labelWrapper: document.querySelector('#blacksmith_backpack_label_wrapper'),
+            sellBtnPrice: document.querySelector('#blacksmith_backpack_item_label .profile__equipmentItemSellPrice'),
+            moveItem: document.querySelector('#blacksmith_backpack_move_item_btn'),
+            moveItemError: document.querySelector('#blacksmith_backpack_sell_item_value')
+         },
          backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
       }
    }
+
    initScripts() {
       this.setUserBackpack();
       this.setUserEquipment();
       this.setShop();
       this.dragEventForMarketSlots();
       this.labelForEquipmentEvent();
+      this.labelForBackpackEvent();
    }
 }
 

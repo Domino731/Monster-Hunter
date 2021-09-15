@@ -77,70 +77,67 @@
         &-legendary {
             border: 4px solid $color-gold;
         }
-        &::after{
+        &::after {
             width: 30px;
             height: 30px;
-            content: '';
+            content: "";
             position: absolute;
             display: block;
-             background: $color-gray_dark;
+            background: $color-gray_dark;
         }
 
-
-        &-helmet{
+        &-helmet {
             transform: translate(17px, -348px);
-            &::after{       
+            &::after {
                 left: -28px;
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
         }
-        &-weapon{
+        &-weapon {
             transform: translate(17px, -348px);
-            &::after{
+            &::after {
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
             }
         }
 
-
-        &-chestPlate{
+        &-chestPlate {
             transform: translate(17px, -152px);
-            &::after{
-                left: -28px;
-                top: 21px;
-                clip-path: polygon(0 50%, 100% 100%, 100% 0);
-            }
-        }
- 
-        &-shield{
-            transform: translate(17px, -152px);
-            &::after{
-                right: -28px;
-                top: 21px;
-                clip-path: polygon(100% 50%, 0 100%, 0 0);
-            }
-        }
-
-        &-gloves{
-            transform: translate(17px, 30px);
-            &::after{
+            &::after {
                 left: -28px;
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
         }
 
-        &-special{
-            transform: translate(17px, 30px);
-            &::after{          
+        &-shield {
+            transform: translate(17px, -152px);
+            &::after {
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
             }
         }
 
+        &-gloves {
+            transform: translate(17px, 30px);
+            &::after {
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+            }
+        }
+
+        &-special {
+            transform: translate(17px, 30px);
+            &::after {
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+        }
         .itemTitle {
             color: $color-white;
         }
@@ -155,7 +152,7 @@
             color: $color-white;
         }
     }
-    &__actionWrapper{
+    &__actionWrapper {
         height: 30px;
         background: $color-white;
         border-radius: 18px;
@@ -166,26 +163,25 @@
         align-items: center;
         transition: 0.2s;
         margin-bottom: 13px;
-         letter-spacing: 0.063rem;
-         transition: 0.2s;
-        img{
+        letter-spacing: 0.063rem;
+        transition: 0.2s;
+        img {
             height: 100%;
             width: auto;
             object-fit: cover;
         }
-        &:hover{
-          cursor: pointer;
-          letter-spacing: 0.125rem;
+        &:hover {
+            cursor: pointer;
+            letter-spacing: 0.125rem;
         }
     }
-    &__actionName{
+    &__actionName {
         margin-left: 0.438rem;
         font-weight: 700;
         color: $color-gray_dark;
         font-size: 1.438rem;
-       
     }
-    &__actionError{
+    &__actionError {
         display: block;
         color: $color-error;
         font-weight: 600;
@@ -309,6 +305,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        .profile__itemSpecs {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     }
     &__backpackRow {
         display: flex;
@@ -328,12 +330,11 @@
         }
     }
 
-    &__backpackItemGraphic{
-       width: 70%;
-       height: 70%;
-       object-fit: cover;
+    &__backpackItemGraphic {
+        width: 70%;
+        height: 70%;
+        object-fit: cover;
     }
-
 
     &__general {
         display: flex;
@@ -470,7 +471,9 @@
         margin-right: 0.5rem;
     }
 }
-
+#blacksmith_backpack_item_label {
+    z-index: 10;
+}
 @keyframes an__notAfford {
     100% {
         background: $color-error;
@@ -508,6 +511,101 @@
         border-radius: 8px;
     }
 }
+
+.profile__itemSpecs{
+    &-backpackSlot1 {
+        transform: translate(-1px, -100%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+    }
+    &-backpackSlot2{
+        transform: translate(151px, -100%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+    }
+    &-backpackSlot3{
+        transform: translate(215px, -100%);
+        &::after {
+            left: 154px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+    &-backpackSlot4{
+        transform: translate(260px, -100%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+    &-backpackSlot5{
+        transform: translate(414px, -100%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+
+    &-backpackSlot6 {
+        transform: translate(-1px, -58%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+    }
+    &-backpackSlot7{
+        transform: translate(151px, -58%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+    }
+    &-backpackSlot8{
+        transform: translate(215px, -58%);
+        &::after {
+            left: 154px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+    &-backpackSlot9{
+        transform: translate(260px, -58%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+    &-backpackSlot10{
+        transform: translate(414px, -58%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        } 
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 @keyframes an__equipmentIcon {
     0% {
