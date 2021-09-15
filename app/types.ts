@@ -80,6 +80,7 @@ export interface UserData {
         luck: number
     }
     equipmentItems: ShopItem[]
+    backpackItems: ShopItem[]
 }
 
 

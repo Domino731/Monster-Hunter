@@ -64,7 +64,8 @@ export class Register extends AuthForm {
                     blacksmith: null ,
                     wizard: null
                 },
-                equipmentItems: []
+                equipmentItems: [],
+                backpackItems: []
             });
 
         

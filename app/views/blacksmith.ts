@@ -27,7 +27,9 @@ export class Blacksmith extends View {
          sellBtn: HTMLElement
          labelWrapper: HTMLElement
          sellBtnPrice: HTMLElement
+         moveItem: HTMLElement
       }
+      backpackSlots: NodeListOf<Element>
    }
    private market: ShopItem[]
    constructor() {
@@ -44,8 +46,10 @@ export class Blacksmith extends View {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
                labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
-               sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice')
-            }
+               sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice'),
+               moveItem: document.querySelector('#blacksmith_equipment_move_item_btn')
+            },
+            backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
          }
       this.market = []
    }
@@ -98,10 +102,19 @@ export class Blacksmith extends View {
                       
                       </div>
 
+
+                       <div class='profile__equipmentActionWrapper' id='blacksmith_equipment_move_item_btn'>
+                          <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
+                          <strong class='profile__equipmentActionName'>Move to backpack</strong>
+                        </div>
+
+                        
                         <div class='profile__equipmentItemSellWrapper'> 
                           <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
-                          <strong class='profile__equipmentItemSellPrice'>50</strong>
+                          <strong class='profile__equipmentItemSellPrice' id='blacksmith_sell_item_value'></strong>
                         </div>
+
+                       
 
                       </div>
 
@@ -114,13 +127,18 @@ export class Blacksmith extends View {
                          <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
                          <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${this.userData.gold}</strong>
                       </div>
+
+
+
                       <div class='profile__goldSubstract disabled' id='blacksmith_gold_substract'></div>
                    </div>
                 </div>           
            
-            <div class='profile__backpack'>
+            <div class='profile__backpack' id='blacksmith_equipment_slots'>
                 <div class='profile__backpackRow'>
-                   <div class='profile__backpackItem'> </div>
+                   <div class='profile__backpackItem'>
+                       
+                   </div>
                    <div class='profile__backpackItem'> </div>
                    <div class='profile__backpackItem'> </div>
                    <div class='profile__backpackItem'> </div>
@@ -559,8 +577,8 @@ export class Blacksmith extends View {
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
          clearInterval(toogleLabel)
-      
-         if(element.dataset.currentItemId === undefined){
+
+         if (element.dataset.currentItemId === undefined) {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
          }
          if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
@@ -572,9 +590,6 @@ export class Blacksmith extends View {
             this.dom.equipmentLabel.sellBtnPrice.innerText = `${(currentItem.initialCost * 0.4).toFixed()}`;
             this.dom.equipmentLabel.root.classList.remove('disabled')
          }
-
-
-
       }))
 
       // remove label with delay -> after 1s
@@ -583,13 +598,13 @@ export class Blacksmith extends View {
          toogleLabel = setInterval(() => {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
          }, 1000);
-
       }))
 
       // keep displaying label when user  focus is on label
       this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
          clearInterval(toogleLabel)
       })
+
       // else hide label
       this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
@@ -620,6 +635,26 @@ export class Blacksmith extends View {
          // remove label
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
       })
+
+
+      // moving item into user's backpack
+      this.dom.equipmentLabel.moveItem.addEventListener('click', () => {
+
+         // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
+         // remove item graphic and set default icon
+         equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+
+         // remove this item from user equipment
+         const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
+         if (itemIndex > -1) {
+            this.userData.equipmentItems.splice(itemIndex, 1);
+         }
+
+         // add current item to user's backpack
+         this.userData.backpackItems.push(currentItem);
+         updateUserData(this.userData);
+      })
    }
 
 
@@ -629,20 +664,16 @@ export class Blacksmith extends View {
 
 
 
-
-
-
-
-
-
-
-
+   setUserBackpack(){
+     this.userData.backpackItems.forEach((el, num) => {
+       this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}'/>`  
+     })
+   }
 
    setUserEquipment() {
-      console.log(this.dom.goldSubstract)
       this.userData.equipmentItems.forEach(el => {
          const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${el.type}']`);
-         equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}'/>`
+         equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}' draggable='true'/>`
       })
    }
    setGoldAmount() {
@@ -650,6 +681,7 @@ export class Blacksmith extends View {
    }
    onDataChange() {
       this.setGoldAmount();
+      this.setUserBackpack();
    }
    getDOMElements() {
       this.dom = {
@@ -664,11 +696,14 @@ export class Blacksmith extends View {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
             labelWrapper: document.querySelector('#blacksmith_equipment_label_wrapper'),
-            sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice')
-         }
+            sellBtnPrice: document.querySelector('.profile__equipmentItemSellPrice'),
+            moveItem: document.querySelector('#blacksmith_equipment_move_item_btn')
+         },
+         backpackSlots: document.querySelectorAll('#blacksmith_equipment_slots .profile__backpackItem')
       }
    }
    initScripts() {
+      this.setUserBackpack();
       this.setUserEquipment();
       this.setShop();
       this.dragEventForMarketSlots();

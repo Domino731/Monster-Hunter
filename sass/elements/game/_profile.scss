@@ -155,6 +155,37 @@
             color: $color-white;
         }
     }
+    &__equipmentActionWrapper{
+        height: 30px;
+        background: $color-white;
+        border-radius: 18px;
+        margin-top: 0.25rem;
+        padding: 0.188rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        margin-bottom: 13px;
+         letter-spacing: 0.063rem;
+         transition: 0.2s;
+        img{
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+        }
+        &:hover{
+          cursor: pointer;
+          letter-spacing: 0.125rem;
+        }
+    }
+    &__equipmentActionName{
+        margin-left: 0.438rem;
+        font-weight: 700;
+        color: $color-gray_dark;
+        font-size: 1.438rem;
+       
+    }
+
     &__equipmentItemSellWrapper {
         height: 30px;
         background: $color-white;
@@ -275,6 +306,9 @@
         display: flex;
     }
     &__backpackItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 148px;
         height: 148px;
         border-left: 3px solid $color-gray_dark;
@@ -285,6 +319,14 @@
             background: rgba(255, 255, 255, 0.5);
         }
     }
+
+    &__backpackItemGraphic{
+       width: 70%;
+       height: 70%;
+       object-fit: cover;
+    }
+
+
     &__general {
         display: flex;
         justify-content: space-between;
