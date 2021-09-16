@@ -519,63 +519,77 @@ export class Blacksmith extends View {
                // need to inject new item or display sold out icon depending on slot pick amount
                const parent: HTMLElement = draggedElement.parentElement;
 
-               // set this item in user equipment
-               element.innerHTML = `<img src='${selectedItem.src}' class="profile__equipmentIcon" data-current-item-id='${selectedItem.id}'>`;
 
-               // update user data -> subtract the price of item from user's gold 
-               this.userData.gold -= marketItem.initialCost;
-               updateUserData(this.userData);
 
                // each market slot have only 2 picks in day, when user buy new item, substract one pick
                const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
-               availablePicks[slotIndex].picks -= 1;
                const picks: number = availablePicks[slotIndex].picks;
 
 
 
                // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
                if (picks > 0) {
-                  // find index of old item in order to replace him by new created one, and to update shop
-                  const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
-                  // set new item in this slot
-                  const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+                  // check if user have free slot in backpack (backpack have 10 slots)
+                  if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+                     availablePicks[slotIndex].picks -= 1;
 
-                  // set item statistics
-                  newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-                     newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                     newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                     newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
-
-                  this.market[oldItemIndex] = newMarketItem;
+                     // find current item in equipment in order to hide him into backpack
+                     const currentEquipmentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === elementImg.dataset.currentItemId)];
+                     currentEquipmentItem !== undefined && this.userData.backpackItems.push(currentEquipmentItem);
 
 
-                  // inject new item into market slot
-                  parent.innerHTML = `<div class='market__slot' draggable='true' data-item-id='${newMarketItem.id}' data-slot-name='${newMarketItem.type}'>
-                  <img src='${newMarketItem.src}'/>
-                  </div>`;
+                     // find index of old item in order to replace him by new created one, and to update shop
+                     const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
-                  // substract gold and show animation
-                  this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
-                  this.dom.goldSubstract.classList.remove('disabled');
+                     // set new item in this slot
+                     const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
 
-                  // remove above animation after 1.3s
-                  setTimeout(() => {
-                     this.dom.goldSubstract.classList.add('disabled');
-                     this.dom.goldSubstract.innerText = ``;
-                  }, 1300);
+                     // set item statistics
+                     newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+                        newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                        newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                        newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+
+                     this.market[oldItemIndex] = newMarketItem;
+
+                     // substract gold and show animation
+                     this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+                     this.dom.goldSubstract.classList.remove('disabled');
+
+                     // remove above animation after 1.3s
+                     setTimeout(() => {
+                        this.dom.goldSubstract.classList.add('disabled');
+                        this.dom.goldSubstract.innerText = ``;
+                     }, 1300);
 
 
-                  // update user equipment
-                  const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
-                  if (equipmentItemIndex > -1) {
-                     this.userData.equipmentItems[equipmentItemIndex] = marketItem;
-                     updateUserData(this.userData);
+
+                     // update user data -> subtract the price of item from user's gold 
+                     this.userData.gold -= marketItem.initialCost;
+                     // update user equipment
+                     const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
+                     if (equipmentItemIndex > -1) {
+                        this.userData.equipmentItems[equipmentItemIndex] = marketItem;
+                     }
+                     else {
+                        this.userData.equipmentItems.push(marketItem);
+                     }
+
                   }
+                  // if the backpack doesnt have free slot show error 
                   else {
-                     this.userData.equipmentItems.push(marketItem);
-                     updateUserData(this.userData)
+                     this.dom.error.innerText = 'Your backpack is full';
+                     this.dom.error.classList.remove('disabled');
+
+                     // remove error after 3.5s
+                     setTimeout(() => {
+                        this.dom.error.innerText = '';
+                        this.dom.error.classList.add('disabled');
+                     }, 3500)
                   }
+
+
                }
                // save picks into user data in firestore
                this.userData.shopPicks.blacksmith = availablePicks;
@@ -617,52 +631,49 @@ export class Blacksmith extends View {
                const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
                const picks: number = availablePicks[slotIndex].picks;
 
-               // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
-               if (picks > 0) {
+               // check if market slot  has available pick if yes then add new item into this slot and update user equipment in firestore, else show sold out icon. Also check if user have enough gold
+               if (this.userData.gold >= selectedItem.initialCost && picks > 0) {
+                  // update user data -> subtract the price of item from user's gold 
+                  this.userData.gold -= selectedItem.initialCost;
+                  // find index of old item in order to replace him by new created one, and to update shop
+                  const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+                  // set new item in this slot
+                  const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+                  // set item statistics
+                  newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+                     newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                     newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+                     newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
 
-                  // check if user have enough gold
-                  if (this.userData.gold >= selectedItem.initialCost) {
-                     // update user data -> subtract the price of item from user's gold 
-                     this.userData.gold -= selectedItem.initialCost;
-                     // find index of old item in order to replace him by new created one, and to update shop
-                     const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
-                     // set new item in this slot
-                     const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
-                     // set item statistics
-                     newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-                        newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                        newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                        newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+                  // substract gold and show animation
+                  this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+                  this.dom.goldSubstract.classList.remove('disabled');
 
-                     // substract gold and show animation
-                     this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
-                     this.dom.goldSubstract.classList.remove('disabled');
-
-                     // remove above animation after 1.3s
-                     setTimeout(() => {
-                        this.dom.goldSubstract.classList.add('disabled');
-                        this.dom.goldSubstract.innerText = ``;
-                     }, 1300);
-                     this.market[oldItemIndex] = newMarketItem;
-                     this.userData.backpackItems.push(selectedItem);
-                     console.log(availablePicks)
-                     // save picks into user data in firestore
-                     availablePicks[slotIndex].picks -= 1;
-                     this.userData.shopPicks.blacksmith = availablePicks;
-                     updateUserData(this.userData);
-                  }
+                  // remove above animation after 1.3s
+                  setTimeout(() => {
+                     this.dom.goldSubstract.classList.add('disabled');
+                     this.dom.goldSubstract.innerText = ``;
+                  }, 1300);
+                  this.market[oldItemIndex] = newMarketItem;
+                  this.userData.backpackItems.push(selectedItem);
+                  console.log(availablePicks)
+                  // save picks into user data in firestore
+                  availablePicks[slotIndex].picks -= 1;
+                  this.userData.shopPicks.blacksmith = availablePicks;
+                  updateUserData(this.userData);
                }
+
             }
             // if the backpack doesnt have free slot show error 
-            else{
-                this.dom.error.innerText = 'Your backpack is full';
-                this.dom.error.classList.remove('disabled');
+            else {
+               this.dom.error.innerText = 'Your backpack is full';
+               this.dom.error.classList.remove('disabled');
 
-                // remove error after 3.5s
-                setTimeout(()=> {
+               // remove error after 3.5s
+               setTimeout(() => {
                   this.dom.error.innerText = '';
                   this.dom.error.classList.add('disabled');
-                },3500)
+               }, 3500)
             }
          }
 
@@ -721,6 +732,7 @@ export class Blacksmith extends View {
       this.setShop();
       this.setGoldAmount();
       this.setUserBackpack();
+      this.setUserEquipment();
    }
 
    getDOMElements() {
