@@ -213,7 +213,9 @@ export class Blacksmith extends View {
          const element: HTMLElement = el.firstElementChild as HTMLElement;
          // hide backpack label
          this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-
+         // reset equipement label styles
+         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+         
          // remove error
          this.dom.equipmentLabel.moveItemError.innerText = ''
          //find specific item, in order to create label of this item
@@ -699,15 +701,14 @@ export class Blacksmith extends View {
 
       // set the countdown date
       const target_date = new Date().getTime() + ((minutes * 60) * 1000);
-      const time_limit = ((minutes * 60) * 1000);
 
       setInterval(() => {
              
             let hours, minutes, seconds; // variables for time units
 
             // find the amount of "seconds" between now and target
-            var current_date = new Date().getTime();
-            var seconds_left: any = (target_date - current_date) / 1000;
+            const current_date = new Date().getTime();
+            let seconds_left: any = (target_date - current_date) / 1000;
 
 
             if (seconds_left >= 0) {

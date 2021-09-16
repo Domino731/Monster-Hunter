@@ -558,7 +558,8 @@
     }
 
     &-backpackSlot6 {
-        transform: translate(-1px, -58%);
+        transform: translate(-1px, -50%);
+   
         &::after {
             left: 28px;
             bottom: -26px;
@@ -566,7 +567,8 @@
         }
     }
     &-backpackSlot7{
-        transform: translate(151px, -58%);
+        transform: translate(151px, -50%);
+     
         &::after {
             left: 28px;
             bottom: -26px;
@@ -574,7 +576,8 @@
         }
     }
     &-backpackSlot8{
-        transform: translate(215px, -58%);
+        transform: translate(215px, -50%);
+       
         &::after {
             left: 154px;
             bottom: -26px;
@@ -582,7 +585,8 @@
         } 
     }
     &-backpackSlot9{
-        transform: translate(260px, -58%);
+        transform: translate(260px, -50%);
+   
         &::after {
             right: 28px;
             bottom: -26px;
@@ -590,14 +594,27 @@
         } 
     }
     &-backpackSlot10{
-        transform: translate(414px, -58%);
+        transform: translate(414px, -50%);
+      
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         } 
     }
-
+    &-backpackSlot6,&-backpackSlot7, &-backpackSlot8, &-backpackSlot9, &-backpackSlot10{
+        height: 328px;
+        overflow: auto;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        &::-webkit-scrollbar {
+         width: 0; 
+        }
+        &::-webkit-scrollbar{
+            width: 0.188rem;
+            background: $color-blue;
+        }
+    }
 }
 
 
