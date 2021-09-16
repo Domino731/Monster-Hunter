@@ -14,6 +14,8 @@ import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
+import { getBlacksmithItems } from '../functions/getBlacksmithItems';
+import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 export class Blacksmith extends View {
    private dom: {
       market: HTMLElement | null,
@@ -310,56 +312,11 @@ export class Blacksmith extends View {
          return this.userData.shop.blacksmith
       }
       else {
-         // array with shop items, base on which shop will be created
-         let shopItems: ShopItem[] = []
-
-         // pushing random equipment items
-
-         // random helmet
-         shopItems.push(getRandomShopItem(helmetsData));
-         // random chest plate
-         shopItems.push(getRandomShopItem(chestplatesData));
-         // random gloves
-         shopItems.push(getRandomShopItem(glovesData));
-         // random weapon
-         shopItems.push(getRandomShopItem(weaponsData));
-         // random shield
-         shopItems.push(getRandomShopItem(shieldsData));
-
-         // Blacksmith shop has 6 slots, shopItems array has only 5 items, so its need to get one more random item 
-         const randomItems: ShopItem[] = [];
-
-         // random helmet
-         randomItems.push(getRandomShopItem(helmetsData));
-         // random chest plate
-         randomItems.push(getRandomShopItem(chestplatesData));
-         // random gloves
-         randomItems.push(getRandomShopItem(glovesData));
-         // random weapon
-         randomItems.push(getRandomShopItem(weaponsData));
-         // random shield
-         randomItems.push(getRandomShopItem(shieldsData));
-
-         // push last item to shopItems array
-         shopItems.push(getRandomShopItem(randomItems));
-
-         // shuffle the shopItems array
-         shopItems = shopItems.sort(() => Math.random() - .5);
-
-         // set the item stats
-         shopItems.forEach(el => {
-            el.properties.strength = setItemStats(el.properties.strength, this.userData.rawStats.strength),
-               el.properties.defence = setItemStats(el.properties.defence, this.userData.rawStats.defence),
-               el.properties.physicalEndurance = setItemStats(el.properties.defence, this.userData.rawStats.defence),
-               el.properties.luck = setItemStats(el.properties.luck, this.userData.rawStats.luck)
-         });
-
-         //update user data in firestore with this shop items
-         this.userData.shop.blacksmith = shopItems;
+         //update user data in firestore with new shop items
+         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
          updateUserData(this.userData)
 
-
-         return shopItems;
+         return getBlacksmithItems(this.userData.rawStats);
       }
    }
 
@@ -475,7 +432,7 @@ export class Blacksmith extends View {
       let hoveredEquipmentSlotName: string | null = null;
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
- 
+
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
          // set currently seleted market slot
@@ -493,9 +450,9 @@ export class Blacksmith extends View {
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
          selectedItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === element.dataset.itemId)];
 
-         
+
       }))
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e)=> {
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
          e.preventDefault();
       }))
 
@@ -726,6 +683,63 @@ export class Blacksmith extends View {
       this.dom.goldAmount.innerText = `${this.userData.gold}`
    }
 
+   setNewShopCountdown() {
+      const today: any = new Date();
+
+      const tomorrow: any = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+
+      // milliseconds between now & tommorow
+      const diffMs = (tomorrow - today);
+      console.log(diffMs)
+      const minutes = Math.floor((diffMs / 1000) / 60);
+
+      // set the countdown date
+      const target_date = new Date().getTime() + ((minutes * 60) * 1000);
+      const time_limit = ((minutes * 60) * 1000);
+
+      setInterval(() => {
+             
+            let hours, minutes, seconds; // variables for time units
+
+            // find the amount of "seconds" between now and target
+            var current_date = new Date().getTime();
+            var seconds_left: any = (target_date - current_date) / 1000;
+
+
+            if (seconds_left >= 0) {
+            seconds_left = seconds_left % 86400;
+
+            hours = parseInt((seconds_left / 3600).toString());
+            seconds_left = seconds_left % 3600;
+
+            minutes = parseInt((seconds_left / 60).toString());
+            seconds = parseInt((seconds_left % 60).toString());
+
+            console.log(`${hours}: ${minutes}: ${seconds}`)
+         }
+
+         // set new blacksmith itmes and reset availble picks
+        else{
+                //update user data in firestore with new shop items
+                this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
+                this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+                updateUserData(this.userData);
+        }
+      }, 1000)
+
+   }
+
+   setLastVisit() {
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      this.userData.newShopDate = tomorrow;
+      this.userData.lastVisit = today;
+      updateUserData(this.userData);
+   }
    onDataChange() {
       this.setShop();
       this.setGoldAmount();
@@ -744,7 +758,7 @@ export class Blacksmith extends View {
          goldSubstract: document.querySelector('#blacksmith_gold_substract'),
          backpack: document.querySelector('#blacksmith_backpack_slots'),
          body: document.querySelector(`body`),
-         error: document.querySelector('#blacksmith__error'),  
+         error: document.querySelector('#blacksmith__error'),
          equipment: document.querySelector('#equipment_slots'),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
@@ -769,6 +783,8 @@ export class Blacksmith extends View {
    }
 
    initScripts() {
+      this.setLastVisit();
+      this.setNewShopCountdown();
       this.setUserBackpack();
       this.setUserEquipment();
       this.setShop();

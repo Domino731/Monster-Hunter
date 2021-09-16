@@ -81,6 +81,8 @@ export interface UserData {
     }
     equipmentItems: ShopItem[]
     backpackItems: ShopItem[]
+    lastVisit: Date
+    newShopDate: Date
 }
 
 
@@ -88,4 +90,10 @@ export interface UserData {
 export interface AvailableMarketPicks {
     picks: number,
     index: number
+}
+export interface UserStats {
+    strength: number 
+    physicalEndurance: number 
+    defence: number
+    luck: number
 }
