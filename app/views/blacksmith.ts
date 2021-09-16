@@ -30,6 +30,7 @@ export class Blacksmith extends View {
       equipment: HTMLElement,
       body: HTMLElement,
       error: HTMLElement,
+      countdown: HTMLElement,
       equipmentLabel: {
          root: HTMLElement,
          sellBtn: HTMLElement
@@ -64,6 +65,7 @@ export class Blacksmith extends View {
             body: document.querySelector(`body`),
             error: document.querySelector('#blacksmith__error'),
             equipment: document.querySelector('#equipment_slots'),
+            countdown: document.querySelector('#blacksmith_countdown_time'),
             equipmentLabel: {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
@@ -717,7 +719,7 @@ export class Blacksmith extends View {
             minutes = parseInt((seconds_left / 60).toString());
             seconds = parseInt((seconds_left % 60).toString());
 
-            console.log(`${hours}: ${minutes}: ${seconds}`)
+            this.dom.countdown.innerText = `${hours}h : ${minutes}m : ${seconds}s`;
          }
 
          // set new blacksmith itmes and reset availble picks
@@ -759,7 +761,8 @@ export class Blacksmith extends View {
          backpack: document.querySelector('#blacksmith_backpack_slots'),
          body: document.querySelector(`body`),
          error: document.querySelector('#blacksmith__error'),
-         equipment: document.querySelector('#equipment_slots'),
+         equipment: document.querySelector('#equipment_slots'), 
+         countdown: document.querySelector('#blacksmith_countdown_time'),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),

@@ -82,41 +82,6 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
    <div class='profile__itemSpecs disabled profile__itemSpecs-backpackSlot10' id='blacksmith_backpack_item_label'>
 
    <div id='blacksmith_backpack_label_wrapper'> 
-   
-   
-        <h3 class='market__itemTitle itemTitle market__itemTitle-common'>asdddddddddd</h3>
-                          <strong class='market__itemRarity itemRarity  market__itemRarity-common'>Legendary</strong>
-                          <p class='market__itemDsc itemDsc'>lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem loere lorem lorem lorem lorem </p>
-
-                          <table class='market__itemStats itemStats'>
-                          <tbody>
-             
-                         <tr>
-                              <td>Strength</td>
-                              <td>123123</td>
-                            </tr>
-                           
-                        
-                          <tr>
-                                <td>Physical endurance</td>
-                                <td>12312</td>
-                              </tr>
-                           
-                            <tr>
-                                    <td>Defence</td>
-                                    <td>12</td>
-                                  </tr>
-                              
-                                                                                                                    
-                            <tr>
-                                    <td>Luck</td>
-                                    <td>12333</td>
-                                </tr>                                 
-                          </tbody>
-                        </table>
-
-
-
    </div> 
    
    <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
@@ -161,6 +126,12 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
   </div>
 
      <div class='blacksmith__item market__shop' id='blacksmith_shop_wrapper'> 
+
+     <div class='market__deliveryWrapper market__deliveryWrapper-blacksmith'> 
+        <div class='market__deliveryTitle'>Next delivery in</div>
+        <div class='market__deliveryTime' id='blacksmith_countdown_time'></div>
+     </div>
+
       <div class='market__characterWrapper'>
 
         <div class='market__itemInfoWrapper disabled' id='blacksmith_item_label'></div> 

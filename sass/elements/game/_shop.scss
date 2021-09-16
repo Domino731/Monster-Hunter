@@ -173,7 +173,36 @@
             }
         }
     }
+    &__deliveryWrapper{
+        position: absolute;
+        top: 0;
+       
+        width: 41%;
+        height: 52px;
+         border-bottom: 9px solid $color-gold ;
+         background: rgba(255,255,255,0.6);
 
+        &-blacksmith{
+            padding-right: 10px;
+            text-align: end;
+             right: 0;
+            border-left: 9px solid $color-gold;
+            border-bottom-left-radius: 40px;
+        }
+    }
+    &__deliveryTitle{
+        font-size: 1.25rem;
+        font-weight: 900;
+        letter-spacing: 0.063rem;
+        word-spacing: 0.125rem;
+        text-shadow:  0.063rem 0 $color-gold;
+    }
+    &__deliveryTime{
+        font-size: 1.875rem;
+        font-weight: 700;
+        word-spacing: 0.125rem;
+        
+    }
     &__itemPriceWrapper {
         height: 30px;
         background: $color-gray-dark;
