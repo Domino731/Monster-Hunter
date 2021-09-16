@@ -63,7 +63,7 @@ export interface ShopItem{
 export interface UserData {
     level: number,
     nick: string,
-    guardPayment: number,
+    guardPayout: number,
     gold: number,
     shop: {
         blacksmith: null | ShopItem[],
@@ -83,6 +83,13 @@ export interface UserData {
     backpackItems: ShopItem[]
     lastVisit: Date
     newShopDate: Date
+    status: 'free' | 'guard' | 'mission',
+    guard: {
+        current: Date | null
+        start: Date | null
+        end: Date | null
+        payout: number | null
+    }
 }
 
 

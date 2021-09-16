@@ -1,5 +1,8 @@
 export const getGuardHTMLCode = () : string => {
-    return  `<section class='guard'>
+
+    return  `
+    <div class='guard__wrapper disabled' id='guard_menu'>
+    <section class='guard-menu'>
     <div class='guard__item'>
       <div class='guard__kingWrapper'>
          <img src='./images/guard_king.png' alt='King' class='guard__king'/>
@@ -33,8 +36,32 @@ export const getGuardHTMLCode = () : string => {
           <button class='guard__acceptBtn'>START</button>
         </div>
       </div>
-
-     
     </div>
- </section>`
+    </div>
+ </section>
+
+ <div class='guard__wrapper disabled' id='guard_castleCity'>
+   <setion class='guard-city'> 
+       <div class='guard__summaryWrapper'> 
+           <div class='guard__summary'> 
+              <img class='guard__summaryIcon' src='./images/gold_bag_big.png' alt='gold bag'/>
+              <h2 class='guard__summaryTitle'>Your payout</h2>
+              <strong class='guard__summaryPayout'>1000</strong>
+              <button class='guard__summaryBtn'>TAKE</button>
+           </div>
+       </div>
+
+       <div class='guard__guardCountdownWrapper'>
+          <div class='guard__guardCountdownBar'>
+             
+          </div>
+          <div class='guard__guardCountdownTime'>12 : 12 : 12 </div>
+       </div>
+
+       <button class='guard__guardCancelBtn'>Cancel</button>
+   </setion>
+ </div>
+
+ 
+ `
 }

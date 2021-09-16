@@ -54,7 +54,7 @@ export class Register extends AuthForm {
                     .set({
                         nick: this.data.nickname,
                         level: 1,
-                        guardPayment: 30,
+                        guardPayout: 30,
                         gold: 100,
                         rawStats: {
                             defence: 50,
@@ -73,7 +73,14 @@ export class Register extends AuthForm {
                         equipmentItems: [],
                         backpackItems: [],
                         lastVisit: today,
-                        newShopDate: tomorrow
+                        newShopDate: tomorrow,
+                        status: 'free',
+                        guard: {
+                            current: null,
+                            start:  null,
+                            end: null,
+                            payout:  null
+                        }
             });
 
 
