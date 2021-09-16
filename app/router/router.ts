@@ -98,7 +98,7 @@ export const initRouter = () => {
         };
     });
 
-    const x = new Blacksmith()
+    const x = new Guard()
     window.addEventListener("popstate", router);
 };
 

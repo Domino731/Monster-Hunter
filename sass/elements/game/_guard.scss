@@ -56,17 +56,21 @@
     }
 
     &__awardIcon{
-        width: 2.25rem;
+        width: 2.313rem;
         height: auto;
         object-fit: cover;
     }
     &__awardAmount{
       margin-left: 0.625rem;
-      font-size: 1.125rem;
+      
+      font-size: 1.625rem;
       font-weight: 700;
       word-spacing: 0.375rem;
       text-transform: uppercase;
       letter-spacing: 0.125rem;
+      strong{
+          text-shadow: 0.128rem 0.128rem $color-red;
+      }
     }
     &__inputValue {
         position: absolute;
