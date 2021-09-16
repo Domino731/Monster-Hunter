@@ -178,7 +178,7 @@
             cursor: pointer;
         }
     }
-    &__guardCountdownWrapper {
+    &__countdownWrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -192,23 +192,24 @@
         position: relative;
         overflow: hidden;
     }
-    &__guardCountdownBar{
+    &__countdownBar{
       position: absolute;
       height: 100%;
-      width: 10%;
+      width: 100%;
       left: 0;
       background: $color-green;
      animation: 15s an_guardCountdownBar infinite ease-in-out;
      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
      background-size: 400% 400%;
     }
-    &__guardCountdownTime{
+    &__countdownTime{
+        z-index: 1;
         font-weight: 900;
        word-spacing: 0.125rem;
         color: $color-white;
        font-size: 3rem;
     }
-    &__guardCancelBtn{
+    &__cancelBtn{
         display: block;
         margin: 10px auto;
         width: auto;

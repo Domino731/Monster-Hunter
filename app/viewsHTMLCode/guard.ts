@@ -41,6 +41,8 @@ export const getGuardHTMLCode = () : string => {
  </section>
 
  <div class='guard__wrapper disabled' id='guard_castleCity'>
+
+
    <setion class='guard-city'> 
        <div class='guard__summaryWrapper'> 
            <div class='guard__summary'> 
@@ -51,14 +53,15 @@ export const getGuardHTMLCode = () : string => {
            </div>
        </div>
 
-       <div class='guard__guardCountdownWrapper'>
-          <div class='guard__guardCountdownBar'>
+       <div class='guard__countdownWrapper'>
+          <div class='guard__countdownBar'>
              
           </div>
-          <div class='guard__guardCountdownTime'>12 : 12 : 12 </div>
+          <div class='guard__countdownTime'></div>
        </div>
 
-       <button class='guard__guardCancelBtn'>Cancel</button>
+
+       <button class='guard__cancelBtn'>Cancel</button>
    </setion>
  </div>
 

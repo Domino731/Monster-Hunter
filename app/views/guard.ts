@@ -6,29 +6,38 @@ import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class Guard extends View {
 
-  private sliderValue: HTMLElement | null
-  private inputSlider: HTMLElement | null
   private guardPayout: number
   private guardTime: number
+  private countdownInterval: null | ReturnType<typeof setInterval>
   private dom: {
-    sliderValue: HTMLElement,
-    inputSlider: HTMLElement
-    guardPayment: HTMLElement
-    acceptBtn: HTMLButtonElement
-    menu: HTMLElement,
-    castleCity: HTMLElement
+    sliderValue: HTMLElement | null
+    inputSlider: HTMLElement | null
+    guardPayment: HTMLElement | null
+    acceptBtn: HTMLButtonElement | null
+    menu: HTMLElement | null
+    castleCity: HTMLElement | null
+    cancelGuardBtn: HTMLElement | null
+    summaryBtn: HTMLElement | null
+    guardTimeLeft: HTMLElement | null
+    countdownProgressBar: HTMLElement | null
   }
   constructor() {
     super()
     this.guardPayout = 0
     this.guardTime = 1
+
     this.dom = {
       sliderValue: document.querySelector('#slider_value'),
       inputSlider: document.querySelector('#guard_input_slider'),
       guardPayment: document.querySelector('.guard__awardAmount'),
       acceptBtn: document.querySelector('.guard__acceptBtn'),
       menu: document.querySelector('#guard_menu'),
-      castleCity: document.querySelector('#guard_castleCity')
+      castleCity: document.querySelector('#guard_castleCity'),
+      cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
+      summaryBtn: document.querySelector('.guard__summaryBtn'),
+      guardTimeLeft: document.querySelector('.guard__countdownTime'),
+      countdownProgressBar: document.querySelector('.guard__countdownBar')
+
     }
   }
 
@@ -48,11 +57,11 @@ export class Guard extends View {
       // Show guard time
       this.dom.sliderValue.innerText = input.value + 'h'
       // set guard payout
-       this.guardPayout = parseFloat((getGuardPaymentValue(this.userData.level) * (parseFloat(input.value) / 10) ).toFixed())
-      this.dom.guardPayment.innerHTML = `Reward: <strong>${this.guardPayout}</strong>`; 
+      this.guardPayout = parseFloat((getGuardPaymentValue(this.userData.level) * (parseFloat(input.value) / 10)).toFixed())
+      this.dom.guardPayment.innerHTML = `Reward: <strong>${this.guardPayout}</strong>`;
       // set guard time
       this.guardTime = parseFloat(input.value)
-      
+
       // change style
       const styleLeft: number = parseInt(input.value) * 10;
       if (styleLeft < 50) {
@@ -72,15 +81,16 @@ export class Guard extends View {
 
 
 
-  general(){
+  general() {
     // set default guardt payout (for 1h guard)
     this.guardPayout = parseFloat((getGuardPaymentValue(this.userData.level) * 0.1).toFixed());
-    this.dom.guardPayment.innerHTML = `Reward: <strong>${this.guardPayout}</strong>`; 
+    this.dom.guardPayment.innerHTML = `Reward: <strong>${this.guardPayout}</strong>`;
   }
 
-  eventForGuardAcceptBtn(){
-    this.dom.acceptBtn.addEventListener('click', ()=> {
-      if(this.userData.status === 'free'){
+  eventForGuardAcceptBtn() {
+    this.dom.acceptBtn.addEventListener('click', () => {
+      if (this.userData.status === 'free') {
+        console.log(1)
         // set user status to guard -> he will not be able to start new missions
         this.userData.status = 'guard';
         // set guard properties -> start, end date of guard, payout and current date 
@@ -91,32 +101,111 @@ export class Guard extends View {
         this.userData.guard.payout = this.guardPayout;
         updateUserData(this.userData);
       }
+      this.checkStatus();
+
     })
   }
-  checkStatus(){
+
+  guardCountdown() {
+
+    const guardStart: any = new Date();
+    const guardEnd: any = this.userData.guard.end;
+
+    // milliseconds between start and end of guard
+    const diffMs = (guardEnd - guardStart);
+
+    const minutes = Math.floor((diffMs / 1000) / 60);
+
+    // set the countdown date
+    const target_date = new Date().getTime() + ((minutes * 60) * 1000);
+
+    this.countdownInterval = setInterval(() => {
+      let hours, minutes, seconds; // variables for time units
+
+      // find the amount of "seconds" between now and target
+      const current_date = new Date().getTime();
+      let seconds_left: any = (target_date - current_date) / 1000;
+
+      if (seconds_left >= 0) {
+
+        seconds_left = seconds_left % 86400;
+
+        hours = parseInt((seconds_left / 3600).toString());
+        seconds_left = seconds_left % 3600;
+
+        minutes = parseInt((seconds_left / 60).toString());
+        seconds = parseInt((seconds_left % 60).toString());
+
+        // set time
+        this.dom.guardTimeLeft.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s`;
+
+        // set progress bar
+        const start : number = this.userData.guard.start.getTime(); // Jul 02 2012
+        const end : number = this.userData.guard.end.getTime(); // Sep 02 2012
+        const today : number  = new Date().getTime();
+
+        const total = end - start;
+        const progress = today - start;
+
+        const result : string = Math.round(progress / total * 100) + "%";
+        this.dom.countdownProgressBar.style.width = result
+
+      }
+
+
+    }, 1000)
+  }
+
+
+
+  // cancel actual guard and clear guard status in user's data in firestore
+  cancelGuardEvent() {
+    this.dom.cancelGuardBtn.addEventListener('click', () => {
+      this.userData.status = 'free';
+      this.userData.guard = {
+        start: null,
+        current: null,
+        payout: null,
+        end: null
+      }
+      updateUserData(this.userData)
+    })
+  }
+  checkStatus() {
     // show menu onlu when user doesnt have active guard
-    if(this.userData.status === 'free'){
+    if (this.userData.status === 'free') {
+      console.log('free')
       this.dom.menu.className = 'guard__wrapper';
+      this.dom.castleCity.className = 'guard__wrapper disabled';
+      this.countdownInterval !== null && clearInterval(this.countdownInterval)
     }
     // if user have active guard show then guard panel with countdown
-    else if(this.userData.status === 'guard'){
+    else if (this.userData.status === 'guard') {
+      this.countdownInterval !== null && clearInterval(this.countdownInterval)
+      this.dom.menu.className = 'guard__wrapper disabled';
       this.dom.castleCity.className = 'guard__wrapper';
+      this.guardCountdown();
     }
     // if user have active mission hide button which is responsible for starting new guard
-    else if(this.userData.status === 'mission'){
+    else if (this.userData.status === 'mission') {
       this.dom.acceptBtn.parentElement.innerHTML = '';
     }
   }
-  onDataChange(){
+  onDataChange() {
+    this.checkStatus();
   }
   getDOMElements() {
     this.dom = {
       sliderValue: document.querySelector('#slider_value'),
       inputSlider: document.querySelector('#guard_input_slider'),
-       guardPayment: document.querySelector('.guard__awardAmount'),
-       acceptBtn: document.querySelector('.guard__acceptBtn'),
-       menu: document.querySelector('#guard_menu'),
-       castleCity: document.querySelector('#guard_castleCity')
+      guardPayment: document.querySelector('.guard__awardAmount'),
+      acceptBtn: document.querySelector('.guard__acceptBtn'),
+      menu: document.querySelector('#guard_menu'),
+      castleCity: document.querySelector('#guard_castleCity'),
+      cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
+      summaryBtn: document.querySelector('.guard__summaryBtn'),
+      guardTimeLeft: document.querySelector('.guard__countdownTime'),
+      countdownProgressBar: document.querySelector('.guard__countdownBar')
     }
   }
 
@@ -125,6 +214,7 @@ export class Guard extends View {
     this.checkStatus();
     this.guardSliderEvent();
     this.eventForGuardAcceptBtn();
+    this.cancelGuardEvent();
   }
 }
 

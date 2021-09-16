@@ -721,7 +721,7 @@ export class Blacksmith extends View {
             seconds = parseInt((seconds_left % 60).toString());
 
             this.dom.countdown.innerText = `${hours}h : ${minutes}m : ${seconds}s`;
-         }
+           }
 
          // set new blacksmith itmes and reset availble picks
         else{
