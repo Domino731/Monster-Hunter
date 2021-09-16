@@ -24,7 +24,8 @@ export class Blacksmith extends View {
       goldBar: HTMLElement | null,
       goldSubstract: HTMLElement | null
       backpackSlots: NodeListOf<Element>
-      backpack: HTMLElement
+      backpack: HTMLElement,
+      equipment: HTMLElement,
       body: HTMLElement,
       error: HTMLElement,
       equipmentLabel: {
@@ -60,6 +61,7 @@ export class Blacksmith extends View {
             backpack: document.querySelector('#blacksmith_backpack_slots'),
             body: document.querySelector(`body`),
             error: document.querySelector('#blacksmith__error'),
+            equipment: document.querySelector('#equipment_slots'),
             equipmentLabel: {
                root: document.querySelector('#blacksmith_equipment__item_label'),
                sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
@@ -472,8 +474,8 @@ export class Blacksmith extends View {
       // name of slot which is currently hovered
       let hoveredEquipmentSlotName: string | null = null;
 
-      this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', () => {
-
+      this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
+ 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
          // set currently seleted market slot
@@ -490,13 +492,17 @@ export class Blacksmith extends View {
          // find current item, in order to add him to equipment,
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
          selectedItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === element.dataset.itemId)];
+
+         
+      }))
+      this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e)=> {
+         e.preventDefault();
       }))
 
-
-      this.dom.marketSlots.forEach(el => el.addEventListener('dragend', () => {
+      this.dom.marketSlots.forEach(el => el.addEventListener('dragend', (e) => {
+         e.preventDefault();
          // remove item shrink
          el.classList.remove('dragging')
-
       }))
 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
@@ -611,14 +617,6 @@ export class Blacksmith extends View {
          }
 
       }))
-
-
-
-
-
-
-
-
 
       this.dom.backpack.addEventListener('mouseover', () => {
 
@@ -746,7 +744,8 @@ export class Blacksmith extends View {
          goldSubstract: document.querySelector('#blacksmith_gold_substract'),
          backpack: document.querySelector('#blacksmith_backpack_slots'),
          body: document.querySelector(`body`),
-         error: document.querySelector('#blacksmith__error'),
+         error: document.querySelector('#blacksmith__error'),  
+         equipment: document.querySelector('#equipment_slots'),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
             sellBtn: document.querySelector('#blacksmith_equipment__item_label .profile__equipmentItemSellWrapper'),
