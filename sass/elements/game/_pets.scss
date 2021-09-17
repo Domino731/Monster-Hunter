@@ -14,7 +14,7 @@
         justify-content: center;
         width: auto;
         margin: 0 auto;
-       
+         position: relative;
     }
     &__userGold{
         display: flex;
@@ -38,6 +38,16 @@
        height: auto;
        object-fit: cover;
     }
+    &__goldSubtract{
+       position: absolute;
+       color: $color-error;
+       bottom: 0;
+       font-size: 1.313rem;
+       font-weight: bold;
+       color: $color-red;
+       -webkit-text-stroke: 0.063rem $color-gray-dark;
+       animation: 1.5s an__pets_goldSubtract forwards;
+    }
     &__item {
         position: relative;
         z-index: 3;
@@ -51,6 +61,9 @@
             background: rgba(255, 255, 255, 0.7);
             width: 21%;
         }
+    }
+    &__current{
+        border: 8px solid $color-gold;
     }
 
     &__img {
@@ -104,6 +117,15 @@
             color: $color-gold;
             -webkit-text-stroke: 0.063rem $color-gray-dark;
         }
+      
+        &-notAfford {
+            
+          strong{
+              text-shadow: 0.188rem 0.188rem $color-error;
+          }
+        }
+
+
     }
     &__benefits {
         display: flex;
@@ -157,5 +179,11 @@
         color: #51ab97;
         font-weight: bold;
         margin-top: 10px;
+    }
+}
+
+@keyframes an__pets_goldSubtract {
+    100%{
+        transform: translateY(2.5rem);
     }
 }

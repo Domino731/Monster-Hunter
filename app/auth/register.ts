@@ -80,7 +80,8 @@ export class Register extends AuthForm {
                             start:  null,
                             end: null,
                             payout:  null
-                        }
+                        },
+                        pet: null
             });
 
 

@@ -90,13 +90,16 @@ export interface UserData {
         end: Date | null
         payout: number | null
     }
+    pet: null | PetData
 }
 
 
-export interface PetsData {
+export interface PetData {
     name: string,
     imgSrc: string,
+    imgSmallSrc: string,
     initialCost: number,
+
     properties: {
         travelTime: number | null,
         defense: number | null,
@@ -104,6 +107,8 @@ export interface PetsData {
         strenght: number | null,
         luck: number | null
     }
+    id: string,
+    rentEnd?: Date
 }
 export interface AvailableMarketPicks {
     picks: number,
