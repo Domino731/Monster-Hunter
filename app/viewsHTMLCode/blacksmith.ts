@@ -79,7 +79,7 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
 
 
    <div>
-   <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot6' id='blacksmith_backpack_item_label'>
+   <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot disabled' id='blacksmith_backpack_item_label'>
 
    <div id='blacksmith_backpack_label_wrapper'> 
    </div> 

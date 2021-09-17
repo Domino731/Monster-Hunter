@@ -20,6 +20,9 @@ export class Guard extends View {
     summaryBtn: HTMLElement | null
     guardTimeLeft: HTMLElement | null
     countdownProgressBar: HTMLElement | null
+    summary: HTMLElement | null
+    countdownWrapper: HTMLElement | null
+    summaryPayout: HTMLElement | null
   }
   constructor() {
     super()
@@ -36,8 +39,11 @@ export class Guard extends View {
       cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
       summaryBtn: document.querySelector('.guard__summaryBtn'),
       guardTimeLeft: document.querySelector('.guard__countdownTime'),
-      countdownProgressBar: document.querySelector('.guard__countdownBar')
-
+      countdownProgressBar: document.querySelector('.guard__countdownBar'),
+      summary: document.querySelector('.guard__summary'),
+      summaryPayout: document.querySelector('.guard__summaryPayout')
+      ,
+      countdownWrapper: document.querySelector('#guard_countdown_elements')
     }
   }
 
@@ -120,6 +126,7 @@ export class Guard extends View {
     const target_date = new Date().getTime() + ((minutes * 60) * 1000);
 
     this.countdownInterval = setInterval(() => {
+
       let hours, minutes, seconds; // variables for time units
 
       // find the amount of "seconds" between now and target
@@ -127,7 +134,7 @@ export class Guard extends View {
       let seconds_left: any = (target_date - current_date) / 1000;
 
       if (seconds_left >= 0) {
-
+        this.dom.countdownWrapper.classList.remove('disabled')
         seconds_left = seconds_left % 86400;
 
         hours = parseInt((seconds_left / 3600).toString());
@@ -140,22 +147,52 @@ export class Guard extends View {
         this.dom.guardTimeLeft.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s`;
 
         // set progress bar
-        const start : number = this.userData.guard.start.getTime(); // Jul 02 2012
-        const end : number = this.userData.guard.end.getTime(); // Sep 02 2012
-        const today : number  = new Date().getTime();
+        const start: number = this.userData.guard.start.getTime(); // Jul 02 2012
+        const end: number = this.userData.guard.end.getTime(); // Sep 02 2012
+        const today: number = new Date().getTime();
 
         const total = end - start;
         const progress = today - start;
 
-        const result : string = Math.round(progress / total * 100) + "%";
+        const result: string = Math.round(progress / total * 100) + "%";
         this.dom.countdownProgressBar.style.width = result
 
+
+        this.dom.summary.classList.add('guard__summary disabled')
+      }
+      else {
+        this.dom.summaryPayout.innerText = `${this.userData.guard.payout}`
+        // when countdown ends show summary and hide countdown elements
+        this.dom.summary.classList.remove('disabled');
+        this.dom.countdownWrapper.classList.add('disabled')
+        // clear interval
+        clearInterval(this.countdownInterval)
       }
 
 
     }, 1000)
   }
 
+  // get gold for guard, and update user's data in firestore, also redirect user to guard menu
+  getGuardPayout() {
+    this.dom.summaryBtn.addEventListener('click', () => {
+      if (this.userData.guard.payout !== null) {
+        // set the gold amount
+        this.userData.gold += this.userData.guard.payout;
+        // clear guard
+        this.userData.guard = {
+          end: null,
+          start: null,
+          current: null,
+          payout: null
+        };
+        // clear user status
+        this.userData.status = 'free';
+        // update user's data in firestore
+        updateUserData(this.userData);
+      }
+    })
+  }
 
 
   // cancel actual guard and clear guard status in user's data in firestore
@@ -205,7 +242,10 @@ export class Guard extends View {
       cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
       summaryBtn: document.querySelector('.guard__summaryBtn'),
       guardTimeLeft: document.querySelector('.guard__countdownTime'),
-      countdownProgressBar: document.querySelector('.guard__countdownBar')
+      countdownProgressBar: document.querySelector('.guard__countdownBar'),
+      summary: document.querySelector('.guard__summary'),
+      countdownWrapper: document.querySelector('#guard_countdown_elements'),
+      summaryPayout: document.querySelector('.guard__summaryPayout')
     }
   }
 
@@ -215,6 +255,7 @@ export class Guard extends View {
     this.guardSliderEvent();
     this.eventForGuardAcceptBtn();
     this.cancelGuardEvent();
+    this.getGuardPayout();
   }
 }
 

@@ -44,15 +44,16 @@ export const getGuardHTMLCode = () : string => {
 
 
    <setion class='guard-city'> 
-       <div class='guard__summaryWrapper'> 
+       <div class='guard__summaryWrapper disabled'> 
            <div class='guard__summary'> 
               <img class='guard__summaryIcon' src='./images/gold_bag_big.png' alt='gold bag'/>
               <h2 class='guard__summaryTitle'>Your payout</h2>
-              <strong class='guard__summaryPayout'>1000</strong>
+              <strong class='guard__summaryPayout'></strong>
               <button class='guard__summaryBtn'>TAKE</button>
            </div>
        </div>
 
+       <div id='guard_countdown_elements' class='disabled'>
        <div class='guard__countdownWrapper'>
           <div class='guard__countdownBar'>
              
@@ -60,8 +61,10 @@ export const getGuardHTMLCode = () : string => {
           <div class='guard__countdownTime'></div>
        </div>
 
-
        <button class='guard__cancelBtn'>Cancel</button>
+       </div>
+
+       
    </setion>
  </div>
 
