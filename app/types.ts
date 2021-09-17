@@ -93,7 +93,18 @@ export interface UserData {
 }
 
 
-
+export interface PetsData {
+    name: string,
+    imgSrc: string,
+    initialCost: number,
+    properties: {
+        travelTime: number | null,
+        defense: number | null,
+        physicalEndurance: number | null,
+        strenght: number | null,
+        luck: number | null
+    }
+}
 export interface AvailableMarketPicks {
     picks: number,
     index: number

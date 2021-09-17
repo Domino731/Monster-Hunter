@@ -113,7 +113,7 @@ export class Guard extends View {
   }
 
   guardCountdown() {
-
+    this.dom.summary.classList.add('disabled')
     const guardStart: any = new Date();
     const guardEnd: any = this.userData.guard.end;
 
@@ -156,15 +156,14 @@ export class Guard extends View {
 
         const result: string = Math.round(progress / total * 100) + "%";
         this.dom.countdownProgressBar.style.width = result
-
-
-        this.dom.summary.classList.add('guard__summary disabled')
       }
       else {
         this.dom.summaryPayout.innerText = `${this.userData.guard.payout}`
         // when countdown ends show summary and hide countdown elements
         this.dom.summary.classList.remove('disabled');
         this.dom.countdownWrapper.classList.add('disabled')
+        // reset coundown time
+        this.dom.guardTimeLeft.innerText = ``;
         // clear interval
         clearInterval(this.countdownInterval)
       }

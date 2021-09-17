@@ -1,72 +1,39 @@
-export class Pets {
+import { getPetsHTMLCode } from '../viewsHTMLCode/pets';
+import { View } from './view';
+export class Pets  extends View {
 
-    private root: HTMLElement
+ 
+    private dom: {
+       catCost: HTMLElement,
+       scorpionCost: HTMLElement
+       cheetahCost: HTMLElement
+       dragonCost: HTMLElement
+    }
     constructor() {
-        this.root = document.getElementById("game__view")
-        this.init();
+       super()
+       this.dom = {
+           catCost: document.querySelector('#pet_cat_cost'),
+           scorpionCost: document.querySelector('#pet_scorpion_cost'),
+           cheetahCost: document.querySelector('#pet_cheetah_cost'),
+           dragonCost: document.querySelector('#pet_dragon_cost')
+       }
     }
 
     async render() {
-        this.root.innerHTML = `<section class='game__section pets'>
-           <div class='pets__item'>
-             <img class='pets__img' src='./images/pet_cat.png' alt='cat'/>
-             <h2 class='pets__name pets__name-cat'>Cat</h2>
-             <div class='pets__cost'>
-               <img  src='./images/coin.png' alt='coin'/>
-               <strong>50</strong>
-             </div>
-             <ul class='pets__benefits'>
-                <li class='pets__benefitsItem'>-10% of travel time </li>
-             </ul>
-             <div class='pets__buy'><button class='pets__buy-afford'>Prolong by 7 days</button></div>
-           </div>
-           <div class='pets__item'>
-             <img class='pets__img' src='./images/pet_scorpion.png' alt='scorpion'/>
-             <h2 class='pets__name pets__name-scorpion'>Scorpio</h2>
-             <div class='pets__cost'>
-               <img  src='./images/coin.png' alt='coin'/>
-               <strong>200</strong>
-             </div>
-             <ul class='pets__benefits'>
-                <li class='pets__benefitsItem'>-25% of travel time </li>
-                <li class='pets__benefitsItem'>+5% to defence </li>
-             </ul>
-             <div class='pets__buy'><button>Rent for 7 days</button></div>
-           </div>
-           <div class='pets__item'>
-             <img class='pets__img' src='./images/pet_cheetah.png' alt='cheetah'/>
-             <h2 class='pets__name pets__name-cheetah'>Cheetah</h2>
-             <div class='pets__cost'>
-               <img  src='./images/coin.png' alt='coin'/>
-               <strong>400</strong>
-             </div>
-             <ul class='pets__benefits'>
-               <li class='pets__benefitsItem'>-50% of travel time </li>
-               <li class='pets__benefitsItem'>+10% to defence </li>
-               <li class='pets__benefitsItem'>+10% to physical endurance </li>
-             </ul>
-             <div class='pets__buy'><button>Rent for 7 days</button></div>
-           </div>
-           <div class='pets__item'>
-             <img class='pets__img' src='./images/pet_dragon.png' alt='dragon'/>
-             <h2 class='pets__name pets__name-dragon'>Dragon</h2>
-             <div class='pets__cost'>
-               <img  src='./images/coin.png' alt='coin'/>
-               <strong>1000</strong>
-             </div>
-             <ul class='pets__benefits'>
-               <li class='pets__benefitsItem'>-50% of travel time </li>
-               <li class='pets__benefitsItem'>+10% to defence </li>
-               <li class='pets__benefitsItem'>+10% to physical endurance </li>
-               <li class='pets__benefitsItem'>+10% to Strength </li>
-             </ul>
-            <div class='pets__buy'><button>Rent for 7 days</button></div>
-           </div>
-        </section>`;
+        this.root.innerHTML = getPetsHTMLCode(this.userData);;
+    }
+ 
+
+    setPetsCost(){
+   
+    }
+    onDataChange(){}
+    getDOMElements(){
+       
     }
 
-    init() {
-       this.render();
+    initScripts(){
+        this.setPetsCost();
     }
 }
 

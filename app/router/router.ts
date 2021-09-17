@@ -98,7 +98,8 @@ export const initRouter = () => {
         };
     });
 
-    const x = new Guard()
+    // for development
+    const x = new Pets()
     window.addEventListener("popstate", router);
 };
 

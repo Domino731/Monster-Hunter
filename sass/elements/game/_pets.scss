@@ -1,18 +1,53 @@
 .pets {
     background-image: url("/images/pets_background.jpg");
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    
+    height: 100%;
+    background-size: 100% 100%;
+    &__wrapper {
+        margin-top: 45px;
+        display: flex;
+        justify-content: space-evenly;
+     
+    }
+    &__userGoldWrapper {
+        display: flex;
+        justify-content: center;
+        width: auto;
+        margin: 0 auto;
+       
+    }
+    &__userGold{
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        padding: 0.688rem;
+    }
+    &__userGoldAmount{
+        
+        margin-left: 0.813rem;
+        font-weight: bold;
+        letter-spacing: 0.063rem;
+        font-size: 2.375rem;
+        color: $color-gold;
+        -webkit-text-stroke: 0.063rem $color-gray-dark;
+    }
+    &__userGoldIcon{
+       width: 2.438rem;
+       height: auto;
+       object-fit: cover;
+    }
     &__item {
         position: relative;
         z-index: 3;
         width: 20%;
-        height: 570px;
+        height: 587px;
         padding: 14px;
         background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         transition: 0.3s;
-        &:hover{
+        &:hover {
             background: rgba(255, 255, 255, 0.7);
             width: 21%;
         }
@@ -30,6 +65,7 @@
         border-radius: 8px;
         font-size: 2.375rem;
         margin-top: 10px;
+        text-transform: uppercase;
         &-cat {
             background: #f7c4db;
             color: #c56cb7;
@@ -91,12 +127,12 @@
         display: flex;
         justify-content: center;
         &-afford {
-                background: $color-green !important;
-                color: $color-white !important;
+            background: $color-green !important;
+            color: $color-white !important;
         }
         &-notAfford {
-                background: $color-error !important;
-                color: $color-white !important;
+            background: $color-error !important;
+            color: $color-white !important;
         }
         button {
             display: block;
