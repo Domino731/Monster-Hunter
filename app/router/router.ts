@@ -99,7 +99,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const x = new Pets()
+    const x = new Profile()
     window.addEventListener("popstate", router);
 };
 

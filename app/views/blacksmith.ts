@@ -744,7 +744,6 @@ export class Blacksmith extends View {
       updateUserData(this.userData);
    }
 
-   
    onDataChange() {
       this.setShop();
       this.setGoldAmount();
