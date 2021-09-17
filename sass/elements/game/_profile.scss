@@ -345,7 +345,6 @@
     &__generalItem {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         width: 151px;
     }
@@ -364,6 +363,11 @@
             width: 90%;
             height: auto;
             object-fit: cover;
+        }
+        &-item{
+            img{
+                width: 67%;
+            }
         }
     }
     &__generalText {

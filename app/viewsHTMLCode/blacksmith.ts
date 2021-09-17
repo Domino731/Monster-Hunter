@@ -3,6 +3,7 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
   return `<section class='blacksmith transparent'>
   <div class='blacksmith__item'>
    <div class='game__errorWrapper disabled' id='blacksmith__error'>Your backpack is full</div>
+   
        <div class='profile__equipment' id='equipment_slots'>
 
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 

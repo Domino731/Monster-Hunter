@@ -81,7 +81,11 @@ export class Register extends AuthForm {
                             end: null,
                             payout:  null
                         },
-                        pet: null
+                        pet: null,
+                        potions: {
+                            first:  null,
+                            second:  null
+                        }
             });
 
 

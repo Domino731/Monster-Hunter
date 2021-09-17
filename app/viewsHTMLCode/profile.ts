@@ -56,23 +56,23 @@ export const getProfileHTMLCode = () : string => {
 
 
         <div class='profile__general'>
-            <div class='profile__generalItem'>
+            <div class='profile__generalItem' id='profile_general_gold'>
                 <div class='profile__generalImg'> <img src="/images/profile_coins.png" alt="Your coins" /></div>
-                <strong class='profile__generalText'> 123123123123123</strong>
+                <strong class='profile__generalText'></strong>
             </div>
-            <div class='profile__generalItem'>
+            <div class='profile__generalItem' id='profile_general_pet'>
                 <div class='profile__generalImg'> <img src="/images/profile_pet_slot.png" alt="Pet slot" /></div>
-                <strong class='profile__generalText'> 123123123123123</strong>
+                <strong class='profile__generalText'></strong>
             </div>
-            <div class='profile__generalItem'>
+            <div class='profile__generalItem' id='profile_general_potion_first'>
                 <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #1" />
                 </div>
-                <strong class='profile__generalText'> 123123123123123</strong>
+                <strong class='profile__generalText'></strong>
             </div>
-            <div class='profile__generalItem'>
+            <div class='profile__generalItem' id='profile_general_potion_second'>
                 <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #2" />
                 </div>
-                <strong class='profile__generalText'> 123123123123123</strong>
+                <strong class='profile__generalText'></strong>
             </div>
         </div>
 

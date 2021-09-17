@@ -91,6 +91,16 @@ export interface UserData {
         payout: number | null
     }
     pet: null | PetData
+    potions: {
+        first: {
+            id: string
+            end: Date
+        } | null
+        second: {
+            id: string
+            end: Date
+        } | null
+    }
 }
 
 
