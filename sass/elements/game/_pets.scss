@@ -181,6 +181,11 @@
             background: $color-gold;
             color: $color-gray-dark;
             font-weight: 700;
+            transition: 0.2s;
+            &:hover{
+                cursor: pointer;
+                letter-spacing: 0.125rem;
+            }
         }
     }
 

@@ -48,9 +48,6 @@ export class Pets extends View {
         return element.dataset.petCountdownId === this.userData.pet.id;
       }) as HTMLElement;
 
-      countdownWrapper.classList.remove('disabled');
-      console.log(countdownWrapper)
-
       const start: any = new Date();
       const rentEnd: any = this.userData.pet.rentEnd;
       // milliseconds between start and end of guard
@@ -79,16 +76,16 @@ export class Pets extends View {
           // differences between current and end rent date
           const diffDays = Math.ceil(Math.abs(rentEnd - start) / (1000 * 60 * 60 * 24));
           // set time
-          if(diffDays !== 0){
-            diffDays % 2 === 0 ?  
-            countdownWrapper.innerText = `${diffDays} Day left`
-            :
-            countdownWrapper.innerText = `${diffDays} Days left`;
+          if (diffDays !== 0) {
+            diffDays % 2 === 0 ?
+              countdownWrapper.innerText = `${diffDays} Day left`
+              :
+              countdownWrapper.innerText = `${diffDays} Days left`;
           }
           else {
-             countdownWrapper.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s left`;
+            countdownWrapper.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s left`;
           }
-         
+
         }
 
         else {
@@ -97,8 +94,9 @@ export class Pets extends View {
           clearInterval(this.countdownInterval);
           updateUserData(this.userData)
         }
+        countdownWrapper.classList.remove('disabled');
       }, 1000)
-
+      
 
 
     }
@@ -107,36 +105,57 @@ export class Pets extends View {
 
   setPetRentEvents() {
     this.dom.rentBtns.forEach(el => {
-
+  
       const pet: PetData = petsData[petsData.findIndex(e => e.id === el.dataset.petId)]
       const cost: number = Math.floor(pet.initialCost * this.userData.guardPayout);
-      console.log(el.name, cost)
       el.addEventListener('click', () => {
+  
 
-        if (this.userData.gold >= cost) {
-          // subtract gold
-          this.userData.gold -= cost;
-          // set user pet
-          this.userData.pet = pet
-          this.userData.pet.rentEnd = new Date()
-          this.userData.pet.rentEnd.setHours(this.userData.guard.end.getHours() + (7 * 24));
-          updateUserData(this.userData);
-          // add gold subtract animation
-          this.dom.goldSubtract.innerText = `-${cost}`
-          this.dom.goldSubtract.classList.remove('disabled')
-          // remove this animation after 1.5s
-          setTimeout(() => {
-            this.dom.goldSubtract.innerText = ``
-            this.dom.goldSubtract.classList.add('disabled')
-          }, 1500)
+        const setNewPet = () => {
+            // subtract gold
+            this.userData.gold -= cost;
+            // set user pet
+            this.userData.pet = pet;
+            this.userData.pet.rentEnd = new Date();
+            this.userData.pet.rentEnd.setHours(this.userData.pet.rentEnd.getHours() + (7 * 24));
+            updateUserData(this.userData);
+            // add gold subtract animation
+            this.dom.goldSubtract.innerText = `-${cost}`;
+            this.dom.goldSubtract.classList.remove('disabled');
+            // remove this animation after 1.5s
+            setTimeout(() => {
+              this.dom.goldSubtract.innerText = ``
+              this.dom.goldSubtract.classList.add('disabled');
+            }, 1500);
         }
-
-
-
+        if (this.userData.gold >= cost) {
+          if (this.userData.pet === null) {
+            setNewPet();
+          }
+          else {
+            // check if user already has a pet check if rent time is no exceed over 100 days
+            // differences between current and end rent date
+            const end: number = this.userData.pet.rentEnd.getTime();
+            const start: number = new Date().getTime();
+            const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24));
+            console.log(diffDays)
+            if (diffDays <= 100 && this.userData.pet.id === pet.id) {
+              this.userData.gold -= cost;
+              this.userData.pet.rentEnd.setHours(this.userData.guard.end.getHours() + (7 * 24));
+              updateUserData(this.userData)
+            }
+            else if (diffDays <= 100 && this.userData.pet.id !== pet.id) {
+              setNewPet();
+            }
+            else {
+              window.alert('You have reached maxiumum rent time.')
+            }
+          }
+        };
       }
-
-      )
-    })
+  
+      );
+    });
   }
 
   setStyles() {
@@ -162,9 +181,6 @@ export class Pets extends View {
     })
 
   }
-
-
-
 
   setGoldAmount() {
     this.dom.goldAmount.innerText = `${this.userData.gold}`
