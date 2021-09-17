@@ -65,7 +65,21 @@
     &__current{
         border: 8px solid $color-gold;
     }
-
+    &__countdownWrapper{
+        position: absolute;
+        bottom: -41px;
+        margin: 0 auto;
+        width: 92%;
+        background: $color-gold;
+        text-align: center;
+        padding: 3px 0;
+        font-weight: bold;
+        letter-spacing: 0.063rem;
+        word-spacing: 0.125rem;
+        color: $color-white;
+        font-size: 30px;
+        border-radius: 0 0  20px 20px;
+    }
     &__img {
         width: 100%;
         height: auto;

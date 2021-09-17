@@ -161,7 +161,7 @@ export class Blacksmith extends View {
 
          const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
          const backpackItemIndex: number = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
-         console.log(equipmentItemIndex)
+        
          if (equipmentItemIndex !== -1) {
             // remove item from backpack
             this.userData.backpackItems.splice(backpackItemIndex, 1);

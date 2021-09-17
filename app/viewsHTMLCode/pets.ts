@@ -34,6 +34,7 @@ export const getPetsHTMLCode = (user: UserData): string => {
               ${el.properties.strenght !== null ? `<li class='pets__benefitsItem'>+${el.properties.strenght}% to Strength </li>` : ``} 
               ${el.properties.luck !== null ? `    <li class='pets__benefitsItem'>+${el.properties.luck}% to Luck </li>` : ``}
              </ul>
+             <div class='pets__countdownWrapper disabled' data-pet-countdown-id=${el.id}>12h 13m 12s left </div>
 
             <div class='pets__buy'><button class='
             ${user.gold >= Math.floor(el.initialCost * user.guardPayout) ? 'pets__buy-afford' : ' pets__buy-notAfford'} 
@@ -42,6 +43,7 @@ export const getPetsHTMLCode = (user: UserData): string => {
             Rent for 7 days
             </button></div>
            </div>
+
          `)}
          </div>             
    </section>

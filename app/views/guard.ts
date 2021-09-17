@@ -147,8 +147,8 @@ export class Guard extends View {
         this.dom.guardTimeLeft.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s`;
 
         // set progress bar
-        const start: number = this.userData.guard.start.getTime(); // Jul 02 2012
-        const end: number = this.userData.guard.end.getTime(); // Sep 02 2012
+        const start: number = this.userData.guard.start.getTime();
+        const end: number = this.userData.guard.end.getTime(); 
         const today: number = new Date().getTime();
 
         const total = end - start;
