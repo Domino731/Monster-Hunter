@@ -82,8 +82,8 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
    <div>
    <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot disabled' id='blacksmith_backpack_item_label'>
 
-   <div id='blacksmith_backpack_label_wrapper'> 
-   </div> 
+   <div id='blacksmith_backpack_label_wrapper'></div> 
+   
    
    <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
    <div class='profile__actionWrapper' id='blacksmith_backpack_move_item_btn'>
@@ -95,6 +95,8 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
      <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
      <strong class='profile__equipmentItemSellPrice' id='blacksmith_backpack_sell_item_value'></strong>
    </div>
+
+
   </div>
 
 

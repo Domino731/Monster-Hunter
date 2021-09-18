@@ -1,9 +1,13 @@
+import { ShopItem } from '../types';
+import { weaponsData } from '../properties/shop/weapons';
+const item: ShopItem = weaponsData[0]
 export const getProfileHTMLCode = () : string => {
     return `
     <section class='game__section profile'>
 
     <div class='profile__item'>
-       <div class='game__errorWrapper' id='profile__error'>Your backpack is full</div>
+       <div class='game__errorWrapper disabled' id='profile__error'></div>
+
         <div class='profile__equipment' id='profile_equipment_slots'>
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'>
                 <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
@@ -25,15 +29,6 @@ export const getProfileHTMLCode = () : string => {
             </div>
             <div class='profile__portrait'> </div>
             <div class='profile__info'>
-
-
-
-
-
-
-
-
-
 
 
             <div class='profile__itemSpecs' id='profile_equipment__item_label'>
@@ -94,18 +89,41 @@ export const getProfileHTMLCode = () : string => {
     <div class='profile__item'>
         <div class='profile__backpack' id='profile_backpack_slots'>
             <div class='profile__backpackRow'>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='1'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='2'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='3'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='4'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='5'> </div>
             </div>
+
+
+
+            <div class='profile__backpackLabelWrapper'>
+            
+               <div class='profile__itemSpecs profile__itemSpecs-backpackSlot disabled' id='profile_backpack_item_label'> 
+               
+
+
+                     <div id='profile_backpack_label_wrapper'>
+      
+                     </div> 
+   
+
+                     <div class='profile__actionError' id='profile_backpack_move_item_error'></div>
+                     <div class='profile__actionWrapper' id='profile_backpack_move_item_btn'>
+                       <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='profile_backpack_replace_item_icon'/>
+                       <strong class='profile__actionName'>Equip</strong>
+                    </div>
+               </div>
+
+            </div>
+
             <div class='profile__backpackRow'>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
-                <div class='profile__backpackItem'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='6'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='7'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='8'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='9'> </div>
+                <div class='profile__backpackItem' data-backpack-slot='10'> </div>
             </div>
         </div>
 

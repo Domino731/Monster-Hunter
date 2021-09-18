@@ -257,7 +257,9 @@
         border: 5px solid $color-red;
         border-radius: 8px;
         position: relative;
-        background: rgba(255, 255, 255, 0.5);
+
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(3px);
         padding: 20px;
         box-shadow: 0 0 3px $color-black;
         &::before {
@@ -303,13 +305,14 @@
     }
 
     &__backpack {
+        position: relative;
         height: 320px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
-       
+
         .profile__itemSpecs {
             position: absolute;
             z-index: 10;
@@ -340,7 +343,11 @@
         height: 70%;
         object-fit: cover;
     }
-
+    &__backpackLabelWrapper {
+        position: absolute;
+        width: 100%;
+        height: 20px;
+    }
     &__general {
         display: flex;
         justify-content: space-between;
@@ -367,8 +374,8 @@
             height: auto;
             object-fit: cover;
         }
-        &-item{
-            img{
+        &-item {
+            img {
                 width: 67%;
             }
         }
@@ -449,13 +456,16 @@
     border-radius: 10px;
     height: 30%;
     width: 100%;
-    background: $color-gray_dark;
     color: $color-gold;
     font-size: 1.563rem;
     padding: 25px 0;
     padding-left: 5px;
     border: 3px solid $color-gold;
     box-shadow: 0 0 3px $color-black;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(3px);
+
     table {
         width: 93%;
         height: 100%;
@@ -481,7 +491,8 @@
         margin-right: 0.5rem;
     }
 }
-#blacksmith_backpack_item_label, #blacksmith_equipment__item_label {
+#blacksmith_backpack_item_label,
+#blacksmith_equipment__item_label {
     z-index: 10;
 }
 @keyframes an__notAfford {
@@ -522,7 +533,7 @@
     }
 }
 
-.profile__itemSpecs{
+.profile__itemSpecs {
     &-backpackSlot1 {
         transform: translate(-1px, -100%);
         &::after {
@@ -531,7 +542,7 @@
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
     }
-    &-backpackSlot2{
+    &-backpackSlot2 {
         transform: translate(151px, -100%);
         &::after {
             left: 28px;
@@ -539,100 +550,177 @@
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
     }
-    &-backpackSlot3{
+    &-backpackSlot3 {
         transform: translate(215px, -100%);
         &::after {
             left: 154px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
-    &-backpackSlot4{
+    &-backpackSlot4 {
         transform: translate(260px, -100%);
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
-    &-backpackSlot5{
+    &-backpackSlot5 {
         transform: translate(414px, -100%);
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
 
     &-backpackSlot6 {
         transform: translate(-1px, -50%);
-   
+
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
     }
-    &-backpackSlot7{
+    &-backpackSlot7 {
         transform: translate(151px, -50%);
-     
+
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
     }
-    &-backpackSlot8{
+    &-backpackSlot8 {
         transform: translate(215px, -50%);
-       
+
         &::after {
             left: 154px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
-    &-backpackSlot9{
+    &-backpackSlot9 {
         transform: translate(260px, -50%);
-   
+
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
-    &-backpackSlot10{
+    &-backpackSlot10 {
         transform: translate(414px, -50%);
-      
+
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
-        } 
+        }
     }
-    &-backpackSlot6,&-backpackSlot7, &-backpackSlot8, &-backpackSlot9, &-backpackSlot10{
+    &-backpackSlot6,
+    &-backpackSlot7,
+    &-backpackSlot8,
+    &-backpackSlot9,
+    &-backpackSlot10 {
         height: 328px;
         overflow: auto;
         margin-bottom: 0;
         padding-bottom: 0;
         &::-webkit-scrollbar {
-         width: 0; 
+            width: 0;
         }
-        &::-webkit-scrollbar{
+        &::-webkit-scrollbar {
             width: 0.188rem;
             background: $color-blue;
         }
     }
 }
 
-
-
-
-
-
-
-
-
-
+.profile__backpackLabel {
+    &-1 {
+        transform: translate(-1px, 3px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-2 {
+        transform: translate(151px, 3px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-3 {
+        transform: translate(59%, 3px);
+        &::after {
+            left: calc(50% - 15px);
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-4 {
+        transform: translate(262px, 3px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-5 {
+        transform: translate(411px, 3px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-6 {
+        transform: translate(-1px, 154px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-7 {
+        transform: translate(151px, 154px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-8 {
+        transform: translate(59%, 154px);
+        &::after {
+            left: calc(50% - 15px);
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-9 {
+        transform: translate(262px, 154px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+    &-10 {
+        transform: translate(411px, 154px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    }
+}
 
 @keyframes an__equipmentIcon {
     0% {

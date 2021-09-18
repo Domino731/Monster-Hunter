@@ -98,6 +98,7 @@ export class Blacksmith extends View {
       let currentItem: ShopItem | null = null;
       let equipmentSlot: HTMLElement | null = null;
       let toogleLabel;
+
       this.dom.backpackSlots.forEach(el => {
 
          el.addEventListener('mouseover', () => {
@@ -145,12 +146,13 @@ export class Blacksmith extends View {
       })
 
 
-      // keep displaying label on focus
+      // keep displaying label on mouse focus
       this.dom.backpackLabel.root.addEventListener('mouseover', () => {
          clearInterval(toogleLabel)
          this.dom.backpackLabel.root.classList.remove('disabled')
       });
-      // remove leave when focus was losed
+      
+      // remove label when focus was losed
       this.dom.backpackLabel.root.addEventListener('mouseleave', () => {
          this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
       });
