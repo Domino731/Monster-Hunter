@@ -3,6 +3,7 @@ export const getProfileHTMLCode = () : string => {
     <section class='game__section profile'>
 
     <div class='profile__item'>
+       <div class='game__errorWrapper' id='profile__error'>Your backpack is full</div>
         <div class='profile__equipment' id='profile_equipment_slots'>
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'>
                 <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
@@ -91,7 +92,7 @@ export const getProfileHTMLCode = () : string => {
     </div>
 
     <div class='profile__item'>
-        <div class='profile__backpack'>
+        <div class='profile__backpack' id='profile_backpack_slots'>
             <div class='profile__backpackRow'>
                 <div class='profile__backpackItem'> </div>
                 <div class='profile__backpackItem'> </div>

@@ -5,6 +5,7 @@ import { updateUserData } from '../firebase/operations';
 import { potionsData } from '../properties/shop/potions';
 import { ShopItem } from '../types';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
+import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -21,6 +22,8 @@ export class Profile extends View {
             potionTimeSecond: HTMLElement | null
         }
         equipmentSlots: NodeListOf<Element>
+        backpackSlots: NodeListOf<Element>
+        error: HTMLElement
         equipmentLabel: {
             root: HTMLElement,
             labelWrapper: HTMLElement
@@ -52,7 +55,9 @@ export class Profile extends View {
                 potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText'),
 
             },
-            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]')
+            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]'),
+            backpackSlots: document.querySelectorAll('#profile_backpack_slots .profile__backpackItem'),
+            error: document.querySelector('#profile__error'),
         }
 
 
@@ -108,7 +113,36 @@ export class Profile extends View {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
         });
 
-        
+        // moving item into user's backpack
+        this.dom.equipmentLabel.moveItem.addEventListener('click', () => {
+
+            // check if user have free slot in backpack (backpack have 10 slots)
+            if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+                // find the specific  equipment slot which is needed to inject new html code later -> set default icon
+                const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
+                // remove item graphic and set default icon
+                equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
+
+                // remove this item from user equipment
+                const itemIndex = this.userData.equipmentItems.findIndex(el => el.id === currentItem.id);
+                if (itemIndex > -1) {
+                    this.userData.equipmentItems.splice(itemIndex, 1);
+                }
+
+                // add current item to user's backpack
+                this.userData.backpackItems.push(currentItem);
+                updateUserData(this.userData);
+
+                // hide label
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+            }
+
+            // notify user about no available in backpack
+            else {
+                this.dom.equipmentLabel.moveItemError.innerText = 'Your backpack is full'
+            }
+        });
+
     }
 
 
@@ -232,8 +266,19 @@ export class Profile extends View {
             equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}' draggable='true'/>`
         })
     }
+    setUserBackpack() {
+        // clear previous 
+        this.dom.backpackSlots.forEach(el => {
+            el.innerHTML = ''
+        })
 
-    onDataChange() { }
+        this.userData.backpackItems.forEach((el, num) => {
+            this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
+        })
+    }
+    onDataChange() {
+        this.setUserBackpack();
+    }
     render() {
         this.root.innerHTML = getProfileHTMLCode();
     }
@@ -254,12 +299,15 @@ export class Profile extends View {
                 moveItem: document.querySelector('#profile_equipment_move_item_btn'),
                 moveItemError: document.querySelector('#profile_equipment_move_item_error')
             },
-            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]')
+            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]'),
+            backpackSlots: document.querySelectorAll('#profile_backpack_slots .profile__backpackItem'),
+            error: document.querySelector('#profile__error'),
         }
     }
     initScripts() {
         this.setUserEquipment();
         this.setGeneral();
+        this.setUserBackpack();
         this.labelForEquipmentEvent();
     }
 }
