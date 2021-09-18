@@ -7,6 +7,7 @@ import { ShopItem } from '../types';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
+import { portraitsData } from '../properties/portraits/portraits';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -25,6 +26,7 @@ export class Profile extends View {
         equipmentSlots: NodeListOf<Element>
         backpackSlots: NodeListOf<Element>
         error: HTMLElement
+        description: HTMLTextAreaElement
         equipmentLabel: {
             root: HTMLElement,
             labelWrapper: HTMLElement
@@ -38,6 +40,11 @@ export class Profile extends View {
             moveItemError: HTMLElement
             replaceIcon: HTMLImageElement
         }
+        portrait:{
+            img: HTMLImageElement
+            prevBtn: HTMLElement
+            nextBtn: HTMLElement
+        }
 
     }
 
@@ -47,6 +54,11 @@ export class Profile extends View {
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            portrait: {
+                img: document.querySelector('.profile__portraitImg'),
+                prevBtn: document.querySelector('.profile__portraitBtn-left'),
+                nextBtn: document.querySelector('.profile__portraitBtn-right'),
+            },
             equipmentLabel: {
                 root: document.querySelector('#profile_equipment__item_label'),
                 labelWrapper: document.querySelector('#profile_equipment_label_wrapper'),
@@ -73,6 +85,7 @@ export class Profile extends View {
             equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]'),
             backpackSlots: document.querySelectorAll('#profile_backpack_slots .profile__backpackItem'),
             error: document.querySelector('#profile__error'),
+            description: document.querySelector('.profile__description textarea')
         }
 
 
@@ -84,7 +97,46 @@ export class Profile extends View {
 
 
 
+    changePortraitEvents(){
 
+        let portraitIndex: number = portraitsData.indexOf(this.userData.portrait)
+        // switch to next portrait
+        this.dom.portrait.nextBtn.addEventListener('click', ()=> {
+            
+            if(portraitIndex < portraitsData.length - 1){
+                portraitIndex++;
+                this.userData.portrait = portraitsData[portraitIndex]
+            }
+            else {
+                portraitIndex = 0
+                this.userData.portrait = portraitsData[portraitIndex]
+            }
+            updateUserData(this.userData);
+        });
+
+        // switch to previous portrait
+        this.dom.portrait.prevBtn.addEventListener('click', ()=> {         
+            if(portraitIndex === 0){        
+                portraitIndex = portraitsData.length - 1
+                this.userData.portrait = portraitsData[portraitIndex]
+            }
+            else {
+                portraitIndex--;
+                this.userData.portrait = portraitsData[portraitIndex]
+            }
+            updateUserData(this.userData);
+        });
+    }
+    // update user description
+    changeUserDescription(){
+        this.dom.description.addEventListener('focusout', ()=> {
+            this.userData.description = this.dom.description.value;
+            updateUserData(this.userData)
+        })
+    }
+    setUserDescription(){
+        this.dom.description.value = this.userData.description;
+    }
     labelForBackpackEvent() {
         let currentItem: ShopItem | null = null;
         let equipmentSlot: HTMLElement | null = null;
@@ -186,6 +238,8 @@ export class Profile extends View {
             const element: HTMLElement = el.firstElementChild as HTMLElement;
             // remove error
             this.dom.equipmentLabel.moveItemError.innerText = '';
+            // hide backpack label
+            this.dom.backpackLabel.root.classList.add('disabled');
             // reset equipement label styles
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
 
@@ -377,14 +431,25 @@ export class Profile extends View {
             this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
         })
     }
+    setUserPortrait(){
+         this.dom.portrait.img.src = this.userData.portrait
+    }
     onDataChange() {
         this.setUserBackpack();
+        this.setUserPortrait();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode();
     }
+
+
     getDOMElements() {
         this.dom = {
+            portrait: {
+                img: document.querySelector('.profile__portraitImg'),
+                prevBtn: document.querySelector('.profile__portraitBtn-left'),
+                nextBtn: document.querySelector('.profile__portraitBtn-right'),
+            },
             general: {
                 goldAmount: document.querySelector('#profile_general_gold .profile__generalText'),
                 petImg: document.querySelector('#profile_general_pet .profile__generalImg'),
@@ -410,13 +475,18 @@ export class Profile extends View {
             equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]'),
             backpackSlots: document.querySelectorAll('#profile_backpack_slots .profile__backpackItem'),
             error: document.querySelector('#profile__error'),
+            description: document.querySelector('.profile__description textarea')
         }
     }
     initScripts() {
+        this.setUserPortrait();
         this.labelForBackpackEvent();
         this.setUserEquipment();
         this.setGeneral();
         this.setUserBackpack();
+        this.setUserDescription();
+        this.changeUserDescription();
         this.labelForEquipmentEvent();
+        this.changePortraitEvents();
     }
 }

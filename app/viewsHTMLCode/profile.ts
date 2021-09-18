@@ -1,3 +1,4 @@
+import { portraitsData } from './../properties/portraits/portraits';
 import { ShopItem } from '../types';
 import { weaponsData } from '../properties/shop/weapons';
 const item: ShopItem = weaponsData[0]
@@ -27,11 +28,30 @@ export const getProfileHTMLCode = () : string => {
             <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'>
                 <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
             </div>
-            <div class='profile__portrait'> </div>
+
+
+
+
+         
+            <div class='profile__portrait'> 
+            <img class='profile__portraitImg' />
+            <div class='profile__portraitActionBar'> 
+               <div class='profile__portraitBtn profile__portraitBtn-left'></div>
+                  <img src='./images/change_portrait_icon.png' class='profile__portraitActionIcon'/>
+               <div class='profile__portraitBtn profile__portraitBtn-right'></div>
+            </div>
+            
+            </div>
+
+
+
+
+
+
             <div class='profile__info'>
 
 
-            <div class='profile__itemSpecs' id='profile_equipment__item_label'>
+            <div class='profile__itemSpecs disabled' id='profile_equipment__item_label'>
 
                <div id='profile_equipment_label_wrapper'> </div> 
                 
@@ -42,34 +62,6 @@ export const getProfileHTMLCode = () : string => {
                </div>
                     
              </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 <div class='profile__level'> </div>
                 <strong class='profile__nickname'>nickname</strong>

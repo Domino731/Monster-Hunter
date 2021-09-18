@@ -101,6 +101,8 @@ export interface UserData {
             end: Date
         } | null
     }
+    description: string
+    portrait: string
 }
 
 

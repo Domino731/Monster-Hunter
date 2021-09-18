@@ -3,6 +3,7 @@ import { includeNumber, isUpper } from '../functions/other';
 import validator from 'validator';
 import { auth, db } from "../firebase";
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
+import { portraitsData } from '../properties/portraits/portraits';
 
 export class Register extends AuthForm {
 
@@ -85,7 +86,9 @@ export class Register extends AuthForm {
                         potions: {
                             first:  null,
                             second:  null
-                        }
+                        },
+                        description: '',
+                        portrait: portraitsData[0]
             });
 
 
