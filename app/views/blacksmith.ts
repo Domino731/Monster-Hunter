@@ -205,10 +205,13 @@ export class Blacksmith extends View {
    labelForEquipmentEvent() {
 
       let toogleLabel;
-
-      //  add label
       let currentItem: ShopItem | null = null;
+
+      // show label on mouse hover event 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
+
+         // prevent of label hiding 
+         clearInterval(toogleLabel)
 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
          // hide backpack label
@@ -217,16 +220,16 @@ export class Blacksmith extends View {
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
          
          // remove error
-         this.dom.equipmentLabel.moveItemError.innerText = ''
+         this.dom.equipmentLabel.moveItemError.innerText = '';
+
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-         clearInterval(toogleLabel)
+         
 
          if (element.dataset.currentItemId === undefined) {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
          }
          if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
-
             this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
             this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
             this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
@@ -235,24 +238,23 @@ export class Blacksmith extends View {
          }
       }))
 
-      // remove label with delay -> after 1s
+      // on mouse leave remove label with delay -> after 1s
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
-
          toogleLabel = setInterval(() => {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
          }, 1000);
-      }))
+      }));
 
       // keep displaying label when user  focus is on label
       this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
          clearInterval(toogleLabel)
-      })
+      });
 
-      // else hide label
+      // hide label when focus loss
       this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      })
-      //<img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon"/>
+      });
+
       // event on item sell btn
       this.dom.equipmentLabel.sellBtn.addEventListener('click', () => {
 
@@ -277,7 +279,7 @@ export class Blacksmith extends View {
 
          // remove label
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      })
+      });
 
 
       // moving item into user's backpack
@@ -309,6 +311,8 @@ export class Blacksmith extends View {
             this.dom.equipmentLabel.moveItemError.innerText = 'Your backpack is full'
          }
       });
+
+
    }
 
    getShopItems(): ShopItem[] {

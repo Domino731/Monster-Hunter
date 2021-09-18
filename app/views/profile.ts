@@ -4,6 +4,7 @@ import { View } from './view';
 import { updateUserData } from '../firebase/operations';
 import { potionsData } from '../properties/shop/potions';
 import { ShopItem } from '../types';
+import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -19,13 +20,28 @@ export class Profile extends View {
             potionImgSecond: HTMLElement | null
             potionTimeSecond: HTMLElement | null
         }
+        equipmentSlots: NodeListOf<Element>
+        equipmentLabel: {
+            root: HTMLElement,
+            labelWrapper: HTMLElement
+            moveItem: HTMLElement
+            moveItemError: HTMLElement
+        }
+
     }
+
     constructor() {
         super()
         this.petRentInterval = null
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            equipmentLabel: {
+                root: document.querySelector('#profile_equipment__item_label'),
+                labelWrapper: document.querySelector('#profile_equipment_label_wrapper'),
+                moveItem: document.querySelector('#profile_equipment_move_item_btn'),
+                moveItemError: document.querySelector('#profile_equipment_move_item_error')
+            },
             general: {
                 goldAmount: document.querySelector('#profile_general_gold .profile__generalText'),
                 petImg: document.querySelector('#profile_general_pet .profile__generalImg'),
@@ -33,14 +49,72 @@ export class Profile extends View {
                 potionImgFirst: document.querySelector('#profile_general_potion_first .profile__generalImg'),
                 potionTimeFirst: document.querySelector('#profile_general_potion_first .profile__generalText'),
                 potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
-                potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText')
-            }
+                potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText'),
+
+            },
+            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]')
         }
+
+
+
+    }
+    labelForEquipmentEvent() {
+
+        let toogleLabel;
+        let currentItem: ShopItem | null = null;
+
+        // show label on mouse hover event 
+        this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
+            // prevent of label hiding 
+            clearInterval(toogleLabel)
+            const element: HTMLElement = el.firstElementChild as HTMLElement;
+            // remove error
+            this.dom.equipmentLabel.moveItemError.innerText = '';
+            // reset equipement label styles
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+
+            //find specific item, in order to create label of this item
+            currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
+
+            // if equipement slot has no item inside then hide label
+            if (element.dataset.currentItemId === undefined) {
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+            }
+            // set the label
+            if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
+                this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+                this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
+                this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+                this.dom.equipmentLabel.root.classList.remove('disabled')
+            }
+
+
+        }))
+
+        // on mouse leave remove label with delay -> after 1s
+        this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
+            toogleLabel = setInterval(() => {
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
+            }, 1000);
+        }));
+
+        // keep displaying label when user  focus is on label
+        this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
+            clearInterval(toogleLabel);
+        });
+
+        // hide label when focus loss
+        this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
+            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        });
+
+        
     }
 
-    render() {
-        this.root.innerHTML = getProfileHTMLCode();
-    }
+
+
+
+
 
 
 
@@ -54,11 +128,11 @@ export class Profile extends View {
         if (this.userData.pet !== null) {
             this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} alt=${this.userData.pet.name}/>`;
             this.dom.general.petImg.classList.add('profile__generalImg-item');
-            this.setCountdown(this.petRentInterval, 
+            this.setCountdown(this.petRentInterval,
                 this.userData.pet.rentEnd,
                 this.dom.general.petRentTime,
                 this.resetPet
-                )
+            )
         }
         else {
             this.dom.general.petRentTime.innerText = 'No pet'
@@ -68,11 +142,11 @@ export class Profile extends View {
             const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.first.id)]
             this.dom.general.potionImgFirst.innerHTML = `<img src=${potion.src} alt=${potion.name}/>`;
             this.dom.general.potionImgFirst.classList.add('profile__generalImg-item');
-            this.setCountdown(this.potionFirstTimeInterval, 
+            this.setCountdown(this.potionFirstTimeInterval,
                 this.userData.potions.first.end,
                 this.dom.general.potionTimeFirst,
                 this.resetFirstPotion
-                )
+            )
         }
         else {
             this.dom.general.potionTimeFirst.innerText = 'No potion'
@@ -83,30 +157,27 @@ export class Profile extends View {
             const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.second.id)]
             this.dom.general.potionImgSecond.innerHTML = `<img src=${potion.src} alt=${potion.name}/>`;
             this.dom.general.potionImgSecond.classList.add('profile__generalImg-item');
-            this.setCountdown(this.potionSecondTimeInterval, 
+            this.setCountdown(this.potionSecondTimeInterval,
                 this.userData.potions.second.end,
                 this.dom.general.potionTimeSecond,
                 this.resetSecondPotion
-                )
+            )
         }
         else {
             this.dom.general.potionTimeSecond.innerText = 'No potion'
         }
 
     }
-
-    resetFirstPotion(){
+    resetFirstPotion() {
         this.userData.potions.first = null
     }
-    resetSecondPotion(){
+    resetSecondPotion() {
         this.userData.potions.second = null
     }
-    resetPet(){
+    resetPet() {
         this.userData.pet = null
     }
-
-
-    setCountdown(interval:  null | ReturnType<typeof setInterval>, end, counterWrapper:HTMLElement, callback: () => void) {
+    setCountdown(interval: null | ReturnType<typeof setInterval>, end, counterWrapper: HTMLElement, callback: () => void) {
         const start: any = new Date();
         // milliseconds between start and end of guard
         const diffMs = (end - start);
@@ -154,8 +225,6 @@ export class Profile extends View {
             }
         }, 1000);
     }
-
-
     setUserEquipment() {
         console.log(this.dom.general)
         this.userData.equipmentItems.forEach(el => {
@@ -165,6 +234,9 @@ export class Profile extends View {
     }
 
     onDataChange() { }
+    render() {
+        this.root.innerHTML = getProfileHTMLCode();
+    }
     getDOMElements() {
         this.dom = {
             general: {
@@ -175,11 +247,19 @@ export class Profile extends View {
                 potionTimeFirst: document.querySelector('#profile_general_potion_first .profile__generalText'),
                 potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
                 potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText')
-            }
+            },
+            equipmentLabel: {
+                root: document.querySelector('#profile_equipment__item_label'),
+                labelWrapper: document.querySelector('#profile_equipment_label_wrapper'),
+                moveItem: document.querySelector('#profile_equipment_move_item_btn'),
+                moveItemError: document.querySelector('#profile_equipment_move_item_error')
+            },
+            equipmentSlots: document.querySelectorAll('#profile_equipment_slots div[data-slot-name]')
         }
     }
     initScripts() {
         this.setUserEquipment();
         this.setGeneral();
+        this.labelForEquipmentEvent();
     }
 }

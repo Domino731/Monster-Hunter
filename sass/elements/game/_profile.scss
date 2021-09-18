@@ -248,6 +248,8 @@
         }
     }
     &__description {
+        position: relative;
+        z-index: -1;
         width: 90%;
         margin: 10px auto;
         height: 30%;

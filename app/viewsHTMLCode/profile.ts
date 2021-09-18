@@ -24,8 +24,62 @@ export const getProfileHTMLCode = () : string => {
             </div>
             <div class='profile__portrait'> </div>
             <div class='profile__info'>
+
+
+
+
+
+
+
+
+
+
+
+            <div class='profile__itemSpecs' id='profile_equipment__item_label'>
+
+               <div id='profile_equipment_label_wrapper'> </div> 
+                
+               <div class='profile__actionError' id='profile_equipment_move_item_error'></div>
+               <div class='profile__actionWrapper' id='profile_equipment_move_item_btn'>
+                 <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
+                 <strong class='profile__actionName'>Move to backpack</strong>
+               </div>
+                    
+             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class='profile__level'> </div>
                 <strong class='profile__nickname'>nickname</strong>
+
+
+
             </div>
         </div>
         <div class='profile__description'>
