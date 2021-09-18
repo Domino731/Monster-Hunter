@@ -1,5 +1,6 @@
+import { getNeededExp } from '../functions/getNeededExp';
 import { UserData } from '../types';
-export const getBlacksmithHTMLCode = (data: UserData) => {
+export const getBlacksmithHTMLCode = (user: UserData) => {
   return `<section class='blacksmith transparent'>
   <div class='blacksmith__item'>
    <div class='game__errorWrapper disabled' id='blacksmith__error'>Your backpack is full</div>
@@ -37,7 +38,11 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
 
 
 
-          <div class='profile__portrait'> </div>
+          <div class='profile__portrait'> 
+          <img class='profile__portraitImg' src='${user.portrait}'/>
+          </div>
+
+
           <div class='profile__info'>
 
 
@@ -63,11 +68,16 @@ export const getBlacksmithHTMLCode = (data: UserData) => {
 
 
 
-             <div class='profile__level'>  </div>
-             <strong class='profile__nickname'>nickname</strong>
+             <div class='profile__level'> 
+                   <div class='profile__levelProgress' style='width: ${Math.floor(user.exp * 100 / getNeededExp(user.level))}%'></div>
+                   ${user.level}
+             </div>
+
+             
+             <strong class='profile__nickname'>${user.nick}</strong>
              <div class='profile__goldBar' id='blacksmith_gold_bar'> 
                 <img class='profile__goldIcon' src='./images/coin.png' alt='coin'/>
-                <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${data.gold}</strong>
+                <strong class='profile__goldAmount' id='blacksmith_gold_amount'>${user.gold}</strong>
              </div>
 
 

@@ -88,7 +88,8 @@ export class Register extends AuthForm {
                             second:  null
                         },
                         description: '',
-                        portrait: portraitsData[0]
+                        portrait: portraitsData[0],
+                        exp: 0
             });
 
 

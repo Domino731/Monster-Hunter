@@ -8,6 +8,7 @@ import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { portraitsData } from '../properties/portraits/portraits';
+import { getNeededExp } from '../functions/getNeededExp';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -45,7 +46,7 @@ export class Profile extends View {
             prevBtn: HTMLElement
             nextBtn: HTMLElement
         }
-
+        level: HTMLElement
     }
 
     constructor() {
@@ -54,6 +55,8 @@ export class Profile extends View {
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            level:document.querySelector('.profile__level'),
+            
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
                 prevBtn: document.querySelector('.profile__portraitBtn-left'),
@@ -431,20 +434,27 @@ export class Profile extends View {
             this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
         })
     }
+    setLevel(){
+        this.dom.level.innerHTML = ` <div class='profile__levelProgress' 
+        style='width: ${Math.floor(this.userData.exp * 100 / getNeededExp(this.userData.level))}%'></div>
+        ${this.userData.level}`
+    }
     setUserPortrait(){
          this.dom.portrait.img.src = this.userData.portrait
     }
     onDataChange() {
         this.setUserBackpack();
         this.setUserPortrait();
+        this.setLevel();
     }
     render() {
-        this.root.innerHTML = getProfileHTMLCode();
+        this.root.innerHTML = getProfileHTMLCode(this.userData);
     }
 
 
     getDOMElements() {
         this.dom = {
+            level:document.querySelector('.profile__level'),
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
                 prevBtn: document.querySelector('.profile__portraitBtn-left'),

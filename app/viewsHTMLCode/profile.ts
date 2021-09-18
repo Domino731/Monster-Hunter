@@ -1,8 +1,8 @@
-import { portraitsData } from './../properties/portraits/portraits';
+import { UserData } from './../types';
 import { ShopItem } from '../types';
 import { weaponsData } from '../properties/shop/weapons';
-const item: ShopItem = weaponsData[0]
-export const getProfileHTMLCode = () : string => {
+import { getNeededExp } from '../functions/getNeededExp';
+export const getProfileHTMLCode = (user: UserData) : string => {
     return `
     <section class='game__section profile'>
 
@@ -34,7 +34,7 @@ export const getProfileHTMLCode = () : string => {
 
          
             <div class='profile__portrait'> 
-            <img class='profile__portraitImg' />
+            <img class='profile__portraitImg'/>
             <div class='profile__portraitActionBar'> 
                <div class='profile__portraitBtn profile__portraitBtn-left'></div>
                   <img src='./images/change_portrait_icon.png' class='profile__portraitActionIcon'/>
@@ -63,8 +63,11 @@ export const getProfileHTMLCode = () : string => {
                     
              </div>
 
-                <div class='profile__level'> </div>
-                <strong class='profile__nickname'>nickname</strong>
+                <div class='profile__level'>
+                <div class='profile__levelProgress' style='width: ${Math.floor(user.exp * 100 / getNeededExp(user.level))}%'></div>
+                   ${user.level}
+                </div>
+                <strong class='profile__nickname'>${user.nick}</strong>
 
 
 

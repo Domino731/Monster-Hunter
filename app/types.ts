@@ -103,6 +103,7 @@ export interface UserData {
     }
     description: string
     portrait: string
+    exp: number
 }
 
 

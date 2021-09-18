@@ -16,6 +16,7 @@ import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
+import { getNeededExp } from '../functions/getNeededExp';
 export class Blacksmith extends View {
    private dom: {
       market: HTMLElement | null,
@@ -48,12 +49,15 @@ export class Blacksmith extends View {
          moveItemError: HTMLElement
          replaceIcon: HTMLImageElement
       }
-
+      level: HTMLElement
+      portraitImg: HTMLImageElement
    }
    private market: ShopItem[]
    constructor() {
       super(),
          this.dom = {
+            portraitImg: document.querySelector('.profile__portraitImg'),
+            level:document.querySelector('.profile__level'),
             market: document.querySelector("#market_slots"),
             marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
             itemLabel: document.querySelector('#blacksmith_item_label'),
@@ -750,15 +754,25 @@ export class Blacksmith extends View {
       updateUserData(this.userData);
    }
 
+   generalOnDataChange(){
+      // set level and progress bar
+      this.dom.level.innerHTML = `<div class='profile__levelProgress' 
+      style='width: ${Math.floor(this.userData.exp * 100 / getNeededExp(this.userData.level))}%'></div>
+      ${this.userData.level}`;
+      this.dom.portraitImg.src = this.userData.portrait
+   }
    onDataChange() {
       this.setShop();
       this.setGoldAmount();
       this.setUserBackpack();
       this.setUserEquipment();
+      this.generalOnDataChange();
    }
 
    getDOMElements() {
       this.dom = {
+         level:document.querySelector('.profile__level'),
+         portraitImg: document.querySelector('.profile__portraitImg'),
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
          itemLabel: document.querySelector('#blacksmith_item_label'),
