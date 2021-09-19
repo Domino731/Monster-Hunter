@@ -1,5 +1,6 @@
-import { UserData, ShopItem } from '../types';
+import { UserData, ShopItem, PetProperties } from '../types';
 import { db, auth } from '../firebase/index'
+import { potionsData } from '../properties/shop/potions';
 
 export class View {
    protected userData: UserData | null
@@ -30,28 +31,94 @@ export class View {
       this.init();
    }
 
-   // function that will set statistics based on equipment
-   setHeroStats(){
+   // function that will set statistics based on equipment, potions and pet
+   setHeroStats() {
+
+      // by equipment
       this.userData.equipmentItems.map(el => {
-                 
-         if(el.properties.strength !== null){
-            this.userStats.strength = Math.floor( this.userData.rawStats.strength + el.properties.strength);
+         if (el.properties.strength !== null) {
+            this.userStats.strength = Math.floor(this.userData.rawStats.strength + el.properties.strength);
             this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
          }
-         if(el.properties.luck !== null){
-            this.userStats.luck =  Math.floor(this.userData.rawStats.luck + el.properties.luck);
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.7);
+         if (el.properties.luck !== null) {
+            this.userStats.luck = Math.floor(this.userData.rawStats.luck + el.properties.luck);
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
          }
-         if(el.properties.physicalEndurance !== null){
-            this.userStats.physicalEndurance =   Math.floor( this.userData.rawStats.physicalEndurance + el.properties.physicalEndurance);
-            this.userStats.health =  Math.floor( this.userStats.physicalEndurance * 0.7);
+         if (el.properties.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = Math.floor(this.userData.rawStats.physicalEndurance + el.properties.physicalEndurance);
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
          }
-         if(el.properties.defence !== null){
-            this.userStats.defence =  Math.floor( this.userData.rawStats.defence + el.properties.defence);
-            this.userStats.damageReduce =  Math.floor( this.userStats.defence * 0.7);
+         if (el.properties.defence !== null) {
+            this.userStats.defence = Math.floor(this.userData.rawStats.defence + el.properties.defence);
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
          }
-       
-      }) 
+      });
+
+      // by pet
+      const petProps: PetProperties = this.userData.pet.properties
+      if (petProps.strength !== null) {
+         this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (petProps.strength / 100));
+         this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+      }
+      if (petProps.luck !== null) {
+         this.userStats.luck = this.userStats.luck + Math.floor(this.userData.rawStats.luck * (petProps.luck / 100));
+         this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+      }
+      if (petProps.physicalEndurance !== null) {
+         this.userStats.physicalEndurance = this.userStats.physicalEndurance + Math.floor(this.userData.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
+         this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+      }
+      if (petProps.defence !== null) {
+         this.userStats.defence = this.userStats.defence + Math.floor(this.userData.rawStats.defence * (petProps.defence / 100));
+         this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+      }
+
+      // by potions       
+      const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
+      const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
+      // first potion
+      if(firstPotion !== undefined){
+         if (firstPotion.properties.strength !== null) {
+            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (firstPotion.properties.strength / 100));
+            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+         }
+         if (firstPotion.properties.luck !== null) {
+            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (firstPotion.properties.luck / 100));
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+         }
+         if (firstPotion.properties.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance  * (firstPotion.properties.physicalEndurance  / 100));
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+         }
+         if (firstPotion.properties.defence !== null) {
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence  * (firstPotion.properties.defence  / 100));
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+         }
+      }
+      // second potion
+      if(secondPotion !== undefined){
+         if (secondPotion.properties.strength !== null) {
+            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (secondPotion.properties.strength / 100));
+            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+         }
+         if (secondPotion.properties.luck !== null) {
+            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (secondPotion.properties.luck / 100));
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+         }
+         if (secondPotion.properties.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance  * (secondPotion.properties.physicalEndurance  / 100));
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+         }
+         if (secondPotion.properties.defence !== null) {
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence  * (secondPotion.properties.defence  / 100));
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+         }
+ 
+      }
+
+
+
+
    }
 
    // method responsbile for fetching user data, and also this is real time data lisener
@@ -72,7 +139,7 @@ export class View {
 
 
 
-     await db.collection("users").where("__name__", "==", userId)
+      await db.collection("users").where("__name__", "==", userId)
          .onSnapshot((snapshot) => {
             snapshot.docChanges.forEach((change) => {
                if (change.type === "modified") {
@@ -91,7 +158,7 @@ export class View {
 
 
    // abstact method which is responsible for operations when data has changed
-   onDataChange(){
+   onDataChange() {
       window.alert('This method (dataChange) should be implemented in  inheriting class')
    }
    // abstact method which is responsible for injecting html code into game root

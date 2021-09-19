@@ -8,8 +8,8 @@ export const petsData : PetData[] =[
         properties: {
             travelTime: 10,
             luck: 5,
-            defense: null,
-            strenght: null,
+            defence: null,
+            strength: null,
             physicalEndurance: null
         },
         id: `11b2be9f-4879-484d-9a8a-e5b801592fde`
@@ -21,9 +21,9 @@ export const petsData : PetData[] =[
         initialCost: 10,
         properties: {
             travelTime: 25,
-            defense: 10,
+            defence: 10,
             physicalEndurance: null,
-            strenght: null,
+            strength: null,
             luck: null
         },
         id: `40e5a642-a861-4395-9cb7-053bff579d8d`
@@ -35,9 +35,9 @@ export const petsData : PetData[] =[
         initialCost: 15,
         properties: {
             travelTime: 50,
-            defense: 10,
+            defence: 10,
             physicalEndurance: 10,
-            strenght: null,
+            strength: null,
             luck: null
         },
         id: `1ae08920-976d-4c75-920c-398b81c80e6e`
@@ -49,9 +49,9 @@ export const petsData : PetData[] =[
         initialCost: 25,
         properties: {
             travelTime: 50,
-            defense: 10,
+            defence: 10,
             physicalEndurance: 10,
-            strenght: 10,
+            strength: 10,
             luck: 10
         },
         id: `ad266f93-8a66-47b8-a5a9-1ec9383ad7e7`

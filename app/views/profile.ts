@@ -148,8 +148,8 @@ export class Profile extends View {
     labelForPotions(){
 
         // find potions
-        const firstPotion : ShopItem | undefined = potionsData[portraitsData.findIndex(el => this.userData.potions.first)];
-        const secondPotion : ShopItem | undefined = potionsData[portraitsData.findIndex(el => this.userData.potions.second)];
+        const firstPotion : ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
+        const secondPotion : ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
         // check if user have potion
         if(firstPotion !== undefined){
              this.dom.general.potionImgFirst.addEventListener('mouseover', ()=> {

@@ -112,20 +112,19 @@ export interface UserData {
     exp: number
 }
 
-
+export interface PetProperties{
+    travelTime: number | null,
+    defence: number | null,
+    physicalEndurance: number | null,
+    strength: number | null,
+    luck: number | null
+}
 export interface PetData {
     name: string,
     imgSrc: string,
     imgSmallSrc: string,
     initialCost: number,
-
-    properties: {
-        travelTime: number | null,
-        defense: number | null,
-        physicalEndurance: number | null,
-        strenght: number | null,
-        luck: number | null
-    }
+    properties: PetProperties
     id: string,
     rentEnd?: Date
 }
