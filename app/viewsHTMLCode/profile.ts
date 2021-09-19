@@ -149,7 +149,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                 <tbody>
 
 
-                    <tr>
+                    <tr id='profile_strength_stat'>
                         <td class='profile__item--name'> <img src="/images/stats_strength.png" alt="strength" />
                             <strong>Strength</strong></td>
                         <td class='profile__item--amount'>123123</td>
@@ -158,10 +158,10 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                             <strong>123</strong>
                         </td>
                         <td class='profile__item--buyBtn'>
-                            <div>+</div>
+                            <button>+</button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id='profile_damage_stat'>
                         <td class='profile__item--name profile__item--nameBlue'><strong>Damage</strong></td>
                         <td class='profile__item--amount profile__item--nameBlue'>11000</td>
                     </tr>
@@ -169,7 +169,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 
 
 
-                    <tr>
+                    <tr id='profile_PE_stat'>
                         <td class='profile__item--name'> <img src="/images/stats_runner.png" alt="physical endurance" />
                             <strong>physical endurance</strong></td>
                         <td class='profile__item--amount'>123123</td>
@@ -178,15 +178,15 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                             <strong>123</strong>
                         </td>
                         <td class='profile__item--buyBtn'>
-                            <div>+</div>
+                        <button>+</button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id='profile_health_stat'>
                         <td class='profile__item--name profile__item--nameBlue'><strong>Health</strong></td>
                         <td class='profile__item--amount profile__item--nameBlue'>11000</td>
                     </tr>
 
-                    <tr>
+                    <tr id='profile_defence_stat'>
                         <td class='profile__item--name'> <img src="/images/stats_defence.png" alt="Defence" />
                             <strong>Defence</strong></td>
                         <td class='profile__item--amount'>123123</td>
@@ -195,15 +195,15 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                             <strong>123</strong>
                         </td>
                         <td class='profile__item--buyBtn'>
-                            <div>+</div>
+                        <button>+</button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id='profile_damegeReduce_stat'>
                         <td class='profile__item--name profile__item--nameBlue'><strong>Damage reduce</strong></td>
                         <td class='profile__item--amount profile__item--nameBlue'>11000</td>
                     </tr>
 
-                    <tr>
+                    <tr id='profile_luck_stat'>
                         <td class='profile__item--name'> <img src="/images/stats_clover.png" alt="Luck" />
                             <strong>Luck</strong></td>
                         <td class='profile__item--amount'>123123</td>
@@ -212,10 +212,10 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                             <strong>123</strong>
                         </td>
                         <td class='profile__item--buyBtn'>
-                            <div>+</div>
+                        <button>+</button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id='profile_critical_stat'>
                         <td class='profile__item--name profile__item--nameBlue'><strong>Chance for critical</strong>
                         </td>
                         <td class='profile__item--amount profile__item--nameBlue'>11000</td>

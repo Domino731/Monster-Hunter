@@ -63,6 +63,12 @@ export class Register extends AuthForm {
                             physicalEndurance: 50,
                             strength: 50
                         },
+                        stats: {
+                            damage: 35,
+                            health: 35,
+                            damageReduce: 35,
+                            critical: 35
+                        },
                         shop: {
                             blacksmith: null,
                             wizard: null

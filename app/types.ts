@@ -79,6 +79,12 @@ export interface UserData {
         defence: number
         luck: number
     }
+    stats: {
+        damage: number,
+        health: number,
+        damageReduce: number
+        critical: number
+    }
     equipmentItems: ShopItem[]
     backpackItems: ShopItem[]
     lastVisit: Date

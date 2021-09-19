@@ -9,6 +9,7 @@ import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { portraitsData } from '../properties/portraits/portraits';
 import { getNeededExp } from '../functions/getNeededExp';
+import { getStatCost } from '../functions/getStatCost';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -46,6 +47,27 @@ export class Profile extends View {
             prevBtn: HTMLElement
             nextBtn: HTMLElement
         }
+        stats: {
+            strength: HTMLElement
+            strengthCost: HTMLElement
+            strengthBtn: HTMLElement
+            damage: HTMLElement
+
+            physicalEndurance: HTMLElement
+            physicalEnduranceCost: HTMLElement
+            physicalEnduranceBtn: HTMLElement
+            Health: HTMLElement
+
+            defence: HTMLElement
+            defenceCost: HTMLElement
+            defenceBtn: HTMLElement
+            damageReduce: HTMLElement
+
+            luck: HTMLElement
+            luckCost: HTMLElement
+            luckBtn: HTMLElement
+            critical: HTMLElement
+        }
         level: HTMLElement
     }
 
@@ -55,8 +77,28 @@ export class Profile extends View {
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            stats: {
+                strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
+                strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
+                strengthBtn: document.querySelector('#profile_strength_stat .profile__item--buyBtn button'),
+                damage: document.querySelector('#profile_damage_stat .profile__item--amount'),
+
+                physicalEndurance: document.querySelector('#profile_PE_stat .profile__item--amount'),
+                physicalEnduranceCost: document.querySelector('#profile_PE_stat .profile__item--cost strong'),
+                physicalEnduranceBtn: document.querySelector('#profile_PE_stat .profile__item--buyBtn button'),
+                Health: document.querySelector('#profile_health_stat .profile__item--amount'),
+
+                defence: document.querySelector('#profile_defence_stat .profile__item--amount'),
+                defenceCost: document.querySelector('#profile_defence_stat .profile__item--cost strong'),
+                defenceBtn: document.querySelector('#profile_defence_stat .profile__item--buyBtn button'),
+                damageReduce: document.querySelector('#profile_damegeReduce_stat .profile__item--amount'),
+
+                luck: document.querySelector('#profile_luck_stat .profile__item--amount'),
+                luckCost: document.querySelector('#profile_luck_stat .profile__item--cost strong'),
+                luckBtn: document.querySelector('#profile_luck_stat .profile__item--buyBtn button'),
+                critical: document.querySelector('#profile_critical_stat .profile__item--amount'),
+            },
             level:document.querySelector('.profile__level'),
-            
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
                 prevBtn: document.querySelector('.profile__portraitBtn-left'),
@@ -99,7 +141,14 @@ export class Profile extends View {
 
 
 
-
+    setStats(){
+       this.dom.stats.strength.innerText = `${this.userData.rawStats.strength}`;
+       this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.strength, this.userData.guardPayout)}`;
+       console.log(getStatCost(1,50, 100));
+       console.log(getStatCost(2,60, 120));
+       console.log(getStatCost(6,120, 180));
+       console.log(getStatCost(3,170, 180));
+    }
     changePortraitEvents(){
 
         let portraitIndex: number = portraitsData.indexOf(this.userData.portrait)
@@ -446,6 +495,7 @@ export class Profile extends View {
         this.setUserBackpack();
         this.setUserPortrait();
         this.setLevel();
+        this.setStats();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
@@ -454,6 +504,27 @@ export class Profile extends View {
 
     getDOMElements() {
         this.dom = {
+            stats: {
+                strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
+                strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
+                strengthBtn: document.querySelector('#profile_strength_stat .profile__item--buyBtn button'),
+                damage: document.querySelector('#profile_damage_stat .profile__item--amount'),
+
+                physicalEndurance: document.querySelector('#profile_PE_stat .profile__item--amount'),
+                physicalEnduranceCost: document.querySelector('#profile_PE_stat .profile__item--cost strong'),
+                physicalEnduranceBtn: document.querySelector('#profile_PE_stat .profile__item--buyBtn button'),
+                Health: document.querySelector('#profile_health_stat .profile__item--amount'),
+
+                defence: document.querySelector('#profile_defence_stat .profile__item--amount'),
+                defenceCost: document.querySelector('#profile_defence_stat .profile__item--cost strong'),
+                defenceBtn: document.querySelector('#profile_defence_stat .profile__item--buyBtn button'),
+                damageReduce: document.querySelector('#profile_damegeReduce_stat .profile__item--amount'),
+
+                luck: document.querySelector('#profile_luck_stat .profile__item--amount'),
+                luckCost: document.querySelector('#profile_luck_stat .profile__item--cost strong'),
+                luckBtn: document.querySelector('#profile_luck_stat .profile__item--buyBtn button'),
+                critical: document.querySelector('#profile_critical_stat .profile__item--amount'),
+            },
             level:document.querySelector('.profile__level'),
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
@@ -498,5 +569,6 @@ export class Profile extends View {
         this.changeUserDescription();
         this.labelForEquipmentEvent();
         this.changePortraitEvents();
+        this.setStats();
     }
 }

@@ -579,13 +579,17 @@
 }
 
 .profile__item--amount {
-    color: $color-gold;
+    font-weight: 600;
+    color: $color-red;
     text-decoration: underline;
-    text-decoration-color: $color-gold;
+    text-decoration-color: $color-red;
 }
 .profile__item--buyBtn {
-    div {
-        padding: 0 10px;
+    button {
+        font-size: 24px;
+        display: block;
+        border: none;
+        padding: 3px 10px;
         text-align: center;
         background: $color-red;
         color: $color-white;

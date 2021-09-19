@@ -19,12 +19,21 @@ export class View {
             querySnapshot.forEach((doc) => {
                // doc.data() is never undefined for query doc snapshots
                this.userData = doc.data() as UserData
+
+               this.userData.equipmentItems.forEach(el => {
+                  
+               })
+
+
+
             });
          })
 
          .catch((error) => {
             console.log("Error getting documents: ", error);
          });
+
+
 
      await db.collection("users").where("__name__", "==", userId)
          .onSnapshot((snapshot) => {
