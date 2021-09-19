@@ -99,7 +99,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const x = new Blacksmith()
+    const x = new Profile()
     window.addEventListener("popstate", router);
 };
 

@@ -140,14 +140,25 @@ export class Profile extends View {
 
 
 
-
+ 
+    // set the statistics table
     setStats(){
-       this.dom.stats.strength.innerText = `${this.userData.rawStats.strength}`;
+        // strength
+       this.dom.stats.strength.innerText = `${this.userStats.strength}`;
        this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.strength, this.userData.guardPayout)}`;
-       console.log(getStatCost(1,50, 100));
-       console.log(getStatCost(2,60, 120));
-       console.log(getStatCost(6,120, 180));
-       console.log(getStatCost(3,170, 180));
+       this.dom.stats.damage.innerText = `${this.userStats.damage}`;
+       // physical endurance
+       this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
+       this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
+       this.dom.stats.Health.innerText = `${this.userStats.health}`;
+       // defence
+       this.dom.stats.defence.innerText = `${this.userStats.defence}`;
+       this.dom.stats.defenceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.defence, this.userData.guardPayout)}`;
+       this.dom.stats.damageReduce.innerText = `${this.userStats.damageReduce}`;
+       // luck
+       this.dom.stats.luck.innerText = `${this.userStats.luck}`;
+       this.dom.stats.luckCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.luck, this.userData.guardPayout)}`;
+       this.dom.stats.critical.innerText = `${this.userStats.critical}`;
     }
     changePortraitEvents(){
 
