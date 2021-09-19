@@ -3,14 +3,14 @@ import { compareStats } from "./compareStats";
 
 export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem): string => {
     if (currentItem === undefined) {
-        return `<h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
+        return `<h3 class='market__itemTitle  ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
                  
         ${item.name}
      
         </h3>
      
         ${item.rarity === 'common' ? ` <strong class='market__itemRarity itemRarity market__itemRarity-common'>Common</strong>` : `<strong class='market__itemRarity itemRarity market__itemRarity-legendary'>Legendary</strong>`}
-        ${item.description !== undefined ? ` <p class='market__itemDsc itemDsc'>'${item.description}' </p>` : ''}
+        ${item.description !== undefined ? ` <p class='market__itemDsc'>'${item.description}' </p>` : ''}
         <table class='market__itemStats itemStats'>
           <tbody>
 

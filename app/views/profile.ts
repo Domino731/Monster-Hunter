@@ -10,6 +10,7 @@ import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLab
 import { portraitsData } from '../properties/portraits/portraits';
 import { getNeededExp } from '../functions/getNeededExp';
 import { getStatCost } from '../functions/getStatCost';
+import { getPotionLabel } from './sub_views/getPotionLabel';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -42,7 +43,7 @@ export class Profile extends View {
             moveItemError: HTMLElement
             replaceIcon: HTMLImageElement
         }
-        portrait:{
+        portrait: {
             img: HTMLImageElement
             prevBtn: HTMLElement
             nextBtn: HTMLElement
@@ -69,6 +70,7 @@ export class Profile extends View {
             critical: HTMLElement
         }
         level: HTMLElement
+        potionLabel: HTMLElement
     }
 
     constructor() {
@@ -77,7 +79,9 @@ export class Profile extends View {
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
+                
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
                 strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
                 strengthBtn: document.querySelector('#profile_strength_stat .profile__item--buyBtn button'),
@@ -98,7 +102,7 @@ export class Profile extends View {
                 luckBtn: document.querySelector('#profile_luck_stat .profile__item--buyBtn button'),
                 critical: document.querySelector('#profile_critical_stat .profile__item--amount'),
             },
-            level:document.querySelector('.profile__level'),
+            level: document.querySelector('.profile__level'),
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
                 prevBtn: document.querySelector('.profile__portraitBtn-left'),
@@ -140,33 +144,90 @@ export class Profile extends View {
 
 
 
- 
-    // set the statistics table
-    setStats(){
-        // strength
-       this.dom.stats.strength.innerText = `${this.userStats.strength}`;
-       this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.strength, this.userData.guardPayout)}`;
-       this.dom.stats.damage.innerText = `${this.userStats.damage}`;
-       // physical endurance
-       this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
-       this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
-       this.dom.stats.Health.innerText = `${this.userStats.health}`;
-       // defence
-       this.dom.stats.defence.innerText = `${this.userStats.defence}`;
-       this.dom.stats.defenceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.defence, this.userData.guardPayout)}`;
-       this.dom.stats.damageReduce.innerText = `${this.userStats.damageReduce}`;
-       // luck
-       this.dom.stats.luck.innerText = `${this.userStats.luck}`;
-       this.dom.stats.luckCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.luck, this.userData.guardPayout)}`;
-       this.dom.stats.critical.innerText = `${this.userStats.critical}`;
+    // events responsible for potion label
+    labelForPotions(){
+
+        // find potions
+        const firstPotion : ShopItem | undefined = potionsData[portraitsData.findIndex(el => this.userData.potions.first)];
+        const secondPotion : ShopItem | undefined = potionsData[portraitsData.findIndex(el => this.userData.potions.second)];
+        // check if user have potion
+        if(firstPotion !== undefined){
+             this.dom.general.potionImgFirst.addEventListener('mouseover', ()=> {
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
+               this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
+             });
+             this.dom.general.potionImgFirst.addEventListener('mouseleave', ()=>{
+                 
+                this.dom.potionLabel.innerHTML = '';
+             })
+        }
+        if(secondPotion !== undefined){
+            this.dom.general.potionImgSecond.addEventListener('mouseover', ()=> {
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
+              this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
+            });
+            this.dom.general.potionImgSecond.addEventListener('mouseleave', ()=>{
+               this.dom.potionLabel.innerHTML = '';
+            })
+       }
+       
     }
-    changePortraitEvents(){
+    increaseStatistic(statistic: 'strength' | 'physicalEndurance' | 'defence' | 'luck', statCost: HTMLElement) {
+       console.log('after update stat:', this.userData.rawStats[statistic])
+        // cost of specific statistic
+        const cost: number = getStatCost(this.userData.level, this.userData.rawStats[statistic], this.userData.guardPayout)
+        // check if user has enough gold
+        if (this.userData.gold >= cost) {
+            // increase statistic
+            this.userData.rawStats[statistic] += 1;
+            this.userData.gold -= cost;
+            // update in firestore
+            updateUserData(this.userData)
+        }
+        // if user doesnt have enough gold then set animation with will make statistic color will be red
+        else{
+        statCost.classList.add('profile__item-notAfford')
+        setTimeout(()=> {
+            statCost.classList.remove('profile__item-notAfford')
+        },1000)
+        }
+    }
+    // increase statistic
+    increaseStatisticEvents() {
+        this.dom.stats.strengthBtn.addEventListener('click', () => this.increaseStatistic('strength', this.dom.stats.strengthCost))
+        this.dom.stats.luckBtn.addEventListener('click', () => this.increaseStatistic('luck', this.dom.stats.luckCost))
+        this.dom.stats.physicalEnduranceBtn.addEventListener('click', () => this.increaseStatistic('physicalEndurance', this.dom.stats.physicalEnduranceCost))
+        this.dom.stats.defenceBtn.addEventListener('click', () => this.increaseStatistic('defence', this.dom.stats.defenceCost))
+    }
+    // set the statistics table
+    setStats() {
+        // strength
+        this.dom.stats.strength.innerText = `${this.userStats.strength}`;
+        this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.strength, this.userData.guardPayout)}`;
+        this.dom.stats.damage.innerText = `${this.userStats.damage}`;
+        // physical endurance
+        this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
+        this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
+        this.dom.stats.Health.innerText = `${this.userStats.health}`;
+        // defence
+        this.dom.stats.defence.innerText = `${this.userStats.defence}`;
+        this.dom.stats.defenceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.defence, this.userData.guardPayout)}`;
+        this.dom.stats.damageReduce.innerText = `${this.userStats.damageReduce}`;
+        // luck
+        this.dom.stats.luck.innerText = `${this.userStats.luck}`;
+        this.dom.stats.luckCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.luck, this.userData.guardPayout)}`;
+        this.dom.stats.critical.innerText = `${this.userStats.critical}`;
+    }
+    // change hero portrait
+    changePortraitEvents() {
 
         let portraitIndex: number = portraitsData.indexOf(this.userData.portrait)
         // switch to next portrait
-        this.dom.portrait.nextBtn.addEventListener('click', ()=> {
-            
-            if(portraitIndex < portraitsData.length - 1){
+        this.dom.portrait.nextBtn.addEventListener('click', () => {
+
+            if (portraitIndex < portraitsData.length - 1) {
                 portraitIndex++;
                 this.userData.portrait = portraitsData[portraitIndex]
             }
@@ -178,8 +239,8 @@ export class Profile extends View {
         });
 
         // switch to previous portrait
-        this.dom.portrait.prevBtn.addEventListener('click', ()=> {         
-            if(portraitIndex === 0){        
+        this.dom.portrait.prevBtn.addEventListener('click', () => {
+            if (portraitIndex === 0) {
                 portraitIndex = portraitsData.length - 1
                 this.userData.portrait = portraitsData[portraitIndex]
             }
@@ -191,13 +252,13 @@ export class Profile extends View {
         });
     }
     // update user description
-    changeUserDescription(){
-        this.dom.description.addEventListener('focusout', ()=> {
+    changeUserDescription() {
+        this.dom.description.addEventListener('focusout', () => {
             this.userData.description = this.dom.description.value;
             updateUserData(this.userData)
         })
     }
-    setUserDescription(){
+    setUserDescription() {
         this.dom.description.value = this.userData.description;
     }
     labelForBackpackEvent() {
@@ -225,7 +286,6 @@ export class Profile extends View {
                     // find specific slot in equipment which is equal to current shop item type, needed to compare items
                     equipmentSlot = document.querySelector(`#profile_equipment_slots div[data-slot-name = ${currentItem.type}]`)
                     // show slot in equipment by adding pulse animation
-                    console.log(equipmentSlot)
                     equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
                     // remove error
                     // this.dom.backpackLabel.moveItemError.innerText = '';
@@ -347,7 +407,7 @@ export class Profile extends View {
             // check if user have free slot in backpack (backpack have 10 slots)
             if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
                 // find the specific  equipment slot which is needed to inject new html code later -> set default icon
-                const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = '${currentItem.type}']`);
+                const equipmentSlot: HTMLElement = document.querySelector(`#profile_equipment_slots div[data-slot-name = '${currentItem.type}']`);
                 // remove item graphic and set default icon
                 equipmentSlot.innerHTML = `<img src='${getEquipmentIconSrc(currentItem.type)}' class="profile__equipmentIcon"/>`
 
@@ -494,27 +554,27 @@ export class Profile extends View {
             this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
         })
     }
-    setLevel(){
-        this.dom.level.innerHTML = ` <div class='profile__levelProgress' 
+    generalOnUpdate() {
+        // set level
+        this.dom.level.innerHTML = ` <div class='profile__levelProgress'
         style='width: ${Math.floor(this.userData.exp * 100 / getNeededExp(this.userData.level))}%'></div>
-        ${this.userData.level}`
-    }
-    setUserPortrait(){
-         this.dom.portrait.img.src = this.userData.portrait
+        ${this.userData.level}`;
+        // set portrait
+        this.dom.portrait.img.src = this.userData.portrait;
+        // set gold
+        this.dom.general.goldAmount.innerText = `${this.userData.gold}`;
     }
     onDataChange() {
+        this.generalOnUpdate();
         this.setUserBackpack();
-        this.setUserPortrait();
-        this.setLevel();
         this.setStats();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
     }
-
-
     getDOMElements() {
-        this.dom = {
+        this.dom = { 
+            potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
                 strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
@@ -536,7 +596,7 @@ export class Profile extends View {
                 luckBtn: document.querySelector('#profile_luck_stat .profile__item--buyBtn button'),
                 critical: document.querySelector('#profile_critical_stat .profile__item--amount'),
             },
-            level:document.querySelector('.profile__level'),
+            level: document.querySelector('.profile__level'),
             portrait: {
                 img: document.querySelector('.profile__portraitImg'),
                 prevBtn: document.querySelector('.profile__portraitBtn-left'),
@@ -571,7 +631,6 @@ export class Profile extends View {
         }
     }
     initScripts() {
-        this.setUserPortrait();
         this.labelForBackpackEvent();
         this.setUserEquipment();
         this.setGeneral();
@@ -581,5 +640,7 @@ export class Profile extends View {
         this.labelForEquipmentEvent();
         this.changePortraitEvents();
         this.setStats();
+        this.increaseStatisticEvents();
+        this.labelForPotions();
     }
 }

@@ -1,3 +1,5 @@
+import { potionsData } from './../properties/shop/potions';
+import { getPotionLabel } from './../views/sub_views/getPotionLabel';
 import { UserData } from './../types';
 import { ShopItem } from '../types';
 import { weaponsData } from '../properties/shop/weapons';
@@ -34,7 +36,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 
          
             <div class='profile__portrait'> 
-            <img class='profile__portraitImg'/>
+            <img class='profile__portraitImg' src='${user.portrait}'/>
             <div class='profile__portraitActionBar'> 
                <div class='profile__portraitBtn profile__portraitBtn-left'></div>
                   <img src='./images/change_portrait_icon.png' class='profile__portraitActionIcon'/>
@@ -65,7 +67,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 
                 <div class='profile__level'>
                 <div class='profile__levelProgress' style='width: ${Math.floor(user.exp * 100 / getNeededExp(user.level))}%'></div>
-                   ${user.level}
+                   <i>${user.level}</i>
                 </div>
                 <strong class='profile__nickname'>${user.nick}</strong>
 
@@ -74,7 +76,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
             </div>
         </div>
         <div class='profile__description'>
-            <textarea type="textarea" name="user-description" placeholder='Your description' maxLength="440"></textarea>
+            <textarea type="textarea" name="user-description" value='${user.description}' placeholder='Your description' maxLength="440"></textarea>
         </div>
         <a href='https://www.freepik.com/vectors/background' target="_black">Background vector created by upklyak -
             www.freepik.com</a>
@@ -124,6 +126,9 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 
 
         <div class='profile__general'>
+        <div class='profile__generalLabelWrapper'>
+            
+        </div>
             <div class='profile__generalItem' id='profile_general_gold'>
                 <div class='profile__generalImg'> <img src="/images/profile_coins.png" alt="Your coins" /></div>
                 <strong class='profile__generalText'></strong>
@@ -147,15 +152,13 @@ export const getProfileHTMLCode = (user: UserData) : string => {
         <div class='profile__stats'>
             <table>
                 <tbody>
-
-
                     <tr id='profile_strength_stat'>
                         <td class='profile__item--name'> <img src="/images/stats_strength.png" alt="strength" />
                             <strong>Strength</strong></td>
                         <td class='profile__item--amount'>123123</td>
                         <td class='profile__item--cost'>
                             <img src="/images/coin.png" alt="coin" />
-                            <strong>123</strong>
+                            <strong></strong>
                         </td>
                         <td class='profile__item--buyBtn'>
                             <button>+</button>
@@ -163,10 +166,8 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                     </tr>
                     <tr id='profile_damage_stat'>
                         <td class='profile__item--name profile__item--nameBlue'><strong>Damage</strong></td>
-                        <td class='profile__item--amount profile__item--nameBlue'>11000</td>
+                        <td class='profile__item--amount profile__item--nameBlue'></td>
                     </tr>
-
-
 
 
                     <tr id='profile_PE_stat'>
@@ -175,7 +176,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                         <td class='profile__item--amount'>123123</td>
                         <td class='profile__item--cost'>
                             <img src="/images/coin.png" alt="coin" />
-                            <strong>123</strong>
+                            <strong></strong>
                         </td>
                         <td class='profile__item--buyBtn'>
                         <button>+</button>
@@ -192,7 +193,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                         <td class='profile__item--amount'>123123</td>
                         <td class='profile__item--cost'>
                             <img src="/images/coin.png" alt="coin" />
-                            <strong>123</strong>
+                            <strong></strong>
                         </td>
                         <td class='profile__item--buyBtn'>
                         <button>+</button>

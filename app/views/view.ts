@@ -76,7 +76,6 @@ export class View {
          .onSnapshot((snapshot) => {
             snapshot.docChanges.forEach((change) => {
                if (change.type === "modified") {
-                  console.log(12)
                   this.userData = change.doc.data() as UserData;
                   this.onDataChange();
                   this.setHeroStats();
