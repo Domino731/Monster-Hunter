@@ -1,3 +1,4 @@
+import { getWonItemLabel } from './../views/sub_views/getWonItemLabel';
 import { chestplatesData } from './../properties/shop/chestplates';
 export const getWizardHTMLCode = (): string => {
     return `
@@ -28,8 +29,11 @@ export const getWizardHTMLCode = (): string => {
            <div class="six" data-spinningWheel>6</div>
            <div class="seven" data-spinningWheel>7</div>
            <div class="eight" data-spinningWheel>8</div>
-        <div class='circle circle-animation'> </div>
-    </div>
+           <div class='circle'> </div>       
+        </div>
+        <div id='wonItem_wrapper'> 
+          
+        </div>
         </div>
      <section>
      `

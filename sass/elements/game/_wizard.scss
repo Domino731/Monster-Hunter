@@ -101,7 +101,7 @@
 // #405c5d - dark gray
 // #4a6b71 - light gray
 .spinningWheel__content {
-width:700px;
+    width:700px;
 	height:700px;
 	background-color: #ccc;
 	border-radius:50%;
@@ -110,7 +110,9 @@ width:700px;
 	overflow: hidden;
 	transition: 5s;
     box-sizing: border-box;
-    // animation: 2s an__spinning_wheel_rotate  infinite;
+    &-animation{
+        animation: 10s an__spinning_wheel_rotate  infinite;
+    }    
     div{
 
 	height:50%;
@@ -137,11 +139,11 @@ width:700px;
         height: 80px;
         width: 80px;
         border-radius: 50%;
-        background: #405c5d;
+        background: $color-gray-dark;
         z-index: 2;
     
         &-animation{
-          //  animation:  2s an__spinning_wheel_circle infinite;
+          animation:  2s an__spinning_wheel_circle forwards;
         }
     }
     
@@ -172,9 +174,40 @@ width:700px;
         transform: rotate(315deg);
     }
 }
+#wonItem_wrapper{
+    position: absolute;
+    z-index: 10;
+}
+.wonItem{
+    &__wrapper{
+        border: 5px solid $color-gold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+     
+        width: 241px;
+        transform: scale(0%);
+        background: $color-white;
+        border-radius: 20px;
+        animation: 1s an__wonItem_wrapper ease-in-out forwards;
+    }
+    &__img{
+        width: 96%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+}
 @keyframes an__spinning_wheel_rotate {
     100%{
-        transform: rotate(360deg);
+        transform: rotate(3060deg);
+    }
+}
+@keyframes an__wonItem_wrapper{
+    100%{
+        padding: 10px;
+       transform: scale(100%);
     }
 }
 @keyframes an__spinning_wheel_circle {
