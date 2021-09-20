@@ -4,6 +4,8 @@ import { potionsData } from '../properties/shop/potions';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
 import { updateUserData } from '../firebase/operations';
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
+import { getRandomShopItem } from '../functions/getRandomShopItem';
+import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 
 export class View {
    protected userData: UserData | null
@@ -159,17 +161,58 @@ export class View {
          });
    }
 
+   setMagicWheel() {
+      // add blacksmith items
+      const items: ShopItem[] = getBlacksmithItems(this.userData.rawStats);
+      // aslo,  user can get gold
+      const gold: ShopItem = {
+         type: 'gold',
+         name: 'Gold',
+         rarity: 'legendary',
+         src: './images/gold_chest.png',
+         description: `${this.userData.gold + Math.ceil(this.userData.guardPayout * 10)} gold will always comforting`,
+         initialCost: 0,
+         properties: {
+            strength: null,
+            physicalEndurance: null,
+            luck: null,
+            defence: null
+         },
+         id: ''
+      }
+      items.push(gold);
+
+      // check if user have active potion
+      if (this.userData.potions.first === null || this.userData.potions.second === null) {
+         items.push(getRandomShopItem(potionsData))
+      }
+      // if user have both potions slots occupied then add random blacksmith item
+      else {
+         items.push(getRandomShopItem(allBlacksmithMarketItems))
+      }
+
+      // set won item
+      this.userData.magicWheel = {
+         items,
+         wonItem: items[Math.floor(Math.random() * items.length)]
+      }
+   }
+   
    dateOperations() {
       const today: Date = new Date();
-      if(this.userData.lastVisit.getDay() !== today.getDay()){
-          // set new shop
-          this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
-          this.userData.shopPicks.blacksmith = getBlacksmithPicks();
-          // set new wizard magic wheel spin 
-          this.userData.wizardWheelSpin = true;
-          updateUserData(this.userData);
+      
+      if (this.userData.lastVisit.getDay() !== today.getDay()) {
+         // set new shop
+         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
+         this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+         // set new wizard magic wheel spin, and new spinning wheel items
+         this.userData.wizardWheelSpin = true;
+         this.setMagicWheel();
+         this.userData.lastVisit = today;
+         updateUserData(this.userData);
+         
       }
- 
+
    }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {

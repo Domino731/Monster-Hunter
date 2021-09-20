@@ -111,6 +111,10 @@ export interface UserData {
     portrait: string
     exp: number
     wizardWheelSpin: boolean
+    magicWheel: {
+        items: ShopItem[]
+        wonItem: ShopItem
+    }
 }
 
 export interface PetProperties{

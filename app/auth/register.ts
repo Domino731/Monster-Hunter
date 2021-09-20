@@ -4,6 +4,11 @@ import validator from 'validator';
 import { auth, db } from "../firebase";
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { portraitsData } from '../properties/portraits/portraits';
+import { ShopItem } from '../types';
+import { getBlacksmithItems } from "../functions/getBlacksmithItems";
+import { setCountdown } from '../functions/countdown';
+import { potionsData } from "../properties/shop/potions";
+import { getRandomShopItem } from "../functions/getRandomShopItem";
 
 export class Register extends AuthForm {
 
@@ -41,7 +46,48 @@ export class Register extends AuthForm {
         this.btn.style.display = "none";
         this.loading.style.display = "block";
 
-    
+
+        const wizardWheelItems: ShopItem[] = []
+
+
+        // add blacksmith items
+        const items: ShopItem[] = getBlacksmithItems({
+            strength: 50,
+            physicalEndurance: 50,
+            defence: 50,
+            luck: 50
+        });
+        // aslo,  user can get gold
+        const gold: ShopItem = {
+            type: 'gold',
+            name: 'Gold',
+            rarity: 'legendary',
+            src: './images/gold_chest.png',
+            description: `${300} gold will always comforting`,
+            initialCost: 0,
+            properties: {
+                strength: null,
+                physicalEndurance: null,
+                luck: null,
+                defence: null
+            },
+            id: ''
+        }
+        items.push(gold);
+
+        // check if user have active potion
+            items.push(getRandomShopItem(potionsData))
+        // set won item
+        const magicWheel = {
+            items,
+            wonItem: items[Math.floor(Math.random() * items.length)]
+        }
+
+
+
+
+
+
         // create new user in firebase
         auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
             .then((cred) => {
@@ -79,20 +125,21 @@ export class Register extends AuthForm {
                         status: 'free',
                         guard: {
                             current: null,
-                            start:  null,
+                            start: null,
                             end: null,
-                            payout:  null
+                            payout: null
                         },
                         pet: null,
                         potions: {
-                            first:  null,
-                            second:  null
+                            first: null,
+                            second: null
                         },
                         description: '',
                         portrait: portraitsData[0],
                         exp: 0,
-                        wizardWheelSpin: true
-            });
+                        wizardWheelSpin: true,
+                        magicWheel
+                    });
 
 
 

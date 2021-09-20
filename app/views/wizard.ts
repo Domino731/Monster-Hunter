@@ -22,7 +22,6 @@ export class Wizard extends View {
         actionBar: HTMLElement | null
         countdown: HTMLElement | null
     }
-    private wonItem: ShopItem | null
     constructor() {
         super()
         this.dom = {
@@ -35,7 +34,6 @@ export class Wizard extends View {
             actionBar: document.querySelector('.wizard__actionBar'),
             countdown: document.querySelector('.wizard__countdown')
         }
-        this.wonItem = null
     }
 
     render() {
@@ -46,20 +44,19 @@ export class Wizard extends View {
     addWonItem() {
         // remove spin from user account, next spin will be availble at next day
         this.userData.wizardWheelSpin = false;
-        this.wonItem = potionsData[0];
         // show coundown
         this.dom.countdown.parentElement.classList.remove('disabled');
         setCountdown(this.dom.countdown);
         this.dom.actionBar.innerHTML = '';
         // add won item to user's data and update his profile in firestore
-        if (this.wonItem.type === 'gold') {
+        if (this.userData.magicWheel.wonItem.type === 'gold') {
             this.userData.gold += Math.ceil(this.userData.guardPayout * 10);
         }
-        else if (this.wonItem.type === 'potion') {
+        else if (this.userData.magicWheel.wonItem.type === 'potion') {
             const end: Date = new Date();
             end.setHours(end.getHours() + (7 * 24));
             const newPotion : {id: string, end: Date}= {
-                 id: this.wonItem.id,
+                 id: this.userData.magicWheel.wonItem.id,
                  end: end
             }
             if (this.userData.potions.first === null) {
@@ -70,7 +67,7 @@ export class Wizard extends View {
             }
         }
         else {
-            this.userData.backpackItems.push(this.wonItem);
+            this.userData.backpackItems.push(this.userData.magicWheel.wonItem);
         }
         updateUserData(this.userData)
     }
@@ -87,7 +84,7 @@ export class Wizard extends View {
                 // remove spinning animation and show won item
                 setTimeout(() => {
                     this.dom.spinningWheel.classList.remove('spinningWheel__content-animation');
-                    this.dom.wonItemLabel.innerHTML = getWonItemLabel(this.wonItem);
+                    this.dom.wonItemLabel.innerHTML = getWonItemLabel(this.userData.magicWheel.wonItem);
                     this.dom.wonItemLabel.classList.remove('disabled');
                 }, 10000);
                 this.addWonItem();
@@ -101,43 +98,11 @@ export class Wizard extends View {
         });
     }
     setSpinningWheelItems() {
-        // add blacksmith items
-        const items: ShopItem[] = getBlacksmithItems(this.userData.rawStats);
-        // aslo,  user can get gold
-        const gold: ShopItem = {
-            type: 'gold',
-            name: 'Gold',
-            rarity: 'legendary',
-            src: './images/gold_chest.png',
-            description: `${this.userData.gold + Math.ceil(this.userData.guardPayout * 10)} gold will always comforting`,
-            initialCost: 0,
-            properties: {
-                strength: null,
-                physicalEndurance: null,
-                luck: null,
-                defence: null
-            },
-            id: ''
-        }
-        items.push(gold);
-
-        // check if user have active potion
-        if (this.userData.potions.first === null || this.userData.potions.second === null) {
-            items.push(getRandomShopItem(potionsData))
-        }
-        // if user have both potions slots occupied then add random blacksmith item
-        else {
-            items.push(getRandomShopItem(allBlacksmithMarketItems))
-        }
-
-        items.forEach((el, num) => {
+        this.userData.magicWheel.items.forEach((el, num) => {
             this.dom.spinningWheelItems[num].innerHTML = `<img src='${el.src}' class='spinningWheel__itemImg'/>`
-        })
-
-        // set won item
-        this.wonItem = items[Math.floor(Math.random() * items.length)]
-
+        });
     }
+
     onDataChange() { }
     getDOMElements() {
         this.dom = {
