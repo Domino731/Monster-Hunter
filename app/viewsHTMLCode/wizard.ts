@@ -1,7 +1,7 @@
 import { getWonItemLabel } from './../views/sub_views/getWonItemLabel';
 import { chestplatesData } from './../properties/shop/chestplates';
 export const getWizardHTMLCode = (): string => {
-    return `
+   return `
      <section class='wizard'>
         <div class='wizard__characterWrapper'>
           <img class='wizard__chracterImg' src='./images/wizard.png' alt='wizard'/> 
@@ -15,7 +15,11 @@ export const getWizardHTMLCode = (): string => {
               It has served warriors since the beginning of the war against monsters. It has all the necessary items for battles with monsters. The magic circle requires a lot of mana to spin, 
               the mana is renewed every midnight when one of the legendary gods gives up some of his mana.    
               </p>
-              <button class='wizard__btn'>SPIN</button>
+              <div class='wizard__actionBar '>
+                    <strong class='wizard__actionError'></strong> 
+                   <button class='wizard__btn'>SPIN</button>
+              </div>
+              
            </div>
         </div>
 

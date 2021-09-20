@@ -141,7 +141,7 @@ export class Pets extends View {
             console.log(diffDays)
             if (diffDays <= 100 && this.userData.pet.id === pet.id) {
               this.userData.gold -= cost;
-              this.userData.pet.rentEnd.setHours(this.userData.guard.end.getHours() + (7 * 24));
+              this.userData.pet.rentEnd.setHours(this.userData.pet.rentEnd.getHours() + (7 * 24));
               updateUserData(this.userData)
             }
             else if (diffDays <= 100 && this.userData.pet.id !== pet.id) {

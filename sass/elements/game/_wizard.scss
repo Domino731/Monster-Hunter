@@ -1,24 +1,24 @@
-.wizard{
+.wizard {
     height: 100%;
     display: flex;
-    background-image: url('/images/background_wizard.jpg');
+    background-image: url("/images/background_wizard.jpg");
     background-size: 100% 100%;
     position: relative;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
 
-    &__characterWrapper{
+    &__characterWrapper {
         grid-column: 1/1;
         grid-row: 1/1;
         padding-left: 20px;
     }
-    &__characterImg{
+    &__characterImg {
         width: 96%;
         height: auto;
         object-fit: cover;
     }
-    &__descriptionWrapper{
+    &__descriptionWrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -27,7 +27,7 @@
         padding: 20px;
         max-height: 336px;
     }
-    &__description{
+    &__description {
         width: 100%;
         height: 100%;
         padding: 10px;
@@ -41,7 +41,7 @@
             backdrop-filter: blur(4px);
         }
     }
-    &__title{
+    &__title {
         font-size: 37px;
         letter-spacing: 0.25rem;
         word-spacing: 0.188rem;
@@ -50,18 +50,34 @@
         color: #e85df5;
         -webkit-text-stroke: 1px $color-black;
     }
-    &__text{
+    &__text {
         font-size: 1.25rem;
         word-spacing: 0.125rem;
         line-height: 1.25rem;
     }
-    &__btn{
-        font-size: 1.375rem;
-        border: none;
-        outline: none;
+    &__actionBar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
         position: absolute;
         bottom: 10px;
         right: 10px;
+    }
+    &__actionError{
+        position: absolute;
+        top: -14px;
+        right: 0;
+        color: $color-error;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.063rem;
+        -webkit-text-stroke: 1px $color-black;
+    }
+    &__btn {
+        font-size: 1.375rem;
+        border: none;
+        outline: none;
+
         font-weight: 900;
         background: #79decf;
         color: $color-white;
@@ -69,69 +85,59 @@
         border-radius: 0.625rem;
         margin-top: 0.625rem;
         transition: 0.2s;
-         transition: 0.2s;
+        transition: 0.2s;
         &:hover {
             cursor: pointer;
             letter-spacing: 0.065rem;
         }
     }
 }
-.spinningWheel{
-  &__wrapper{
-    grid-column: 2/-1;
-    grid-row: 1/-1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__itemImg{
-
-    width: 141px;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 157px;
-  }
-
-
-  
-}
-
-
-// #ffd26a - gold
-// #405c5d - dark gray
-// #4a6b71 - light gray
-.spinningWheel__content {
-    width:700px;
-	height:700px;
-	background-color: #ccc;
-	border-radius:50%;
-	border:15px solid #ffd26a;
-	position: relative;
-	overflow: hidden;
-	transition: 5s;
-    box-sizing: border-box;
-    &-animation{
-        animation: 10s an__spinning_wheel_rotate  infinite;
-    }    
-    div{
-
-	height:50%;
-	width:280px;
-	position: absolute;
-	clip-path: polygon(100% 0 , 50% 100% , 0 0 );
-	transform:translateX(-50%);
-	transform-origin:bottom;
-	text-align:center;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-	font-size:20px;
-	background: rgb(230,243,255);
-    background: linear-gradient(229deg, rgba(230,243,255,1) 37%, rgba(185,212,240,1) 53%);
-	left:195px;
+.spinningWheel {
+    &__wrapper {
+        grid-column: 2/-1;
+        grid-row: 1/-1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-  
-    .circle{
+    &__itemImg {
+        width: 141px;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 157px;
+    }
+}
+.spinningWheel__content {
+    width: 700px;
+    height: 700px;
+    background-color: #ccc;
+    border-radius: 50%;
+    border: 15px solid #ffd26a;
+    position: relative;
+    overflow: hidden;
+    transition: 5s;
+    box-sizing: border-box;
+    &-animation {
+        animation: 10s an__spinning_wheel_rotate infinite;
+    }
+    div {
+        height: 50%;
+        width: 280px;
+        position: absolute;
+        clip-path: polygon(100% 0, 50% 100%, 0 0);
+        transform: translateX(-50%);
+        transform-origin: bottom;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        background: rgb(230, 243, 255);
+        background: linear-gradient(229deg, rgba(230, 243, 255, 1) 37%, rgba(185, 212, 240, 1) 53%);
+        left: 195px;
+    }
+
+    .circle {
         clip-path: none;
         position: absolute;
         top: calc(50% - 40px);
@@ -141,58 +147,56 @@
         border-radius: 50%;
         background: $color-gray-dark;
         z-index: 2;
-    
-        &-animation{
-          animation:  2s an__spinning_wheel_circle forwards;
+
+        &-animation {
+            animation: 2s an__spinning_wheel_circle forwards;
         }
     }
-    
-    .one{
-        left:50%;
+
+    .one {
+        left: 50%;
     }
-    .two{
+    .two {
         transform: rotate(45deg);
     }
-    .three{
-        transform:rotate(90deg);
+    .three {
+        transform: rotate(90deg);
     }
 
-    .four{
+    .four {
         transform: rotate(135deg);
     }
-    .five{
+    .five {
         transform: rotate(180deg);
     }
-    .six{
+    .six {
         transform: rotate(225deg);
     }
-    .seven{
+    .seven {
         transform: rotate(270deg);
     }
-    .eight{
-
+    .eight {
         transform: rotate(315deg);
     }
 }
-#wonItem_wrapper{
+#wonItem_wrapper {
     position: absolute;
     z-index: 10;
 }
-.wonItem{
-    &__wrapper{
+.wonItem {
+    &__wrapper {
         border: 5px solid $color-gold;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-     
         width: 241px;
         transform: scale(0%);
         background: $color-white;
         border-radius: 20px;
         animation: 1s an__wonItem_wrapper ease-in-out forwards;
     }
-    &__img{
+    &__img {
         width: 96%;
         height: auto;
         object-fit: cover;
@@ -200,18 +204,18 @@
     }
 }
 @keyframes an__spinning_wheel_rotate {
-    100%{
+    100% {
         transform: rotate(3060deg);
     }
 }
-@keyframes an__wonItem_wrapper{
-    100%{
+@keyframes an__wonItem_wrapper {
+    100% {
         padding: 10px;
-       transform: scale(100%);
+        transform: scale(100%);
     }
 }
 @keyframes an__spinning_wheel_circle {
-    100%{
+    100% {
         width: 100%;
         height: 100%;
         top: 0;
