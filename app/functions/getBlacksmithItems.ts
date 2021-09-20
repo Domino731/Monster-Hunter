@@ -6,6 +6,7 @@ import { weaponsData } from '../properties/shop/weapons';
 import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from './getRandomShopItem';
 import { setItemStats } from './setItemStats';
+import { specialItemsData } from '../properties/shop/special';
 export const getBlacksmithItems = (rawStats : UserStats) : ShopItem[] => {
        // array with shop items, base on which shop will be created
        let shopItems: ShopItem[] = []
@@ -22,23 +23,8 @@ export const getBlacksmithItems = (rawStats : UserStats) : ShopItem[] => {
        shopItems.push(getRandomShopItem(weaponsData));
        // random shield
        shopItems.push(getRandomShopItem(shieldsData));
-
-       // Blacksmith shop has 6 slots, shopItems array has only 5 items, so its need to get one more random item 
-       const randomItems: ShopItem[] = [];
-
-       // random helmet
-       randomItems.push(getRandomShopItem(helmetsData));
-       // random chest plate
-       randomItems.push(getRandomShopItem(chestplatesData));
-       // random gloves
-       randomItems.push(getRandomShopItem(glovesData));
-       // random weapon
-       randomItems.push(getRandomShopItem(weaponsData));
-       // random shield
-       randomItems.push(getRandomShopItem(shieldsData));
-
-       // push last item to shopItems array
-       shopItems.push(getRandomShopItem(randomItems));
+       // random special item 
+       shopItems.push(getRandomShopItem(specialItemsData));
 
        // shuffle the shopItems array
        shopItems = shopItems.sort(() => Math.random() - .5);

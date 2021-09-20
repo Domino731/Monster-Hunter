@@ -84,18 +84,12 @@
     justify-content: center;
     align-items: center;
   }
-  &__content{
-    width:500px;
-	height:500px;
-	background-color: #ccc;
-	border-radius:50%;
-	border:15px solid #dde;
-	position: relative;
-	overflow: hidden;
-	transition: 5s;
-    box-sizing: border-box;
+  &__itemImg{
 
-    
+    width: 141px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 157px;
   }
 
 
@@ -116,7 +110,7 @@ width:700px;
 	overflow: hidden;
 	transition: 5s;
     box-sizing: border-box;
-
+    // animation: 2s an__spinning_wheel_rotate  infinite;
     div{
 
 	height:50%;
@@ -134,15 +128,7 @@ width:700px;
     background: linear-gradient(229deg, rgba(230,243,255,1) 37%, rgba(185,212,240,1) 53%);
 	left:195px;
     }
-    span{
-        display: block;
-        position: absolute;
-        top: 50%;
-        height: 50%;
-        width:280px;
-        height: 20px;
-        border: 3px solid red;
-    }
+  
     .circle{
         clip-path: none;
         position: absolute;
@@ -151,8 +137,9 @@ width:700px;
         height: 80px;
         width: 80px;
         border-radius: 50%;
-        background: red;
+        background: #405c5d;
         z-index: 2;
+    
         &-animation{
           //  animation:  2s an__spinning_wheel_circle infinite;
         }
@@ -183,6 +170,11 @@ width:700px;
     .eight{
 
         transform: rotate(315deg);
+    }
+}
+@keyframes an__spinning_wheel_rotate {
+    100%{
+        transform: rotate(360deg);
     }
 }
 @keyframes an__spinning_wheel_circle {

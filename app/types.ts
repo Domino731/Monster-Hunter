@@ -46,7 +46,7 @@ export interface Gloves{
     }
 }
 export interface ShopItem{
-    type: 'helmet' | 'shield' | 'special' | 'weapon' | 'potion' | 'chestPlate' | 'gloves',
+    type: 'helmet' | 'shield' | 'special' | 'weapon' | 'potion' | 'chestPlate' | 'gloves' | 'gold',
     name: string,
     rarity: 'common' | 'legendary',
     src: string,

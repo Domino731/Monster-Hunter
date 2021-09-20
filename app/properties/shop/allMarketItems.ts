@@ -7,8 +7,11 @@ import { shieldsData } from './shields';
 import { specialItemsData } from './special';
 import { weaponsData } from './weapons';
 
-export const allBlacksmithMarketItems : ShopItem[] = [...chestplatesData, 
+export const allBlacksmithMarketItems : ShopItem[] = [
+    ...chestplatesData, 
     ...glovesData, 
     ...helmetsData,
-     ...shieldsData, 
-     ...weaponsData];
+    ...shieldsData, 
+    ...weaponsData,
+    ...specialItemsData
+    ];

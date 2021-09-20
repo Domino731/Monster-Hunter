@@ -1,3 +1,4 @@
+import { chestplatesData } from './../properties/shop/chestplates';
 export const getWizardHTMLCode = (): string => {
     return `
      <section class='wizard'>
@@ -19,14 +20,14 @@ export const getWizardHTMLCode = (): string => {
 
         <div class='spinningWheel__wrapper'>
         <div class='spinningWheel__content'>
-        <div class="one">1</div>
-        <div class="two">2</div>
-        <div class="three">3</div>
-        <div class="four">4</div>
-        <div class="five">5</div>
-        <div class="six">6</div>
-        <div class="seven">7</div>
-        <div class="eight">8</div>
+           <div class="one" data-spinningWheel></div>
+           <div class="two" data-spinningWheel>2</div>
+           <div class="three" data-spinningWheel>3</div>
+           <div class="four" data-spinningWheel>4</div>
+           <div class="five" data-spinningWheel>5</div>
+           <div class="six" data-spinningWheel>6</div>
+           <div class="seven" data-spinningWheel>7</div>
+           <div class="eight" data-spinningWheel>8</div>
         <div class='circle circle-animation'> </div>
     </div>
         </div>
