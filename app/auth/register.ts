@@ -41,11 +41,7 @@ export class Register extends AuthForm {
         this.btn.style.display = "none";
         this.loading.style.display = "block";
 
-        const today = new Date()
-        const tomorrow = new Date(today)
-        tomorrow.setDate(tomorrow.getDate() + 1)
-        tomorrow.setHours(0,0,0,0)
-
+    
         // create new user in firebase
         auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
             .then((cred) => {
@@ -53,6 +49,7 @@ export class Register extends AuthForm {
                 return db.collection("users")
                     .doc(cred.uid)
                     .set({
+                        lastVisit: new Date(),
                         nick: this.data.nickname,
                         level: 1,
                         guardPayout: 30,
@@ -79,8 +76,6 @@ export class Register extends AuthForm {
                         },
                         equipmentItems: [],
                         backpackItems: [],
-                        lastVisit: today,
-                        newShopDate: tomorrow,
                         status: 'free',
                         guard: {
                             current: null,
@@ -95,7 +90,8 @@ export class Register extends AuthForm {
                         },
                         description: '',
                         portrait: portraitsData[0],
-                        exp: 0
+                        exp: 0,
+                        wizardWheelSpin: true
             });
 
 

@@ -1,6 +1,9 @@
 import { UserData, ShopItem, PetProperties } from '../types';
 import { db, auth } from '../firebase/index'
 import { potionsData } from '../properties/shop/potions';
+import { getBlacksmithItems } from '../functions/getBlacksmithItems';
+import { updateUserData } from '../firebase/operations';
+import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 
 export class View {
    protected userData: UserData | null
@@ -77,7 +80,7 @@ export class View {
       const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
       const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
       // first potion
-      if(firstPotion !== undefined){
+      if (firstPotion !== undefined) {
          if (firstPotion.properties.strength !== null) {
             this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (firstPotion.properties.strength / 100));
             this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
@@ -87,16 +90,16 @@ export class View {
             this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
          }
          if (firstPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance  * (firstPotion.properties.physicalEndurance  / 100));
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
             this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
          }
          if (firstPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence  * (firstPotion.properties.defence  / 100));
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (firstPotion.properties.defence / 100));
             this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
          }
       }
       // second potion
-      if(secondPotion !== undefined){
+      if (secondPotion !== undefined) {
          if (secondPotion.properties.strength !== null) {
             this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (secondPotion.properties.strength / 100));
             this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
@@ -106,14 +109,14 @@ export class View {
             this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
          }
          if (secondPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance  * (secondPotion.properties.physicalEndurance  / 100));
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
             this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
          }
          if (secondPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence  * (secondPotion.properties.defence  / 100));
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (secondPotion.properties.defence / 100));
             this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
          }
- 
+
       }
 
 
@@ -156,7 +159,18 @@ export class View {
          });
    }
 
-
+   dateOperations() {
+      const today: Date = new Date();
+      if(this.userData.lastVisit.getDay() !== today.getDay()){
+          // set new shop
+          this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
+          this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+          // set new wizard magic wheel spin 
+          this.userData.wizardWheelSpin = true;
+          updateUserData(this.userData);
+      }
+ 
+   }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {
       window.alert('This method (dataChange) should be implemented in  inheriting class')
@@ -180,6 +194,7 @@ export class View {
    init() {
       this.getUserData()
          .then(() => {
+            this.dateOperations();
             this.render();
             this.getDOMElements();
             this.initScripts()

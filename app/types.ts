@@ -110,6 +110,7 @@ export interface UserData {
     description: string
     portrait: string
     exp: number
+    wizardWheelSpin: boolean
 }
 
 export interface PetProperties{

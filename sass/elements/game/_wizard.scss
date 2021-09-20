@@ -63,7 +63,7 @@
         bottom: 10px;
         right: 10px;
     }
-    &__actionError{
+    &__actionError {
         position: absolute;
         top: -14px;
         right: 0;
@@ -90,6 +90,25 @@
             cursor: pointer;
             letter-spacing: 0.065rem;
         }
+    }
+    &__countdownWrapper{
+         position: absolute;
+        text-align: right;
+        bottom: 10px;
+        right: 10px;
+        div:first-child{
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.063rem;
+            word-spacing: 0.125rem;
+            text-shadow: 0.063rem 0 #e85df5;
+        }
+    }
+    &__countdown {
+        width: 100%;       
+        font-size: 1.875rem;
+        font-weight: 700;
+        word-spacing: 0.125rem;
     }
 }
 .spinningWheel {

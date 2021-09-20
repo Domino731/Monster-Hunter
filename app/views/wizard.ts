@@ -9,6 +9,7 @@ import { getWonItemLabel } from './sub_views/getWonItemLabel';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import firebase from 'firebase/app';
+import { setCountdown } from '../functions/countdown';
 export class Wizard extends View {
 
     private dom: {
@@ -18,6 +19,8 @@ export class Wizard extends View {
         spinningCircle: HTMLElement | null
         wonItemLabel: HTMLElement | null
         actionError: HTMLElement | null
+        actionBar: HTMLElement | null
+        countdown: HTMLElement | null
     }
     private wonItem: ShopItem | null
     constructor() {
@@ -28,15 +31,49 @@ export class Wizard extends View {
             spinBtn: document.querySelector('.wizard__btn'),
             spinningCircle: document.querySelector('.spinningWheel__content .circle'),
             wonItemLabel: document.querySelector('.wonItem__wrapper'),
-            actionError: document.querySelector('.wizard__actionError')
+            actionError: document.querySelector('.wizard__actionError'),
+            actionBar: document.querySelector('.wizard__actionBar'),
+            countdown: document.querySelector('.wizard__countdown')
         }
         this.wonItem = null
     }
 
     render() {
-        this.root.innerHTML = getWizardHTMLCode();
+        this.root.innerHTML = getWizardHTMLCode(this.userData);
     }
 
+    // add won item to user's data
+    addWonItem() {
+        // remove spin from user account, next spin will be availble at next day
+        this.userData.wizardWheelSpin = false;
+        this.wonItem = potionsData[0];
+        // show coundown
+        this.dom.countdown.parentElement.classList.remove('disabled');
+        setCountdown(this.dom.countdown);
+        this.dom.actionBar.innerHTML = '';
+        // add won item to user's data and update his profile in firestore
+        if (this.wonItem.type === 'gold') {
+            this.userData.gold += Math.ceil(this.userData.guardPayout * 10);
+        }
+        else if (this.wonItem.type === 'potion') {
+            const end: Date = new Date();
+            end.setHours(end.getHours() + (7 * 24));
+            const newPotion : {id: string, end: Date}= {
+                 id: this.wonItem.id,
+                 end: end
+            }
+            if (this.userData.potions.first === null) {
+                this.userData.potions.first = newPotion;
+            }
+            else {
+                this.userData.potions.second = newPotion;
+            }
+        }
+        else {
+            this.userData.backpackItems.push(this.wonItem);
+        }
+        updateUserData(this.userData)
+    }
     startSpinningEvent() {
         this.dom.spinBtn.addEventListener('click', () => {
 
@@ -53,6 +90,7 @@ export class Wizard extends View {
                     this.dom.wonItemLabel.innerHTML = getWonItemLabel(this.wonItem);
                     this.dom.wonItemLabel.classList.remove('disabled');
                 }, 10000);
+                this.addWonItem();
             }
             else {
                 this.dom.actionError.innerText = 'Your backpack is full';
@@ -60,29 +98,6 @@ export class Wizard extends View {
                     this.dom.actionError.innerText = '';
                 }, 3000);
             }
-            const x = this.userData.gold + Math.ceil(this.userData.guardPayout * 10);
-            console.log(x)
-            // add won item to user's data and update his profile in firestore
-            if (this.wonItem.type === 'gold') {
-                this.userData.gold += Math.ceil(this.userData.guardPayout * 10);
-            }
-            else if (this.wonItem.type === 'potion') {
-                const start: Date = new Date();
-                if (this.userData.potions.first === null) {
-                    this.userData.potions.first.id = this.wonItem.id;
-                    this.userData.potions.first.end.setHours(start.getHours() + (7 * 24));
-                }
-                else {
-                    this.userData.potions.second.id = this.wonItem.id;
-                    this.userData.potions.second.end.setHours(start.getHours() + (7 * 24));
-                }
-            }
-            else {
-                this.userData.backpackItems.push(this.wonItem);
-            }
-            updateUserData(this.userData)
-
-
         });
     }
     setSpinningWheelItems() {
@@ -123,8 +138,6 @@ export class Wizard extends View {
         this.wonItem = items[Math.floor(Math.random() * items.length)]
 
     }
-
-
     onDataChange() { }
     getDOMElements() {
         this.dom = {
@@ -133,13 +146,24 @@ export class Wizard extends View {
             spinBtn: document.querySelector('.wizard__btn'),
             spinningCircle: document.querySelector('.spinningWheel__content .circle'),
             wonItemLabel: document.querySelector('#wonItem_wrapper'),
-            actionError: document.querySelector('.wizard__actionError')
+            actionError: document.querySelector('.wizard__actionError'),
+            actionBar: document.querySelector('.wizard__actionBar'),
+            countdown: document.querySelector('.wizard__countdown')
         }
     }
+
     initScripts() {
         this.setSpinningWheelItems();
-        this.startSpinningEvent();
+        if (this.userData.wizardWheelSpin) {
+            this.startSpinningEvent();
+        }
+        else {
+            setCountdown(this.dom.countdown);
+        }
+
     }
+
+
 }
 
 // <a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpouch - www.freepik.com</a>
