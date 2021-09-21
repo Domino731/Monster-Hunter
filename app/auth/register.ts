@@ -136,7 +136,8 @@ export class Register extends AuthForm {
                         wizardWheelSpin: true,
                         magicWheel,
                         nextLevelAt: getNeededExp(1),
-                        missionWillingness: 100
+                        missionWillingness: 100,
+                        currentMission: null
                        // availableMissions: getRandomMissions(10, 100, )
                     });
 

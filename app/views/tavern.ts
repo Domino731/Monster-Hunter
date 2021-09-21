@@ -1,7 +1,9 @@
 import { View } from './view';
 import { getTavernHTMLCode } from '../viewsHTMLCode/tavern';
-import { MissionData } from '../types';
+import { MissionData, CurrentMission } from '../types';
 import { getMissionDetails } from './sub_views/getMissionDetails';
+import { updateUserData } from '../firebase/operations';
+import { Travel } from './travel';
 export class Tavern extends View {
     private selectedMission: MissionData | null
     private dom: {
@@ -58,21 +60,42 @@ export class Tavern extends View {
     }
     startMission() {
         this.dom.startMissionBtn.addEventListener('click', () => {
-            // check if user have enough willingness to start new mission, then add new mission to user's data, else 
-            // show error
-            if (this.selectedMission.time <= this.userData.missionWillingness) {
+            if (this.selectedMission !== null) {
+                // check if user have enough willingness to start new mission, then add new mission to user's data, else 
+                // show error
+                if (this.selectedMission.time <= this.userData.missionWillingness) {
+                    // create mission date which will be passed into user's data in firestore
+                    const start: Date = new Date();
+                    const end: Date = new Date();
+                    end.setMinutes(end.getMinutes() + this.selectedMission.time)
+                    const newMission: CurrentMission = {
+                        exp: this.selectedMission.exp,
+                        gold: this.selectedMission.gold,
+                        time: this.selectedMission.time,
+                        title: this.selectedMission.title,
+                        character: this.selectedMission.character,
+                        monster: this.selectedMission.monster,
+                        background: this.selectedMission.background,
+                        start,
+                        end
+                    }
+                    this.userData.currentMission = newMission;
+                    this.userData.status = 'mission';
+                    this.userData.missionWillingness -= this.selectedMission.time;
+                    updateUserData(this.userData)
+                    // create new mission travel section
+                    const travel = new Travel();
+                }
 
+                else {
+                    this.dom.missionError.innerText = `You don't have enough willingness to start new mission`
+                    this.dom.willingnessBarWrapper.classList.add('tavern__willingnessBarWrapper-error');
+                    setTimeout(() => {
+                        this.dom.missionError.innerText = ``
+                        this.dom.willingnessBarWrapper.classList.remove('tavern__willingnessBarWrapper-error');
+                    }, 2000)
+                }
             }
-
-            else {
-                this.dom.missionError.innerText = `You don't have enough willingness to start new mission`
-                this.dom.willingnessBarWrapper.classList.add('tavern__willingnessBarWrapper-error');
-                setTimeout(() => {
-                    this.dom.missionError.innerText = ``
-                    this.dom.willingnessBarWrapper.classList.remove('tavern__willingnessBarWrapper-error');
-                }, 2000)
-            }
-
         })
     }
 

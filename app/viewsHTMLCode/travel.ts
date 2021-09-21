@@ -1,3 +1,3 @@
 export const getTravelHTMLCode = () : string => {
-    return `asd`
+    return `You are on mission`
 }
