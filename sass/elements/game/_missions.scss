@@ -8,17 +8,25 @@
     background-repeat: no-repeat;
     background-position: top;
     &__characterWrapper {
+    
         grid-column: 1/2;
         grid-row: 1/1;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        height: 100%;
+    }
+    &__detailsWrapper{
+        height: 50vh;
+         grid-column: 2/3;
+        grid-row: 1/1;
+       display: flex;
+       align-items: center;
+       justify-content: center;
     }
     &__details {
-        grid-column: 2/3;
-        grid-row: 1/1;
-        padding: 15px;
+        width: 90%;
+        height: 90%;
+        box-sizing: border-box;
     }
     &__list {
         grid-column: 1/-1;
@@ -40,12 +48,14 @@
         font-weight: bold;
         letter-spacing: 0.125rem;
     }
+   
     &__papyrus {
         width: 19%;
         height: auto;
         object-fit: cover;
         transition: 0.5s;
         &:hover {
+            transform: scale(105%);
             cursor: pointer;
         }
     }
@@ -101,6 +111,9 @@
     }
 }
 .mission {
+    *{
+        box-sizing: border-box
+    };
     &__character {
         height: auto;
         width: 50%;
@@ -110,15 +123,21 @@
         height: 100%;
         position: relative;
     }
-    &__textWrapper {
+    &__contentWrapper {
         position: relative;
         height: 0%;
         animation: 1s showPapyrus forwards ease-in-out;
+       
     }
-    &__text {
-        width: 73%;
+    &__content {
+        width: 70%;
         height: 100%;
         margin: 0 auto;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+
+ 
         clip-path: polygon(
             100% 100%,
             95% 94%,
@@ -142,6 +161,29 @@
         padding-top: 0.75rem;
         font-family: $fontFamily-medivalSharp;
     }
+    &__general{
+        display: flex;
+        justify-content: space-between;
+        height: 147px;
+        overflow: hidden;
+    }
+    &__detailsWrapper{
+        height: 90%;
+        width: 100%;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+    }
+    &__monsterWrapper{
+        margin-top: 10px;
+        margin-right: 40px;
+        width: auto;
+        height: 90%;
+        border: 3px solid red;
+        object-fit: cover;
+    }
+
     &__title {
         font-size: 2.313rem;
         font-weight: bold;
@@ -151,10 +193,7 @@
         font-weight: bold;
         margin-top: 0.5rem;
     }
-    &__detailsWrapper {
-        margin-top: 0.625rem;
-    }
-
+  
     &__detail {
         display: flex;
         align-items: center;
@@ -175,6 +214,7 @@
         margin-left: 0.5rem;
     }
     &__acceptBtn {
+
         background: transparent;
         font-size: 1.375rem;
         border: none;
