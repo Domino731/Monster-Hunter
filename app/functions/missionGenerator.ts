@@ -4,7 +4,9 @@ import uniqid from 'uniqid';
 import { MissionData, UserStats, FullUserStats } from '../types';
 import { papyrusSrcData } from '../properties/missions/papyrusSrc';
 import { monstersData } from '../properties/missions/monsters';
+import { charactersData } from "../properties/missions/charactersData";
 import { User } from "firebase";
+import { backgroundsData } from '../properties/missions/backgroundsData';
 
 // arrays with needed data to create mission, everytime when getRandomMission funtion creates new mission 
 // these arrays are reduced due to avoid mission duplicates
@@ -12,7 +14,7 @@ let missionDscArr: string[] = missionDscData
 let missionTitlesArr: string[] = missionTitlesData
 let papyrusSrcArr: string[] = papyrusSrcData
 let monstersArr: string[] = monstersData
-
+let charactersArr: string[] = charactersData
 const getRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -56,8 +58,8 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
     if (papyrusSrcArr.length === 0) {
         papyrusSrcArr === papyrusSrcData;
     }
-    if(monstersArr.length === 0){
-        monstersArr === monstersData;
+    if(charactersArr.length === 0){
+        charactersArr === charactersData;
     }
     // points from which experience, gold and mission time will be calculated
     const missionGoldPoints: number = getRandomInt(1, 20);
@@ -68,9 +70,11 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         gold: Math.ceil((guardPayout / 10) * (missionGoldPoints / 3) * 0.7),
         title: missionTitlesArr[Math.floor(Math.random() * missionTitlesArr.length)],
         dsc: missionDscArr[Math.floor(Math.random() * missionDscArr.length)],
-        time: (missionGoldPoints + missionExpPoints) / 2,
+        time: Math.ceil((missionGoldPoints + missionExpPoints) / 2),
         id: `${uniqid.process() + uniqid(missionExpPoints, missionGoldPoints)}`,
         papyrus: papyrusSrcArr[Math.floor(Math.random() * papyrusSrcArr.length)],
+        character: charactersArr[Math.floor(Math.random() * charactersArr.length)],
+        background: backgroundsData[Math.floor(Math.random() * backgroundsData.length)],
         monster: {
             src: monstersArr[Math.floor(Math.random() * monstersData.length)],
             strength: Math.ceil(userStats.strength * 0.8),
@@ -88,5 +92,6 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
     missionDscArr.splice(missionDscArr.indexOf(mission.dsc), 1);
     missionTitlesArr.splice(missionTitlesArr.indexOf(mission.title), 1);
     papyrusSrcArr.splice(papyrusSrcArr.indexOf(mission.papyrus), 1);
+    charactersArr.splice(charactersArr.indexOf(mission.character), 1);
     return mission
 }

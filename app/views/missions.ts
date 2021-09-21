@@ -26,7 +26,7 @@ export class Missions extends View{
         }
     }
     initScripts(){
-        this.userData.availableMissions = getRandomMissions(getNeededExp(this.userData.level), 100);
+       
     }
     onDataChange(){
       

@@ -191,6 +191,7 @@ export class View {
    }
    
    dateOperations() {
+
       const today: Date = new Date();
       if (this.userData.lastVisit.getDay() !== today.getDay()) {
          // set new shop

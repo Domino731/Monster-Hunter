@@ -163,7 +163,12 @@ export interface MissionData {
     id: string
     time: number
     papyrus: string,
+    character: string,
     monster: MonsterData
+    background: {
+        attribute: string,
+        src: string
+    }
 }
 export interface MonsterData {
     src: string
