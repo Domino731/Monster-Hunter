@@ -99,7 +99,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const x = new Wizard()
+    const developmentRender = new Missions()
     window.addEventListener("popstate", router);
 };
 

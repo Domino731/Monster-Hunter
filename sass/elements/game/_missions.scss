@@ -77,7 +77,29 @@
         }
     }
 }
-
+.onGuardTavern{
+    height: 100%;
+    background-image: url("/images/background_missions.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    &__title{
+        text-shadow: 0.063rem 0.063rem $color-red;
+        font-weight: bold;
+        word-spacing: 0.188rem;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 2.25rem;
+        margin-bottom: 35px;
+        width: 90%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(2px);
+    }
+}
 .mission {
     &__character {
         height: auto;
