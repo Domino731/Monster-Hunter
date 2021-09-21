@@ -9,6 +9,7 @@ import { Account } from '../views/account';
 import { Friends } from '../views/friends';
 import { SearchFriend } from '../views/searchFriend';
 import { Guard } from '../views/guard';
+let x;
 export const router = async () => {
     const routes: route[] = [
         {

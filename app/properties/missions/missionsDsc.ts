@@ -1,10 +1,13 @@
-export const missionsData : string[] = [
+export const missionsDscData : string[] = [
+   
     `I've been meaning to reach out to you for a long time. 
     There is a very strange monster in the garden behind my house and I'm afraid to go there myself. 
-    Help me get rid of the monster and I will give you award.`,
+    Help me get rid of the monster and I will give you award.`
+    
+    ,
     `
     Welcome hunter. Today I was crossing the bridge to the castle today, I saw monsters destroying the castle's foundation. 
-    You must get rid of them or they will steal all the gold from our treasurym,
+    You must get rid of them or they will steal all the gold from our treasure room,
      as you know, the king is planning to buy a new castle door next week.
     `,
     `

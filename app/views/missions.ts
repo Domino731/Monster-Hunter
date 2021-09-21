@@ -24,7 +24,7 @@ export class Missions extends View{
     }
     initScripts(){}
     onDataChange(){
-        this.render();
+      
     }
     getDOMElements(){}
 
