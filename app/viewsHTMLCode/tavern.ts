@@ -5,12 +5,14 @@ export const getTavernHTMLCode = (user: UserData) : string => {
     return `
     <section class='tavern'>
     <div class='tavern__characterWrapper'>
-        <div class='tavern__willingnessBarWrapper'>
+        <div class='tavern__willingnessBarWrapper' title='Mission willingness: ${user.missionWillingness}/100'>
           <div class='tavern__willingnessBar tavern__willingnessBar-green' style='height: ${user.missionWillingness}%;'> </div>
           <div class='tavern__willingnessBar tavern__willingnessBar-red' style='height: ${user.missionWillingness}%;'> </div>
         </div>
         <img class='mission__character disabled' alt='character'>
         <span></span>
+
+        <div class='tavern__countdownWrapper ${user.missionWillingness > 100 && 'disabled'}'>Missions wiligness reset in <span> </span></div>
     </div>
     <div class='tavern__detailsWrapper'>
 

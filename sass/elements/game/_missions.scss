@@ -13,6 +13,14 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        position: relative;
+    }
+    &__countdownWrapper{
+        position: absolute;
+        left: 82px;
+        color: $color-white;
+        top: 10px;
+        font-size: 20px;
     }
     &__detailsWrapper {
         height: 50vh;

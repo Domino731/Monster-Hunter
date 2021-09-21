@@ -4,6 +4,7 @@ import { MissionData, CurrentMission } from '../types';
 import { getMissionDetails } from './sub_views/getMissionDetails';
 import { updateUserData } from '../firebase/operations';
 import { Travel } from './travel';
+import { setCountdown } from '../functions/countdown';
 export class Tavern extends View {
     private selectedMission: MissionData | null
     private dom: {
@@ -15,6 +16,7 @@ export class Tavern extends View {
         willingnessBarGreen: HTMLElement
         missionError: HTMLElement
         willingnessBarWrapper: HTMLElement
+        countdown: HTMLElement
     }
     constructor() {
         super()
@@ -26,7 +28,8 @@ export class Tavern extends View {
             character: document.querySelector('.mission__character'),
             willingnessBarGreen: document.querySelector(' .tavern__willingnessBar-green'),
             missionError: document.querySelector('.tavern__missionError'),
-            willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper')
+            willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper'),
+            countdown: document.querySelector('.tavern__countdownWrapper span')
         }
         this.selectedMission = null
     }
@@ -119,10 +122,12 @@ export class Tavern extends View {
             character: document.querySelector('.mission__character'),
             willingnessBarGreen: document.querySelector(' .tavern__willingnessBar-green'),
             missionError: document.querySelector('.tavern__missionError'),
-            willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper')
+            willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper'),
+            countdown: document.querySelector('.tavern__countdownWrapper span')
         }
     }
     initScripts() {
+        setCountdown(this.dom.countdown);
         this.onBtnHover();
         this.startMission();
         this.selectMissionEvent();

@@ -204,6 +204,8 @@ export class View {
          this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats)
          // set last visit date
          this.userData.lastVisit = today;
+         // reset mission willingness
+         this.userData.missionWillingness = 100;
          updateUserData(this.userData);
          
       }

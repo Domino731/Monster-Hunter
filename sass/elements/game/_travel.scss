@@ -1,0 +1,36 @@
+.travel{
+        height: 100%;
+        background-size: 100% 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    &__title{
+        font-family: $fontFamily-medivalSharp;
+        color:$color-blue;
+        text-shadow: 0.063rem  0.063rem  $color-gray_dark;
+        font-weight: bold;
+        word-spacing: 0.188rem;
+        text-transform: uppercase;
+        text-align: center;
+
+        font-size: 2.75rem;
+        letter-spacing: 0.125rem;
+        margin-bottom: 35px;
+        margin-top: 10px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(2px);
+
+    }
+    &__countdownWrapper{
+        width: 100%;
+    }
+    &__freepikAttribute{
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+    }
+}

@@ -36,10 +36,10 @@ export class Guard extends View {
       acceptBtn: document.querySelector('.guard__acceptBtn'),
       menu: document.querySelector('#guard_menu'),
       castleCity: document.querySelector('#guard_castleCity'),
-      cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
+      cancelGuardBtn: document.querySelector('.countdown__cancelBtn'),
       summaryBtn: document.querySelector('.guard__summaryBtn'),
-      guardTimeLeft: document.querySelector('.guard__countdownTime'),
-      countdownProgressBar: document.querySelector('.guard__countdownBar'),
+      guardTimeLeft: document.querySelector('.countdown__time'),
+      countdownProgressBar: document.querySelector('.countdown__bar'),
       summary: document.querySelector('.guard__summary'),
       summaryPayout: document.querySelector('.guard__summaryPayout')
       ,
@@ -210,7 +210,6 @@ export class Guard extends View {
   checkStatus() {
     // show menu onlu when user doesnt have active guard
     if (this.userData.status === 'free') {
-      console.log('free')
       this.dom.menu.className = 'guard__wrapper';
       this.dom.castleCity.className = 'guard__wrapper disabled';
       this.countdownInterval !== null && clearInterval(this.countdownInterval)
@@ -224,6 +223,8 @@ export class Guard extends View {
     }
     // if user have active mission hide button which is responsible for starting new guard
     else if (this.userData.status === 'mission') {
+      this.dom.menu.className = 'guard__wrapper';
+      this.dom.castleCity.className = 'guard__wrapper disabled';
       this.dom.acceptBtn.parentElement.innerHTML = '';
     }
   }
@@ -238,13 +239,14 @@ export class Guard extends View {
       acceptBtn: document.querySelector('.guard__acceptBtn'),
       menu: document.querySelector('#guard_menu'),
       castleCity: document.querySelector('#guard_castleCity'),
-      cancelGuardBtn: document.querySelector('.guard__cancelBtn'),
+      cancelGuardBtn: document.querySelector('.countdown__cancelBtn'),
       summaryBtn: document.querySelector('.guard__summaryBtn'),
-      guardTimeLeft: document.querySelector('.guard__countdownTime'),
-      countdownProgressBar: document.querySelector('.guard__countdownBar'),
+      guardTimeLeft: document.querySelector('.countdown__time'),
+      countdownProgressBar: document.querySelector('.countdown__progressBar'),
       summary: document.querySelector('.guard__summary'),
-      countdownWrapper: document.querySelector('#guard_countdown_elements'),
       summaryPayout: document.querySelector('.guard__summaryPayout')
+      ,
+      countdownWrapper: document.querySelector('#guard_countdown_elements')
     }
   }
 

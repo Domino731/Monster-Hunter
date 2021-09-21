@@ -11,7 +11,7 @@ export class Travel extends View{
        }
    }
    render(){
-       this.root.innerHTML = getTravelHTMLCode();
+       this.root.innerHTML = getTravelHTMLCode(this.userData);
    }
    onDataChange(){
     

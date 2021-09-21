@@ -54,14 +54,14 @@ export const getGuardHTMLCode = () : string => {
        </div>
 
        <div id='guard_countdown_elements' class='disabled'>
-       <div class='guard__countdownWrapper'>
-          <div class='guard__countdownBar'>
+       <div class='countdown__wrapper'>
+          <div class='countdown__progressBar'>
              
           </div>
-          <div class='guard__countdownTime'></div>
+          <div class='countdown__time'></div>
        </div>
 
-       <button class='guard__cancelBtn'>Cancel</button>
+       <button class='countdown__cancelBtn'>Cancel</button>
        </div>
 
        
