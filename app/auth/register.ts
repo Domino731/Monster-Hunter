@@ -4,11 +4,13 @@ import validator from 'validator';
 import { auth, db } from "../firebase";
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { portraitsData } from '../properties/portraits/portraits';
-import { ShopItem } from '../types';
+import { MissionData, ShopItem } from '../types';
 import { getBlacksmithItems } from "../functions/getBlacksmithItems";
 import { setCountdown } from '../functions/countdown';
 import { potionsData } from "../properties/shop/potions";
 import { getRandomShopItem } from "../functions/getRandomShopItem";
+import { getNeededExp } from '../functions/getNeededExp';
+import { getRandomMission, getRandomMissions } from '../functions/missionGenerator';
 
 export class Register extends AuthForm {
 
@@ -75,18 +77,12 @@ export class Register extends AuthForm {
         }
         items.push(gold);
 
-        // check if user have active potion
             items.push(getRandomShopItem(potionsData))
         // set won item
         const magicWheel = {
             items,
             wonItem: items[Math.floor(Math.random() * items.length)]
         }
-
-
-
-
-
 
         // create new user in firebase
         auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
@@ -98,7 +94,7 @@ export class Register extends AuthForm {
                         lastVisit: new Date(),
                         nick: this.data.nickname,
                         level: 1,
-                        guardPayout: 30,
+                        guardPayout: 100,
                         gold: 100,
                         rawStats: {
                             defence: 50,
@@ -138,7 +134,9 @@ export class Register extends AuthForm {
                         portrait: portraitsData[0],
                         exp: 0,
                         wizardWheelSpin: true,
-                        magicWheel
+                        magicWheel,
+                        nextLevelAt: getNeededExp(1),
+                        availableMissions: getRandomMissions(10, 100)
                     });
 
 

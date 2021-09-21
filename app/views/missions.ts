@@ -2,6 +2,9 @@ import { Tavern } from './tavern';
 import { View } from './view';
 import { OnGuardTavern } from './onGuardTavern';
 import { Travel } from './travel';
+import { getRandomMissions } from '../functions/missionGenerator';
+import { getNeededExp } from '../functions/getNeededExp';
+import { updateUserData } from '../firebase/operations';
 export class Missions extends View{
 
     constructor() {
@@ -22,7 +25,11 @@ export class Missions extends View{
             render = new Travel();
         }
     }
-    initScripts(){}
+    initScripts(){
+        this.userData.availableMissions = getRandomMissions(getNeededExp(this.userData.level), 100);
+         console.log(this.userData.availableMissions)
+       // getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout);
+    }
     onDataChange(){
       
     }

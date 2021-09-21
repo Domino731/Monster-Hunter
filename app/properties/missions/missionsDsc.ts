@@ -1,4 +1,4 @@
-export const missionsDscData : string[] = [
+export const missionDscData : string[] = [
    
     `I've been meaning to reach out to you for a long time. 
     There is a very strange monster in the garden behind my house and I'm afraid to go there myself. 

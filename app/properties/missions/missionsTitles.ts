@@ -1,4 +1,4 @@
-export const MissionTitlesData : string[] = [
+export const missionTitlesData : string[] = [
     `Broken swords`,
     `The Smoke Forest`,
     `The Fallen Island`,

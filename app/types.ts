@@ -62,6 +62,7 @@ export interface ShopItem{
 }
 export interface UserData {
     level: number,
+    nextLevelAt: number
     nick: string,
     guardPayout: number,
     gold: number,
@@ -115,6 +116,7 @@ export interface UserData {
         items: ShopItem[]
         wonItem: ShopItem
     }
+    availableMissions: MissionData[]
 }
 
 export interface PetProperties{
@@ -142,4 +144,13 @@ export interface UserStats {
     physicalEndurance: number 
     defence: number
     luck: number
+}
+export interface MissionData {
+    exp: number,
+    gold: number,
+    title: string,
+    dsc: string,
+    id: string
+    time: number
+    papyrus: string
 }
