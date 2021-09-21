@@ -197,9 +197,9 @@
       width: 100%;
       left: 0;
       background: $color-green;
-     animation: 15s an_guardCountdownBar infinite ease-in-out;
-     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-     background-size: 400% 400%;
+      animation: 15s an_guardCountdownBar infinite ease-in-out;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
     }
     &__countdownTime{
         z-index: 1;

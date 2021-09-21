@@ -8,20 +8,19 @@
     background-repeat: no-repeat;
     background-position: top;
     &__characterWrapper {
-    
         grid-column: 1/2;
         grid-row: 1/1;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
     }
-    &__detailsWrapper{
+    &__detailsWrapper {
         height: 50vh;
-         grid-column: 2/3;
+        grid-column: 2/3;
         grid-row: 1/1;
-       display: flex;
-       align-items: center;
-       justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     &__details {
         width: 90%;
@@ -48,7 +47,7 @@
         font-weight: bold;
         letter-spacing: 0.125rem;
     }
-   
+
     &__papyrus {
         width: 19%;
         height: auto;
@@ -59,7 +58,7 @@
             cursor: pointer;
         }
     }
-    &__willingnessBar {
+    &__willingnessBarWrapper {
         height: 90%;
         width: 50px;
         border: 5px solid $color-gold;
@@ -69,25 +68,34 @@
         position: relative;
         overflow: hidden;
         margin-left: 10px;
-        &::after {
-            content: "";
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 30%;
-            bottom: 0;
-
-            background: #11998e; 
-            background: -webkit-linear-gradient(to right, #38ef7d, #11998e); 
-            background: linear-gradient(
-                to right,
-                #38ef7d,
-                #11998e
-            ); 
+        &-error{
+            border: 5px solid $color-error; 
+        } 
+    }
+    &__missionError{
+        margin-top: 0.25rem;
+        color: $color-error;
+    }
+    &__willingnessBar {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        animation: 2s an__gradient_background infinite ease-in-out;
+        transition: 0.4s;
+        &-green {
+            z-index: 1;
+            background: #11998e;
+            background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+            background: linear-gradient(to right, #38ef7d, #11998e);
+        }
+        &-red {z-index: 0;
+            height: 100%;
+            background: linear-gradient(-45deg, #E71D36, #7200da, #D81159, #f9320c);
+            background-size: 400% 400%;
         }
     }
 }
-.onGuardTavern{
+.onGuardTavern {
     height: 100%;
     background-image: url("/images/background_missions.jpg");
     background-size: 100% 100%;
@@ -95,7 +103,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    &__title{
+    &__title {
         text-shadow: 0.063rem 0.063rem $color-red;
         font-weight: bold;
         word-spacing: 0.188rem;
@@ -111,9 +119,9 @@
     }
 }
 .mission {
-    *{
-        box-sizing: border-box
-    };
+    * {
+        box-sizing: border-box;
+    }
     &__character {
         height: auto;
         width: 50%;
@@ -127,7 +135,6 @@
         position: relative;
         height: 0%;
         animation: 1s showPapyrus forwards ease-in-out;
-       
     }
     &__content {
         width: 70%;
@@ -137,7 +144,6 @@
         display: flex;
         justify-content: center;
 
- 
         clip-path: polygon(
             100% 100%,
             95% 94%,
@@ -161,21 +167,21 @@
         padding-top: 0.75rem;
         font-family: $fontFamily-medivalSharp;
     }
-    &__general{
+    &__general {
         display: flex;
         justify-content: space-between;
         height: 147px;
         overflow: hidden;
     }
-    &__detailsWrapper{
+    &__detailsWrapper {
         height: 90%;
         width: 100%;
         overflow: auto;
-        &::-webkit-scrollbar{
+        &::-webkit-scrollbar {
             width: 0;
         }
     }
-    &__monsterWrapper{
+    &__monsterWrapper {
         margin-top: 9px;
         margin-right: 22px;
         width: auto;
@@ -192,7 +198,7 @@
         font-weight: bold;
         margin-top: 0.5rem;
     }
-  
+
     &__detail {
         display: flex;
         align-items: center;
@@ -213,7 +219,6 @@
         margin-left: 0.5rem;
     }
     &__acceptBtn {
-
         background: transparent;
         font-size: 1.375rem;
         border: none;

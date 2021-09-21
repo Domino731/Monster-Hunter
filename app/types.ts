@@ -116,7 +116,8 @@ export interface UserData {
         items: ShopItem[]
         wonItem: ShopItem
     }
-    availableMissions: MissionData[]
+    availableMissions: MissionData[],
+    missionWillingness: number
 }
 
 export interface PetProperties{
@@ -180,4 +181,18 @@ export interface MonsterData {
     damageReduce: number,
     luck: number,
     critical: number
+}
+export interface currentMission {
+    exp: number,
+    gold: number,
+    title: string,
+    time: number
+    character: string,
+    monster: MonsterData
+    background: {
+        attribute: string,
+        src: string
+    }
+    start: Date,
+    end: Date
 }

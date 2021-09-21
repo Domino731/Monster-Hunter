@@ -1,11 +1,14 @@
 import { UserData } from '../types';
 
 export const getTavernHTMLCode = (user: UserData) : string => {
-
+  
     return `
     <section class='tavern'>
     <div class='tavern__characterWrapper'>
-        <div class='tavern__willingnessBar'></div>
+        <div class='tavern__willingnessBarWrapper'>
+          <div class='tavern__willingnessBar tavern__willingnessBar-green' style='height: ${user.missionWillingness}%;'> </div>
+          <div class='tavern__willingnessBar tavern__willingnessBar-red' style='height: ${user.missionWillingness}%;'> </div>
+        </div>
         <img class='mission__character disabled' alt='character'>
         <span></span>
     </div>
@@ -22,7 +25,7 @@ export const getTavernHTMLCode = (user: UserData) : string => {
                             <div id='mission_content_wrapper'>                                
                             </div>
 
-
+                            <div class='tavern__missionError'></div>
                             <button class='mission__acceptBtn'>Accept this mission</button>
 
                         </div>
