@@ -1,15 +1,17 @@
 import { missionTitlesData } from "../properties/missions/missionsTitles";
 import { missionDscData } from '../properties/missions/missionsDsc';
 import uniqid from 'uniqid';
-import { MissionData } from '../types';
+import { MissionData, UserStats, FullUserStats } from '../types';
 import { papyrusSrcData } from '../properties/missions/papyrusSrc';
+import { monstersData } from '../properties/missions/monsters';
+import { User } from "firebase";
 
 // arrays with needed data to create mission, everytime when getRandomMission funtion creates new mission 
 // these arrays are reduced due to avoid mission duplicates
 let missionDscArr: string[] = missionDscData
 let missionTitlesArr: string[] = missionTitlesData
 let papyrusSrcArr: string[] = papyrusSrcData
-
+let monstersArr: string[] = monstersData
 
 const getRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
@@ -25,11 +27,11 @@ const getRandomInt = (min: number, max: number): number => {
  * @param nextLvlExp - experience needed to level up
  * @param guardPayout - guard payout value
  */
-export const getRandomMissions = (nextLvlExp: number, guardPayout: number): MissionData[] => {
+export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats): MissionData[] => {
     const missions: MissionData[] = [];
-    missions.push(getRandomMission(nextLvlExp, guardPayout));
-    missions.push(getRandomMission(nextLvlExp, guardPayout));
-    missions.push(getRandomMission(nextLvlExp, guardPayout));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
     return missions
 }
 
@@ -40,8 +42,9 @@ export const getRandomMissions = (nextLvlExp: number, guardPayout: number): Miss
  * Function that returns random mission 
  * @param nextLvlExp - experience needed to level up
  * @param guardPayout - guard payout value
+ * @param userStats - user statistics on the basis of which statistics for the monster will be created
  */
-export const getRandomMission = (nextLvlExp: number, guardPayout: number): MissionData => {
+export const getRandomMission = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats): MissionData => {
 
     // at first check if data ararys aren't empty
     if (missionTitlesArr.length === 0) {
@@ -53,7 +56,9 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number): Missi
     if (papyrusSrcArr.length === 0) {
         papyrusSrcArr === papyrusSrcData;
     }
-
+    if(monstersArr.length === 0){
+        monstersArr === monstersData;
+    }
     // points from which experience, gold and mission time will be calculated
     const missionGoldPoints: number = getRandomInt(1, 20);
     const missionExpPoints: number = getRandomInt(1, 20);
@@ -65,7 +70,18 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number): Missi
         dsc: missionDscArr[Math.floor(Math.random() * missionDscArr.length)],
         time: (missionGoldPoints + missionExpPoints) / 2,
         id: `${uniqid.process() + uniqid(missionExpPoints, missionGoldPoints)}`,
-        papyrus: papyrusSrcArr[Math.floor(Math.random() * papyrusSrcArr.length)]
+        papyrus: papyrusSrcArr[Math.floor(Math.random() * papyrusSrcArr.length)],
+        monster: {
+            src: monstersArr[Math.floor(Math.random() * monstersData.length)],
+            strength: Math.ceil(userStats.strength * 0.8),
+            defence:  Math.ceil(userStats.defence * 0.8),
+            physicalEndurance: Math.ceil(userStats.physicalEndurance * 0.8),
+            luck: Math.ceil(userStats.physicalEndurance * 0.8),
+            damage: Math.ceil(userStats.damage * 0.8),
+            health: Math.ceil(userStats.health * 0.8),
+            damageReduce: Math.ceil(userStats.damageReduce * 0.8),
+            critical: Math.ceil(userStats.critical * 0.8),
+        }
     }
 
     // prevent of duplicates

@@ -1,4 +1,4 @@
-import { UserData, ShopItem, PetProperties } from '../types';
+import { UserData, ShopItem, PetProperties, FullUserStats } from '../types';
 import { db, auth } from '../firebase/index'
 import { potionsData } from '../properties/shop/potions';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
@@ -6,20 +6,12 @@ import { updateUserData } from '../firebase/operations';
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
+import { getRandomMissions } from '../functions/missionGenerator';
 
 export class View {
    protected userData: UserData | null
    protected root: HTMLElement
-   protected userStats: {
-      strength: number,
-      damage: number,
-      physicalEndurance: number,
-      health: number,
-      defence: number
-      damageReduce: number,
-      luck: number,
-      critical: number
-   }
+   protected userStats: FullUserStats
    constructor() {
       this.userData = null
       this.userStats = {
@@ -200,7 +192,6 @@ export class View {
    
    dateOperations() {
       const today: Date = new Date();
-      
       if (this.userData.lastVisit.getDay() !== today.getDay()) {
          // set new shop
          this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
@@ -208,6 +199,9 @@ export class View {
          // set new wizard magic wheel spin, and new spinning wheel items
          this.userData.wizardWheelSpin = true;
          this.setMagicWheel();
+         // set new missions
+         this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats)
+         // set last visit date
          this.userData.lastVisit = today;
          updateUserData(this.userData);
          

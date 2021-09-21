@@ -25,7 +25,7 @@ export class Tavern extends View{
       }
       startMission(){
          this.dom.startMissionBtn.addEventListener('click', ()=> {
-             this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout)
+             this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats)
              console.log(this.userData.availableMissions)
          })
       }

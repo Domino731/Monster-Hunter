@@ -145,6 +145,16 @@ export interface UserStats {
     defence: number
     luck: number
 }
+export interface FullUserStats{
+    strength: number,
+    damage: number,
+    physicalEndurance: number,
+    health: number,
+    defence: number
+    damageReduce: number,
+    luck: number,
+    critical: number
+}
 export interface MissionData {
     exp: number,
     gold: number,
@@ -152,5 +162,17 @@ export interface MissionData {
     dsc: string,
     id: string
     time: number
-    papyrus: string
+    papyrus: string,
+    monster: MonsterData
+}
+export interface MonsterData {
+    src: string
+    strength: number,
+    damage: number,
+    physicalEndurance: number,
+    health: number,
+    defence: number
+    damageReduce: number,
+    luck: number,
+    critical: number
 }
