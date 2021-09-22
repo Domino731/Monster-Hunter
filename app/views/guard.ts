@@ -2,7 +2,7 @@ import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
 import { View } from './view';
 import { getGuardHTMLCode } from '../viewsHTMLCode/guard';
 import { updateUserData } from '../firebase/operations';
-import { textChangeRangeIsUnchanged } from 'typescript';
+
 
 export class Guard extends View {
 

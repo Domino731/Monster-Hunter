@@ -10,14 +10,10 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
      <div class='fight__container'>   
 
 
-           <!-- 
-           
-           <img src='${weapon.src}' class='fight__sword fight__sword-an'/> 
-           <img src='./images/explosion.png' class='fight__explosion fight__explosion-an'/>
-           <div class='fight__weaponWrapper fight__weaponWrapper-an'> 
-           -->
+         
+        
 
-           <div class='fight__weaponWrapper'> 
+           <div class='fight__weaponWrapper ' > 
               <img src='./images/explosion.png' class='fight__explosion'/>
               ${weapon !== undefined ? 
               `<img src='${weapon.src}' class='fight__sword'/>`
@@ -29,7 +25,7 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
          <div class='fight__characterWrapper fight__characterWrapper-user'> 
            <img class='fight__characterImg' src='${userData.portrait}'/>
            <div class='fight__healthBar'>
-             <div class='fight__healthPoints'>1440 / ${userStats.health}</div>
+             <div class='fight__healthPoints'>${userStats.health}/ ${userStats.health}</div>
              <div class='fight__health'></div>
            </div>
 
@@ -68,12 +64,12 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
 
             <img class='fight__characterImg' src='${userData.currentMission.monster.src}'/>
            <div class='fight__healthBar'>
-              <div class='fight__healthPoints'>1440 / ${userData.currentMission.monster.health}</div>
+              <div class='fight__healthPoints'>${userData.currentMission.monster.health} / ${userData.currentMission.monster.health}</div>
              <div class='fight__health'></div>
            </div>
-
+           <div style='width: 100%;'>
            <table class='fight__statsTable'>
-               <tbody>
+              <tbody>
                 <tr> 
                   <td>Strength</td>
                   <td>${userStats.strength}</td>
@@ -92,6 +88,8 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
                 </tr>
               </tbody>
            </table>
+           </div>
+              
          </div>
 
          </div>
