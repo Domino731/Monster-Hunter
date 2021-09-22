@@ -10,6 +10,7 @@ import { Friends } from '../views/friends';
 import { SearchFriend } from '../views/searchFriend';
 import { Guard } from '../views/guard';
 import { MonsterFight } from '../views/monsterFight';
+import { Tavern } from '../views/tavern';
 let x;
 export const router = async () => {
     const routes: route[] = [
@@ -101,7 +102,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new MonsterFight()
+    const developmentRender = new Missions()
     window.addEventListener("popstate", router);
 };
 

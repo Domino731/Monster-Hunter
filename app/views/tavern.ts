@@ -73,6 +73,7 @@ export class Tavern extends View {
                     const end: Date = new Date();
                     end.setMinutes(end.getMinutes() + this.selectedMission.time)
                     const newMission: CurrentMission = {
+                        id: this.selectedMission.id,
                         exp: this.selectedMission.exp,
                         gold: this.selectedMission.gold,
                         time: this.selectedMission.time,

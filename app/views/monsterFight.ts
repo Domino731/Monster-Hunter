@@ -1,22 +1,30 @@
+
 import { View } from './view';
 import { getMonsterFightHTMLCode } from '../viewsHTMLCode/monsterFight';
-import { ListFormat } from 'typescript';
-import { General } from '../general/general';
+import { getRandomMission } from '../functions/missionGenerator';
+import { getNeededExp } from '../functions/getNeededExp';
+import { Tavern } from './tavern';
+import { updateUserData } from '../firebase/operations';
+
 export class MonsterFight extends View {
     private fightInterval: null | ReturnType<typeof setInterval>
     private dom: {
+        fightContainer: HTMLElement | null
+        successSummary: HTMLElement| null
+        failedSummary: HTMLElement| null
+        summaryBtns: NodeListOf<Element>
         monster: {
-            wrapper: HTMLElement
-            explosion: HTMLElement
-            HP: HTMLElement
-            HPBar: HTMLElement
+            wrapper: HTMLElement| null
+            explosion: HTMLElement| null
+            HP: HTMLElement| null
+            HPBar: HTMLElement| null
         }
         user: {
-            weaponWrapper: HTMLElement
-            sword: HTMLElement
-            explosion: HTMLElement
-            HP: HTMLElement
-            HPBar: HTMLElement
+            weaponWrapper: HTMLElement| null
+            sword: HTMLElement| null
+            explosion: HTMLElement| null
+            HP: HTMLElement| null
+            HPBar: HTMLElement| null
         }
     }
     private monsterHP: number;
@@ -25,6 +33,10 @@ export class MonsterFight extends View {
         super()
         this.fightInterval = null
         this.dom = {
+            fightContainer: document.querySelector('#fight_container'),
+            successSummary: document.querySelector('#successful_fight_summary'),
+            failedSummary: document.querySelector('#failed_fight_summary'),
+            summaryBtns: document.querySelectorAll('.fight__summaryBtn'),
             monster: {
                 wrapper: document.querySelector('.fight__characterWrapper-monster'),
                 explosion: document.querySelector('.monster__explosionImg'),
@@ -61,6 +73,44 @@ export class MonsterFight extends View {
         this.userHP -= Math.ceil(damage);
 
     }
+    // if user defeated the monster, then show summary button, create new mission, and update user's data in firestore
+    successfulMission() {
+        // hide fight container
+        setTimeout(() => {
+            this.dom.fightContainer.classList.add('disabled');
+            // show summary
+            this.dom.successSummary.classList.remove('disabled');
+        }, 2000)
+
+        // find index of current mission, in order to replace her by new
+        const index: number = this.userData.availableMissions.findIndex(el => el.id === this.userData.currentMission.id)
+        // set new mission
+        this.userData.availableMissions[index] = getRandomMission(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats, this.userData.pet);
+        // add exp
+        this.userData.exp += this.userData.currentMission.exp;
+        // add gold
+        this.userData.gold += this.userData.currentMission.gold;
+        // check if user has enough exp to level up
+        if(this.userData.exp >= this.userData.nextLevelAt){
+            this.userData.level++;
+            this.userData.nextLevelAt = getNeededExp(this.userData.level);
+            this.userData.exp = 0;
+        }
+        // set status
+        this.userData.status = 'free';
+        this.userData.currentMission = null;
+        updateUserData(this.userData);
+    }
+
+    // when user click on button on summary panel, he will be redirected to the tavern
+    summaryBtnsEvents(){
+       this.dom.summaryBtns.forEach(el => el.addEventListener('click', ()=> {
+           if(this.userData.currentMission === null){
+               const tavern = new Tavern();
+           }
+       }))
+    } 
+
     // check if user he defeated the monster, and set monster's hp
     checkMonsterHP() {
         const HP = Math.floor((this.monsterHP / this.userData.currentMission.monster.health) * 100);
@@ -71,10 +121,11 @@ export class MonsterFight extends View {
         else {
             this.dom.monster.HP.innerText = `0`;
             this.dom.monster.HPBar.style.width = `0%`;
+            this.successfulMission();
         }
 
     }
-      // check if monster defeated user, and set user's hp
+    // check if monster defeated user, and set user's hp
     checkUserHP() {
         const HP = Math.floor((this.userHP / this.userStats.health) * 100);
         if (HP > 0) {
@@ -102,8 +153,10 @@ export class MonsterFight extends View {
             this.checkMonsterHP();
         }, 1500)
         //  this.checkMonsterHP();
+
         setTimeout(() => {
-            this.dom.user.explosion.classList.remove('fight__explosion-an');
+            if(this.monsterHP > 0){
+                  this.dom.user.explosion.classList.remove('fight__explosion-an');
             this.dom.user.sword.classList.remove('fight__sword-an');
             this.dom.user.weaponWrapper.classList.remove('fight__weaponWrapper-an')
 
@@ -115,6 +168,9 @@ export class MonsterFight extends View {
             setTimeout(() => {
                 this.checkUserHP();
             }, 1700)
+            }
+          
+
         }, 2000);
 
     }
@@ -123,7 +179,12 @@ export class MonsterFight extends View {
     fightAnimations() {
         this.attackAnimation();
         this.fightInterval = setInterval(() => {
-            this.attackAnimation();
+            if(this.userHP > 0 && this.monsterHP > 0){
+                this.attackAnimation();
+            }
+            else{
+                clearInterval(this.fightInterval)
+            }
         }, 4000)
     }
 
@@ -134,6 +195,10 @@ export class MonsterFight extends View {
     onDataChange() { }
     getDOMElements() {
         this.dom = {
+            fightContainer: document.querySelector('#fight_container'),
+            successSummary: document.querySelector('#successful_fight_summary'),
+            failedSummary: document.querySelector('#failed_fight_summary'),
+            summaryBtns: document.querySelectorAll('.fight__summaryBtn'),
             monster: {
                 wrapper: document.querySelector('.fight__characterWrapper-monster'),
                 explosion: document.querySelector('.monster__explosionImg'),
@@ -152,6 +217,7 @@ export class MonsterFight extends View {
     initScripts() {
         this.general()
         this.fightAnimations();
+        this.summaryBtnsEvents();
     }
 }
 // <a href='https://www.freepik.com/vectors/nature'>Nature vector created by brgfx - www.freepik.com</a>

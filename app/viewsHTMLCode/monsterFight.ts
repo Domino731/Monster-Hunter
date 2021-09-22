@@ -7,12 +7,8 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
      <section class='fight'> 
 
      
+     <div id='fight_container'>
      <div class='fight__container'>   
-
-
-         
-        
-
            <div class='fight__weaponWrapper ' > 
               <img src='./images/explosion.png' class='fight__explosion'/>
               ${weapon !== undefined ? 
@@ -94,11 +90,12 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
 
          </div>
 
+         </div>
 
 
 
 
-        <div class='fight__summaryWrapper disabled'> 
+        <div class='fight__summaryWrapper disabled' id='successful_fight_summary'> 
             <div class='fight__summary'>
               <img class='fight__characterImg' src='${userData.currentMission.character}'/>
               <h2 class='fight__summaryTitle'>${getRandomcongratulationsText()}</h2>
@@ -106,14 +103,14 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
                 <div><img src='./images/coin.png' alt='coin'/> <strong>Gold: ${userData.currentMission.gold}</strong></div>
                 <div><img src='./images/mission_detail_increase.png' alt='coin'/> <strong>Experience: ${userData.currentMission.exp}</strong></div>
               </div>
-              <button class='fight__summaryBtn fight__summaryBtn-green'>Back to tavern</button>
+              <button class='fight__summaryBtn fight__summaryBtn-green' id='mission_success_btn'>Back to tavern</button>
             </div>
         </div>
 
-        <div class='fight__summaryWrapper disabled'>
+        <div class='fight__summaryWrapper disabled' id='failed_fight_summary'>
            <div class='fight__summary'> 
               <h2 class='fight__failed'>Mission failed</h2>
-              <button class='fight__summaryBtn fight__summaryBtn-red'>Back to tavern</button>
+              <button class='fight__summaryBtn fight__summaryBtn-red' id='mission_failed_btn'>Back to tavern</button>
            </div>
         </div>
 

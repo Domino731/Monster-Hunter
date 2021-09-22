@@ -24,9 +24,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        &-user {
-
-        }
         &-monster{
             position: relative;
         }
@@ -130,9 +127,10 @@
 
     &__summaryWrapper{
         width: 100%;
-  
+         
     }
     &__summary{
+        transform: scale(0);
         margin: 0 auto;
         border: 5px solid $color-gold;
         display: flex;
@@ -145,6 +143,7 @@
         backdrop-filter: blur(2px);
         padding: 10px;
         transition: 0.3s;
+        animation: 1s an__summary_scale forwards;
         &:hover{
             backdrop-filter: blur(4px);
         }
@@ -211,9 +210,15 @@
 
 
 
+#fight_container{
+    width: 100%;
+}
 
-
-
+@keyframes an__summary_scale{
+    100%{
+        transform: scale(100%);
+    }
+}
 
 
 

@@ -184,6 +184,7 @@ export interface MonsterData {
     critical: number
 }
 export interface CurrentMission {
+    id: string,
     exp: number,
     gold: number,
     title: string,
