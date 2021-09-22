@@ -86,7 +86,7 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
             strength: Math.ceil(userStats.strength * 0.8),
             defence: Math.ceil(userStats.defence * 0.8),
             physicalEndurance: Math.ceil(userStats.physicalEndurance * 0.8),
-            luck: Math.ceil(userStats.physicalEndurance * 0.8),
+            luck: Math.ceil(userStats.luck * 0.8),
             damage: Math.ceil(userStats.damage * 0.8),
             health: Math.ceil(userStats.health * 0.8),
             damageReduce: Math.ceil(userStats.damageReduce * 0.8),

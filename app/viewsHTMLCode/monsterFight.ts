@@ -72,19 +72,19 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
               <tbody>
                 <tr> 
                   <td>Strength</td>
-                  <td>${userStats.strength}</td>
+                  <td>${userData.currentMission.monster.strength}</td>
                 </tr>
                 <tr> 
                   <td>Physical endurance</td>
-                  <td>${userStats.physicalEndurance}</td>
+                  <td>${userData.currentMission.monster.physicalEndurance}</td>
                 </tr>
                 <tr> 
                   <td>Defence</td>
-                  <td>${userStats.defence}</td>
+                  <td>${userData.currentMission.monster.defence}</td>
                 </tr>
                 <tr> 
                   <td>luck</td>
-                  <td>${userStats.luck}</td>
+                  <td>${userData.currentMission.monster.luck}</td>
                 </tr>
               </tbody>
            </table>
