@@ -25,8 +25,8 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
          <div class='fight__characterWrapper fight__characterWrapper-user'> 
            <img class='fight__characterImg' src='${userData.portrait}'/>
            <div class='fight__healthBar'>
-             <div class='fight__healthPoints'>${userStats.health}/ ${userStats.health}</div>
-             <div class='fight__health'></div>
+             <div class='fight__healthPoints'> <span id='user_HP'>${userStats.health}</span>/ ${userStats.health}</div>
+             <div class='fight__health' id='user_HPBar'></div>
            </div>
 
            <table class='fight__statsTable'>
@@ -64,8 +64,8 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
 
             <img class='fight__characterImg' src='${userData.currentMission.monster.src}'/>
            <div class='fight__healthBar'>
-              <div class='fight__healthPoints'>${userData.currentMission.monster.health} / ${userData.currentMission.monster.health}</div>
-             <div class='fight__health'></div>
+              <div class='fight__healthPoints'><span id='monster_HP'>${userData.currentMission.monster.health}</span> / ${userData.currentMission.monster.health}</div>
+             <div class='fight__health' id='monster_HPBar'></div>
            </div>
            <div style='width: 100%;'>
            <table class='fight__statsTable'>
