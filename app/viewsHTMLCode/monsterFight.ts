@@ -1,10 +1,24 @@
 import { FullUserStats, UserData } from '../types';
 export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: UserData) :string => {
+  const weapon = userData.equipmentItems[userData.equipmentItems.findIndex(el => el.type === 'weapon')];
+
     return `
      <section class='fight'> 
-         <div class='fight__characterWrapper'> 
 
-            <img class='fight__characterImg' src='${userData.portrait}'/>
+     <div class='fight__container'>   
+
+
+           <div class='fight__weaponWrapper'> 
+              <img src='./images/explosion.png' class='fight__explosion'/>
+              ${weapon !== undefined ? 
+              `<img src='${weapon.src}' class='fight__sword'/>`
+              :
+              `<img src='./images/fist.png' class='fight__sword'/>`
+              }
+           </div>
+
+         <div class='fight__characterWrapper fight__characterWrapper-user'> 
+           <img class='fight__characterImg' src='${userData.portrait}'/>
            <div class='fight__healthBar'>
              <div class='fight__healthPoints'>1440 / ${userStats.health}</div>
              <div class='fight__health'></div>
@@ -64,6 +78,7 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
            </table>
          </div>
 
+         </div>
      </section>
     `
 }

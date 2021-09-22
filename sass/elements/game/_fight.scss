@@ -1,30 +1,40 @@
-.fight{
+.fight {
     height: 100%;
-    background-image: url('/images/background_monster_fight.jpg');
+    background-image: url("/images/background_monster_fight.jpg");
     background-size: 100% 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
-    &__characterWrapper{
-      width: 400px;
-      padding: 10px;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-      position: relative;
-      backdrop-filter: blur(2px); 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    &__container {
+        width: 100%;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
     }
-    &__characterImg{
+
+    &__characterWrapper {
+        width: 400px;
+        padding: 10px;
+        z-index: 0;
+
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        position: relative;
+        backdrop-filter: blur(2px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-user {
+        }
+    }
+    &__characterImg {
         width: 100%;
         height: auto;
         object-fit: cover;
         margin-bottom: 15px;
     }
-    &__healthBar{
+    &__healthBar {
         width: 100%;
         height: 42px;
         border: 6px solid $color-gray_dark;
@@ -34,7 +44,7 @@
         align-items: center;
         justify-content: center;
     }
-    &__healthPoints{
+    &__healthPoints {
         display: block;
         font-weight: bold;
         font-size: 1.75rem;
@@ -42,7 +52,7 @@
         letter-spacing: 0.125rem;
         color: $color-white;
     }
-    &__health{
+    &__health {
         position: absolute;
         left: 0;
         top: 0;
@@ -50,30 +60,81 @@
         width: 20px;
         background: $color-green;
     }
-    &__statsTable{
+    &__statsTable {
         width: 100%;
         border-spacing: 0;
         margin-top: 15px;
-       tbody{
-        display: table-row-group;
-        vertical-align: middle;
-        border-color: inherit;
-        font-weight: bold;
-        font-size: 1.438rem;
-       }
-       tr{
-        display: table-row;
-        vertical-align: inherit;
-        border-color: inherit;
-        td{
-            padding-bottom: 0.313rem;
-
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+            font-weight: bold;
+            font-size: 1.438rem;
         }
-        td:first-child{
-            vertical-align: top;
-            white-space: nowrap;
-
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+            td {
+                padding-bottom: 0.313rem;
+            }
+            td:first-child {
+                vertical-align: top;
+                white-space: nowrap;
+            }
         }
-       }
+    }
+    &__weaponWrapper {
+        z-index: 10;
+        position: absolute;
+        top: 150px;
+        left: 245px;
+        width: 200px;
+        height: 200px;
+        transform: scale(0);
+        animation: 1.5s an__sword_attack forwards;
+    }
+    &__explosion {
+        transform: scale(0);
+        position: absolute;
+        z-index: 2;
+        width: 80%;
+        height: auto;
+        object-fit: cover;
+        animation: 0.5s 1s  an__attack_explosion forwards, 0.5s 1.5s  an__attack_explosion_shrink  forwards;
+    }
+    &__sword {
+        z-index: 0;
+        animation: 0.5s 1s an__sword_attack_shrink forwards;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
+
+@keyframes an__sword_attack {
+    30%{
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(830px, 0%)  scale(100%);
+    }
+}
+@keyframes an__attack_explosion {
+    100% {
+        transform:  scale(130%);
+    }
+}
+@keyframes an__attack_explosion_shrink {
+    100% {
+        transform:  scale(0%);
+    }
+}
+@keyframes an__sword_attack_shrink {
+    100% {
+        transform:  scale(0%);
     }
 }
