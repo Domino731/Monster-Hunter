@@ -1,0 +1,79 @@
+.fight{
+    height: 100%;
+    background-image: url('/images/background_monster_fight.jpg');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    &__characterWrapper{
+      width: 400px;
+      padding: 10px;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      position: relative;
+      backdrop-filter: blur(2px); 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__characterImg{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+    &__healthBar{
+        width: 100%;
+        height: 42px;
+        border: 6px solid $color-gray_dark;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__healthPoints{
+        display: block;
+        font-weight: bold;
+        font-size: 1.75rem;
+        font-style: italic;
+        letter-spacing: 0.125rem;
+        color: $color-white;
+    }
+    &__health{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 20px;
+        background: $color-green;
+    }
+    &__statsTable{
+        width: 100%;
+        border-spacing: 0;
+        margin-top: 15px;
+       tbody{
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+        font-weight: bold;
+        font-size: 1.438rem;
+       }
+       tr{
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+        td{
+            padding-bottom: 0.313rem;
+
+        }
+        td:first-child{
+            vertical-align: top;
+            white-space: nowrap;
+
+        }
+       }
+    }
+}
