@@ -11,6 +11,7 @@
         display: flex;
         position: relative;
         justify-content: space-between;
+        display: none;
     }
 
     &__characterWrapper {
@@ -30,7 +31,6 @@
         }
         &-monster{
             position: relative;
-         //  animation: 0.8s an__monster_attack forwards;
         }
     }
     &__characterImg {
@@ -97,7 +97,10 @@
         width: 200px;
         height: 200px;
         transform: scale(0);
-        //animation: 1.5s an__sword_attack forwards;
+        &-an{
+           animation: 1.5s an__sword_attack forwards;
+        }
+       
     }
     &__explosion {
         transform: scale(0);
@@ -106,21 +109,119 @@
         width: 80%;
         height: auto;
         object-fit: cover;
-        //animation: 0.5s 1s  an__attack_explosion forwards, 0.5s 1.5s  an__attack_explosion_shrink  forwards;
+        &-an{
+            animation: 0.5s 1s  an__attack_explosion forwards, 0.5s 1.5s  an__attack_explosion_shrink  forwards; 
+        }
+       
     }
     &__sword {
         z-index: 0;
-        //animation: 0.5s 1s an__sword_attack_shrink forwards;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: auto;
         object-fit: cover;
+        &-an{
+            animation: 0.5s 1s an__sword_attack_shrink forwards;
+        }
+    }
+
+
+    &__summaryWrapper{
+        width: 100%;
+  
+    }
+    &__summary{
+        margin: 0 auto;
+        border: 5px solid $color-gold;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        position: relative;
+        backdrop-filter: blur(2px);
+        padding: 10px;
+        transition: 0.3s;
+        &:hover{
+            backdrop-filter: blur(4px);
+        }
+        
+    }
+    &__summaryTitle{
+      font-size: 1.125rem;
+      font-weight: bold;
+      letter-spacing: 0.063rem;
+      word-spacing: 0.125rem;
+      color: $color-white;
+      text-align: center;
+    }
+    &__summaryPayout{
+        margin: 10px 0;
+        div{
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.438rem;
+        }
+        img{
+            width: 2rem;
+            height: auto;
+            object-fit: cover;
+            margin-right: 0.5rem;
+        }
+        strong{
+            font-weight: 600;
+            font-size: 1.125rem;
+            
+        }
+    }
+    &__summaryBtn{
+        width: 100%;
+        font-size: 1.25rem;
+        color: $color-white;
+        font-weight: bold;
+        border-radius: 0.625rem;
+        padding: 0.313rem 0;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        &-green{
+            background: $color-green;
+        }
+        &-red{
+            background: $color-red;
+        }
+        &:focus, &:hover{
+            cursor: pointer;
+            letter-spacing: 0.125rem;
+        }
+    }
+    &__failed{
+        font-size: 2.063rem;
+        margin-bottom: 0.688rem;
+        font-weight: bold;
+        letter-spacing: 0.063rem;
+        word-spacing: 0.125rem;
+        text-shadow: 0.125rem 0.125rem $color-red;  
     }
 }
 
+
+
+
+
+
+
+
+
+
+
 .monster{
+    &-an{
+        animation: 0.8s an__monster_attack forwards;
+    }
     &__explosionWrapper{
         display: flex;
         justify-content: center;
@@ -130,14 +231,16 @@
         left: -200px;
         width: 200px;
         height: 200px;
-        border: 3px solid red;
     }
     &__explosionImg{
         width: 70%;
         height: auto;
         object-fit: cover;
         transform: scale(0%);
-        animation: 1s 0.8s an__monster_explosion_grow ;
+        &-an{
+            animation: 1s 0.8s an__monster_explosion_grow ;
+        }
+        
     }
 }
 @keyframes an__monster_attack {
@@ -153,17 +256,6 @@
         transform: scale(0%);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
