@@ -201,7 +201,7 @@ export class View {
          this.userData.wizardWheelSpin = true;
          this.setMagicWheel();
          // set new missions
-         this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats)
+         this.userData.availableMissions = getRandomMissions(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats, this.userData.pet);
          // set last visit date
          this.userData.lastVisit = today;
          // reset mission willingness

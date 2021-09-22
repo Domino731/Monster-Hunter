@@ -8,7 +8,7 @@ export const getTravelHTMLCode = (user: UserData) : string => {
            <div class='travel__countdownWrapper'>
               <div class='countdown__wrapper'>
                  <div class='countdown__progressBar'> </div>
-                 <div class='countdown__time'>123s 12s 12</div>
+                 <div class='countdown__time'></div>
               </div>
               <button class='countdown__cancelBtn'>Cancel</button>
             </div>

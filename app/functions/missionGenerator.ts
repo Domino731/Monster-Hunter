@@ -1,7 +1,7 @@
 import { missionTitlesData } from "../properties/missions/missionsTitles";
 import { missionDscData } from '../properties/missions/missionsDsc';
 import uniqid from 'uniqid';
-import { MissionData, UserStats, FullUserStats } from '../types';
+import { MissionData, UserStats, FullUserStats, PetData } from '../types';
 import { papyrusSrcData } from '../properties/missions/papyrusSrc';
 import { monstersData } from '../properties/missions/monsters';
 import { charactersData } from "../properties/missions/charactersData";
@@ -29,11 +29,11 @@ const getRandomInt = (min: number, max: number): number => {
  * @param nextLvlExp - experience needed to level up
  * @param guardPayout - guard payout value
  */
-export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats): MissionData[] => {
+export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats, userPet: PetData | null): MissionData[] => {
     const missions: MissionData[] = [];
-    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
-    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
-    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats, userPet));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats, userPet));
+    missions.push(getRandomMission(nextLvlExp, guardPayout, userStats, userPet));
     return missions
 }
 
@@ -46,7 +46,7 @@ export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userS
  * @param guardPayout - guard payout value
  * @param userStats - user statistics on the basis of which statistics for the monster will be created
  */
-export const getRandomMission = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats): MissionData => {
+export const getRandomMission = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats, userPet: PetData | null): MissionData => {
 
     // at first check if data ararys aren't empty
     if (missionTitlesArr.length === 0) {
@@ -56,14 +56,20 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         missionDscArr = missionDscData;
     }
     if (papyrusSrcArr.length === 0) {
-        papyrusSrcArr === papyrusSrcData;
+        papyrusSrcArr = papyrusSrcData;
     }
-    if(charactersArr.length === 0){
-        charactersArr === charactersData;
+    if (charactersArr.length === 0) {
+        charactersArr = charactersData;
     }
+    if (monstersArr.length === 0) {
+        monstersArr = monstersData;
+    }
+
+
     // points from which experience, gold and mission time will be calculated
     const missionGoldPoints: number = getRandomInt(1, 20);
     const missionExpPoints: number = getRandomInt(1, 20);
+
     // create mission data 
     const mission: MissionData = {
         exp: Math.ceil(missionExpPoints * (Math.random() * 10 / 3) / nextLvlExp),
@@ -78,7 +84,7 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         monster: {
             src: monstersArr[Math.floor(Math.random() * monstersData.length)],
             strength: Math.ceil(userStats.strength * 0.8),
-            defence:  Math.ceil(userStats.defence * 0.8),
+            defence: Math.ceil(userStats.defence * 0.8),
             physicalEndurance: Math.ceil(userStats.physicalEndurance * 0.8),
             luck: Math.ceil(userStats.physicalEndurance * 0.8),
             damage: Math.ceil(userStats.damage * 0.8),
@@ -88,10 +94,17 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         }
     }
 
+    if (userPet.properties.travelTime) {
+        const newTravelTime = Math.floor(mission.time - (mission.time * userPet.properties.travelTime / 100));
+        mission.time = newTravelTime;
+    }
+
     // prevent of duplicates
     missionDscArr.splice(missionDscArr.indexOf(mission.dsc), 1);
     missionTitlesArr.splice(missionTitlesArr.indexOf(mission.title), 1);
     papyrusSrcArr.splice(papyrusSrcArr.indexOf(mission.papyrus), 1);
     charactersArr.splice(charactersArr.indexOf(mission.character), 1);
+    monstersArr.splice(monstersArr.indexOf(mission.monster.src), 1);
+
     return mission
 }

@@ -43,7 +43,7 @@ export const getTavernHTMLCode = (user: UserData) : string => {
     </div>
 
     <div class='tavern__list'>
-        <h2 class='tavern__title'>Available tavern</h2>
+        <h2 class='tavern__title'>Available missions</h2>
         <div class='tavern__listWrapper'>
             ${user.availableMissions.map(el => `<img src='${el.papyrus}' alt='papyrus' data-mission-id='${el.id}'
                 class='tavern__papyrus' />`)}

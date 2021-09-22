@@ -35,6 +35,9 @@ export class Tavern extends View {
     }
 
     selectMissionEvent() {
+
+
+        let mission : MissionData | null = null;
         this.dom.missionList.forEach(el => el.addEventListener('click', () => {
             const element = el as HTMLElement;
 
@@ -44,26 +47,24 @@ export class Tavern extends View {
             this.dom.missionContentWrapper.classList.add('disabled');
             // find specific mission from user's data
             const missionIndex: number = this.userData.availableMissions.findIndex(el => el.id === element.dataset.missionId)
-            const mission: MissionData = this.userData.availableMissions[missionIndex];
-
-            // check if user has active pet, then reduce mission travel time
-            if (this.userData.pet.properties.travelTime) {
-                const newTravelTime = Math.floor(mission.time - (mission.time * this.userData.pet.properties.travelTime / 100))
-                mission.time = newTravelTime;
-            }
+            mission = this.userData.availableMissions[missionIndex];
+      
             // create details about this mission
             this.dom.missionDetails.innerHTML = getMissionDetails(mission);
             this.dom.character.src = mission.character
             this.dom.character.classList.remove('disabled')
             this.dom.missionContentWrapper.classList.remove('disabled');
 
+           
             // set selected mission
             this.selectedMission = mission;
         }))
     }
     startMission() {
         this.dom.startMissionBtn.addEventListener('click', () => {
-            if (this.selectedMission !== null) {
+            const x = true
+            //this.selectedMission !== null
+            if (x) {
                 // check if user have enough willingness to start new mission, then add new mission to user's data, else 
                 // show error
                 if (this.selectedMission.time <= this.userData.missionWillingness) {
@@ -82,9 +83,11 @@ export class Tavern extends View {
                         start,
                         end
                     }
+                    console.log(newMission)
                     this.userData.currentMission = newMission;
                     this.userData.status = 'mission';
                     this.userData.missionWillingness -= this.selectedMission.time;
+
                     updateUserData(this.userData)
                     // create new mission travel section
                     const travel = new Travel();
@@ -104,7 +107,6 @@ export class Tavern extends View {
 
     onBtnHover() {
         this.dom.startMissionBtn.addEventListener('mouseover', () => {
-            console.log(12)
             this.dom.willingnessBarGreen.style.height = `${this.userData.missionWillingness - this.selectedMission.time}%`
         })
         this.dom.startMissionBtn.addEventListener('mouseleave', () => {
@@ -127,6 +129,7 @@ export class Tavern extends View {
         }
     }
     initScripts() {
+        console.log(this.userData.availableMissions)
         setCountdown(this.dom.countdown);
         this.onBtnHover();
         this.startMission();

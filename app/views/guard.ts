@@ -28,7 +28,7 @@ export class Guard extends View {
     super()
     this.guardPayout = 0
     this.guardTime = 1
-
+    this.countdownInterval = null
     this.dom = {
       sliderValue: document.querySelector('#slider_value'),
       inputSlider: document.querySelector('#guard_input_slider'),
@@ -47,10 +47,8 @@ export class Guard extends View {
     }
   }
 
-  async render() {
+   render() {
     this.root.innerHTML = getGuardHTMLCode();
-
-
   }
 
 
@@ -96,7 +94,6 @@ export class Guard extends View {
   eventForGuardAcceptBtn() {
     this.dom.acceptBtn.addEventListener('click', () => {
       if (this.userData.status === 'free') {
-        console.log(1)
         // set user status to guard -> he will not be able to start new missions
         this.userData.status = 'guard';
         // set guard properties -> start, end date of guard, payout and current date 
@@ -127,6 +124,7 @@ export class Guard extends View {
 
     this.countdownInterval = setInterval(() => {
 
+  
       let hours, minutes, seconds; // variables for time units
 
       // find the amount of "seconds" between now and target
@@ -155,7 +153,7 @@ export class Guard extends View {
         const progress = today - start;
 
         const result: string = Math.round(progress / total * 100) + "%";
-        this.dom.countdownProgressBar.style.width = result
+        this.dom.countdownProgressBar.style.width = result;       
       }
       else {
         this.dom.summaryPayout.innerText = `${this.userData.guard.payout}`
