@@ -203,7 +203,8 @@ export interface SearchedUserData {
     status: 'free' | 'guard' | 'mission',
     nick: string,
     lastVisit: Date,
-    id: string
+    id: string,
+    pet: PetData | null
 }
 export interface CurrentMission {
     id: string,

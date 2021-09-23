@@ -42,7 +42,8 @@ export class SearchFriend extends View {
                status: doc.data().status,
                nick: doc.data().nick,
                lastVisit: doc.data().lastVisit,
-               id: doc.id
+               id: doc.id,
+               pet: doc.data().pet
              }
              this.allUsersData.push(data);
          });
@@ -87,6 +88,9 @@ export class SearchFriend extends View {
    initScripts() {
         this.getAllUsers()
         .then(()=> {
+         const searchedUser : SearchedUserData = this.allUsersData[3]
+           //@ ts-ignore
+           const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
           this.showSpecificUserEvent();
         })
    }
