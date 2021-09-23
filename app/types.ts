@@ -183,7 +183,7 @@ export interface MonsterData {
     luck: number,
     critical: number
 }
-export interface SpecificUserData {
+export interface SearchedUserData {
     description: string,
     equipmentItems: ShopItem[],
     exp: number,

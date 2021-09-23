@@ -538,7 +538,6 @@ export class Profile extends View {
         }, 1000);
     }
     setUserEquipment() {
-        console.log(this.dom.general)
         this.userData.equipmentItems.forEach(el => {
             const equipmentSlot: HTMLElement = document.querySelector(`#profile_equipment_slots div[data-slot-name = '${el.type}']`);
             equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon" data-current-item-id='${el.id}' draggable='true'/>`
