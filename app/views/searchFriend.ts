@@ -57,9 +57,9 @@ export class SearchFriend extends View {
          this.allUsersData.forEach(el => {
             const newElement = `
             <tr data-user-id='${el.id}'>
-            <td><div class='searchFriend__status'> <img src='${getStatusImgSrc(el.status)}'/><strong>${el.status}</strong></div></td>
+            <td><div class='searchFriend__status searchFriend__status-an'> <img src='${getStatusImgSrc(el.status)}'/><strong>${el.status}</strong></div></td>
             <td><div class='searchFriend__nick'><div class='searchFriend__level'>${el.level}</div><strong>${el.nick}</strong></div></td>
-            <td><div class='searchFriend__lastVisit'>${formatDate(el.lastVisit)} <img src='./images/computer.png'/></div></td>
+            <td><div class='searchFriend__lastVisit searchFriend__lastVisit-an'>${formatDate(el.lastVisit)} <img src='./images/computer.png'/></div></td>
             </tr>
             `
             html += newElement;
@@ -85,12 +85,12 @@ export class SearchFriend extends View {
     }));
    }
 
+   
+
+
    initScripts() {
         this.getAllUsers()
         .then(()=> {
-         const searchedUser : SearchedUserData = this.allUsersData[3]
-           //@ ts-ignore
-           const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
           this.showSpecificUserEvent();
         })
    }

@@ -59,6 +59,9 @@
         align-items: center;
         border-radius: 15px;
         position: relative;
+        &-an{
+            
+        }
         &::after{
             content: '';
             display: block;
@@ -146,6 +149,12 @@
         background: $color-white;
         border-radius: 15px;
         position: relative;
+
+        &-an{
+            &::after{
+           //   animation: 1s an__searchFriend_level forwards;
+            }
+        }
         &::after{
             content: '';
             display: block;
@@ -157,6 +166,7 @@
             clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
         }
         img{
+            margin-left: 3px;
             margin-right: -2px;
         }
     }
@@ -207,35 +217,11 @@
             border-radius: 50%;
         }
     }
-    .status {
-        padding: 0 0.563rem;
-        border-radius: 20px;
-        &-online {
-            background: $color-green;
-            color: $color-white;
-        }
-        &-offline {
-            background: $color-red;
-            color: $color-white;
-        }
-    }
-    .level {
-        font-weight: 900;
-        background: #473080;
-        color: #27c1e6;
-        font-size: 1.313rem;
-        letter-spacing: 0.125rem;
-        padding: 0 0.563rem;
-        border-radius: 20px;
-    }
-    .nick {
-        font-weight: 900;
-        background: $color-gold;
-        padding: 0 0.563rem;
-        padding: 0 0.563rem;
-        letter-spacing: 0.125rem;
-        background: $color-gold;
-        color: #27c1e6;
-        border-radius: 20px;
+}
+
+@keyframes an__searchFriend_level{
+    100%{
+        left: -40px;
     }
 }
+

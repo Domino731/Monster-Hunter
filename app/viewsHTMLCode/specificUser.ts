@@ -2,6 +2,8 @@ import { getNeededExp } from '../functions/getNeededExp';
 import { potionsData } from '../properties/shop/potions';
 import { SearchedUserData, UserData, ShopItem, FullUserStats, PetProperties } from '../types';
 import { SearchedUser } from '../views/sub_views/specificUser';
+import { setUserStats } from '../functions/setStats';
+
 
 export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[], searchedUser: SearchedUserData): string => {
 
@@ -31,110 +33,26 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
             return `<img src=${searchedUser.pet.imgSmallSrc} alt=${searchedUser.pet.name} class='profile__generalImg-item'/>`
         }
         else {
-            return ` <img src="/images/profile_pet_slot.png" alt="Pet slot" />`
+            return ` <img src="/images/profile_pet_slot.png" title="Pet slot" />`
         }
     }
 
 
-   const stats: FullUserStats = {
-    strength: 0,
+   let stats: FullUserStats = {
+    strength: searchedUser.rawStats.strength,
     damage: 0,
-    physicalEndurance: 0,
+    physicalEndurance: searchedUser.rawStats.physicalEndurance,
     health: 0,
-    defence: 0,
+    defence: searchedUser.rawStats.defence,
     damageReduce: 0,
-    luck: 0,
+    luck: searchedUser.rawStats.luck,
     critical: 0
  }
 
+  stats = setUserStats(searchedUser, stats)
 
   // function that will set statistics based on equipment, potions and pet
-  const setStats = () : void => {
-
-    // by equipment
-    searchedUser.equipmentItems.forEach(el => {
-       if (el.properties.strength !== null) {
-          stats.strength = Math.floor(searchedUser.rawStats.strength + el.properties.strength);
-          stats.damage = Math.floor(stats.strength * 0.7);
-       }
-       if (el.properties.luck !== null) {
-          stats.luck = Math.floor(searchedUser.rawStats.luck + el.properties.luck);
-          stats.critical = Math.floor(stats.luck * 0.3);
-       }
-       if (el.properties.physicalEndurance !== null) {
-          stats.physicalEndurance = Math.floor(searchedUser.rawStats.physicalEndurance + el.properties.physicalEndurance);
-          stats.health = Math.floor(stats.physicalEndurance * 0.8);
-       }
-       if (el.properties.defence !== null) {
-          stats.defence = Math.floor(searchedUser.rawStats.defence + el.properties.defence);
-          stats.damageReduce = Math.floor(stats.defence * 0.5);
-       }
-    });
-
-    // by pet
-    if (searchedUser.pet !== null) {
-       const petProps: PetProperties = searchedUser.pet.properties
-       if (petProps.strength !== null) {
-          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (petProps.strength / 100));
-          stats.damage = Math.floor(stats.strength * 0.7);
-       }
-       if (petProps.luck !== null) {
-          stats.luck = stats.luck + Math.floor(searchedUser.rawStats.luck * (petProps.luck / 100));
-          stats.critical = Math.floor(stats.luck * 0.3);
-       }
-       if (petProps.physicalEndurance !== null) {
-          stats.physicalEndurance = stats.physicalEndurance + Math.floor(searchedUser.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
-          stats.health = Math.floor(stats.physicalEndurance * 0.8);
-       }
-       if (petProps.defence !== null) {
-          stats.defence = stats.defence + Math.floor(searchedUser.rawStats.defence * (petProps.defence / 100));
-          stats.damageReduce = Math.floor(stats.defence * 0.5);
-       }
-    }
-    // by potions       
-    const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => searchedUser.potions.first)];
-    const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => searchedUser.potions.second)];
-    // first potion
-    if (firstPotion !== undefined) {
-       if (firstPotion.properties.strength !== null) {
-          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (firstPotion.properties.strength / 100));
-          stats.damage = Math.floor(stats.strength * 0.7);
-       }
-       if (firstPotion.properties.luck !== null) {
-          stats.luck = stats.strength + Math.floor(searchedUser.rawStats.luck * (firstPotion.properties.luck / 100));
-          stats.critical = Math.floor(stats.luck * 0.3);
-       }
-       if (firstPotion.properties.physicalEndurance !== null) {
-          stats.physicalEndurance = stats.strength + Math.floor(searchedUser.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
-          stats.health = Math.floor(stats.physicalEndurance * 0.8);
-       }
-       if (firstPotion.properties.defence !== null) {
-          stats.defence = stats.strength + Math.floor(searchedUser.rawStats.defence * (firstPotion.properties.defence / 100));
-          stats.damageReduce = Math.floor(stats.defence * 0.5);
-       }
-    }
-    // second potion
-    if (secondPotion !== undefined) {
-       if (secondPotion.properties.strength !== null) {
-          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (secondPotion.properties.strength / 100));
-          stats.damage = Math.floor(stats.strength * 0.7);
-       }
-       if (secondPotion.properties.luck !== null) {
-          stats.luck = stats.strength + Math.floor(searchedUser.rawStats.luck * (secondPotion.properties.luck / 100));
-          stats.critical = Math.floor(stats.luck * 0.3);
-       }
-       if (secondPotion.properties.physicalEndurance !== null) {
-          stats.physicalEndurance = stats.strength + Math.floor(searchedUser.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
-          stats.health = Math.floor(stats.physicalEndurance * 0.8);
-       }
-       if (secondPotion.properties.defence !== null) {
-          stats.defence = stats.strength + Math.floor(searchedUser.rawStats.defence * (secondPotion.properties.defence / 100));
-          stats.damageReduce = Math.floor(stats.defence * 0.5);
-       }
-
-    }
- }
- setStats();
+  
   
  // function that check if searched user is already your friend
  const checkFriend = () : string => {
@@ -146,6 +64,28 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
          return `./images/active_friend.png`
      }
  }
+
+ const firstPotionImg = () => {
+    // find specific potion
+    const potion: ShopItem = potionsData[potionsData.findIndex(el => searchedUser.potions.first)];
+    if(potion !== undefined){
+       return `<img src=${potion.src} class='profile__generalImg-item'/>`
+    }
+    else {
+       return `<img src="/images/profile_elixir_slot.png" title="Elixir slot #1" />`
+    }
+ }
+ const secondPotionImg = () => {
+   // find specific potion
+   const potion: ShopItem = potionsData[potionsData.findIndex(el => searchedUser.potions.second)];
+   if(potion !== undefined){
+      return `<img src=${potion.src} class='profile__generalImg-item'/>`
+   }
+   else {
+      return `<img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />`
+   }
+}
+
 
     return `
    <div class='profile__equipment'>
@@ -191,7 +131,7 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
      <div class='profile__levelProgress' style='width: ${Math.floor(searchedUser.exp * 100 / getNeededExp(searchedUser.level))}%'></div>
       <i>${searchedUser.level}</i>
       </div>
-    <strong class='profile__nickname'>nickname</strong>
+    <strong class='profile__nickname'>${searchedUser.nick}</strong>
     <div class='searchedUser__actionBar'> 
        <img src='./images/switch.png' class='searchedUser__actionIcon' id='searched_user_switch' title='Switch'/>
        <img src='${checkFriend()}' class='searchedUser__actionIcon' id='searched_user_friend_action' title='Add to friends'/>
@@ -219,14 +159,14 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
                 <strong class='profile__generalText'>${searchedUser.pet !== null ? searchedUser.pet.name : 'No pet'}</strong>
             </div>
             <div class='profile__generalItem' id='profile_general_potion_first'>
-                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #1" />
+                <div class='profile__generalImg ${searchedUser.pet !== null && 'profile__generalImg-item'}'> ${firstPotionImg()}
                 </div>
                 <strong class='profile__generalText'>${searchedUser.potions.first !== null ? firstPotionName() : 'No potion'}</strong>
               
                 
             </div>
             <div class='profile__generalItem' id='profile_general_potion_second'>
-                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #2" />
+                <div class='profile__generalImg ${searchedUser.pet !== null && 'profile__generalImg-item'}'> ${secondPotionImg()}
                 </div>
                 <strong class='profile__generalText'>${searchedUser.potions.second !== null ? secondPotionName() : 'No potion'}</strong>
             </div>
