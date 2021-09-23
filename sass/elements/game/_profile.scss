@@ -850,6 +850,36 @@
         transform: translate(50%, -100%);
     }
 }
+.searchedUser{
+    &__statsWrapper{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+        height: 135px;
+    }
+    &__statsTable{
+        color: $color-white;
+        width: 47%;
+        height: 100%;
+        border-radius: 20px;
+        padding: 10px;
+        background: $color-gray_dark;
+    }
+}
+.searchedUser__statsTable{
+    td:first-child{
+        padding-top: 10px;
+    }
+    td{
+        padding-left: 10px ;
+    }
+    tr{
+        font-weight: bold;
+        letter-spacing: 0.125rem;
+        font-size: 20px;
+    }
+}
 @keyframes an__profile__item-notAfford {
     100% {
         color: $color-error;

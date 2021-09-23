@@ -1,5 +1,5 @@
 import { getSpecificUserHTMLCode } from '../../viewsHTMLCode/specificUser';
-import { UserData, SearchedUserData, ShopItem } from '../../types';
+import { UserData, SearchedUserData, ShopItem, FullUserStats } from '../../types';
 import { getEquipmentLabel } from './getEquipmentLabel';
 import { potionsData } from '../../properties/shop/potions';
 import { getPotionLabel } from './getPotionLabel';
@@ -18,7 +18,6 @@ export class SearchedUser {
       root: HTMLElement | null
       labelWrapper: HTMLElement | null
     }
-
   }
 
   /**
@@ -102,7 +101,6 @@ export class SearchedUser {
 
   }
 
-
   // events responsible for potion label
   labelForPotions() {
 
@@ -158,6 +156,7 @@ export class SearchedUser {
 
 
   initScripts() {
+
     this.labelForEquipmentEvent();
     this.labelForPotions();
   }

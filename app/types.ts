@@ -188,7 +188,6 @@ export interface SearchedUserData {
     equipmentItems: ShopItem[],
     exp: number,
     level: number,
-    rawStats: number,
     portrait: string,
     potions: {
         first: {
@@ -204,7 +203,13 @@ export interface SearchedUserData {
     nick: string,
     lastVisit: Date,
     id: string,
-    pet: PetData | null
+    pet: PetData | null,
+    rawStats: {
+        strength: number
+        physicalEndurance: number
+        defence: number
+        luck: number
+    }
 }
 export interface CurrentMission {
     id: string,
@@ -213,7 +218,7 @@ export interface CurrentMission {
     title: string,
     time: number
     character: string,
-    monster: MonsterData
+    monster: MonsterData,
     background: {
         attribute: string,
         src: string

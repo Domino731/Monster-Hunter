@@ -1,6 +1,6 @@
 import { getNeededExp } from '../functions/getNeededExp';
 import { potionsData } from '../properties/shop/potions';
-import { SearchedUserData, UserData, ShopItem } from '../types';
+import { SearchedUserData, UserData, ShopItem, FullUserStats, PetProperties } from '../types';
 import { SearchedUser } from '../views/sub_views/specificUser';
 
 export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string => {
@@ -34,6 +34,111 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
             return ` <img src="/images/profile_pet_slot.png" alt="Pet slot" />`
         }
     }
+
+
+   const stats: FullUserStats = {
+    strength: 0,
+    damage: 0,
+    physicalEndurance: 0,
+    health: 0,
+    defence: 0,
+    damageReduce: 0,
+    luck: 0,
+    critical: 0
+ }
+
+
+  // function that will set statistics based on equipment, potions and pet
+  const setStats = () => {
+
+    // by equipment
+    searchedUser.equipmentItems.forEach(el => {
+       if (el.properties.strength !== null) {
+          stats.strength = Math.floor(searchedUser.rawStats.strength + el.properties.strength);
+          stats.damage = Math.floor(stats.strength * 0.7);
+       }
+       if (el.properties.luck !== null) {
+          stats.luck = Math.floor(searchedUser.rawStats.luck + el.properties.luck);
+          stats.critical = Math.floor(stats.luck * 0.3);
+       }
+       if (el.properties.physicalEndurance !== null) {
+          stats.physicalEndurance = Math.floor(searchedUser.rawStats.physicalEndurance + el.properties.physicalEndurance);
+          stats.health = Math.floor(stats.physicalEndurance * 0.8);
+       }
+       if (el.properties.defence !== null) {
+          stats.defence = Math.floor(searchedUser.rawStats.defence + el.properties.defence);
+          stats.damageReduce = Math.floor(stats.defence * 0.5);
+       }
+    });
+
+    // by pet
+    if (searchedUser.pet !== null) {
+       const petProps: PetProperties = searchedUser.pet.properties
+       if (petProps.strength !== null) {
+          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (petProps.strength / 100));
+          stats.damage = Math.floor(stats.strength * 0.7);
+       }
+       if (petProps.luck !== null) {
+          stats.luck = stats.luck + Math.floor(searchedUser.rawStats.luck * (petProps.luck / 100));
+          stats.critical = Math.floor(stats.luck * 0.3);
+       }
+       if (petProps.physicalEndurance !== null) {
+          stats.physicalEndurance = stats.physicalEndurance + Math.floor(searchedUser.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
+          stats.health = Math.floor(stats.physicalEndurance * 0.8);
+       }
+       if (petProps.defence !== null) {
+          stats.defence = stats.defence + Math.floor(searchedUser.rawStats.defence * (petProps.defence / 100));
+          stats.damageReduce = Math.floor(stats.defence * 0.5);
+       }
+    }
+    // by potions       
+    const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => searchedUser.potions.first)];
+    const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => searchedUser.potions.second)];
+    // first potion
+    if (firstPotion !== undefined) {
+       if (firstPotion.properties.strength !== null) {
+          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (firstPotion.properties.strength / 100));
+          stats.damage = Math.floor(stats.strength * 0.7);
+       }
+       if (firstPotion.properties.luck !== null) {
+          stats.luck = stats.strength + Math.floor(searchedUser.rawStats.luck * (firstPotion.properties.luck / 100));
+          stats.critical = Math.floor(stats.luck * 0.3);
+       }
+       if (firstPotion.properties.physicalEndurance !== null) {
+          stats.physicalEndurance = stats.strength + Math.floor(searchedUser.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
+          stats.health = Math.floor(stats.physicalEndurance * 0.8);
+       }
+       if (firstPotion.properties.defence !== null) {
+          stats.defence = stats.strength + Math.floor(searchedUser.rawStats.defence * (firstPotion.properties.defence / 100));
+          stats.damageReduce = Math.floor(stats.defence * 0.5);
+       }
+    }
+    // second potion
+    if (secondPotion !== undefined) {
+       if (secondPotion.properties.strength !== null) {
+          stats.strength = stats.strength + Math.floor(searchedUser.rawStats.strength * (secondPotion.properties.strength / 100));
+          stats.damage = Math.floor(stats.strength * 0.7);
+       }
+       if (secondPotion.properties.luck !== null) {
+          stats.luck = stats.strength + Math.floor(searchedUser.rawStats.luck * (secondPotion.properties.luck / 100));
+          stats.critical = Math.floor(stats.luck * 0.3);
+       }
+       if (secondPotion.properties.physicalEndurance !== null) {
+          stats.physicalEndurance = stats.strength + Math.floor(searchedUser.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
+          stats.health = Math.floor(stats.physicalEndurance * 0.8);
+       }
+       if (secondPotion.properties.defence !== null) {
+          stats.defence = stats.strength + Math.floor(searchedUser.rawStats.defence * (secondPotion.properties.defence / 100));
+          stats.damageReduce = Math.floor(stats.defence * 0.5);
+       }
+
+    }
+ }
+
+ setStats();
+ console.log(stats)
+ 
+
 
 
     return `
@@ -117,6 +222,44 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
             </div>
         </div>
 
+
+        <div class='searchedUser__statsWrapper'> 
+        
+          <table class='searchedUser__statsTable'> 
+              <tbody> 
+                <tr>
+                  <td>Strength:</td><td>${stats.strength}</td>
+               </tr>
+               <tr>
+                  <td>Physical endurance:</td><td>${stats.physicalEndurance}</td>
+               </tr>
+               <tr>
+                  <td>Defence:</td><td>${stats.defence}</td>
+               </tr>
+               <tr>
+                  <td>Luck:</td><td>${stats.luck}</td>
+               </tr>
+              </tbody>
+          </table>
+
+
+          <table class='searchedUser__statsTable'> 
+            <tbody> 
+               <tr>
+                  <td>Damage:</td><td>${stats.damage}</td>
+               </tr>
+               <tr>
+                  <td>Health:</td><td>${stats.health}</td>
+               </tr>
+               <tr>
+                  <td>Damage reduce:</td><td>${stats.damageReduce}</td>
+               </tr>
+               <tr>
+                  <td>Chance for critical:</td><td>${stats.critical}</td>
+               </tr>
+            </tbody>
+          </table>
+        </div>
 
    `
 }
