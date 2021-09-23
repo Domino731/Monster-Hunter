@@ -202,7 +202,8 @@ export interface SpecificUserData {
     },
     status: 'free' | 'guard' | 'mission',
     nick: string,
-    lastVisit: Date
+    lastVisit: Date,
+    id: string
 }
 export interface CurrentMission {
     id: string,

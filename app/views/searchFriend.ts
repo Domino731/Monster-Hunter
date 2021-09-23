@@ -2,7 +2,7 @@ import { formatDate } from './../functions/formatDate';
 import { SpecificUserData } from './../types';
 import { getSearchFriendHTMLCode } from '../viewsHTMLCode/searchFriend';
 import { View } from './view';
-import { db} from '../firebase/index'
+import { db, auth } from '../firebase/index';
 import { getStatusImgSrc } from '../functions/getStatusImgSrc';
 export class SearchFriend extends View {
 
@@ -38,10 +38,16 @@ export class SearchFriend extends View {
                potions:  doc.data().potions,
                status: doc.data().status,
                nick: doc.data().nick,
-               lastVisit: doc.data().lastVisit
+               lastVisit: doc.data().lastVisit,
+               id: doc.id
              }
              this.allUsersData.push(data);
          });
+
+         // remove actual user from this list
+         const userIndex: number = this.allUsersData.findIndex(el => el.id === auth.currentUser.uid) 
+         this.allUsersData.splice(userIndex, 1);
+         
          let html: string = '';
          // create list of user's
          this.allUsersData.forEach(el => {
