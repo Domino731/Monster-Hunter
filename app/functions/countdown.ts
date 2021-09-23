@@ -7,7 +7,6 @@ export const setCountdown = (element: HTMLElement) => {
 
       // milliseconds between now & tommorow
       const diffMs = (tomorrow - today);
-      console.log(diffMs)
       const minutes = Math.floor((diffMs / 1000) / 60);
 
       // set the countdown date

@@ -4,13 +4,14 @@ import validator from 'validator';
 import { auth, db } from "../firebase";
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { portraitsData } from '../properties/portraits/portraits';
-import { MissionData, ShopItem } from '../types';
+import { FullUserStats, MissionData, ShopItem } from '../types';
 import { getBlacksmithItems } from "../functions/getBlacksmithItems";
 import { setCountdown } from '../functions/countdown';
 import { potionsData } from "../properties/shop/potions";
 import { getRandomShopItem } from "../functions/getRandomShopItem";
 import { getNeededExp } from '../functions/getNeededExp';
 import { getRandomMission, getRandomMissions } from '../functions/missionGenerator';
+import { initialUserProfile } from '../properties/initialUserProfile/initialUserProfile';
 
 export class Register extends AuthForm {
 
@@ -44,9 +45,11 @@ export class Register extends AuthForm {
 
     // creating new user with his own data in firestore
     authAction() {
+ 
         // hide button and show loading
         this.btn.style.display = "none";
         this.loading.style.display = "block";
+
 
 
         const wizardWheelItems: ShopItem[] = []
@@ -77,17 +80,27 @@ export class Register extends AuthForm {
         }
         items.push(gold);
 
-            items.push(getRandomShopItem(potionsData))
+        items.push(getRandomShopItem(potionsData))
         // set won item
         const magicWheel = {
             items,
             wonItem: items[Math.floor(Math.random() * items.length)]
         }
+        const fullUserStats: FullUserStats = {
+            damage: 35,
+            health: 35,
+            damageReduce: 35,
+            critical: 35,
+            defence: 50,
+            luck: 50,
+            physicalEndurance: 50,
+            strength: 50
+        }
 
         // create new user in firebase
-        auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
+        const unlisten = async () => {
+          await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
             .then((cred) => {
-                console.log(cred)
                 return db.collection("users")
                     .doc(cred.uid)
                     .set({
@@ -95,7 +108,7 @@ export class Register extends AuthForm {
                         nick: this.data.nickname,
                         level: 1,
                         guardPayout: 100,
-                        gold: 100,
+                        gold: 1000,
                         rawStats: {
                             defence: 50,
                             luck: 50,
@@ -137,8 +150,8 @@ export class Register extends AuthForm {
                         magicWheel,
                         nextLevelAt: getNeededExp(1),
                         missionWillingness: 100,
-                        currentMission: null
-                       // availableMissions: getRandomMissions(10, 100, )
+                        currentMission: null,
+                        availableMissions: getRandomMissions(10, 100, fullUserStats, null )
                     });
 
 
@@ -153,11 +166,23 @@ export class Register extends AuthForm {
                     this.input.eMail.style.borderBottomColor = "#e63946";
                 }
             });
+        }
+
 
         // show button and hide loading
         this.loading.style.display = "none";
         this.btn.style.display = "block";
+
+        unlisten()
+        .then(()=> {
+            document.location.href="/";
+        })
+        .catch((err)=> {
+           console.log(err)
+        });
     }
+
+
     setErrors() {
         // checking email
         if (!validator.isEmail(this.data.eMail)) {

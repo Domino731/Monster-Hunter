@@ -94,7 +94,7 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         }
     }
 
-    if (userPet.properties.travelTime) {
+    if (userPet !== null && userPet.properties.travelTime) {
         const newTravelTime = Math.floor(mission.time - (mission.time * userPet.properties.travelTime / 100));
         mission.time = newTravelTime;
     }

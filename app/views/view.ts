@@ -32,7 +32,7 @@ export class View {
    setHeroStats() {
 
       // by equipment
-      this.userData.equipmentItems.map(el => {
+      this.userData.equipmentItems.forEach(el => {
          if (el.properties.strength !== null) {
             this.userStats.strength = Math.floor(this.userData.rawStats.strength + el.properties.strength);
             this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
@@ -52,24 +52,25 @@ export class View {
       });
 
       // by pet
-      const petProps: PetProperties = this.userData.pet.properties
-      if (petProps.strength !== null) {
-         this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (petProps.strength / 100));
-         this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+      if (this.userData.pet !== null) {
+         const petProps: PetProperties = this.userData.pet.properties
+         if (petProps.strength !== null) {
+            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (petProps.strength / 100));
+            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+         }
+         if (petProps.luck !== null) {
+            this.userStats.luck = this.userStats.luck + Math.floor(this.userData.rawStats.luck * (petProps.luck / 100));
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+         }
+         if (petProps.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = this.userStats.physicalEndurance + Math.floor(this.userData.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+         }
+         if (petProps.defence !== null) {
+            this.userStats.defence = this.userStats.defence + Math.floor(this.userData.rawStats.defence * (petProps.defence / 100));
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+         }
       }
-      if (petProps.luck !== null) {
-         this.userStats.luck = this.userStats.luck + Math.floor(this.userData.rawStats.luck * (petProps.luck / 100));
-         this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
-      }
-      if (petProps.physicalEndurance !== null) {
-         this.userStats.physicalEndurance = this.userStats.physicalEndurance + Math.floor(this.userData.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
-         this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
-      }
-      if (petProps.defence !== null) {
-         this.userStats.defence = this.userStats.defence + Math.floor(this.userData.rawStats.defence * (petProps.defence / 100));
-         this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
-      }
-
       // by potions       
       const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
       const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
@@ -189,7 +190,7 @@ export class View {
          wonItem: items[Math.floor(Math.random() * items.length)]
       }
    }
-   
+
    dateOperations() {
 
       const today: Date = new Date();
@@ -207,7 +208,7 @@ export class View {
          // reset mission willingness
          this.userData.missionWillingness = 100;
          updateUserData(this.userData);
-         
+
       }
 
    }

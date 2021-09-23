@@ -130,7 +130,6 @@ export class Tavern extends View {
         }
     }
     initScripts() {
-        console.log(this.userData.availableMissions)
         setCountdown(this.dom.countdown);
         this.onBtnHover();
         this.startMission();
