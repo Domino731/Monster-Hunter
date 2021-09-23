@@ -1,90 +1,81 @@
-export class SearchFriend {
+import { formatDate } from './../functions/formatDate';
+import { SpecificUserData } from './../types';
+import { getSearchFriendHTMLCode } from '../viewsHTMLCode/searchFriend';
+import { View } from './view';
+import { db} from '../firebase/index'
+import { getStatusImgSrc } from '../functions/getStatusImgSrc';
+export class SearchFriend extends View {
 
-    private root: HTMLElement
-    constructor() {
-        this.root = document.getElementById("game__view")
-        this.init();
-    }
+   private allUsersData: SpecificUserData[]
+   private dom: {
+      allUsersList: HTMLElement,
+      allUsersRow: NodeListOf<Element>
+   }
+   constructor() {
+      super();
+      this.allUsersData = [];
+      this.dom = {
+         allUsersList: document.querySelector('#all_users'),
+         allUsersRow: document.querySelectorAll('#all_users tr')
+      }
+   }
 
-    async render() {
-        this.root.innerHTML = `<section class='searchFriend'>
-           <div class='searchFriend__item searchFriend__item-search'>
+   render() {
+      this.root.innerHTML = getSearchFriendHTMLCode();
+   }
+   // fetch all user's data from firestore, in order to create list of this user's, and find specific user later
+   async getAllUsers(){
+      db.collection('users').get().then((querySnapshot) => {
+         querySnapshot.forEach((doc) => {
+             // doc.data() is never undefined for query doc snapshots
+             const data : SpecificUserData = {
+                description: doc.data().description,
+               equipmentItems: doc.data().equipmentItems,
+               exp: doc.data().exp,
+               level: doc.data().level,
+               rawStats:doc.data().rawStats,
+               portrait: doc.data().portrait,
+               potions:  doc.data().potions,
+               status: doc.data().status,
+               nick: doc.data().nick,
+               lastVisit: doc.data().lastVisit
+             }
+             this.allUsersData.push(data);
+         });
+         let html: string = '';
+         // create list of user's
+         this.allUsersData.forEach(el => {
+            const newElement = `
+            <tr>
+            <td><div class='searchFriend__status'> <img src='${getStatusImgSrc(el.status)}'/><strong>${el.status}</strong></div></td>
+            <td><div class='searchFriend__nick'><div class='searchFriend__level'>${el.level}</div><strong>${el.nick}</strong></div></td>
+            <td><div class='searchFriend__lastVisit'>${formatDate(el.lastVisit)} <img src='./images/computer.png'/></div></td>
+            </tr>
+            `
+            html += newElement;
+         });
 
-              <div  class='searchFriend__list'>
-                <table>
-                   <thead>
-                     <tr>
-                       <th>Status</th>
-                       <th>Nickname</th>
-                       <th>Level</th>
-                     </tr>  
-                    </thead>
-                  <tbody>
+         this.dom.allUsersList.innerHTML = html;
+         this.dom.allUsersRow = document.querySelectorAll('#all_users tr');
+         console.log(this.dom.allUsersRow)
 
+     }
+     
+     );
+   }
+   initScripts() {
+        this.getAllUsers()
+        .then(()=> {
 
+        })
+   }
+   onDataChange() {
 
-                   <tr>
-                   <td><span class='status status-online'>Online</span></td>
-                   <td><span class='nick'>OlimpicGod739</span></td>
-                   <td><span class='level'>13</span></td>
-                   </tr>
-                   <tr>
-                   <td><span class='status status-offline'>Offline</span></td>
-                   <td><span class='nick'>OlimpicGod739</span></td>
-                   <td><span class='level'>13</span></td>
-                   </tr>
-             
-                    
-                  </tbody>               
-                </table>
-                 </div>
-                <div class='searchFriend__searchBar'>
-                <div class='searchFriend__searchIcon'> 
-                  <img src='./images/friends_icon_search.png' alt='search'/>
-                </div>
-                <input type='text' name='search_friends_input' class='searchFriend__input'>
-                </div>
-           </div>
+   }
+   getDOMElements() {
+      this.dom.allUsersList = document.querySelector('#all_users')
+   }
 
-           <div class='searchFriend__item searchFriend__item-result'>
-           <div class='profile__equipment'>
-                   <div class='profile__equipmentItem profile__equipmentItem-helmet'> 
-                      <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-armor'> 
-                      <img src='/images/profile_equipment_armor.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-gloves'> 
-                      <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-weapon'> 
-                      <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-shield'> 
-                      <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__equipmentItem profile__equipmentItem-special'> 
-                      <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
-                   </div>
-                   <div class='profile__portrait'> </div>
-                   <div class='profile__info'>
-                      <div class='profile__level'>  </div>
-                      <strong class='profile__nickname'>nickname</strong>
-                   </div>
-                </div>
-                <div class='profile__description'> 
-                   <p></p>
-                </div>
-               <a href='https://www.freepik.com/vectors/tree'>Tree vector created by upklyak - www.freepik.com</a>
-
-             </div>
-           </div>
-        </section>`;
-    }
-
-    init() {
-       this.render();
-    }
 }
 
 

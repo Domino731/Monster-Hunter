@@ -1,9 +1,9 @@
-import { Blacksmith } from './views/blacksmith';
-export interface route{
+
+export interface route {
     path: string,
     view: any
 }
-export interface Potion{
+export interface Potion {
     type: 'potion',
     src: string,
     name: string,
@@ -16,7 +16,7 @@ export interface Potion{
         luck: number | null
     }
 }
-export interface ChestPlate{
+export interface ChestPlate {
     type: 'chestPlate',
     name: string,
     rarity: 'common' | 'legendary',
@@ -31,7 +31,7 @@ export interface ChestPlate{
     }
 }
 
-export interface Gloves{
+export interface Gloves {
     type: 'gloves',
     name: string,
     rarity: 'common' | 'legendary',
@@ -45,7 +45,7 @@ export interface Gloves{
         luck: number | null
     }
 }
-export interface ShopItem{
+export interface ShopItem {
     type: 'helmet' | 'shield' | 'special' | 'weapon' | 'potion' | 'chestPlate' | 'gloves' | 'gold',
     name: string,
     rarity: 'common' | 'legendary',
@@ -71,12 +71,12 @@ export interface UserData {
         wizard: null | ShopItem[]
     },
     shopPicks: {
-        blacksmith: null |  AvailableMarketPicks[],
-        wizard: null |  AvailableMarketPicks[]
+        blacksmith: null | AvailableMarketPicks[],
+        wizard: null | AvailableMarketPicks[]
     }
     rawStats: {
-        strength: number 
-        physicalEndurance: number 
+        strength: number
+        physicalEndurance: number
         defence: number
         luck: number
     }
@@ -121,7 +121,7 @@ export interface UserData {
     currentMission: CurrentMission | null
 }
 
-export interface PetProperties{
+export interface PetProperties {
     travelTime: number | null,
     defence: number | null,
     physicalEndurance: number | null,
@@ -142,12 +142,12 @@ export interface AvailableMarketPicks {
     index: number
 }
 export interface UserStats {
-    strength: number 
-    physicalEndurance: number 
+    strength: number
+    physicalEndurance: number
     defence: number
     luck: number
 }
-export interface FullUserStats{
+export interface FullUserStats {
     strength: number,
     damage: number,
     physicalEndurance: number,
@@ -182,6 +182,27 @@ export interface MonsterData {
     damageReduce: number,
     luck: number,
     critical: number
+}
+export interface SpecificUserData {
+    description: string,
+    equipmentItems: ShopItem[],
+    exp: number,
+    level: number,
+    rawStats: number,
+    portrait: string,
+    potions: {
+        first: {
+            id: string
+            end: Date
+        } | null
+        second: {
+            id: string
+            end: Date
+        } | null
+    },
+    status: 'free' | 'guard' | 'mission',
+    nick: string,
+    lastVisit: Date
 }
 export interface CurrentMission {
     id: string,
