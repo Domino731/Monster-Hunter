@@ -126,9 +126,9 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 
 
         <div class='profile__general'>
-        <div class='profile__generalLabelWrapper'>
+        <div class='profile__generalLabelWrapper'></div>
             
-        </div>
+        
             <div class='profile__generalItem' id='profile_general_gold'>
                 <div class='profile__generalImg'> <img src="/images/profile_coins.png" alt="Your coins" /></div>
                 <strong class='profile__generalText'></strong>
