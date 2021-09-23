@@ -151,7 +151,8 @@ export class Register extends AuthForm {
                         nextLevelAt: getNeededExp(1),
                         missionWillingness: 100,
                         currentMission: null,
-                        availableMissions: getRandomMissions(10, 100, fullUserStats, null )
+                        availableMissions: getRandomMissions(10, 100, fullUserStats, null ),
+                        friends: []
                     });
 
 

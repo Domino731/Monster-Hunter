@@ -1,3 +1,4 @@
+import { Friends } from './views/friends';
 
 export interface route {
     path: string,
@@ -118,7 +119,11 @@ export interface UserData {
     }
     availableMissions: MissionData[],
     missionWillingness: number,
-    currentMission: CurrentMission | null
+    currentMission: CurrentMission | null,
+    friends: {
+        nick: string,
+        id: string
+    }[]
 }
 
 export interface PetProperties {

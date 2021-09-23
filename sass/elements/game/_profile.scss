@@ -866,6 +866,31 @@
         padding: 10px;
         background: $color-gray_dark;
     }
+    &__actionBar{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 5px 0;
+        margin: 10px auto;
+        width: 90%;
+        border-radius: 25px;
+        height: 50px;
+        background: $color-gray_dark;
+    }
+    &__actionIcon{
+       height: 100%;
+       width: auto;
+       object-fit: cover;
+       &:hover{
+           cursor: pointer;
+       }
+    }
+}
+#searched_user_switch{
+    transition: 0.7s;
+    &:hover{
+        transform: rotate(360deg);
+    }
 }
 .searchedUser__statsTable{
     td:first-child{
@@ -880,6 +905,7 @@
         font-size: 20px;
     }
 }
+
 @keyframes an__profile__item-notAfford {
     100% {
         color: $color-error;

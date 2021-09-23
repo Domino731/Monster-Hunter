@@ -20,7 +20,7 @@ body{
  
 }
 .disabled{
-    display: none;
+    display: none !important;
 }
 .countdown{
     &__wrapper {

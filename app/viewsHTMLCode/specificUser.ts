@@ -3,7 +3,7 @@ import { potionsData } from '../properties/shop/potions';
 import { SearchedUserData, UserData, ShopItem, FullUserStats, PetProperties } from '../types';
 import { SearchedUser } from '../views/sub_views/specificUser';
 
-export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string => {
+export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[], searchedUser: SearchedUserData): string => {
 
     const specificEquipmentItemImg = (slot: 'helmet' | 'shield' | 'special' | 'weapon' | 'chestPlate' | 'gloves') => {
         const itemIndex: number = searchedUser.equipmentItems.findIndex(el => el.type === slot);
@@ -49,7 +49,7 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
 
 
   // function that will set statistics based on equipment, potions and pet
-  const setStats = () => {
+  const setStats = () : void => {
 
     // by equipment
     searchedUser.equipmentItems.forEach(el => {
@@ -134,12 +134,18 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
 
     }
  }
-
  setStats();
- console.log(stats)
- 
-
-
+  
+ // function that check if searched user is already your friend
+ const checkFriend = () : string => {
+     const friendIndex = friendsArr.findIndex(el => el.id === searchedUser.id);
+     if(friendIndex < 0){
+         return `./images/add_friend.png`
+     }
+     else {
+         return `./images/active_friend.png`
+     }
+ }
 
     return `
    <div class='profile__equipment'>
@@ -186,17 +192,21 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
       <i>${searchedUser.level}</i>
       </div>
     <strong class='profile__nickname'>nickname</strong>
-
+    <div class='searchedUser__actionBar'> 
+       <img src='./images/switch.png' class='searchedUser__actionIcon' id='searched_user_switch' title='Switch'/>
+       <img src='${checkFriend()}' class='searchedUser__actionIcon' id='searched_user_friend_action' title='Add to friends'/>
+    </div>
 
 
    </div>
 </div>
 
-<div class='profile__description ${searchedUser.description.length < 10 && 'disabled'}'>
+<div class='profile__description ${searchedUser.description.length < 6 && 'disabled'}'>
  <p>${searchedUser.description}</p>
 </div>
 
 
+   <div id='searched_user_general'>
 
 
         <div class='profile__general profile__general-searchedUser'>
@@ -261,5 +271,6 @@ export const getSpecificUserHTMLCode = (searchedUser: SearchedUserData): string 
           </table>
         </div>
 
+        </div>
    `
 }
