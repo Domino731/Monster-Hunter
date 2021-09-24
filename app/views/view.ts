@@ -1,4 +1,4 @@
-import { UserData, ShopItem, PetProperties, FullUserStats } from '../types';
+import { UserData, ShopItem, PetProperties, FullUserStats, SearchedUserData } from '../types';
 import { db, auth } from '../firebase/index'
 import { potionsData } from '../properties/shop/potions';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
@@ -12,8 +12,10 @@ export class View {
    protected userData: UserData | null
    protected root: HTMLElement
    protected userStats: FullUserStats
+   protected userFriends: SearchedUserData[]
    constructor() {
       this.userData = null
+      this.userFriends = []
       this.userStats = {
          strength: 0,
          damage: 0,
@@ -121,6 +123,7 @@ export class View {
 
    // method responsbile for fetching user data, and also this is real time data lisener
    async getUserData() {
+
       const userId: string = auth.currentUser.uid
       await db.collection("users").where("__name__", "==", userId)
          .get()
@@ -129,14 +132,15 @@ export class View {
                // doc.data() is never undefined for query doc snapshots
                this.userData = doc.data() as UserData
                this.setHeroStats();
+
             });
          })
+
          .catch((error) => {
             console.log("Error getting documents: ", error);
          });
 
-
-
+      // listening for data updates
       await db.collection("users").where("__name__", "==", userId)
          .onSnapshot((snapshot) => {
             snapshot.docChanges.forEach((change) => {
@@ -235,10 +239,11 @@ export class View {
    init() {
       this.getUserData()
          .then(() => {
-            this.dateOperations();
-            this.render();
+            this.dateOperations()
+            this.render()
             this.getDOMElements();
-            this.initScripts()
-         });
+            this.initScripts();
+         })
+
    }
 }

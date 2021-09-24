@@ -120,12 +120,12 @@ export interface UserData {
     availableMissions: MissionData[],
     missionWillingness: number,
     currentMission: CurrentMission | null,
-    friends: {
-        nick: string,
-        id: string
-    }[]
+    friends: FriendData[]
 }
-
+export interface FriendData {
+    nick: string,
+    id: string
+}
 export interface PetProperties {
     travelTime: number | null,
     defence: number | null,
