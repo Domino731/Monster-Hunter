@@ -12,8 +12,11 @@ export const getSearchFriendHTMLCode = ( ) : string => {
                         <th>Last visit</th>
                     </tr>
                 </thead>
+
                 <tbody id='all_users'>
+
                 </tbody>
+
             </table>
         </div>
         <div class='searchFriend__searchBar'>

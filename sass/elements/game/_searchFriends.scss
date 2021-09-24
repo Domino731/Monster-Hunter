@@ -94,6 +94,15 @@
         align-items: center;
         border-radius: 15px;
         position: relative;
+        transition: 0.2s;
+        &-selected{
+            color: $color-blue;
+            transition: 0.2s;
+            color: $color-blue;
+            &::after{
+                background: $color-blue !important;
+            }
+        }
         strong {
             margin-left: 0.25rem;
             font-weight: bold;
@@ -149,13 +158,11 @@
         background: $color-white;
         border-radius: 15px;
         position: relative;
-
-        &-an{
-            &::after{
-           //   animation: 1s an__searchFriend_level forwards;
-            }
-        }
+        z-index: 0;
+  
+     
         &::after{
+            z-index: -1;
             content: '';
             display: block;
             height: 100%;
@@ -219,9 +226,4 @@
     }
 }
 
-@keyframes an__searchFriend_level{
-    100%{
-        left: -40px;
-    }
-}
 
