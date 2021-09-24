@@ -8,6 +8,11 @@
         flex-direction: column;
         width: 50%;
         flex-grow: 1;
+        &:last-child{
+            background: rgba(255,255,255,0.4);
+            padding: 10px;
+            backdrop-filter: blur(8px);
+        }
     }
     &__topBar {
         height: 47px;

@@ -14,7 +14,8 @@ export class Friends extends View {
     branch: HTMLElement,
     profileBtns: NodeListOf<Element>,
     chatBtns: NodeListOf<Element>,
-    friendsList: HTMLElement
+    friendsList: HTMLElement,
+    friendsWindows: NodeListOf<Element>
   }
   private friendsList: SearchedUserData[]
   constructor() {
@@ -28,7 +29,8 @@ export class Friends extends View {
       branch: document.querySelector('#friends_branch'),
       profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
-      friendsList: document.querySelector('.friends__list')
+      friendsList: document.querySelector('.friends__list'),
+      friendsWindows: document.querySelectorAll('.friend')
     };
   }
 
@@ -63,6 +65,7 @@ export class Friends extends View {
   }
 
   async getFriendsData() {
+    this.friendsList = [];
     await db.collection('users').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -98,7 +101,31 @@ export class Friends extends View {
     })
     this.dom.friendsList.innerHTML = html;
   }
-  onDataChange() { }
+  showFriendProfileEvent(){
+    this.dom.profileBtns.forEach(el => el.addEventListener('click', ()=> {
+      // find friend
+      const element: HTMLElement = el as HTMLElement;
+      const userId: string = element.parentElement.parentElement.dataset.userId;
+      const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
+      
+      // create view of friend's profile
+      const friendProfile = new SearchedUser(this.dom.branch, this.userData, friend);
+      this.dom.branch.classList.remove('disabled');
+      this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
+      setTimeout(()=> {
+          this.hideFriendView();
+      }, 3000)
+
+    }))
+  }
+  hideFriendView(){
+    this.dom.branch.classList.add('disabled');
+    this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
+  }
+  onDataChange() {
+    this.hideFriendView();
+    this.initScripts();
+  }
 
 
   initScripts() {
@@ -107,6 +134,7 @@ export class Friends extends View {
         this.renderFriendsList();
         this.getDOMElements();
         this.showFormsEvents();
+        this.showFriendProfileEvent();
       })
 
   }
@@ -119,7 +147,8 @@ export class Friends extends View {
       branch: document.querySelector('#friends_branch'),
       profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
-      friendsList: document.querySelector('.friends__list')
+      friendsList: document.querySelector('.friends__list'),
+      friendsWindows: document.querySelectorAll('.friend')
     }
   }
 }
