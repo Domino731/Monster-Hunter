@@ -15,16 +15,18 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]) : string => {
             </div>
 
             <div class="friends__settingsWrapper">
-                <img src="./images/friends_icon_sort.png" alt="sort" class="friends__settingsIcon" id="friends_sort_btn">
-                <img src="./images/friends_icon_filter.png" alt="filter" class="friends__settingsIcon" id="friends_filter_btn">
+                <img src="./images/friends_icon_sort.png" alt="sort" title='Sort friends list' class="friends__settingsIcon" id="friends_sort_btn">
+                <img src="./images/friends_icon_filter.png" alt="filter" title ='Filter friends list' class="friends__settingsIcon" id="friends_filter_btn">
 
 
-                <form class="friends__settingsForm" id="friends_sort_form">
+                <form class="friends__settingsForm disabled" id="friends_sort_form">
+                    <h3 class='friends__settingsTitle'>Sort</h3>
+                    <fieldset>
+                 
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-highestLevel">
                         <label>
-
                             From highest level
-                            <input type="checkbox">
+                            <input type="radio" name='friends-sort' value='sort-by-highest-level'>
                             <span></span>
                             <i class="fas fa-check" aria-hidden="true"></i>
                         </label>
@@ -33,63 +35,21 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]) : string => {
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestLevel">
                         <label>
                             From lowest level
-                            <input type="checkbox">
+                            <input type="radio" name='friends-sort' value='sort-by-lowest-level'>
                             <span></span>
                             <i class="fas fa-check" aria-hidden="true"></i>
                         </label>
                     </div>
-
-                    <div class="friends__checkboxWrapper friends__checkboxWrapper-highestGold">
-                        <label>
-                            Highest amount of gold
-                            <input type="checkbox">
-                            <span></span>
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                        </label>
-                    </div>
-
-                    <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestGold">
-                        <label>
-                            Lowest amount of gold
-                            <input type="checkbox">
-                            <span></span>
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                        </label>
-                    </div>
-
-                    <div class="friends__checkboxWrapper friends__checkboxWrapper-timePlayed">
-                        <label>
-                            Game time
-                            <input type="checkbox">
-                            <span></span>
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                        </label>
-                    </div>
+                   </fieldset> 
                 </form>
 
 
 
 
 
-                <form class="friends__settingsForm friends__settingsForm-filter" id="friends_filter_form">
-                    <div class="friends__checkboxWrapper friends__checkboxWrapper-highestLevel">
-                        <label>
-                            Online friends
-                            <input type="checkbox">
-                            <span></span>
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                        </label>
-                    </div>
-
-                    <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestLevel">
-                        <label>
-                            Ofline friends
-                            <input type="checkbox">
-                            <span></span>
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                        </label>
-                    </div>
-
+                <form class="friends__settingsForm friends__settingsForm-filter disabled" id="friends_filter_form">
+            
+                <h3 class='friends__settingsTitle'>Filter</h3>
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-highestGold">
                         <label>
                             With a higher level than yours

@@ -16,6 +16,7 @@ export class Friends extends View {
     chatBtns: NodeListOf<Element>,
     friendsList: HTMLElement,
     friendsWindows: NodeListOf<Element>
+    sortCheckboxes: NodeListOf<Element>
   }
   private friendsList: SearchedUserData[]
   constructor() {
@@ -30,7 +31,8 @@ export class Friends extends View {
       profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
-      friendsWindows: document.querySelectorAll('.friend')
+      friendsWindows: document.querySelectorAll('.friend'),
+      sortCheckboxes: document.querySelectorAll('#friends_sort_form input') 
     };
   }
 
@@ -44,11 +46,11 @@ export class Friends extends View {
     this.dom.filterBtn.addEventListener("click", () => {
 
       //hide sort form
-      this.dom.sortForm.style.display = 'none';
+      this.dom.sortForm.classList.add('disabled')
 
       // toogle filter form
-      const flag: boolean = this.dom.filterForm.style.display === "block";
-      flag ? this.dom.filterForm.style.display = "none" : this.dom.filterForm.style.display = "block"
+      const flag: boolean = this.dom.filterForm.classList.contains('disabled');
+      flag ? this.dom.filterForm.classList.remove('disabled') : this.dom.filterForm.classList.add('disabled')
     });
 
 
@@ -56,11 +58,11 @@ export class Friends extends View {
     this.dom.sortBtn.addEventListener("click", () => {
 
       //hide filter form
-      this.dom.filterForm.style.display = 'none';
+      this.dom.filterForm.classList.add('disabled');
 
       // toogle sort form
-      const flag: boolean = this.dom.sortForm.style.display === "block";
-      flag ? this.dom.sortForm.style.display = "none" : this.dom.sortForm.style.display = "block"
+      const flag: boolean = this.dom.sortForm.classList.contains('disabled');
+      flag ? this.dom.sortForm.classList.remove('disabled') : this.dom.sortForm.classList.add('disabled')
     });
   }
 
@@ -94,6 +96,25 @@ export class Friends extends View {
     );
   }
 
+  // events on checkboxes, responsbile for sorting list with friends 
+  sortFriends(){
+    this.dom.sortCheckboxes.forEach(el => el.addEventListener('change', ()=> {
+      const input : HTMLInputElement = el as HTMLInputElement
+      console.log(input.value)
+      if(input.value === 'sort-by-highest-level'){
+        this.friendsList =  this.friendsList.sort((a,b) => b.level - a.level);
+      }
+      else{
+        this.friendsList =  this.friendsList.sort((a,b) => a.level - b.level);
+      }
+      this.renderFriendsList();
+      this.getDOMElements();
+      this.showFriendProfileEvent();
+      setTimeout(()=> {
+       this.dom.sortForm.classList.add('disabled')
+      }, 850)
+    }));
+  }
   renderFriendsList() {
     let html : string = '';
     this.friendsList.forEach(el => {
@@ -112,10 +133,6 @@ export class Friends extends View {
       const friendProfile = new SearchedUser(this.dom.branch, this.userData, friend);
       this.dom.branch.classList.remove('disabled');
       this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
-      setTimeout(()=> {
-          this.hideFriendView();
-      }, 3000)
-
     }))
   }
   hideFriendView(){
@@ -133,8 +150,10 @@ export class Friends extends View {
       .then(() => {
         this.renderFriendsList();
         this.getDOMElements();
-        this.showFormsEvents();
         this.showFriendProfileEvent();
+        this.showFormsEvents();
+        this.sortFriends();
+        
       })
 
   }
@@ -148,7 +167,8 @@ export class Friends extends View {
       profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
-      friendsWindows: document.querySelectorAll('.friend')
+      friendsWindows: document.querySelectorAll('.friend'),
+      sortCheckboxes: document.querySelectorAll('#friends_sort_form input') 
     }
   }
 }
