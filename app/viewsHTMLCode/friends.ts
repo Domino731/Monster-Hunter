@@ -1,6 +1,6 @@
 import { friendWindow } from './../views/sub_views/friendWindow';
 import { FriendData } from '../types';
-export const getFriendsHTMLCode = (friendsList: FriendData[]) : string => {
+export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
 
     return `
     
@@ -50,11 +50,13 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]) : string => {
                 <form class="friends__settingsForm friends__settingsForm-filter disabled" id="friends_filter_form">
             
                 <h3 class='friends__settingsTitle'>Filter</h3>
+
+
+                <fieldset>
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-highestGold">
                         <label>
                             With a higher level than yours
-
-                            <input type="checkbox">
+                            <input type="radio" name='friends-filter' value='higher-level'>
                             <span></span>
                             <i class="fas fa-check" aria-hidden="true"></i>
                         </label>
@@ -63,12 +65,20 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]) : string => {
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestGold">
                         <label>
                             With a lower level than yours
-                            <input type="checkbox">
+                            <input type="radio" name='friends-filter' value='lower-level'>
                             <span></span>
                             <i class="fas fa-check" aria-hidden="true"></i>
                         </label>
                     </div>
-
+                    <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestGold">
+                    <label>
+                        None
+                        <input type="radio" name='friends-filter' value='none'>
+                        <span></span>
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </label>
+                </div>
+                </fieldset>
                 </form>
 
             </div>

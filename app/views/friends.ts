@@ -17,11 +17,14 @@ export class Friends extends View {
     friendsList: HTMLElement,
     friendsWindows: NodeListOf<Element>
     sortCheckboxes: NodeListOf<Element>
+    filterCheckboxes:  NodeListOf<Element>
   }
   private friendsList: SearchedUserData[]
+  private friendsListBackup: SearchedUserData[]
   constructor() {
     super();
     this.friendsList = [];
+    this.friendsListBackup = [];
     this.dom = {
       sortBtn: document.querySelector('#friends_sort_btn'),
       filterBtn: document.querySelector('#friends_filter_btn'),
@@ -32,7 +35,8 @@ export class Friends extends View {
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
-      sortCheckboxes: document.querySelectorAll('#friends_sort_form input') 
+      sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
+      filterCheckboxes:  document.querySelectorAll('#friends_filter_form input')
     };
   }
 
@@ -72,7 +76,7 @@ export class Friends extends View {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         if (this.userData.friends.findIndex(el => el.id === doc.id) !== -1) {
-         
+
           const data: SearchedUserData = {
             description: doc.data().description,
             equipmentItems: doc.data().equipmentItems,
@@ -88,6 +92,8 @@ export class Friends extends View {
             pet: doc.data().pet
           }
           this.friendsList.push(data);
+          // array with friends, which is needed to return all friends when user remove filter
+          this.friendsListBackup.push(data);
         }
 
       });
@@ -97,45 +103,72 @@ export class Friends extends View {
   }
 
   // events on checkboxes, responsbile for sorting list with friends 
-  sortFriends(){
-    this.dom.sortCheckboxes.forEach(el => el.addEventListener('change', ()=> {
-      const input : HTMLInputElement = el as HTMLInputElement
-      console.log(input.value)
-      if(input.value === 'sort-by-highest-level'){
-        this.friendsList =  this.friendsList.sort((a,b) => b.level - a.level);
+  sortFriends() {
+    this.dom.sortCheckboxes.forEach(el => el.addEventListener('change', () => {
+      const input: HTMLInputElement = el as HTMLInputElement
+      if (input.value === 'sort-by-highest-level') {
+        this.friendsList = this.friendsList.sort((a, b) => b.level - a.level);
       }
-      else{
-        this.friendsList =  this.friendsList.sort((a,b) => a.level - b.level);
+      else {
+        this.friendsList = this.friendsList.sort((a, b) => a.level - b.level);
       }
+      // rerender view 
       this.renderFriendsList();
       this.getDOMElements();
       this.showFriendProfileEvent();
-      setTimeout(()=> {
-       this.dom.sortForm.classList.add('disabled')
+      // remove form after animations ends
+      setTimeout(() => {
+        this.dom.sortForm.classList.add('disabled')
       }, 850)
     }));
   }
+
+  // events on checkboxes, responsbile for filtering list with friends 
+  filterFriends() {
+     this.dom.filterCheckboxes.forEach(el => el.addEventListener('change', ()=> {
+      const input: HTMLInputElement = el as HTMLInputElement
+      console.log(input.value)
+      if(input.value === 'lower-level'){
+        this.friendsList = this.friendsList.filter(el => el.level < this.userData.level);
+      }
+      else if (input.value === 'higher-level'){
+        this.friendsList = this.friendsList.filter(el => el.level > this.userData.level);
+      }
+      else{
+        this.friendsList = this.friendsListBackup
+      }
+       // rerender view 
+       this.renderFriendsList();
+       this.getDOMElements();
+       this.showFriendProfileEvent();
+         // remove form after animations ends
+      setTimeout(() => {
+        this.dom.filterForm.classList.add('disabled')
+      }, 850)
+     }));
+  }
+
   renderFriendsList() {
-    let html : string = '';
+    let html: string = '';
     this.friendsList.forEach(el => {
-       html+= friendWindow(el);
+      html += friendWindow(el);
     })
     this.dom.friendsList.innerHTML = html;
   }
-  showFriendProfileEvent(){
-    this.dom.profileBtns.forEach(el => el.addEventListener('click', ()=> {
+  showFriendProfileEvent() {
+    this.dom.profileBtns.forEach(el => el.addEventListener('click', () => {
       // find friend
       const element: HTMLElement = el as HTMLElement;
       const userId: string = element.parentElement.parentElement.dataset.userId;
       const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
-      
+
       // create view of friend's profile
       const friendProfile = new SearchedUser(this.dom.branch, this.userData, friend);
       this.dom.branch.classList.remove('disabled');
       this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
     }))
   }
-  hideFriendView(){
+  hideFriendView() {
     this.dom.branch.classList.add('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
   }
@@ -153,7 +186,7 @@ export class Friends extends View {
         this.showFriendProfileEvent();
         this.showFormsEvents();
         this.sortFriends();
-        
+        this.filterFriends();
       })
 
   }
@@ -168,7 +201,8 @@ export class Friends extends View {
       chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
-      sortCheckboxes: document.querySelectorAll('#friends_sort_form input') 
+      sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
+      filterCheckboxes:  document.querySelectorAll('#friends_filter_form input')
     }
   }
 }
