@@ -5,6 +5,9 @@ body{
     font-family: 'Kanit', sans-serif;
     color: $color-black;
 }
+*{
+    box-sizing: border-box;
+}
 .transparent{
     &::after{
     content: "";

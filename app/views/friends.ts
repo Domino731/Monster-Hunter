@@ -3,6 +3,7 @@ import { getFriendsHTMLCode } from '../viewsHTMLCode/friends';
 import { View } from './view';
 import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
+import { friendWindow } from './sub_views/friendWindow';
 export class Friends extends View {
 
   private dom: {
@@ -10,6 +11,10 @@ export class Friends extends View {
     filterBtn: HTMLElement,
     sortForm: HTMLElement,
     filterForm: HTMLElement
+    branch: HTMLElement,
+    profileBtns: NodeListOf<Element>,
+    chatBtns: NodeListOf<Element>,
+    friendsList: HTMLElement
   }
   private friendsList: SearchedUserData[]
   constructor() {
@@ -19,7 +24,11 @@ export class Friends extends View {
       sortBtn: document.querySelector('#friends_sort_btn'),
       filterBtn: document.querySelector('#friends_filter_btn'),
       sortForm: document.querySelector('#friends_sort_form'),
-      filterForm: document.querySelector('#friends_filter_form')
+      filterForm: document.querySelector('#friends_filter_form'),
+      branch: document.querySelector('#friends_branch'),
+      profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
+      chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
+      friendsList: document.querySelector('.friends__list')
     };
   }
 
@@ -83,7 +92,11 @@ export class Friends extends View {
   }
 
   renderFriendsList() {
-    console.log(this.friendsList)
+    let html : string = '';
+    this.friendsList.forEach(el => {
+       html+= friendWindow(el);
+    })
+    this.dom.friendsList.innerHTML = html;
   }
   onDataChange() { }
 
@@ -102,7 +115,11 @@ export class Friends extends View {
       sortBtn: document.querySelector('#friends_sort_btn'),
       filterBtn: document.querySelector('#friends_filter_btn'),
       sortForm: document.querySelector('#friends_sort_form'),
-      filterForm: document.querySelector('#friends_filter_form')
+      filterForm: document.querySelector('#friends_filter_form'),
+      branch: document.querySelector('#friends_branch'),
+      profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
+      chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
+      friendsList: document.querySelector('.friends__list')
     }
   }
 }
