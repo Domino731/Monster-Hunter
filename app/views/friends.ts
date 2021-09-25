@@ -18,6 +18,7 @@ export class Friends extends View {
     friendsWindows: NodeListOf<Element>
     sortCheckboxes: NodeListOf<Element>
     filterCheckboxes:  NodeListOf<Element>
+    closeBtn: HTMLElement
   }
   private friendsList: SearchedUserData[]
   private friendsListBackup: SearchedUserData[]
@@ -28,6 +29,7 @@ export class Friends extends View {
     this.dom = {
       sortBtn: document.querySelector('#friends_sort_btn'),
       filterBtn: document.querySelector('#friends_filter_btn'),
+      closeBtn: document.querySelector('#friends_close_btn'),
       sortForm: document.querySelector('#friends_sort_form'),
       filterForm: document.querySelector('#friends_filter_form'),
       branch: document.querySelector('#friends_branch'),
@@ -115,7 +117,7 @@ export class Friends extends View {
       // rerender view 
       this.renderFriendsList();
       this.getDOMElements();
-      this.showFriendProfileEvent();
+      this.showFriendProfile();
       // remove form after animations ends
       setTimeout(() => {
         this.dom.sortForm.classList.add('disabled')
@@ -123,11 +125,11 @@ export class Friends extends View {
     }));
   }
 
+
   // events on checkboxes, responsbile for filtering list with friends 
   filterFriends() {
      this.dom.filterCheckboxes.forEach(el => el.addEventListener('change', ()=> {
       const input: HTMLInputElement = el as HTMLInputElement
-      console.log(input.value)
       if(input.value === 'lower-level'){
         this.friendsList = this.friendsList.filter(el => el.level < this.userData.level);
       }
@@ -140,7 +142,7 @@ export class Friends extends View {
        // rerender view 
        this.renderFriendsList();
        this.getDOMElements();
-       this.showFriendProfileEvent();
+       this.showFriendProfile();
          // remove form after animations ends
       setTimeout(() => {
         this.dom.filterForm.classList.add('disabled')
@@ -148,6 +150,9 @@ export class Friends extends View {
      }));
   }
 
+  closeViewEvent(){
+    this.dom.closeBtn.addEventListener("click", () => this.hideFriendView())
+  }
   renderFriendsList() {
     let html: string = '';
     this.friendsList.forEach(el => {
@@ -155,8 +160,11 @@ export class Friends extends View {
     })
     this.dom.friendsList.innerHTML = html;
   }
-  showFriendProfileEvent() {
+  showFriendProfile() {
     this.dom.profileBtns.forEach(el => el.addEventListener('click', () => {
+      // show close icon in order to give user ability to close friend profile view
+      this.dom.closeBtn.classList.remove('disabled');
+
       // find friend
       const element: HTMLElement = el as HTMLElement;
       const userId: string = element.parentElement.parentElement.dataset.userId;
@@ -169,6 +177,9 @@ export class Friends extends View {
     }))
   }
   hideFriendView() {
+    // hide close btn
+    this.dom.closeBtn.classList.add('disabled');
+    // clear view 
     this.dom.branch.classList.add('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
   }
@@ -183,10 +194,11 @@ export class Friends extends View {
       .then(() => {
         this.renderFriendsList();
         this.getDOMElements();
-        this.showFriendProfileEvent();
+        this.showFriendProfile();
         this.showFormsEvents();
         this.sortFriends();
         this.filterFriends();
+        this.closeViewEvent();
       })
 
   }
@@ -195,6 +207,7 @@ export class Friends extends View {
       sortBtn: document.querySelector('#friends_sort_btn'),
       filterBtn: document.querySelector('#friends_filter_btn'),
       sortForm: document.querySelector('#friends_sort_form'),
+      closeBtn: document.querySelector('#friends_close_btn'),
       filterForm: document.querySelector('#friends_filter_form'),
       branch: document.querySelector('#friends_branch'),
       profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),

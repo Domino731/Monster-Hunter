@@ -15,9 +15,10 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
             </div>
 
             <div class="friends__settingsWrapper">
+                <img src="./images/close.png" alt="filter" title ='Close' class="friends__settingsIcon disabled" id="friends_close_btn">
                 <img src="./images/friends_icon_sort.png" alt="sort" title='Sort friends list' class="friends__settingsIcon" id="friends_sort_btn">
                 <img src="./images/friends_icon_filter.png" alt="filter" title ='Filter friends list' class="friends__settingsIcon" id="friends_filter_btn">
-
+                
 
                 <form class="friends__settingsForm disabled" id="friends_sort_form">
                     <h3 class='friends__settingsTitle'>Sort</h3>
