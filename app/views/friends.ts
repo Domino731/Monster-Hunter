@@ -4,6 +4,7 @@ import { View } from './view';
 import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
 import { friendWindow } from './sub_views/friendWindow';
+import { Chat } from './chat';
 export class Friends extends View {
 
   private dom: {
@@ -17,13 +18,15 @@ export class Friends extends View {
     friendsList: HTMLElement,
     friendsWindows: NodeListOf<Element>
     sortCheckboxes: NodeListOf<Element>
-    filterCheckboxes:  NodeListOf<Element>
+    filterCheckboxes: NodeListOf<Element>
     closeBtn: HTMLElement
   }
   private friendsList: SearchedUserData[]
   private friendsListBackup: SearchedUserData[]
+  private secondView: SearchedUser | Chat | null
   constructor() {
     super();
+    this.secondView = null;
     this.friendsList = [];
     this.friendsListBackup = [];
     this.dom = {
@@ -38,7 +41,7 @@ export class Friends extends View {
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
-      filterCheckboxes:  document.querySelectorAll('#friends_filter_form input')
+      filterCheckboxes: document.querySelectorAll('#friends_filter_form input')
     };
   }
 
@@ -128,30 +131,31 @@ export class Friends extends View {
 
   // events on checkboxes, responsbile for filtering list with friends 
   filterFriends() {
-     this.dom.filterCheckboxes.forEach(el => el.addEventListener('change', ()=> {
+    this.dom.filterCheckboxes.forEach(el => el.addEventListener('change', () => {
       const input: HTMLInputElement = el as HTMLInputElement
-      if(input.value === 'lower-level'){
+      if (input.value === 'lower-level') {
         this.friendsList = this.friendsList.filter(el => el.level < this.userData.level);
       }
-      else if (input.value === 'higher-level'){
+      else if (input.value === 'higher-level') {
         this.friendsList = this.friendsList.filter(el => el.level > this.userData.level);
       }
-      else{
+      else {
         this.friendsList = this.friendsListBackup
       }
-       // rerender view 
-       this.renderFriendsList();
-       this.getDOMElements();
-       this.showFriendProfile();
-         // remove form after animations ends
+      // rerender view 
+      this.renderFriendsList();
+      this.getDOMElements();
+      this.showFriendProfile();
+      // remove form after animations ends
       setTimeout(() => {
         this.dom.filterForm.classList.add('disabled')
       }, 850)
-     }));
+    }));
   }
 
-  closeViewEvent(){
+  closeViewEvent() {
     this.dom.closeBtn.addEventListener("click", () => this.hideFriendView())
+    this.secondView = null;
   }
   renderFriendsList() {
     let html: string = '';
@@ -171,11 +175,16 @@ export class Friends extends View {
       const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
 
       // create view of friend's profile
-      const friendProfile = new SearchedUser(this.dom.branch, this.userData, friend);
-      this.dom.branch.classList.remove('disabled');
-      this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
+      this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
+      this.shrinkFriendsList();
     }))
   }
+
+  shrinkFriendsList() {
+    this.dom.branch.classList.remove('disabled');
+    this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
+  }
+
   hideFriendView() {
     // hide close btn
     this.dom.closeBtn.classList.add('disabled');
@@ -187,8 +196,6 @@ export class Friends extends View {
     this.hideFriendView();
     this.initScripts();
   }
-
-
   initScripts() {
     this.getFriendsData()
       .then(() => {
@@ -215,7 +222,7 @@ export class Friends extends View {
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
-      filterCheckboxes:  document.querySelectorAll('#friends_filter_form input')
+      filterCheckboxes: document.querySelectorAll('#friends_filter_form input')
     }
   }
 }
