@@ -206,6 +206,8 @@ export class Friends extends View {
         this.sortFriends();
         this.filterFriends();
         this.closeViewEvent();
+        this.shrinkFriendsList();
+        this.secondView = new Chat(this.dom.branch, this.friendsList[0]);
       })
 
   }
