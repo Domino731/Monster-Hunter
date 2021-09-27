@@ -218,10 +218,10 @@ export interface SearchedUserData {
     confirmedFriend: boolean
 }
 export interface MessageData {
-    content: string;
+    content: string[];
     createdAt: Date;
     userId: string;
-    nick: string
+    nick: string;
 }
 export interface Conversation {
     messages: MessageData[];

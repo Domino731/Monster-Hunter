@@ -1,5 +1,4 @@
 import { emojiData } from './../properties/emoji/emoji';
-import { getFriendMessage, getUserMessage } from './../views/sub_views/messages';
 import { SearchedUserData } from '../types';
 const foo = `licabo ipsam, debitis dolores, `
 export const getChatHTMLCode = (friend: SearchedUserData): string => {
@@ -13,57 +12,9 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
          </div>
        </div>
 
-
-
-
-
        <div class='chat__content'> 
-       
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          <div class='message__time'> Yesterday, 12:45</div>
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          ${getFriendMessage(friend)}
-          ${getUserMessage(friend)}
-          
+                 
        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
        <div class='chat__botBar'> 
 
@@ -89,7 +40,7 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
             
              
              </div>
-             <button class='chat__btn'>SEND</button>
+             <button class='chat__btn disabled'>SEND</button>
           </div>
        </div>
     </section>

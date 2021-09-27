@@ -1,5 +1,8 @@
-export const getFriendMessage = (friend) : string => {
-    return `
+import { auth } from '../../firebase/index';
+import { MessageData } from '../../types';
+export const getMessageCode = (friend, currentUser, message: MessageData) : string => {
+  if(message.userId !== auth.currentUser.uid){
+     return `
     <div class='message'>
     <div class='message__portraitWrapper'>
        <div class='message__portrait'> 
@@ -9,29 +12,40 @@ export const getFriendMessage = (friend) : string => {
 
     <div class='message__content message__content-friend'> 
       <strong class='message__nick'>${friend.nick}</strong>
-      <p class='message__cloud message__cloud-friend'> 123123123123</p>
+      ${
+        message.content.map((el) => {
+          return `<p class='message__cloud message__cloud-friend'>${el}</p>`
+        }).join('')
+        }
+      
     </div>
   </div>
     `
-}
-
-export const getUserMessage = (user) : string => {
-    return `
+  }
+  else{
+      return `
     <div class='message'>
    
 
     <div class='message__content message__content-user'> 
-      <strong class='message__nick'>${user.nick}</strong>
-      <p class='message__cloud message__cloud-user'> 123123123123</p>
+      <strong class='message__nick'>${currentUser.nick}</strong>
+      ${
+        message.content.map((el) => {
+          return `<p class='message__cloud message__cloud-friend'>${el}</p>`
+        }).join('')
+        }
     </div>
 
     <div class='message__portraitWrapper'>
        <div class='message__portrait'> 
-         <img src='${user.portrait}'/>
+         <img src='${currentUser.portrait}'/>
        </div>
     </div>
 
 
   </div>
     `
+  } 
 }
+
+//<div class='message__time'> Yesterday, 12:45</div>

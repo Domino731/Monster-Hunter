@@ -45,7 +45,7 @@ export class Register extends AuthForm {
 
     // creating new user with his own data in firestore
     authAction() {
- 
+
         // hide button and show loading
         this.btn.style.display = "none";
         this.loading.style.display = "block";
@@ -99,79 +99,84 @@ export class Register extends AuthForm {
 
         // create new user in firebase
         const unlisten = async () => {
-          await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
-            .then((cred) => {
-                return () => {
-                    db.collection("users")
-                    .doc(cred.uid)
-                    .set({
-                        lastVisit: new Date(),
-                        nick: this.data.nickname,
-                        level: 1,
-                        guardPayout: 100,
-                        gold: 1000,
-                        rawStats: {
-                            defence: 50,
-                            luck: 50,
-                            physicalEndurance: 50,
-                            strength: 50
-                        },
-                        stats: {
-                            damage: 35,
-                            health: 35,
-                            damageReduce: 35,
-                            critical: 35
-                        },
-                        shop: {
-                            blacksmith: null,
-                            wizard: null
-                        },
-                        shopPicks: {
-                            blacksmith: getBlacksmithPicks(),
-                            wizard: null
-                        },
-                        equipmentItems: [],
-                        backpackItems: [],
-                        status: 'free',
-                        guard: {
-                            current: null,
-                            start: null,
-                            end: null,
-                            payout: null
-                        },
-                        pet: null,
-                        potions: {
-                            first: null,
-                            second: null
-                        },
-                        description: '',
-                        portrait: portraitsData[0],
-                        exp: 0,
-                        wizardWheelSpin: true,
-                        magicWheel,
-                        nextLevelAt: getNeededExp(1),
-                        missionWillingness: 100,
-                        currentMission: null,
-                        availableMissions: getRandomMissions(10, 100, fullUserStats, null ),
-                        friends: []
-                    });
-                   db.collection('chat')
-                   .doc(`${cred.uid}`)
-                   .collection('conversations')
-                   .doc(``)
-                   .set({})
-                }
+            await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
+                .then((cred) => {
 
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorCode, errorMessage)
-                if (errorCode === "auth/email-already-in-use") {
-                    this.invalid.eMail.innerText = "This e-mail is already in use.";
-                    this.input.eMail.style.borderBottomColor = "#e63946";
+                    const createData = async () => {
+                        await db.collection("users")
+                            .doc(cred.uid)
+                            .set({
+                                lastVisit: new Date(),
+                                nick: this.data.nickname,
+                                level: 1,
+                                guardPayout: 100,
+                                gold: 1000,
+                                rawStats: {
+                                    defence: 50,
+                                    luck: 50,
+                                    physicalEndurance: 50,
+                                    strength: 50
+                                },
+                                stats: {
+                                    damage: 35,
+                                    health: 35,
+                                    damageReduce: 35,
+                                    critical: 35
+                                },
+                                shop: {
+                                    blacksmith: null,
+                                    wizard: null
+                                },
+                                shopPicks: {
+                                    blacksmith: getBlacksmithPicks(),
+                                    wizard: null
+                                },
+                                equipmentItems: [],
+                                backpackItems: [],
+                                status: 'free',
+                                guard: {
+                                    current: null,
+                                    start: null,
+                                    end: null,
+                                    payout: null
+                                },
+                                pet: null,
+                                potions: {
+                                    first: null,
+                                    second: null
+                                },
+                                description: '',
+                                portrait: portraitsData[0],
+                                exp: 0,
+                                wizardWheelSpin: true,
+                                magicWheel,
+                                nextLevelAt: getNeededExp(1),
+                                missionWillingness: 100,
+                                currentMission: null,
+                                availableMissions: getRandomMissions(10, 100, fullUserStats, null),
+                                friends: []
+                            }).then(async () => {
+                                await db.collection('chat')
+                                    .doc(`${cred.uid}`)
+                                    .collection('conversations').add({ initial: true });
+
+                            })
+                            .then(() => {
+                                location.href = '/'
+                            })
+                    }
+                    createData();
                 }
-            });
+                )
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(errorCode, errorMessage)
+                    if (errorCode === "auth/email-already-in-use") {
+                        this.invalid.eMail.innerText = "This e-mail is already in use.";
+                        this.input.eMail.style.borderBottomColor = "#e63946";
+                    }
+                });
         }
 
 
@@ -180,12 +185,7 @@ export class Register extends AuthForm {
         this.btn.style.display = "block";
 
         unlisten()
-        .then(()=> {
-            document.location.href="/";
-        })
-        .catch((err)=> {
-           console.log(err)
-        });
+
     }
 
 
