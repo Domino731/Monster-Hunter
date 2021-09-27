@@ -67,7 +67,7 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
 
        <div class='chat__botBar'> 
 
-         <div class='chat__emojiList disabled'>
+         <div class='chat__emojiContainer disabled'>
           ${
             emojiData.map((el) => {
               return `<img src='${el}'/>`
@@ -80,10 +80,10 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
           </div>
           <div class='chat__form'>
              <img src='./images/chat_text_icon.png' class='chat__textIcon'/>
-             <div class='chat__messageWrapper' contenteditable='true' style='border: none; outline: none;'> 
+             <div class='chat__messageWrapper' style='border: none; outline: none;'> 
            
-           <div class='chat__message'>
-                <img src='./images/chat_text_icon.png' class='chat__textIcon'/>
+            <div class='chat__message' contenteditable='true'>
+               
             </div> 
 
             
