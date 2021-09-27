@@ -1,3 +1,4 @@
+import { emojiData } from './../properties/emoji/emoji';
 import { getFriendMessage, getUserMessage } from './../views/sub_views/messages';
 import { SearchedUserData } from '../types';
 const foo = `licabo ipsam, debitis dolores, `
@@ -66,23 +67,30 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
 
        <div class='chat__botBar'> 
 
-          <div class='chat__emojiList'>
-          
-          </div>
+         <div class='chat__emojiList'>
+          ${
+            emojiData.map((el) => {
+              return `<img src='${el}'/>`
+            }).join('')
+            }
+          </div> 
 
           <div class='chat__emojiIcon'> 
              <img src='./images/chat_emoji_icon.png'/>
           </div>
-          <form class='chat__form'>
+          <div class='chat__form'>
              <img src='./images/chat_text_icon.png' class='chat__textIcon'/>
-             <div class='chat__textareaWrapper'> 
-             asdasd
-            <textarea class='chat__textarea'> </textarea> 
-               
+             <div class='chat__messageWrapper' contenteditable='true' style='border: none; outline: none;'> 
+           
+           <div class='chat__message'>
+                <img src='./images/chat_text_icon.png' class='chat__textIcon'/>
+            </div> 
+
+            
              
              </div>
              <button class='chat__btn'>SEND</button>
-          </form>
+          </div>
        </div>
     </section>
     `
