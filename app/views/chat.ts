@@ -4,13 +4,15 @@ export class Chat {
     private root: HTMLElement
     private friend: SearchedUserData
     private dom: {
-        textarea: HTMLTextAreaElement
+        emojiBtn: HTMLImageElement
+        emojiList: HTMLElement
     }
     constructor(root: HTMLElement, friend) {
         this.root = root;
         this.friend = friend;
         this.dom = {
-            textarea: document.querySelector('.chat__textarea')
+           emojiBtn: document.querySelector('.chat__emojiIcon img'),
+           emojiList: document.querySelector('.chat__emojiList')
         }
         this.init();
     }
@@ -27,24 +29,32 @@ export class Chat {
     // getting the dom elements of newly injected html code
     getDOMElements() {
         this.dom = {
-            textarea: document.querySelector('.chat__textarea')
+            emojiBtn: document.querySelector('.chat__emojiIcon img'),
+            emojiList: document.querySelector('.chat__emojiList')
         }
     }
 
 
-    textareaAutosize() {
-        this.dom.textarea.addEventListener('keydown', ()=> {      
-                console.log(this.dom.textarea)
-                 this.dom.textarea.style.cssText = 'height:auto; padding:0';
-                // // for box-sizing other than "content-box" use:
-                // // el.style.cssText = '-moz-box-sizing:content-box';
-                 this.dom.textarea.style.cssText = 'height:' + this.dom.textarea.scrollHeight + 'px';
-        });
+
+    toogleEmojiList(){
+       this.dom.emojiBtn.addEventListener('click', ()=> {
+          // boolean value, needed to toogle emoji list 
+          const flag: boolean = this.dom.emojiList.classList.contains('disabled')
+          if(flag){
+              this.dom.emojiList.classList.remove('disabled');
+              this.dom.emojiBtn.src = './images/close.png';
+          }
+          else{
+            this.dom.emojiList.classList.add('disabled');
+            this.dom.emojiBtn.src = './images/chat_emoji_icon.png';
+          }
+       });
     }
+
 
     // initialization of scripts
     initScripts() {
-         this.textareaAutosize();
+         this.toogleEmojiList();
     }
 
     init() {
