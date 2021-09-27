@@ -101,7 +101,8 @@ export class Register extends AuthForm {
         const unlisten = async () => {
           await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
             .then((cred) => {
-                return db.collection("users")
+                return () => {
+                    db.collection("users")
                     .doc(cred.uid)
                     .set({
                         lastVisit: new Date(),
@@ -154,8 +155,12 @@ export class Register extends AuthForm {
                         availableMissions: getRandomMissions(10, 100, fullUserStats, null ),
                         friends: []
                     });
-
-
+                   db.collection('chat')
+                   .doc(`${cred.uid}`)
+                   .collection('conversations')
+                   .doc(``)
+                   .set({})
+                }
 
             })
             .catch((error) => {

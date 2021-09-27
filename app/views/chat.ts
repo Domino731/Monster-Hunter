@@ -38,6 +38,7 @@ export class Chat {
 
     // scroll to bottom of message, in order when a user selects emoji, know where new emoji is
     scrollToBottomMessage(){
+      
         const scrollToBottom = () => {
             this.dom.newMessageText.scrollTop =  this.dom.newMessageText.scrollHeight;
         }

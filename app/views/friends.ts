@@ -5,6 +5,7 @@ import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
 import { friendWindow } from './sub_views/friendWindow';
 import { Chat } from './chat';
+import firebase from 'firebase/app';
 export class Friends extends View {
 
   private dom: {
@@ -81,7 +82,8 @@ export class Friends extends View {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         if (this.userData.friends.findIndex(el => el.id === doc.id) !== -1) {
-
+             
+          const friends: string[] = doc.data().friends.map(el => el.id);
           const data: SearchedUserData = {
             description: doc.data().description,
             equipmentItems: doc.data().equipmentItems,
@@ -94,7 +96,8 @@ export class Friends extends View {
             nick: doc.data().nick,
             lastVisit: doc.data().lastVisit,
             id: doc.id,
-            pet: doc.data().pet
+            pet: doc.data().pet,
+            confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0
           }
           this.friendsList.push(data);
           // array with friends, which is needed to return all friends when user remove filter

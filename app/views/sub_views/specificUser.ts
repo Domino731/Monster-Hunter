@@ -1,9 +1,10 @@
 import { getSpecificUserHTMLCode } from '../../viewsHTMLCode/specificUser';
-import { UserData, SearchedUserData, ShopItem, FullUserStats } from '../../types';
+import { UserData, SearchedUserData, ShopItem, FullUserStats, Conversation, CurrentMission } from '../../types';
 import { getEquipmentLabel } from './getEquipmentLabel';
 import { potionsData } from '../../properties/shop/potions';
 import { getPotionLabel } from './getPotionLabel';
 import { updateUserData } from '../../firebase/operations';
+import { db, auth } from '../../firebase/index';
 export class SearchedUser {
   private root: HTMLElement
   private currentUser: UserData
@@ -138,20 +139,62 @@ export class SearchedUser {
     }
   }
 
+  async createChat() {
+    const conversation: Conversation = {
+      messages: [],
+      createdAt: new Date,
+      participants: [`${auth.currentUser.uid}`, `${this.searchedUser.id}`],
+      updatedAt: new Date,
+      recipientId: this.searchedUser.id
+    }
+
+
+    await db.collection('chat').doc(`${auth.currentUser.uid}`).collection('conversations').add(conversation)
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  }
+
+  async deleteChat() {
+     await db.collection('chat')
+    .doc(`${auth.currentUser.uid}`)
+    .collection('conversations')
+    .where('recipientId', '==', `${this.searchedUser.id}`)
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.delete();
+      });
+    })
+    .catch(err => console.log(err))
+  }
+
+
   // add or remove searched user to friends
   addOrRemoveFriendEvent() {
     this.dom.friendAction.addEventListener('click', () => {
+     
       // index which is needed to check if user already has this searched user in friends
       const friendIndex: number = this.currentUser.friends.findIndex(el => el.id === this.searchedUser.id);
       if (friendIndex < 0) {
-        const newFriend: { nick: string, id: string } = { nick: this.searchedUser.nick, id: this.searchedUser.id };
+        const newFriend: { nick: string, id: string } = {
+          nick: this.searchedUser.nick,
+          id: this.searchedUser.id
+        };
         this.currentUser.friends.push(newFriend);
         this.dom.friendAction.src = './images/active_friend.png';
+        this.createChat();
         updateUserData(this.currentUser);
+
+
       }
       else {
         this.currentUser.friends.splice(friendIndex, 1);
         this.dom.friendAction.src = './images/add_friend.png';
+        this.deleteChat();
         updateUserData(this.currentUser);
       }
     });
@@ -172,8 +215,8 @@ export class SearchedUser {
       // index which is needed to check if user already has this searched user in friends
       const friendIndex: number = this.currentUser.friends.findIndex(el => el.id === this.searchedUser.id);
       if (friendIndex >= 0) {
-      this.dom.friendAction.src = './images/active_friend.png';
-      this.dom.friendAction.title = `${this.searchedUser.nick} is your friend`;
+        this.dom.friendAction.src = './images/active_friend.png';
+        this.dom.friendAction.title = `${this.searchedUser.nick} is your friend`;
       }
     });
   }

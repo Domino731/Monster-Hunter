@@ -35,6 +35,7 @@ export class SearchFriend extends View {
       await db.collection('users').get().then((querySnapshot) => {
          querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
+            const friends: string[] = doc.data().friends.map(el => el.id);
             const data: SearchedUserData = {
                description: doc.data().description,
                equipmentItems: doc.data().equipmentItems,
@@ -47,7 +48,8 @@ export class SearchFriend extends View {
                nick: doc.data().nick,
                lastVisit: doc.data().lastVisit,
                id: doc.id,
-               pet: doc.data().pet
+               pet: doc.data().pet,
+               confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0
             }
             this.allUsersData.push(data);
          });

@@ -1,78 +1,78 @@
 import { Friends } from './views/friends';
 
 export interface route {
-    path: string,
+    path: string 
     view: any
 }
 export interface Potion {
-    type: 'potion',
-    src: string,
-    name: string,
-    description?: string,
-    initialCost: number,
+    type: 'potion' 
+    src: string 
+    name: string 
+    description?: string 
+    initialCost: number 
     properties: {
-        strength: number | null,
-        physicalEndurance: number | null,
-        defence: number | null,
+        strength: number | null 
+        physicalEndurance: number | null 
+        defence: number | null 
         luck: number | null
     }
 }
 export interface ChestPlate {
-    type: 'chestPlate',
-    name: string,
-    rarity: 'common' | 'legendary',
-    src: string,
-    description?: string,
-    initialCost: number,
+    type: 'chestPlate' 
+    name: string 
+    rarity: 'common' | 'legendary' 
+    src: string 
+    description?: string ;
+    initialCost: number ;
     properties: {
-        strength: number | null,
-        physicalEndurance: number | null,
-        defence: number | null,
+        strength: number | null ;
+        physicalEndurance: number | null ;
+        defence: number | null ;
         luck: number | null
     }
 }
 
 export interface Gloves {
-    type: 'gloves',
-    name: string,
-    rarity: 'common' | 'legendary',
-    src: string,
-    description?: string,
-    initialCost: number,
+    type: 'gloves' ;
+    name: string ;
+    rarity: 'common' | 'legendary' ;
+    src: string ;
+    description?: string ;
+    initialCost: number ;
     properties: {
-        strength: number | null,
-        physicalEndurance: number | null,
-        defence: number | null,
+        strength: number | null ;
+        physicalEndurance: number | null ;
+        defence: number | null ;
         luck: number | null
     }
 }
 export interface ShopItem {
-    type: 'helmet' | 'shield' | 'special' | 'weapon' | 'potion' | 'chestPlate' | 'gloves' | 'gold',
-    name: string,
-    rarity: 'common' | 'legendary',
-    src: string,
-    description?: string,
-    initialCost: number,
+    type: 'helmet' | 'shield' | 'special' | 'weapon' | 'potion' | 'chestPlate' | 'gloves' | 'gold' ;
+    name: string ;
+    rarity: 'common' | 'legendary' ;
+    src: string ;
+    description?: string ;
+    initialCost: number ;
     properties: {
-        strength: number | null,
-        physicalEndurance: number | null,
-        defence: number | null,
+        strength: number | null ;
+        physicalEndurance: number | null ;
+        defence: number | null ;
         luck: number | null
     }
     id: string
 }
 export interface UserData {
-    level: number,
+    level: number ;
     nextLevelAt: number
-    nick: string,
-    guardPayout: number,
-    gold: number,
+    nick: string ;
+    guardPayout: number ;
+    gold: number ;
     shop: {
-        blacksmith: null | ShopItem[],
+        blacksmith: null | ShopItem[] ;
         wizard: null | ShopItem[]
-    },
+    } ;
     shopPicks: {
-        blacksmith: null | AvailableMarketPicks[],
+        blacksmith: null | AvailableMarketPicks[] ;
         wizard: null | AvailableMarketPicks[]
     }
     rawStats: {
@@ -82,8 +82,8 @@ export interface UserData {
         luck: number
     }
     stats: {
-        damage: number,
-        health: number,
+        damage: number ;
+        health: number ;
         damageReduce: number
         critical: number
     }
@@ -91,7 +91,7 @@ export interface UserData {
     backpackItems: ShopItem[]
     lastVisit: Date
     newShopDate: Date
-    status: 'free' | 'guard' | 'mission',
+    status: 'free' | 'guard' | 'mission' ;
     guard: {
         current: Date | null
         start: Date | null
@@ -117,33 +117,33 @@ export interface UserData {
         items: ShopItem[]
         wonItem: ShopItem
     }
-    availableMissions: MissionData[],
-    missionWillingness: number,
-    currentMission: CurrentMission | null,
+    availableMissions: MissionData[] ;
+    missionWillingness: number ;
+    currentMission: CurrentMission | null ;
     friends: FriendData[]
 }
 export interface FriendData {
-    nick: string,
+    nick: string ;
     id: string
 }
 export interface PetProperties {
-    travelTime: number | null,
-    defence: number | null,
-    physicalEndurance: number | null,
-    strength: number | null,
+    travelTime: number | null ;
+    defence: number | null ;
+    physicalEndurance: number | null ;
+    strength: number | null ;
     luck: number | null
 }
 export interface PetData {
-    name: string,
-    imgSrc: string,
-    imgSmallSrc: string,
-    initialCost: number,
+    name: string ;
+    imgSrc: string ;
+    imgSmallSrc: string ;
+    initialCost: number ;
     properties: PetProperties
-    id: string,
+    id: string ;
     rentEnd?: Date
 }
 export interface AvailableMarketPicks {
-    picks: number,
+    picks: number ;
     index: number
 }
 export interface UserStats {
@@ -153,47 +153,47 @@ export interface UserStats {
     luck: number
 }
 export interface FullUserStats {
-    strength: number,
-    damage: number,
-    physicalEndurance: number,
-    health: number,
+    strength: number ;
+    damage: number ;
+    physicalEndurance: number ;
+    health: number ;
     defence: number
-    damageReduce: number,
-    luck: number,
+    damageReduce: number ;
+    luck: number ;
     critical: number
 }
 export interface MissionData {
-    exp: number,
-    gold: number,
-    title: string,
-    dsc: string,
+    exp: number ;
+    gold: number ;
+    title: string ;
+    dsc: string ;
     id: string
     time: number
-    papyrus: string,
-    character: string,
+    papyrus: string ;
+    character: string ;
     monster: MonsterData
     background: {
-        attribute: string,
+        attribute: string ;
         src: string
     }
 }
 export interface MonsterData {
     src: string
-    strength: number,
-    damage: number,
-    physicalEndurance: number,
-    health: number,
+    strength: number ;
+    damage: number ;
+    physicalEndurance: number ;
+    health: number ;
     defence: number
-    damageReduce: number,
-    luck: number,
+    damageReduce: number ;
+    luck: number ;
     critical: number
 }
 export interface SearchedUserData {
-    description: string,
-    equipmentItems: ShopItem[],
-    exp: number,
-    level: number,
-    portrait: string,
+    description: string ;
+    equipmentItems: ShopItem[] ;
+    exp: number ;
+    level: number ;
+    portrait: string ;
     potions: {
         first: {
             id: string
@@ -203,31 +203,45 @@ export interface SearchedUserData {
             id: string
             end: Date
         } | null
-    },
-    status: 'free' | 'guard' | 'mission',
-    nick: string,
-    lastVisit: Date,
-    id: string,
-    pet: PetData | null,
+    } ;
+    status: 'free' | 'guard' | 'mission' ;
+    nick: string
+    lastVisit: Date
+    id: string
+    pet: PetData | null
     rawStats: {
         strength: number
         physicalEndurance: number
         defence: number
         luck: number
     }
+    confirmedFriend: boolean
+}
+export interface MessageData {
+    content: string;
+    createdAt: Date;
+    userId: string;
+    nick: string
+}
+export interface Conversation {
+    messages: MessageData[];
+    createdAt: Date;
+    participants: string[];
+    updatedAt: Date;
+    recipientId: string
 }
 export interface CurrentMission {
-    id: string,
-    exp: number,
-    gold: number,
-    title: string,
-    time: number
-    character: string,
-    monster: MonsterData,
+    id: string ;
+    exp: number ;
+    gold: number ;
+    title: string ;
+    time: number;
+    character: string ;
+    monster: MonsterData ;
     background: {
-        attribute: string,
-        src: string
+        attribute: string ;
+        src: string;
     }
-    start: Date,
-    end: Date
+    start: Date ;
+    end: Date;
 }
