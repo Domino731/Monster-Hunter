@@ -1,5 +1,6 @@
 import { auth } from '../../firebase/index';
 import { MessageData } from '../../types';
+import { formatChatDate } from '../../functions/formatDate';
 export const getMessageCode = (friend, currentUser, message: MessageData) : string => {
   if(message.userId !== auth.currentUser.uid){
      return `
@@ -14,10 +15,10 @@ export const getMessageCode = (friend, currentUser, message: MessageData) : stri
       <strong class='message__nick'>${friend.nick}</strong>
       ${
         message.content.map((el) => {
-          return `<p class='message__cloud message__cloud-friend'>${el}</p>`
+          return `<div class='message__cloud message__cloud-friend'>${el}</div>`
         }).join('')
         }
-      
+        <strong>${formatChatDate(message.createdAt)}</strong>
     </div>
   </div>
     `
@@ -28,12 +29,16 @@ export const getMessageCode = (friend, currentUser, message: MessageData) : stri
    
 
     <div class='message__content message__content-user'> 
-      <strong class='message__nick'>${currentUser.nick}</strong>
+      <strong class='message__nick'>You</strong>
       ${
         message.content.map((el) => {
-          return `<p class='message__cloud message__cloud-friend'>${el}</p>`
+          return `
+          <div class='message__cloud message__cloud-user'>${el}</div>
+          
+          `
         }).join('')
         }
+        <strong>${formatChatDate(message.createdAt)}</strong>
     </div>
 
     <div class='message__portraitWrapper'>
@@ -42,10 +47,8 @@ export const getMessageCode = (friend, currentUser, message: MessageData) : stri
        </div>
     </div>
 
-
   </div>
     `
   } 
 }
 
-//<div class='message__time'> Yesterday, 12:45</div>

@@ -41,17 +41,18 @@ export class Chat {
             .get()
             .then(response => {
                 response.docs.forEach(doc => {
-                   return db.collection('chat')
-                    .doc(`${auth.currentUser.uid}`)
-                    .collection('conversations')
-                    .doc(doc.id)
-                    .update(newData)
-                    .then(()=> {
-                        console.log('documents successful updated');
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                    return db.collection('chat')
+                        .doc(`${auth.currentUser.uid}`)
+                        .collection('conversations')
+                        .doc(doc.id)
+                        .update(newData)
+                        .then(() => {
+                            // clean input text
+                            this.dom.newMessageText.innerHTML = '';
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
                 })
             })
     }
@@ -68,7 +69,7 @@ export class Chat {
                     if (change.type === "modified") {
                         this.conversation = change.doc.data() as Conversation
                         this.renderChat();
-                        
+
                     }
                 });
             })
@@ -77,14 +78,14 @@ export class Chat {
             .doc(`${this.friend.id}`)
             .collection('conversations')
             .where('recipientId', '==', `${auth.currentUser.uid}`)
-        .onSnapshot((snapshot) => {
-            snapshot.docChanges.forEach((change) => {
-                if (change.type === "modified") {
-                    this.conversation = change.doc.data() as Conversation
-                    this.renderChat();
-                }
+            .onSnapshot((snapshot) => {
+                snapshot.docChanges.forEach((change) => {
+                    if (change.type === "modified") {
+                        this.conversation = change.doc.data() as Conversation
+                        this.renderChat();
+                    }
+                });
             });
-        });
     }
     async getChatroomData() {
         let conversation: Conversation | null = null;
@@ -121,17 +122,19 @@ export class Chat {
 
     renderChat() {
         // sort by date
-        this.conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        this.conversation.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
         let html = '';
         this.conversation.messages.forEach(el => {
             html += getMessageCode(this.friend, this.currentUser, el)
+
         });
         this.dom.chatContainer.innerHTML = html;
     }
     sendMessageEvent() {
         this.dom.sendMessageBtn.addEventListener('click', () => {
+            
             const messageText: string = this.dom.newMessageText.innerHTML;
-
+            if(messageText !== ''){
             const newMessage = () => {
                 const data: MessageData = {
                     content: [],
@@ -164,7 +167,7 @@ export class Chat {
                 this.updateChatData(this.conversation)
             }
 
-
+        }
         });
     }
     addEmoji() {
@@ -173,7 +176,7 @@ export class Chat {
             let messageHTML: string = this.dom.newMessageText.innerHTML
             messageHTML += `<img src='${emoji.src}'/>`
             this.dom.newMessageText.innerHTML = messageHTML;
-            console.log(emoji.src)
+            console.log(this.dom.newMessageText.innerHTML)
         }))
     }
 
