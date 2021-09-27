@@ -33,7 +33,59 @@ export class Chat {
         this.init();
     }
 
+    async updateChatData(newData: Conversation) {
+        await db.collection('chat')
+            .doc(`${auth.currentUser.uid}`)
+            .collection('conversations')
+            .where('recipientId', '==', `${this.friend.id}`)
+            .get()
+            .then(response => {
+                response.docs.forEach(doc => {
+                   return db.collection('chat')
+                    .doc(`${auth.currentUser.uid}`)
+                    .collection('conversations')
+                    .doc(doc.id)
+                    .update(newData)
+                    .then(()=> {
+                        console.log('documents successful updated');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                })
+            })
+    }
 
+    // listening for chat data updates in firestore
+    async dataChangeListener() {
+        // current user
+        await db.collection('chat')
+            .doc(`${auth.currentUser.uid}`)
+            .collection('conversations')
+            .where('recipientId', '==', `${this.friend.id}`)
+            .onSnapshot((snapshot) => {
+                snapshot.docChanges.forEach((change) => {
+                    if (change.type === "modified") {
+                        this.conversation = change.doc.data() as Conversation
+                        this.renderChat();
+                        
+                    }
+                });
+            })
+        // friend
+        await db.collection('chat')
+            .doc(`${this.friend.id}`)
+            .collection('conversations')
+            .where('recipientId', '==', `${auth.currentUser.uid}`)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges.forEach((change) => {
+                if (change.type === "modified") {
+                    this.conversation = change.doc.data() as Conversation
+                    this.renderChat();
+                }
+            });
+        });
+    }
     async getChatroomData() {
         let conversation: Conversation | null = null;
 
@@ -42,7 +94,7 @@ export class Chat {
             .collection('conversations')
             .where('recipientId', '==', `${this.friend.id}`)
             .get()
-            .then(function (querySnapshot) {
+            .then(querySnapshot => {
                 querySnapshot.forEach(function (doc) {
                     conversation = doc.data() as Conversation;
                 });
@@ -66,46 +118,52 @@ export class Chat {
         this.conversation = conversation;
     }
 
+
     renderChat() {
+        // sort by date
+        this.conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         let html = '';
         this.conversation.messages.forEach(el => {
             html += getMessageCode(this.friend, this.currentUser, el)
         });
         this.dom.chatContainer.innerHTML = html;
     }
-    sendMessageEvent() {      
+    sendMessageEvent() {
         this.dom.sendMessageBtn.addEventListener('click', () => {
             const messageText: string = this.dom.newMessageText.innerHTML;
-          
-                const newMessage = () => {
-                    const data: MessageData = {
-                        content: [],
-                        createdAt: new Date,
-                        nick: this.currentUser.nick,
-                        userId: auth.currentUser.uid
-                    }
-                    data.content.push(messageText)
-                    this.conversation.messages.push(data);
-                }
-                const currentTime: Date = new Date();
-                const index: number = this.conversation.messages.length - 1;
 
-                if (this.conversation.messages[index]) {
-                    const lastUpdate: Date = this.conversation.messages[index].createdAt;
-                    let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
-                    const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-                    if (minutes <= 3) {
-                        let oldContent: string[] = this.conversation.messages[index].content;
-                        oldContent.push(messageText);
-                    }
-                    else {
-                        newMessage();
-                    }
+            const newMessage = () => {
+                const data: MessageData = {
+                    content: [],
+                    createdAt: new Date,
+                    nick: this.currentUser.nick,
+                    userId: auth.currentUser.uid
+                }
+                data.content.push(messageText)
+                this.conversation.messages.push(data);
+            }
+            const currentTime: Date = new Date();
+            const index: number = this.conversation.messages.length - 1;
+
+            if (this.conversation.messages[index]) {
+                const lastUpdate: Date = this.conversation.messages[index].createdAt;
+                let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
+                const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
+                if (minutes <= 3) {
+                    let oldContent: string[] = this.conversation.messages[index].content;
+                    oldContent.push(messageText);
+                    this.updateChatData(this.conversation)
                 }
                 else {
                     newMessage();
+                    this.updateChatData(this.conversation)
                 }
-            
+            }
+            else {
+                newMessage();
+                this.updateChatData(this.conversation)
+            }
+
 
         });
     }
@@ -145,17 +203,17 @@ export class Chat {
     }
 
     // check if message text has more than 0 letter
-    checkMessage(){
+    checkMessage() {
         const check = () => {
-          if(this.dom.newMessageText.innerText.length !== 0){
-              this.dom.sendMessageBtn.classList.remove('disabled');
-          }
-          else{
-            this.dom.sendMessageBtn.classList.add('disabled');
-          }
+            if (this.dom.newMessageText.innerText.length !== 0) {
+                this.dom.sendMessageBtn.classList.remove('disabled');
+            }
+            else {
+                this.dom.sendMessageBtn.classList.add('disabled');
+            }
         }
-         this.dom.newMessageText.addEventListener('keyup', check);
-         this.dom.newMessageText.addEventListener('change', check);
+        this.dom.newMessageText.addEventListener('keyup', check);
+        this.dom.newMessageText.addEventListener('change', check);
     }
 
     // method which is responsible for injecting html code into game root
@@ -177,11 +235,14 @@ export class Chat {
 
     // initialization of scripts
     initScripts() {
+        this.dataChangeListener();
+        this.renderChat();
         this.toogleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();
         this.sendMessageEvent();
         this.checkMessage();
+        this.dataChangeListener();
     }
 
     init() {
