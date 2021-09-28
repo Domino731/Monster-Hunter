@@ -10,8 +10,11 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
         <div class="friends__topBar">
 
             <div class="friends__searchWrapper">
-                <img src="./images/friends_icon_search.png" alt="search" class="friends__searchIcon">
-                <input type="text" class="friends__searchInput" name="friends_search_input">
+               
+                <div class='searchFriend__searchIcon'>
+                <img src='./images/friends_icon_search.png' alt='search' />
+            </div>
+            <input type='text' name='search_friends_input' class='searchFriend__input'>
             </div>
 
             <div class="friends__settingsWrapper">

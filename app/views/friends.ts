@@ -9,22 +9,24 @@ import firebase from 'firebase/app';
 export class Friends extends View {
 
   private dom: {
-    sortBtn: HTMLElement,
-    filterBtn: HTMLElement,
-    sortForm: HTMLElement,
-    filterForm: HTMLElement
-    branch: HTMLElement,
-    profileBtns: NodeListOf<Element>,
-    chatBtns: NodeListOf<Element>,
-    friendsList: HTMLElement,
-    friendsWindows: NodeListOf<Element>
-    sortCheckboxes: NodeListOf<Element>
-    filterCheckboxes: NodeListOf<Element>
-    closeBtn: HTMLElement
+    sortBtn: HTMLElement;
+    filterBtn: HTMLElement;
+    sortForm: HTMLElement;
+    filterForm: HTMLElement;
+    branch: HTMLElement;
+    profileBtns: NodeListOf<Element>;
+    chatBtns: NodeListOf<Element>;
+    friendsList: HTMLElement;
+    friendsWindows: NodeListOf<Element>;
+    sortCheckboxes: NodeListOf<Element>;
+    filterCheckboxes: NodeListOf<Element>;
+    closeBtn: HTMLElement;
+    searchFriendInput: HTMLInputElement;
+    nicks: NodeListOf<Element>;
   }
-  private friendsList: SearchedUserData[]
-  private friendsListBackup: SearchedUserData[]
-  private secondView: SearchedUser | Chat | null
+  private friendsList: SearchedUserData[];
+  private friendsListBackup: SearchedUserData[];
+  private secondView: SearchedUser | Chat | null;
   constructor() {
     super();
     this.secondView = null;
@@ -42,14 +44,12 @@ export class Friends extends View {
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
-      filterCheckboxes: document.querySelectorAll('#friends_filter_form input')
+      filterCheckboxes: document.querySelectorAll('#friends_filter_form input'),
+      searchFriendInput: document.querySelector('.searchFriend__input'),
+      nicks: document.querySelectorAll('.friend__name')
     };
   }
 
-
-  render() {
-    this.root.innerHTML = getFriendsHTMLCode(this.userData.friends);
-  }
 
   showFormsEvents() {
     // toogle filter form
@@ -208,6 +208,28 @@ export class Friends extends View {
     this.dom.branch.classList.add('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
   }
+  searchFriendEvent() {
+    const search = async (nick: string) => {
+      console.log(nick.length)
+      if (nick.length > 0) {
+        const elements = []
+        this.dom.nicks.forEach((el) => {
+          if (el.innerHTML === nick) {
+            elements.push(el.parentElement.parentElement)
+          }
+        })
+        this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('disabled'))
+        elements.forEach(el => el.classList.remove('disabled'))
+      }
+      else {
+        this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('disabled'))
+      }
+
+    }
+    this.dom.searchFriendInput.addEventListener('change', () => search(this.dom.searchFriendInput.value));
+    this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
+
+  }
   onDataChange() {
     this.hideFriendView();
     this.initScripts();
@@ -223,8 +245,12 @@ export class Friends extends View {
         this.filterFriends();
         this.closeViewEvent();
         this.showChat();
+        this.searchFriendEvent();
       })
 
+  }
+  render() {
+    this.root.innerHTML = getFriendsHTMLCode(this.userData.friends);
   }
   getDOMElements() {
     this.dom = {
@@ -239,7 +265,9 @@ export class Friends extends View {
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
-      filterCheckboxes: document.querySelectorAll('#friends_filter_form input')
+      filterCheckboxes: document.querySelectorAll('#friends_filter_form input'),
+      searchFriendInput: document.querySelector('.searchFriend__input'),
+      nicks: document.querySelectorAll('.friend__name')
     }
   }
 }

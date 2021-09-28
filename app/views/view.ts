@@ -227,10 +227,10 @@ export class View {
    dateOperations() {
 
       const today: Date = new Date();
-      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+      
       if (this.userData.lastVisit.getDay() !== today.getDay()) {
          // set new shop
-         
+         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
          this.userData.shopPicks.blacksmith = getBlacksmithPicks();
          // set new wizard magic wheel spin, and new spinning wheel items
          this.userData.wizardWheelSpin = true;
