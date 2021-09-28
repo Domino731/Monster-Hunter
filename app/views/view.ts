@@ -151,7 +151,7 @@ export class View {
                }
                if (change.type === "removed") {
                   // redirect user to login page
-                  location.href = '/login.html';
+                 // location.href = '/login.html';
                }
             });
          });
