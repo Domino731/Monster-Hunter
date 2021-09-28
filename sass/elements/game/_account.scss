@@ -5,6 +5,7 @@
     height: 100%;
     background-image: url('/images/background_account.jpg');
     background-size: 100% 100%;
+    position: relative;
     &__item{
         width: 441px;
         padding: 5px 10px;
@@ -13,15 +14,20 @@
         border-radius: 20px;
 
     }
-    &__nick{
+    &__title{
         text-align: center;
         font-size: 44px;
         letter-spacing: 0.25rem;
         word-spacing: 0.188rem;
         font-weight: 900;
         text-transform: uppercase;
-        color: #ffcd00;
         -webkit-text-stroke: 1px #03071e;
+        &-nick{
+            color: #ffcd00;
+        }
+        &-delete{
+            color: $color-red;
+        }
     }
     &__element{
         height: 66px;
@@ -45,7 +51,7 @@
         }
     }
     &__elementContent{
-        width: 85%;
+        width: 84%;
         height: 50px;
         background: $color-white;
         transform: translateX(-15px);
@@ -97,7 +103,6 @@
     }
     &__btn{
         width: 100%;
-        background-color: $color-blue;
         color: $color-white;
         margin: 1.5rem 0;
         font-size: 1.5rem;
@@ -108,12 +113,16 @@
         padding: 0.313rem 0;
         border: none;
        
-
+        
         &:hover{
             cursor: pointer;
-            color: $color-gold;
-            border: 2px solid $color-gold;
             letter-spacing: 0.125rem;
+        }
+        &-update{
+            background-color: $color-blue;
+        }
+        &-delete{
+            background-color: $color-error;
         }
     }
     &__succcessfullUpdate{
@@ -131,6 +140,29 @@
         border: none;
         transform: scale(0%);
         animation: 1s an__account_scale forwards;
+    }
+    &__deleteIcon{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        height: 70px;
+        width: 70px;
+        img{
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    &__deleteCode{
+        text-align: center;
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 1.438rem;
+        font-weight: bold;
+        letter-spacing: 0.125rem;
     }
 }
 

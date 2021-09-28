@@ -1,9 +1,9 @@
 import { auth } from './../firebase/index';
-export const getAccountHTMLCode = (userNick: string) : string => {
+export const getAccountHTMLCode = (userNick: string, deleteCode: string) : string => {
     return `
     <section class='account'>
-          <div class='account__item'>
-             <h2 class='account__nick'>${userNick}</h2>
+          <div class='account__item disabled' id='update-account'>
+             <h2 class='account__title account__title-nick'>${userNick}</h2>
 
              <div class='account__element'>
                 <div class='account__elementIcon'>
@@ -51,11 +51,30 @@ export const getAccountHTMLCode = (userNick: string) : string => {
                   Password has been updated.
                </div>
            
-              <button class='account__btn' id='btn-update-profile'>Update your profile</button>
+              <button class='account__btn account__btn-update' id='btn-update-account'>Update your account</button>
               <div class='account__succcessfullUpdate disabled'>Successfully updated</div>
              </form>
 
 
+          </div>
+
+
+         <div class='account__item' id='delete-account'> 
+             <h2 class='account__title account__title-delete'>Delete your account</h2>
+
+             <strong class='account__deleteCode'>${deleteCode}</strong>
+             <div class='account__element account__element-password'>
+             <div class='account__elementIcon'>
+               <img  src='./images/account_signature.png' alt='lock'/>
+             </div>            
+                <input type='text' name='deleteCode' class='account__elementContent account__elementContent-password' placeholder='Rewrite above code to delete account'>            
+             </div>
+             <button class='account__btn account__btn-delete disabled' id='btn-delete-account'>Delete your account</button>
+         </div>
+
+    
+          <div class='account__deleteIcon'> 
+            <img src='./images/account_delete_icon.png' title='Delete your account'/>
           </div>
         </section>
     `

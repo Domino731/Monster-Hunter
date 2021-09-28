@@ -150,9 +150,8 @@ export class View {
                   this.setHeroStats();
                }
                if (change.type === "removed") {
-                  this.userData = change.doc.data() as UserData;
-                  this.onDataChange();
-                  this.setHeroStats();
+                  // redirect user to login page
+                  location.href = '/login.html';
                }
             });
          });

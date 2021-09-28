@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             const general = new General();
         }
         else {
-            // redirect user to main page
+            // redirect user to login page
             location.href = '/login.html';
         }
     })
