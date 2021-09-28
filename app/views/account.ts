@@ -1,23 +1,24 @@
 import validator from 'validator';
 import { auth } from '../firebase/index';
 import { includeNumber, isUpper } from '../functions/other';
-export class Account {
+import { View } from './view';
+import { getAccountHTMLCode } from '../viewsHTMLCode/account';
+export class Account extends View{
 
-    private root: HTMLElement | null
     private data: {
-        email: string,
-        password: string,
-        passwordRepeat: string
+        email: string;
+        password: string;
+        passwordRepeat: string;
     }
     private dom: {
-        updateFormInputs: NodeListOf<Element> | null,
-        actionBtn: HTMLButtonElement | null,
-        errorWrapper: HTMLElement | null,
-        successEmailUpdate:HTMLElement | null,
-        successPasswordUpdate:HTMLElement | null
+        updateFormInputs: NodeListOf<Element> | null;
+        actionBtn: HTMLButtonElement | null;
+        errorWrapper: HTMLElement | null;
+        successEmailUpdate:HTMLElement | null;
+        successPasswordUpdate:HTMLElement | null;
     }
     constructor() {
-        this.root = document.getElementById("game__view")
+        super()
         this.data = {
             email: auth.currentUser.email,
             password: "",
@@ -30,66 +31,10 @@ export class Account {
             successEmailUpdate: document.querySelector('#update_profile_email'),
             successPasswordUpdate: document.querySelector('#update_profile_password')
         }
-        this.init()
     }
 
-    async render() {
-        this.root.innerHTML = `<section class='account'>
-          <div class='account__item'>
-             <h2 class='account__nick'>NightNinja_890</h2>
-
-             <div class='account__element'>
-                <div class='account__elementIcon'>
-                  <img  src='./images/account_date.png' alt='calendar'/>
-                </div>
-                <div class='account__elementContent'> 
-                    12 November 2020
-                </div>
-             </div>
-
-             <form id='account-update'>
-              <div class='account__element'>
-                <div class='account__elementIcon'>
-                  <img  src='./images/account_email.png' alt='email'/>
-                </div>           
-                   <input type='text' name='email' value=${this.data.email} class='account__elementContent account__elementContent-email' placeholder='Leave blank to keep email same'>               
-             </div>
-
-             <div class='account__element account__element-password'>
-             <div class='account__elementIcon'>
-               <img  src='./images/account_password.png' alt='lock'/>
-             </div>            
-                <input type='password' name='password' class='account__elementContent account__elementContent-password' placeholder='New password'>            
-             </div>
-
-              <div class='account__element account__element-password'>
-             <div class='account__elementIcon'>
-               <img  src='./images/account_password.png' alt='lock'/>
-             </div>            
-                <input type='password'  class='account__elementContent account__elementContent-password' placeholder='Repeat new password' name='passwordRepeat' >            
-             </div>
-              
-            
-               <div class='account__msg account__msg-error' id='update_profile_error'> 
-                 Password do not match!
-               </div>
-
-
-               <div class='account__msg account__msg-success' id='update_profile_email'> 
-                 E-mail has been updated.
-               </div>
-
-               
-               <div class='account__msg account__msg-success' id='update_profile_password'> 
-                  Password has been updated.
-               </div>
-           
-              <button class='account__btn' id='btn-update-profile'>Update your profile</button>
-             </form>
-
-
-          </div>
-        </section>`;
+    render() {
+        this.root.innerHTML = getAccountHTMLCode(this.userData.nick);;
     }
 
     // adding event for each input, which is responsible to changing data
@@ -113,31 +58,43 @@ export class Account {
             includeNumber(this.data.password) &&
             isUpper(this.data.password) &&
             this.data.password === this.data.passwordRepeat) {
-                auth.currentUser.updatePassword(this.data.password)
+               return  auth.currentUser.updatePassword(this.data.password)
                 .then(()=>{
-                    this.dom.successPasswordUpdate.style.display = "block"
+                    console.log('Password updated successfully');
+                    this.dom.successPasswordUpdate.classList.remove('disabled');
+                    this.dom.actionBtn.classList.add('disabled');
                 })
-                .catch(err => console.error(err));
+                .catch((err) => {
+                    console.log(err)
+                    alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
+                    return auth.signOut()
+                    .then( () =>  {
+                         console.log('Sign-out successful')
+                      })
+                      .catch(err =>  {
+                        console.log(err)
+                      });
+                   });
         }
         // searching for error
         else {
             if(this.data.password.length === 0){
-                this.dom.errorWrapper.style.display = "none";
+                this.dom.errorWrapper.classList.add('disabled');
             }
             else if(this.data.password.length < 6){
-                this.dom.errorWrapper.style.display = "block";
+                this.dom.errorWrapper.classList.remove('disabled');
                 this.dom.errorWrapper.innerText = 'Password must have min. 6 characters';
             }
             else if(!includeNumber(this.data.password)){
-                this.dom.errorWrapper.style.display = "block";
+                this.dom.errorWrapper.classList.remove('disabled');
                 this.dom.errorWrapper.innerText = 'Password must have number';
             }
             else if (!isUpper(this.data.password)){
-                this.dom.errorWrapper.style.display = "block";
+                this.dom.errorWrapper.classList.remove('disabled');
                 this.dom.errorWrapper.innerText = 'Password must have upper letter';
             }
             else if(this.data.password !== this.data.passwordRepeat){
-                this.dom.errorWrapper.style.display = "block";
+                this.dom.errorWrapper.classList.remove('disabled');
                 this.dom.errorWrapper.innerText = 'Passwords do not match';
             }
         }
@@ -146,19 +103,31 @@ export class Account {
     // updating user e-mail
     updateEmail(){
         // update only when user enter new
-        if(auth.currentUser.email !== this.data.email && validator.isEmail(this.data.email)){
-           auth.currentUser.updateEmail(this.data.email)
+        if(auth.currentUser.email !== this.data.email && validator.isEmail(this.data.email) && this.data.email.length !== 0){
+           return auth.currentUser.updateEmail(this.data.email)
            .then(()=>{
-               this.dom.successEmailUpdate.style.display = "block"
+               console.log('Email updated successfully');
+               this.dom.successEmailUpdate.classList.remove('disabled');
+               this.dom.actionBtn.classList.add('disabled');
            })
-           .catch(err => console.error(err))
+           .catch((err) => {
+            console.log(err)
+            alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
+            return auth.signOut()
+            .then( () =>  {
+                 console.log('Sign-out successful')
+              })
+              .catch(err =>  {
+                console.log(err)
+              });
+           });
         }
-        if (!validator.isEmail(this.data.email)){
-                this.dom.errorWrapper.style.display = "block";
+        if (!validator.isEmail(this.data.email) && this.data.email.length !== 0){
+                this.dom.errorWrapper.classList.remove('disabled');
                 this.dom.errorWrapper.innerText = 'Invalid e-mail';
         }
     }
-
+    onDataChange(){}
     // firebase auth action on button, responsible for update user's profile
     updateProfileEvent() {
         this.dom.actionBtn.addEventListener("click", (e: Event) => {
@@ -185,13 +154,7 @@ export class Account {
             successPasswordUpdate: document.querySelector('#update_profile_password')
         }
     };
-
-    // methods initizaliton
-    init() {
-        this.render();
-        this.getDOMElements();
-        this.initScripts();
-    };
+   
 }
 
 //<a href='https://www.freepik.com/vectors/light'>Light vector created by vectorpouch - www.freepik.com</a>
