@@ -7,7 +7,7 @@ import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from './getRandomShopItem';
 import { setItemStats } from './setItemStats';
 import { specialItemsData } from '../properties/shop/special';
-export const getBlacksmithItems = (rawStats : UserStats) : ShopItem[] => {
+export const getBlacksmithItems = (rawStats : UserStats, guardPayout: number) : ShopItem[] => {
        // array with shop items, base on which shop will be created
        let shopItems: ShopItem[] = []
 
@@ -31,10 +31,13 @@ export const getBlacksmithItems = (rawStats : UserStats) : ShopItem[] => {
 
        // set the item stats
        shopItems.forEach(el => {
-          el.properties.strength = setItemStats(el.properties.strength, rawStats.strength),
+             const random : number = (Math.floor(Math.random() * 10) + 1) / 100;
+             const itemCost: number = Math.ceil(((el.initialCost + random) * guardPayout / 100));
+             el.properties.strength = setItemStats(el.properties.strength, rawStats.strength),
              el.properties.defence = setItemStats(el.properties.defence, rawStats.defence),
              el.properties.physicalEndurance = setItemStats(el.properties.defence, rawStats.defence),
              el.properties.luck = setItemStats(el.properties.luck, rawStats.luck)
+             el.initialCost = itemCost;
        });
 
        return shopItems;

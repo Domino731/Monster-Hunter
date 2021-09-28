@@ -29,9 +29,9 @@ export const getPetsHTMLCode = (user: UserData): string => {
              </div>
              <ul class='pets__benefits'>
               ${el.properties.travelTime !== null ? `<li class='pets__benefitsItem'>-${el.properties.travelTime}% of travel time </li>` : ''}
-              ${el.properties.defense !== null ? `<li class='pets__benefitsItem'>+${el.properties.defense}% to Defence </li>` : ``}
+              ${el.properties.defence !== null ? `<li class='pets__benefitsItem'>+${el.properties.defence}% to Defence </li>` : ``}
               ${el.properties.physicalEndurance !== null ? `   <li class='pets__benefitsItem'>+${el.properties.physicalEndurance}% to Physical endurance </li>` : ``}
-              ${el.properties.strenght !== null ? `<li class='pets__benefitsItem'>+${el.properties.strenght}% to Strength </li>` : ``} 
+              ${el.properties.strength !== null ? `<li class='pets__benefitsItem'>+${el.properties.strength}% to Strength </li>` : ``} 
               ${el.properties.luck !== null ? `    <li class='pets__benefitsItem'>+${el.properties.luck}% to Luck </li>` : ``}
              </ul>
              <div class='pets__countdownWrapper disabled' data-pet-countdown-id=${el.id}>12h 13m 12s left </div>

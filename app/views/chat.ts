@@ -84,6 +84,9 @@ export class Chat {
                         this.conversation = change.doc.data() as Conversation
                         this.renderChat();
                     }
+                    if (change.type === "removed") {
+                        location.reload();
+                    }
                 });
             });
     }

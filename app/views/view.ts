@@ -34,17 +34,17 @@ export class View {
    checkPetAndPotions(){
       const today : Date = new Date;
        if(this.userData.pet !== null){
-         if(this.userData.pet.rentEnd >= today){
+         if(this.userData.pet.rentEnd <= today){
             this.userData.pet = null;
          } 
        }
        if(this.userData.potions.first !== null){
-          if(this.userData.potions.first.end >= today){
+          if(this.userData.potions.first.end <= today){
              this.userData.potions.first = null;
           }
        }
        if(this.userData.potions.second !== null){
-         if(this.userData.potions.second.end >= today){
+         if(this.userData.potions.second.end <= today){
             this.userData.potions.second = null;
          }
       }
@@ -189,7 +189,7 @@ export class View {
 
    setMagicWheel() {
       // add blacksmith items
-      const items: ShopItem[] = getBlacksmithItems(this.userData.rawStats);
+      const items: ShopItem[] = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
       // aslo,  user can get gold
       const gold: ShopItem = {
          type: 'gold',
@@ -227,9 +227,10 @@ export class View {
    dateOperations() {
 
       const today: Date = new Date();
+      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
       if (this.userData.lastVisit.getDay() !== today.getDay()) {
          // set new shop
-         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
+         
          this.userData.shopPicks.blacksmith = getBlacksmithPicks();
          // set new wizard magic wheel spin, and new spinning wheel items
          this.userData.wizardWheelSpin = true;

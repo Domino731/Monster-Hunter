@@ -95,7 +95,7 @@ export class Register extends AuthForm {
             physicalEndurance: 50,
             defence: 50,
             luck: 50
-        });
+        }, 100);
         // aslo,  user can get gold
         const gold: ShopItem = {
             type: 'gold',
@@ -189,7 +189,7 @@ export class Register extends AuthForm {
                                 currentMission: null,
                                 availableMissions: getRandomMissions(10, 100, fullUserStats, null),
                                 friends: [],
-                                inbox: [{mail}]
+                                inbox: [mail]
                             }).then(async () => {
                                 await db.collection('chat')
                                     .doc(`${cred.uid}`)

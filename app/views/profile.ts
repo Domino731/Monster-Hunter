@@ -57,7 +57,7 @@ export class Profile extends View {
             physicalEndurance: HTMLElement
             physicalEnduranceCost: HTMLElement
             physicalEnduranceBtn: HTMLElement
-            Health: HTMLElement
+            health: HTMLElement
 
             defence: HTMLElement
             defenceCost: HTMLElement
@@ -90,7 +90,7 @@ export class Profile extends View {
                 physicalEndurance: document.querySelector('#profile_PE_stat .profile__item--amount'),
                 physicalEnduranceCost: document.querySelector('#profile_PE_stat .profile__item--cost strong'),
                 physicalEnduranceBtn: document.querySelector('#profile_PE_stat .profile__item--buyBtn button'),
-                Health: document.querySelector('#profile_health_stat .profile__item--amount'),
+                health: document.querySelector('#profile_health_stat .profile__item--amount'),
 
                 defence: document.querySelector('#profile_defence_stat .profile__item--amount'),
                 defenceCost: document.querySelector('#profile_defence_stat .profile__item--cost strong'),
@@ -203,7 +203,7 @@ export class Profile extends View {
         this.dom.stats.defenceBtn.addEventListener('click', () => this.increaseStatistic('defence', this.dom.stats.defenceCost))
     }
     // set the statistics table
-    setStats() {
+    setTableStats() {
         // strength
         this.dom.stats.strength.innerText = `${this.userStats.strength}`;
         this.dom.stats.strengthCost.innerText = `${getStatCost( this.userData.rawStats.strength, this.userData.guardPayout)}`;
@@ -211,7 +211,7 @@ export class Profile extends View {
         // physical endurance
         this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
         this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost( this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
-        this.dom.stats.Health.innerText = `${this.userStats.health}`;
+        this.dom.stats.health.innerText = `${this.userStats.health}`;
         // defence
         this.dom.stats.defence.innerText = `${this.userStats.defence}`;
         this.dom.stats.defenceCost.innerText = `${getStatCost( this.userData.rawStats.defence, this.userData.guardPayout)}`;
@@ -567,7 +567,8 @@ export class Profile extends View {
     onDataChange() {
         this.generalOnUpdate();
         this.setUserBackpack();
-        this.setStats();
+        this.setHeroStats();
+        this.setTableStats();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
@@ -584,7 +585,7 @@ export class Profile extends View {
                 physicalEndurance: document.querySelector('#profile_PE_stat .profile__item--amount'),
                 physicalEnduranceCost: document.querySelector('#profile_PE_stat .profile__item--cost strong'),
                 physicalEnduranceBtn: document.querySelector('#profile_PE_stat .profile__item--buyBtn button'),
-                Health: document.querySelector('#profile_health_stat .profile__item--amount'),
+                health: document.querySelector('#profile_health_stat .profile__item--amount'),
 
                 defence: document.querySelector('#profile_defence_stat .profile__item--amount'),
                 defenceCost: document.querySelector('#profile_defence_stat .profile__item--cost strong'),
@@ -639,7 +640,7 @@ export class Profile extends View {
         this.changeUserDescription();
         this.labelForEquipmentEvent();
         this.changePortraitEvents();
-        this.setStats();
+        this.setTableStats();
         this.increaseStatisticEvents();
         this.labelForPotions();
     }
