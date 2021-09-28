@@ -12,10 +12,13 @@ const getDifferenceInDays = (date1: Date, date2: Date): number => {
 
 export const formatDate = (date: Date): string => {
 
-
+     console.log(date.getDay() === today.getDay())
 
     if (date.getDay() === today.getDay()) {
         return `Today`
+    }
+    else if (getDifferenceInDays(date, today) === 7) {
+        return `Yesterday`
     }
     else if (getDifferenceInDays(date, today) < 7) {
         return `${days[date.getDay()]}`
@@ -25,7 +28,7 @@ export const formatDate = (date: Date): string => {
     }
 }
 
-export const formatChatDate = (date: Date) => {
+export const formatChatDate = (date: Date): string => {
     const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes() 
     if (date.getDay() === today.getDay()) {
         
@@ -35,7 +38,31 @@ export const formatChatDate = (date: Date) => {
         return `${days[date.getDay()]}, ${date.getHours()}:${minutes}`;
     }
     else if (date.getMonth() === today.getMonth()) {
-        return `${months[date.getMonth() + 1]}, ${days[date.getDay()]}, ${date.getHours()}:${minutes}`
+        return `${months[date.getMonth() + 1]}, ${date.getDate()}, ${days[date.getDay()]}`
     }
+    else{
+        return months[date.getMonth() + 1]
+        }
+}
+export const formatMailDate = (date: Date) : string => {
+    const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes() 
+    if (date.getDay() === today.getDay()) {
+        
+        return `
+        Today </br>
+        ${date.getHours()}:${minutes }
+        `;
+    }
+    else if (getDifferenceInDays(date, today) < 7) {
+        return `${days[date.getDay()]} </br> ${date.getHours()}:${minutes}`;
+    }
+    else if (date.getMonth() === today.getMonth()) {
+        return `${months[date.getMonth() + 1]}, ${date.getDate()}, ${days[date.getDay()]}
+        </br>  ${date.getHours()}:${minutes}
+        `
+    }
+    else{
+        return `${months[date.getMonth() + 1]} ${date.getDate()}`
+        }
 }
 

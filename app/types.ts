@@ -120,7 +120,8 @@ export interface UserData {
     availableMissions: MissionData[] ;
     missionWillingness: number ;
     currentMission: CurrentMission | null ;
-    friends: FriendData[]
+    friends: FriendData[],
+    inbox: MailData[]
 }
 export interface FriendData {
     nick: string ;
@@ -229,6 +230,13 @@ export interface Conversation {
     participants: string[];
     updatedAt: Date;
     recipientId: string
+}
+export interface MailData {
+     title: string;
+     createdAt: Date;
+     createdBy: string;
+     content: string;
+     id: string
 }
 export interface CurrentMission {
     id: string ;

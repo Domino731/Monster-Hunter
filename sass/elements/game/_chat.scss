@@ -3,6 +3,7 @@
     height: 100%;
     border-radius: 12px;
     overflow: hidden;
+
     &__topBar {
         padding: 3px 0;
         height: 37px;
@@ -36,6 +37,8 @@
         padding-top: 10px;
         height: calc(100% - 84px);
         overflow: auto;
+        border-left: 2px solid  $color-gray-dark;
+        border-right:  2px solid $color-gray-dark;
         &::-webkit-scrollbar {
             width: 3px;
         }

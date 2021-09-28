@@ -88,6 +88,8 @@
         font-weight: 600;
     }
     &__listSubTitle {
+        display: flex;
+        justify-content: space-between;
         grid-column: 1/ 5;
         grid-row: 2/2;
         letter-spacing: 0.063rem;
@@ -95,6 +97,15 @@
         font-weight: 500;
         font-size: 1.125rem;
         overflow: hidden;
+        i{
+            font-size: 1.625rem;
+            color: $color-error;
+            -webkit-text-stroke: 0.063rem $color-black;
+            margin-right: 0.188rem;
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
     &__listDate {
         grid-column: 5/6;

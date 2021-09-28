@@ -82,7 +82,7 @@ export class Friends extends View {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         if (this.userData.friends.findIndex(el => el.id === doc.id) !== -1) {
-             
+
           const friends: string[] = doc.data().friends.map(el => el.id);
           const data: SearchedUserData = {
             description: doc.data().description,
@@ -169,7 +169,7 @@ export class Friends extends View {
   }
   showFriendProfile() {
     this.dom.profileBtns.forEach(el => el.addEventListener('click', () => {
-      // show close icon in order to give user ability to close friend profile view
+      // show close icon in order to give user ability to close friend profile component 
       this.dom.closeBtn.classList.remove('disabled');
 
       // find friend
@@ -182,7 +182,20 @@ export class Friends extends View {
       this.shrinkFriendsList();
     }))
   }
+  showChat() {
+    this.dom.chatBtns.forEach(el => el.addEventListener('click', () => {
+      // show close icon in order to give user ability to close chat
+      this.dom.closeBtn.classList.remove('disabled');
 
+      // find friend
+      const element: HTMLElement = el as HTMLElement;
+      const userId: string = element.parentElement.parentElement.dataset.userId;
+      const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
+
+      this.shrinkFriendsList();
+      this.secondView = new Chat(this.dom.branch, this.userData, friend);
+    }))
+  }
   shrinkFriendsList() {
     this.dom.branch.classList.remove('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
@@ -209,8 +222,7 @@ export class Friends extends View {
         this.sortFriends();
         this.filterFriends();
         this.closeViewEvent();
-        this.shrinkFriendsList();
-        this.secondView = new Chat(this.dom.branch, this.friendsList[0], this.userData);
+        this.showChat();
       })
 
   }

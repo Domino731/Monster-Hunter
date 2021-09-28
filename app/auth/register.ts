@@ -4,15 +4,49 @@ import validator from 'validator';
 import { auth, db } from "../firebase";
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { portraitsData } from '../properties/portraits/portraits';
-import { FullUserStats, MissionData, ShopItem } from '../types';
+import { FullUserStats, ShopItem, MailData } from '../types';
 import { getBlacksmithItems } from "../functions/getBlacksmithItems";
-import { setCountdown } from '../functions/countdown';
 import { potionsData } from "../properties/shop/potions";
 import { getRandomShopItem } from "../functions/getRandomShopItem";
 import { getNeededExp } from '../functions/getNeededExp';
-import { getRandomMission, getRandomMissions } from '../functions/missionGenerator';
-import { initialUserProfile } from '../properties/initialUserProfile/initialUserProfile';
+import {  getRandomMissions } from '../functions/missionGenerator';
+import uniqid from 'uniqid';
 
+const mail : MailData = {
+    id: uniqid(),
+    createdBy: 'admin',
+    createdAt: new Date(),
+    title: 'Welcome in MONSTER HUNTER',
+    content: `
+    <div class='mail'>
+    <div class='mail__header'>
+       <span></span>
+       <img src='./images/inbox/introduce.jpg'/>  
+    </div>
+    <h2 class='mail__title'>Welcome in MONSTER HUNTER</h2>
+    <div class='mail__content'>
+        <p>
+         Welcome in Monster Hunter game. 
+         When I was creating this game I inspired by the popular game <a href='https://www.sfgame.pl/?cid=sfplplgoaw1604&gclid=Cj0KCQjw4eaJBhDMARIsANhrQADuLkuKG0YLRh-qbLEu67m2WDZEe-nyvd-qRFAhKF2hyFs34AWd8x8aAuBjEALw_wcB' target='_blank'> Shakes & Fidget.</a>
+         I hope you have fun and enjoy your time here.
+      
+        </p>
+          <div>
+           <h3>Contact</h3>
+           <ul>
+            <li><a href='https://discord.com/channels/873119072613707776/873119072613707778' target='_blank'><i class="fab fa-discord"></i> My discord server  </a></li>
+            <li><a href='https://www.facebook.com/dominik.orzechowski.1088' target='_blank'><i class="fab fa-facebook"></i> Contact with me directly by facebook </a></li>
+            <li><a href='https://www.linkedin.com/in/dominik-orzechowski-2aa553212/' target='_blank'><i class="fab fa-linkedin"></i> Linkedin profile </a></li>
+           </ul>
+         </div>
+         <p>
+          <strong>Enjoy your game :)</strong>
+         </p>
+      
+         
+    </div>
+    `
+}
 export class Register extends AuthForm {
 
     private invalid: {
@@ -154,7 +188,8 @@ export class Register extends AuthForm {
                                 missionWillingness: 100,
                                 currentMission: null,
                                 availableMissions: getRandomMissions(10, 100, fullUserStats, null),
-                                friends: []
+                                friends: [],
+                                inbox: [{mail}]
                             }).then(async () => {
                                 await db.collection('chat')
                                     .doc(`${cred.uid}`)

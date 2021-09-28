@@ -1,3 +1,4 @@
+
 .friends {
     height: 100%;
     background-image: url("/images/background_friends.jpg");
@@ -263,6 +264,9 @@
     input:checked ~ i {
         animation: 0.3s 0.3s an__friends_checkbox_check forwards;
     }
+}
+#friends_branch{
+    border-left: 6px solid $color-gray-dark;
 }
 
 .friends__checkboxWrapper-highestLevel {

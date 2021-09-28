@@ -17,7 +17,7 @@ export class Chat {
         chatContainer: HTMLElement | null
     }
     private currentUser: UserData
-    constructor(root: HTMLElement, friend: SearchedUserData, currentUser: UserData) {
+    constructor(root: HTMLElement, currentUser: UserData, friend: SearchedUserData) {
         this.root = root;
         this.friend = friend;
         this.currentUser = currentUser;
@@ -143,6 +143,7 @@ export class Chat {
                     userId: auth.currentUser.uid
                 }
                 data.content.push(messageText)
+                this.dom.sendMessageBtn.classList.add('disabled');
                 this.conversation.messages.push(data);
             }
             const currentTime: Date = new Date();
@@ -154,17 +155,18 @@ export class Chat {
                 const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
                 if (minutes <= 3) {
                     let oldContent: string[] = this.conversation.messages[index].content;
+                    this.dom.sendMessageBtn.classList.add('disabled');
                     oldContent.push(messageText);
-                    this.updateChatData(this.conversation)
+                    this.updateChatData(this.conversation);
                 }
                 else {
                     newMessage();
-                    this.updateChatData(this.conversation)
+                    this.updateChatData(this.conversation);
                 }
             }
             else {
                 newMessage();
-                this.updateChatData(this.conversation)
+                this.updateChatData(this.conversation);
             }
 
         }
