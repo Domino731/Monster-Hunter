@@ -210,7 +210,6 @@ export class Friends extends View {
   }
   searchFriendEvent() {
     const search = async (nick: string) => {
-      console.log(nick.length)
       if (nick.length > 0) {
         const elements = []
         this.dom.nicks.forEach((el) => {
@@ -224,11 +223,9 @@ export class Friends extends View {
       else {
         this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('disabled'))
       }
-
     }
     this.dom.searchFriendInput.addEventListener('change', () => search(this.dom.searchFriendInput.value));
     this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
-
   }
   onDataChange() {
     this.hideFriendView();

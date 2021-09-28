@@ -9,11 +9,12 @@ export class SearchFriend extends View {
 
    private allUsersData: SearchedUserData[]
    private dom: {
-      allUsersList: HTMLElement,
-      allUsersRow: NodeListOf<Element>,
-      userRoot: HTMLElement
-      input: HTMLInputElement
-      nicknames: NodeListOf<Element>
+      allUsersList: HTMLElement;
+      allUsersRow: NodeListOf<Element>;
+      userRoot: HTMLElement;
+      input: HTMLInputElement;
+      nicks: NodeListOf<Element>;
+      searchFriendInput: HTMLInputElement;
    }
    constructor() {
       super();
@@ -23,7 +24,8 @@ export class SearchFriend extends View {
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
          input: document.querySelector('.searchFriend__input'),
-         nicknames: document.querySelectorAll('#all_users .searchFriend__nick')
+         nicks: document.querySelectorAll('#all_users .searchFriend__nick'),
+         searchFriendInput: document.querySelector('.searchFriend__input'),
       }
    }
 
@@ -73,7 +75,7 @@ export class SearchFriend extends View {
 
          this.dom.allUsersList.innerHTML = html;
          this.dom.allUsersRow = document.querySelectorAll('#all_users tr');
-         this.dom.nicknames = document.querySelectorAll('#all_users .searchFriend__nick')
+         this.dom.nicks = document.querySelectorAll('#all_users .searchFriend__nick strong')
       }
 
       );
@@ -83,7 +85,7 @@ export class SearchFriend extends View {
    showSpecificUserEvent() {
       this.dom.allUsersRow.forEach(el => el.addEventListener('click', () => {
         // remove all previous nick marks 
-        this.dom.nicknames.forEach(el => el.classList.remove('searchFriend__nick-selected'));
+        this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
 
          const element: HTMLElement = el as HTMLElement;
          // find user
@@ -101,7 +103,7 @@ export class SearchFriend extends View {
       
       const scrollToFriend = (target: HTMLInputElement) => {
           // remove all previous nick marks 
-         this.dom.nicknames.forEach(el => el.classList.remove('searchFriend__nick-selected'));
+         this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
 
          // find searched friend in order to scroll to his postion in table
          const friend = this.allUsersData[this.allUsersData.findIndex(el => el.nick === target.value)];
@@ -129,12 +131,35 @@ export class SearchFriend extends View {
    }
 
 
+   searchFriendEvent() {
+      const search = async (nick: string) => {
+        if (nick.length > 0) {
+          const elements = []
+          console.log(this.dom.nicks)
+          this.dom.nicks.forEach((el) => {
+            if (el.innerHTML === nick) {
+              elements.push(el.parentElement.parentElement.parentElement)
+            }
+          })
+          console.log(elements)
+          this.dom.allUsersRow.forEach(el => el.classList.add('disabled'))
+          elements.forEach(el => el.classList.remove('disabled'))
+        }
+        else {
+          this.dom.allUsersRow.forEach(el => el.classList.remove('disabled'))
+        }
+      }
+      this.dom.searchFriendInput.addEventListener('change', () => search(this.dom.searchFriendInput.value));
+      this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
+    }
+
 
    initScripts() {
       this.getAllUsers()
          .then(() => {
             this.showSpecificUserEvent();
             this.findFriend();
+            this.searchFriendEvent();
          })
    }
    onDataChange() {
@@ -146,7 +171,8 @@ export class SearchFriend extends View {
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
          input: document.querySelector('.searchFriend__input'),
-         nicknames: document.querySelectorAll('#all_users .searchFriend__nick')
+         nicks: document.querySelectorAll('#all_users .searchFriend__nick strong' ),
+         searchFriendInput: document.querySelector('.searchFriend__input'),
       }
    }
 
