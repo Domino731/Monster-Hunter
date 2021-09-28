@@ -48,41 +48,45 @@ export class Account extends View {
             toogleIcon: document.querySelector('.account__deleteIcon img'),
             deleteAccountBtn: document.querySelector('#btn-delete-account')
         }
-        
+
     }
 
-    
-    deleteAccount(){
+
+    deleteAccount() {
         const backUpData: UserData = this.userData
         return auth.currentUser.delete()
-        .then(()=> {
-           console.log('Your account has been deleted')   
-        })
-        .catch((err) => {
-            db.collection('users').doc(auth.currentUser.uid).set(backUpData)
-            console.log(err)
-            alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
-            return auth.signOut()
-                .then(() => {
-                    console.log('Sign-out successful')
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-        });
+            .then(() => {
+                console.log('Your account has been deleted')
+            })
+            .catch((err) => {
+                return db.collection('users')
+                    .doc(auth.currentUser.uid)
+                    .set(backUpData)
+                    .then(() => {
+                        console.log(err)
+                        alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
+                        return auth.signOut()
+                            .then(() => {
+                                console.log('Sign-out successful')
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            });
+                    })
+
+            });
     }
 
     deleteAccountEvent() {
-        console.log(this.dom.deleteAccountBtn)
         this.dom.deleteAccountBtn.addEventListener('click', (e: Event) => {
             e.preventDefault();
             if (this.deleteCode === this.data.deleteCode) {
                 const uid: string = auth.currentUser.uid
-             return db.collection('users').doc(uid).delete()
-             .then(()=> {
-                  this.deleteAccount();
-             })
-             .catch(err => console.log(err))
+                return db.collection('users').doc(uid).delete()
+                    .then(() => {
+                        this.deleteAccount();
+                    })
+                    .catch(err => console.log(err))
             }
 
         })

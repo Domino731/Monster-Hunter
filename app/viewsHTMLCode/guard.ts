@@ -44,7 +44,7 @@ export const getGuardHTMLCode = () : string => {
 
 
    <setion class='guard-city'> 
-       <div class='guard__summaryWrapper disabled'> 
+       <div class='guard__summaryWrapper'> 
            <div class='guard__summary'> 
               <img class='guard__summaryIcon' src='./images/gold_bag_big.png' alt='gold bag'/>
               <h2 class='guard__summaryTitle'>Your payout</h2>

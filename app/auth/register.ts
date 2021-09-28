@@ -135,7 +135,7 @@ export class Register extends AuthForm {
         const unlisten = async () => {
             await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
                 .then((cred) => {
-
+                      
                     const createData = async () => {
                         await db.collection("users")
                             .doc(cred.uid)

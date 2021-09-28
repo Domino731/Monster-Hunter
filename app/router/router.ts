@@ -11,6 +11,7 @@ import { SearchFriend } from '../views/searchFriend';
 import { Guard } from '../views/guard';
 import { MonsterFight } from '../views/monsterFight';
 import { Tavern } from '../views/tavern';
+import { AdminPanel } from '../views/adminPanel';
 let x;
 export const router = async () => {
     const routes: route[] = [
@@ -53,6 +54,10 @@ export const router = async () => {
         {
             path: "/account",
             view: Account
+        },
+        {
+            path: "/admin-panel",
+            view: AdminPanel
         }
     ]
 
@@ -102,7 +107,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Account()
+    const developmentRender = new Guard()
     window.addEventListener("popstate", router);
 };
 

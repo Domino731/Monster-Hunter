@@ -65,7 +65,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
                     
              </div>
 
-                <div class='profile__level'>
+                <div class='profile__level' title='Level exp: ${user.exp}/${user.nextLevelAt}'>
                 <div class='profile__levelProgress' style='width: ${Math.floor(user.exp * 100 / getNeededExp(user.level))}%'></div>
                    <i>${user.level}</i>
                 </div>

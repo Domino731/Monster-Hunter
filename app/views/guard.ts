@@ -117,7 +117,7 @@ export class Guard extends View {
     // milliseconds between start and end of guard
     const diffMs = (guardEnd - guardStart);
 
-    const minutes = Math.floor((diffMs / 1000) / 60);
+    const minutes = (diffMs / 1000) / 60;
 
     // set the countdown date
     const target_date = new Date().getTime() + ((minutes * 60) * 1000);
@@ -153,12 +153,13 @@ export class Guard extends View {
         const progress = today - start;
 
         const result: string = Math.round(progress / total * 100) + "%";
-        this.dom.countdownProgressBar.style.width = result;       
+        this.dom.countdownProgressBar.style.width = result;   
+          
       }
       else {
         this.dom.summaryPayout.innerText = `${this.userData.guard.payout}`
         // when countdown ends show summary and hide countdown elements
-        this.dom.summary.classList.remove('disabled');
+        this.dom.summary.classList.remove('disabled');  
         this.dom.countdownWrapper.classList.add('disabled')
         // reset coundown time
         this.dom.guardTimeLeft.innerText = ``;
@@ -173,7 +174,7 @@ export class Guard extends View {
   // get gold for guard, and update user's data in firestore, also redirect user to guard menu
   getGuardPayout() {
     this.dom.summaryBtn.addEventListener('click', () => {
-      if (this.userData.guard.payout !== null) {
+      if (this.userData.guard.payout !== null && this.userData.guard.end.getTime() <= new Date().getTime() ) {
         // set the gold amount
         this.userData.gold += this.userData.guard.payout;
         // clear guard
@@ -196,6 +197,10 @@ export class Guard extends View {
   cancelGuardEvent() {
     this.dom.cancelGuardBtn.addEventListener('click', () => {
       this.userData.status = 'free';
+      // reset coundown time
+      this.dom.guardTimeLeft.innerText = ``;
+      // clear interval
+      clearInterval(this.countdownInterval);
       this.userData.guard = {
         start: null,
         current: null,

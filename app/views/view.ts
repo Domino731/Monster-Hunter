@@ -30,8 +30,42 @@ export class View {
       this.init();
    }
 
+   // check if pet rent time has ended or if potions ended
+   checkPetAndPotions(){
+      const today : Date = new Date;
+       if(this.userData.pet !== null){
+         if(this.userData.pet.rentEnd >= today){
+            this.userData.pet = null;
+         } 
+       }
+       if(this.userData.potions.first !== null){
+          if(this.userData.potions.first.end >= today){
+             this.userData.potions.first = null;
+          }
+       }
+       if(this.userData.potions.second !== null){
+         if(this.userData.potions.second.end >= today){
+            this.userData.potions.second = null;
+         }
+      }
+   }
    // function that will set statistics based on equipment, potions and pet
    setHeroStats() {
+       this.checkPetAndPotions();
+       // by basic stats
+
+       // strenght
+       this.userStats.strength = this.userData.rawStats.strength;
+       this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+       // luck
+       this.userStats.luck = this.userData.rawStats.luck;
+       this.userStats.critical = this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+       // pe
+       this.userStats.physicalEndurance = this.userData.rawStats.physicalEndurance;
+       this.userStats.health =  Math.floor(this.userStats.physicalEndurance * 0.8);
+       // defence
+       this.userStats.defence = this.userData.rawStats.defence;
+       this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
 
       // by equipment
       this.userData.equipmentItems.forEach(el => {
@@ -115,10 +149,6 @@ export class View {
          }
 
       }
-
-
-
-
    }
 
    // method responsbile for fetching user data, and also this is real time data lisener

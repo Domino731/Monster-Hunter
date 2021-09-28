@@ -172,12 +172,13 @@ export class Profile extends View {
                this.dom.potionLabel.innerHTML = '';
             })
        }
+       console.log(this.userData.guardPayout)
        
     }
     increaseStatistic(statistic: 'strength' | 'physicalEndurance' | 'defence' | 'luck', statCost: HTMLElement) {
        console.log('after update stat:', this.userData.rawStats[statistic])
         // cost of specific statistic
-        const cost: number = getStatCost(this.userData.level, this.userData.rawStats[statistic], this.userData.guardPayout)
+        const cost: number = getStatCost(this.userData.rawStats[statistic], this.userData.guardPayout)
         // check if user has enough gold
         if (this.userData.gold >= cost) {
             // increase statistic
@@ -205,19 +206,19 @@ export class Profile extends View {
     setStats() {
         // strength
         this.dom.stats.strength.innerText = `${this.userStats.strength}`;
-        this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.strength, this.userData.guardPayout)}`;
+        this.dom.stats.strengthCost.innerText = `${getStatCost( this.userData.rawStats.strength, this.userData.guardPayout)}`;
         this.dom.stats.damage.innerText = `${this.userStats.damage}`;
         // physical endurance
         this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
-        this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
+        this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost( this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
         this.dom.stats.Health.innerText = `${this.userStats.health}`;
         // defence
         this.dom.stats.defence.innerText = `${this.userStats.defence}`;
-        this.dom.stats.defenceCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.defence, this.userData.guardPayout)}`;
+        this.dom.stats.defenceCost.innerText = `${getStatCost( this.userData.rawStats.defence, this.userData.guardPayout)}`;
         this.dom.stats.damageReduce.innerText = `${this.userStats.damageReduce}`;
         // luck
         this.dom.stats.luck.innerText = `${this.userStats.luck}`;
-        this.dom.stats.luckCost.innerText = `${getStatCost(this.userData.level, this.userData.rawStats.luck, this.userData.guardPayout)}`;
+        this.dom.stats.luckCost.innerText = `${getStatCost(this.userData.rawStats.luck, this.userData.guardPayout)}`;
         this.dom.stats.critical.innerText = `${this.userStats.critical}`;
     }
     // change hero portrait
