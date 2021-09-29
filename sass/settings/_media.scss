@@ -9,12 +9,12 @@ $laptopM: 1336px;
 $laptopL: 1440px;
 $desktopS: 1599px;
 $desktopM: 1919px;
-@mixin deskopM {
+@mixin desktopM {
   @media (max-width: $desktopM) {
     @content;
   }
 }
-@mixin deskopS {
+@mixin desktopS {
     @media (max-width: $desktopS) {
       @content;
     }

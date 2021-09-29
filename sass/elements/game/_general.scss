@@ -5,12 +5,12 @@
     max-height: 1080px;
     display: flex;
     margin: 0 auto;
-    @include deskopM{
+    @include desktopM{
         width: 1600px;
         min-height: 800px;
         max-height: 900px;
     }
-    @include deskopS{
+    @include desktopS{
         width: 1440px;
     }
 }

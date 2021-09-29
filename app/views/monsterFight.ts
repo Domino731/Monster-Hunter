@@ -99,7 +99,7 @@ export class MonsterFight extends View {
         // set status
         this.userData.status = 'free';
         this.userData.currentMission = null;
-        updateUserData(this.userData);
+      //  updateUserData(this.userData);
     }
 
     // if user defeated the monster, then show summary panel, create new mission, and update user's data in firestore
@@ -118,7 +118,7 @@ export class MonsterFight extends View {
         // set status
         this.userData.status = 'free';
         this.userData.currentMission = null;
-        updateUserData(this.userData);
+        // updateUserData(this.userData);
 
     }
 
@@ -177,7 +177,7 @@ export class MonsterFight extends View {
         this.userDamage();
         // set monster health bar
         setTimeout(() => {
-            this.checkMonsterHP();
+         //   this.checkMonsterHP();
         }, 1500)
         //  this.checkMonsterHP();
 
@@ -193,7 +193,7 @@ export class MonsterFight extends View {
 
                 // set user's health bar
                 setTimeout(() => {
-                    this.checkUserHP();
+                  //  this.checkUserHP();
                 }, 1700)
             }
 
@@ -205,14 +205,14 @@ export class MonsterFight extends View {
 
     fightAnimations() {
         this.attackAnimation();
-        this.fightInterval = setInterval(() => {
-            if (this.userHP > 0 && this.monsterHP > 0) {
+       this.fightInterval = setInterval(() => {
+          //  if (this.userHP > 0 && this.monsterHP > 0) {
                 this.attackAnimation();
-            }
-            else {
-                clearInterval(this.fightInterval)
-            }
-        }, 4000)
+          //  }
+          //  else {
+            //    clearInterval(this.fightInterval)
+            //}
+       }, 4000)
     }
 
     general() {

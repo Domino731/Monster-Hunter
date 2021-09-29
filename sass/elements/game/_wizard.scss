@@ -220,7 +220,7 @@
         height: auto;
         object-fit: cover;
         margin-bottom: 10px;
-        @include deskopM {
+        @include desktopM {
             width: 70%;
         }
     }
