@@ -5,7 +5,7 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
   <div class='blacksmith__item'>
    <div class='game__errorWrapper disabled' id='blacksmith__error'>Your backpack is full</div>
    
-       <div class='profile__equipment' id='equipment_slots'>
+       <div class='profile__equipment profile__equipment-currentUser' id='equipment_slots'>
 
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'> 
               <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon"/>

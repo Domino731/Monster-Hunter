@@ -13,6 +13,7 @@
             background: rgba(255, 255, 255, 0.5);
             padding: 10px;
         }
+    
     }
     &__searchBar {
         display: flex;
@@ -59,14 +60,13 @@
         align-items: center;
         border-radius: 15px;
         position: relative;
-        &-an{
-            
-        }
+        z-index: 0;
         &::after{
             content: '';
             display: block;
             height: 100%;
             width: 40px;
+            z-index: -1;
             position: absolute;
             right: -10px;
             background: $color-white;
@@ -82,8 +82,10 @@
             letter-spacing: 0.063rem;
         }
 
-
-
+        @include deskopM{
+         margin-left: 10px;  
+         width: 135px;  
+        }
     }
     &__nick {
         margin-left: 20px;
@@ -130,6 +132,9 @@
             background: $color-green;
             clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
         }
+        @include deskopM{
+            width: 288px;  
+           }
     }
     &__level{
         height: 100%;
@@ -176,12 +181,16 @@
             margin-left: 3px;
             margin-right: -2px;
         }
+        @include deskopM{
+            width: 100%;  
+           }
     }
 }
 .searchFriend__list {
     width: 100%;
     height: calc(100% - 50px);
     overflow-y: scroll;
+    overflow-x: hidden;
     position: relative;
     &::-webkit-scrollbar {
         width: 6px;

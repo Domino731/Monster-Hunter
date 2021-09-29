@@ -328,10 +328,10 @@ export class Blacksmith extends View {
       }
       else {
          //update user data in firestore with new shop items
-         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats);
+         this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
          updateUserData(this.userData)
 
-         return getBlacksmithItems(this.userData.rawStats);
+         return getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
       }
    }
 
@@ -765,6 +765,25 @@ export class Blacksmith extends View {
       }
    }
 
+   // method for rwd works
+   rwd(){
+      // blacksmith item label
+      // const marketItem = this.userData.shop.blacksmith[0]
+      // const currentItem = this.userData.equipmentItems[0]
+      //        // set the item label
+      //        this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+
+             
+
+      //        // show the item label
+      //        this.dom.itemLabel.classList.remove('disabled');
+      // equipment
+      const currentItem = this.userData.equipmentItems[0]
+      this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+      this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-special`)
+      this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+      this.dom.equipmentLabel.root.classList.remove('disabled')
+   }
    initScripts() {
       this.setLastVisit();
       this.setNewShopCountdown();
@@ -774,6 +793,7 @@ export class Blacksmith extends View {
       this.dragEventForMarketSlots();
       this.labelForEquipmentEvent();
       this.labelForBackpackEvent();
+      this.rwd();
    }
 }
 

@@ -199,6 +199,7 @@ export class Friends extends View {
   shrinkFriendsList() {
     this.dom.branch.classList.remove('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
+    console.log(this.dom.friendsWindows)
   }
 
   hideFriendView() {
@@ -207,6 +208,7 @@ export class Friends extends View {
     // clear view 
     this.dom.branch.classList.add('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
+    
   }
   searchFriendEvent() {
     const search = async (nick: string) => {
@@ -234,8 +236,15 @@ export class Friends extends View {
   initScripts() {
     this.getFriendsData()
       .then(() => {
+        
         this.renderFriendsList();
         this.getDOMElements();
+        // for rwd develop
+        const x = new Chat(this.dom.branch, this.userData, this.friendsList[0]);
+        this.shrinkFriendsList();
+        //
+
+
         this.showFriendProfile();
         this.showFormsEvents();
         this.sortFriends();
@@ -267,6 +276,7 @@ export class Friends extends View {
       nicks: document.querySelectorAll('.friend__name')
     }
   }
+
 }
 
 

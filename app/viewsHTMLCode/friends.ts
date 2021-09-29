@@ -77,7 +77,7 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
                     <div class="friends__checkboxWrapper friends__checkboxWrapper-LowestGold">
                     <label>
                         None
-                        <input type="radio" name='friends-filter' value='none'>
+                        <input type="radio" name='friends-filter' value='none' checked>
                         <span></span>
                         <i class="fas fa-check" aria-hidden="true"></i>
                     </label>

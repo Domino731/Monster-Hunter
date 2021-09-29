@@ -61,15 +61,20 @@
             background: rgba(255, 255, 255, 0.7);
             width: 21%;
         }
+        @include deskopM {
+            width: 22%;
+            height: 553px;
+        }
     }
     &__current{
         border: 8px solid $color-gold;
     }
     &__countdownWrapper{
         position: absolute;
-        bottom: -41px;
+        bottom: -38px;
+        left: 0;
         margin: 0 auto;
-        width: 92%;
+        width: 100%;
         background: $color-gold;
         text-align: center;
         padding: 3px 0;

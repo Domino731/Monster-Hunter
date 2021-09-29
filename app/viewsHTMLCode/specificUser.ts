@@ -88,7 +88,7 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
 
 
     return `
-   <div class='profile__equipment'>
+   <div class='profile__equipment  profile__equipment-specificUser'>
 
 
 

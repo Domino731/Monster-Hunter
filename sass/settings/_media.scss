@@ -7,8 +7,13 @@ $laptopS: 1024px;
 $laptopSM: 1280px;
 $laptopM: 1336px;
 $laptopL: 1440px;
-$desktopS: 1600px;
-
+$desktopS: 1599px;
+$desktopM: 1919px;
+@mixin deskopM {
+  @media (max-width: $desktopM) {
+    @content;
+  }
+}
 @mixin deskopS {
     @media (max-width: $desktopS) {
       @content;
@@ -24,16 +29,7 @@ $desktopS: 1600px;
       @content;
     }
 }
-@mixin deskopSM {
-    @media (max-width: $desktopSM) {
-      @content;
-    }
-}
-@mixin deskopS {
-    @media (max-width: $desktopSM) {
-      @content;
-    }
-}
+
 @mixin tablet {
     @media (max-width: $tablet) {
       @content;

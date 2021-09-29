@@ -88,6 +88,9 @@
         height: 70%;
         position: relative;
         border-radius: 0 20px 20px 0;
+        @include deskopM {
+            width: 74%;
+        }
     }
     &__message {
         background: $color-white;
@@ -140,6 +143,7 @@
         &:focus {
             letter-spacing: 0.125rem;
         }
+        
     }
     &__emojiContainer {
         z-index: 2;
@@ -167,7 +171,7 @@
         width: 10%;
     }
     &__portrait {
-        height: 70px;
+         width:  70px;
         height: 70px;
         border: 3px solid $color-gray_dark;
         border-radius: 50px;
@@ -178,6 +182,10 @@
             height: auto;
             width: 71%;
             object-fit: cover;
+        }
+        @include deskopM {
+            width: 65px;
+            height: 65px;
         }
     }
     &__date {
@@ -214,6 +222,7 @@
         padding: 0.75rem;
         margin-bottom: 0.313rem;
         font-size: 1.125rem;
+        word-wrap:break-word;
         div{
             display: inline;
         }

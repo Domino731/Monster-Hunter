@@ -11,11 +11,23 @@
         }
     }
     &__equipment {
-        height: 60%;
+        height: 528px;
         display: grid;
         grid-template-rows: repeat(3, 1fr);
         grid-template-columns: repeat(4, 1fr);
         border-bottom: 10px solid $color-gold;
+        position: relative;
+        &-specificUser{
+            @include deskopM{
+            height: 460px; 
+           }
+        }
+        &-currentUser{
+           @include deskopM{
+            height: 510px;
+        }  
+        }
+       
     }
 
     &__equipmentItem {
@@ -100,7 +112,6 @@
     }
 
     &__info {
-        position: relative;
         grid-column: 2/4;
         grid-row: 3/4;
     }
@@ -128,15 +139,20 @@
         }
 
         &-helmet {
-            transform: translate(17px, -348px);
+            top: 0;
+            left: 189px;
             &::after {
                 left: -28px;
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
+            @include deskopM {
+                transform: translate(16px, -328px);
+            }
         }
         &-weapon {
-            transform: translate(17px, -348px);
+            top: 0;
+            right: 189px;
             &::after {
                 right: -28px;
                 top: 21px;
@@ -145,7 +161,8 @@
         }
 
         &-chestPlate {
-            transform: translate(17px, -152px);
+            top: 35%;
+            left: 189px;
             &::after {
                 left: -28px;
                 top: 21px;
@@ -154,7 +171,8 @@
         }
 
         &-shield {
-            transform: translate(17px, -152px);
+            top: 35%;
+            right: 189px;
             &::after {
                 right: -28px;
                 top: 21px;
@@ -163,19 +181,22 @@
         }
 
         &-gloves {
-            transform: translate(17px, 30px);
+            bottom: 10px;
+            left: 189px;
             &::after {
                 left: -28px;
-                top: 21px;
+                bottom: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
+         
         }
 
         &-special {
-            transform: translate(17px, 30px);
+            bottom: 10px;
+            right: 189px;
             &::after {
                 right: -28px;
-                top: 21px;
+                bottom: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
             }
         }
@@ -376,7 +397,7 @@
 
     &__backpack {
         position: relative;
-        height: 320px;
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -402,9 +423,18 @@
         border-left: 3px solid $color-gray_dark;
         border-top: 3px solid $color-gray_dark;
         transition: 0.3s;
+          img{
+                width: 90%;
+                height: 90%;
+            }
         &:hover {
             cursor: pointer;
             background: rgba(255, 255, 255, 0.5);
+        }
+        @include deskopM {
+            width: 122px;
+            height: 122px;
+          
         }
     }
 
@@ -903,6 +933,9 @@
         font-weight: bold;
         letter-spacing: 0.125rem;
         font-size: 20px;
+        @include deskopM{
+            font-size: 18px; 
+           }
     }
 }
 

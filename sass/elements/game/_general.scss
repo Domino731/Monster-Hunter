@@ -1,8 +1,18 @@
 .game__root {
-    max-width: 1980px;
+    width: 1920px;
     height: 100vh;
+    min-height: 900px;
+    max-height: 1080px;
     display: flex;
     margin: 0 auto;
+    @include deskopM{
+        width: 1600px;
+        min-height: 800px;
+        max-height: 900px;
+    }
+    @include deskopS{
+        width: 1440px;
+    }
 }
 .game__contentContainer{
     width: 80%;
