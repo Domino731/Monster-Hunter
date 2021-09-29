@@ -7,12 +7,15 @@ import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 import { getRandomMissions } from '../functions/missionGenerator';
+import { monstersData } from '../properties/missions/monsters';
 
 export class View {
    protected userData: UserData | null
    protected root: HTMLElement
    protected userStats: FullUserStats
    protected userFriends: SearchedUserData[]
+   protected loadingContainer: HTMLElement
+   protected loadingMonster: HTMLImageElement
    constructor() {
       this.userData = null
       this.userFriends = []
@@ -27,6 +30,8 @@ export class View {
          critical: 0
       }
       this.root = document.getElementById("game__view")
+      this.loadingContainer = document.querySelector('.loading')
+      this.loadingMonster = document.querySelector('.loading__monster')
       this.init();
    }
 
@@ -265,8 +270,17 @@ export class View {
       window.alert('This method (initScripts) should be implemented in  inheriting class')
    }
 
+   addLoading(){
+      // set random monster
+      this.loadingMonster.src = monstersData[Math.floor(Math.random() * monstersData.length)];
+      this.loadingContainer.classList.remove('disabled');
+   }
+   removeLoading(){
+      this.loadingContainer.classList.add('disabled');
+   }
    // initialization 
    init() {
+      this.addLoading();
       this.getUserData()
          .then(() => {
             this.dateOperations()
@@ -274,6 +288,10 @@ export class View {
             this.getDOMElements();
             this.initScripts();
          })
+         .then(()=> {
+            this.removeLoading();
+         })
+         .catch(err => console.log(err))
 
    }
 }

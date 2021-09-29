@@ -122,7 +122,9 @@ export class Chat {
         this.conversation = conversation;
     }
 
+    general(){
 
+    }
     renderChat() {
         // sort by date
         this.conversation.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
@@ -132,6 +134,8 @@ export class Chat {
 
         });
         this.dom.chatContainer.innerHTML = html;
+
+        this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
     }
     sendMessageEvent() {
         this.dom.sendMessageBtn.addEventListener('click', () => {

@@ -85,7 +85,19 @@
       </ul>
     </nav>
 
-    <main id="game__view"></main>
+    <main class='game__contentContainer'>
+      <div id="game__view"> 
+
+      </div>
+      <div class='loading'>
+         
+        <div class='loading__content'>
+          <div class='loading__circle'> </div>
+          <img class='loading__monster'/>
+        </div>
+        <h2 class='loading__title'>Loading...</h2>
+      </div>
+    </main>
   </div>
   <script src="build/style.js"></script>
   <script src="build/index.js"></script>

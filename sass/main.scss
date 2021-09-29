@@ -2,7 +2,7 @@
 @import "./settings/colors";
 @import "./settings/all";
 @import "./elements/signInForm/signInForm";
-
+@import "./settings/media";
 
 @import "./elements/game/general";
 @import "./elements/game/navMenu";
@@ -20,3 +20,4 @@
 @import "./elements/game/travel";
 @import "./elements/game/fight";
 @import "./elements/game/chat";
+@import './elements/game/loading';
