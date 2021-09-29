@@ -147,7 +147,7 @@
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
             @include deskopM {
-                transform: translate(16px, -328px);
+                left: 160px;
             }
         }
         &-weapon {
@@ -157,6 +157,9 @@
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+            @include deskopM {
+                right: 160px;
             }
         }
 
@@ -168,6 +171,9 @@
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
+            @include deskopM {
+                left: 160px;
+            }
         }
 
         &-shield {
@@ -177,6 +183,9 @@
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+            @include deskopM {
+                right: 160px;
             }
         }
 
@@ -188,6 +197,9 @@
                 bottom: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
             }
+            @include deskopM {
+                left: 160px;
+            }
          
         }
 
@@ -198,6 +210,9 @@
                 right: -28px;
                 bottom: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+            }
+            @include deskopM {
+                right: 160px;
             }
         }
         .itemTitle {
@@ -446,7 +461,10 @@
     &__backpackLabelWrapper {
         position: absolute;
         width: 100%;
-        height: 20px;
+        &-blacksmith{
+           top: 0;
+           background-color: red;
+        }
     }
     &__general {
         display: flex;
@@ -660,7 +678,7 @@
 }
 .profile__itemSpecs {
     &-backpackSlot1 {
-        transform: translate(-1px, -100%);
+        transform: translate(-1px,-100%);
         &::after {
             left: 28px;
             bottom: -26px;
@@ -682,13 +700,19 @@
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
+        @include deskopM{
+            transform: translate(144px, -100%);
+        }
     }
     &-backpackSlot4 {
-        transform: translate(260px, -100%);
+        transform: translate(260px, -348px);
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include deskopM{
+            transform: translate(144px, -100%);
         }
     }
     &-backpackSlot5 {
@@ -698,68 +722,71 @@
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
+        @include deskopM{
+            transform: translate(295px, -100%);
+        }
     }
 
     &-backpackSlot6 {
-        transform: translate(-1px, -50%);
-
+        transform: translate(-1px,-100%);
+        margin-top:  160px;
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include deskopM{
+            margin-top: 134px;
         }
     }
     &-backpackSlot7 {
-        transform: translate(151px, -50%);
-
+        transform: translate(151px,-100%);
+        margin-top:  160px;
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
+        @include deskopM{
+            margin-top: 134px;
+        }
     }
     &-backpackSlot8 {
-        transform: translate(215px, -50%);
-
+        transform: translate(215px, -100%);
+        margin-top:  160px;
         &::after {
             left: 154px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
+        @include deskopM{
+            transform: translate(144px, -100%);
+            margin-top: 134px;
+        }
     }
     &-backpackSlot9 {
-        transform: translate(260px, -50%);
-
+        transform: translate(260px, -100%);
+        margin-top:  160px;
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
+        @include deskopM{
+            margin-top: 134px;
+        }
     }
     &-backpackSlot10 {
-        transform: translate(414px, -50%);
-
+        transform: translate(414px, -100%);
+        margin-top:  160px;
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-    }
-    &-backpackSlot6,
-    &-backpackSlot7,
-    &-backpackSlot8,
-    &-backpackSlot9,
-    &-backpackSlot10 {
-        height: 328px;
-        overflow: auto;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        &::-webkit-scrollbar {
-            width: 0;
-        }
-        &::-webkit-scrollbar {
-            width: 0.188rem;
-            background: $color-blue;
+        @include deskopM{
+            margin-top: 134px;
+            transform: translate(295px, -100%);
         }
     }
 }

@@ -90,24 +90,9 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
 
 
    <div>
-   <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot disabled' id='blacksmith_backpack_item_label'>
-
-   <div id='blacksmith_backpack_label_wrapper'></div> 
-   
-   
-   <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
-   <div class='profile__actionWrapper' id='blacksmith_backpack_move_item_btn'>
-     <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='blacksmith_backpack_replace_item_icon'/>
-     <strong class='profile__actionName'>Equip</strong>
-   </div>
-             
-   <div class='profile__equipmentItemSellWrapper'> 
-     <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
-     <strong class='profile__equipmentItemSellPrice' id='blacksmith_backpack_sell_item_value'></strong>
-   </div>
 
 
-  </div>
+
 
 
 
@@ -121,6 +106,23 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
           <div class='profile__backpackItem' data-backpack-slot='3'> </div>
           <div class='profile__backpackItem' data-backpack-slot='4'> </div>
           <div class='profile__backpackItem' data-backpack-slot='5'> </div>
+       </div>
+       <div class='profile__backpackLabelWrapper profile__backpackLabelWrapper-blacksmith'> 
+       <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot disabled' id='blacksmith_backpack_item_label'>
+       <div id='blacksmith_backpack_label_wrapper'></div> 
+       
+       <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
+       <div class='profile__actionWrapper' id='blacksmith_backpack_move_item_btn'>
+         <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='blacksmith_backpack_replace_item_icon'/>
+         <strong class='profile__actionName'>Equip</strong>
+       </div>
+                 
+       <div class='profile__equipmentItemSellWrapper'> 
+         <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
+         <strong class='profile__equipmentItemSellPrice' id='blacksmith_backpack_sell_item_value'></strong>
+       </div>
+    
+      </div>
        </div>
        <div class='profile__backpackRow'>
           <div class='profile__backpackItem' data-backpack-slot='6'> </div>
