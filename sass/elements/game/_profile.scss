@@ -943,7 +943,10 @@
         z-index: 0;
     }
     .potion__label-1{
-        transform: translate(50%, -100%);
+        transform: translate(156px, -100%);
+        @include deskopM{
+            transform: translate(91px, -100%);
+        }
     }
 }
 .searchedUser{
@@ -953,6 +956,10 @@
         width: 100%;
         margin-top: 10px;
         height: 135px;
+        @include deskopM{
+            height: 120px;
+            padding-bottom: 4px;
+        }
     }
     &__statsTable{
         color: $color-white;

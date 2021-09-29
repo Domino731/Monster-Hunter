@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Profile()
+    const developmentRender = new SearchFriend()
     window.addEventListener("popstate", router);
 };
 

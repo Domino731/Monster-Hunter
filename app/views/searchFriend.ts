@@ -153,6 +153,11 @@ export class SearchFriend extends View {
       this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
     }
 
+    // for rwd works
+    rwd(){
+       const searchedUser = this.allUsersData[1];
+      const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+    }
 
    initScripts() {
       this.getAllUsers()
@@ -160,6 +165,7 @@ export class SearchFriend extends View {
             this.showSpecificUserEvent();
             this.findFriend();
             this.searchFriendEvent();
+            this.rwd();
          })
    }
    onDataChange() {
