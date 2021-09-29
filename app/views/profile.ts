@@ -81,7 +81,7 @@ export class Profile extends View {
         this.dom = {
             potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
-                
+
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
                 strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
                 strengthBtn: document.querySelector('#profile_strength_stat .profile__item--buyBtn button'),
@@ -145,38 +145,37 @@ export class Profile extends View {
 
 
     // events responsible for potion label
-    labelForPotions(){
+    labelForPotions() {
 
         // find potions
-        const firstPotion : ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
-        const secondPotion : ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
+        const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
+        const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
         // check if user have potion
-        if(firstPotion !== undefined){
-             this.dom.general.potionImgFirst.addEventListener('mouseover', ()=> {
+        if (firstPotion !== undefined) {
+            this.dom.general.potionImgFirst.addEventListener('mouseover', () => {
                 this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
                 this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-               this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
-             });
-             this.dom.general.potionImgFirst.addEventListener('mouseleave', ()=>{
-                 
-                this.dom.potionLabel.innerHTML = '';
-             })
-        }
-        if(secondPotion !== undefined){
-            this.dom.general.potionImgSecond.addEventListener('mouseover', ()=> {
-                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-              this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
+                this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
             });
-            this.dom.general.potionImgSecond.addEventListener('mouseleave', ()=>{
-               this.dom.potionLabel.innerHTML = '';
+            this.dom.general.potionImgFirst.addEventListener('mouseleave', () => {
+
+                this.dom.potionLabel.innerHTML = '';
             })
-       }
-       console.log(this.userData.guardPayout)
-       
+        }
+        if (secondPotion !== undefined) {
+            this.dom.general.potionImgSecond.addEventListener('mouseover', () => {
+                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
+                this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
+            });
+            this.dom.general.potionImgSecond.addEventListener('mouseleave', () => {
+                this.dom.potionLabel.innerHTML = '';
+            })
+        }
+
     }
     increaseStatistic(statistic: 'strength' | 'physicalEndurance' | 'defence' | 'luck', statCost: HTMLElement) {
-       console.log('after update stat:', this.userData.rawStats[statistic])
+        console.log('after update stat:', this.userData.rawStats[statistic])
         // cost of specific statistic
         const cost: number = getStatCost(this.userData.rawStats[statistic], this.userData.guardPayout)
         // check if user has enough gold
@@ -188,11 +187,11 @@ export class Profile extends View {
             updateUserData(this.userData)
         }
         // if user doesnt have enough gold then set animation with will make statistic color will be red
-        else{
-        statCost.classList.add('profile__item-notAfford')
-        setTimeout(()=> {
-            statCost.classList.remove('profile__item-notAfford')
-        },1000)
+        else {
+            statCost.classList.add('profile__item-notAfford')
+            setTimeout(() => {
+                statCost.classList.remove('profile__item-notAfford')
+            }, 1000)
         }
     }
     // increase statistic
@@ -206,15 +205,15 @@ export class Profile extends View {
     setTableStats() {
         // strength
         this.dom.stats.strength.innerText = `${this.userStats.strength}`;
-        this.dom.stats.strengthCost.innerText = `${getStatCost( this.userData.rawStats.strength, this.userData.guardPayout)}`;
+        this.dom.stats.strengthCost.innerText = `${getStatCost(this.userData.rawStats.strength, this.userData.guardPayout)}`;
         this.dom.stats.damage.innerText = `${this.userStats.damage}`;
         // physical endurance
         this.dom.stats.physicalEndurance.innerText = `${this.userStats.physicalEndurance}`;
-        this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost( this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
+        this.dom.stats.physicalEnduranceCost.innerText = `${getStatCost(this.userData.rawStats.physicalEndurance, this.userData.guardPayout)}`
         this.dom.stats.health.innerText = `${this.userStats.health}`;
         // defence
         this.dom.stats.defence.innerText = `${this.userStats.defence}`;
-        this.dom.stats.defenceCost.innerText = `${getStatCost( this.userData.rawStats.defence, this.userData.guardPayout)}`;
+        this.dom.stats.defenceCost.innerText = `${getStatCost(this.userData.rawStats.defence, this.userData.guardPayout)}`;
         this.dom.stats.damageReduce.innerText = `${this.userStats.damageReduce}`;
         // luck
         this.dom.stats.luck.innerText = `${this.userStats.luck}`;
@@ -574,7 +573,7 @@ export class Profile extends View {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
     }
     getDOMElements() {
-        this.dom = { 
+        this.dom = {
             potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
@@ -631,6 +630,28 @@ export class Profile extends View {
             description: document.querySelector('.profile__description textarea')
         }
     }
+
+    // for rwd works
+    rwd() {
+        // equipment
+        const currentItem = this.userData.equipmentItems[0]
+        // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+        // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-special`)
+        // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+        // this.dom.equipmentLabel.root.classList.remove('disabled')
+        // backpack
+        //   const equipmentItem = this.userData.equipmentItems[0]
+        //   this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
+        //   this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${5}`)
+        //   this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+        //   this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+        //   this.dom.backpackLabel.root.classList.remove('disabled')
+        // potions
+        //     const firstPotion = potionsData[0]
+        //     this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        //     this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
+        //    this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
+    }
     initScripts() {
         this.labelForBackpackEvent();
         this.setUserEquipment();
@@ -643,5 +664,6 @@ export class Profile extends View {
         this.setTableStats();
         this.increaseStatisticEvents();
         this.labelForPotions();
+        this.rwd();
     }
 }

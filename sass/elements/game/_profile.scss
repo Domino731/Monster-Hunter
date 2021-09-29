@@ -408,17 +408,20 @@
             line-height: 1.563rem;
             font-family: $fontFamily-medivalSharp;
         }
+        @include deskopM {
+            height: 27%;
+        }
     }
 
     &__backpack {
         position: relative;
-        margin-top: 10px;
+        margin: 10px 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
-
+        
         .profile__itemSpecs {
             position: absolute;
             z-index: 10;
@@ -701,7 +704,7 @@
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
         @include deskopM{
-            transform: translate(144px, -100%);
+            transform: translate(153px, -100%);
         }
     }
     &-backpackSlot4 {
@@ -799,6 +802,9 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(-1px, 3px);
+        }
     }
     &-2 {
         transform: translate(151px, 3px);
@@ -807,13 +813,19 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(151px, 3px);
+        }
     }
     &-3 {
-        transform: translate(59%, 3px);
+        transform: translate(215px, 3px);
         &::after {
             left: calc(50% - 15px);
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include deskopM{
+            transform: translate(153px, 3px);
         }
     }
     &-4 {
@@ -823,6 +835,9 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(171px, 3px);
+        }
     }
     &-5 {
         transform: translate(411px, 3px);
@@ -830,6 +845,9 @@
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include deskopM{
+            transform: translate(290px, 3px);
         }
     }
     &-6 {
@@ -839,6 +857,9 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(-1px, 110px);
+        }
     }
     &-7 {
         transform: translate(151px, 154px);
@@ -847,13 +868,19 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(151px, 110px);
+        }
     }
     &-8 {
-        transform: translate(59%, 154px);
+        transform: translate(215px, 154px);
         &::after {
             left: calc(50% - 15px);
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include deskopM{
+            transform: translate(153px, 110px);
         }
     }
     &-9 {
@@ -863,6 +890,9 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
+        @include deskopM{
+            transform: translate(171px, 110px);
+        }
     }
     &-10 {
         transform: translate(411px, 154px);
@@ -870,6 +900,9 @@
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include deskopM{
+            transform: translate(290px, 110px);
         }
     }
 }
@@ -881,9 +914,15 @@
         position: absolute;
         &-1{
             transform: translate(258px, -100%);
+            @include deskopM {
+                transform: translate(170px, -100%);
+            }
         }
         &-2{
             transform: translate(454px, -100%);
+            @include deskopM {
+                transform: translate(325px, -100%);
+            }
         }
         &::after {
             width: 30px;
