@@ -4,7 +4,8 @@ export const getTavernHTMLCode = (user: UserData) : string => {
   
     return `
     <section class='tavern'>
-    <div class='tavern__characterWrapper'>
+    <div class='tavern__item'> 
+     <div class='tavern__characterWrapper'>
         <div class='tavern__willingnessBarWrapper' title='Mission willingness: ${user.missionWillingness}/100'>
           <div class='tavern__willingnessBar tavern__willingnessBar-green' style='height: ${user.missionWillingness}%;'> </div>
           <div class='tavern__willingnessBar tavern__willingnessBar-red' style='height: ${user.missionWillingness}%;'> </div>
@@ -41,8 +42,10 @@ export const getTavernHTMLCode = (user: UserData) : string => {
         </div>
 
     </div>
-
-    <div class='tavern__list'>
+    </div>
+   
+    <div class='tavern__item'> 
+     <div class='tavern__list'>
         <h2 class='tavern__title'>Available missions</h2>
         <div class='tavern__listWrapper'>
             ${user.availableMissions.map(el => `<img src='${el.papyrus}' alt='papyrus' data-mission-id='${el.id}'
@@ -50,6 +53,9 @@ export const getTavernHTMLCode = (user: UserData) : string => {
 
         </div>
     </div>
+    </div>
+
+   
 </section>
     `
 }
