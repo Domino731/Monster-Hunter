@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Missions()
+    const developmentRender = new Guard()
     window.addEventListener("popstate", router);
 };
 

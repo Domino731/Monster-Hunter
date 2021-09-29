@@ -185,42 +185,57 @@
         height: 80px;
         width: 100%;
     }
+    .rangeIcon{
+        position: absolute;
+        appearance: none;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url("/images/guard_input_range__progress_icon.png");
+        background-size: 100% 100%;
+        transform: translateY(-1px);
+        z-index: 3;
+    }
     .field {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
+        border-radius: 40px;
+        height: 30px;
+        background: #e5646e;
+        z-index: 1;
         input {
-            position: relative;
-
+            position: absolute;
+            z-index: 3;
+            background: transparent;
             appearance: none;
             width: 100%;
-            border-radius: 40px;
-            height: 30px;
-            background: #e5646e;
             border: none;
-            &::-webkit-slider-thumb {
-                position: relative;
+            &::-webkit-slider-thumb{
                 appearance: none;
-                width: 50px;
+                background: none;
+                border: none;
                 height: 50px;
-                background-image: url("/images/guard_input_range__progress_icon.png");
-                background-size: 100% 100%;
-                transform: translateY(-1px);
-                z-index: 3;
+                width: 50px;
             }
-            &::after {
-                content: "";
-                display: block;
-                height: 100%;
-                background: $color-gold;
-                left: 0;
-                position: absolute;
-                border-radius: 40px;
-                z-index: 2;
+            &::-moz-range-thumb{
+                appearance: none;
+                background: none;
+                border: none;
+                height: 50px;
+                width: 50px;
+            }
+            &::-ms-thumb{
+                appearance: none;
+                height: 50px;
+                width: 50px; 
+                appearance: none;
+                background: none;
+                border: none;
             }
         }
+      
     }
     .value {
         position: absolute;
@@ -236,7 +251,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-bottom: 42px;
+        margin-bottom: 67px;
         span {
             position: absolute;
             display: block;
@@ -274,6 +289,49 @@
             width: ($i * 10%) - 3% !important;
         }
     }
+}
+.progressBar{
+    z-index: -1;
+    display: block;
+    background: $color-gold;
+    z-index: 2;
+    width: 8%;
+    left: 0;
+    position: absolute;
+    border-radius: 40px;
+    height: 30px;
+
+}
+.progressBar-1{
+    width: 8%;
+}
+.progressBar-2{
+    width: 18%;
+}
+.progressBar-3{
+    width: 28%;
+}
+.progressBar-4{
+    width: 38%;
+}
+.progressBar-5{
+    width: 48%;
+}
+.progressBar-6{
+    width: 59%;
+}
+
+.progressBar-7{
+    width: 68%;
+}
+.progressBar-8{
+    width: 78%;
+}
+.progressBar-9{
+    width: 90%;
+}
+.progressBar-10{
+    width: 100%;
 }
 @keyframes an_guardCountdownBar{
 	0% {

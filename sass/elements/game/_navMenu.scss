@@ -3,6 +3,10 @@
     height: 100%;
     background: $color-gray_dark;
     font-size: 2.5rem;
+    overflow: auto;
+    ::-webkit-scrollbar{
+        width: 0;
+    }
     &__titleWrapper{
         margin-top: 10px;
         height: 90px;

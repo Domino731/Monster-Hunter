@@ -22,6 +22,8 @@ export const getGuardHTMLCode = () : string => {
          </div>
 
          <div class='field'>        
+             <span class='progressBar'></span>
+             <div class='rangeIcon'> </div>
             <input type='range' name='guard_time_slider' class='field__progressBar-1' id='guard_input_slider' min='1' max='10' value='1'>
          </div>
          

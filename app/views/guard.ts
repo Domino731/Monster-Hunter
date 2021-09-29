@@ -10,6 +10,7 @@ export class Guard extends View {
   private guardTime: number
   private countdownInterval: null | ReturnType<typeof setInterval>
   private dom: {
+    progressBar: HTMLElement | null
     sliderValue: HTMLElement | null
     inputSlider: HTMLElement | null
     guardPayment: HTMLElement | null
@@ -23,6 +24,7 @@ export class Guard extends View {
     summary: HTMLElement | null
     countdownWrapper: HTMLElement | null
     summaryPayout: HTMLElement | null
+    rangeIcon: HTMLElement | null
   }
   constructor() {
     super()
@@ -30,6 +32,7 @@ export class Guard extends View {
     this.guardTime = 1
     this.countdownInterval = null
     this.dom = {
+      progressBar: document.querySelector('.progressBar'),
       sliderValue: document.querySelector('#slider_value'),
       inputSlider: document.querySelector('#guard_input_slider'),
       guardPayment: document.querySelector('.guard__awardAmount'),
@@ -43,11 +46,12 @@ export class Guard extends View {
       summary: document.querySelector('.guard__summary'),
       summaryPayout: document.querySelector('.guard__summaryPayout')
       ,
-      countdownWrapper: document.querySelector('#guard_countdown_elements')
+      countdownWrapper: document.querySelector('#guard_countdown_elements'),
+      rangeIcon: document.querySelector('.rangeIcon')
     }
   }
 
-   render() {
+  render() {
     this.root.innerHTML = getGuardHTMLCode();
   }
 
@@ -78,8 +82,20 @@ export class Guard extends View {
         this.dom.sliderValue.style.left = '40%'
       }
 
+      // change style
+      const styleLeft2: number = parseInt(input.value) * 10;
+      if (styleLeft < 50) {
+        this.dom.rangeIcon.style.left = styleLeft2 - 10 + '%'
+      }
+      else if (styleLeft > 50) {
+        this.dom.rangeIcon.style.left = styleLeft2 - 9 + '%'
+      }
+      else {
+        this.dom.rangeIcon.style.left = '40%'
+      }
+
       // change progress bar
-      this.dom.inputSlider.className = `field__progressBar-${input.value}`
+      this.dom.progressBar.className = `progressBar progressBar-${input.value}`
     };
   }
 
@@ -124,7 +140,7 @@ export class Guard extends View {
 
     this.countdownInterval = setInterval(() => {
 
-  
+
       let hours, minutes, seconds; // variables for time units
 
       // find the amount of "seconds" between now and target
@@ -146,20 +162,20 @@ export class Guard extends View {
 
         // set progress bar
         const start: number = this.userData.guard.start.getTime();
-        const end: number = this.userData.guard.end.getTime(); 
+        const end: number = this.userData.guard.end.getTime();
         const today: number = new Date().getTime();
 
         const total = end - start;
         const progress = today - start;
 
         const result: string = Math.round(progress / total * 100) + "%";
-        this.dom.countdownProgressBar.style.width = result;   
-          
+        this.dom.countdownProgressBar.style.width = result;
+
       }
       else {
         this.dom.summaryPayout.innerText = `${this.userData.guard.payout}`
         // when countdown ends show summary and hide countdown elements
-        this.dom.summary.classList.remove('disabled');  
+        this.dom.summary.classList.remove('disabled');
         this.dom.countdownWrapper.classList.add('disabled')
         // reset coundown time
         this.dom.guardTimeLeft.innerText = ``;
@@ -174,7 +190,7 @@ export class Guard extends View {
   // get gold for guard, and update user's data in firestore, also redirect user to guard menu
   getGuardPayout() {
     this.dom.summaryBtn.addEventListener('click', () => {
-      if (this.userData.guard.payout !== null && this.userData.guard.end.getTime() <= new Date().getTime() ) {
+      if (this.userData.guard.payout !== null && this.userData.guard.end.getTime() <= new Date().getTime()) {
         // set the gold amount
         this.userData.gold += this.userData.guard.payout;
         // clear guard
@@ -236,6 +252,7 @@ export class Guard extends View {
   }
   getDOMElements() {
     this.dom = {
+      progressBar: document.querySelector('.progressBar'),
       sliderValue: document.querySelector('#slider_value'),
       inputSlider: document.querySelector('#guard_input_slider'),
       guardPayment: document.querySelector('.guard__awardAmount'),
@@ -249,7 +266,8 @@ export class Guard extends View {
       summary: document.querySelector('.guard__summary'),
       summaryPayout: document.querySelector('.guard__summaryPayout')
       ,
-      countdownWrapper: document.querySelector('#guard_countdown_elements')
+      countdownWrapper: document.querySelector('#guard_countdown_elements'),
+      rangeIcon: document.querySelector('.rangeIcon')
     }
   }
 
