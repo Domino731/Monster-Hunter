@@ -8,17 +8,19 @@
         width: 50%;
         height: 100%;
         &:first-child {
-            background: rgba(255, 255, 255, 0.2);
-            border-right: 6px solid #343a40;
+            border-right: 4px solid #343a40;
         }
     }
     &__header {
         height: 50px;
-
         display: flex;
         justify-content: center;
         align-items: center;
         border-bottom: 6px solid $color-gold;
+        @include desktopS {
+            height: 42px;
+            border-bottom: 4px solid $color-gold;
+        }
     }
     &__mailIcon {
         height: 100%;
@@ -33,17 +35,17 @@
 
     &__list {
         margin-top: 10px;
-        li{
+        li {
             display: flex;
             align-items: center;
         }
     }
-    &__deleteIcon{
+    &__deleteIcon {
         margin: 0 0.5rem;
         font-size: 1.625rem;
         color: $color-error;
         -webkit-text-stroke: 0.063rem $color-black;
-        i:hover{
+        i:hover {
             cursor: pointer;
         }
     }
@@ -60,6 +62,7 @@
         padding: 0 13px;
         backdrop-filter: blur(4px);
         margin-bottom: 12px;
+        overflow: hidden;
         &::after,
         &::before {
             content: "";
@@ -74,17 +77,30 @@
             left: 0;
             border-left: 6px solid $color-blue;
             border-bottom: 6px solid $color-blue;
+            @include desktopS {
+                border-left: 4px solid $color-blue;
+                border-bottom: 4px solid $color-blue;
+            }
         }
         &::before {
             top: 0;
             right: 0;
             border-right: 6px solid $color-blue;
             border-top: 6px solid $color-blue;
+            @include desktopS {
+                border-right: 4px solid $color-blue;
+                border-top: 4px solid $color-blue;
+            }
         }
         &:hover::after,
         &:hover::before {
             width: 100%;
             cursor: pointer;
+        }
+
+        @include desktopS {
+            padding: 0 10px ;
+            height: 50px;
         }
     }
 
@@ -109,12 +125,12 @@
         font-weight: 500;
         font-size: 1.125rem;
         overflow: hidden;
-        i{
+        i {
             font-size: 1.625rem;
             color: $color-error;
             -webkit-text-stroke: 0.063rem $color-black;
             margin-right: 0.188rem;
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -268,18 +284,18 @@
             margin-top: 0.313rem;
             margin-bottom: 0.188rem;
         }
-        
-        i{
-            color:$color-blue;
+
+        i {
+            color: $color-blue;
             margin-right: 0.313rem;
         }
         a {
             color: $color-blue;
         }
-        p{
+        p {
             margin-top: 0.5rem;
         }
-        strong{
+        strong {
             font-style: italic;
         }
     }
