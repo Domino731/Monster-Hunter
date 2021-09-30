@@ -5,7 +5,7 @@ export const getWizardHTMLCode = (user: UserData): string => {
    return `
      <section class='wizard'>
         <div class='wizard__characterWrapper'>
-          <img class='wizard__chracterImg' src='./images/wizard.png' alt='wizard'/> 
+          <img class='wizard__characterImg' src='./images/wizard.png' alt='wizard'/> 
         </div>
 
         <div class='wizard__descriptionWrapper'> 
