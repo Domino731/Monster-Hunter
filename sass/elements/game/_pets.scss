@@ -1,22 +1,24 @@
 .pets {
     background-image: url("/images/pets_background.jpg");
-    
+
     height: 100%;
     background-size: 100% 100%;
     &__wrapper {
         margin-top: 45px;
         display: flex;
         justify-content: space-evenly;
-     
+        @include desktopM {
+            margin-top: 31px;
+        }
     }
     &__userGoldWrapper {
         display: flex;
         justify-content: center;
         width: auto;
         margin: 0 auto;
-         position: relative;
+        position: relative;
     }
-    &__userGold{
+    &__userGold {
         display: flex;
         align-items: center;
         margin-top: 10px;
@@ -24,8 +26,7 @@
         border-radius: 20px;
         padding: 0.688rem;
     }
-    &__userGoldAmount{
-        
+    &__userGoldAmount {
         margin-left: 0.813rem;
         font-weight: bold;
         letter-spacing: 0.063rem;
@@ -33,20 +34,20 @@
         color: $color-gold;
         -webkit-text-stroke: 0.063rem $color-gray-dark;
     }
-    &__userGoldIcon{
-       width: 2.438rem;
-       height: auto;
-       object-fit: cover;
+    &__userGoldIcon {
+        width: 2.438rem;
+        height: auto;
+        object-fit: cover;
     }
-    &__goldSubtract{
-       position: absolute;
-       color: $color-error;
-       bottom: 0;
-       font-size: 1.313rem;
-       font-weight: bold;
-       color: $color-red;
-       -webkit-text-stroke: 0.063rem $color-gray-dark;
-       animation: 1.5s an__pets_goldSubtract forwards;
+    &__goldSubtract {
+        position: absolute;
+        color: $color-error;
+        bottom: 0;
+        font-size: 1.313rem;
+        font-weight: bold;
+        color: $color-red;
+        -webkit-text-stroke: 0.063rem $color-gray-dark;
+        animation: 1.5s an__pets_goldSubtract forwards;
     }
     &__item {
         position: relative;
@@ -67,10 +68,10 @@
             padding: 11px;
         }
     }
-    &__current{
+    &__current {
         border: 8px solid $color-gold;
     }
-    &__countdownWrapper{
+    &__countdownWrapper {
         position: absolute;
         bottom: -38px;
         left: 0;
@@ -84,7 +85,7 @@
         word-spacing: 0.125rem;
         color: $color-white;
         font-size: 30px;
-        border-radius: 0 0  20px 20px;
+        border-radius: 0 0 20px 20px;
     }
     &__img {
         width: 100%;
@@ -104,7 +105,7 @@
         font-size: 2.375rem;
         margin-top: 10px;
         text-transform: uppercase;
-        @include desktopM{
+        @include desktopM {
             margin-top: 7px;
         }
 
@@ -132,7 +133,7 @@
         align-items: center;
         margin-top: 13px;
         height: 2rem;
-        @include desktopM{
+        @include desktopM {
             margin-top: 10px;
         }
         img {
@@ -149,15 +150,12 @@
             color: $color-gold;
             -webkit-text-stroke: 0.063rem $color-gray-dark;
         }
-      
+
         &-notAfford {
-            
-          strong{
-              text-shadow: 0.188rem 0.188rem $color-error;
-          }
+            strong {
+                text-shadow: 0.188rem 0.188rem $color-error;
+            }
         }
-
-
     }
     &__benefits {
         display: flex;
@@ -200,7 +198,7 @@
             color: $color-gray-dark;
             font-weight: 700;
             transition: 0.2s;
-            &:hover{
+            &:hover {
                 cursor: pointer;
                 letter-spacing: 0.125rem;
             }
@@ -220,7 +218,7 @@
 }
 
 @keyframes an__pets_goldSubtract {
-    100%{
+    100% {
         transform: translateY(2.5rem);
     }
 }
