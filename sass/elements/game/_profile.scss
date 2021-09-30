@@ -421,7 +421,9 @@
             font-family: $fontFamily-medivalSharp;
         }
         @include desktopM {
-            height: 27%;
+            height: 34%;
+            width: 93%;    
+            padding: 15px;
         }
     }
 
@@ -645,6 +647,10 @@
         object-fit: cover;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
+    }
+    @include desktopM{
+        margin-top: 7px;
+        padding: 10px 0;
     }
 }
 .profile__generalLabelWrapper {

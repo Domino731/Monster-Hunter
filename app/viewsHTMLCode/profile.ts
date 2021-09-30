@@ -11,7 +11,7 @@ export const getProfileHTMLCode = (user: UserData) : string => {
     <div class='profile__item'>
        <div class='game__errorWrapper disabled' id='profile__error'></div>
 
-        <div class='profile__equipment' id='profile_equipment_slots'>
+        <div class='profile__equipment profile__equipment-currentUser' id='profile_equipment_slots'>
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'>
                 <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
             </div>
