@@ -274,8 +274,8 @@ export class SearchedUser {
     //   this.dom.backpackLabel.root.classList.remove('disabled')
     // potions
         const firstPotion = potionsData[0]
-        this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-       this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
+        //this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        //this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
 }
   initScripts() {
 

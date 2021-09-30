@@ -156,7 +156,7 @@ export class SearchFriend extends View {
     // for rwd works
     rwd(){
        const searchedUser = this.allUsersData[1];
-      const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+       const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
     }
 
    initScripts() {

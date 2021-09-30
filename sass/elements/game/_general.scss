@@ -7,7 +7,7 @@
     margin: 0 auto;
     @include desktopM{
         width: 1600px;
-        min-height: 800px;
+        min-height: 720px;
         max-height: 900px;
     }
     @include desktopS{

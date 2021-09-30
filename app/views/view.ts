@@ -280,6 +280,8 @@ export class View {
    }
    // initialization 
    init() {
+      console.log('widht', window.innerWidth)
+      console.log('height', window.innerHeight)
       this.addLoading();
       this.getUserData()
          .then(() => {
