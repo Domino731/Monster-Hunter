@@ -63,7 +63,8 @@
         }
         @include desktopM {
             width: 22%;
-            height: 553px;
+            height: 517px;
+            padding: 11px;
         }
     }
     &__current{
@@ -89,6 +90,11 @@
         width: 100%;
         height: auto;
         object-fit: cover;
+        @include desktopM {
+            display: block;
+            width: 90%;
+            margin: 0 auto;
+        }
     }
 
     &__name {
@@ -98,6 +104,10 @@
         font-size: 2.375rem;
         margin-top: 10px;
         text-transform: uppercase;
+        @include desktopM{
+            margin-top: 7px;
+        }
+
         &-cat {
             background: #f7c4db;
             color: #c56cb7;
@@ -120,8 +130,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 0.813rem;
+        margin-top: 13px;
         height: 2rem;
+        @include desktopM{
+            margin-top: 10px;
+        }
         img {
             width: auto;
             height: 100%;
