@@ -24,6 +24,9 @@
             @include desktopM{
             height: 436px; 
            }
+           @include laptopL{
+               height: 380px;
+           }
         }
         &-currentUser{
            @include desktopM{
@@ -118,6 +121,10 @@
     &__info {
         grid-column: 2/4;
         grid-row: 3/4;
+        @include laptopL{
+            height: 100%;
+            overflow: hidden;
+        }
     }
     &__itemSpecs {
         z-index: 10;
@@ -126,12 +133,21 @@
         width: 325px;
         background-color: $color-gray_dark;
         position: absolute;
-    
+     
+        @include laptopL{
+            border-radius: 15px;
+        }
         &-common {
             border: 4px solid $color-blue;
+            @include laptopL{
+                border: 3px solid $color-blue;
+            }
         }
         &-legendary {
             border: 4px solid $color-gold;
+            @include laptopL{
+                border: 3px solid $color-gold;
+            }
         }
         &::after {
             width: 30px;
@@ -330,6 +346,10 @@
             font-size: 36px;
             text-shadow: 2px 2px $color-gray_dark;
         }
+        @include laptopL {
+            height: 34px;
+            font-size: 31px;
+        }
     }
     &__levelProgress {
         z-index: -1;
@@ -356,6 +376,9 @@
         text-shadow: 1px 1px $color-red;
         @include desktopM {
             padding: 1px 0;
+        }
+        @include laptopL {
+            border-radius: 4px;
         }
     }
     &__equipmentIcon {
@@ -528,6 +551,11 @@
             width: 100px;
             height: 100px;
         }
+        @include laptopL {
+            width: 79px;
+            height: 79px;
+            border: 5px solid $color-wood-dark;
+        }
     }
     &__generalText {
         width: 120px;
@@ -542,6 +570,11 @@
         border-radius: 3px;
         @include desktopM{
             margin-top: 5px;
+        }
+        @include laptopL {
+            width: 79px;
+            padding: 3px 0;
+            margin-top: 2px;
         }
     }
     &__goldBar {
@@ -943,6 +976,7 @@
         width: 280px;
         background-color: $color-gray_dark;
         position: absolute;
+        
         &-1{
             transform: translate(258px, -100%);
             @include desktopM {
@@ -951,6 +985,7 @@
             @include desktopS {
                 transform: translate(125px, -100%);
             }
+          
         }
         &-2{
             transform: translate(454px, -100%);
@@ -959,6 +994,9 @@
             }
             @include desktopS {
                 transform: translate(264px, -100%);
+            }
+            @include laptopL{
+                transform: translate(266px, -100%);
             }
         }
         &::after {
@@ -972,6 +1010,14 @@
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
+            @include laptopL {
+                width: 24px;
+                height: 24px;
+                bottom: -23px;
+            }
+        }
+        @include laptopL {
+            width: 225px;
         }
 }
 #searched_user_root{
@@ -983,6 +1029,12 @@
         transform: translate(156px, -100%);
         @include desktopM{
             transform: translate(91px, -100%);
+        }
+        @include desktopS{
+            transform: translate(57px, -100%);
+        }
+        @include laptopL {
+            transform: translate(88px, -100%);
         }
     }
 }
@@ -998,6 +1050,9 @@
             padding-bottom: 4px;
             margin-top: 7px;
         }
+        @include laptopL{
+           height: 95px;
+        } 
     }
     &__statsTable{
         color: $color-white;
@@ -1006,10 +1061,18 @@
         border-radius: 20px;
         padding: 10px;
         background: $color-gray_dark;
+        font-size: 20px;
+      
         @include desktopM{
            height: 92%;
+           font-size: 18px; 
+           border-radius: 16px;
         }
-
+        @include laptopL{
+            width: 49%;
+            font-size: 15px;
+            border-radius: 13px;
+        } 
     }
     &__actionBar{
         box-sizing: border-box;
@@ -1025,6 +1088,10 @@
             height: 35px;
             margin: 5px auto;
             padding: 3px;
+        }
+        @include laptopL {
+            height: 32px;
+            margin: 4px auto;
         }
     }
     &__actionIcon{
@@ -1043,22 +1110,29 @@
     }
 }
 .searchedUser__statsTable{
+    
     td:first-child{
         padding-top: 10px;
         @include desktopM {
             padding-top: 7px;
         }
+        @include laptopL {
+            padding-top: 4px;
+        }
     }
     td{
         padding-left: 10px ;
+        @include desktopM {
+            padding-left: 7px;
+        }
+        @include laptopL {
+            padding-left: 4px;
+        }
     }
     tr{
         font-weight: bold;
         letter-spacing: 0.125rem;
-        font-size: 20px;
-        @include desktopM{
-            font-size: 18px; 
-           }
+       
     }
 }
 

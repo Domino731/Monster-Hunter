@@ -1,45 +1,66 @@
-$fontFamily-adventure: 'Advent Pro', sans-serif;
-$fontFamily-kanit: 'Kanit', sans-serif;
-$fontFamily-medivalSharp: 'MedievalSharp', cursive;
-body{
-    font-family: 'Kanit', sans-serif;
+$fontFamily-adventure: "Advent Pro", sans-serif;
+$fontFamily-kanit: "Kanit", sans-serif;
+$fontFamily-medivalSharp: "MedievalSharp", cursive;
+body {
+    font-family: "Kanit", sans-serif;
     color: $color-black;
 }
-:root{
-    @include desktopS{
-      font-size: 14px;
+:root {
+    @include desktopS {
+        font-size: 14px;
     }
-
+    @include laptopL {
+        font-size: 12px;
+    }
 }
-*{
+* {
     box-sizing: border-box;
 }
-.transparent{
-    &::after{
-    content: "";
-    z-index: 0;
-    position: absolute;
-    display: block;
-    height: 100%;
-    width: 100%;
-    backdrop-filter: blur(3px);
-    top: 0;
-    left: 0; 
+.transparent {
+    &::after {
+        content: "";
+        z-index: 0;
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 100%;
+        backdrop-filter: blur(3px);
+        top: 0;
+        left: 0;
     }
- 
 }
-.disabled{
+.disabled {
     display: none !important;
 }
+@mixin arrow($direction) {
+    @if $direction == 'left' {
+        content: "";
+        z-index: -1;
+        display: block;
+        height: 100%;
+        width: 40px;
+        position: absolute;
+        clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    } 
+    @if $direction == 'right' {
+        z-index: -1;
+        content: "";
+        display: block;
+        height: 100%;
+        width: 40px;
+        position: absolute;
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%)
+    }
 
-@keyframes an__gradient_background{
+}
+@keyframes an__gradient_background {
     0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

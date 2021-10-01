@@ -13,6 +13,11 @@
     @include desktopS{
         width: 1440px;
     }
+    @include laptopL{
+        width: 1336px;
+        min-height: 600px;
+        max-height: 768px;
+    }
 }
 .game__contentContainer{
     width: 80%;
