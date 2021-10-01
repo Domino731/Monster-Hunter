@@ -8,7 +8,10 @@
         width: 50%;
         height: 100%;
         &:first-child {
-            border-right: 4px solid #343a40;
+            border-right: 6px solid #343a40;
+            @include desktopS {
+                border-right: 4px solid #343a40;
+            }
         }
     }
     &__header {
