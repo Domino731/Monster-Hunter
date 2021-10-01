@@ -14,7 +14,7 @@
         padding-left: 20px;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-end;
     }
     &__characterImg {
         width: 96%;
@@ -28,8 +28,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
         grid-column: 1/1;
-        grid-row: 2/2;
+        grid-row: 2/-1;
         padding: 20px;
         max-height: 336px;
         @include desktopM {

@@ -121,7 +121,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: center;
+        height: calc(100% - 131px);
+        @include desktopS{
+            height: calc(100% - 120px);
+        }
     }
     &__summary{
         padding: 15px;

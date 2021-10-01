@@ -63,6 +63,68 @@
         left: 0;
     }
 }
+.countdown{
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 60px;
+        border-radius: 40px;
+        margin: 4px auto;
+        border: 8px solid $color-gold;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(2px);
+        position: relative;
+        overflow: hidden;
+        @include desktopS{
+            height: 51px;
+            border: 6px solid $color-gold;
+        }
+    }
+    &__progressBar{
+      position: absolute;
+      height: 100%;
+      width: 0%;
+      left: 0;
+      background: $color-green;
+      animation: 15s an_guardCountdownBar infinite ease-in-out;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+    }
+    &__time{
+        z-index: 1;
+        font-weight: 900;
+       word-spacing: 0.125rem;
+        color: $color-white;
+       font-size: 48px;
+       @include desktopS{
+           font-size: 34px;
+       }
+    }
+    &__cancelBtn{
+        display: block;
+        margin: 10px auto;
+        width: auto;
+        background: $color-white;
+        font-size: 1.188rem;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        padding: 0.313rem 1.188rem;
+        font-weight: 700;
+        border-radius: 8px;
+        letter-spacing: 0.063rem;
+        &:hover{
+            cursor: pointer;
+            background: $color-error;
+            color: $color-white;
+            letter-spacing: 0.125rem;
+            border-radius: 3px;
+        }
+
+    }
+}
 @keyframes an__game_errorWrapper_show{
     100%{
         transform: translateY(0%);  
