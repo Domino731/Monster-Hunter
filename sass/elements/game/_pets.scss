@@ -25,6 +25,9 @@
         background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         padding: 0.688rem;
+        @include desktopS {
+            border-radius: 16px;
+        }
     }
     &__userGoldAmount {
         margin-left: 0.813rem;
@@ -67,9 +70,16 @@
             height: 517px;
             padding: 11px;
         }
+        @include desktopS{
+            height: 466px;
+            border-radius: 16px;
+        }
     }
     &__current {
         border: 8px solid $color-gold;
+        @include desktopS{
+            border: 6px solid $color-gold;
+        }
     }
     &__countdownWrapper {
         position: absolute;
@@ -86,6 +96,11 @@
         color: $color-white;
         font-size: 30px;
         border-radius: 0 0 20px 20px;
+        @include desktopS{
+         bottom: -30px;
+         font-size: 25px;
+         border-radius: 0 0 16px 16px;
+        }
     }
     &__img {
         width: 100%;
