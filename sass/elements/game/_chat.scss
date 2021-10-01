@@ -11,6 +11,10 @@
         border-bottom: 4px solid $color-blue;
         background: $color-gray_dark;
         display: flex;
+        @include desktopS {
+            height: 30px;
+            border-bottom: 3px solid $color-blue;
+        }
     }
     &__friendNick {
         font-size: 1.375rem;
@@ -52,6 +56,11 @@
         display: flex;
         height: 47px;
         border-top: 4px solid $color-blue;
+        @include desktopS {
+            border-radius: 0 0  12px 12px;
+            height: 40px;
+            border-top: 3px solid $color-blue;
+        }
     }
     &__emojiIcon {
         width: 10%;
@@ -171,8 +180,8 @@
         width: 10%;
     }
     &__portrait {
-         width:  70px;
-        height: 70px;
+         width:  100%;
+        height: 72px;
         border: 3px solid $color-gray_dark;
         border-radius: 50px;
         display: flex;
@@ -184,8 +193,10 @@
             object-fit: cover;
         }
         @include desktopM {
-            width: 65px;
-            height: 65px;
+            height: 59px;
+        }
+        @include desktopS {
+            height: 52px;
         }
     }
     &__date {
@@ -198,6 +209,7 @@
         width: 90%;
         display: flex;
         flex-direction: column;
+        font-size: 10px;
         .message__message__cloud:first-child {
           margin-top: 0;
         }
@@ -209,19 +221,25 @@
             padding-right: 7px;
             align-items: flex-end;
         }
+        strong{
+            font-size: 1.4em;
+        };
+        @include desktopS{
+            font-size: 8px;
+        }
     }
     &__nick {
-        font-size: 1.063rem;
+        font-size: 1.7em;
         font-weight: 600;
-        letter-spacing: 0.063rem;
+        letter-spacing: 0.1em;
     }
     &__cloud {
         max-width: 70%;
-        letter-spacing: 0.063rem;
-        word-spacing: 0.063rem;
-        padding: 0.75rem;
-        margin-bottom: 0.313rem;
-        font-size: 1.125rem;
+        letter-spacing: 0.1em;
+        word-spacing: 0.1em;
+        padding: 0.6em;
+        margin-bottom: 0.4em;
+        font-size: 1.8em;
         word-wrap:break-word;
         div{
             display: inline;

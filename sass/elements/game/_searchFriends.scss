@@ -32,7 +32,7 @@
         transform: translateX(2.188rem);
         img {
             width: auto;
-            height: 25px;
+            height: 100%;
             object-fit: cover;
         }
     }
@@ -44,6 +44,7 @@
         border-radius: 50px;
         width: 381px;
         height: 100%;
+        margin-left: 5px;
         padding-left: 2.188rem;
         font-family: $fontFamily-kanit;
         font-size: 1.563rem;
@@ -82,14 +83,7 @@
             letter-spacing: 0.063rem;
         }
 
-        @include desktopM{
-         margin-left: 10px;  
-         width: 135px;  
-        }
-        @include desktopS{
-            margin-left: 6px;
-            width: 119px;
-        }
+     
     }
     &__nick {
         margin-left: 20px;
@@ -137,7 +131,7 @@
             clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
         }
         @include desktopM{
-            width: 288px;  
+        
            }
     }
     &__level{
@@ -173,6 +167,7 @@
      
         &::after{
             content: "";
+            z-index: -1;
             display: block;
             height: 100%;
             width: 40px;
@@ -186,7 +181,7 @@
             margin-right: -2px;
         }
         @include desktopM{
-            width: 100%;  
+           
            }
     }
 }
