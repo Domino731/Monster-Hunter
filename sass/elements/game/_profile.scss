@@ -466,7 +466,10 @@
         @include desktopM {
             width: 122px;
             height: 122px;
-          
+        }
+        @include desktopS {
+            width: 110px;
+            height: 110px;
         }
     }
 
@@ -945,11 +948,17 @@
             @include desktopM {
                 transform: translate(170px, -100%);
             }
+            @include desktopS {
+                transform: translate(125px, -100%);
+            }
         }
         &-2{
             transform: translate(454px, -100%);
             @include desktopM {
                 transform: translate(325px, -100%);
+            }
+            @include desktopS {
+                transform: translate(264px, -100%);
             }
         }
         &::after {
