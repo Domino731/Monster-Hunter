@@ -13,6 +13,12 @@
         position: relative;
         &:first-child {
             border-right: 6px solid $color-gray_dark;
+            @include laptopL {
+                border-right: 4px solid $color-gray_dark;
+            }
+        }
+        @include laptopL {
+            padding: 6px;
         }
     }
     &__frame{

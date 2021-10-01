@@ -8,6 +8,12 @@
         z-index: 1;
         &:first-child {
             border-right: 6px solid $color-gray_dark;
+            @include laptopL {
+                border-right: 4px solid $color-gray_dark;
+            }
+        }
+        @include laptopL {
+            padding: 6px;
         }
     }
     &__equipment {
@@ -17,24 +23,25 @@
         grid-template-columns: repeat(4, 1fr);
         border-bottom: 10px solid $color-gold;
         position: relative;
-          @include desktopM{
+        @include desktopM {
             border-bottom: 7px solid $color-gold;
         }
-        &-specificUser{
-            @include desktopM{
-            height: 436px; 
-           }
-           @include laptopL{
-               height: 380px;
-           }
+        &-specificUser {
+            @include desktopM {
+                height: 436px;
+            }
+            @include laptopL {
+                height: 380px;
+            }
         }
-        &-currentUser{
-           @include desktopM{
-            height: 454px;
-        }  
-      
+        &-currentUser {
+            @include desktopM {
+                height: 454px;
+            }
+            @include laptopL {
+                height: 376px;
+            }
         }
-       
     }
 
     &__equipmentItem {
@@ -121,7 +128,7 @@
     &__info {
         grid-column: 2/4;
         grid-row: 3/4;
-        @include laptopL{
+        @include laptopL {
             height: 100%;
             overflow: hidden;
         }
@@ -133,19 +140,19 @@
         width: 325px;
         background-color: $color-gray_dark;
         position: absolute;
-     
-        @include laptopL{
+
+        @include laptopL {
             border-radius: 15px;
         }
         &-common {
             border: 4px solid $color-blue;
-            @include laptopL{
+            @include laptopL {
                 border: 3px solid $color-blue;
             }
         }
         &-legendary {
             border: 4px solid $color-gold;
-            @include laptopL{
+            @include laptopL {
                 border: 3px solid $color-gold;
             }
         }
@@ -220,7 +227,6 @@
             @include desktopM {
                 left: 160px;
             }
-         
         }
 
         &-special {
@@ -445,7 +451,7 @@
         }
         @include desktopM {
             height: 34%;
-            width: 93%;    
+            width: 93%;
             padding: 15px;
         }
     }
@@ -458,7 +464,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
-        
+
         .profile__itemSpecs {
             position: absolute;
             z-index: 10;
@@ -478,10 +484,10 @@
         border-left: 3px solid $color-gray_dark;
         border-top: 3px solid $color-gray_dark;
         transition: 0.3s;
-          img{
-                width: 90%;
-                height: 90%;
-            }
+        img {
+            width: 90%;
+            height: 90%;
+        }
         &:hover {
             cursor: pointer;
             background: rgba(255, 255, 255, 0.5);
@@ -494,6 +500,10 @@
             width: 110px;
             height: 110px;
         }
+        @include laptopL {
+            width: 103px;
+            height: 103px;
+        }
     }
 
     &__backpackItemGraphic {
@@ -504,18 +514,18 @@
     &__backpackLabelWrapper {
         position: absolute;
         width: 100%;
-        &-blacksmith{
-           top: 0;
-           background-color: red;
+        &-blacksmith {
+            top: 0;
+            background-color: red;
         }
     }
     &__general {
         display: flex;
         justify-content: space-between;
         position: relative;
-        &-searchedUser{
+        &-searchedUser {
             margin-top: 10px;
-            @include desktopM{
+            @include desktopM {
                 margin-top: 7px;
             }
         }
@@ -547,7 +557,7 @@
                 width: 67%;
             }
         }
-        @include desktopM{
+        @include desktopM {
             width: 100px;
             height: 100px;
         }
@@ -568,7 +578,7 @@
         font-weight: 600;
         letter-spacing: 0.063rem;
         border-radius: 3px;
-        @include desktopM{
+        @include desktopM {
             margin-top: 5px;
         }
         @include laptopL {
@@ -589,6 +599,9 @@
         border-radius: 50px;
         &-noAfford {
             animation: 1s an__goldBar infinite alternate-reverse;
+        }
+        @include laptopL {
+            height: 32px;
         }
     }
     &__goldIcon {
@@ -684,7 +697,7 @@
         margin-left: 0.5rem;
         margin-right: 0.5rem;
     }
-    @include desktopM{
+    @include desktopM {
         margin-top: 7px;
         padding: 10px 0;
     }
@@ -745,7 +758,7 @@
 }
 .profile__itemSpecs {
     &-backpackSlot1 {
-        transform: translate(-1px,-100%);
+        transform: translate(-1px, -100%);
         &::after {
             left: 28px;
             bottom: -26px;
@@ -767,7 +780,7 @@
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(153px, -100%);
         }
     }
@@ -778,7 +791,7 @@
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(144px, -100%);
         }
     }
@@ -789,69 +802,69 @@
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(295px, -100%);
         }
     }
 
     &-backpackSlot6 {
-        transform: translate(-1px,-100%);
-        margin-top:  160px;
+        transform: translate(-1px, -100%);
+        margin-top: 160px;
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             margin-top: 134px;
         }
     }
     &-backpackSlot7 {
-        transform: translate(151px,-100%);
-        margin-top:  160px;
+        transform: translate(151px, -100%);
+        margin-top: 160px;
         &::after {
             left: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             margin-top: 134px;
         }
     }
     &-backpackSlot8 {
         transform: translate(215px, -100%);
-        margin-top:  160px;
+        margin-top: 160px;
         &::after {
             left: 154px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(144px, -100%);
             margin-top: 134px;
         }
     }
     &-backpackSlot9 {
         transform: translate(260px, -100%);
-        margin-top:  160px;
+        margin-top: 160px;
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             margin-top: 134px;
         }
     }
     &-backpackSlot10 {
         transform: translate(414px, -100%);
-        margin-top:  160px;
+        margin-top: 160px;
         &::after {
             right: 28px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
-        @include desktopM{
+        @include desktopM {
             margin-top: 134px;
             transform: translate(295px, -100%);
         }
@@ -866,7 +879,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(-1px, 3px);
         }
     }
@@ -877,7 +890,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(151px, 3px);
         }
     }
@@ -888,7 +901,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(153px, 3px);
         }
     }
@@ -899,7 +912,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(171px, 3px);
         }
     }
@@ -910,7 +923,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(290px, 3px);
         }
     }
@@ -921,7 +934,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(-1px, 110px);
         }
     }
@@ -932,7 +945,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(151px, 110px);
         }
     }
@@ -943,7 +956,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(153px, 110px);
         }
     }
@@ -954,7 +967,7 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(171px, 110px);
         }
     }
@@ -965,72 +978,72 @@
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        @include desktopM{
+        @include desktopM {
             transform: translate(290px, 110px);
         }
     }
 }
-.potion__label{
-        padding: 10px;
-        border-radius: 18px;
-        width: 280px;
-        background-color: $color-gray_dark;
-        position: absolute;
-        
-        &-1{
-            transform: translate(258px, -100%);
-            @include desktopM {
-                transform: translate(170px, -100%);
-            }
-            @include desktopS {
-                transform: translate(125px, -100%);
-            }
-          
+.potion__label {
+    padding: 10px;
+    border-radius: 18px;
+    width: 280px;
+    background-color: $color-gray_dark;
+    position: absolute;
+
+    &-1 {
+        transform: translate(258px, -100%);
+        @include desktopM {
+            transform: translate(170px, -100%);
         }
-        &-2{
-            transform: translate(454px, -100%);
-            @include desktopM {
-                transform: translate(325px, -100%);
-            }
-            @include desktopS {
-                transform: translate(264px, -100%);
-            }
-            @include laptopL{
-                transform: translate(266px, -100%);
-            }
+        @include desktopS {
+            transform: translate(125px, -100%);
         }
-        &::after {
-            width: 30px;
-            height: 30px;
-            content: "";
-            bottom: -30px;
-            position: absolute;
-            display: block;
-            background: $color-gray_dark;
-            right: 28px;
-            bottom: -26px;
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
-            @include laptopL {
-                width: 24px;
-                height: 24px;
-                bottom: -23px;
-            }
+    }
+    &-2 {
+        transform: translate(454px, -100%);
+        @include desktopM {
+            transform: translate(325px, -100%);
+        }
+        @include desktopS {
+            transform: translate(264px, -100%);
         }
         @include laptopL {
-            width: 225px;
+            transform: translate(266px, -100%);
         }
+    }
+    &::after {
+        width: 30px;
+        height: 30px;
+        content: "";
+        bottom: -30px;
+        position: absolute;
+        display: block;
+        background: $color-gray_dark;
+        right: 28px;
+        bottom: -26px;
+        clip-path: polygon(50% 100%, 0 0, 100% 0);
+        @include laptopL {
+            width: 24px;
+            height: 24px;
+            bottom: -23px;
+        }
+    }
+    @include laptopL {
+        width: 225px;
+    }
 }
-#searched_user_root{
+#searched_user_root,
+#friends_branch {
     padding: 10px;
-    .profile__description{
+    .profile__description {
         z-index: 0;
     }
-    .potion__label-1{
+    .potion__label-1 {
         transform: translate(156px, -100%);
-        @include desktopM{
+        @include desktopM {
             transform: translate(91px, -100%);
         }
-        @include desktopS{
+        @include desktopS {
             transform: translate(57px, -100%);
         }
         @include laptopL {
@@ -1038,23 +1051,23 @@
         }
     }
 }
-.searchedUser{
-    &__statsWrapper{
+.searchedUser {
+    &__statsWrapper {
         display: flex;
         justify-content: space-between;
         width: 100%;
         margin-top: 10px;
         height: 135px;
-        @include desktopM{
+        @include desktopM {
             height: 120px;
             padding-bottom: 4px;
             margin-top: 7px;
         }
-        @include laptopL{
-           height: 95px;
-        } 
+        @include laptopL {
+            height: 95px;
+        }
     }
-    &__statsTable{
+    &__statsTable {
         color: $color-white;
         width: 47%;
         height: 100%;
@@ -1062,19 +1075,19 @@
         padding: 10px;
         background: $color-gray_dark;
         font-size: 20px;
-      
-        @include desktopM{
-           height: 92%;
-           font-size: 18px; 
-           border-radius: 16px;
+
+        @include desktopM {
+            height: 92%;
+            font-size: 18px;
+            border-radius: 16px;
         }
-        @include laptopL{
+        @include laptopL {
             width: 49%;
             font-size: 15px;
             border-radius: 13px;
-        } 
+        }
     }
-    &__actionBar{
+    &__actionBar {
         box-sizing: border-box;
         display: flex;
         justify-content: space-evenly;
@@ -1084,7 +1097,7 @@
         border-radius: 25px;
         height: 50px;
         background: $color-gray_dark;
-        @include desktopM{
+        @include desktopM {
             height: 35px;
             margin: 5px auto;
             padding: 3px;
@@ -1094,24 +1107,23 @@
             margin: 4px auto;
         }
     }
-    &__actionIcon{
-       height: 100%;
-       width: auto;
-       object-fit: cover;
-       &:hover{
-           cursor: pointer;
-       }
+    &__actionIcon {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
-#searched_user_switch{
+#searched_user_switch {
     transition: 0.7s;
-    &:hover{
+    &:hover {
         transform: rotate(360deg);
     }
 }
-.searchedUser__statsTable{
-    
-    td:first-child{
+.searchedUser__statsTable {
+    td:first-child {
         padding-top: 10px;
         @include desktopM {
             padding-top: 7px;
@@ -1120,8 +1132,8 @@
             padding-top: 4px;
         }
     }
-    td{
-        padding-left: 10px ;
+    td {
+        padding-left: 10px;
         @include desktopM {
             padding-left: 7px;
         }
@@ -1129,10 +1141,9 @@
             padding-left: 4px;
         }
     }
-    tr{
+    tr {
         font-weight: bold;
         letter-spacing: 0.125rem;
-       
     }
 }
 

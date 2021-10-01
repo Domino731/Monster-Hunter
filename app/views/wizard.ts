@@ -10,6 +10,7 @@ import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import firebase from 'firebase/app';
 import { setCountdown } from '../functions/countdown';
+import { helmetsData } from '../properties/shop/helmets';
 export class Wizard extends View {
 
     private dom: {
@@ -103,6 +104,20 @@ export class Wizard extends View {
         });
     }
 
+    rwd(){
+        // const foo = helmetsData[12]
+        // this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
+        // // spin the wheel
+        // setTimeout(() => {
+        //     this.dom.spinningCircle.classList.add('circle-animation');
+        // }, 7000);
+        // // remove spinning animation and show won item
+        // setTimeout(() => {
+        //     this.dom.spinningWheel.classList.remove('spinningWheel__content-animation');
+        //     this.dom.wonItemLabel.innerHTML = getWonItemLabel(foo);
+        //     this.dom.wonItemLabel.classList.remove('disabled');
+        // }, 10000);
+    }
     onDataChange() { }
     getDOMElements() {
         this.dom = {
@@ -118,6 +133,7 @@ export class Wizard extends View {
     }
 
     initScripts() {
+        this.rwd();
         this.setSpinningWheelItems();
         if (this.userData.wizardWheelSpin) {
             this.startSpinningEvent();

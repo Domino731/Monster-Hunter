@@ -9,6 +9,9 @@
             margin-top: 32px;
             height: 305px;
         }
+        @include laptopL {
+            height: 257px;
+        }
     }
     &__characterImg {
         transition: 0.5s;
@@ -67,6 +70,14 @@
             width: 177px;
             height: 177px;
         }
+        @include desktopS{
+            width: 166px;
+            height: 166px;
+        }
+        @include laptopL {
+            width: 144px;
+            height: 144px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -96,6 +107,9 @@
     &__itemInfoWrapper {
         width: 360px;
         z-index: 1;
+        @include laptopL {
+            width: 250px;
+        }
     }
     &__itemInfo {
         
@@ -127,6 +141,11 @@
             @include desktopM{
                 width: 170px;
                 right: -167px;
+            }
+            @include laptopL {
+                width: 143px;
+                right: -142px;
+                top: 18px;
             }
         }
     }

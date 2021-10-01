@@ -74,6 +74,9 @@
             height: 466px;
             border-radius: 16px;
         }
+        @include desktopS{
+            height: 412px;
+        }
     }
     &__current {
         border: 8px solid $color-gold;

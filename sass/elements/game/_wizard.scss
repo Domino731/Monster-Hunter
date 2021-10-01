@@ -36,6 +36,9 @@
         @include desktopM {
             padding: 10px;
         }
+        @include laptopL {
+            padding: 6px;
+        }
     }
     &__description {
         width: 100%;
@@ -103,12 +106,12 @@
             letter-spacing: 0.065rem;
         }
     }
-    &__countdownWrapper{
-         position: absolute;
+    &__countdownWrapper {
+        position: absolute;
         text-align: right;
         bottom: 10px;
         right: 10px;
-        div:first-child{
+        div:first-child {
             font-size: 1.25rem;
             font-weight: 900;
             letter-spacing: 0.063rem;
@@ -117,7 +120,7 @@
         }
     }
     &__countdown {
-        width: 100%;       
+        width: 100%;
         font-size: 1.875rem;
         font-weight: 700;
         word-spacing: 0.125rem;
@@ -136,6 +139,10 @@
         height: auto;
         object-fit: cover;
         margin-bottom: 157px;
+        @include laptopL {
+            width: 115px;
+            margin-bottom: 138px;
+        }
     }
 }
 .spinningWheel__content {
@@ -148,6 +155,12 @@
     overflow: hidden;
     transition: 5s;
     box-sizing: border-box;
+
+    @include laptopL {
+        width: 586px;
+        height: 586px;
+        border: 10px solid #ffd26a;
+    }
     &-animation {
         animation: 10s an__spinning_wheel_rotate infinite;
     }
@@ -165,7 +178,11 @@
         font-size: 20px;
         background: rgb(230, 243, 255);
         background: linear-gradient(229deg, rgba(230, 243, 255, 1) 37%, rgba(185, 212, 240, 1) 53%);
-        left: 195px;
+        left: 195px; // 163
+        @include laptopL {
+            width: 236px;
+            left: 163px; 
+        }
     }
 
     .circle {

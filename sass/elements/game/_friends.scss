@@ -7,6 +7,9 @@
         @include desktopS{
             width: 353px;
         }
+        @include desktopS{
+            width: 290px;
+        }
     }
     &__itemWrapper {
         display: flex;
@@ -156,6 +159,9 @@
             height: calc(100% - 40px);
             padding: 10px 0;
         }
+        @include laptopL {
+            padding:  7px 0;
+        }
     }
     &__item {
         width: 25%;
@@ -173,6 +179,9 @@
         @include desktopS {
             height: 330px;
         }
+        @include laptopL {
+            height: 280px;
+        }
     }
 }
 
@@ -186,6 +195,9 @@
     padding-top: 10px;
     transition: 0.2s;
     overflow: hidden;
+    @include laptopL{
+        padding-top: 7px;
+    }
     &:hover {
         backdrop-filter: blur(4px);
     }
@@ -205,6 +217,9 @@
          }
          @include desktopS {
             height: 224px ;
+         }
+         @include laptopL{
+             height: 190px;
          }
     }
     &__portrait {
@@ -241,6 +256,10 @@
             height: 45px;
             font-size: 1.375rem;
          }
+         @include laptopL {
+             height: 36px;
+             padding: 2px 0;
+         }
     }
     &__actionBtn {
         display: flex;
@@ -269,6 +288,9 @@
 
         @include desktopM {
             height: 32px;
+        }
+        @include laptopL{
+            height: 27px;
         }
     }
 }

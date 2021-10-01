@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new SearchFriend()
+    const developmentRender = new Blacksmith()
     window.addEventListener("popstate", router);
 };
 

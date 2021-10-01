@@ -49,6 +49,9 @@
         &::-webkit-scrollbar-thumb {
             background: $color-gold;
         }
+        @include desktopS {
+            height: calc(100% - 67px);
+        }
     }
     &__botBar {
         position: relative;
@@ -75,6 +78,9 @@
             object-fit: cover;
             &:hover {
                 cursor: pointer;
+            }
+            @include laptopL {
+                height: 75%;
             }
         }
     }
