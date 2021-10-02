@@ -41,6 +41,9 @@
             @include laptopL {
                 height: 376px;
             }
+            @include laptopM {
+
+            }
         }
     }
 
@@ -555,6 +558,10 @@
             width: 103px;
             height: 103px;
         }
+        @include laptopM {
+            width: 99px;
+            height: 99px;
+        }
     }
 
     &__backpackItemGraphic {
@@ -653,6 +660,9 @@
         }
         @include laptopL {
             height: 32px;
+        }
+        @include laptopM {
+            height: 28px;
         }
     }
     &__goldIcon {

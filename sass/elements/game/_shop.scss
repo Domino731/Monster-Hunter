@@ -12,6 +12,9 @@
         @include laptopL {
             height: 257px;
         }
+        @include laptopM {
+            height: 200px;
+        }
     }
     &__characterImg {
         transition: 0.5s;
@@ -70,13 +73,17 @@
             width: 177px;
             height: 177px;
         }
-        @include desktopS{
+        @include desktopS {
             width: 166px;
             height: 166px;
         }
         @include laptopL {
             width: 144px;
             height: 144px;
+        }
+        @include laptopM {
+            width: 135px;
+            height: 133px;
         }
     }
     &__slotWrapper {
@@ -110,9 +117,11 @@
         @include laptopL {
             width: 250px;
         }
+        @include laptopM {
+            width: 290px;
+        }
     }
     &__itemInfo {
-        
         box-sizing: border-box;
         transition: 0.5s;
         background: $color-white;
@@ -124,7 +133,7 @@
         animation: 0.6s an__blacksmith_messageCloud forwards;
         position: relative;
         transition: 0.5s;
-        @include desktopM{
+        @include desktopM {
             padding: 7px;
         }
         &::after {
@@ -138,7 +147,7 @@
             background: $color-white;
             clip-path: polygon(98% 64%, 0 0, 0 36%);
             z-index: -1;
-            @include desktopM{
+            @include desktopM {
                 width: 170px;
                 right: -167px;
             }
@@ -146,6 +155,12 @@
                 width: 143px;
                 right: -142px;
                 top: 18px;
+                clip-path: polygon(100% 33%, 0 61%, 0 100%);
+            }
+            @include laptopM {
+                width: 156px;
+                right: -118px;
+                top: 28px;
             }
         }
     }
@@ -171,6 +186,9 @@
 
         font-style: italic;
         text-align: center;
+        @include laptopM {
+            margin-top: 2px;
+        }
     }
     &__itemRarity {
         display: block;
@@ -187,8 +205,9 @@
         &-legendary {
             -webkit-text-stroke: 0.063rem $color-gold;
         }
-        @include desktopM{
-            margin-top: 7px;
+        @include desktopM {
+            margin-top: 4px;
+            font-size: 16px;
         }
     }
     &__itemStats {
@@ -212,6 +231,12 @@
             .worse {
                 color: $color-error;
             }
+            @include laptopM {
+                padding-bottom: 1px;
+            }
+        }
+        @include laptopM {
+            margin-top: 4px;
         }
     }
     &__deliveryWrapper {
@@ -232,11 +257,19 @@
             @include desktopM {
                 border-left: 7px solid $color-gold;
             }
+            @include laptopM {
+                border-bottom: 5px solid $color-gold;
+            }
         }
         @include desktopM {
             border-bottom: 7px solid $color-gold;
             height: 47px;
             font-size: 13px;
+        }
+        @include laptopM {
+            border-bottom: 5px solid $color-gold;
+            height: 39px;
+            font-size: 11px;
         }
     }
     &__deliveryTitle {
@@ -260,6 +293,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @include laptopM {
+            height: 23px;
+        }
     }
     &__itemPriceIcon {
         height: 90%;

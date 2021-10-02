@@ -1,16 +1,23 @@
 .blacksmith {
-    height: 100%;
     display: flex;
     background-image: url('/images/background_blacksmith.jpg');
     background-size: 100% 100%;
     position: relative;
-
+    overflow: auto;
+     height: 100%;
+    &::-webkit-scrollbar{
+        width: 0;
+    }
     &__item{
-        width: 50%;
+        overflow: auto;
         height: 100%;
+        width: 50%;
         padding: 10px;
         z-index: 2;
         position: relative;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
         &:first-child {
             border-right: 6px solid $color-gray_dark;
             @include laptopL {
