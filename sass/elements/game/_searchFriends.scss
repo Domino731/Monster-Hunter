@@ -8,6 +8,9 @@
         &-search {
             background: rgba(255, 255, 255, 0.5);
             border-right: 6px solid #343a40;
+            @include desktopS {
+                border-right: 4px solid #343a40;
+            }
         }
         &-result {
             background: rgba(255, 255, 255, 0.5);
@@ -246,9 +249,15 @@
             font-weight: bold;
             letter-spacing: 0.125rem;
             border-right: 6px solid $color-gray_dark;
+            @include desktopS {
+                border-right: 4px solid $color-gray_dark;
+            }
             &:last-child {
                 border-right: none;
             }
+        }
+        @include desktopS {
+            border-bottom: 4px solid $color-blue;
         }
     }
     tbody {

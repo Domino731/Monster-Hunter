@@ -1119,6 +1119,9 @@
             transform: translate(267px, -100%);
         }
     }
+    @include laptopL {
+        padding: 6px;
+    }
 }
 .searchedUser {
     &__statsWrapper {

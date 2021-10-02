@@ -20,6 +20,10 @@
             height: 75px;
             font-size: 39px;
         }
+        @include laptopL {
+            height: 56px;
+            font-size: 31px;
+        }
     }
     &__list {
         margin-top: 10px;
@@ -35,6 +39,10 @@
         @include desktopM{
            margin-top: 6px;
            height: 50px;
+        }
+        @include laptopL {
+            margin-top: 5px;
+            height: 42px;
         }
     }
   
@@ -56,6 +64,9 @@
         @include desktopM{
            width: 56px;
          }
+         @include laptopL {
+             width: 42px;
+         }
     }
     &__link{
         position: relative;
@@ -72,6 +83,10 @@
         @include desktopM{
             padding: 5px;
             padding-left: 20px;
+          }
+          @include laptopL {
+              padding: 4px;
+              padding-left: 21px;
           }
         &::after {
             content: "";
