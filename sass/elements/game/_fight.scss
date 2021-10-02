@@ -32,6 +32,8 @@
         }
         @include desktopS{
             width: 280px;
+            border-radius: 16px;
+            padding: 6px;
         }
     }
     &__characterImg {
@@ -160,7 +162,12 @@
         &:hover{
             backdrop-filter: blur(4px);
         }
-        
+        @include desktopS{
+            padding: 6px;
+        }
+        @include laptopL {
+            width: 268px;
+        }
     }
     &__summaryTitle{
       font-size: 1.125rem;
@@ -246,6 +253,9 @@
         @include desktopS {
             animation: 0.8s  an__monster_attack-desktopS forwards;
         }
+        @include laptopL {
+            animation: 0.8s  an__monster_attack-laptopL forwards;
+        }
     }
     &__explosionWrapper{
         display: flex;
@@ -273,13 +283,6 @@
     }
 }
 
-// rwd
-// monster
-// .fight__characterWrapper-monster{
-//      transform: translateX(-200px);
-// }
-// user
-// weapon
 .fight__sword-an{
    @include desktopM{
      
@@ -298,8 +301,22 @@
         @include desktopS{
             animation: 1.5s an__sword_attack-desktopS forwards;
         }
+        @include laptopL {
+            animation: 1.5s an__sword_attack-laptopL forwards;
+        }
+    }
+
+}
+// monster attack
+@keyframes an__monster_explosion_grow {
+    50%{
+        transform: scale(100%);
+    }
+    100%{
+        transform: scale(0%);
     }
 }
+
 // moving monster
 @keyframes an__monster_attack {
     100%{
@@ -317,13 +334,9 @@
         transform: translateX(-520px);
     }
 }
-// monster attack
-@keyframes an__monster_explosion_grow {
-    50%{
-        transform: scale(100%);
-    }
-    100%{
-        transform: scale(0%);
+@keyframes an__monster_attack-laptopL{
+    100% {
+        transform: translateX(-440px);
     }
 }
 
@@ -351,6 +364,14 @@
     }
     100% {
         transform: translate(640px, 0%)  scale(100%);
+    }
+}
+@keyframes an__sword_attack-laptopL {
+    30%{
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(540px, 0%)  scale(100%);
     }
 }
 
