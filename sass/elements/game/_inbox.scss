@@ -23,6 +23,10 @@
         @include desktopS {
             height: 42px;
             border-bottom: 4px solid $color-gold;
+            
+        }
+        @include laptopM {
+            height: 34px;
         }
     }
     &__mailIcon {
@@ -38,6 +42,17 @@
 
     &__list {
         margin-top: 10px;
+        overflow: auto;
+        height: calc(100% - 50px);
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+        @include desktopS {
+            height: calc(100% - 42px);
+        }
+        @include laptopM {
+            height: calc(100% - 32px);
+        }
         li {
             display: flex;
             align-items: center;
@@ -104,6 +119,10 @@
         @include desktopS {
             padding: 0 10px ;
             height: 50px;
+        }
+        @include laptopM {
+            padding: 0px 8px;
+            height: 40px;
         }
     }
 
