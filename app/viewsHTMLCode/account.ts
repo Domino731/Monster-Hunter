@@ -3,7 +3,7 @@ export const getAccountHTMLCode = (userNick: string, deleteCode: string) : strin
     return `
     <section class='account'>
           <div class='account__item' id='update-account'>
-             <h2 class='account__title account__title-nick'>${userNick}</h2>
+             <h2 class='account__title account__title-nick'>${userNick}DDD</h2>
 
              <div class='account__element'>
                 <div class='account__elementIcon'>

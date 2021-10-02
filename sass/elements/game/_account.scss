@@ -12,6 +12,9 @@
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(2px);
         border-radius: 20px;
+        @include laptopM {
+            width: 360px;
+        }
     }
     &__title{
         text-align: center;
@@ -27,6 +30,12 @@
         &-delete{
             color: $color-red;
         }
+        @include desktopS {
+            font-size: 41px;
+        }
+        @include laptopL {
+            font-size: 37px;
+        }
     }
     &__element{
         height: 66px;
@@ -38,6 +47,9 @@
         @include desktopS{
             margin-top: 16px;
             height: 59px;
+        }
+        @include laptopM {
+            height: 47px;
         }
     }
     &__elementIcon{
@@ -55,6 +67,11 @@
         @include desktopS{
             width: 59px;
         }
+        @include laptopM {
+            width: 47px;
+            padding: 3px;
+        }
+       
     }
     &__elementContent{
         width: 84%;
@@ -79,12 +96,21 @@
         &-email{
             &:focus{
                 border: 4px solid #5f98d1;
+                @include laptopM {
+                    border: 3px solid #5f98d1;
+                }
             }
         }
         &-password{
             &:focus{
                 border: 4px solid #7343dd;
+                @include laptopM {
+                    border: 3px solid #7343dd;
+                }
             }
+        }
+        @include laptopM {
+            height: 31px;
         }
     }
     &__msg{
@@ -160,6 +186,18 @@
             &:hover{
                 cursor: pointer;
             }
+        }
+        @include desktopS {
+            right: 9px;
+            bottom: 9px;
+            height: 56px;
+            width: 56px;
+        }
+        @include laptopL {
+            right: 7px;
+            bottom: 7px;
+            height: 51px;
+            width: 51px;
         }
     }
     &__deleteCode{
