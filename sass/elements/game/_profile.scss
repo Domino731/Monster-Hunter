@@ -1113,10 +1113,16 @@
         @include laptopL {
             transform: translate(88px, -100%);
         }
+        @include laptopM {
+            transform: translate(77px, -100%);
+        }
     }
     .potion__label-2{
         @include laptopL {
             transform: translate(267px, -100%);
+        }
+        @include laptopM {
+            transform: translate(252px, -100%);
         }
     }
     @include laptopL {

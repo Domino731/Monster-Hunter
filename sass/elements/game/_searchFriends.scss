@@ -5,6 +5,13 @@
     background-size: 100% 100%;
     &__item {
         width: 50%;
+        height: 100%;
+        &:last-child{
+            overflow: auto;
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+        }
         &-search {
             background: rgba(255, 255, 255, 0.5);
             border-right: 6px solid #343a40;
@@ -15,6 +22,7 @@
         &-result {
             background: rgba(255, 255, 255, 0.5);
             padding: 10px;
+
         }
     }
     &__searchBar {
@@ -26,6 +34,10 @@
         padding: 10px 0;
         @include laptopL {
             height: 42px;
+            padding: 7px 0;
+        }
+        @include laptopM {
+            height: 38px;
             padding: 7px 0;
         }
     }
@@ -56,6 +68,9 @@
         font-size: 1.563rem;
         &:focus {
             background: rgba(255, 255, 255, 0.4);
+        }
+        @include laptopM {
+            font-size: 1.363rem;
         }
     }
     &__status {
@@ -141,6 +156,9 @@
         }
         @include laptopL{
             height: 25px;
+        }
+        @include  laptopM {
+            width: 87%;
         }
     }
     &__level {
@@ -287,5 +305,8 @@
     }
     @include laptopL {
         height: calc(100% - 42px);
+    }
+    @include laptopM {
+        height: calc(100% - 38px);
     }
 }
