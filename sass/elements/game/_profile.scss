@@ -1,7 +1,14 @@
 .profile {
     background-image: url("/images/background_profile.jpg");
     display: flex;
+    overflow: auto;
+    height: 100%;
+   &::-webkit-scrollbar{
+       width: 0;
+   }
     &__item {
+        overflow: auto;
+        height: 100%;
         position: relative;
         padding: 10px;
         width: 50%;
@@ -153,6 +160,7 @@
         @include laptopL {
             border-radius: 15px;
             width: 250px;
+             padding: 6px;
         }
 
         &-common {
@@ -340,7 +348,37 @@
             cursor: pointer;
             letter-spacing: 0.125rem;
         }
+        @include desktopS {
+            height: 27px;
+            margin-bottom: 8px;
+        }
+        @include laptopM {
+            height: 25px;
+            margin-bottom: 6px;
+        }
     }
+  &__equipmentItemSellWrapper {
+        height: 30px;
+        background: $color-white;
+        border-radius: 18px;
+        margin-top: 0.25rem;
+        padding: 0.188rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 0 0.125rem $color-gold inset;
+        }
+        @include desktopS {
+            height: 27px;
+        }
+        @include laptopM {
+            height: 25px;
+        }
+    }
+
     &__actionName {
         margin-left: 0.438rem;
         font-weight: 700;
@@ -356,21 +394,7 @@
         text-align: center;
     }
 
-    &__equipmentItemSellWrapper {
-        height: 30px;
-        background: $color-white;
-        border-radius: 18px;
-        margin-top: 0.25rem;
-        padding: 0.188rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 0.2s;
-        &:hover {
-            cursor: pointer;
-            box-shadow: 0 0 0 0.125rem $color-gold inset;
-        }
-    }
+  
     &__equipmentItemSellIcon {
         height: 100%;
         width: auto;
@@ -1070,6 +1094,9 @@
         @include laptopL {
             transform: translate(155px, -100%);
         }
+        @include laptopM {
+            transform: translate(140px, -100%);
+        }
     }
     &-2 {
         transform: translate(454px, -100%);
@@ -1082,7 +1109,9 @@
         @include laptopL {
             transform: translate(284px, -100%);
         }
-        
+        @include laptopM {
+            transform: translate(264px, -100%);
+        }
     }
     &::after {
         width: 30px;
