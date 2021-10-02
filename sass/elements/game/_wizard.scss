@@ -49,8 +49,13 @@
         position: relative;
         backdrop-filter: blur(2px);
         transition: 0.3s;
+        
         @include desktopM {
             padding: 7px;
+            
+        }
+        @include desktopS{
+            border-radius: 16px;
         }
         &:hover {
             backdrop-filter: blur(4px);
@@ -64,6 +69,12 @@
         text-transform: uppercase;
         color: #e85df5;
         -webkit-text-stroke: 1px $color-black;
+        @include laptopL {
+            font-size: 35px;
+        }
+        @include laptopM {
+            font-size: 28px;
+        }
     }
     &__text {
         font-size: 1.25rem;
@@ -143,6 +154,10 @@
             width: 115px;
             margin-bottom: 138px;
         }
+        @include laptopM {
+            width: 101px;
+            margin-bottom: 123px;
+        }
     }
 }
 .spinningWheel__content {
@@ -160,6 +175,11 @@
         width: 586px;
         height: 586px;
         border: 10px solid #ffd26a;
+    }
+    @include laptopM {
+        width: 510px;
+        height: 510px;
+        border: 8px solid #ffd26a;
     }
     &-animation {
         animation: 10s an__spinning_wheel_rotate infinite;
@@ -183,6 +203,10 @@
             width: 236px;
             left: 163px; 
         }
+        @include laptopM {
+            width: 207px;
+            left: 143px;
+        }
     }
 
     .circle {
@@ -198,6 +222,11 @@
 
         &-animation {
             animation: 2s an__spinning_wheel_circle forwards;
+        }
+        @include laptopM {
+            width: 68px;
+            height: 68px;
+            top: calc(50% - 34px);
         }
     }
 
@@ -243,6 +272,10 @@
         background: $color-white;
         border-radius: 20px;
         animation: 1s an__wonItem_wrapper ease-in-out forwards;
+        @include laptopM {
+            width: 204px;
+            border: 3px solid $color-gold;
+        }
     }
     &__img {
         width: 96%;
