@@ -10,6 +10,9 @@
         @include desktopM {
             margin-top: 31px;
         }
+        @include laptopM {
+            margin-top: 14px;
+        }
     }
     &__userGoldWrapper {
         display: flex;
@@ -73,15 +76,23 @@
         @include desktopS{
             height: 466px;
             border-radius: 16px;
+            padding: 8px;
         }
         @include desktopS{
             height: 412px;
+            padding: 7px;
+        }
+        @include laptopM {
+            height: 393px;
         }
     }
     &__current {
         border: 8px solid $color-gold;
         @include desktopS{
             border: 6px solid $color-gold;
+        }
+        @include laptopM {
+            border: 5px solid $color-gold;
         }
     }
     &__countdownWrapper {
@@ -104,6 +115,12 @@
          font-size: 25px;
          border-radius: 0 0 16px 16px;
         }
+        @include laptopM {
+            font-size: 21px;
+            border-radius: 0 0 14px 14px;
+            padding: 2px 0;
+            bottom: -26px;
+        }
     }
     &__img {
         width: 100%;
@@ -125,6 +142,11 @@
         text-transform: uppercase;
         @include desktopM {
             margin-top: 7px;
+            border-radius: 7px;
+        }
+        @include laptopM {
+            margin-top: 3px;
+            border-radius: 6px;
         }
 
         &-cat {
@@ -153,6 +175,9 @@
         height: 2rem;
         @include desktopM {
             margin-top: 10px;
+        }
+        @include laptopM {
+            margin-top: 6px;
         }
         img {
             width: auto;
