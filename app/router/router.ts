@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Blacksmith()
+    const developmentRender = new Tavern()
     window.addEventListener("popstate", router);
 };
 

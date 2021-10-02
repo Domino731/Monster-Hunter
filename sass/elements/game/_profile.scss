@@ -103,6 +103,9 @@
         display: flex;
         bottom: 2px;
         height: 29px;
+        @include laptopL {
+            height: 21px;
+        }
     }
     &__portraitBtn {
         height: 29px;
@@ -116,6 +119,10 @@
         }
         &-right {
             clip-path: polygon(50% 50%, 0 0, 0 100%);
+        }
+        @include laptopL {
+            height: 21px;
+            width: 26px;
         }
     }
     &__portraitActionIcon {
@@ -140,10 +147,11 @@
         width: 325px;
         background-color: $color-gray_dark;
         position: absolute;
-
         @include laptopL {
             border-radius: 15px;
+            width: 250px;
         }
+
         &-common {
             border: 4px solid $color-blue;
             @include laptopL {
@@ -163,8 +171,14 @@
             position: absolute;
             display: block;
             background: $color-gray_dark;
+            @include laptopL {
+                width: 24px;
+                height: 24px;
+                
+            }
         }
 
+     
         &-helmet {
             top: 0;
             left: 189px;
@@ -172,10 +186,17 @@
                 left: -28px;
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -24px;
+                }
             }
             @include desktopM {
                 left: 160px;
             }
+            @include laptopL {
+                left: 135px;
+            }
+           
         }
         &-weapon {
             top: 0;
@@ -184,9 +205,15 @@
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -24px;
+                }
             }
             @include desktopM {
                 right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
             }
         }
 
@@ -197,9 +224,15 @@
                 left: -28px;
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -24px;
+                }
             }
             @include desktopM {
                 left: 160px;
+            }
+            @include laptopL {
+                left: 135px;
             }
         }
 
@@ -210,9 +243,15 @@
                 right: -28px;
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -24px;
+                }
             }
             @include desktopM {
                 right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
             }
         }
 
@@ -223,9 +262,15 @@
                 left: -28px;
                 bottom: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -24px;
+                }
             }
             @include desktopM {
                 left: 160px;
+            }
+            @include laptopL {
+                left: 135px;
             }
         }
 
@@ -236,9 +281,15 @@
                 right: -28px;
                 bottom: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -24px;
+                }
             }
             @include desktopM {
                 right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
             }
         }
         .itemTitle {
@@ -652,7 +703,6 @@
     box-sizing: border-box;
     margin-top: 10px;
     border-radius: 10px;
-    // height: 30%;
     width: 100%;
     color: $color-gold;
     font-size: 1.563rem;
@@ -676,6 +726,9 @@
     }
     td {
         padding-top: 5px;
+        @include laptopL {
+            padding-top: 3px;
+        }
     }
     tr {
         max-height: 30px;
@@ -700,6 +753,9 @@
     @include desktopM {
         margin-top: 7px;
         padding: 10px 0;
+    }
+    @include laptopL {
+        padding: 6px 0;
     }
 }
 .profile__generalLabelWrapper {
@@ -751,6 +807,9 @@
         background: $color-red;
         color: $color-white;
         border-radius: 8px;
+        @include laptopL{
+            font-size: 18px;
+        }
     }
 }
 .white {
@@ -989,7 +1048,7 @@
     width: 280px;
     background-color: $color-gray_dark;
     position: absolute;
-
+    
     &-1 {
         transform: translate(258px, -100%);
         @include desktopM {
@@ -997,6 +1056,9 @@
         }
         @include desktopS {
             transform: translate(125px, -100%);
+        }
+        @include laptopL {
+            transform: translate(155px, -100%);
         }
     }
     &-2 {
@@ -1008,8 +1070,9 @@
             transform: translate(264px, -100%);
         }
         @include laptopL {
-            transform: translate(266px, -100%);
+            transform: translate(284px, -100%);
         }
+        
     }
     &::after {
         width: 30px;
@@ -1030,6 +1093,7 @@
     }
     @include laptopL {
         width: 225px;
+        padding: 6px;
     }
 }
 #searched_user_root,
@@ -1048,6 +1112,11 @@
         }
         @include laptopL {
             transform: translate(88px, -100%);
+        }
+    }
+    .potion__label-2{
+        @include laptopL {
+            transform: translate(267px, -100%);
         }
     }
 }
