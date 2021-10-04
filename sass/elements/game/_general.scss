@@ -91,6 +91,10 @@
             height: 51px;
             border: 6px solid $color-gold;
         }
+        @include laptopM {
+            height: 41px;
+            border: 4px solid $color-gold;
+        }
     }
     &__progressBar{
       position: absolute;
@@ -110,6 +114,9 @@
        font-size: 48px;
        @include desktopS{
            font-size: 34px;
+       }
+       @include laptopM {
+           font-size: 28px;
        }
     }
     &__cancelBtn{
@@ -131,6 +138,9 @@
             color: $color-white;
             letter-spacing: 0.125rem;
             border-radius: 3px;
+        }
+        @include laptopM {
+            margin: 6px auto;
         }
 
     }
