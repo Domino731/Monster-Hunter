@@ -29,6 +29,11 @@ $desktopM: 1919px;
       @content;
     }
 }
+@mixin laptopS {
+  @media (max-width: $laptopS) {
+    @content;
+  }
+}
 
 @mixin tablet {
     @media (max-width: $tablet) {

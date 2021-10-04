@@ -36,6 +36,9 @@
         @include laptopL {
             font-size: 37px;
         }
+        @include laptopS {
+            font-size: 31px;
+        }
     }
     &__element{
         height: 66px;
@@ -200,6 +203,12 @@
             bottom: 7px;
             height: 51px;
             width: 51px;
+        }
+        @include laptopS {
+            right: 5px;
+            bottom: 5px;
+            height: 42px;
+            width: 42px;
         }
     }
     &__deleteCode{

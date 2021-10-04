@@ -12,6 +12,9 @@ body {
     @include laptopL {
         font-size: 12px;
     }
+    @include laptopS {
+        font-size: 10px;
+    }
 }
 * {
     box-sizing: border-box;

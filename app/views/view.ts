@@ -291,7 +291,7 @@ export class View {
             this.initScripts();
          })
          .then(()=> {
-         //   this.removeLoading();
+           this.removeLoading();
          })
          .catch(err => console.log(err))
 
