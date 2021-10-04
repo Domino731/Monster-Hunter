@@ -74,6 +74,7 @@
         }
         @include laptopS {
             width: 297px;
+            border:  2px solid $color-gold;
         }
     }
     &__status {

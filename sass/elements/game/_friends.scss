@@ -3,12 +3,15 @@
     background-image: url("/images/background_friends.jpg");
     background-size: 100% 100%;
     display: flex;
-    .searchFriend__input{
-        @include desktopS{
+    .searchFriend__input {
+        @include desktopS {
             width: 353px;
         }
-        @include desktopS{
+        @include desktopS {
             width: 290px;
+        }
+        @include laptopS {
+            width: 222px;
         }
     }
     &__itemWrapper {
@@ -35,6 +38,10 @@
         }
         @include laptopM {
             height: 33px;
+        }
+        @include laptopS {
+            height: 27px;
+            padding: 4px;
         }
     }
     &__searchWrapper {
@@ -73,6 +80,9 @@
         height: 100%;
         margin-right: 53px;
         position: relative;
+        @include laptopS {
+            margin-right: -4px;
+        }
     }
     &__settingsIcon {
         height: 100%;
@@ -81,6 +91,9 @@
         margin-right: 10px;
         &:hover {
             cursor: pointer;
+        }
+        @include laptopS {
+            margin-right: 6px;
         }
     }
     &__settingsTitle {
@@ -101,18 +114,13 @@
         background: $color-gray-dark;
         border: 3px solid #e80054;
         z-index: 3;
-        @include desktopS {
-            top: 55px;
-            right: 62px;
-        }
-        @include laptopL {
-            width: 209px;
-            padding: 6px;
 
-        }
-        @include laptopM {
-            top: 49px;
-            right: 48px;
+        &:last-child {
+            @include laptopS {
+                width: 232px;
+                border: 2px solid #ffdc00;
+                right: 14px;
+            }
         }
         &::after {
             content: "";
@@ -128,13 +136,13 @@
             z-index: 2;
             @include desktopM {
                 width: 26px;
-                height: 26px; 
+                height: 26px;
                 top: -18px;
                 right: -18px;
             }
             @include desktopM {
                 width: 21px;
-                height: 21px; 
+                height: 21px;
                 top: -15px;
                 right: -15px;
             }
@@ -143,6 +151,13 @@
                 height: 17px;
                 top: -13px;
                 right: -13px;
+            }
+            @include laptopS {
+                border: 2px solid $color-gray-dark;
+                width: 14px;
+                height: 14px;
+                top: -10px;
+                right: -10px;
             }
         }
 
@@ -164,11 +179,33 @@
                 top: 47px;
                 right: 20px;
             }
+            @include laptopS {
+                border: 2px solid #ffdc00;
+            }
         }
+        @include desktopS {
+            top: 55px;
+            right: 62px;
+        }
+        @include laptopL {
+            width: 209px;
+            padding: 6px;
+        }
+        @include laptopM {
+            top: 49px;
+            right: 48px;
+        }
+
         @include desktopM {
-            padding: 9px;  
+            padding: 9px;
         }
-      
+        @include laptopS {
+            width: 159px;
+            padding: 5px;
+            top: 38px;
+            right: 39px;
+            border: 2px solid #e80054;
+        }
     }
     &__list {
         box-sizing: border-box;
@@ -180,12 +217,16 @@
         &::-webkit-scrollbar {
             width: 0;
         }
-        @include desktopS{
+        @include desktopS {
             height: calc(100% - 40px);
             padding: 10px 0;
         }
         @include laptopL {
-            padding:  7px 0;
+            padding: 7px 0;
+        }
+        @include laptopS {
+            height: calc(100% - 27px);
+            padding: 3px 0;
         }
     }
     &__item {
@@ -199,7 +240,7 @@
             width: 50%;
         }
         @include desktopM {
-           height: 365px ;
+            height: 365px;
         }
         @include desktopS {
             height: 330px;
@@ -209,6 +250,9 @@
         }
         @include laptopM {
             height: 240px;
+        }
+        @include laptopS {
+            height: 280px;
         }
     }
 }
@@ -223,7 +267,7 @@
     padding-top: 10px;
     transition: 0.2s;
     overflow: hidden;
-    @include laptopL{
+    @include laptopL {
         padding-top: 7px;
     }
     @include laptopM {
@@ -244,18 +288,20 @@
         justify-content: center;
         align-items: flex-end;
         @include desktopM {
-            height: 255px ;
-         }
-         @include desktopS {
-            height: 224px ;
-         }
-         @include laptopL{
-             height: 190px;
-         }
-         @include laptopM {
-             height: 160px;
-         }
-         
+            height: 255px;
+        }
+        @include desktopS {
+            height: 224px;
+        }
+        @include laptopL {
+            height: 190px;
+        }
+        @include laptopM {
+            height: 160px;
+        }
+        @include laptopS {
+            height: 193px;
+        }
     }
     &__portrait {
         width: 50%;
@@ -275,7 +321,10 @@
             margin-bottom: 23px;
             width: 46%;
         }
-        
+        @include laptopS {
+            margin-bottom: 28px;
+            width: 52%;
+        }
     }
     &__name {
         margin-top: 6px;
@@ -286,10 +335,13 @@
         color: $color-white;
         @include desktopM {
             padding: 0.25rem 0;
-         }
-         @include laptopM {
-          margin-top: 2px;
-         }
+        }
+        @include laptopM {
+            margin-top: 2px;
+        }
+        @include laptopS {
+            margin-top: 6px;
+        }
     }
     &__levelWrapper {
         display: flex;
@@ -307,14 +359,17 @@
         @include desktopM {
             height: 45px;
             font-size: 1.375rem;
-         }
-         @include laptopL {
-             height: 36px;
-             padding: 2px 0;
-         }
-         @include laptopM {
-             height: 30px;
-         }
+        }
+        @include laptopL {
+            height: 36px;
+            padding: 2px 0;
+        }
+        @include laptopM {
+            height: 30px;
+        }
+        @include laptopS {
+            height: 36px;
+        }
     }
     &__actionBtn {
         display: flex;
@@ -331,13 +386,13 @@
         &-profile {
             text-shadow: 0.125rem 0.125rem #e80054;
             @include laptopL {
-              //  text-shadow: 0.065rem 0.065rem #e80054;
+                //  text-shadow: 0.065rem 0.065rem #e80054;
             }
         }
         &-chat {
             text-shadow: 0.125rem 0.125rem #fdd33a;
             @include laptopL {
-               // text-shadow:  0.125rem 0.095rem #fdd33a;
+                // text-shadow:  0.125rem 0.095rem #fdd33a;
             }
         }
     }
@@ -350,11 +405,14 @@
         @include desktopM {
             height: 32px;
         }
-        @include laptopL{
+        @include laptopL {
             height: 27px;
         }
         @include laptopM {
             height: 22px;
+        }
+        @include laptopS {
+            height: 27px;
         }
     }
 }
@@ -397,11 +455,14 @@
     input:checked ~ i {
         animation: 0.3s 0.3s an__friends_checkbox_check forwards;
     }
+    @include laptopS {
+        height: 24px;
+    }
 }
 #friends_branch {
     border-left: 6px solid $color-gray-dark;
     overflow: auto;
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
         width: 0;
     }
     @include desktopM {
@@ -485,4 +546,3 @@
         border: 3px solid #3a86ff;
     }
 }
-

@@ -18,6 +18,9 @@
         @include laptopM{
             height: 27px;
         }
+        @include laptopS {
+            height: 21px;
+        }
     }
     &__friendNick {
         font-size: 1.375rem;
@@ -50,10 +53,14 @@
             width: 3px;
         }
         &::-webkit-scrollbar-thumb {
-            background: $color-gold;
+            background: $color-red;
         }
         @include desktopS {
             height: calc(100% - 67px);
+        }
+        @include laptopS {
+            padding-top: 6px;
+            height: calc(100% - 51px);
         }
        
     }
@@ -67,6 +74,9 @@
             border-radius: 0 0  12px 12px;
             height: 40px;
             border-top: 3px solid $color-blue;
+        }
+        @include laptopS {
+            height: 33px;
         }
     }
     &__emojiIcon {
@@ -87,6 +97,9 @@
                 height: 75%;
             }
         }
+        @include desktopS {
+            border-right: 3px solid $color-blue;
+        }
     }
     &__form {
         width: 90%;
@@ -100,6 +113,9 @@
         width: auto;
         object-fit: cover;
         z-index: 1;
+        @include laptopS {
+            margin-left: 10px;
+        }
     }
     &__messageWrapper {
         margin-left: -19px;
@@ -142,6 +158,13 @@
             min-height: 100%;
             height: auto;
         }
+        @include desktopS {
+            border-radius: 16px;
+        }
+        @include laptopS {
+            padding: 1px 19px;
+            border-radius: 12px;
+        }
     }
     &__btn {
         height: 27px;
@@ -164,6 +187,9 @@
         }
         @include desktopS {
             height: 22px;
+        }
+        @include laptopS {
+            height: 19px;
         }
     }
     &__emojiContainer {
@@ -202,6 +228,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         img {
             height: auto;
             width: 71%;
@@ -215,6 +242,10 @@
         }
         @include laptopM {
             height: 47px;
+        }
+        @include laptopS {
+            height: 38px;
+            border: 2px solid $color-gray_dark;
         }
     }
     &__date {
