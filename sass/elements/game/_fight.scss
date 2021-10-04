@@ -35,12 +35,18 @@
             border-radius: 16px;
             padding: 6px;
         }
+        @include laptopM {
+            width: 247px;
+        }
     }
     &__characterImg {
         width: 100%;
         height: auto;
         object-fit: cover;
         margin-bottom: 15px;
+        @include laptopM {
+            margin-bottom: 7px;
+        }
     }
     &__healthBar {
         width: 100%;
@@ -54,6 +60,10 @@
         @include desktopS{
             border: 4px solid $color-gray_dark;
             height: 36px;
+        }
+        @include laptopM {
+            height: 33px;
+            border: 3px solid $color-gray_dark;
         }
     }
     &__healthPoints {
@@ -97,6 +107,9 @@
                 white-space: nowrap;
             }
         }
+        @include laptopM {
+            margin-top: 7px;
+        }
     }
     &__weaponWrapper {
         z-index: 10;
@@ -109,7 +122,11 @@
         &-an{
            animation: 1.5s an__sword_attack forwards;
         }
-       
+       @include laptopM {
+           top: 120px;
+           width: 170px;
+           height: 170px;
+       }
     }
     &__explosion {
         transform: scale(0);
@@ -137,6 +154,7 @@
         &-an{
             animation: 0.5s 1s an__sword_attack_shrink forwards;
         }
+      
     }
 
 
@@ -167,6 +185,9 @@
         }
         @include laptopL {
             width: 268px;
+        }
+        @include laptopM {
+            width: 228px;
         }
     }
     &__summaryTitle{
@@ -244,7 +265,7 @@
 
 
 .monster{
-   
+ 
     &-an{
         animation: 0.8s an__monster_attack forwards;
         @include desktopM {
@@ -255,6 +276,9 @@
         }
         @include laptopL {
             animation: 0.8s  an__monster_attack-laptopL forwards;
+        }
+        @include laptopM {
+            animation: 0.8s  an__monster_attack-laptopM forwards;
         }
     }
     &__explosionWrapper{
@@ -304,6 +328,9 @@
         @include laptopL {
             animation: 1.5s an__sword_attack-laptopL forwards;
         }
+        @include laptopM {
+            animation: 1.5s an__sword_attack-laptopM forwards;
+        }
     }
 
 }
@@ -339,7 +366,11 @@
         transform: translateX(-440px);
     }
 }
-
+@keyframes an__monster_attack-laptopM{
+    100% {
+        transform: translateX(-460px);
+    }
+}
 
 // user attack
 @keyframes an__sword_attack {
@@ -375,6 +406,14 @@
     }
 }
 
+@keyframes an__sword_attack-laptopM {
+    30%{
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(540px, 0%)  scale(100%);
+    }
+}
 
 
 @keyframes an__attack_explosion {
