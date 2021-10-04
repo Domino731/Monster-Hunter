@@ -51,14 +51,44 @@
     }
     &__itemsList {
         margin-bottom: 57px;
+
+        @include laptopS {
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-evenly;
+            position: relative;
+            &::after {
+                content: '';
+                display: block;
+                width: 4px;
+                height: 100%;
+                position: absolute;
+                left: calc(50% - 2px);
+                background-color: #343a40;
+            }
+        }
     }
 
     &__shopRow {
         display: flex;
         justify-content: space-evenly;
+
         height: 50%;
         &:last-child {
             margin-top: 10px;
+            @include laptopS {
+                margin-top: 0;
+               
+            }
+        }
+      
+      
+
+        @include laptopS {
+            height: 354px;
+            flex-direction: column;
+            justify-content: space-between;
+            
         }
     }
     &__shopFrame {
@@ -85,6 +115,10 @@
             width: 135px;
             height: 133px;
         }
+        @include laptopS {
+            width: 154px;
+            height: 110px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -102,6 +136,9 @@
             width: auto;
             height: 74%;
             object-fit: cover;
+            @include laptopS {
+                height: 140%;
+            }
         }
 
         &-wizard {
@@ -155,12 +192,13 @@
                 width: 143px;
                 right: -142px;
                 top: 18px;
-                clip-path: polygon(100% 33%, 0 61%, 0 100%);
+
             }
             @include laptopM {
                 width: 156px;
                 right: -118px;
-                top: 28px;
+                top: 0;
+                transform: rotate(-8deg);
             }
         }
     }
@@ -260,6 +298,9 @@
             @include laptopM {
                 border-bottom: 5px solid $color-gold;
             }
+            @include laptopS {
+                border-bottom: 4px solid $color-gold;
+            }
         }
         @include desktopM {
             border-bottom: 7px solid $color-gold;
@@ -270,6 +311,11 @@
             border-bottom: 5px solid $color-gold;
             height: 39px;
             font-size: 11px;
+        }
+        @include laptopS{
+            border-bottom: 4px solid $color-gold;
+            height: 36px;
+            font-size: 10px;
         }
     }
     &__deliveryTitle {
