@@ -24,6 +24,11 @@
             height: 56px;
             font-size: 31px;
         }
+        @include laptopM {
+            height: 39px;
+            font-size: 26px;
+            margin-top: 5px;
+        }
     }
     &__list {
         margin-top: 10px;
