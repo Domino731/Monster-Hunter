@@ -1,0 +1,650 @@
+.profile__backpackLabel {
+    &-1 {
+        transform: translate(-1px, -9px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(-1px, -11px);
+        }
+    }
+    &-2 {
+        transform: translate(151px, -9px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(114px, -11px);
+        }
+        @include desktopS {
+            transform: translate(100px, -11px);
+        }
+        @include laptopM {
+            transform: translate(92px, -11px);
+        }
+        @include laptopS {
+            transform: translate(72px, -11px);
+        }
+    }
+    &-3 {
+        transform: translate(215px, -9px);
+        &::after {
+            left: calc(50% - 15px);
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            @include laptopS {
+                left: calc(50% - 10px);
+            }
+        }
+        @include desktopM {
+            transform: translate(153px, -11px);
+        }
+        @include desktopS {
+            transform: translate(120px, -11px);
+        }
+        @include laptopL {
+            transform: translate(142px, -11px);
+        }
+        @include laptopM {
+            transform: translate(133px, -11px);
+        }
+        @include laptopS {
+            transform: translate(98px, -11px);
+        }
+    }
+    &-4 {
+        transform: translate(262px, -9px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(186px, -11px);
+        }
+        @include desktopS {
+            transform: translate(137px, -11px);
+        }
+        @include laptopL {
+            transform: translate(179px, -11px);
+        }
+        @include laptopM {
+            transform: translate(167px, -11px);
+        }
+        @include laptopS {
+            transform: translate(124px, -11px);
+        }
+    }
+    &-5 {
+        transform: translate(411px, -9px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(300px, -11px);
+        }
+        @include desktopS {
+            transform: translate(236px, -11px);
+        }
+        @include laptopL {
+            transform: translate(275px, -11px);
+        }
+        @include laptopM {
+            transform: translate(253px, -11px);
+        }
+        @include laptopS {
+            transform: translate(193px, -11px);
+        }
+    }
+
+    &-6 {
+        transform: translate(-1px, 134px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(-1px, 110px);
+        }
+        @include desktopS {
+            transform: translate(-1px, 95px);
+        }
+        @include laptopL {
+            transform: translate(-1px, 90px);
+        }
+        @include laptopM {
+            transform: translate(-1px, 85px);
+        }
+        @include desktopM {
+            transform: translate(-1px, 65px);
+        }
+    }
+    &-7 {
+        transform: translate(151px, 134px);
+        &::after {
+            left: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(114px, 110px);
+        }
+        @include desktopS {
+            transform: translate(100px, 95px);
+        }
+        @include laptopL {
+            transform: translate(100px, 90px);
+        }
+        @include laptopM {
+            transform: translate(92px, 85px);
+        }
+        @include laptopS {
+            transform: translate(72px, 65px);
+        }
+    }
+    &-8 {
+        transform: translate(215px, 134px);
+        &::after {
+            left: calc(50% - 15px);
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            @include laptopS {
+                left: calc(50% - 10px);
+            }
+        }
+        @include desktopM {
+            transform: translate(153px, 110px);
+        }
+        @include desktopS {
+            transform: translate(120px, 95px);
+        }
+        @include laptopL {
+            transform: translate(142px, 90px);
+        }
+        @include laptopM {
+            transform: translate(133px, 85px);
+        }
+        @include laptopS {
+            transform: translate(98px, 65px);
+        }
+    }
+    &-9 {
+        transform: translate(262px, 134px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(186px, 110px);
+        }
+        @include desktopS {
+            transform: translate(137px, 95px);
+        }
+        @include laptopL {
+            transform: translate(179px, 90px);
+        }
+        @include laptopM {
+            transform: translate(167px, 85px);
+        }
+        @include laptopS {
+            transform: translate(124px, 65px);
+        }
+    }
+    &-10 {
+        transform: translate(411px, 134px);
+        &::after {
+            right: 28px;
+            top: -26px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        @include desktopM {
+            transform: translate(300px, 110px);
+        }
+        @include desktopS {
+            transform: translate(236px, 95px);
+        }
+        @include laptopL {
+            transform: translate(275px, 90px);
+        }
+        @include laptopM {
+            transform: translate(253px, 85px);
+        }
+        @include laptopS {
+            transform: translate(193px, 65px);
+        }
+    }
+
+    &-1,
+    &-2,
+    &-3,
+    &-4,
+    &-5,
+    &-6,
+    &-7,
+    &-8,
+    &-9,
+    &-10 {
+        &::after {
+            @include laptopL {
+                top: -23px;
+            }
+            @include laptopS {
+                top: -17px;
+            }
+        }
+    }
+}
+.potion__label {
+    padding: 10px;
+    border-radius: 18px;
+    width: 280px;
+    background-color: $color-gray_dark;
+    position: absolute;
+
+    &-1 {
+        transform: translate(258px, -100%);
+        @include desktopM {
+            transform: translate(170px, -100%);
+        }
+        @include desktopS {
+            transform: translate(125px, -100%);
+        }
+        @include laptopL {
+            transform: translate(155px, -100%);
+        }
+        @include laptopM {
+            transform: translate(140px, -100%);
+        }
+
+        @include laptopS {
+            transform: translate(117px, -100%);
+        }
+    }
+    &-2 {
+        transform: translate(454px, -100%);
+        @include desktopM {
+            transform: translate(325px, -100%);
+        }
+        @include desktopS {
+            transform: translate(264px, -100%);
+        }
+        @include laptopL {
+            transform: translate(284px, -100%);
+        }
+        @include laptopM {
+            transform: translate(264px, -100%);
+        }
+        @include laptopS {
+            transform: translate(217px, -100%);
+        }
+    }
+    &::after {
+        width: 30px;
+        height: 30px;
+        content: "";
+        bottom: -30px;
+        position: absolute;
+        display: block;
+        background: $color-gray_dark;
+        right: 28px;
+        bottom: -26px;
+        clip-path: polygon(50% 100%, 0 0, 100% 0);
+        @include laptopL {
+            width: 24px;
+            height: 24px;
+            bottom: -23px;
+        }
+        @include laptopS {
+            width: 18px;
+            height: 18px;
+            bottom: -18px;
+        }
+    }
+    @include laptopL {
+        width: 225px;
+        padding: 6px;
+        border-radius: 16px;
+    }
+    @include laptopS {
+        width: 180px;
+        padding: 4px;
+        border-radius: 10px;
+    }
+}
+
+.profile__itemSpecs {
+    &-backpackSlot1 {
+        transform: translate(-1px, -100%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+    }
+    &-backpackSlot2 {
+        transform: translate(151px, -96%);
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            transform: translate(114px, -96%);
+        }
+        @include desktopS {
+            transform: translate(100px, -96%);
+        }
+        @include laptopM {
+            transform: translate(92px, -96%);
+        }
+        @include laptopS {
+            transform: translate(72px, -96%);
+        }
+    }
+    &-backpackSlot3 {
+        transform: translate(215px, -96%);
+        &::after {
+            left: 154px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            transform: translate(153px, -96%);
+        }
+        @include desktopS {
+            transform: translate(120px, -96%);
+        }
+        @include laptopL {
+            transform: translate(142px, -96%);
+        }
+        @include laptopM {
+            transform: translate(133px, -96%);
+        }
+        @include laptopS {
+            transform: translate(98px, -96%);
+        }
+    }
+    &-backpackSlot4 {
+        transform: translate(260px, -96%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            transform: translate(186px, -96%);
+        }
+        @include desktopS {
+            transform: translate(137px, -96%);
+        }
+        @include laptopL {
+            transform: translate(179px, -96%);
+        }
+        @include laptopM {
+            transform: translate(167px, -96%);
+        }
+        @include laptopS {
+            transform: translate(124px, -96%);
+        }
+    }
+    &-backpackSlot5 {
+        transform: translate(414px, -96%);
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            transform: translate(300px, -96%);
+        }
+        @include desktopS {
+            transform: translate(236px, -96%);
+        }
+        @include laptopL {
+            transform: translate(275px, -96%);
+        }
+        @include laptopM {
+            transform: translate(253px, -96%);
+        }
+        @include laptopS {
+            transform: translate(193px, -96%);
+        }
+    }
+
+    &-backpackSlot6 {
+        transform: translate(-1px, -100%);
+        margin-top: 160px;
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            transform: translate(-1px, -100%);
+        }
+        @include desktopS {
+            transform: translate(-1px, -100%);
+        }
+        @include laptopL {
+            transform: translate(-1px, -100%);
+        }
+        @include laptopM {
+            transform: translate(-1px, -100%);
+        }
+        @include desktopM {
+            transform: translate(-1px, -100%);
+        }
+    }
+    &-backpackSlot7 {
+        transform: translate(151px, -100%);
+        margin-top: 160px;
+        &::after {
+            left: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            margin-top: 134px;
+        }
+        @include desktopM {
+            transform: translate(114px, -100%);
+        }
+        @include desktopS {
+            transform: translate(100px, -100%);
+        }
+        @include laptopL {
+            transform: translate(100px, -100%);
+        }
+        @include laptopM {
+            transform: translate(92px, -100%);
+        }
+        @include laptopS {
+            transform: translate(72px, -100%);
+        }
+    }
+    &-backpackSlot8 {
+        transform: translate(215px, -100%);
+        margin-top: 160px;
+        &::after {
+            left: 154px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            margin-top: 134px;
+        }
+        @include desktopM {
+            transform: translate(153px, -100%);
+        }
+        @include desktopS {
+            transform: translate(120px, -100%);
+        }
+        @include laptopL {
+            transform: translate(142px, -100%);
+        }
+        @include laptopM {
+            transform: translate(133px, -100%);
+        }
+        @include laptopS {
+            transform: translate(98px, -100%);
+        }
+    }
+    &-backpackSlot9 {
+        transform: translate(260px, -100%);
+        margin-top: 160px;
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            margin-top: 134px;
+        }
+        @include desktopM {
+            transform: translate(186px, -100%);
+        }
+        @include desktopS {
+            transform: translate(137px, -100%);
+        }
+        @include laptopL {
+            transform: translate(179px, -100%);
+        }
+        @include laptopM {
+            transform: translate(167px, -100%);
+        }
+        @include laptopS {
+            transform: translate(124px, -100%);
+        }
+    }
+    &-backpackSlot10 {
+        transform: translate(414px, -100%);
+        margin-top: 160px;
+        &::after {
+            right: 28px;
+            bottom: -26px;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+        @include desktopM {
+            margin-top: 134px;
+        }
+        @include desktopM {
+            transform: translate(300px, -100%);
+        }
+        @include desktopS {
+            transform: translate(236px, -100%);
+        }
+        @include laptopL {
+            transform: translate(275px, -100%);
+        }
+        @include laptopM {
+            transform: translate(253px, -100%);
+        }
+        @include laptopS {
+            transform: translate(193px, -100%);
+        }
+    }
+}
+.profile__itemSpecs {
+    &-backpackSlot6,
+    &-backpackSlot7,
+    &-backpackSlot8,
+    &-backpackSlot9,
+    &-backpackSlot10 {
+        @include desktopM {
+            margin-top: 134px;
+        }
+        @include desktopS {
+            margin-top: 125px;
+        }
+        @include laptopL {
+            margin-top: 114px;
+        }
+        @include laptopM {
+            margin-top: 110px;
+        }
+        @include laptopS {
+            margin-top: 86px;
+        }
+    }
+    &-backpackSlot1,
+    &-backpackSlot2,
+    &-backpackSlot3,
+    &-backpackSlot4,
+    &-backpackSlot5,
+    &-backpackSlot6,
+    &-backpackSlot7,
+    &-backpackSlot8,
+    &-backpackSlot9,
+    &-backpackSlot10 {
+        @include laptopL {
+            &::after {
+                bottom: -22px;
+            }
+        }
+    }
+}
+
+#searched_user_root,
+#friends_branch {
+    padding: 10px;
+    .profile__description {
+        z-index: 0;
+    }
+    .potion__label-1 {
+        transform: translate(156px, -100%);
+        @include desktopM {
+            transform: translate(91px, -100%);
+        }
+        @include desktopS {
+            transform: translate(57px, -100%);
+        }
+        @include laptopL {
+            transform: translate(88px, -100%);
+        }
+        @include laptopM {
+            transform: translate(77px, -100%);
+        }
+        @include laptopS {
+            transform: translate(73px, -100%);
+        }
+    }
+    .potion__label-2 {
+        @include laptopL {
+            transform: translate(267px, -100%);
+        }
+        @include laptopM {
+            transform: translate(252px, -100%);
+        }
+        @include laptopS {
+            transform: translate(200px, -100%);
+        }
+    }
+    .profile__portraitImg {
+        @include desktopM {
+            margin-top: 25px;
+        }
+        @include desktopS {
+            margin-top: 45px;
+        }
+        @include laptopL {
+            margin-top: 29px;
+        }
+        @include laptopM {
+            margin-top: 35px;
+        }
+        @include laptopS {
+            margin-top: 32px;
+        }
+    }
+    @include laptopL {
+        padding: 6px;
+    }
+}

@@ -770,28 +770,28 @@ export class Blacksmith extends View {
 
      // blacksmith item label
      //const marketItem = this.userData.shop.blacksmith[0]
-     const marketItem = helmetsData[12]
-      const currentItem = this.userData.equipmentItems[0]
-             // set the item label
-             this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+   //   const marketItem = helmetsData[12]
+   //    const currentItem = this.userData.equipmentItems[0]
+   //           // set the item label
+   //           this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
              
 
-             // show the item label
-             this.dom.itemLabel.classList.remove('disabled');
+   //           // show the item label
+   //           this.dom.itemLabel.classList.remove('disabled');
       // equipment
-       // const currentItem = helmetsData[12]
+        const currentItem = helmetsData[12]
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
       // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-gloves`)
       // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
       // this.dom.equipmentLabel.root.classList.remove('disabled')
       // backpack
-      // const equipmentItem =  helmetsData[12]
-      // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-      // this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot10`)
-      // this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-      // this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
-      // this.dom.backpackLabel.root.classList.remove('disabled')
+      const equipmentItem =  helmetsData[12]
+      this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+      this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot6`)
+      this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+      this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+      this.dom.backpackLabel.root.classList.remove('disabled')
    }
    initScripts() {
       this.setLastVisit();
