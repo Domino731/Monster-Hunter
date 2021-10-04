@@ -17,17 +17,15 @@
         align-items: flex-end;
     }
     &__characterImg {
-        width: 96%;
+        width: 100%;
         height: auto;
         object-fit: cover;
-        @include desktopM {
-            width: 88%;
-        }
+        
     }
     &__descriptionWrapper {
         display: flex;
         justify-content: center;
-        align-items: center;
+      
 
         grid-column: 1/1;
         grid-row: 2/-1;
@@ -47,9 +45,11 @@
         background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         position: relative;
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(4px);
         transition: 0.3s;
-        
+          &:hover {
+            backdrop-filter: blur(5px);
+        }
         @include desktopM {
             padding: 7px;
             
@@ -57,8 +57,13 @@
         @include desktopS{
             border-radius: 16px;
         }
-        &:hover {
-            backdrop-filter: blur(4px);
+      
+        @include laptopL { 
+            height: 241px;
+        }
+        @include laptopS {
+            height: 209px;
+            border-radius: 10px;
         }
     }
     &__title {
@@ -73,7 +78,10 @@
             font-size: 35px;
         }
         @include laptopM {
-            font-size: 28px;
+            font-size: 31px;
+        }
+        @include laptopS {
+            font-size: 24px;
         }
     }
     &__text {
