@@ -40,6 +40,9 @@
             @include laptopL {
                 height: 380px;
             }
+            @include laptopS {
+                height: 310px;
+            }
         }
         &-currentUser {
             @include desktopM {
@@ -106,6 +109,9 @@
         width: 60%;
         height: auto;
         object-fit: cover;
+        @include laptopS {
+            margin-top: 31px;
+        }
     }
     &__portraitActionBar {
         position: absolute;
@@ -433,6 +439,12 @@
         @include laptopL {
             height: 34px;
             font-size: 31px;
+        }
+        @include laptopS {
+            height: 29px;
+            font-size: 25px;
+            border: 3px solid $color-gray_dark;
+            margin: 5px auto;
         }
     }
     &__levelProgress {
@@ -1132,10 +1144,21 @@
             height: 24px;
             bottom: -23px;
         }
+        @include laptopS {
+            width: 18px;
+            height: 18px;
+            bottom: -18px;
+        }
     }
     @include laptopL {
         width: 225px;
         padding: 6px;
+        border-radius: 16px;
+    }
+    @include laptopS {
+        width: 180px;
+        padding: 4px;
+        border-radius: 10px;
     }
 }
 #searched_user_root,
@@ -1158,6 +1181,9 @@
         @include laptopM {
             transform: translate(77px, -100%);
         }
+        @include laptopS {
+            transform: translate(73px, -100%);
+        }
     }
     .potion__label-2{
         @include laptopL {
@@ -1165,6 +1191,9 @@
         }
         @include laptopM {
             transform: translate(252px, -100%);
+        }
+        @include laptopS {
+            transform: translate(200px, -100%);
         }
     }
     @include laptopL {
@@ -1186,6 +1215,9 @@
         @include laptopL {
             height: 95px;
         }
+        @include laptopS {
+            flex-direction: column;
+        }
     }
     &__statsTable {
         color: $color-white;
@@ -1206,6 +1238,13 @@
             font-size: 15px;
             border-radius: 13px;
         }
+        @include laptopS {
+            width: 100%;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+        
     }
     &__actionBar {
         box-sizing: border-box;
@@ -1225,6 +1264,10 @@
         @include laptopL {
             height: 32px;
             margin: 4px auto;
+        }
+        @include laptopS {
+            height: 26px;
+            margin: 5px auto;
         }
     }
     &__actionIcon {
@@ -1251,6 +1294,14 @@
         @include laptopL {
             padding-top: 4px;
         }
+        @include laptopS {
+            padding-top: 2px;
+        }
+    }
+    td:last-child{
+        @include laptopS {
+            padding-bottom: 3px;
+        }
     }
     td {
         padding-left: 10px;
@@ -1259,6 +1310,9 @@
         }
         @include laptopL {
             padding-left: 4px;
+        }
+        @include laptopS {
+            padding-left: 12px;
         }
     }
     tr {

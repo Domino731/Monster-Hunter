@@ -72,6 +72,9 @@
         @include laptopM {
             font-size: 1.363rem;
         }
+        @include laptopS {
+            width: 297px;
+        }
     }
     &__status {
         margin-left: 5px;
@@ -93,6 +96,9 @@
             @include laptopL {
                 right: -11px;
             }
+            @include laptopS {
+                right: -7px;
+            }
         }
         img {
             margin-left: -2px;
@@ -107,7 +113,9 @@
             width: 89%;
             height: 25px;
         }
-       
+        @include laptopS {
+            height: 21px;
+        }
     }
     &__nick {
         margin-left: 20px;
@@ -150,6 +158,9 @@
             left: -20px;
             z-index: 1;
             background: $color-green;
+            @include laptopS {
+                width: 41px;
+            }
         }
         @include desktopS {
             width: 88%;
@@ -159,6 +170,10 @@
         }
         @include  laptopM {
             width: 87%;
+        }
+        @include laptopS {
+            height: 21px;
+            width: 83%;
         }
     }
     &__level {
@@ -170,7 +185,6 @@
         margin-left: -2px;
         justify-content: center;
         align-items: center;
-        background: $color-green;
         color: $color-white;
         font-weight: 600;
         letter-spacing: 0.125rem;
@@ -178,6 +192,9 @@
         text-shadow: 0.125rem 0.125rem $color-gray_dark;
         position: relative;
         z-index: 1;
+        @include laptopS {
+            text-indent: -12px;
+        }
     }
     &__lastVisit {
         display: flex;
@@ -204,6 +221,9 @@
             @include laptopL {
                 left: -8px;
             }
+            @include laptopS {
+                left: -6px;
+            }
         }
         img {
             margin-left: 3px;
@@ -218,6 +238,10 @@
         }
         @include laptopL{
             height: 25px;
+        }
+        @include laptopS {
+            height: 21px;
+            margin-left: 5px;
         }
     }
 }
@@ -291,6 +315,9 @@
             }
             @include laptopL {
                 height: 32px;
+            }
+            @include laptopS{
+                height: 28px;
             }
         }
         td {
