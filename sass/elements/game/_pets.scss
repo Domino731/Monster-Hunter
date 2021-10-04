@@ -4,14 +4,18 @@
     height: 100%;
     background-size: 100% 100%;
     &__wrapper {
-        margin-top: 45px;
         display: flex;
+        align-items: center;
         justify-content: space-evenly;
+        height: calc(100% - 70px);
         @include desktopM {
-            margin-top: 31px;
+            height: calc(100% - 64px);
         }
         @include laptopM {
-            margin-top: 14px;
+            height: calc(100% - 55px);
+        }
+        @include laptopS {
+            height: calc(100% - 48px);
         }
     }
     &__userGoldWrapper {
@@ -30,6 +34,9 @@
         padding: 0.688rem;
         @include desktopS {
             border-radius: 16px;
+        }
+        @include laptopS {
+            border-radius:  10px;
         }
     }
     &__userGoldAmount {
@@ -85,6 +92,10 @@
         @include laptopM {
             height: 393px;
         }
+        @include laptopS {
+            border-radius: 10px;
+            height: 329px;
+        }
     }
     &__current {
         border: 8px solid $color-gold;
@@ -93,6 +104,9 @@
         }
         @include laptopM {
             border: 5px solid $color-gold;
+        }
+        @include laptopS {
+            border: 4px solid $color-gold;
         }
     }
     &__countdownWrapper {
@@ -120,6 +134,12 @@
             border-radius: 0 0 14px 14px;
             padding: 2px 0;
             bottom: -26px;
+        }
+        @include laptopS {
+            font-size: 18px;
+            border-radius: 0 0 12px 12px;
+            padding: 2px 0;
+            bottom: -20px;
         }
     }
     &__img {
@@ -236,7 +256,7 @@
             font-size: 1.25rem;
             border: none;
             margin-top: 0.813rem;
-            border-radius: 9px;
+            border-radius: 0.563rem;
             background: $color-gold;
             color: $color-gray-dark;
             font-weight: 700;
