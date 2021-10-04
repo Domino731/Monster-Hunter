@@ -22,8 +22,11 @@
         padding: 10px;
         background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
-        backdrop-filter: blur(2px);
-
+        backdrop-filter: blur(4px);
+        @include laptopS {
+          border-radius: 10px;
+          padding: 5px;
+        }
     }
     &__countdownWrapper{
         width: 100%;
