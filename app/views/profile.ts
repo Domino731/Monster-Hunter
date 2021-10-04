@@ -636,17 +636,17 @@ export class Profile extends View {
     rwd() {
         // equipment
         const currentItem = helmetsData[12]
-        this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-        this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-helmet`)
-        this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-        this.dom.equipmentLabel.root.classList.remove('disabled')
+        // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+        // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-helmet`)
+        // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+        // this.dom.equipmentLabel.root.classList.remove('disabled')
         // backpack
-        //   const equipmentItem = this.userData.equipmentItems[0]
-        //   this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
-        //   this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${5}`)
-        //   this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-        //   this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
-        //   this.dom.backpackLabel.root.classList.remove('disabled')
+          const equipmentItem = this.userData.equipmentItems[0]
+          this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
+          this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${10}`)
+          this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+          this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+          this.dom.backpackLabel.root.classList.remove('disabled')
         // potions
         //     const firstPotion = potionsData[0]
         //     this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';

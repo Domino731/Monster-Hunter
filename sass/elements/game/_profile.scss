@@ -3,9 +3,9 @@
     display: flex;
     overflow: auto;
     height: 100%;
-   &::-webkit-scrollbar{
-       width: 0;
-   }
+    &::-webkit-scrollbar {
+        width: 0;
+    }
     &__item {
         overflow: auto;
         height: 100%;
@@ -33,6 +33,12 @@
         @include desktopM {
             border-bottom: 7px solid $color-gold;
         }
+        @include laptopL {
+            border-bottom: 5px solid $color-gold;
+        }
+        @include laptopS {
+            border-bottom: 4px solid $color-gold;
+        }
         &-specificUser {
             @include desktopM {
                 height: 436px;
@@ -52,7 +58,6 @@
                 height: 376px;
             }
             @include laptopM {
-
             }
             @include laptopS {
                 height: 330px;
@@ -112,8 +117,17 @@
         width: 60%;
         height: auto;
         object-fit: cover;
+        @include desktopS {
+            margin-top: 59px;
+        }
+        @include laptopL {
+            margin-top: 32px;
+        }
+        @include laptopM {
+            margin-top: 39px;
+        }
         @include laptopS {
-            margin-top: 31px;
+            margin-top: 44px;
         }
     }
     &__portraitActionBar {
@@ -143,12 +157,20 @@
             height: 21px;
             width: 26px;
         }
+        @include laptopS {
+            height: 19px;
+            width: 22px;
+        }
     }
     &__portraitActionIcon {
         width: 27px;
         height: auto;
         object-fit: cover;
         margin: 0 9px;
+        @include laptopS {
+            width: 21px;
+            margin: 2px 5px;
+        }
     }
 
     &__info {
@@ -169,19 +191,29 @@
         @include laptopL {
             border-radius: 15px;
             width: 250px;
-             padding: 6px;
+            padding: 6px;
         }
-
+        @include laptopS {
+            border-radius: 10px;
+            width: 208px;
+            padding: 6px;
+        }
         &-common {
             border: 4px solid $color-blue;
             @include laptopL {
                 border: 3px solid $color-blue;
+            }
+            @include laptopS {
+                border: 2px solid $color-blue;
             }
         }
         &-legendary {
             border: 4px solid $color-gold;
             @include laptopL {
                 border: 3px solid $color-gold;
+            }
+            @include laptopS {
+                border: 2px solid $color-gold;
             }
         }
         &::after {
@@ -194,11 +226,13 @@
             @include laptopL {
                 width: 24px;
                 height: 24px;
-                
+            }
+            @include laptopS {
+                width: 18px;
+                height: 18px;
             }
         }
 
-     
         &-helmet {
             top: 0;
             left: 189px;
@@ -207,7 +241,10 @@
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
                 @include laptopL {
-                    left: -24px;
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
                 }
             }
             @include desktopM {
@@ -216,7 +253,9 @@
             @include laptopL {
                 left: 135px;
             }
-           
+            @include laptopS {
+                left: 100px;
+            }
         }
         &-weapon {
             top: 0;
@@ -226,7 +265,10 @@
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
                 @include laptopL {
-                    right: -24px;
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
                 }
             }
             @include desktopM {
@@ -234,6 +276,9 @@
             }
             @include laptopL {
                 right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
             }
         }
 
@@ -245,7 +290,10 @@
                 top: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
                 @include laptopL {
-                    left: -24px;
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
                 }
             }
             @include desktopM {
@@ -253,6 +301,9 @@
             }
             @include laptopL {
                 left: 135px;
+            }
+            @include laptopS {
+                left: 100px;
             }
         }
 
@@ -264,7 +315,13 @@
                 top: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
                 @include laptopL {
-                    right: -24px;
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
+                }
+                @include laptopS {
+                    right: -17px;
                 }
             }
             @include desktopM {
@@ -272,6 +329,9 @@
             }
             @include laptopL {
                 right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
             }
         }
 
@@ -283,7 +343,10 @@
                 bottom: 21px;
                 clip-path: polygon(0 50%, 100% 100%, 100% 0);
                 @include laptopL {
-                    left: -24px;
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
                 }
             }
             @include desktopM {
@@ -291,6 +354,9 @@
             }
             @include laptopL {
                 left: 135px;
+            }
+            @include laptopS {
+                left: 100px;
             }
         }
 
@@ -302,7 +368,10 @@
                 bottom: 21px;
                 clip-path: polygon(100% 50%, 0 100%, 0 0);
                 @include laptopL {
-                    right: -24px;
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
                 }
             }
             @include desktopM {
@@ -310,6 +379,9 @@
             }
             @include laptopL {
                 right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
             }
         }
         .itemTitle {
@@ -365,8 +437,12 @@
             height: 25px;
             margin-bottom: 6px;
         }
+        @include laptopS {
+            height: 20px;
+            margin-bottom: 1px;
+        }
     }
-  &__equipmentItemSellWrapper {
+    &__equipmentItemSellWrapper {
         height: 30px;
         background: $color-white;
         border-radius: 18px;
@@ -403,7 +479,6 @@
         text-align: center;
     }
 
-  
     &__equipmentItemSellIcon {
         height: 100%;
         width: auto;
@@ -497,7 +572,6 @@
         border: 5px solid $color-red;
         border-radius: 8px;
         position: relative;
-
         background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(3px);
         padding: 20px;
@@ -514,6 +588,11 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-image: url("/images/profile_description_ribbon.png");
+            @include laptopS {
+                height: 38px;
+                width: 38px;
+                left: -22px;
+            }
         }
         &::after {
             content: "";
@@ -527,6 +606,11 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-image: url("/images/profile_description_ribbon.png");
+            @include laptopS {
+                height: 38px;
+                width: 38px;
+                right: -22px;
+            }
         }
 
         textarea {
@@ -546,6 +630,9 @@
             height: 34%;
             width: 93%;
             padding: 15px;
+        }
+        @include laptopS {
+            border: 3px solid $color-red;
         }
     }
 
@@ -815,8 +902,8 @@
         }
     }
     img {
-        width: 20px;
-        height: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
         object-fit: cover;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
@@ -827,6 +914,12 @@
     }
     @include laptopL {
         padding: 6px 0;
+    }
+    @include laptopM {
+        padding: 11px 0;
+    }
+    @include laptopS {
+        padding: 11px 0;
     }
 }
 .profile__generalLabelWrapper {
@@ -878,8 +971,15 @@
         background: $color-red;
         color: $color-white;
         border-radius: 8px;
-        @include laptopL{
+        @include laptopL {
             font-size: 18px;
+            padding: 2px 8px;
+            border-radius: 7px;
+        }
+        @include laptopS {
+            font-size: 15px;
+            padding: 1px 6px;
+            border-radius: 6px;
         }
     }
 }
@@ -1003,62 +1103,111 @@
 
 .profile__backpackLabel {
     &-1 {
-        transform: translate(-1px, 3px);
+        transform: translate(-1px, -9px);
         &::after {
             left: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(-1px, 3px);
+            transform: translate(-1px, -11px);
         }
     }
     &-2 {
-        transform: translate(151px, 3px);
+        transform: translate(151px, -9px);
         &::after {
             left: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(151px, 3px);
+            transform: translate(114px, -11px);
+        }
+        @include desktopS { 
+            transform: translate(100px, -11px);
+        }
+        @include laptopM {
+            transform: translate(92px, -11px);
+        }
+        @include laptopS {
+            transform: translate(72px, -11px);
         }
     }
     &-3 {
-        transform: translate(215px, 3px);
+        transform: translate(215px, -9px);
         &::after {
             left: calc(50% - 15px);
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            @include laptopS {
+                left: calc(50% - 10px);
+            }
         }
         @include desktopM {
-            transform: translate(153px, 3px);
+            transform: translate(153px, -11px);
+        }
+        @include desktopS { 
+            transform: translate(120px, -11px);
+        }
+        @include laptopL {
+            transform: translate(142px, -11px);
+        }
+        @include laptopM {
+            transform: translate(133px, -11px);
+        }
+        @include laptopS {
+            transform: translate(98px, -11px);
         }
     }
     &-4 {
-        transform: translate(262px, 3px);
+        transform: translate(262px, -9px);
         &::after {
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(171px, 3px);
+            transform: translate(186px, -11px);
+        }
+        @include desktopS {
+            transform: translate(137px, -11px);
+        }
+        @include laptopL {
+            transform: translate(179px, -11px);
+        }
+        @include laptopM {
+            transform: translate(167px, -11px);
+        }
+        @include laptopS {
+            transform: translate(124px, -11px);
         }
     }
     &-5 {
-        transform: translate(411px, 3px);
+        transform: translate(411px, -9px);
         &::after {
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(290px, 3px);
+            transform: translate(300px,-11px);
+        }
+        @include desktopS {
+            transform: translate(236px, -11px);
+        }
+        @include laptopL {
+            transform: translate(275px, -11px);
+        }
+        @include laptopM {
+            transform: translate(253px, -11px);
+        }
+        @include laptopS {
+            transform: translate(193px, -11px);
         }
     }
+
     &-6 {
-        transform: translate(-1px, 154px);
+        transform: translate(-1px, 134px);
         &::after {
             left: 28px;
             top: -26px;
@@ -1067,49 +1216,132 @@
         @include desktopM {
             transform: translate(-1px, 110px);
         }
+        @include desktopS {
+            transform: translate(-1px, 95px);
+        }
+        @include laptopL {
+            transform: translate(-1px, 90px);
+        }
+        @include laptopM {
+            transform: translate(-1px, 85px);
+        }
+        @include desktopM {
+            transform: translate(-1px, 65px);
+        }
     }
     &-7 {
-        transform: translate(151px, 154px);
+        transform: translate(151px, 134px);
         &::after {
             left: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(151px, 110px);
+            transform: translate(114px, 110px);
+        }
+        @include desktopS {
+            transform: translate(100px, 95px);
+        }
+        @include laptopL {   
+             transform: translate(100px, 90px);
+        }
+        @include laptopM {
+            transform: translate(92px, 85px);
+        }
+        @include laptopS {
+            transform: translate(72px, 65px);
         }
     }
     &-8 {
-        transform: translate(215px, 154px);
+        transform: translate(215px, 134px);
         &::after {
             left: calc(50% - 15px);
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            @include laptopS {
+                left: calc(50% - 10px);
+            }
         }
         @include desktopM {
             transform: translate(153px, 110px);
         }
+        @include desktopS {
+            transform: translate(120px, 95px);
+        }
+        @include laptopL {           
+                transform: translate(142px, 90px);
+        }
+        @include laptopM {
+            transform: translate(133px, 85px);
+        }
+        @include laptopS {
+            transform: translate(98px, 65px);
+        }
     }
     &-9 {
-        transform: translate(262px, 154px);
+        transform: translate(262px, 134px);
         &::after {
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(171px, 110px);
+            transform: translate(186px, 110px);
+        }
+        @include desktopS {
+            transform: translate(137px, 95px);
+        }
+        @include laptopL {
+            transform: translate(179px, 90px);
+        }
+        @include laptopM {
+            transform: translate(167px, 85px);
+        }
+        @include laptopS {
+            transform: translate(124px, 65px);
         }
     }
     &-10 {
-        transform: translate(411px, 154px);
+        transform: translate(411px, 134px);
         &::after {
             right: 28px;
             top: -26px;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         @include desktopM {
-            transform: translate(290px, 110px);
+            transform: translate(300px, 110px);
+        }
+        @include desktopS {
+            transform: translate(236px, 95px);
+        }
+        @include laptopL {
+            transform: translate(275px, 90px);
+        }
+        @include laptopM {
+            transform: translate(253px, 85px);
+        }
+        @include laptopS {
+            transform: translate(193px, 65px);
+        }
+    }
+
+    &-1,
+    &-2,
+    &-3,
+    &-4,
+    &-5,
+    &-6,
+    &-7,
+    &-8,
+    &-9,
+    &-10 {
+        &::after {
+            @include laptopL {
+                top: -23px;
+            }
+            @include laptopS {
+                top: -17px;
+            }
         }
     }
 }
@@ -1119,7 +1351,7 @@
     width: 280px;
     background-color: $color-gray_dark;
     position: absolute;
-    
+
     &-1 {
         transform: translate(258px, -100%);
         @include desktopM {
@@ -1133,6 +1365,10 @@
         }
         @include laptopM {
             transform: translate(140px, -100%);
+        }
+
+        @include laptopS {
+            transform: translate(117px, -100%);
         }
     }
     &-2 {
@@ -1148,6 +1384,9 @@
         }
         @include laptopM {
             transform: translate(264px, -100%);
+        }
+        @include laptopS {
+            transform: translate(217px, -100%);
         }
     }
     &::after {
@@ -1207,7 +1446,7 @@
             transform: translate(73px, -100%);
         }
     }
-    .potion__label-2{
+    .potion__label-2 {
         @include laptopL {
             transform: translate(267px, -100%);
         }
@@ -1216,6 +1455,23 @@
         }
         @include laptopS {
             transform: translate(200px, -100%);
+        }
+    }
+    .profile__portraitImg {
+        @include desktopM {
+            margin-top: 25px;
+        }
+        @include desktopS {
+            margin-top: 45px;
+        }
+        @include laptopL {
+            margin-top: 29px;
+        }
+        @include laptopM {
+            margin-top: 35px;
+        }
+        @include laptopS {
+            margin-top: 32px;
         }
     }
     @include laptopL {
@@ -1266,7 +1522,6 @@
             font-size: 14px;
             margin-bottom: 7px;
         }
-        
     }
     &__actionBar {
         box-sizing: border-box;
@@ -1320,7 +1575,7 @@
             padding-top: 2px;
         }
     }
-    td:last-child{
+    td:last-child {
         @include laptopS {
             padding-bottom: 3px;
         }
