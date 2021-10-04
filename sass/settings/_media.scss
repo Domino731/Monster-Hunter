@@ -9,6 +9,7 @@ $laptopM: 1335px;
 $laptopL: 1439px;
 $desktopS: 1599px;
 $desktopM: 1919px;
+
 @mixin desktopM {
   @media (max-width: $desktopM) {
     @content;
@@ -34,7 +35,11 @@ $desktopM: 1919px;
     @content;
   }
 }
-
+@mixin ipadPro {
+  @media (max-width: $laptopS) and (min-height: 1100px), (max-width: $tablet){
+    @content;
+  }
+}
 @mixin tablet {
     @media (max-width: $tablet) {
       @content;

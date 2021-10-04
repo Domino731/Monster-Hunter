@@ -589,6 +589,11 @@
                 bottom: -22px;
             }
         }
+        @include laptopS {
+            &::after {
+                bottom: -17px;
+            }
+        }
     }
 }
 

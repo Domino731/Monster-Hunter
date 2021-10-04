@@ -462,6 +462,9 @@
         @include laptopM {
             height: 25px;
         }
+        @include laptopS {
+            height: 20px;
+        }
     }
 
     &__actionName {
