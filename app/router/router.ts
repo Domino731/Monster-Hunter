@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Friends()
+    const developmentRender = new Guard()
     window.addEventListener("popstate", router);
 };
 

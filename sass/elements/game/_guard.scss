@@ -40,6 +40,9 @@
         @include laptopL {
             padding: 6px;
         }
+        @include laptopS {
+            border-radius: 10px;
+        }
     }
     &__kingWrapper {
         width: 35%;
@@ -68,6 +71,9 @@
         @include laptopM {
             font-size: 31px;
         }
+        @include laptopS{
+            font-size: 25px;
+        }
     }
     &__text {
         font-size: 1.25rem;
@@ -83,6 +89,9 @@
         }
         @include laptopM {
             margin-top: 17px;
+        }
+        @include laptopS {
+            margin-top: 9px;
         }
       
     }
@@ -320,13 +329,25 @@
                     width: 35px;
                     height: 35px;
                 }
+                @include laptopS {
+                    width: 30px;
+                    height: 30px;
+                    border: 2px solid #53433f;
+                }
             }
             @include desktopS {
                 line-height: 3.2rem;
             }
+            @include laptopS {
+                width: 3.3rem;
+                line-height: 3.8rem;
+            }
         }
         @include laptopM {
             margin-bottom: 61px;
+        }
+        @include laptopS {
+            margin-bottom: 50px;
         }
     }
 }

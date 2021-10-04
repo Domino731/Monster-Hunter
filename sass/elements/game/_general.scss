@@ -143,9 +143,16 @@
             color: $color-white;
             letter-spacing: 0.125rem;
             border-radius: 3px;
+            @include laptopS {
+                border-radius: 2px;
+            }
         }
         @include laptopM {
             margin: 6px auto;
+            border-radius: 7px;
+        }
+        @include laptopS {
+            border-radius: 5px;
         }
 
     }
