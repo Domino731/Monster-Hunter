@@ -50,7 +50,9 @@
         }
         @include laptopM {
             height: 47px;
+            margin-top: 8px;
         }
+
     }
     &__elementIcon{
         height: 100%;
