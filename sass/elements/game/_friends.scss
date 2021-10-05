@@ -249,7 +249,7 @@
         height: calc(100% - 47px);
         overflow: auto;
 
-        align-content: flex-start; /* NEW */
+        align-content: flex-start;
         &::-webkit-scrollbar {
             width: 0;
         }
