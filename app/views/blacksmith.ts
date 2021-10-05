@@ -767,20 +767,19 @@ export class Blacksmith extends View {
 
    // method for rwd works
    rwd(){
-
+   const currentItem = helmetsData[12]
+     const marketItem = helmetsData[12]
      // blacksmith item label
-     //const marketItem = this.userData.shop.blacksmith[0]
-   //   const marketItem = helmetsData[12]
-   //    const currentItem = this.userData.equipmentItems[0]
-   //           // set the item label
-   //           this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+
+             // set the item label
+             this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
              
 
-   //           // show the item label
-   //           this.dom.itemLabel.classList.remove('disabled');
-      // equipment
-        const currentItem = helmetsData[12]
+             // show the item label
+             this.dom.itemLabel.classList.remove('disabled');
+      //equipment
+     
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
       // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-gloves`)
       // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
