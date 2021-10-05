@@ -407,6 +407,9 @@
         @include laptopM {
             margin-top: 2px;
         }
+        @include ipadPro {
+            margin-top: 8px;
+        }
     }
     &__itemRarity {
         display: block;
@@ -455,6 +458,9 @@
         }
         @include laptopM {
             margin-top: 4px;
+        }
+        @include ipadPro {
+            margin-top: 9px;
         }
     }
     &__deliveryWrapper {

@@ -267,6 +267,9 @@
         @include laptopS {
             transform: translate(117px, -100%);
         }
+        @include ipadPro {
+            transform: translate(33px, -96%);
+        }
     }
     &-2 {
         transform: translate(454px, -100%);
@@ -284,6 +287,9 @@
         }
         @include laptopS {
             transform: translate(217px, -100%);
+        }
+        @include ipadPro {
+            transform: translate(160px, -96%);
         }
     }
     &::after {
@@ -319,8 +325,11 @@
         border-radius: 10px;
     }
     @include ipadPro {
-        width: 265px;
+        width: 336px;
+        padding: 10px;
+        border-radius: 20px;
     }
+    
 }
 
 .profile__itemSpecs {
@@ -661,4 +670,60 @@
     @include laptopL {
         padding: 6px;
     }
+
+    .potion__label-2, .potion__label-1 {
+        @include ipadPro {
+            padding: 10px;
+            border-radius: 20px;
+        }
+    }
 }
+
+// profile backpack -> ipad pro
+@include ipadPro {
+    .profile__backpackLabel {
+        &-1 {
+            transform: translate(3px, -10px);
+        
+        }
+        &-2 {
+            transform: translate(98px, -10px);
+      
+    
+        }
+        &-3 {
+            transform: translate(103px, -10px);
+       
+        }
+        &-4 {
+            transform: translate(112px, -10px);
+
+        }
+        &-5 {
+            transform: translate(200px, -10px);
+     
+        }
+    
+        &-6 {
+            transform: translate(3px, 75px);
+   
+        }
+        &-7 {
+            transform: translate(98px, 75px);
+    
+        }
+        &-8 {
+            transform: translate(103px, 75px);
+      
+        }
+        &-9 {
+            transform: translate(112px, 75px);
+        
+        }
+        &-10 {
+            transform: translate(200px, 75px);
+ 
+        }
+    }
+}
+// blacksmith backpack -> ipad pro
