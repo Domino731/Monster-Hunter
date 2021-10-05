@@ -767,7 +767,7 @@ export class Blacksmith extends View {
 
    // method for rwd works
    rwd(){
-   const currentItem = helmetsData[12]
+   const currentItem = helmetsData[1]
      const marketItem = helmetsData[12]
      // blacksmith item label
 
@@ -786,11 +786,11 @@ export class Blacksmith extends View {
       // this.dom.equipmentLabel.root.classList.remove('disabled')
       // backpack
       const equipmentItem =  helmetsData[12]
-      // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-      // this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot6`)
-      // this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-      // this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
-      // this.dom.backpackLabel.root.classList.remove('disabled')
+      this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+      this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot10`)
+      this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+      this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+      this.dom.backpackLabel.root.classList.remove('disabled')
    }
    initScripts() {
       this.setLastVisit();

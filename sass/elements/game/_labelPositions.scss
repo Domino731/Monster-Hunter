@@ -329,7 +329,6 @@
         padding: 10px;
         border-radius: 20px;
     }
-    
 }
 
 .profile__itemSpecs {
@@ -633,7 +632,7 @@
             transform: translate(73px, -100%);
         }
         @include ipadPro {
-            transform: translate(43px, -92%);
+            transform: translate(-5px, -92%);
         }
     }
     .potion__label-2 {
@@ -647,7 +646,7 @@
             transform: translate(200px, -100%);
         }
         @include ipadPro {
-            transform: translate(220px, -92%);
+            transform: translate(167px, -92%);
         }
     }
     .profile__portraitImg {
@@ -671,7 +670,8 @@
         padding: 6px;
     }
 
-    .potion__label-2, .potion__label-1 {
+    .potion__label-2,
+    .potion__label-1 {
         @include ipadPro {
             padding: 10px;
             border-radius: 20px;
@@ -684,46 +684,138 @@
     .profile__backpackLabel {
         &-1 {
             transform: translate(3px, -10px);
-        
         }
         &-2 {
             transform: translate(98px, -10px);
-      
-    
         }
         &-3 {
             transform: translate(103px, -10px);
-       
         }
         &-4 {
             transform: translate(112px, -10px);
-
         }
         &-5 {
             transform: translate(200px, -10px);
-     
         }
-    
+
         &-6 {
             transform: translate(3px, 75px);
-   
         }
         &-7 {
             transform: translate(98px, 75px);
-    
         }
         &-8 {
             transform: translate(103px, 75px);
-      
         }
         &-9 {
             transform: translate(112px, 75px);
-        
         }
         &-10 {
             transform: translate(200px, 75px);
- 
         }
     }
 }
 // blacksmith backpack -> ipad pro
+@include ipadPro {
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1 {
+            &::after {
+                left: 28px;
+            }
+        }
+        &-backpackSlot2 {
+            left: 91px;
+            &::after {
+                left: 28px;
+            }
+        }
+        &-backpackSlot3 {
+            left: 91px;
+            &::after {
+                left: 143px;
+            }
+        }
+        &-backpackSlot4 {
+            left: 100px;
+            &::after {
+                right: 28px;
+            }
+        }
+        &-backpackSlot5 {
+            left: 175px;
+            &::after {
+                right: 28px;
+            }
+        }
+
+        &-backpackSlot6 {
+            left: 91px;
+        }
+        &-backpackSlot7 {
+            left: 182px;
+        }
+        &-backpackSlot8 {
+            left: -91px;
+        }
+        &-backpackSlot9 {
+            left: 0;
+        }
+        &-backpackSlot10 {
+            left: 91px;
+        }
+    }
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot2,
+        &-backpackSlot3,
+        &-backpackSlot4,
+        &-backpackSlot5 {
+            transform: none;
+            top: -96px;
+        }
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10 {
+            margin-top: 0;
+            transform: none;
+            top: -96px;
+        }
+    }
+    .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot2,
+        &-backpackSlot3,
+        &-backpackSlot4,
+        &-backpackSlot5,
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10 {
+            &::after {
+                top: -16px;
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            }
+        }
+        &-backpackSlot6,
+        &-backpackSlot7 {
+            &::after {
+                left: -14px;
+                top: 16px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+            }
+        }
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10{
+            &::after {
+                left: calc(100% - 1px);
+                right: 0;
+                top: 16px;
+                clip-path: polygon(100% 50%, 0 100%, 0 3%);
+            }
+        }
+    }
+}
