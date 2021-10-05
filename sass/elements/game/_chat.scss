@@ -21,6 +21,10 @@
         @include laptopS {
             height: 21px;
         }
+        @include ipadPro {
+            height: 39px;
+            border-bottom: 4px solid $color-blue;
+        }
     }
     &__friendNick {
         font-size: 1.375rem;
@@ -62,6 +66,9 @@
             padding-top: 6px;
             height: calc(100% - 51px);
         }
+        @include ipadPro {
+            height: calc(100% - 93px);
+        }
        
     }
     &__botBar {
@@ -78,6 +85,11 @@
         @include laptopS {
             height: 33px;
         }
+        @include ipadPro {
+            height: 53px;
+            border-top: 4px solid $color-blue;
+        }
+        
     }
     &__emojiIcon {
         width: 10%;
@@ -99,6 +111,9 @@
         }
         @include desktopS {
             border-right: 3px solid $color-blue;
+        }
+        @include ipadPro {
+            border-right: 4px solid $color-blue;
         }
     }
     &__form {
@@ -165,6 +180,9 @@
             padding: 1px 19px;
             border-radius: 12px;
         }
+        @include ipadPro {
+            border-radius: 17px;
+        }
     }
     &__btn {
         height: 27px;
@@ -190,6 +208,9 @@
         }
         @include laptopS {
             height: 19px;
+        }
+        @include ipadPro {
+            height: 30px;
         }
     }
     &__emojiContainer {
@@ -247,6 +268,10 @@
             height: 38px;
             border: 2px solid $color-gray_dark;
         }
+        @include ipadPro {
+            height: 47px;
+            border: 3px solid $color-gray_dark;
+        }
     }
     &__date {
         font-size: 20px;
@@ -279,6 +304,9 @@
         @include laptopM {
             font-size: 7px;
         }
+        @include ipadPro {
+            font-size: 11px;
+        }
     }
     &__nick {
         font-size: 1.7em;
@@ -310,6 +338,9 @@
             border-radius: 1.375rem 0 1.375rem 1.375rem;
             color: $color-white;
             background: $color-blue;
+        }
+        @include ipadPro {
+            margin-bottom: 0.2em;
         }
     }
     &__time {

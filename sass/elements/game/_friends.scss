@@ -13,6 +13,14 @@
         @include laptopS {
             width: 222px;
         }
+        @include ipadPro {
+            width: 305px;
+        }
+    }
+    .searchFriend__searchIcon {
+        @include ipadPro {
+            margin-left: -27px;
+        }
     }
     &__itemWrapper {
         display: flex;
@@ -42,6 +50,10 @@
         @include laptopS {
             height: 27px;
             padding: 4px;
+        }
+        @include ipadPro {
+            height: 45px;
+            padding: 5px;
         }
     }
     &__searchWrapper {
@@ -95,6 +107,9 @@
         @include laptopS {
             margin-right: 6px;
         }
+        @include ipadPro {
+            margin-right: 14px;
+        }
     }
     &__settingsTitle {
         letter-spacing: 0.125rem;
@@ -120,6 +135,11 @@
                 width: 232px;
                 border: 2px solid #ffdc00;
                 right: 14px;
+            }
+            @include ipadPro {
+                width: 354px;
+                border: 3px solid #ffdc00;
+                right: 28px;
             }
         }
         &::after {
@@ -158,6 +178,13 @@
                 height: 14px;
                 top: -10px;
                 right: -10px;
+            }
+            @include ipadPro {
+                border: 3px solid $color-gray-dark;
+                width: 19px;
+                height: 19px;
+                top: -13px;
+                right: -13px;
             }
         }
 
@@ -206,6 +233,13 @@
             right: 39px;
             border: 2px solid #e80054;
         }
+        @include ipadPro {
+            width: 245px;
+            padding: 5px;
+            top: 57px;
+            right: 79px;
+            border: 3px solid #e80054;
+        }
     }
     &__list {
         box-sizing: border-box;
@@ -214,6 +248,8 @@
         padding: 22px 0;
         height: calc(100% - 47px);
         overflow: auto;
+
+        align-content: flex-start; /* NEW */
         &::-webkit-scrollbar {
             width: 0;
         }
@@ -227,6 +263,9 @@
         @include laptopS {
             height: calc(100% - 27px);
             padding: 3px 0;
+        }
+        @include ipadPro {
+            height: calc(100% - 45px);
         }
     }
     &__item {
@@ -253,6 +292,9 @@
         }
         @include laptopS {
             height: 280px;
+        }
+        @include ipadPro {
+            height: 325px;
         }
     }
 }
@@ -302,6 +344,9 @@
         @include laptopS {
             height: 193px;
         }
+        @include ipadPro {
+            height: 216px;
+        }
     }
     &__portrait {
         width: 50%;
@@ -342,6 +387,9 @@
         @include laptopS {
             margin-top: 6px;
         }
+        @include ipadPro {
+            margin-top: 9px;
+        }
     }
     &__levelWrapper {
         display: flex;
@@ -369,6 +417,9 @@
         }
         @include laptopS {
             height: 36px;
+        }
+        @include ipadPro {
+            height: 42px;
         }
     }
     &__actionBtn {
@@ -414,6 +465,9 @@
         @include laptopS {
             height: 27px;
         }
+        @include ipadPro {
+            height: 31px;
+        }
     }
 }
 
@@ -458,6 +512,9 @@
     @include laptopS {
         height: 24px;
     }
+    @include ipadPro {
+        height: 34px;
+    }
 }
 #friends_branch {
     border-left: 6px solid $color-gray-dark;
@@ -467,6 +524,9 @@
     }
     @include desktopM {
         border-left: 4px solid $color-gray-dark;
+    }
+    @include ipadPro {
+        border-left: 10px solid $color-gray-dark;
     }
 }
 
