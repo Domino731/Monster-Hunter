@@ -14,6 +14,14 @@
         border-radius: 20px;
         @include laptopM {
             width: 360px;
+            border-radius: 16px;
+        }
+        @include laptopS {
+            border-radius: 10px;
+        }
+        @include ipadPro {
+            width: 510px;
+            border-radius: 20px;
         }
     }
     &__title{
@@ -39,6 +47,9 @@
         @include laptopS {
             font-size: 31px;
         }
+        @include ipadPro {
+            font-size: 44px;
+        }
     }
     &__element{
         height: 66px;
@@ -55,7 +66,9 @@
             height: 47px;
             margin-top: 8px;
         }
-
+        @include ipadPro {
+            height: 66px;
+        }
     }
     &__elementIcon{
         height: 100%;
@@ -75,6 +88,9 @@
         @include laptopM {
             width: 47px;
             padding: 3px;
+        }
+        @include ipadPro {
+            width: 66px;
         }
        
     }
@@ -116,6 +132,10 @@
         }
         @include laptopM {
             height: 31px;
+        }
+        @include ipadPro {
+            height: 46px;
+            padding-left: 17px;
         }
     }
     &__msg{
@@ -209,6 +229,12 @@
             bottom: 5px;
             height: 42px;
             width: 42px;
+        }
+        @include ipadPro {
+            right: 15px;
+            bottom: 14px;
+            height: 63px;
+            width: 63px;
         }
     }
     &__deleteCode{
