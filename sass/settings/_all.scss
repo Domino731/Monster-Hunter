@@ -15,6 +15,9 @@ body {
     @include laptopS {
         font-size: 10px;
     }
+    @include ipadPro {
+        font-size: 16px;
+    }
 }
 * {
     box-sizing: border-box;

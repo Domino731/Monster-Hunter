@@ -5,6 +5,9 @@
     position: relative;
     overflow: auto;
      height: 100%;
+     @include ipadPro {
+         flex-direction: column-reverse;
+     }
     &::-webkit-scrollbar{
         width: 0;
     }
@@ -23,13 +26,49 @@
             @include laptopL {
                 border-right: 4px solid $color-gray_dark;
             }
+            @include ipadPro {
+                display: flex;
+            }
+        }
+        &:last-child {
+            @include ipadPro {
+                overflow: hidden;
+                flex-direction: row;
+                height:1665px;
+                padding-top: 45px;
+                border-bottom: 10px solid $color-gray_dark;
+            }
         }
         @include laptopL {
             padding: 6px;
+        }
+        @include ipadPro {
+            width: 100%;
         }
     }
     &__frame{
         background-image: url('/images/blacksmith_item_frame.png');
     }
-  
+  .profile__equipment{
+      @include ipadPro {
+          width: 50%;
+      }
+  }
+  .profile__backpack{
+    @include ipadPro {
+        width: 50%;
+        justify-content: flex-start;
+    }
+  }
+  &__mobileTable{
+      display: none;
+      width: 366px;
+      height: auto;
+      object-fit: cover;
+      margin: 0 auto;
+      margin-bottom: -54px;
+      @include ipadPro {
+          display: block;
+      }
+  }
 }

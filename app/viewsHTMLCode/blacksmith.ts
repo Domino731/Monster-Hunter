@@ -100,6 +100,7 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
 
    </div>    
    <div class='profile__backpack' id='blacksmith_backpack_slots'>
+      <div>
        <div class='profile__backpackRow'>
           <div class='profile__backpackItem' data-backpack-slot='1'> </div>
           <div class='profile__backpackItem' data-backpack-slot='2'> </div>
@@ -131,9 +132,10 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
           <div class='profile__backpackItem' data-backpack-slot='9'> </div>
           <div class='profile__backpackItem' data-backpack-slot='10'> </div>
        </div>
-
+   </div>
+    <img src='./images/profile_treasure_chest.png' class='profile__mobileTreasureChest'/>
   </div>
-
+   
 
 
 
@@ -153,7 +155,7 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
    
                             
         <img class='market__characterImg' src='./images/blacksmith.png' alt='blacksmith'/>   
-
+        <img  class='blacksmith__mobileTable' src='./images/blacksmith_table.png'/>
        </div>
 
        <div class='market__itemsList' id='market_slots'>

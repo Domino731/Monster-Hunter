@@ -15,15 +15,23 @@
         @include laptopM {
             height: 200px;
         }
+        @include ipadPro {
+            width: 50%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
     }
     &__characterImg {
-        transition: 0.5s;
         width: auto;
         height: 100%;
         object-fit: cover;
         transition: 0.5s;
-        @include desktopM {
-            //height: 85%;
+        @include ipadPro {
+            width: 320px;
+            height: auto;
+            margin-bottom: -92px;
         }
     }
     &__character {
@@ -58,14 +66,26 @@
             justify-content: space-evenly;
             position: relative;
             &::after {
-                content: '';
+                content: "";
                 display: block;
                 width: 4px;
                 height: 100%;
                 position: absolute;
                 left: calc(50% - 2px);
                 background-color: #343a40;
+                @include ipadPro {
+                    width: 10px;
+                    left: calc(50% - 4px);
+                    bottom: -6px;
+                    height: 97%;
+                }
             }
+            
+        }
+        @include ipadPro {
+            width: 50%;
+            justify-content: space-around;
+            align-items: space-evenly;
         }
     }
 
@@ -78,17 +98,13 @@
             margin-top: 10px;
             @include laptopS {
                 margin-top: 0;
-               
             }
         }
-      
-      
 
         @include laptopS {
             height: 354px;
             flex-direction: column;
             justify-content: space-between;
-            
         }
     }
     &__shopFrame {
@@ -119,6 +135,11 @@
             width: 154px;
             height: 110px;
         }
+        @include ipadPro {
+            margin-top: 30px;
+            width: 229px;
+            height: 186px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -139,10 +160,15 @@
             @include laptopS {
                 height: 140%;
             }
+            @include ipadPro {
+              
+                height: 98%;
+            }
         }
 
         &-wizard {
             img {
+               
                 width: 45%;
             }
         }
@@ -192,7 +218,6 @@
                 width: 143px;
                 right: -142px;
                 top: 18px;
-
             }
             @include laptopM {
                 width: 156px;
@@ -296,10 +321,13 @@
                 border-left: 7px solid $color-gold;
             }
             @include laptopM {
-                border-bottom: 5px solid $color-gold;
+                border-left: 5px solid $color-gold;
             }
             @include laptopS {
-                border-bottom: 4px solid $color-gold;
+                border-left: 4px solid $color-gold;
+            }
+            @include ipadPro {
+                border-left: 6px solid $color-gold;
             }
         }
         @include desktopM {
@@ -312,10 +340,16 @@
             height: 39px;
             font-size: 11px;
         }
-        @include laptopS{
+        @include laptopS {
             border-bottom: 4px solid $color-gold;
             height: 36px;
             font-size: 10px;
+        }
+        @include ipadPro {
+            border-bottom: 6px solid $color-gold;
+            height: 55px;
+            font-size: 16px;
+            width: 300px;
         }
     }
     &__deliveryTitle {
