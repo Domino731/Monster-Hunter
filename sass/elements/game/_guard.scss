@@ -43,6 +43,10 @@
         @include laptopS {
             border-radius: 10px;
         }
+        @include ipadPro {
+            width: 78%;
+            border-radius: 20px;
+        }
     }
     &__kingWrapper {
         width: 35%;
@@ -71,14 +75,20 @@
         @include laptopM {
             font-size: 31px;
         }
-        @include laptopS{
+        @include laptopS {
             font-size: 25px;
+        }
+        @include ipadPro {
+            font-size: 52px;
         }
     }
     &__text {
         font-size: 1.25rem;
         word-spacing: 0.125rem;
         line-height: 1.25rem;
+        @include ipadPro {
+            font-size: 1.5rem;
+        }
     }
     &__award {
         display: flex;
@@ -93,7 +103,9 @@
         @include laptopS {
             margin-top: 9px;
         }
-      
+        @include ipadPro {
+            margin-top: 42px;
+        }
     }
 
     &__awardIcon {
@@ -163,6 +175,9 @@
             padding: 8px;
             border-radius: 16px;
         }
+        @include ipadPro {
+            border-radius: 20px;
+        }
     }
     &__summaryIcon {
         height: 190px;
@@ -170,6 +185,9 @@
         object-fit: cover;
         @include laptopM {
             height: 166px;
+        }
+        @include ipadPro {
+            height: 313px;
         }
     }
     &__summaryTitle {
@@ -180,6 +198,9 @@
         text-align: center;
         color: $color-white;
         text-shadow: 0.125rem 0.125rem $color-gold;
+        @include ipadPro {
+            font-size: 2rem;
+        }
     }
     &__summaryPayout {
         display: block;
@@ -237,6 +258,10 @@
             width: 39px;
             height: 39px;
         }
+        @include ipadPro {
+            width: 54px;
+            height: 54px;
+        }
     }
     .field {
         position: relative;
@@ -282,6 +307,9 @@
         }
         @include laptopM {
             height: 19px;
+        }
+        @include ipadPro {
+            height: 32px;
         }
     }
     .value {
@@ -334,6 +362,11 @@
                     height: 30px;
                     border: 2px solid #53433f;
                 }
+                @include ipadPro {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid #53433f;
+                }
             }
             @include desktopS {
                 line-height: 3.2rem;
@@ -348,6 +381,9 @@
         }
         @include laptopS {
             margin-bottom: 50px;
+        }
+        @include ipadPro {
+            margin-bottom: 64px;
         }
     }
 }
@@ -371,6 +407,9 @@
     height: 30px;
     @include laptopM {
         height: 19px;
+    }
+    @include ipadPro {
+        height: 32px;
     }
 }
 .progressBar-1 {
