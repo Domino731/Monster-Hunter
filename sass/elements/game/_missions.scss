@@ -34,6 +34,11 @@
             top: 3px;
             font-size: 14px;
         }
+        @include ipadPro {
+            left: 61px;
+            top: 8px;
+            font-size: 22px;
+        }
     }
     &__detailsWrapper {
         width: 50%;
@@ -81,6 +86,10 @@
             margin-top: 15px;
             font-size: 29px;
         }
+        @include ipadPro {
+            margin-top: 23px;
+            font-size: 59px;
+        }
     }
 
     &__papyrus {
@@ -101,6 +110,10 @@
         @include laptopS {
             width: 23%;
         }
+        @include ipadPro {
+            margin-top: 59px;
+            width: 30%;
+        }
     }
     &__willingnessBarWrapper {
         height: 90%;
@@ -120,6 +133,12 @@
             border: 4px solid #ffcd00;
             margin-bottom: 14px;
             margin-left: 5px;
+        }
+        @include ipadPro {
+            width: 61px;
+            border: 8px solid #ffcd00;
+            margin-bottom: 15px;
+            margin-left: 10px;
         }
     }
     &__missionError {
@@ -180,6 +199,10 @@
         @include laptopM {
             width: 45%;
         }
+        @include ipadPro {
+            transform: translateX(21px);
+            width: 87%;
+        }
     }
     &__informations {
         height: 100%;
@@ -220,6 +243,9 @@
         padding: 0 41px;
         padding-top: 0.75rem;
         font-family: $fontFamily-medivalSharp;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
         @include desktopS {
             width: 76%;
             padding: 0 24px;
@@ -235,6 +261,10 @@
             width: 75%;
             padding: 0px 12px;
         }
+        @include ipadPro {
+            height: 100%;
+            padding: 0px 14px;
+        }
     }
     &__general {
         display: flex;
@@ -243,6 +273,9 @@
         overflow: hidden;
         @include laptopL {
             height: 105px;
+        }
+        @include ipadPro {
+            height: 115px;
         }
     }
     &__detailsWrapper {
@@ -265,7 +298,7 @@
         }
         @include laptopM {
             margin-top: 8px;
-           margin-right: 35px;
+            margin-right: 35px;
         }
         @include laptopS {
             margin-right: 20px;
@@ -366,6 +399,10 @@
             height: 33px;
             width: 20px;
         }
+        @include ipadPro {
+            height: 45px;
+            width: 27px;
+        }
     }
     &::before {
         border-radius: 15px 0 0 15px;
@@ -391,5 +428,9 @@
     @include laptopM {
         height: 15px;
         box-shadow: -58px 0 #b27a49 inset;
+    }
+    @include ipadPro {
+        box-shadow: -83px 0 #b27a49 inset;
+        height: 25px;
     }
 }
