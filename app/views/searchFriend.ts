@@ -9,17 +9,25 @@ export class SearchFriend extends View {
 
    private allUsersData: SearchedUserData[]
    private dom: {
-      allUsersList: HTMLElement;
-      allUsersRow: NodeListOf<Element>;
-      userRoot: HTMLElement;
-      input: HTMLInputElement;
-      nicks: NodeListOf<Element>;
-      searchFriendInput: HTMLInputElement;
+      container: {
+         users: HTMLElement | null;
+         searchedUser: HTMLElement | null;
+      }
+      allUsersList: HTMLElement| null;
+      allUsersRow: NodeListOf<Element>| null;
+      userRoot: HTMLElement| null;
+      input: HTMLInputElement| null;
+      nicks: NodeListOf<Element>| null;
+      searchFriendInput: HTMLInputElement| null;
    }
    constructor() {
       super();
       this.allUsersData = [];
       this.dom = {
+         container: {
+            users: document.querySelector('.searchFriend__item-search'),
+            searchedUser: document.querySelector('#searched_user_root')
+         },
          allUsersList: document.querySelector('#all_users'),
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
@@ -96,6 +104,7 @@ export class SearchFriend extends View {
          // mark this row
          const nick = element.querySelector('.searchFriend__nick');
          nick.classList.add('searchFriend__nick-selected');
+      
       }));
    }
 
@@ -130,12 +139,14 @@ export class SearchFriend extends View {
 
    }
 
+   mobile(){
+      
+   }
 
    searchFriendEvent() {
       const search = async (nick: string) => {
         if (nick.length > 0) {
           const elements = []
-          console.log(this.dom.nicks)
           this.dom.nicks.forEach((el) => {
             if (el.innerHTML === nick) {
               elements.push(el.parentElement.parentElement.parentElement)
@@ -156,12 +167,14 @@ export class SearchFriend extends View {
     // for rwd works
     rwd(){
        const searchedUser = this.allUsersData[3];
+       // development
        const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
     }
 
    initScripts() {
       this.getAllUsers()
          .then(() => {
+            this.mobile();
             this.showSpecificUserEvent();
             this.findFriend();
             this.searchFriendEvent();
@@ -179,6 +192,10 @@ export class SearchFriend extends View {
          input: document.querySelector('.searchFriend__input'),
          nicks: document.querySelectorAll('#all_users .searchFriend__nick strong' ),
          searchFriendInput: document.querySelector('.searchFriend__input'),
+         container: {
+            users: document.querySelector('.searchFriend__item-search'),
+            searchedUser: document.querySelector('#searched_user_root')
+         },
       }
    }
 

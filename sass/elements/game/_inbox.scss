@@ -28,6 +28,9 @@
         @include laptopM {
             height: 34px;
         }
+        @include ipadPro {
+            height: 53px;
+        }
     }
     &__mailIcon {
         height: 100%;
@@ -52,6 +55,9 @@
         }
         @include laptopM {
             height: calc(100% - 32px);
+        }
+        @include ipadPro {
+            height: calc(100% - 53px);
         }
         li {
             display: flex;
@@ -123,6 +129,10 @@
         @include laptopM {
             padding: 0px 8px;
             height: 40px;
+        }
+        @include ipadPro {
+            padding: 0px 8px;
+            height: 54px;
         }
     }
 

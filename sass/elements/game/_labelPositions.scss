@@ -318,6 +318,9 @@
         padding: 4px;
         border-radius: 10px;
     }
+    @include ipadPro {
+        width: 265px;
+    }
 }
 
 .profile__itemSpecs {
@@ -620,6 +623,9 @@
         @include laptopS {
             transform: translate(73px, -100%);
         }
+        @include ipadPro {
+            transform: translate(43px, -92%);
+        }
     }
     .potion__label-2 {
         @include laptopL {
@@ -630,6 +636,9 @@
         }
         @include laptopS {
             transform: translate(200px, -100%);
+        }
+        @include ipadPro {
+            transform: translate(220px, -92%);
         }
     }
     .profile__portraitImg {

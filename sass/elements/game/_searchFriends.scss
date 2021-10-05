@@ -6,9 +6,9 @@
     &__item {
         width: 50%;
         height: 100%;
-        &:last-child{
+        &:last-child {
             overflow: auto;
-            &::-webkit-scrollbar{
+            &::-webkit-scrollbar {
                 width: 0;
             }
         }
@@ -18,11 +18,16 @@
             @include desktopS {
                 border-right: 4px solid #343a40;
             }
+            @include ipadPro {
+                border-right: 10px solid #343a40;
+            }
         }
         &-result {
             background: rgba(255, 255, 255, 0.5);
             padding: 10px;
-
+        }
+        @include ipadPro {
+            width: 100%;
         }
     }
     &__searchBar {
@@ -39,6 +44,10 @@
         @include laptopM {
             height: 38px;
             padding: 7px 0;
+        }
+        @include ipadPro {
+            height: 48px;
+            padding: 5px 0;
         }
     }
     &__searchIcon {
@@ -74,7 +83,11 @@
         }
         @include laptopS {
             width: 297px;
-            border:  2px solid $color-gold;
+            border: 2px solid $color-gold;
+        }
+        @include ipadPro {
+            width: 398px;
+            border: 3px solid $color-gold;
         }
     }
     &__status {
@@ -89,7 +102,7 @@
         z-index: 0;
         &::after {
             right: -10px;
-            @include arrow('right');
+            @include arrow("right");
             background: $color-white;
             @include desktopS {
                 right: -9px;
@@ -109,13 +122,20 @@
             font-weight: bold;
             font-size: 1.438rem;
             letter-spacing: 0.063rem;
+            @include ipadPro {
+                font-size: 1.1rem;
+            }
         }
-        @include laptopL{
+        @include laptopL {
             width: 89%;
             height: 25px;
         }
         @include laptopS {
             height: 21px;
+        }
+        @include ipadPro {
+            height: 34px;
+            width: 91%;
         }
     }
     &__nick {
@@ -140,21 +160,24 @@
             margin-left: 9px;
             font-weight: bold;
             font-size: 1.438rem;
+            z-index: 1;
             letter-spacing: 0.063rem;
             @include desktopS {
-               margin-left: 16px;
+                margin-left: 16px;
             }
-           
+            @include ipadPro {
+                margin-left: 12px;
+                // font-size: 1.1rem;
+            }
         }
         &::after {
             right: -11px;
-            @include arrow('left');
+            @include arrow("left");
             background: $color-white;
             z-index: 0;
-      
         }
         &::before {
-            @include arrow('right');
+            @include arrow("right");
             width: 47px;
             left: -20px;
             z-index: 1;
@@ -162,19 +185,27 @@
             @include laptopS {
                 width: 41px;
             }
+            @include ipadPro {
+                width: 49px;
+            }
         }
         @include desktopS {
             width: 88%;
         }
-        @include laptopL{
+        @include laptopL {
             height: 25px;
         }
-        @include  laptopM {
+        @include laptopM {
             width: 87%;
         }
         @include laptopS {
             height: 21px;
             width: 83%;
+        }
+        @include ipadPro {
+            height: 34px;
+            margin-left: 17px;
+            width: 89%;
         }
     }
     &__level {
@@ -210,7 +241,7 @@
         margin-left: 9px;
 
         &::after {
-            @include arrow('left');
+            @include arrow("left");
             left: -10px;
             background: $color-white;
             @include desktopM {
@@ -229,20 +260,29 @@
         img {
             margin-left: 3px;
             margin-right: -2px;
-            @include desktopM{
+            @include desktopM {
                 margin-right: -1px;
             }
+            @include ipadPro {
+                margin-right: -4px;
+            }
         }
-       
-        @include laptopL{
+
+        @include laptopL {
             margin-left: 8px;
         }
-        @include laptopL{
+        @include laptopL {
             height: 25px;
         }
         @include laptopS {
             height: 21px;
             margin-left: 5px;
+        }
+        @include ipadPro {
+            height: 34px;
+        }
+        @include ipadPro {
+            font-size: 15px;
         }
     }
 }
@@ -270,6 +310,7 @@
             white-space: nowrap;
             padding: 1px;
         }
+
         tr {
             th:first-child,
             td:first-child {
@@ -298,6 +339,10 @@
             &:last-child {
                 border-right: none;
             }
+            @include ipadPro {
+                padding-top: 9px;
+                padding-bottom: 9px;
+            }
         }
         @include desktopS {
             border-bottom: 4px solid $color-blue;
@@ -317,8 +362,11 @@
             @include laptopL {
                 height: 32px;
             }
-            @include laptopS{
+            @include laptopS {
                 height: 28px;
+            }
+            @include ipadPro {
+                height: 43px;
             }
         }
         td {
@@ -331,10 +379,15 @@
             border-radius: 50%;
         }
     }
+
     @include laptopL {
         height: calc(100% - 42px);
     }
     @include laptopM {
         height: calc(100% - 38px);
+    }
+    @include ipadPro {
+        height: calc(100% - 55px);
+        width: 101%;
     }
 }

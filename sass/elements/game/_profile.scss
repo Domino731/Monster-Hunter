@@ -49,6 +49,9 @@
             @include laptopS {
                 height: 310px;
             }
+            @include ipadPro {
+                height: 407px;
+            }
         }
         &-currentUser {
             @include desktopM {
@@ -142,6 +145,7 @@
         @include laptopL {
             height: 21px;
         }
+       
     }
     &__portraitBtn {
         height: 29px;
@@ -530,6 +534,12 @@
             border: 3px solid $color-gray_dark;
             margin: 5px auto;
         }
+        @include ipadPro {
+            height: 36px;
+            font-size: 34px;
+            border: 4px solid #343a40;
+            margin: 5px auto;
+        }
     }
     &__levelProgress {
         z-index: -1;
@@ -660,9 +670,8 @@
     }
     &__backpackRow {
         display: flex;
-        &:last-child{
+        &:last-child {
             @include ipadPro {
-             
             }
         }
     }
@@ -773,6 +782,11 @@
             height: 79px;
             border: 5px solid $color-wood-dark;
         }
+        @include ipadPro {
+            width: 118px;
+            height: 118px;
+            border: 7px solid #aa6615;
+        }
     }
     &__generalText {
         width: 120px;
@@ -792,6 +806,11 @@
             width: 79px;
             padding: 3px 0;
             margin-top: 2px;
+        }
+        @include ipadPro {
+            width: 117px;
+            padding: 5px 0;
+            margin-top: 7px;
         }
     }
     &__goldBar {
@@ -871,19 +890,15 @@
         @include laptopS {
             border-right: 2px solid $color-gray_dark;
         }
-
     }
     @include ipadPro {
         &:first-child .profile__backpackItem:last-child {
             border-right: 4px solid $color-gray_dark;
-        
         }
         &:last-child .profile__backpackItem:last-child {
             border-right: 4px solid $color-gray_dark;
-        
         }
     }
-    
 }
 
 .profile__stats {
@@ -1020,7 +1035,7 @@
 }
 
 .profile {
-    &__mobileTreasureChest{
+    &__mobileTreasureChest {
         display: none;
         width: 200px;
         height: auto;
@@ -1076,6 +1091,9 @@
             font-size: 14px;
             margin-bottom: 7px;
         }
+        @include ipadPro {
+            font-size: 19px;
+        }
     }
     &__actionBar {
         box-sizing: border-box;
@@ -1099,6 +1117,10 @@
         @include laptopS {
             height: 26px;
             margin: 5px auto;
+        }
+        @include ipadPro {
+            height: 40px;
+            margin: 11px auto;
         }
     }
     &__actionIcon {
@@ -1128,6 +1150,9 @@
         @include laptopS {
             padding-top: 2px;
         }
+        @include ipadPro {
+            padding-top: 9px;
+        }
     }
     td:last-child {
         @include laptopS {
@@ -1144,6 +1169,9 @@
         }
         @include laptopS {
             padding-left: 12px;
+        }
+        @include ipadPro {
+            padding-left: 14px;
         }
     }
     tr {

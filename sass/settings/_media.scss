@@ -36,7 +36,7 @@ $desktopM: 1919px;
   }
 }
 @mixin ipadPro {
-  @media (max-width: $laptopS) and (min-height: 1100px), (max-width: $tablet){
+  @media (max-width: $laptopS) and (min-height: 800px), (max-width: $tablet){
     @content;
   }
 }
