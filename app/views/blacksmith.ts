@@ -12,51 +12,54 @@ import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
-import { getBlacksmithHTMLCode } from '../viewsHTMLCode/blacksmith';
+import { getBlacksmithHTMLCode, blacksmithMobileNavCode } from '../viewsHTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
 import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { getNeededExp } from '../functions/getNeededExp';
 import { setCountdown } from '../functions/countdown';
+import { MobileNav } from '../general/mobileNav';
 export class Blacksmith extends View {
    private dom: {
-      market: HTMLElement | null,
-      marketSlots: NodeListOf<Element> | null,
-      itemLabel: HTMLElement | null,
-      equipmentSlots: NodeListOf<Element> | null,
-      goldAmount: HTMLElement | null,
-      goldBar: HTMLElement | null,
-      goldSubstract: HTMLElement | null
-      backpackSlots: NodeListOf<Element>
-      backpack: HTMLElement,
-      equipment: HTMLElement,
-      body: HTMLElement,
-      error: HTMLElement,
-      countdown: HTMLElement,
+      market: HTMLElement | null;
+      marketSlots: NodeListOf<Element> | null;
+      itemLabel: HTMLElement | null;
+      equipmentSlots: NodeListOf<Element> | null;
+      goldAmount: HTMLElement | null;
+      goldBar: HTMLElement | null;
+      goldSubstract: HTMLElement | null;
+      backpackSlots: NodeListOf<Element>;
+      backpack: HTMLElement;
+      equipment: HTMLElement;
+      body: HTMLElement;
+      error: HTMLElement;
+      countdown: HTMLElement;
+      mobileNav: HTMLElement;
       equipmentLabel: {
-         root: HTMLElement,
-         sellBtn: HTMLElement
-         labelWrapper: HTMLElement
-         sellBtnPrice: HTMLElement
-         moveItem: HTMLElement
-         moveItemError: HTMLElement
+         root: HTMLElement;
+         sellBtn: HTMLElement;
+         labelWrapper: HTMLElement;
+         sellBtnPrice: HTMLElement;
+         moveItem: HTMLElement;
+         moveItemError: HTMLElement;
       }
       backpackLabel: {
-         root: HTMLElement,
-         sellBtn: HTMLElement
-         labelWrapper: HTMLElement
-         sellBtnPrice: HTMLElement
-         moveItem: HTMLElement
-         moveItemError: HTMLElement
-         replaceIcon: HTMLImageElement
+         root: HTMLElement;
+         sellBtn: HTMLElement;
+         labelWrapper: HTMLElement;
+         sellBtnPrice: HTMLElement;
+         moveItem: HTMLElement;
+         moveItemError: HTMLElement;
+         replaceIcon: HTMLImageElement;
       }
-      level: HTMLElement
-      portraitImg: HTMLImageElement
+      level: HTMLElement;
+      portraitImg: HTMLImageElement;
    }
    private market: ShopItem[]
    constructor() {
       super(),
          this.dom = {
+            mobileNav: document.querySelector('.mobileNav__content'),
             portraitImg: document.querySelector('.profile__portraitImg'),
             level:document.querySelector('.profile__level'),
             market: document.querySelector("#market_slots"),
@@ -95,6 +98,7 @@ export class Blacksmith extends View {
 
    render() {
       this.root.innerHTML = getBlacksmithHTMLCode(this.userData);
+      this.dom.mobileNav.innerHTML = blacksmithMobileNavCode;
    }
 
 
@@ -712,6 +716,7 @@ export class Blacksmith extends View {
       updateUserData(this.userData);
    }
 
+  
    generalOnDataChange(){
       // set level and progress bar
       this.dom.level.innerHTML = `<div class='profile__levelProgress' 
@@ -729,6 +734,7 @@ export class Blacksmith extends View {
 
    getDOMElements() {
       this.dom = {
+         mobileNav: document.querySelector('.mobileNav__content'),
          level:document.querySelector('.profile__level'),
          portraitImg: document.querySelector('.profile__portraitImg'),
          market: document.querySelector("#market_slots"),
@@ -772,12 +778,12 @@ export class Blacksmith extends View {
      // blacksmith item label
 
              // set the item label
-             this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+            // this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
              
 
              // show the item label
-             this.dom.itemLabel.classList.remove('disabled');
+             //this.dom.itemLabel.classList.remove('disabled');
       //equipment
      
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
@@ -785,12 +791,12 @@ export class Blacksmith extends View {
       // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
       // this.dom.equipmentLabel.root.classList.remove('disabled')
       // backpack
-      const equipmentItem =  helmetsData[12]
-      this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-      this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot10`)
-      this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-      this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
-      this.dom.backpackLabel.root.classList.remove('disabled')
+      // const equipmentItem =  helmetsData[12]
+      // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
+      // this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot10`)
+      // this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+      // this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+      // this.dom.backpackLabel.root.classList.remove('disabled')
    }
    initScripts() {
       this.setLastVisit();

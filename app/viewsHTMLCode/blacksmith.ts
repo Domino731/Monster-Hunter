@@ -224,3 +224,22 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
 
 </section>`
 }
+export const blacksmithMobileNavCode = `
+        <div class='mobileNav__item'>
+           <div class='mobileNav__itemIcon'> 
+              <img src='./images/mobileNav_blacksmith_anvil.png' />
+           </div>
+           <div class='mobileNav__itemName'> 
+              Blacksmith
+           </div>
+         </div>
+
+         <div class='mobileNav__item'>
+         <div class='mobileNav__itemIcon'> 
+            <img src='./images/mobileNav_blacksmith_knight.png' />
+         </div>
+         <div class='mobileNav__itemName'> 
+            Profile
+         </div>
+       </div>
+`

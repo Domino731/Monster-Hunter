@@ -537,6 +537,9 @@
         @include laptopM {
             height: 23px;
         }
+        @include ipadPro {
+            height: 30px;
+        }
     }
     &__itemPriceIcon {
         height: 90%;
