@@ -61,6 +61,9 @@
             @include ipadPro {
                 height: 407px;
             }
+            @include tablet {
+                height: 606px;
+            }
         }
         &-currentUser {
             @include desktopM {
@@ -1237,6 +1240,9 @@
         @include laptopS {
             flex-direction: column;
         }
+        @include tablet {
+            flex-direction: row;
+        }
     }
     &__statsTable {
         color: $color-white;
@@ -1265,6 +1271,12 @@
         }
         @include ipadPro {
             font-size: 19px;
+            border-radius: 20px;
+        }
+        @include tablet {
+            width: 49%;
+            font-size: 17px;
+
         }
     }
     &__actionBar {
@@ -1293,6 +1305,9 @@
         @include ipadPro {
             height: 40px;
             margin: 11px auto;
+        }
+        @include tablet {
+            height: 48px;
         }
     }
     &__actionIcon {
@@ -1325,11 +1340,15 @@
         @include ipadPro {
             padding-top: 9px;
         }
+        @include tablet {
+            padding-top: 5px;
+        }
     }
     td:last-child {
         @include laptopS {
             padding-bottom: 3px;
         }
+       
     }
     td {
         padding-left: 10px;
@@ -1349,8 +1368,17 @@
     tr {
         font-weight: bold;
         letter-spacing: 0.125rem;
+        td:last-child{
+            @include tablet{
+                padding-right: 8px;
+                text-align: end;
+            }
+        }
     }
-}
+   
+    }
+   
+
 
 @keyframes an__profile__item-notAfford {
     100% {

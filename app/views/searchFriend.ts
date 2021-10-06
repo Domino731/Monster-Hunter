@@ -1,3 +1,4 @@
+
 import { formatDate } from './../functions/formatDate';
 import { SearchedUserData } from './../types';
 import { getSearchFriendHTMLCode } from '../viewsHTMLCode/searchFriend';
@@ -9,25 +10,21 @@ export class SearchFriend extends View {
 
    private allUsersData: SearchedUserData[]
    private dom: {
-      container: {
-         users: HTMLElement | null;
-         searchedUser: HTMLElement | null;
-      }
-      allUsersList: HTMLElement| null;
-      allUsersRow: NodeListOf<Element>| null;
-      userRoot: HTMLElement| null;
-      input: HTMLInputElement| null;
-      nicks: NodeListOf<Element>| null;
-      searchFriendInput: HTMLInputElement| null;
+      usersContainer: HTMLElement | null;
+      searchedUserContainer: HTMLElement | null;
+      allUsersList: HTMLElement | null;
+      allUsersRow: NodeListOf<Element> | null;
+      userRoot: HTMLElement | null;
+      input: HTMLInputElement | null;
+      nicks: NodeListOf<Element> | null;
+      searchFriendInput: HTMLInputElement | null;
    }
    constructor() {
       super();
       this.allUsersData = [];
       this.dom = {
-         container: {
-            users: document.querySelector('.searchFriend__item-search'),
-            searchedUser: document.querySelector('#searched_user_root')
-         },
+         usersContainer: document.querySelector('.searchFriend__item-search'),
+         searchedUserContainer: document.querySelector('#searched_user_root'),
          allUsersList: document.querySelector('#all_users'),
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
@@ -92,38 +89,42 @@ export class SearchFriend extends View {
    // show general view of specific user
    showSpecificUserEvent() {
       this.dom.allUsersRow.forEach(el => el.addEventListener('click', () => {
-        // remove all previous nick marks 
-        this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
+         // remove all previous nick marks 
+         this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
 
          const element: HTMLElement = el as HTMLElement;
          // find user
          const userIndex: number = this.allUsersData.findIndex(el => el.id === element.dataset.userId)
          const searchedUser: SearchedUserData = this.allUsersData[userIndex]
          // create view 
-          const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+         const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
          // mark this row
          const nick = element.querySelector('.searchFriend__nick');
          nick.classList.add('searchFriend__nick-selected');
-      
+
+         if(window.innerWidth < 1024){
+            this.dom.searchedUserContainer.classList.remove('disabled');
+            this.dom.usersContainer.classList.add('disabled');
+         }
       }));
    }
 
    findFriend() {
-      
+
       const scrollToFriend = (target: HTMLInputElement) => {
-          // remove all previous nick marks 
+         // remove all previous nick marks 
          this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
 
          // find searched friend in order to scroll to his postion in table
          const friend = this.allUsersData[this.allUsersData.findIndex(el => el.nick === target.value)];
          if (friend !== undefined) {
-             // create view 
-             const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, friend);
-             // scroll
+            // create view 
+            const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, friend);
+            // scroll
             const tableRow: HTMLElement = document.querySelector(`#all_users tr[data-user-id = '${friend.id}']`);
             tableRow.scrollIntoView({ behavior: "smooth" });
             // mark  table row
-            const nick : HTMLElement = tableRow.querySelector('.searchFriend__nick');
+            const nick: HTMLElement = tableRow.querySelector('.searchFriend__nick');
             nick.classList.add('searchFriend__nick-selected');
          }
 
@@ -139,37 +140,40 @@ export class SearchFriend extends View {
 
    }
 
-   mobile(){
-      
+   mobile() {
+      if (window.innerWidth < 1024) {
+         this.dom.usersContainer.classList.add('disabled')
+         console.log(this.dom.searchedUserContainer, this.dom.usersContainer)
+      }
    }
 
    searchFriendEvent() {
       const search = async (nick: string) => {
-        if (nick.length > 0) {
-          const elements = []
-          this.dom.nicks.forEach((el) => {
-            if (el.innerHTML === nick) {
-              elements.push(el.parentElement.parentElement.parentElement)
-            }
-          })
-          console.log(elements)
-          this.dom.allUsersRow.forEach(el => el.classList.add('disabled'))
-          elements.forEach(el => el.classList.remove('disabled'))
-        }
-        else {
-          this.dom.allUsersRow.forEach(el => el.classList.remove('disabled'))
-        }
+         if (nick.length > 0) {
+            const elements = []
+            this.dom.nicks.forEach((el) => {
+               if (el.innerHTML === nick) {
+                  elements.push(el.parentElement.parentElement.parentElement)
+               }
+            })
+            console.log(elements)
+            this.dom.allUsersRow.forEach(el => el.classList.add('disabled'))
+            elements.forEach(el => el.classList.remove('disabled'))
+         }
+         else {
+            this.dom.allUsersRow.forEach(el => el.classList.remove('disabled'))
+         }
       }
       this.dom.searchFriendInput.addEventListener('change', () => search(this.dom.searchFriendInput.value));
       this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
-    }
+   }
 
-    // for rwd works
-    rwd(){
-       const searchedUser = this.allUsersData[3];
-       // development
-       const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
-    }
+   // for rwd works
+   rwd() {
+      const searchedUser = this.allUsersData[3];
+      // development
+      const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+   }
 
    initScripts() {
       this.getAllUsers()
@@ -190,12 +194,10 @@ export class SearchFriend extends View {
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
          input: document.querySelector('.searchFriend__input'),
-         nicks: document.querySelectorAll('#all_users .searchFriend__nick strong' ),
+         nicks: document.querySelectorAll('#all_users .searchFriend__nick strong'),
          searchFriendInput: document.querySelector('.searchFriend__input'),
-         container: {
-            users: document.querySelector('.searchFriend__item-search'),
-            searchedUser: document.querySelector('#searched_user_root')
-         },
+         usersContainer: document.querySelector('.searchFriend__item-search'),
+         searchedUserContainer: document.querySelector('#searched_user_root'),
       }
    }
 

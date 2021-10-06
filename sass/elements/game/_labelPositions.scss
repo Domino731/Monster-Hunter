@@ -640,6 +640,9 @@
         @include ipadPro {
             transform: translate(-5px, -92%);
         }
+        @include tablet {
+            transform: translate(101px, -92%);
+        }
     }
     .potion__label-2 {
         @include laptopL {
@@ -653,6 +656,9 @@
         }
         @include ipadPro {
             transform: translate(167px, -92%);
+        }
+        @include tablet {
+            transform: translate(405px, -92%);
         }
     }
     .profile__portraitImg {
@@ -670,6 +676,9 @@
         }
         @include laptopS {
             margin-top: 32px;
+        }
+        @include tablet {
+            margin-top: 70px;
         }
     }
     @include laptopL {

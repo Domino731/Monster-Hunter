@@ -2,6 +2,11 @@ export const getSearchFriendHTMLCode = ( ) : string => {
 
   return `
   <section class='searchFriend'>
+
+  <div class='closeIcon closeIcon__searchFriend disabled'> 
+    <img src='./images/close.png' />
+     </div>
+
     <div class='searchFriend__item searchFriend__item-search'>
         <div class='searchFriend__list'>
             <table>
