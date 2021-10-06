@@ -6,6 +6,10 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
+        @include tablet {
+            background-size: 158% 100%;
+            background-position: 50%;
+        }
     &__title{
         font-family: $fontFamily-medivalSharp;
         color:$color-blue;
@@ -30,6 +34,9 @@
     }
     &__countdownWrapper{
         width: 100%;
+        @include tablet {
+            margin-bottom: 30px;
+        }
     }
     &__freepikAttribute{
         position: absolute;
