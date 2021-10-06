@@ -90,22 +90,6 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
 
         <div class="friends__list">
 
-        
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
         </div>
 
 </div>

@@ -32,7 +32,7 @@ export const getSearchFriendHTMLCode = ( ) : string => {
         </div>
     </div>
 
-    <div class='searchFriend__item' id='searched_user_root'>
+    <div class='searchFriend__item ${window.innerWidth < 1024 ? 'disabled' : ''}' id='searched_user_root'>
       
     </div>
     </div>

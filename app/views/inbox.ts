@@ -55,7 +55,6 @@ export class Inbox extends View {
       this.dom.mailListContainer.classList.remove('disabled');
       this.dom.closeMailIcon.classList.add('disabled');
     }
-
   }
 
 

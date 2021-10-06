@@ -18,11 +18,13 @@ export class SearchFriend extends View {
       input: HTMLInputElement | null;
       nicks: NodeListOf<Element> | null;
       searchFriendInput: HTMLInputElement | null;
+      closeViewIcon: HTMLElement;
    }
    constructor() {
       super();
       this.allUsersData = [];
       this.dom = {
+         closeViewIcon: document.querySelector('.closeIcon__searchFriend'),
          usersContainer: document.querySelector('.searchFriend__item-search'),
          searchedUserContainer: document.querySelector('#searched_user_root'),
          allUsersList: document.querySelector('#all_users'),
@@ -102,9 +104,8 @@ export class SearchFriend extends View {
          const nick = element.querySelector('.searchFriend__nick');
          nick.classList.add('searchFriend__nick-selected');
 
-         if(window.innerWidth < 1024){
-            this.dom.searchedUserContainer.classList.remove('disabled');
-            this.dom.usersContainer.classList.add('disabled');
+         if (window.innerWidth < 1024) {
+            this.toogleView();
          }
       }));
    }
@@ -142,7 +143,7 @@ export class SearchFriend extends View {
 
    mobile() {
       if (window.innerWidth < 1024) {
-         this.dom.usersContainer.classList.add('disabled')
+         this.dom.searchedUserContainer.classList.add('disabled');
          console.log(this.dom.searchedUserContainer, this.dom.usersContainer)
       }
    }
@@ -168,6 +169,19 @@ export class SearchFriend extends View {
       this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
    }
 
+   toogleView() {
+      const flag: boolean = this.dom.usersContainer.classList.contains('disabled');
+      if (flag) {
+         this.dom.searchedUserContainer.classList.add('disabled');
+         this.dom.usersContainer.classList.remove('disabled');
+         this.dom.closeViewIcon.classList.add('disabled');
+      }
+      else {
+         this.dom.searchedUserContainer.classList.remove('disabled');
+         this.dom.usersContainer.classList.add('disabled');
+         this.dom.closeViewIcon.classList.remove('disabled');
+      }
+   }
    // for rwd works
    rwd() {
       const searchedUser = this.allUsersData[3];
@@ -175,9 +189,17 @@ export class SearchFriend extends View {
       const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
    }
 
+   hideSearchedFrindEvent(){
+      this.dom.closeViewIcon.addEventListener('click', ()=> {
+         this.dom.searchedUserContainer.classList.add('disabled');
+         this.dom.usersContainer.classList.remove('disabled');
+         this.dom.closeViewIcon.classList.add('disabled');
+      })
+   }
    initScripts() {
       this.getAllUsers()
          .then(() => {
+            this.hideSearchedFrindEvent();
             this.mobile();
             this.showSpecificUserEvent();
             this.findFriend();
@@ -190,6 +212,7 @@ export class SearchFriend extends View {
    }
    getDOMElements() {
       this.dom = {
+         closeViewIcon: document.querySelector('.closeIcon__searchFriend'),
          allUsersList: document.querySelector('#all_users'),
          allUsersRow: document.querySelectorAll('#all_users tr'),
          userRoot: document.querySelector('#searched_user_root'),
