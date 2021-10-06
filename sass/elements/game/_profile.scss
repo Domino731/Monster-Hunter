@@ -71,6 +71,9 @@
             @include ipadPro {
                 height: 407px;
             }
+            @include tablet {
+                height: 606px;
+            }
         }
     }
 
@@ -137,6 +140,9 @@
         }
         @include laptopS {
             margin-top: 44px;
+        }
+        @include tablet {
+            margin-top: 72px;
         }
     }
     &__portraitActionBar {
@@ -493,6 +499,11 @@
             height: 28px;
             margin-bottom: 3px;
         }
+        @include tablet {
+            margin-top: 12px;
+            height: 35px;
+            margin-bottom: 11px;
+        }
     }
     &__equipmentItemSellWrapper {
         height: 30px;
@@ -520,6 +531,9 @@
         @include ipadPro {
             height: 28px;
             margin-bottom: 3px;
+        }
+        @include tablet {
+            height: 35px;
         }
     }
 
@@ -589,6 +603,12 @@
             border: 4px solid #343a40;
             margin: 5px auto;
         }
+        @include tablet {
+            height: 53px;
+            font-size: 50px;
+            border: 5px solid #343a40;
+            margin: 7px auto;
+        }
     }
     &__levelProgress {
         z-index: -1;
@@ -618,6 +638,10 @@
         }
         @include laptopL {
             border-radius: 4px;
+        }
+        @include tablet {
+            padding: 6px 0;
+            border-radius: 6px;
         }
     }
     &__equipmentIcon {
@@ -773,6 +797,10 @@
             width: 95px;
             height: 95px;
         }
+        @include tablet {
+            width: 150px;
+            height: 150px;
+        }
     }
 
     &__backpackItemGraphic {
@@ -785,10 +813,12 @@
         width: 100%;
         &-blacksmith {
             top: 0;
-            background-color: red;
             height: 1px;
             @include ipadPro {
                 top: 186px;
+            }
+            @include tablet {
+                top: 0;
             }
         }
     }
@@ -892,6 +922,10 @@
         @include laptopS {
             height: 26px;
             margin: 5px auto;
+        }
+        @include tablet {
+            height: 48px;
+            margin: 7px auto;
         }
     }
     &__goldIcon {
@@ -1108,6 +1142,9 @@
         margin: 0 auto;
         @include ipadPro {
             display: block;
+        }
+        @include tablet {
+            display: none;
         }
     }
 }

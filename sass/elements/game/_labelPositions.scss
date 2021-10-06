@@ -363,7 +363,7 @@
     &-backpackSlot3 {
         transform: translate(215px, -96%);
         &::after {
-            left: 154px;
+            left: 140px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
         }
@@ -818,4 +818,105 @@
             }
         }
     }
+}
+
+// backpack -> tablet 
+@include tablet {
+    .profile__backpack .profile__itemSpecs{
+        &-backpackSlot1,  &-backpackSlot6{
+            transform: translate(-1px, -100%);
+            
+        }
+        &-backpackSlot2{
+            transform: translate(45px, -100%);
+           
+        }
+        &-backpackSlot3{
+            transform: translate(134px, -100%);
+          
+        }
+        &-backpackSlot4{
+            transform: translate(218px, -100%);
+        }
+        &-backpackSlot5{
+            transform: translate(275px, -100%);
+           
+        }
+        &-backpackSlot7{
+            transform: translate(142px, -100%);
+        }
+        &-backpackSlot8{
+            transform: translate(223px, -100%);
+            &::after{
+                left: 50%;
+            }
+        }
+        &-backpackSlot9{
+            transform: translate(317px, -100%);
+        }
+        &-backpackSlot10{
+            transform: translate(449px, -100%);
+        }
+    }
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot2,
+        &-backpackSlot3,
+        &-backpackSlot4,
+        &-backpackSlot5,
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10{
+            top: auto;
+            &::after {
+                top: auto;
+                bottom: -17px;
+                clip-path: polygon(50% 100%, 0 0, 100% 0);
+            }
+        }
+    }
+   
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10{
+            &::after{
+                left: auto;
+                right: auto;
+            }
+         left: auto;
+         margin-top: 155px;
+        }
+        &-backpackSlot6{
+            &::after{
+              left: 28px;  
+            }
+            
+        }
+        &-backpackSlot7{
+            &::after{
+                left: 28px;  
+              }
+        }
+        &-backpackSlot8{
+            &::after{
+                left: 140px;
+              }
+        }
+        &-backpackSlot9{
+            &::after{
+                right: 28px;  
+              }
+        }
+        &-backpackSlot10{
+            &::after{
+                right: 28px;  
+              }
+        }
+    }
+
 }
