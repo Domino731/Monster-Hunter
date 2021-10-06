@@ -23,6 +23,8 @@
             justify-content: flex-end;
             align-items: center;
         }
+        @include tablet {
+        }
     }
     &__characterImg {
         width: auto;
@@ -33,6 +35,10 @@
             width: 320px;
             height: auto;
             margin-bottom: -92px;
+        }
+        @include tablet {
+            margin-bottom: 0;
+            width: 360px;
         }
     }
     &__character {
@@ -80,12 +86,20 @@
                     bottom: -6px;
                     height: 97%;
                 }
+                @include tablet {
+                    display: none;
+                }
             }
         }
         @include ipadPro {
             width: 50%;
             justify-content: space-around;
             align-items: space-evenly;
+        }
+        @include tablet {
+            width: 100%;
+            flex-direction: column;
+            height: 542px;
         }
     }
 
@@ -105,6 +119,9 @@
             height: 354px;
             flex-direction: column;
             justify-content: space-between;
+        }
+        @include tablet {
+            flex-direction: row;
         }
     }
     &__shopFrame {
@@ -140,6 +157,11 @@
             width: 229px;
             height: 186px;
         }
+        @include tablet {
+            margin-top: 0;
+            width: 239px;
+            height: 239px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -162,6 +184,9 @@
             }
             @include ipadPro {
                 height: 98%;
+            }
+            @include tablet {
+                height: 84%;
             }
         }
 
@@ -380,6 +405,11 @@
                     0% 3%
                 );
             }
+            @include tablet {
+                clip-path: none;
+                border-radius: 20px;
+                box-shadow: 15px 15px $color-gray-dark;
+            }
         }
     }
     &__itemTitle {
@@ -410,6 +440,9 @@
         @include ipadPro {
             margin-top: 8px;
         }
+        @include tablet {
+            font-size: 1.163rem;
+        }
     }
     &__itemRarity {
         display: block;
@@ -429,6 +462,10 @@
         @include desktopM {
             margin-top: 4px;
             font-size: 16px;
+        }
+        @include tablet {
+            margin-top: 6px;
+            font-size: 21px;
         }
     }
     &__itemStats {
@@ -455,6 +492,11 @@
             @include laptopM {
                 padding-bottom: 1px;
             }
+            @include tablet {
+                padding-bottom: 3px;
+                font-size: 18px;
+            }
+            
         }
         @include laptopM {
             margin-top: 4px;
@@ -511,6 +553,9 @@
             height: 55px;
             font-size: 16px;
             width: 300px;
+        }
+        @include tablet {
+            width: 235px;
         }
     }
     &__deliveryTitle {

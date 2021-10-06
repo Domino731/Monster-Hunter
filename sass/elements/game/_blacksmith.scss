@@ -8,6 +8,10 @@
      @include ipadPro {
          flex-direction: column-reverse;
      }
+     @include tablet {
+         flex-direction: column;
+
+     }
     &::-webkit-scrollbar{
         width: 0;
     }
@@ -37,6 +41,15 @@
                 height:1665px;
                 padding-top: 45px;
                 border-bottom: 10px solid $color-gray_dark;
+            }
+            @include tablet {
+                padding-top: 0;
+                overflow: auto;
+                flex-direction: column;
+                align-items: center;
+                border-bottom: none;
+                height: auto;
+                justify-content: flex-start;
             }
         }
         @include laptopL {
@@ -69,6 +82,9 @@
       margin-bottom: -54px;
       @include ipadPro {
           display: block;
+      }
+      @include tablet {
+          display: none;
       }
   }
 }

@@ -804,12 +804,12 @@ export class Blacksmith extends View {
       // blacksmith item label
 
       // set the item label
-      // this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+       this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
 
 
       // show the item label
-      //this.dom.itemLabel.classList.remove('disabled');
+      this.dom.itemLabel.classList.remove('disabled');
       //equipment
 
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
