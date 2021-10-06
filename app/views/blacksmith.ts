@@ -15,12 +15,14 @@ import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithHTMLCode, blacksmithMobileNavCode } from '../viewsHTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
-import { getBlacksmithPicks } from '../functions/getBlacksmithPicks';
 import { getNeededExp } from '../functions/getNeededExp';
 import { setCountdown } from '../functions/countdown';
-import { MobileNav } from '../general/mobileNav';
 export class Blacksmith extends View {
    private dom: {
+      blacksmithContainer: HTMLElement;
+      mobileNavFristSwitch: HTMLElement;
+      mobileNavSecondSwitch: HTMLElement;
+      profileContainer: HTMLElement;
       market: HTMLElement | null;
       marketSlots: NodeListOf<Element> | null;
       itemLabel: HTMLElement | null;
@@ -59,9 +61,13 @@ export class Blacksmith extends View {
    constructor() {
       super(),
          this.dom = {
+            blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),
+            profileContainer: document.querySelector('.blacksmith__item:first-child'),
             mobileNav: document.querySelector('.mobileNav__content'),
+            mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
+            mobileNavSecondSwitch: document.querySelector('.mobileNav__item:last-child'),
             portraitImg: document.querySelector('.profile__portraitImg'),
-            level:document.querySelector('.profile__level'),
+            level: document.querySelector('.profile__level'),
             market: document.querySelector("#market_slots"),
             marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
             itemLabel: document.querySelector('#blacksmith_item_label'),
@@ -160,7 +166,7 @@ export class Blacksmith extends View {
          clearInterval(toogleLabel)
          this.dom.backpackLabel.root.classList.remove('disabled')
       });
-      
+
       // remove label when focus was losed
       this.dom.backpackLabel.root.addEventListener('mouseleave', () => {
          this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
@@ -172,7 +178,7 @@ export class Blacksmith extends View {
 
          const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
          const backpackItemIndex: number = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
-        
+
          if (equipmentItemIndex !== -1) {
             // remove item from backpack
             this.userData.backpackItems.splice(backpackItemIndex, 1);
@@ -229,13 +235,13 @@ export class Blacksmith extends View {
          this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
          // reset equipement label styles
          this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-         
+
          // remove error
          this.dom.equipmentLabel.moveItemError.innerText = '';
 
          //find specific item, in order to create label of this item
          currentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-         
+
 
          if (element.dataset.currentItemId === undefined) {
             this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
@@ -716,8 +722,7 @@ export class Blacksmith extends View {
       updateUserData(this.userData);
    }
 
-  
-   generalOnDataChange(){
+   generalOnDataChange() {
       // set level and progress bar
       this.dom.level.innerHTML = `<div class='profile__levelProgress' 
       style='width: ${Math.floor(this.userData.exp * 100 / getNeededExp(this.userData.level))}%'></div>
@@ -734,8 +739,12 @@ export class Blacksmith extends View {
 
    getDOMElements() {
       this.dom = {
+         blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),
+         profileContainer: document.querySelector('.blacksmith__item:first-child'),
+         mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
+         mobileNavSecondSwitch: document.querySelector('.mobileNav__item:last-child'),
          mobileNav: document.querySelector('.mobileNav__content'),
-         level:document.querySelector('.profile__level'),
+         level: document.querySelector('.profile__level'),
          portraitImg: document.querySelector('.profile__portraitImg'),
          market: document.querySelector("#market_slots"),
          marketSlots: document.querySelectorAll("#market_slots .market__slotWrapper"),
@@ -747,7 +756,7 @@ export class Blacksmith extends View {
          backpack: document.querySelector('#blacksmith_backpack_slots'),
          body: document.querySelector(`body`),
          error: document.querySelector('#blacksmith__error'),
-         equipment: document.querySelector('#equipment_slots'), 
+         equipment: document.querySelector('#equipment_slots'),
          countdown: document.querySelector('#blacksmith_countdown_time'),
          equipmentLabel: {
             root: document.querySelector('#blacksmith_equipment__item_label'),
@@ -771,21 +780,38 @@ export class Blacksmith extends View {
       }
    }
 
+   toogleView() {
+      const flag: boolean = this.dom.profileContainer.classList.contains('disabled');
+       this.dom.mobileNavFristSwitch.addEventListener('click', ()=> {
+          this.dom.blacksmithContainer.classList.remove('disabled');
+          this.dom.profileContainer.classList.add('disabled');
+       });
+       this.dom.mobileNavSecondSwitch.addEventListener('click', ()=> {
+         this.dom.blacksmithContainer.classList.add('disabled');
+         this.dom.profileContainer.classList.remove('disabled');
+       });
+   }
+   mobile() {
+      if (window.innerWidth < 1024) {
+         this.dom.profileContainer.classList.add('disabled');
+         this.toogleView();
+      }
+   }
    // method for rwd works
-   rwd(){
-   const currentItem = helmetsData[1]
-     const marketItem = helmetsData[12]
-     // blacksmith item label
+   rwd() {
+      const currentItem = helmetsData[1]
+      const marketItem = helmetsData[12]
+      // blacksmith item label
 
-             // set the item label
-            // this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+      // set the item label
+      // this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
-             
 
-             // show the item label
-             //this.dom.itemLabel.classList.remove('disabled');
+
+      // show the item label
+      //this.dom.itemLabel.classList.remove('disabled');
       //equipment
-     
+
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
       // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-gloves`)
       // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
@@ -799,6 +825,7 @@ export class Blacksmith extends View {
       // this.dom.backpackLabel.root.classList.remove('disabled')
    }
    initScripts() {
+      this.mobile();
       this.setLastVisit();
       this.setNewShopCountdown();
       this.setUserBackpack();
