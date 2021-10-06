@@ -6,6 +6,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
+    @include tablet {
+        padding: 0 10px;
+    }
     &__container {
         width: 100%;
         display: flex;
@@ -46,6 +49,9 @@
             width: 288px;
             border-radius: 20px;
         }
+        @include tablet {
+            width: 233px;
+        }
     }
     &__characterImg {
         width: 100%;
@@ -77,6 +83,10 @@
             height: 40px;
             border: 4px solid  $color-gray_dark;
         }
+        @include tablet {
+            height: 36px;
+            border: 3px solid $color-gray_dark;
+        }
     }
     &__healthPoints {
         display: block;
@@ -85,6 +95,9 @@
         font-style: italic;
         letter-spacing: 0.125rem;
         color: $color-white;
+        @include tablet {
+            font-size: 19px;
+        }
     }
     &__health {
         position: absolute;
@@ -108,6 +121,9 @@
             font-size: 1.438rem;
             @include ipadPro {
                 font-size: 1.338rem;
+            }
+            @include tablet {
+                font-size: 16px;
             }
         }
         tr {
@@ -304,6 +320,9 @@
         @include ipadPro {
             animation: 0.8s an__monster_attack-ipadPro forwards;
         }
+        @include tablet {
+            animation: 0.8s an__monster_attack-tablet forwards;
+        }
     }
     &__explosionWrapper {
         display: flex;
@@ -360,6 +379,9 @@
         @include ipadPro {
             animation: 1.5s an__sword_attack-ipadPro forwards;
         }
+        @include tablet {
+            animation: 1.5s an__sword_attack-tablet forwards;
+        }
     }
     @include laptopS {
         top: 70px;
@@ -369,6 +391,9 @@
     }
     @include ipadPro {
         top: 130px;
+    }
+    @include tablet {
+        top: 90px;
     }
 }
 // monster attack
@@ -415,6 +440,11 @@
 @keyframes an__monster_attack-ipadPro{
     100% {
         transform: translateX(-370px);
+    }
+}
+@keyframes an__monster_attack-tablet{
+    100% {
+        transform: translateX(-270px);
     }
 }
 
@@ -469,6 +499,15 @@
         transform: translate(590px, 0%) scale(100%);
     }
 }
+@keyframes an__sword_attack-tablet {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(480px, 0%) scale(100%);
+    }
+}
+
 
 @keyframes an__attack_explosion {
     100% {
