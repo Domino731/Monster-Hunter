@@ -3,6 +3,7 @@
     background-image: url("/images/background_friends.jpg");
     background-size: 100% 100%;
     display: flex;
+    
     .searchFriend__input {
         @include desktopS {
             width: 353px;
@@ -31,6 +32,9 @@
             background: rgba(255, 255, 255, 0.4);
             padding: 10px;
             backdrop-filter: blur(8px);
+        }
+        @include tablet {
+            width: 100%;
         }
     }
     &__topBar {
@@ -296,6 +300,11 @@
         @include ipadPro {
             height: 325px;
         }
+        @include tablet {
+            width: 33.3% ;
+            height: 342px;
+           
+        }
     }
 }
 
@@ -346,6 +355,9 @@
         }
         @include ipadPro {
             height: 216px;
+        }
+        @include tablet {
+            height: 227px;
         }
     }
     &__portrait {
@@ -421,6 +433,9 @@
         @include ipadPro {
             height: 42px;
         }
+        @include tablet {
+            height: 50px;
+        }
     }
     &__actionBtn {
         display: flex;
@@ -467,6 +482,9 @@
         }
         @include ipadPro {
             height: 31px;
+        }
+        @include tablet {
+            height: 33px;
         }
     }
 }
@@ -527,6 +545,9 @@
     }
     @include ipadPro {
         border-left: 10px solid $color-gray-dark;
+    }
+    @include tablet {
+        border-left: none;
     }
 }
 

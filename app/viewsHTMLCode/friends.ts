@@ -6,7 +6,12 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
     
     <section class="friends">
 
-    <div class="friends__itemWrapper">
+
+    <div class='closeIcon closeIcon__chat disabled'> 
+    <img src='./images/close.png' />
+     </div>
+
+    <div class="friends__itemWrapper" id='friends_container'>
         <div class="friends__topBar">
 
             <div class="friends__searchWrapper">
