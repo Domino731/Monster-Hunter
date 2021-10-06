@@ -4,6 +4,9 @@
     height: 100%;
     background-size: 100% 100%;
     overflow: auto;
+    @include tablet {
+            padding-bottom: 40px;
+        }
     &__wrapper {
         display: flex;
         align-items: center;
@@ -25,6 +28,7 @@
             align-content: flex-start;
             padding-top: 23px;
         }
+        
     }
     &__userGoldWrapper {
         display: flex;
@@ -115,6 +119,10 @@
             &:nth-child(3), &:nth-child(4){
                 margin-top: 36px;
             }
+        }
+        @include tablet {
+            height: 490px;
+        
         }
     }
     &__current {
