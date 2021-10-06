@@ -7,6 +7,10 @@
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
      @include ipadPro {
         grid-template-rows: repeat(5, 1fr);
         grid-template-columns: repeat(2, 1fr);
@@ -105,6 +109,9 @@
         @include ipadPro{
         font-size: 44px;
         }
+        @include tablet {
+            font-size: 30px;
+        }
     }
     &__text {
         font-size: 1.25rem;
@@ -113,6 +120,10 @@
         @include ipadPro {
             font-size:  1.9rem;
             line-height: 1.7rem;
+        }
+        @include tablet {
+            font-size: 1.27rem;
+            line-height: 1.4rem;
         }
     }
     &__actionBar {
@@ -152,6 +163,9 @@
         }
         @include ipadPro {
             font-size: 1.875rem;
+        } 
+        @include tablet {
+            font-size: 1.375rem;
         }
     }
     &__countdownWrapper {
@@ -168,6 +182,9 @@
             @include ipadPro {
                 font-size: 1.85rem;
             }
+            @include tablet {
+                font-size: 1.55rem;
+            }
         }
     }
     &__countdown {
@@ -177,6 +194,9 @@
         word-spacing: 0.125rem;
         @include ipadPro {
             font-size: 2.875rem;
+        }
+        @include tablet {
+            font-size: 2.175rem;
         }
     }
 }
@@ -191,6 +211,7 @@
             grid-column: 1/-1;
             grid-row: 3/-1;
         }
+       
     }
     &__itemImg {
         width: 141px;
@@ -208,6 +229,10 @@
         @include ipadPro {
             width: 140px;
             margin-bottom: 136px;
+        }
+        @include tablet {
+            width: 107px;
+            margin-bottom: 132px;
         }
     }
 }
@@ -236,6 +261,10 @@
         width: 760px;
         height: 760px;
         border: 10px solid #ffd26a;
+    }
+    @include tablet{
+        width: 550px;
+        height: 550px;
     }
     &-animation {
         animation: 10s an__spinning_wheel_rotate infinite;
@@ -266,6 +295,10 @@
         @include ipadPro {
             width: 308px;
             left: 217px;
+        }
+        @include tablet {
+            width: 221px;
+            left: 154px;
         }
     }
 
@@ -349,6 +382,12 @@
         @include desktopM {
             width: 70%;
         }
+        @include tablet {
+            width: 46%;
+        }
+    }
+    @include tablet {
+        width: 270px;
     }
 }
 @keyframes an__spinning_wheel_rotate {
