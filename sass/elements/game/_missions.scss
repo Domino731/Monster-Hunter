@@ -16,6 +16,9 @@
         justify-content: space-between;
         align-items: flex-end;
         position: relative;
+        @include tablet {
+            width: 43%;
+        }
     }
     &__countdownWrapper {
         position: absolute;
@@ -39,6 +42,11 @@
             top: 8px;
             font-size: 22px;
         }
+        @include tablet {
+            left: 43px;
+            top: 4px;
+            font-size: 16px;
+        }
     }
     &__detailsWrapper {
         width: 50%;
@@ -48,6 +56,9 @@
         justify-content: center;
         @include laptopM {
             height: 98%;
+        }
+        @include tablet {
+            width: 57%;
         }
     }
     &__details {
@@ -64,6 +75,9 @@
         @include laptopM {
             border: 7px solid #805333;
             box-shadow: 7px 7px #a56a43 inset, -6px -6px #a56a43 inset;
+        }
+        @include tablet {
+            box-shadow: 13px 13px #a56a43 inset, -12px -13px #a56a43 inset;
         }
     }
     &__listWrapper {
@@ -130,15 +144,21 @@
         }
         @include laptopM {
             width: 39px;
-            border: 4px solid #ffcd00;
+            border: 4px solid $color-gold;
             margin-bottom: 14px;
             margin-left: 5px;
         }
         @include ipadPro {
             width: 61px;
-            border: 8px solid #ffcd00;
+            border: 8px solid $color-gold;
             margin-bottom: 15px;
             margin-left: 10px;
+        }
+        @include tablet {
+            width: 47px;
+            border: 5px solid $color-gold;
+            margin-bottom: 20px;
+            margin-left: 4px;
         }
     }
     &__missionError {
@@ -243,7 +263,7 @@
         padding: 0 41px;
         padding-top: 0.75rem;
         font-family: $fontFamily-medivalSharp;
-        &::-webkit-scrollbar{
+        &::-webkit-scrollbar {
             width: 0;
         }
         @include desktopS {
@@ -265,6 +285,9 @@
             height: 100%;
             padding: 0px 14px;
         }
+        @include tablet {
+            width: 79%;
+        }
     }
     &__general {
         display: flex;
@@ -277,6 +300,10 @@
         @include ipadPro {
             height: 115px;
         }
+        @include tablet {
+            flex-direction: column;
+            height: auto;
+        }
     }
     &__detailsWrapper {
         height: 90%;
@@ -284,6 +311,9 @@
         overflow: auto;
         &::-webkit-scrollbar {
             width: 0;
+        }
+        @include tablet {
+            height: 98%;
         }
     }
     &__monsterWrapper {
@@ -302,6 +332,13 @@
         }
         @include laptopS {
             margin-right: 20px;
+        }
+        @include tablet {
+            display: block;
+            width: 150px;
+            height: auto;
+            margin: 0;
+            margin: 10px auto;
         }
     }
 
@@ -356,6 +393,9 @@
             cursor: pointer;
             letter-spacing: 0.065rem;
         }
+        @include tablet {
+            width: 100%;
+        }
     }
 }
 @keyframes showPapyrus {
@@ -403,12 +443,19 @@
             height: 45px;
             width: 27px;
         }
+        @include tablet {
+            height: 39px;
+            width: 23px;
+        }
     }
     &::before {
         border-radius: 15px 0 0 15px;
         left: 21px;
         @include laptopS {
-            before: 16px;
+            left: 16px;
+        }
+        @include tablet {
+            left: 14px;
         }
     }
     &::after {
@@ -416,6 +463,9 @@
         right: 21px;
         @include laptopS {
             right: 16px;
+        }
+        @include tablet {
+            right: 14px;
         }
     }
     @include desktopS {
@@ -432,5 +482,9 @@
     @include ipadPro {
         box-shadow: -83px 0 #b27a49 inset;
         height: 25px;
+    }
+    @include tablet {
+        box-shadow: -72px 0 #b27a49 inset;
+        height: 18px;
     }
 }
