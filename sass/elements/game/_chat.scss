@@ -15,7 +15,7 @@
             height: 30px;
             border-bottom: 3px solid $color-blue;
         }
-        @include laptopM{
+        @include laptopM {
             height: 27px;
         }
         @include laptopS {
@@ -24,6 +24,9 @@
         @include ipadPro {
             height: 39px;
             border-bottom: 4px solid $color-blue;
+        }
+        @include tablet {
+            height: 48px;
         }
     }
     &__friendNick {
@@ -51,8 +54,8 @@
         padding-top: 10px;
         height: calc(100% - 84px);
         overflow: auto;
-        border-left: 2px solid  $color-gray-dark;
-        border-right:  2px solid $color-gray-dark;
+        border-left: 2px solid $color-gray-dark;
+        border-right: 2px solid $color-gray-dark;
         &::-webkit-scrollbar {
             width: 3px;
         }
@@ -69,7 +72,9 @@
         @include ipadPro {
             height: calc(100% - 93px);
         }
-       
+        @include tablet {
+            height: calc(100% - 115px);
+        }
     }
     &__botBar {
         position: relative;
@@ -78,7 +83,7 @@
         height: 47px;
         border-top: 4px solid $color-blue;
         @include desktopS {
-            border-radius: 0 0  12px 12px;
+            border-radius: 0 0 12px 12px;
             height: 40px;
             border-top: 3px solid $color-blue;
         }
@@ -89,7 +94,9 @@
             height: 53px;
             border-top: 4px solid $color-blue;
         }
-        
+        @include tablet {
+            height: 65px;
+        }
     }
     &__emojiIcon {
         width: 10%;
@@ -161,7 +168,7 @@
         max-height: 400px;
         padding: 5px 19px;
         border: 2px solid $color-gray_dark;
-        
+
         img {
             display: inline-block;
             width: 1.188rem;
@@ -212,6 +219,9 @@
         @include ipadPro {
             height: 30px;
         }
+        @include tablet {
+            height: 38px;
+        }
     }
     &__emojiContainer {
         z-index: 2;
@@ -242,7 +252,7 @@
         width: 10%;
     }
     &__portrait {
-         width:  100%;
+        width: 100%;
         height: 72px;
         border: 3px solid $color-gray_dark;
         border-radius: 50px;
@@ -272,6 +282,9 @@
             height: 47px;
             border: 3px solid $color-gray_dark;
         }
+        @include tablet {
+            height: 74px;
+        }
     }
     &__date {
         font-size: 20px;
@@ -285,7 +298,7 @@
         flex-direction: column;
         font-size: 10px;
         .message__message__cloud:first-child {
-          margin-top: 0;
+            margin-top: 0;
         }
         &-friend {
             padding-left: 7px;
@@ -295,10 +308,10 @@
             padding-right: 7px;
             align-items: flex-end;
         }
-        strong{
+        strong {
             font-size: 1.4em;
-        };
-        @include desktopS{
+        }
+        @include desktopS {
             font-size: 8px;
         }
         @include laptopM {
@@ -306,6 +319,9 @@
         }
         @include ipadPro {
             font-size: 11px;
+        }
+        @include tablet {
+            font-size: 12px;
         }
     }
     &__nick {
@@ -320,11 +336,11 @@
         padding: 0.6em;
         margin-bottom: 0.4em;
         font-size: 1.8em;
-        word-wrap:break-word;
-        div{
+        word-wrap: break-word;
+        div {
             display: inline;
         }
-        img{
+        img {
             width: 1.125rem;
             height: 1.125rem;
             object-fit: cover;
@@ -332,7 +348,7 @@
         &-friend {
             border-radius: 0 1.375rem 1.375rem 1.375rem;
             color: $color-black;
-            background:$color-white ;
+            background: $color-white;
         }
         &-user {
             border-radius: 1.375rem 0 1.375rem 1.375rem;

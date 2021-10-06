@@ -260,17 +260,22 @@ export class Friends extends View {
     this.hideFriendView();
     this.initScripts();
   }
+  // for rwd develop
+  rwd(){
+    // const x = new Chat(this.dom.branch, this.userData, this.friendsList[0]);
+        // this.shrinkFriendsList();
+        //
+
+        // 
+  }
   initScripts() {
     this.getFriendsData()
       .then(() => {
 
         this.renderFriendsList();
         this.getDOMElements();
-        // for rwd develop
-        // const x = new Chat(this.dom.branch, this.userData, this.friendsList[0]);
-        // this.shrinkFriendsList();
-        //
-
+        
+        
         this.hideBranchEvent();
         this.showFriendProfile();
         this.showFormsEvents();
@@ -279,6 +284,7 @@ export class Friends extends View {
         this.closeViewEvent();
         this.showChat();
         this.searchFriendEvent();
+        this.rwd();
       })
 
   }
