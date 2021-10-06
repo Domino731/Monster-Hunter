@@ -1,5 +1,5 @@
 import { isThisTypeNode } from 'typescript';
-import { getProfileHTMLCode } from '../viewsHTMLCode/profile';
+import { getProfileHTMLCode, profileMobileNavCode } from '../viewsHTMLCode/profile';
 import { View } from './view';
 import { updateUserData } from '../firebase/operations';
 import { potionsData } from '../properties/shop/potions';
@@ -72,6 +72,10 @@ export class Profile extends View {
         }
         level: HTMLElement
         potionLabel: HTMLElement
+        profileContainer: HTMLElement;
+        backpackContainer: HTMLElement;
+        mobileNavFristSwitch: HTMLElement;
+        mobileNavSecondSwitch: HTMLElement;
     }
 
     constructor() {
@@ -80,9 +84,12 @@ export class Profile extends View {
         this.potionFirstTimeInterval = null
         this.potionSecondTimeInterval = null
         this.dom = {
+            mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
+            mobileNavSecondSwitch: document.querySelector('.mobileNav__item:last-child'),
+            profileContainer: document.querySelector('.profile__item:first-child'),
+            backpackContainer: document.querySelector('.profile__item:last-child'),
             potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
-
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
                 strengthCost: document.querySelector('#profile_strength_stat .profile__item--cost strong'),
                 strengthBtn: document.querySelector('#profile_strength_stat .profile__item--buyBtn button'),
@@ -572,9 +579,14 @@ export class Profile extends View {
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
+        this.mobileNav.innerHTML = profileMobileNavCode;
     }
     getDOMElements() {
         this.dom = {
+            mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
+            mobileNavSecondSwitch: document.querySelector('.mobileNav__item:last-child'),
+            profileContainer: document.querySelector('.profile__item:first-child'),
+            backpackContainer: document.querySelector('.profile__item:last-child'),
             potionLabel: document.querySelector('.profile__generalLabelWrapper'),
             stats: {
                 strength: document.querySelector('#profile_strength_stat .profile__item--amount'),
@@ -631,8 +643,25 @@ export class Profile extends View {
             description: document.querySelector('.profile__description textarea')
         }
     }
+    toogleView() {
+        this.dom.mobileNavFristSwitch.addEventListener('click', () => {
+            this.dom.backpackContainer.classList.add('disabled');
+            this.dom.profileContainer.classList.remove('disabled');
+        });
+        this.dom.mobileNavSecondSwitch.addEventListener('click', () => {
+            this.dom.backpackContainer.classList.remove('disabled');
+            this.dom.profileContainer.classList.add('disabled');
+        });
+    }
+    mobile() {
+        if (window.innerWidth < 1024) {
+            this.dom.profileContainer.classList.add('disabled');
+            this.toogleView();
+        }
+    }
 
-    // for rwd works
+
+    // for rwd development
     rwd() {
         // equipment
         const currentItem = helmetsData[12]
@@ -641,19 +670,20 @@ export class Profile extends View {
         // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
         // this.dom.equipmentLabel.root.classList.remove('disabled')
         // backpack
-        //   const equipmentItem = this.userData.equipmentItems[0]
-        //   this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
-        //   this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${6}`)
-        //   this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
-        //   this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
-        //   this.dom.backpackLabel.root.classList.remove('disabled')
+          const equipmentItem = this.userData.equipmentItems[0]
+          this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
+          this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${6}`)
+          this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
+          this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
+          this.dom.backpackLabel.root.classList.remove('disabled')
         // potions
-            const firstPotion = potionsData[4]
-            this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-            this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-           this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
+        // const firstPotion = potionsData[4]
+        // this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
+        // this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
     }
     initScripts() {
+        this.mobile();
         this.labelForBackpackEvent();
         this.setUserEquipment();
         this.setGeneral();

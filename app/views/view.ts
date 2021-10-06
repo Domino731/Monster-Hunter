@@ -11,12 +11,14 @@ import { monstersData } from '../properties/missions/monsters';
 
 export class View {
    protected userData: UserData | null
-   protected root: HTMLElement
-   protected userStats: FullUserStats
-   protected userFriends: SearchedUserData[]
-   protected loadingContainer: HTMLElement
-   protected loadingMonster: HTMLImageElement
+   protected root: HTMLElement;
+   protected userStats: FullUserStats;
+   protected userFriends: SearchedUserData[];
+   protected loadingContainer: HTMLElement;
+   protected loadingMonster: HTMLImageElement;
+   protected mobileNav: HTMLElement
    constructor() {
+      this.mobileNav = document.querySelector('.mobileNav__content')
       this.userData = null
       this.userFriends = []
       this.userStats = {
@@ -279,9 +281,13 @@ export class View {
       this.loadingContainer.classList.add('disabled');
    }
 
+   clearMobileNav(){
+      this.mobileNav.innerHTML = ''
+   }
 
    // initialization 
    init() {
+      this.clearMobileNav();
       this.addLoading();
       this.getUserData()
          .then(() => {

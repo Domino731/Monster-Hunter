@@ -781,7 +781,6 @@ export class Blacksmith extends View {
    }
 
    toogleView() {
-      const flag: boolean = this.dom.profileContainer.classList.contains('disabled');
        this.dom.mobileNavFristSwitch.addEventListener('click', ()=> {
           this.dom.blacksmithContainer.classList.remove('disabled');
           this.dom.profileContainer.classList.add('disabled');
@@ -793,11 +792,11 @@ export class Blacksmith extends View {
    }
    mobile() {
       if (window.innerWidth < 1024) {
-         this.dom.blacksmithContainer.classList.add('disabled');
-        // this.dom.profileContainer.classList.add('disabled');
+         this.dom.profileContainer.classList.add('disabled');
          this.toogleView();
       }
    }
+
    // method for rwd works
    rwd() {
       const currentItem = helmetsData[12]

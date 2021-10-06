@@ -4,7 +4,7 @@ import { UserData } from './../types';
 import { ShopItem } from '../types';
 import { weaponsData } from '../properties/shop/weapons';
 import { getNeededExp } from '../functions/getNeededExp';
-export const getProfileHTMLCode = (user: UserData) : string => {
+export const getProfileHTMLCode = (user: UserData): string => {
     return `
     <section class='game__section profile'>
 
@@ -223,3 +223,24 @@ export const getProfileHTMLCode = (user: UserData) : string => {
 </section>
     `
 }
+export const profileMobileNavCode = `
+<div class='mobileNav__item'>
+<div class='mobileNav__itemIcon'> 
+ <img src='./images/mobileNav_blacksmith_knight.png' />
+</div>
+<div class='mobileNav__itemName'> 
+ Profile
+</div>
+</div>
+
+<div class='mobileNav__item'>
+<div class='mobileNav__itemIcon'> 
+   <img src='./images/mobileNav_profile_chest.png' />
+</div>
+<div class='mobileNav__itemName'> 
+   Backpack
+</div>
+</div>
+
+
+`

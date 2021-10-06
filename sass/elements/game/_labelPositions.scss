@@ -920,7 +920,39 @@
     }
 
 }
-// equipment -> tablet
+// profile backpack -> tablet
 @include tablet {
+    .profile__backpackLabel {
+        &-1 {
+          transform: translate(4px, -16px);
+        }
+        &-2 {
+            transform: translate(139px, -16px);
+        }
+        &-3 {
+            transform: translate(234px, -16px);
+        }
+        &-4 {
+            transform: translate(323px, -16px);
+        }
+        &-5 {
+            transform: translate(450px, -16px);
+        }
     
+        &-6 {
+            transform: translate(4px, 128px);
+        }
+        &-7 {
+            transform: translate(139px, 128px);
+        }
+        &-8 {
+            transform: translate(234px, 128px);
+        }
+        &-9 {
+            transform: translate(323px, 128px);
+        }
+        &-10 {
+            transform: translate(450px, 128px);
+        } 
+    }
 }
