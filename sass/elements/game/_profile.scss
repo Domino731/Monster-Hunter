@@ -289,6 +289,9 @@
             @include ipadPro {
                 left: 122px;
             }
+            @include tablet {
+                left: 192px;
+            }
         }
         &-weapon {
             top: 0;
@@ -315,6 +318,9 @@
             }
             @include ipadPro {
                 right: 122px;
+            }
+            @include tablet {
+                right: 192px;
             }
         }
 
@@ -344,6 +350,9 @@
             }
             @include ipadPro {
                 left: 122px;
+            }
+            @include tablet {
+                left: 192px;
             }
         }
 
@@ -376,6 +385,9 @@
             @include ipadPro {
                 right: 122px;
             }
+            @include tablet {
+                right: 192px;
+            }
         }
 
         &-gloves {
@@ -404,6 +416,9 @@
             @include ipadPro {
                 left: 122px;
             }
+            @include tablet {
+                left: 192px;
+            }
         }
 
         &-special {
@@ -431,6 +446,9 @@
             }
             @include ipadPro {
                 right: 122px;
+            }
+            @include tablet {
+                right: 192px;
             }
         }
         .itemTitle {

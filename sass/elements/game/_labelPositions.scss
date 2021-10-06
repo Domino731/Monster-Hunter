@@ -820,7 +820,7 @@
     }
 }
 
-// backpack -> tablet 
+// blacksmith backpack -> tablet 
 @include tablet {
     .profile__backpack .profile__itemSpecs{
         &-backpackSlot1,  &-backpackSlot6{
@@ -919,4 +919,8 @@
         }
     }
 
+}
+// equipment -> tablet
+@include tablet {
+    
 }
