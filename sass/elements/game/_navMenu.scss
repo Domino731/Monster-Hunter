@@ -77,6 +77,9 @@
             margin-top: 10px;
             height: 61px;
         }
+        @include tablet {
+            height: 60px;
+        }
     }
 
     &__icon {
@@ -128,6 +131,7 @@
             padding-left: 21px;
             font-weight: bold;
         }
+       
         &::after {
             content: "";
             display: block;
@@ -144,6 +148,9 @@
             }
             @include ipadPro {
                 width: 157px;
+            }
+            @include tablet {
+                width: 78px;
             }
         }
         &:hover::after {
