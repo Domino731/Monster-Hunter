@@ -270,6 +270,9 @@
         @include ipadPro {
             transform: translate(33px, -96%);
         }
+        @include tablet {
+            transform: translate(204px, -92%);
+        }
     }
     &-2 {
         transform: translate(454px, -100%);
@@ -291,6 +294,9 @@
         @include ipadPro {
             transform: translate(160px, -96%);
         }
+        @include tablet {
+            transform: translate(402px, -92%);
+        }
     }
     &::after {
         width: 30px;
@@ -311,7 +317,7 @@
         @include laptopS {
             width: 18px;
             height: 18px;
-            bottom: -18px;
+            bottom: -16px;
         }
     }
     @include laptopL {
