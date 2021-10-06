@@ -18,6 +18,9 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        @include tablet {
+            background-size: 167% 100%;
+        }
     }
 
     &__item {
@@ -374,6 +377,10 @@
             @include laptopS {
                 width: 3.3rem;
                 line-height: 3.8rem;
+            }
+            @include tablet {
+                width: 2.9rem;
+                line-height: 2.8rem;
             }
         }
         @include laptopM {

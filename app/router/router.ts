@@ -12,7 +12,6 @@ import { Guard } from '../views/guard';
 import { MonsterFight } from '../views/monsterFight';
 import { Tavern } from '../views/tavern';
 import { AdminPanel } from '../views/adminPanel';
-import firebase from 'firebase/app';
 let x;
 export const router = async () => {
     const routes: route[] = [
@@ -108,7 +107,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Wizard()
+    const developmentRender = new Guard()
     window.addEventListener("popstate", router);
 };
 
