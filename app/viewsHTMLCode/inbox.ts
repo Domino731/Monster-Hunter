@@ -3,8 +3,10 @@ import { formatMailDate } from '../functions/formatDate';
 export const getInboxHTMLCode = (user: UserData) : string => {
     return `
     <section class='inbox'>
-
-           <div class='inbox__item'>
+    <div class='inbox__closeMail disabled'> 
+    <img src='./images/close.png' />
+     </div>
+           <div class='inbox__item' id='mail-list'>
              <div class='inbox__header'>
                 <img src='./images/inbox_icon_message.png' alt='_message' class='inbox__mailIcon'/>
                 <strong class='inbox__mailAmount'>${user.inbox.length}</strong>
@@ -37,6 +39,7 @@ export const getInboxHTMLCode = (user: UserData) : string => {
            <div class='inbox__item' id='mail-container'>
         
            </div>
+           
         </section>
     `
 }

@@ -278,10 +278,10 @@ export class View {
    removeLoading(){
       this.loadingContainer.classList.add('disabled');
    }
+
+
    // initialization 
    init() {
-      console.log('widht', window.innerWidth)
-      console.log('height', window.innerHeight)
       this.addLoading();
       this.getUserData()
          .then(() => {
