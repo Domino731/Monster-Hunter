@@ -73,6 +73,7 @@ export class Wizard extends View {
         updateUserData(this.userData)
     }
     startSpinningEvent() {
+       
         this.dom.spinBtn.addEventListener('click', () => {
 
             // check if user's backpack has availble slots
@@ -88,6 +89,9 @@ export class Wizard extends View {
                     this.dom.wonItemLabel.innerHTML = getWonItemLabel(this.userData.magicWheel.wonItem);
                     this.dom.wonItemLabel.classList.remove('disabled');
                 }, 10000);
+                // scroll to spinning wheel (mainly for mobile devices)
+                const wheel : HTMLElement  =  this.dom.spinningWheel.parentElement.parentElement;
+                wheel.scrollTop =  wheel.scrollHeight;
                 this.addWonItem();
             }
             else {
@@ -108,15 +112,15 @@ export class Wizard extends View {
         const foo = helmetsData[12]
         this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
         // spin the wheel
-        setTimeout(() => {
-            this.dom.spinningCircle.classList.add('circle-animation');
-        }, 7000);
+      //  setTimeout(() => {
+       //     this.dom.spinningCircle.classList.add('circle-animation');
+      //  }, 7000);
         // remove spinning animation and show won item
-        setTimeout(() => {
-            this.dom.spinningWheel.classList.remove('spinningWheel__content-animation');
+       // setTimeout(() => {
+         //   this.dom.spinningWheel.classList.remove('spinningWheel__content-animation');
             this.dom.wonItemLabel.innerHTML = getWonItemLabel(foo);
-            this.dom.wonItemLabel.classList.remove('disabled');
-        }, 10000);
+        //    this.dom.wonItemLabel.classList.remove('disabled');
+       // }, 10000);
     }
     onDataChange() { }
     getDOMElements() {
