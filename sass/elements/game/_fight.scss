@@ -6,14 +6,39 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    
     @include tablet {
-        padding: 0 10px;
+        padding: 0;
+    }
+    @media screen and (max-height: 500px) {
+        align-items: flex-start;
+        padding-bottom: 20px;
     }
     &__container {
         width: 100%;
         display: flex;
         position: relative;
         justify-content: space-between;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+       
+        @include tablet {
+            width: 758px;
+            margin: 0 auto;
+            overflow: auto;
+        }
+        @include mobileL {
+            width: 600px;
+        }
+        @media screen and (max-width: 599px) {
+            width: 420px;
+        }
     }
 
     &__characterWrapper {
@@ -29,6 +54,9 @@
         align-items: center;
         &-monster {
             position: relative;
+        }
+        @media screen and (max-height: 500px) {
+            margin-top: 20px; 
         }
         @include desktopM {
             width: 310px;
@@ -51,6 +79,10 @@
         }
         @include tablet {
             width: 233px;
+        }
+        @media screen and (max-width: 599px) {
+            border-radius: 10px;
+            width: 159px;
         }
     }
     &__characterImg {
@@ -81,11 +113,15 @@
         }
         @include ipadPro {
             height: 40px;
-            border: 4px solid  $color-gray_dark;
+            border: 4px solid $color-gray_dark;
         }
         @include tablet {
             height: 36px;
             border: 3px solid $color-gray_dark;
+        }
+        @media screen and (max-width: 599px) {
+            height: 27px;
+            border: 2px solid #343a40;
         }
     }
     &__healthPoints {
@@ -97,6 +133,9 @@
         color: $color-white;
         @include tablet {
             font-size: 19px;
+        }
+        @media screen and (max-width: 599px) {
+            font-size: 13px;
         }
     }
     &__health {
@@ -124,6 +163,9 @@
             }
             @include tablet {
                 font-size: 16px;
+            }
+            @media screen and (max-width: 599px) {
+                font-size: 11px;
             }
         }
         tr {
@@ -158,7 +200,6 @@
             width: 170px;
             height: 170px;
         }
-       
     }
     &__explosion {
         transform: scale(0);
@@ -208,6 +249,9 @@
         &:hover {
             backdrop-filter: blur(4px);
         }
+        @media screen and (max-height: 500px) {
+            margin-top: 20px; 
+        }
         @include desktopS {
             padding: 6px;
             border-radius: 16px;
@@ -226,6 +270,11 @@
             border: 10px solid $color-gold;
             border-radius: 20px;
             padding: 10px;
+        }
+        @include tablet {
+           
+            width: 318px;
+            border-radius: 16px;
         }
     }
     &__summaryTitle {
@@ -323,6 +372,12 @@
         @include tablet {
             animation: 0.8s an__monster_attack-tablet forwards;
         }
+        @include mobileL {
+            animation: 0.8s an__monster_attack-mobileXL forwards;
+        }
+        @media screen and (max-width: 599px) {
+            animation: 0.8s an__monster_attack-mobileL forwards;
+        }
     }
     &__explosionWrapper {
         display: flex;
@@ -340,6 +395,11 @@
         @include laptopS {
             width: 150px;
             height: 150px;
+        }
+        @media screen and (max-width: 599px) {
+            width: 100px;
+            height: 100px;
+            left: -140px;
         }
     }
     &__explosionImg {
@@ -382,6 +442,12 @@
         @include tablet {
             animation: 1.5s an__sword_attack-tablet forwards;
         }
+        @include mobileL {
+            animation: 1.5s an__sword_attack-mobileXl forwards;
+        }
+        @media screen and (max-width: 599px) {
+            animation: 1.5s an__sword_attack-mobileL forwards;
+        }
     }
     @include laptopS {
         top: 70px;
@@ -394,6 +460,12 @@
     }
     @include tablet {
         top: 90px;
+    }
+    @media screen and (max-width: 599px) {
+        height: 120px;
+        width: 120px;
+        left: 50px;
+        top: 60px;
     }
 }
 // monster attack
@@ -437,16 +509,28 @@
         transform: translateX(-330px);
     }
 }
-@keyframes an__monster_attack-ipadPro{
+@keyframes an__monster_attack-ipadPro {
     100% {
         transform: translateX(-370px);
     }
 }
-@keyframes an__monster_attack-tablet{
+@keyframes an__monster_attack-tablet {
     100% {
         transform: translateX(-270px);
     }
 }
+
+@keyframes an__monster_attack-mobileXL {
+    100% {
+        transform: translateX(-120px);
+    }
+}
+@keyframes an__monster_attack-mobileL {
+    100% {
+        transform: translateX(-90px);
+    }
+}
+
 
 // user attack
 @keyframes an__sword_attack {
@@ -505,6 +589,24 @@
     }
     100% {
         transform: translate(480px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-mobileXl {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(290px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-mobileL {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(230px, 0%) scale(100%);
     }
 }
 

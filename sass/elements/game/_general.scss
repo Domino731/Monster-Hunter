@@ -60,6 +60,9 @@
     @include ipadPro {
         height: calc(100% - 68px);
     }
+    @include tablet {
+       
+    }
     @include mobileL {
         height: calc(100% - 52px);
     }

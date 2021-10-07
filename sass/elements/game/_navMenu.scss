@@ -156,7 +156,7 @@
             padding-left: 21px;
             font-weight: bold;
         }
-       @include tablet {
+       @include mobileL {
            display: flex;
            align-items: flex-end;
            justify-content: center;

@@ -4,6 +4,13 @@
     background-size: 100% 50%;
     background-repeat: no-repeat;
     background-position: top;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    @include mobileL {
+        min-height: 625px;
+    }
     &__item {
         width: 100%;
         height: 50%;
@@ -18,6 +25,9 @@
         position: relative;
         @include tablet {
             width: 43%;
+        }
+        @media screen and (max-width: 600px) {
+            width: 34%;
         }
     }
     &__countdownWrapper {
@@ -47,6 +57,12 @@
             top: 4px;
             font-size: 16px;
         }
+        @include mobileL {
+            left: 33px;
+            top: 4px;
+            font-size: 13px;
+            width: 132px;
+        }
     }
     &__detailsWrapper {
         width: 50%;
@@ -59,6 +75,9 @@
         }
         @include tablet {
             width: 57%;
+        }
+        @media screen and (max-width: 600px) {
+            width: 66%;
         }
     }
     &__details {
@@ -77,7 +96,10 @@
             box-shadow: 7px 7px #a56a43 inset, -6px -6px #a56a43 inset;
         }
         @include tablet {
-            box-shadow: 13px 13px #a56a43 inset, -12px -13px #a56a43 inset;
+            box-shadow: 13px 13px #a56a43 inset, -13px -13px #a56a43 inset;
+        }
+        @include mobileL {
+            box-shadow: 7px 7px #a56a43 inset, -7px -7px #a56a43 inset;
         }
     }
     &__listWrapper {
@@ -104,6 +126,10 @@
             margin-top: 23px;
             font-size: 59px;
         }
+        @include mobileL {
+            margin-top: 8px;
+    font-size: 36px;
+        }
     }
 
     &__papyrus {
@@ -127,6 +153,10 @@
         @include ipadPro {
             margin-top: 59px;
             width: 30%;
+        }
+        @include mobileL {
+            margin-top: 26px;
+            width: 22%;
         }
     }
     &__willingnessBarWrapper {
@@ -159,6 +189,10 @@
             border: 5px solid $color-gold;
             margin-bottom: 20px;
             margin-left: 4px;
+        }
+        @include mobileL {
+            width: 27px;
+            border: 3px solid #ffcd00;
         }
     }
     &__missionError {
@@ -340,6 +374,9 @@
             margin: 0;
             margin: 10px auto;
         }
+        @media screen and (max-width: 600px) {
+            width: 115px;
+        }
     }
 
     &__title {
@@ -447,6 +484,10 @@
             height: 39px;
             width: 23px;
         }
+        @include mobileL {
+            height: 30px;
+            width: 17px;
+        }
     }
     &::before {
         border-radius: 15px 0 0 15px;
@@ -457,6 +498,12 @@
         @include tablet {
             left: 14px;
         }
+        @include mobileL {
+            border-radius: 8px 0 0 8px;
+        }
+        @media screen and (max-width: 600px){
+            left: 8px;
+        }
     }
     &::after {
         border-radius: 0 15px 15px 0;
@@ -466,6 +513,12 @@
         }
         @include tablet {
             right: 14px;
+        }
+        @include mobileL {
+            border-radius: 0 8px 8px 0;
+        }
+        @media screen and (max-width: 600px){
+            right: 8px;
         }
     }
     @include desktopS {
@@ -486,5 +539,9 @@
     @include tablet {
         box-shadow: -72px 0 #b27a49 inset;
         height: 18px;
+    }
+    @include mobileL {
+        box-shadow: -48px 0 #b27a49 inset;
+        height: 13px;
     }
 }
