@@ -654,6 +654,9 @@
         @include tablet {
             transform: translate(101px, -92%);
         }
+        @include mobileL {
+            transform: translate(45px, -92%);
+        }
     }
     .potion__label-2 {
         @include laptopL {
@@ -670,6 +673,9 @@
         }
         @include tablet {
             transform: translate(405px, -92%);
+        }
+        @include mobileL {
+            transform: translate(183px, -92%);
         }
     }
     .profile__portraitImg {
@@ -691,6 +697,12 @@
         @include tablet {
             margin-top: 70px;
         }
+        @include mobileL {
+            margin-top: 65px;
+        }
+        @include tablet {
+            transform: translate(405px, -92%);
+        }
     }
     @include laptopL {
         padding: 6px;
@@ -701,6 +713,9 @@
         @include ipadPro {
             padding: 10px;
             border-radius: 20px;
+        }
+        @include mobileL {
+            border-radius: 16px;
         }
     }
 }
@@ -835,7 +850,7 @@
         }
         &-backpackSlot8,
         &-backpackSlot9,
-        &-backpackSlot10{
+        &-backpackSlot10 {
             &::after {
                 left: calc(100% - 1px);
                 right: 0;
@@ -846,41 +861,38 @@
     }
 }
 
-// blacksmith backpack -> tablet 
+// blacksmith backpack -> tablet
 @include tablet {
-    .profile__backpack .profile__itemSpecs{
-        &-backpackSlot1,  &-backpackSlot6{
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot6 {
             transform: translate(-1px, -100%);
-            
         }
-        &-backpackSlot2{
+        &-backpackSlot2 {
             transform: translate(45px, -100%);
-           
         }
-        &-backpackSlot3{
+        &-backpackSlot3 {
             transform: translate(134px, -100%);
-          
         }
-        &-backpackSlot4{
+        &-backpackSlot4 {
             transform: translate(218px, -100%);
         }
-        &-backpackSlot5{
+        &-backpackSlot5 {
             transform: translate(275px, -100%);
-           
         }
-        &-backpackSlot7{
+        &-backpackSlot7 {
             transform: translate(142px, -100%);
         }
-        &-backpackSlot8{
+        &-backpackSlot8 {
             transform: translate(223px, -100%);
-            &::after{
+            &::after {
                 left: 50%;
             }
         }
-        &-backpackSlot9{
+        &-backpackSlot9 {
             transform: translate(317px, -100%);
         }
-        &-backpackSlot10{
+        &-backpackSlot10 {
             transform: translate(449px, -100%);
         }
     }
@@ -894,7 +906,7 @@
         &-backpackSlot7,
         &-backpackSlot8,
         &-backpackSlot9,
-        &-backpackSlot10{
+        &-backpackSlot10 {
             top: auto;
             &::after {
                 top: auto;
@@ -903,54 +915,52 @@
             }
         }
     }
-   
+
     .profile__backpack .profile__itemSpecs {
         &-backpackSlot6,
         &-backpackSlot7,
         &-backpackSlot8,
         &-backpackSlot9,
-        &-backpackSlot10{
-            &::after{
+        &-backpackSlot10 {
+            &::after {
                 left: auto;
                 right: auto;
             }
-         left: auto;
-         margin-top: 155px;
+            left: auto;
+            margin-top: 155px;
         }
-        &-backpackSlot6{
-            &::after{
-              left: 28px;  
+        &-backpackSlot6 {
+            &::after {
+                left: 28px;
             }
-            
         }
-        &-backpackSlot7{
-            &::after{
-                left: 28px;  
-              }
+        &-backpackSlot7 {
+            &::after {
+                left: 28px;
+            }
         }
-        &-backpackSlot8{
-            &::after{
+        &-backpackSlot8 {
+            &::after {
                 left: 140px;
-              }
+            }
         }
-        &-backpackSlot9{
-            &::after{
-                right: 28px;  
-              }
+        &-backpackSlot9 {
+            &::after {
+                right: 28px;
+            }
         }
-        &-backpackSlot10{
-            &::after{
-                right: 28px;  
-              }
+        &-backpackSlot10 {
+            &::after {
+                right: 28px;
+            }
         }
     }
-
 }
 // profile backpack -> tablet
 @include tablet {
     .profile__backpackLabel {
         &-1 {
-          transform: translate(4px, -16px);
+            transform: translate(4px, -16px);
         }
         &-2 {
             transform: translate(139px, -16px);
@@ -964,7 +974,7 @@
         &-5 {
             transform: translate(450px, -16px);
         }
-    
+
         &-6 {
             transform: translate(4px, 128px);
         }
@@ -979,7 +989,7 @@
         }
         &-10 {
             transform: translate(450px, 128px);
-        } 
+        }
     }
 }
 
@@ -987,13 +997,13 @@
 @include mobileL {
     .profile__backpackLabel {
         &-1 {
-            transform:  translate(4px, -7px)
+            transform: translate(4px, -7px);
         }
         &-2 {
             transform: translate(75px, -7px);
         }
         &-3 {
-            transform: translate(74px, -7px)
+            transform: translate(74px, -7px);
         }
         &-4 {
             transform: translate(76px, -7px);
@@ -1001,7 +1011,7 @@
         &-5 {
             transform: translate(141px, -7px);
         }
-    
+
         &-6 {
             transform: translate(4px, 71px);
         }
@@ -1016,6 +1026,6 @@
         }
         &-10 {
             transform: translate(141px, 71px);
-        } 
+        }
     }
 }

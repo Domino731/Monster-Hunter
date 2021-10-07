@@ -18,15 +18,15 @@
         }
         &-search {
             background: rgba(255, 255, 255, 0.5);
-            border-right: 6px solid  $color-gray_dark;
+            border-right: 6px solid $color-gray_dark;
             @include desktopS {
-                border-right: 4px solid  $color-gray_dark;
+                border-right: 4px solid $color-gray_dark;
             }
             @include ipadPro {
                 border-right: 10px solid $color-gray_dark;
             }
             @include tablet {
-                border-right:none;
+                border-right: none;
             }
         }
         &-result {
@@ -55,6 +55,10 @@
         @include ipadPro {
             height: 48px;
             padding: 5px 0;
+        }
+        @include mobileL {
+            height: 34px;
+            padding: 4px 0;
         }
     }
     &__searchIcon {
@@ -98,7 +102,9 @@
         }
         @include mobileL {
             border: 2px solid $color-gold;
+            width: 300px;
         }
+
     }
     &__status {
         margin-left: 5px;
@@ -141,6 +147,10 @@
             @include tablet {
                 font-size: 1.6rem;
             }
+            @include mobileL {
+                font-size: 15px;
+                
+             }
         }
         @include laptopL {
             width: 89%;
@@ -156,6 +166,10 @@
         @include tablet {
             height: 42px;
             border-radius: 19px;
+        }
+        @include mobileL {
+            width: 90%;
+            height: 27px;
         }
     }
     &__nick {
@@ -191,6 +205,11 @@
             @include tablet {
                 font-size: 1.6rem;
             }
+            @include mobileL {
+               font-size: 15px;
+               margin-left: 10px;
+
+            }
         }
         &::after {
             right: -11px;
@@ -209,6 +228,9 @@
             }
             @include ipadPro {
                 width: 49px;
+            }
+            @include mobileL {
+                width: 41px;
             }
         }
         @include desktopS {
@@ -230,9 +252,11 @@
             width: 89%;
         }
         @include tablet {
-            @include tablet {
                 height: 42px;
-            }
+        }
+        @include mobileL {
+            width: 86%;
+            height: 27px;
         }
     }
     &__level {
@@ -315,6 +339,10 @@
             height: 42px;
             font-size: 22px;
         }
+        @include mobileL {
+            height: 27px;
+            font-size: 12px;
+        }
     }
 }
 .searchFriend__list {
@@ -356,11 +384,10 @@
                 width: 26%;
             }
         }
-        td{
-            @include tablet{
-              padding-bottom: 7px;  
+        td {
+            @include tablet {
+                padding-bottom: 7px;
             }
-            
         }
     }
     thead {
@@ -382,12 +409,18 @@
             @include tablet {
                 font-size: 1.863rem;
                 padding: 3px 0;
-               
             }
-            
+            @include mobileL {
+                font-size: 15px;
+                padding: 2px 0;
+                border-right: 3px solid $color-gray_dark;
+            }
         }
         @include desktopS {
             border-bottom: 4px solid $color-blue;
+        }
+        @include mobileL {
+            border-bottom: 3px solid $color-blue;
         }
     }
     tbody {
@@ -410,6 +443,9 @@
             @include ipadPro {
                 height: 43px;
             }
+            @include mobileL {
+                height: 35px;
+            }
         }
         td {
             text-align: center;
@@ -431,5 +467,8 @@
     @include ipadPro {
         height: calc(100% - 51px);
         width: 101%;
+    }
+    @include mobileL {
+        height: calc(100% - 37px);
     }
 }

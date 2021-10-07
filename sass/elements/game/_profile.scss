@@ -64,6 +64,9 @@
             @include tablet {
                 height: 606px;
             }
+            @include mobileL {
+                height: 387px;
+            }
         }
         &-currentUser {
             @include desktopM {
@@ -1483,7 +1486,11 @@
         }
     }
 }
-
+#searched_user_root{
+    @include mobileL {
+        height: 103%;
+    }
+}
 @keyframes an__profile__item-notAfford {
     100% {
         color: $color-error;
