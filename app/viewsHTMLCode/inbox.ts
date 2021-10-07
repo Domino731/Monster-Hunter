@@ -2,8 +2,8 @@ import { UserData } from '../types';
 import { formatMailDate } from '../functions/formatDate';
 export const getInboxHTMLCode = (user: UserData) : string => {
     return `
-    <section class='inbox'>
-    <div class='inbox__closeMail disabled background'> 
+    <section class='inbox background'>
+    <div class='closeIcon closeIcon__mail disabled'> 
     <img src='./images/close.png' />
      </div>
            <div class='inbox__item' id='mail-list'>

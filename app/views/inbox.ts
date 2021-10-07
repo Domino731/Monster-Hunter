@@ -17,7 +17,7 @@ export class Inbox extends View {
     super();
     this.dom = {
       mailListContainer: document.querySelector('.inbox__item:first-child'),
-      closeMailIcon: document.querySelector('.inbox__closeMail'),
+      closeMailIcon: document.querySelector('.closeIcon__mail'),
       mails: document.querySelectorAll('.inbox__listItem'),
       mailContainer: document.querySelector('#mail-container'),
       deleteMailBtns: document.querySelectorAll('.inbox__deleteIcon i'),
@@ -94,7 +94,7 @@ export class Inbox extends View {
   getDOMElements() {
     this.dom = {
       mailListContainer: document.querySelector('#mail-list'),
-      closeMailIcon: document.querySelector('.inbox__closeMail'),
+      closeMailIcon: document.querySelector('.closeIcon__mail'),
       mails: document.querySelectorAll('.inbox__listItem'),
       mailContainer: document.querySelector('#mail-container'),
       deleteMailBtns: document.querySelectorAll('.inbox__deleteIcon i'),
