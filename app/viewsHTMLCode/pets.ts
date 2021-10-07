@@ -21,7 +21,13 @@ export const getPetsHTMLCode = (user: UserData): string => {
 
          ${petsData.map(el => `
               <div class='pets__item ${user.pet !== null && checkCurrentPet(user.pet.name, el.name)}' data-pet-name=${el.name}>
+
+              <div class='pets__imgWrapper'>
              <img class='pets__img' src=${el.imgSrc} alt=${el.name}/>
+             
+             </div>
+
+             <div class='pets__label'>
              <h2 class='pets__name pets__name-${el.name}'>${el.name}</h2>
              <div class='pets__cost'>
                <img  src='./images/coin.png' alt='coin'/>
@@ -42,8 +48,10 @@ export const getPetsHTMLCode = (user: UserData): string => {
             
             Rent for 7 days
             </button></div>
+
            </div>
 
+           </div>
          `)}
          </div>             
    </section>

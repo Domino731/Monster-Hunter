@@ -28,6 +28,9 @@
             align-content: flex-start;
             padding-top: 23px;
         }
+        @include mobileL {
+            padding-top: 11px;
+        }
         
     }
     &__userGoldWrapper {
@@ -52,6 +55,10 @@
         }
         @include ipadPro {
             border-radius: 20px;
+        }
+        @include mobileL {
+            border-radius: 12px;
+
         }
     }
     &__userGoldAmount {
@@ -86,10 +93,13 @@
         background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         transition: 0.3s;
-        &:hover {
+        @media screen and (min-width: 1228px) {
+            &:hover {
             background: rgba(255, 255, 255, 0.7);
             width: 21%;
+        } 
         }
+       
         @include desktopM {
             width: 22%;
             height: 517px;
@@ -121,8 +131,28 @@
             }
         }
         @include tablet {
+            width: 91%;
             height: 490px;
-        
+        }
+        @include mobileL {
+            border-radius: 16px;
+            display: flex;
+            height: 250px;
+            &:nth-child(3), &:nth-child(4){
+                margin: 0;
+                margin-bottom: 20px;
+            }
+            margin-bottom: 20px;
+        }
+    }
+    &__imgWrapper{
+          @include mobileL {
+              width: 40%;
+          }
+    }
+    &__label{
+        @include mobileL {
+            width: 60%;
         }
     }
     &__current {
@@ -138,6 +168,10 @@
         }
         @include ipadPro {
             border: 10px solid $color-gold;
+        }
+        @include mobileL {
+            border: 6px solid  $color-gold;
+            margin-bottom: 40px !important;
         }
     }
     &__countdownWrapper {
@@ -178,6 +212,12 @@
             padding: 2px 0;
             bottom: -36px;
         }
+        @include mobileL {
+            font-size: 23px;
+            border-radius: 0 0 16px 16px;
+            padding: 3px 0;
+            bottom: -27px;
+        }
     }
     &__img {
         width: 100%;
@@ -189,8 +229,15 @@
             margin: 0 auto;
         }
         @include ipadPro {
-            width: 64%;
+            width: 62%;
         }
+      
+        @include mobileL {
+            width: 50%;
+        }
+          @media screen and (max-width: 670px) {
+              width: 87%;
+          }
     }
 
     &__name {
@@ -259,12 +306,20 @@
                 text-shadow: 0.188rem 0.188rem $color-error;
             }
         }
+        @include mobileL {
+            justify-content: flex-start;
+         
+        }
     }
     &__benefits {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 0.813rem;
+        @include mobileL {
+            margin-top: 2px;
+            align-items: flex-start;
+        }
     }
 
     &__benefitsItem {
@@ -275,6 +330,9 @@
         margin-top: 0.188rem;
         @include ipadPro {
             font-size: 17px;
+        }
+        @include mobileL {
+            font-size: 15px;
         }
     }
     &__buy {
@@ -307,6 +365,9 @@
             &:hover {
                 cursor: pointer;
                 letter-spacing: 0.125rem;
+            }
+            @include mobileL {
+                width: 97%;
             }
         }
     }
