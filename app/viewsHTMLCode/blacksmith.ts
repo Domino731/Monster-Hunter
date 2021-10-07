@@ -1,7 +1,7 @@
 import { getNeededExp } from '../functions/getNeededExp';
 import { UserData } from '../types';
 export const getBlacksmithHTMLCode = (user: UserData) => {
-  return `<section class='blacksmith transparent'>
+  return `<section class='blacksmith transparent background'>
   <div class='blacksmith__item'>
    <div class='game__errorWrapper disabled' id='blacksmith__error'>Your backpack is full</div>
    

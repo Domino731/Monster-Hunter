@@ -3,7 +3,7 @@ import { chestplatesData } from './../properties/shop/chestplates';
 import { UserData } from '../types';
 export const getWizardHTMLCode = (user: UserData): string => {
    return `
-     <section class='wizard'>
+     <section class='wizard background'>
         <div class='wizard__characterWrapper'>
           <img class='wizard__characterImg' src='./images/wizard.png' alt='wizard'/> 
         </div>

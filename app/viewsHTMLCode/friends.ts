@@ -4,7 +4,7 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
 
     return `
     
-    <section class="friends">
+    <section class="friends background">
 
 
     <div class='closeIcon closeIcon__chat disabled'> 

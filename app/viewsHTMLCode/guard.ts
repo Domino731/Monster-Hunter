@@ -1,7 +1,7 @@
 export const getGuardHTMLCode = () : string => {
 
     return  `
-    <div class='guard__wrapper disabled' id='guard_menu'>
+    <div class='guard__wrapper disabled background' id='guard_menu'>
     <section class='guard-menu'>
     <div class='guard__item'>
       <div class='guard__kingWrapper'>

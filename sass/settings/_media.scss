@@ -1,7 +1,6 @@
 $mobileS: 320px;
 $mobileM: 375px;
 $mobileL: 425px;
-$mobileXL: 600px;
 $tablet: 768px;
 $laptopS: 1024px;
 $laptopSM: 1279px;
@@ -48,13 +47,9 @@ $desktopM: 1919px;
       @content;
     }
 }
-@mixin mobileXL {
-    @media (max-width: $desktopXL) {
-      @content;
-    }
-}
+
 @mixin mobileL {
-    @media (max-width: $desktopL) {
+    @media (max-width: 767px) {
       @content;
     }
 }

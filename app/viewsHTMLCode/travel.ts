@@ -1,7 +1,7 @@
 import { UserData } from '../types';
 export const getTravelHTMLCode = (user: UserData) : string => {
     return `
-    <section class='travel' style='background-image: url(${user.currentMission.background.src})'>
+    <section class='travel background' style='background-image: url(${user.currentMission.background.src})'>
            <h2 class='travel__title'>${user.currentMission.title}</h2>
 
 

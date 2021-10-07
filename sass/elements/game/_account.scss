@@ -6,6 +6,13 @@
     background-image: url('/images/background_account.jpg');
     background-size: 100% 100%;
     position: relative;
+    @include tablet {
+        background-size: 150% 100%;
+        background-position: 50% 0;
+    }
+    // @include mobileL {
+    //     background-size: 150% ;
+    // }
     &__item{
         width: 441px;
         padding: 5px 10px;
@@ -22,6 +29,9 @@
         @include ipadPro {
             width: 510px;
             border-radius: 20px;
+        }
+        @include mobileL {
+            
         }
     }
     &__title{

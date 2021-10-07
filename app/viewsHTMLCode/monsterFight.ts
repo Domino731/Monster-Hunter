@@ -4,7 +4,7 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
   const weapon = userData.equipmentItems[userData.equipmentItems.findIndex(el => el.type === 'weapon')];
 
     return `
-     <section class='fight'> 
+     <section class='fight background'> 
 
      
      <div id='fight_container'>

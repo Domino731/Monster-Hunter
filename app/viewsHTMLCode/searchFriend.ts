@@ -1,7 +1,7 @@
 export const getSearchFriendHTMLCode = ( ) : string => {
 
   return `
-  <section class='searchFriend'>
+  <section class='searchFriend background'>
 
   <div class='closeIcon closeIcon__searchFriend disabled'> 
     <img src='./images/close.png' />

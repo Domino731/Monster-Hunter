@@ -1,7 +1,7 @@
 import { auth } from './../firebase/index';
 export const getAccountHTMLCode = (userNick: string, deleteCode: string) : string => {
     return `
-    <section class='account'>
+    <section class='account background'>
           <div class='account__item' id='update-account'>
              <h2 class='account__title account__title-nick'>${userNick}DDD</h2>
 

@@ -236,6 +236,9 @@
     display: none;
     padding: 7px 16px;
     z-index: 4;
+    @include mobileL {
+        height: 52px;
+    }
     h1 {
         margin-left: 11px;
     }

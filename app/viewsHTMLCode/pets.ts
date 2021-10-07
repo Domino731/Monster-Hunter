@@ -5,7 +5,7 @@ import { UserData } from '../types';
 }
 export const getPetsHTMLCode = (user: UserData): string => {
   return `
-    <section class='pets'>
+    <section class='pets background'>
 
           <div class='pets__userGoldWrapper'>
               <div class='pets__userGold'>

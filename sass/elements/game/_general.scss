@@ -38,6 +38,10 @@
     @include tablet {
         min-height: 1024px;
     }
+    @include mobileL {
+        min-height: auto;
+    }
+  
 }
 .game__contentContainer {
     width: 80%;
@@ -55,6 +59,9 @@
     height: 100%;
     @include ipadPro {
         height: calc(100% - 68px);
+    }
+    @include mobileL {
+        height: calc(100% - 52px);
     }
 }
 .game__errorWrapper {
@@ -210,5 +217,11 @@
     }
     100% {
         transform: translateY(-140%);
+    }
+}
+.background{
+    @include tablet {
+        background-size: 150% 100%;
+        background-position: 50%;
     }
 }
