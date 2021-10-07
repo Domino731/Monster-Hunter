@@ -3,7 +3,7 @@
     background-image: url("/images/background_friends.jpg");
     background-size: 100% 100%;
     display: flex;
-    
+
     .searchFriend__input {
         @include desktopS {
             width: 353px;
@@ -16,6 +16,9 @@
         }
         @include ipadPro {
             width: 305px;
+        }
+        @include mobileL {
+            width: 261px;
         }
     }
     .searchFriend__searchIcon {
@@ -58,6 +61,10 @@
         @include ipadPro {
             height: 45px;
             padding: 5px;
+        }
+        @include mobileL {
+            height: 27px;
+            padding: 3px 10px;
         }
     }
     &__searchWrapper {
@@ -145,6 +152,12 @@
                 border: 3px solid #ffdc00;
                 right: 28px;
             }
+            @include mobileL {
+                border: 2px solid #ffdc00;
+                width: 251px;
+                right: 24px;
+            }
+            
         }
         &::after {
             content: "";
@@ -189,6 +202,13 @@
                 height: 19px;
                 top: -13px;
                 right: -13px;
+            }
+            @include mobileL {
+                border: 2px solid $color-gray-dark;
+                width: 12px;
+                height: 12px;
+                top: -9px;
+                right: -9px;
             }
         }
 
@@ -244,6 +264,13 @@
             right: 79px;
             border: 3px solid #e80054;
         }
+        @include mobileL {
+            width: 171px;
+            padding: 5px;
+            top: 37px;
+            right: 58px;
+            border: 2px solid #e80054;
+        }
     }
     &__list {
         box-sizing: border-box;
@@ -270,6 +297,9 @@
         }
         @include ipadPro {
             height: calc(100% - 45px);
+        }
+        @include mobileL {
+            height: calc(100% - 27px);
         }
     }
     &__item {
@@ -301,9 +331,11 @@
             height: 325px;
         }
         @include tablet {
-            width: 33.3% ;
+            width: 33.3%;
             height: 342px;
-           
+        }
+        @include mobileL {
+            height: 254px;
         }
     }
 }
@@ -323,6 +355,9 @@
     }
     @include laptopM {
         width: 90%;
+    }
+    @include mobileL {
+        width: 92%;
     }
     &:hover {
         backdrop-filter: blur(4px);
@@ -359,6 +394,9 @@
         @include tablet {
             height: 227px;
         }
+        @include mobileL {
+            height: 139px;
+        }
     }
     &__portrait {
         width: 50%;
@@ -382,6 +420,9 @@
             margin-bottom: 28px;
             width: 52%;
         }
+        @include mobileL {
+            margin-bottom: 20px;
+        }
     }
     &__name {
         margin-top: 6px;
@@ -401,6 +442,9 @@
         }
         @include ipadPro {
             margin-top: 9px;
+        }
+        @include mobileL {
+            margin-top: 4px;
         }
     }
     &__levelWrapper {
@@ -436,6 +480,12 @@
         @include tablet {
             height: 50px;
         }
+        @include mobileL {
+            flex-direction: column;
+            align-items: center;
+            height: 63px;
+          
+        }
     }
     &__actionBtn {
         display: flex;
@@ -451,15 +501,21 @@
         }
         &-profile {
             text-shadow: 0.125rem 0.125rem #e80054;
-            @include laptopL {
-                //  text-shadow: 0.065rem 0.065rem #e80054;
+            @include mobileL {
+              
             }
         }
         &-chat {
             text-shadow: 0.125rem 0.125rem #fdd33a;
-            @include laptopL {
-                // text-shadow:  0.125rem 0.095rem #fdd33a;
+            @include mobileL {
+                 flex-direction: row-reverse;
+                img{
+                    margin-left: 5px;
+                }
             }
+        }
+        @include mobileL {
+            width: 100%;
         }
     }
     &__icon {
@@ -485,6 +541,9 @@
         }
         @include tablet {
             height: 33px;
+        }
+        @include mobileL {
+            height: 27px;
         }
     }
 }
@@ -520,6 +579,9 @@
         font-size: 0;
         font-size: 1.25rem;
         transform: scale(0%);
+        @include mobileL {
+            font-size: 11px;
+        }
     }
     input {
         appearance: none;
@@ -532,6 +594,9 @@
     }
     @include ipadPro {
         height: 34px;
+    }
+    @include mobileL {
+        height: 25px;
     }
 }
 #friends_branch {

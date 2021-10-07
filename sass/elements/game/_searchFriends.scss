@@ -96,6 +96,9 @@
             width: 398px;
             border: 3px solid $color-gold;
         }
+        @include mobileL {
+            border: 2px solid $color-gold;
+        }
     }
     &__status {
         margin-left: 5px;
