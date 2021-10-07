@@ -1,19 +1,19 @@
-.account{
+.account {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-image: url('/images/background_account.jpg');
+    background-image: url("/images/background_account.jpg");
     background-size: 100% 100%;
     position: relative;
-    @include tablet {
-        background-size: 150% 100%;
-        background-position: 50% 0;
-    }
-    // @include mobileL {
-    //     background-size: 150% ;
-    // }
-    &__item{
+    overflow: auto;
+    @media screen and (max-height: 500px) {
+       align-items: center;
+       justify-content: flex-start;
+       flex-direction: column;
+       padding-top: 30px;
+    } 
+    &__item {
         width: 441px;
         padding: 5px 10px;
         background: rgba(255, 255, 255, 0.5);
@@ -31,10 +31,12 @@
             border-radius: 20px;
         }
         @include mobileL {
-            
+            width: 389px;
+            border-radius: 16px;
+            padding: 3px 6px;
         }
     }
-    &__title{
+    &__title {
         text-align: center;
         font-size: 44px;
         letter-spacing: 0.25rem;
@@ -42,10 +44,10 @@
         font-weight: 900;
         text-transform: uppercase;
         -webkit-text-stroke: 1px #03071e;
-        &-nick{
+        &-nick {
             color: #ffcd00;
         }
-        &-delete{
+        &-delete {
             color: $color-red;
         }
         @include desktopS {
@@ -60,15 +62,18 @@
         @include ipadPro {
             font-size: 44px;
         }
+        @include mobileL {
+            font-size: 31px;
+        }
     }
-    &__element{
+    &__element {
         height: 66px;
         width: 100%;
         display: flex;
         align-items: center;
         margin-top: 21px;
         box-sizing: border-box;
-        @include desktopS{
+        @include desktopS {
             margin-top: 16px;
             height: 59px;
         }
@@ -79,20 +84,23 @@
         @include ipadPro {
             height: 66px;
         }
+        @include tablet {
+            height: 49px;
+        }
     }
-    &__elementIcon{
+    &__elementIcon {
         height: 100%;
         width: 66px;
         border-radius: 80px;
         padding: 4px;
         background: $color-white;
         z-index: 1;
-        img{
+        img {
             height: 100%;
             width: 100%;
             object-fit: cover;
         }
-        @include desktopS{
+        @include desktopS {
             width: 59px;
         }
         @include laptopM {
@@ -102,9 +110,11 @@
         @include ipadPro {
             width: 66px;
         }
-       
+        @include mobileL {
+            width: 49px;
+        }
     }
-    &__elementContent{
+    &__elementContent {
         width: 84%;
         height: 3.125rem;
         background: $color-white;
@@ -121,19 +131,19 @@
         outline: none;
         box-sizing: border-box;
 
-        &::placeholder{
+        &::placeholder {
             font-size: 1.188rem;
         }
-        &-email{
-            &:focus{
+        &-email {
+            &:focus {
                 border: 4px solid #5f98d1;
                 @include laptopM {
                     border: 3px solid #5f98d1;
                 }
             }
         }
-        &-password{
-            &:focus{
+        &-password {
+            &:focus {
                 border: 4px solid #7343dd;
                 @include laptopM {
                     border: 3px solid #7343dd;
@@ -147,10 +157,14 @@
             height: 46px;
             padding-left: 17px;
         }
+        @include mobileL {
+            height: 34px;
+            padding-left: 16px;
+        }
     }
-    &__msg{
+    &__msg {
         margin-top: 1rem;
-        
+
         font-weight: 600;
         padding: 5px 0;
         font-size: 17px;
@@ -161,14 +175,14 @@
         border-radius: 50px;
         transform: scale(0%);
         animation: 0.5s an__account_scale forwards;
-        &-error{
+        &-error {
             background: $color-error;
         }
-        &-success{
+        &-success {
             background: $color-green;
         }
     }
-    &__btn{
+    &__btn {
         width: 100%;
         color: $color-white;
         margin: 1.5rem 0;
@@ -179,20 +193,19 @@
         transition: 0.2s;
         padding: 0.313rem 0;
         border: none;
-       
-        
-        &:hover{
+
+        &:hover {
             cursor: pointer;
             letter-spacing: 0.125rem;
         }
-        &-update{
+        &-update {
             background-color: $color-blue;
         }
-        &-delete{
+        &-delete {
             background-color: $color-error;
         }
     }
-    &__succcessfullUpdate{
+    &__succcessfullUpdate {
         text-align: center;
         width: 100%;
         background-color: $color-green;
@@ -208,17 +221,17 @@
         transform: scale(0%);
         animation: 1s an__account_scale forwards;
     }
-    &__deleteIcon{
+    &__deleteIcon {
         position: absolute;
         right: 20px;
         bottom: 20px;
         height: 70px;
         width: 70px;
-        img{
+        img {
             width: 100%;
             height: auto;
             object-fit: cover;
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
@@ -246,8 +259,20 @@
             height: 63px;
             width: 63px;
         }
+        @include mobileL {
+            right: 10px;
+            bottom: 10px;
+            height: 46px;
+            width: 46px;
+        }
+        @media screen and (max-height: 500px) {
+            position: relative;
+            right:auto;
+            bottom: auto;
+            margin-top: 25px;
+         } 
     }
-    &__deleteCode{
+    &__deleteCode {
         text-align: center;
         display: block;
         margin-top: 0.25rem;
@@ -257,8 +282,8 @@
     }
 }
 
-@keyframes an__account_scale{
-    100%{
+@keyframes an__account_scale {
+    100% {
         transform: scale(100%);
     }
 }

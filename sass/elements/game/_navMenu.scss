@@ -10,6 +10,11 @@
         position: absolute;
         display: none;
     }
+  
+    @include mobileL {
+        width: 100%;
+        height: calc(100% - 52px);
+    }
     ::-webkit-scrollbar {
         width: 0;
     }
@@ -52,9 +57,15 @@
                 display: none;
             }
         }
+        @include mobileL {
+            height: 50px;
+            font-size: 32px;
+        }
+        
     }
     &__list {
         margin-top: 10px;
+      
     }
     &__item {
         padding: 0 10px;
@@ -80,6 +91,17 @@
         @include tablet {
             height: 60px;
         }
+        @include mobileL {
+            padding: 0;
+            flex-direction: column;
+            align-items: center;
+            height: 100px;
+            margin-top: 0;
+            &:last-child {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+        }
     }
 
     &__icon {
@@ -104,6 +126,9 @@
         }
         @include ipadPro {
             width: 61px;
+        }
+          @include mobileL {
+            margin-bottom: -15px;
         }
     }
     &__link {
@@ -131,7 +156,16 @@
             padding-left: 21px;
             font-weight: bold;
         }
-       
+       @include tablet {
+           display: flex;
+           align-items: flex-end;
+           justify-content: center;
+           border-radius: 30px;
+           height: 43px;
+           font-size: 19px;
+           width: 76%;
+       }
+
         &::after {
             content: "";
             display: block;
@@ -152,9 +186,32 @@
             @include tablet {
                 width: 78px;
             }
+            @include mobileL {
+                width: 45px;
+                height: 66px;
+                bottom: -21px;
+                right: -32px;
+            }
         }
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 84px;
+            transform: rotate(21deg);
+            @include mobileL {
+                width: 45px;
+                height: 66px;
+                top: -21px;
+                left: -32px;
+            }
+        }
+    
         &:hover::after {
-            right: 0;
+            @media screen and (min-width: 764px) {
+                 right: 0;
+            }
+           
         }
 
         &-reverse {
@@ -174,54 +231,62 @@
             &:hover::after {
                 left: -2px;
             }
+            @include mobileL {
+  
+                margin: 0;
+                padding: 0;
+                margin-right: 16px;
+                padding-bottom: 6px;
+                border-radius: 30px;
+            }
         }
         &-mission {
-            &::after {
+            &::after, &::before {
                 background: #ffdc00;
             }
         }
         &-profile {
-            &::after {
+            &::after, &::before {
                 background: #e80457;
             }
         }
         &-blacksmith {
-            &::after {
+            &::after, &::before {
                 background: #95d600;
             }
         }
         &-wizard {
-            &::after {
+            &::after, &::before {
                 background: #65b0fb;
             }
         }
         &-inbox {
-            &::after {
+            &::after, &::before {
                 background: #ffb600;
             }
         }
         &-pets {
-            &::after {
+            &::after, &::before {
                 background: #1ab975;
             }
         }
         &-friends {
-            &::after {
+            &::after, &::before {
                 background: #813788;
             }
         }
         &-search {
-            &::after {
+            &::after, &::before {
                 background: #ffc91b;
             }
         }
         &-guard {
-            &::after {
+            &::after , &::before{
                 background: #ff9e22;
             }
         }
         &-account {
-            &::after {
+            &::after, &::before {
                 background: #8f95e6;
             }
         }

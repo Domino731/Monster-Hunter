@@ -18,6 +18,9 @@ body {
     @include ipadPro {
         font-size: 16px;
     }
+    @include mobileL {
+        font-size: 11px;
+    }
 }
 * {
     box-sizing: border-box;
