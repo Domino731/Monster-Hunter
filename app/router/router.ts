@@ -107,7 +107,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Pets()
+    const developmentRender = new Blacksmith()
     window.addEventListener("popstate", router);
 };
 

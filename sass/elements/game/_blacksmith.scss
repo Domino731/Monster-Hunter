@@ -54,9 +54,10 @@
             padding: 6px;
         }
         @include ipadPro {
-            width: 768px;
-            
-            
+            width: 768px;    
+        }
+        @include mobileL {
+            width: 425px;
         }
     }
     &__frame{

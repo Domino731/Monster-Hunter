@@ -24,6 +24,7 @@
             align-items: center;
         }
         @include tablet {
+            margin-top: 0;
         }
     }
     &__characterImg {
@@ -39,6 +40,9 @@
         @include tablet {
             margin-bottom: 0;
             width: 360px;
+        }
+        @include mobileL {
+            width: 262px;
         }
     }
     &__character {
@@ -123,6 +127,9 @@
         @include tablet {
             flex-direction: row;
         }
+        @include mobileL {
+            height: 140px;
+        }
     }
     &__shopFrame {
         width: 214px;
@@ -161,6 +168,10 @@
             margin-top: 0;
             width: 239px;
             height: 239px;
+        }
+        @include mobileL {
+            width: 134px;
+            height: 134px;
         }
     }
     &__slotWrapper {
@@ -210,6 +221,9 @@
             width: 380px;
             position: absolute;
             top: 0;
+        }
+        @include mobileL {
+            width: 394px;
         }
     }
     &__itemInfo {
@@ -410,6 +424,10 @@
                 border-radius: 20px;
                 box-shadow: 15px 15px $color-gray-dark;
             }
+            @include mobileL {
+                border-radius: 16px;
+                box-shadow: 0px 12px #343a40;
+            }
         }
     }
     &__itemTitle {
@@ -525,12 +543,19 @@
             }
             @include laptopM {
                 border-left: 5px solid $color-gold;
+                border-bottom-left-radius: 35px;
             }
             @include laptopS {
                 border-left: 4px solid $color-gold;
+                border-bottom-left-radius: 30px;
             }
             @include ipadPro {
                 border-left: 6px solid $color-gold;
+                border-bottom-left-radius: 35px;
+            }
+            @include mobileL {
+                border-left: 4px solid $color-gold;
+                border-bottom-left-radius: 30px;
             }
         }
         @include desktopM {
@@ -556,6 +581,12 @@
         }
         @include tablet {
             width: 235px;
+        }
+        @include mobileL {
+            border-bottom: 4px solid $color-gold;
+            width: 168px;
+            height: 42px;
+            font-size: 11px;
         }
     }
     &__deliveryTitle {

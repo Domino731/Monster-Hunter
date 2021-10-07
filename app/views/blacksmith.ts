@@ -805,17 +805,17 @@ export class Blacksmith extends View {
 
       // set the item label
        this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+ // show the item label
+      this.dom.itemLabel.classList.remove('disabled');
 
 
-
-      // show the item label
-     // this.dom.itemLabel.classList.remove('disabled');
+     
       //equipment
 
-      this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-      this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-helmet`)
-      this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-      this.dom.equipmentLabel.root.classList.remove('disabled')
+      // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
+      // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-helmet`)
+      // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
+      // this.dom.equipmentLabel.root.classList.remove('disabled')
       // backpack
       // const equipmentItem =  helmetsData[12]
       // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
