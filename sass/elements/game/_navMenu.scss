@@ -330,6 +330,9 @@
         &:last-child {
             margin-left: 20px;
         }
+        @include mobileL {
+            height: 38px;
+        }
     }
     &__itemIcon {
         z-index: 1;
@@ -344,8 +347,7 @@
         }
     }
     &__itemName{
-        margin-left: -12px;
-        
+        margin-left: -12px;   
         z-index: 0;
         width: 100%;
         background-color: $color-white;
@@ -355,5 +357,10 @@
         letter-spacing: 0.125rem;
         border-radius: 0 20px 20px 0;
         padding-left: 14px;
+        @include mobileL {
+            font-size: 16px;
+            padding: 6px;
+            padding-left: 13px;
+        }
     }
 }

@@ -83,6 +83,9 @@
             @include tablet {
                 height: 606px;
             }
+            @include mobileL {
+                height: 387px;
+            }
         }
     }
 
@@ -635,14 +638,20 @@
         @include ipadPro {
             height: 36px;
             font-size: 34px;
-            border: 4px solid #343a40;
+            border: 4px solid $color-gray_dark;
             margin: 5px auto;
         }
         @include tablet {
             height: 53px;
             font-size: 50px;
-            border: 5px solid #343a40;
+            border: 5px solid $color-gray_dark;
             margin: 7px auto;
+        }
+        @include mobileL {
+            height: 32px;
+            font-size: 28px;
+            border: 3px solid $color-gray_dark;
+            margin: 4px auto;
         }
     }
     &__levelProgress {
@@ -677,6 +686,10 @@
         @include tablet {
             padding: 6px 0;
             border-radius: 6px;
+        }
+        @include mobileL {
+            padding: 4px 0;
+    border-radius: 5px;
         }
     }
     &__equipmentIcon {
@@ -846,8 +859,10 @@
             height: 95px;
         }
         @include tablet {
-            width: 150px;
-            height: 150px;
+            width: 82px;
+            height: 82px;
+            border-left: 2px solid $color-gray_dark;
+            border-top: 2px solid $color-gray_dark;
         }
     }
 
@@ -989,6 +1004,10 @@
             height: 48px;
             margin: 7px auto;
         }
+        @include mobileL {
+            height: 30px;
+            margin: 5px auto;
+        }
     }
     &__goldIcon {
         height: 100%;
@@ -1037,6 +1056,9 @@
         @include ipadPro {
             border-bottom: 4px solid $color-gray_dark;
         }
+        @include mobileL {
+            border-bottom: 2px solid $color-gray_dark;
+        }
     }
     &:last-child .profile__backpackItem:last-child {
         border-right: 3px solid $color-gray_dark;
@@ -1050,6 +1072,14 @@
         }
         &:last-child .profile__backpackItem:last-child {
             border-right: 4px solid $color-gray_dark;
+        }
+    }
+    @include mobileL {
+        &:first-child .profile__backpackItem:last-child {
+            border-right: 2px solid $color-gray_dark;
+        }
+        &:last-child .profile__backpackItem:last-child {
+            border-right: 2px solid $color-gray_dark;
         }
     }
 }
@@ -1276,7 +1306,6 @@
         @include tablet {
             width: 49%;
             font-size: 17px;
-
         }
     }
     &__actionBar {
@@ -1348,7 +1377,6 @@
         @include laptopS {
             padding-bottom: 3px;
         }
-       
     }
     td {
         padding-left: 10px;
@@ -1368,17 +1396,14 @@
     tr {
         font-weight: bold;
         letter-spacing: 0.125rem;
-        td:last-child{
-            @include tablet{
+        td:last-child {
+            @include tablet {
                 padding-right: 8px;
                 text-align: end;
             }
         }
     }
-   
-    }
-   
-
+}
 
 @keyframes an__profile__item-notAfford {
     100% {
