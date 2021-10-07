@@ -199,14 +199,27 @@
     width: 47px;
     height: 47px;
     z-index: 2;
-
+ @include mobileL {
+        width: 36px;
+        height: 36px;
+    }
     &__searchFriend {
         top: 7px;
         right: calc(50% - 23px);
+        @include mobileL {
+            width: 28px;
+            height: 28px;
+            top: 5px;
+            right: calc(50% - 16px);
+        }
     }
     &__chat{
         top: 2px;
         right: 2px;
+        @include mobileL {
+            width: 28px;
+            height: 28px;
+        }
     }
     &__mail{
         top: 2px;
@@ -217,10 +230,7 @@
         height: 100%;
         object-fit: cover;
     }
-    @include mobileL {
-        width: 36px;
-        height: 36px;
-    }
+   
 
 }
 @keyframes an__game_errorWrapper_show {

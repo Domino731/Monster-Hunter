@@ -1370,6 +1370,10 @@
             width: 49%;
             font-size: 17px;
         }
+        @include mobileL {
+            border-radius: 12px;
+            font-size: 12px;
+        }
     }
     &__actionBar {
         box-sizing: border-box;
@@ -1400,6 +1404,9 @@
         }
         @include tablet {
             height: 48px;
+        }
+        @include mobileL {
+            height: 30px;
         }
     }
     &__actionIcon {
@@ -1435,9 +1442,15 @@
         @include tablet {
             padding-top: 5px;
         }
+        @include mobileL {
+            padding-top: 3px;
+        }
     }
     td:last-child {
         @include laptopS {
+            padding-bottom: 3px;
+        }
+        @include mobileL {
             padding-bottom: 3px;
         }
     }
@@ -1454,6 +1467,9 @@
         }
         @include ipadPro {
             padding-left: 14px;
+        }
+        @include mobileL {
+            padding-left: 8px;
         }
     }
     tr {

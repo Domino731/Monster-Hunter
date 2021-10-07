@@ -28,6 +28,10 @@
         @include tablet {
             height: 48px;
         }
+        @include mobileL {
+            height: 31px;
+            border-bottom: 3px solid $color-blue;
+        }
     }
     &__friendNick {
         font-size: 1.375rem;
@@ -35,6 +39,9 @@
         color: $color-white;
         letter-spacing: 0.125rem;
         margin-left: 0.75rem;
+        @include mobileL {
+            font-size: 19px;
+        }
     }
     &__portrait {
         display: flex;
@@ -75,6 +82,9 @@
         @include tablet {
             height: calc(100% - 115px);
         }
+        @include mobileL {
+            height: calc(100% - 71px);
+        }
     }
     &__botBar {
         position: relative;
@@ -96,6 +106,10 @@
         }
         @include tablet {
             height: 65px;
+        }
+        @include mobileL {
+            height: 40px;
+            border-top: 3px solid $color-blue;
         }
     }
     &__emojiIcon {
@@ -121,6 +135,9 @@
         }
         @include ipadPro {
             border-right: 4px solid $color-blue;
+        }
+        @include mobileL {
+            border-right: 3px solid $color-blue;
         }
     }
     &__form {
@@ -222,6 +239,9 @@
         @include tablet {
             height: 38px;
         }
+        @include mobileL {
+            height: 22px;
+        }
     }
     &__emojiContainer {
         z-index: 2;
@@ -285,6 +305,10 @@
         @include tablet {
             height: 74px;
         }
+        @include mobileL {
+            height: 40px;
+            border: 2px solid $color-gray_dark;
+        }
     }
     &__date {
         font-size: 20px;
@@ -322,6 +346,9 @@
         }
         @include tablet {
             font-size: 12px;
+        }
+        @include mobileL {
+            font-size: 7px;
         }
     }
     &__nick {
