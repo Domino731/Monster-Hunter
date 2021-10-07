@@ -132,7 +132,14 @@
         }
         @include tablet {
             width: 91%;
-            height: 490px;
+            height: 522px;
+
+            &:nth-child(3), &:nth-child(4){
+                margin: 0;
+                margin-bottom: 30px;
+            }
+            margin-bottom: 30px;
+
         }
         @include mobileL {
             border-radius: 16px;
@@ -229,9 +236,11 @@
             margin: 0 auto;
         }
         @include ipadPro {
-            width: 62%;
+            width: 64%;
         }
-      
+        @include tablet {
+            width: 250px;
+        }
         @include mobileL {
             width: 50%;
         }
@@ -366,7 +375,7 @@
                 cursor: pointer;
                 letter-spacing: 0.125rem;
             }
-            @include mobileL {
+            @include tablet {
                 width: 97%;
             }
         }
