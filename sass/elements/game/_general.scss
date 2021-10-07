@@ -127,6 +127,11 @@
             height: 63px;
             border: 7px solid $color-gold;
         }
+        @include mobileL {
+            width: 97%;
+            height: 46px;
+            border: 4px solid $color-gold;
+        }
     }
     &__progressBar {
         position: absolute;
@@ -152,6 +157,9 @@
         }
         @include ipadPro {
             font-size: 41px;
+        }
+        @include mobileL {
+            font-size: 28px;
         }
     }
     &__cancelBtn {

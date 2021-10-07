@@ -1,8 +1,8 @@
 export const getGuardHTMLCode = () : string => {
 
     return  `
-    <div class='guard__wrapper disabled background' id='guard_menu'>
-    <section class='guard-menu'>
+    <div class='guard__wrapper disabled' id='guard_menu'>
+    <section class='guard-menu background'>
     <div class='guard__item'>
       <div class='guard__kingWrapper'>
          <img src='./images/guard_king.png' alt='King' class='guard__king'/>
@@ -45,7 +45,7 @@ export const getGuardHTMLCode = () : string => {
  <div class='guard__wrapper disabled' id='guard_castleCity'>
 
 
-   <setion class='guard-city'> 
+   <setion class='guard-city background'> 
        <div class='guard__summaryWrapper'> 
            <div class='guard__summary'> 
               <img class='guard__summaryIcon' src='./images/gold_bag_big.png' alt='gold bag'/>
