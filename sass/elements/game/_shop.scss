@@ -445,6 +445,9 @@
             color: $color-gold;
             text-shadow: 0 0 0.938rem $color-gold;
         }
+        @include mobileL {
+            font-size: 1.95rem;
+        }
     }
     &__itemDsc {
         margin-top: 0.625rem;
@@ -513,6 +516,9 @@
             @include tablet {
                 padding-bottom: 3px;
                 font-size: 16px;
+            }
+            @include mobileL {
+                font-size: 13px;
             }
             
         }

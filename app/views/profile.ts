@@ -664,7 +664,7 @@ export class Profile extends View {
     // for rwd development
     rwd() {
         // equipment
-        const currentItem = helmetsData[12]
+         const currentItem = helmetsData[12]
         // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
         // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-chestPlate`)
         // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
