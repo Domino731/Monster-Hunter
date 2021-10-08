@@ -689,7 +689,7 @@
         }
         @include mobileS {
             border-radius: 10px;
-            transform: translate(20px, -92%);
+            transform: translate(-3px, -92%);
         }
     }
     .potion__label-2 {
@@ -722,8 +722,9 @@
         }
         @include mobileS {
             border-radius: 10px;
-            transform: translate(101px, 75px);
+            transform: translate(104px, -92%);
         }
+
     }
     .profile__portraitImg {
         @include desktopM {

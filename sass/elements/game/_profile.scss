@@ -1615,6 +1615,9 @@
             font-size: 15px;
             width: 100%;
         }
+        @include mobileS {
+            font-size: 11px;
+        }
     }
     &__actionBar {
         box-sizing: border-box;
@@ -1648,6 +1651,10 @@
         }
         @include mobileL {
             height: 30px;
+        }
+        @include mobileS {
+            height: 25px;
+            margin: 5px auto;
         }
     }
     &__actionIcon {
@@ -1725,9 +1732,7 @@
     }
 }
 #searched_user_root {
-    @include mobileL {
-        height: 103%;
-    }
+    
 }
 @keyframes an__profile__item-notAfford {
     100% {

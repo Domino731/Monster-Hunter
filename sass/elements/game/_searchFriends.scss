@@ -105,6 +105,9 @@
             width: 300px;
         }
 
+        @include mobileS {
+            width: 213px;
+        }
     }
     &__status {
         margin-left: 5px;
@@ -154,6 +157,9 @@
                 font-size: 13px;
                 margin-left: 2px;
             }
+            @include mobileS {
+                font-size: 11px;
+            }
         }
         @include laptopL {
             width: 89%;
@@ -177,6 +183,10 @@
         @include mobileM {
             width: 89%;
             height: 25px;
+        }
+        @include mobileS {
+            width: 86%;
+            height: 23px;
         }
     }
     &__nick {
@@ -220,6 +230,9 @@
                 font-size: 13px;
                 margin-left: 8px;
             }
+            @include mobileS {
+                font-size: 11px;
+            }
         }
         &::after {
             right: -11px;
@@ -244,6 +257,9 @@
             }
             @include mobileM {
                 width: 38px;
+            }
+            @include mobileS {
+                width: 35px;
             }
         }
         @include desktopS {
@@ -275,6 +291,11 @@
             margin-left: 19px;
             width: 84%;
             height: 25px;
+        }
+        @include mobileS {
+            margin-left: 18px;
+            width: 82%;
+            height: 23px;
         }
     }
     &__level {
@@ -338,6 +359,9 @@
             @include mobileM {
                 margin-right: -2px;
             }
+            @include mobileS {
+                margin-right: -1px;
+            }
         }
 
         @include laptopL {
@@ -365,7 +389,7 @@
             font-size: 12px;
         }
         @include mobileM {
-            font-size: 10px;
+            font-size: 8px;
             height: 25px;
         }
     }
@@ -412,6 +436,9 @@
         td {
             @include tablet {
                 padding-bottom: 7px;
+            }
+            @include mobileS {
+                padding-bottom: 3px;
             }
         }
     }
@@ -473,6 +500,9 @@
             }
             @include mobileM {
                 height: 33px;
+            }
+            @include mobileS {
+                height: 29px;
             }
         }
         td {
