@@ -1008,6 +1008,51 @@
     }
 }
 
+// blacksmith backpack -> mobileL 
+@include mobileL {
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot6 {
+            transform: translate(-1px, -100%);
+        }
+        &-backpackSlot2 {
+            transform: translate(-10px, -100%);
+        }
+        &-backpackSlot3 {
+            transform: translate(-19px, -100%);
+        }
+        &-backpackSlot4 {
+            transform: translate(-38px, -100%);
+        }
+        &-backpackSlot5 {
+            transform: translate(-35px, -100%);
+        }
+        &-backpackSlot7 {
+            transform: translate(83px, -100%);
+        }
+        &-backpackSlot8 {
+            transform: translate(72px, -100%);
+            &::after {
+                left: 50%;
+            }
+        }
+        &-backpackSlot9 {
+            transform: translate(59px, -100%);
+        }
+        &-backpackSlot10 {
+            transform: translate(139px, -100%);
+        }
+        
+            &-backpackSlot6,
+            &-backpackSlot7,
+            &-backpackSlot8,
+            &-backpackSlot9,
+            &-backpackSlot10 {
+              
+                margin-top: 83px;
+            }
+    }
+}
 // profile backpack -> mobileL
 @include mobileL {
     .profile__backpackLabel {
@@ -1044,6 +1089,21 @@
         }
     }
 }
+@include mobileL {
+    .profile__backpack .profile__itemSpecs-backpackSlot3::after,
+    .profile__backpack .profile__itemSpecs-backpackSlot8::after {
+        left: 126px;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 // profile backpack -> mobile M
 @include mobileM {

@@ -619,6 +619,10 @@
         @include tablet {
             height: 35px;
         }
+        @include mobileL {
+            margin-top: 8px;
+            height: 29px;
+        }
     }
 
     &__actionName {
