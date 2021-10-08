@@ -1096,15 +1096,6 @@
     }
 }
 
-
-
-
-
-
-
-
-
-
 // profile backpack -> mobile M
 @include mobileM {
     .profile__backpackLabel {
@@ -1139,5 +1130,57 @@
         &-10 {
             transform: translate(144px, 60px);
         }
+    }
+}
+
+// blacksmith backpack -> mobile L 
+@include mobileM {
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot6 {
+            transform: translate(-1px, -100%);
+        }
+        &-backpackSlot2 {
+            transform: translate(-20px, -100%);
+        }
+        &-backpackSlot3 {
+            transform: translate(-18px, -100%);
+        }
+        &-backpackSlot4 {
+            transform: translate(-26px, -100%);
+        }
+        &-backpackSlot5 {
+            transform: translate(-31px, -100%);
+        }
+        &-backpackSlot7 {
+            transform: translate(73px, -100%);
+        }
+        &-backpackSlot8 {
+            transform: translate(72px, -100%);
+            &::after {
+                left: 50%;
+            }
+        }
+        &-backpackSlot9 {
+            transform: translate(72px, -100%);
+        }
+        &-backpackSlot10 {
+            transform: translate(142px, -100%);
+        }
+        
+            &-backpackSlot6,
+            &-backpackSlot7,
+            &-backpackSlot8,
+            &-backpackSlot9,
+            &-backpackSlot10 {
+              
+                margin-top: 72px;
+            }
+    }
+}
+@include mobileM {
+    .profile__backpack .profile__itemSpecs-backpackSlot3::after,
+    .profile__backpack .profile__itemSpecs-backpackSlot8::after {
+        left: 99px;
     }
 }

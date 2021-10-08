@@ -350,6 +350,9 @@
             @include mobileL {
                 left: 100px;
             }
+            @include mobileM {
+                left: 94px;
+            }
         }
         &-weapon {
             top: 0;
@@ -379,6 +382,12 @@
             }
             @include tablet {
                 right: 192px;
+            }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
             }
         }
 
@@ -410,6 +419,12 @@
             }
             @include tablet {
                 left: 192px;
+            }
+            @include mobileL {
+                left: 100px;
+            }
+            @include mobileM {
+                left: 94px;
             }
         }
 
@@ -445,6 +460,12 @@
             @include tablet {
                 right: 192px;
             }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
+            }
         }
 
         &-gloves {
@@ -476,6 +497,12 @@
             @include tablet {
                 left: 192px;
             }
+            @include mobileL {
+                left: 100px;
+            }
+            @include mobileM {
+                left: 94px;
+            }
         }
 
         &-special {
@@ -506,6 +533,12 @@
             }
             @include tablet {
                 right: 192px;
+            }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
             }
         }
         .itemTitle {
@@ -622,6 +655,9 @@
         @include mobileL {
             margin-top: 8px;
             height: 29px;
+        }
+        @include mobileM {
+            height: 23px;
         }
     }
 
