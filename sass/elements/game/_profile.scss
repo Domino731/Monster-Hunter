@@ -162,6 +162,9 @@
         @include mobileL {
             margin-top: 64px;
         }
+        @include mobileM {
+            margin-top: 79px;
+        }
     }
     &__portraitActionBar {
         position: absolute;
@@ -869,6 +872,7 @@
                 width: 86%;
                 height: 86%;
             }
+          
         }
         &:hover {
             cursor: pointer;
@@ -903,10 +907,18 @@
             height: 95px;
         }
         @include tablet {
+            width: 150px;
+            height: 150px;
+        }
+        @include mobileL {
             width: 82px;
             height: 82px;
             border-left: 2px solid $color-gray_dark;
             border-top: 2px solid $color-gray_dark;
+        }
+        @include mobileM {
+            width: 72px;
+            height: 72px;
         }
     }
 

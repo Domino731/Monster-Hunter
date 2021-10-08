@@ -792,8 +792,8 @@ export class Blacksmith extends View {
    }
    mobile() {
       if (window.innerWidth < 1024) {
-         this.dom.blacksmithContainer.classList.add('disabled');
-         //this.dom.profileContainer.classList.add('disabled');
+         //this.dom.blacksmithContainer.classList.add('disabled');
+         this.dom.profileContainer.classList.add('disabled');
          this.toogleView();
       }
    }

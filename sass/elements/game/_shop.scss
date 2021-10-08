@@ -44,6 +44,9 @@
         @include mobileL {
             width: 262px;
         }
+        @include mobileM {
+            width: 300px;
+        }
     }
     &__character {
         height: 100%;
@@ -105,6 +108,9 @@
             flex-direction: column;
             height: 542px;
         }
+        @include mobileM {
+            height: 413px;
+        }
     }
 
     &__shopRow {
@@ -129,6 +135,9 @@
         }
         @include mobileL {
             height: 140px;
+        }
+        @include mobileM {
+            height: 120px;
         }
     }
     &__shopFrame {
@@ -173,6 +182,10 @@
             width: 134px;
             height: 134px;
         }
+        @include mobileM {
+            width: 117px;
+            height: 117px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -199,6 +212,9 @@
             @include tablet {
                 height: 84%;
             }
+            @include mobileM {
+                height: 118%;
+            }
         }
 
         &-wizard {
@@ -224,6 +240,9 @@
         }
         @include mobileL {
             width: 394px;
+        }
+        @include mobileM {
+            width: 375px;
         }
     }
     &__itemInfo {
@@ -563,6 +582,11 @@
                 border-left: 4px solid $color-gold;
                 border-bottom-left-radius: 30px;
             }
+            @include mobileM { 
+                border-left: 3px solid $color-gold;
+                border-bottom-left-radius: 20px;
+
+            }
         }
         @include desktopM {
             border-bottom: 7px solid $color-gold;
@@ -593,6 +617,12 @@
             width: 168px;
             height: 42px;
             font-size: 11px;
+        }
+        @include mobileM {
+            border-bottom: 3px solid $color-gold;
+            width: 161px;
+            height: 37px;
+            font-size: 10px;
         }
     }
     &__deliveryTitle {
