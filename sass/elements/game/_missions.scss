@@ -8,13 +8,20 @@
     &::-webkit-scrollbar {
         width: 0;
     }
-    @include mobileL {
-        min-height: 625px;
-    }
+
     &__item {
         width: 100%;
         height: 50%;
         display: flex;
+       
+        &:last-child{
+            @include mobileL {
+            min-height: 300px;
+            @include mobileM {
+                min-height: 355px;
+            }
+        } 
+        }
     }
     &__characterWrapper {
         width: 50%;
@@ -29,10 +36,13 @@
         @media screen and (max-width: 600px) {
             width: 34%;
         }
+        @include mobileM {
+            width: 10%;
+        }
     }
     &__countdownWrapper {
         position: absolute;
-        height: 100%;
+        height: 0;
         left: 82px;
         color: $color-white;
         top: 10px;
@@ -63,6 +73,15 @@
             font-size: 13px;
             width: 132px;
         }
+        @include mobileM {
+            width: 300px;
+            height: 0;
+            left: -30px;
+            top: auto;
+            bottom: 15px;
+            z-index: 3;
+            text-align: center;
+        }
     }
     &__detailsWrapper {
         width: 50%;
@@ -78,6 +97,9 @@
         }
         @media screen and (max-width: 600px) {
             width: 66%;
+        }
+        @include mobileM {
+            width: 90%;
         }
     }
     &__details {
@@ -101,11 +123,15 @@
         @include mobileL {
             box-shadow: 7px 7px #a56a43 inset, -7px -7px #a56a43 inset;
         }
+        
     }
     &__listWrapper {
         display: flex;
         justify-content: space-evenly;
         margin-top: 12px;
+        @include mobileM {
+           flex-wrap: wrap;
+        }
     }
     &__title {
         text-align: center;
@@ -128,7 +154,11 @@
         }
         @include mobileL {
             margin-top: 8px;
-    font-size: 36px;
+            font-size: 36px;
+        }
+        @include mobileM {
+            margin-top: 11px;
+            font-size: 26px;
         }
     }
 
@@ -157,6 +187,10 @@
         @include mobileL {
             margin-top: 26px;
             width: 22%;
+        }
+        @include mobileM {
+            width: 33%;
+            margin-top: 10px;
         }
     }
     &__willingnessBarWrapper {
@@ -257,6 +291,9 @@
             transform: translateX(21px);
             width: 87%;
         }
+        @include mobileM {
+            display: none;
+        }
     }
     &__informations {
         height: 100%;
@@ -322,6 +359,9 @@
         @include tablet {
             width: 79%;
         }
+        @include mobileM {
+            box-shadow: -13px 0 #f7dab4 inset;
+        }
     }
     &__general {
         display: flex;
@@ -376,6 +416,9 @@
         }
         @media screen and (max-width: 600px) {
             width: 115px;
+        }
+        @include mobileM {
+            width: 84px;
         }
     }
 
@@ -501,7 +544,7 @@
         @include mobileL {
             border-radius: 8px 0 0 8px;
         }
-        @media screen and (max-width: 600px){
+        @media screen and (max-width: 600px) {
             left: 8px;
         }
     }
@@ -517,7 +560,7 @@
         @include mobileL {
             border-radius: 0 8px 8px 0;
         }
-        @media screen and (max-width: 600px){
+        @media screen and (max-width: 600px) {
             right: 8px;
         }
     }

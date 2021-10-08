@@ -55,7 +55,7 @@ export class Tavern extends View {
             this.dom.character.classList.remove('disabled')
             this.dom.missionContentWrapper.classList.remove('disabled');
 
-           
+            this.dom.missionContentWrapper.scrollIntoView();
             // set selected mission
             this.selectedMission = mission;
         }))
