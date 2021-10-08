@@ -59,7 +59,7 @@ $desktopM: 1919px;
     }
 }
 @mixin mobileS {
-    @media (max-width: $desktopS) {
+    @media (max-width: 374px) {
       @content;
     }
 }

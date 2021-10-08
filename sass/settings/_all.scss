@@ -21,6 +21,9 @@ body {
     @include mobileL {
         font-size: 11px;
     }
+    @include mobileS {
+        font-size: 9px;
+    }
 }
 * {
     box-sizing: border-box;
