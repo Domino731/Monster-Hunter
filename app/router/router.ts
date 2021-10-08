@@ -106,9 +106,9 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
- console.log(auth.currentUser.uid)
+
     // for development
-    const developmentRender = new Guard()
+    const developmentRender = new Wizard()
     window.addEventListener("popstate", router);
 };
 

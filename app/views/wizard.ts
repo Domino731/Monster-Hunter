@@ -110,7 +110,7 @@ export class Wizard extends View {
 
     rwd(){
         const foo = helmetsData[12]
-        this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
+       // this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
         // spin the wheel
       //  setTimeout(() => {
        //     this.dom.spinningCircle.classList.add('circle-animation');
