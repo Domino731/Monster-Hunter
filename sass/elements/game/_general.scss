@@ -41,7 +41,6 @@
     @include mobileL {
         min-height: auto;
     }
-  
 }
 .game__contentContainer {
     width: 80%;
@@ -61,7 +60,6 @@
         height: calc(100% - 68px);
     }
     @include tablet {
-       
     }
     @include mobileL {
         height: calc(100% - 52px);
@@ -202,9 +200,13 @@
     width: 47px;
     height: 47px;
     z-index: 2;
- @include mobileL {
+    @include mobileL {
         width: 36px;
         height: 36px;
+    }
+    @include mobileM {
+        width: 30px;
+        height: 30px;
     }
     &__searchFriend {
         top: 7px;
@@ -216,7 +218,7 @@
             right: calc(50% - 16px);
         }
     }
-    &__chat{
+    &__chat {
         top: 2px;
         right: 2px;
         @include mobileL {
@@ -224,7 +226,7 @@
             height: 28px;
         }
     }
-    &__mail{
+    &__mail {
         top: 2px;
         right: 2px;
     }
@@ -233,8 +235,6 @@
         height: 100%;
         object-fit: cover;
     }
-   
-
 }
 @keyframes an__game_errorWrapper_show {
     100% {
@@ -249,7 +249,7 @@
         transform: translateY(-140%);
     }
 }
-.background{
+.background {
     @include tablet {
         background-size: 150% 100%;
         background-position: 50%;
