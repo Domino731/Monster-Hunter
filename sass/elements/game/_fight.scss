@@ -39,6 +39,9 @@
         @media screen and (max-width: 599px) {
             width: 420px;
         }
+        @include mobileM {
+            width: 370px;
+        }
     }
 
     &__characterWrapper {
@@ -84,6 +87,10 @@
             border-radius: 10px;
             width: 159px;
         }
+        @include mobileM {
+            width: 136px;
+        }
+     
     }
     &__characterImg {
         width: 100%;
@@ -165,7 +172,10 @@
                 font-size: 16px;
             }
             @media screen and (max-width: 599px) {
-                font-size: 11px;
+                font-size: 12px;
+            }
+            @include mobileM {
+                font-size: 10px;
             }
         }
         tr {
@@ -272,9 +282,12 @@
             padding: 10px;
         }
         @include tablet {
-           
             width: 318px;
             border-radius: 16px;
+        }
+        @include mobileM {
+            width: 243px;
+            border-radius: 13px;
         }
     }
     &__summaryTitle {
@@ -448,6 +461,9 @@
         @media screen and (max-width: 599px) {
             animation: 1.5s an__sword_attack-mobileL forwards;
         }
+        @include mobileM {
+            animation: 1.5s an__sword_attack-mobileM forwards;
+        }
     }
     @include laptopS {
         top: 70px;
@@ -466,6 +482,12 @@
         width: 120px;
         left: 50px;
         top: 60px;
+    }
+    @include mobileM {
+        height: 90px;
+        width: 90px;
+        top: 50px;
+        left: 40px;
     }
 }
 // monster attack
@@ -527,7 +549,7 @@
 }
 @keyframes an__monster_attack-mobileL {
     100% {
-        transform: translateX(-90px);
+        transform: translateX(-80px);
     }
 }
 
@@ -602,6 +624,14 @@
 }
 
 @keyframes an__sword_attack-mobileL {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(230px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-mobileM {
     30% {
         transform: scale(50%);
     }
