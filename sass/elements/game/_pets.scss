@@ -58,7 +58,9 @@
         }
         @include mobileL {
             border-radius: 12px;
-
+        }
+        @include mobileM {
+            border-radius: 8px;
         }
     }
     &__userGoldAmount {
@@ -151,6 +153,10 @@
             }
             margin-bottom: 20px;
         }
+        @include mobileM {
+            height: 198px;
+            border-radius: 13px;
+        }
     }
     &__imgWrapper{
           @include mobileL {
@@ -225,6 +231,14 @@
             padding: 3px 0;
             bottom: -27px;
         }
+        @include mobileM {
+           font-size: 19px;
+            border-radius: 0 0 13px 13px;
+            padding: 3px 0;
+            bottom: -24px; 
+        }
+            
+        
     }
     &__img {
         width: 100%;
@@ -265,6 +279,10 @@
             border-radius: 6px;
         }
 
+        @include mobileM {
+            margin-top: 2px;
+            border-radius: 4px;
+        }
         &-cat {
             background: #f7c4db;
             color: #c56cb7;
@@ -342,6 +360,9 @@
         }
         @include mobileL {
             font-size: 15px;
+        }
+        @include mobileM {
+            font-size: 13px;
         }
     }
     &__buy {
