@@ -10,7 +10,7 @@
         position: absolute;
         display: none;
     }
-  
+
     @include mobileL {
         width: 100%;
         height: calc(100% - 52px);
@@ -53,7 +53,7 @@
             &:first-child {
                 display: block;
             }
-            &:nth-child(2){
+            &:nth-child(2) {
                 display: none;
             }
         }
@@ -61,11 +61,13 @@
             height: 50px;
             font-size: 32px;
         }
-        
+        @include mobileM {
+            height: 42px;
+            font-size: 26px;
+        }
     }
     &__list {
         margin-top: 10px;
-      
     }
     &__item {
         padding: 0 10px;
@@ -102,6 +104,12 @@
                 align-items: center;
             }
         }
+        @include mobileM {
+            margin-top: -18px;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
     }
 
     &__icon {
@@ -127,8 +135,12 @@
         @include ipadPro {
             width: 61px;
         }
-          @include mobileL {
+        @include mobileL {
             margin-bottom: -15px;
+            width: 53px;
+        }
+        @include mobileM {
+            width: 46px;
         }
     }
     &__link {
@@ -156,15 +168,20 @@
             padding-left: 21px;
             font-weight: bold;
         }
-       @include mobileL {
-           display: flex;
-           align-items: flex-end;
-           justify-content: center;
-           border-radius: 30px;
-           height: 43px;
-           font-size: 19px;
-           width: 76%;
-       }
+        @include mobileL {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            border-radius: 30px;
+            height: 43px;
+            font-size: 19px;
+            width: 76%;
+        }
+        @include mobileM {
+            height: 36px;
+            font-size: 18px;
+            width: 80%;
+        }
 
         &::after {
             content: "";
@@ -206,12 +223,11 @@
                 left: -32px;
             }
         }
-    
+
         &:hover::after {
             @media screen and (min-width: 764px) {
-                 right: 0;
+                right: 0;
             }
-           
         }
 
         &-reverse {
@@ -232,7 +248,6 @@
                 left: -2px;
             }
             @include mobileL {
-  
                 margin: 0;
                 padding: 0;
                 margin-right: 16px;
@@ -241,52 +256,62 @@
             }
         }
         &-mission {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #ffdc00;
             }
         }
         &-profile {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #e80457;
             }
         }
         &-blacksmith {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #95d600;
             }
         }
         &-wizard {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #65b0fb;
             }
         }
         &-inbox {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #ffb600;
             }
         }
         &-pets {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #1ab975;
             }
         }
         &-friends {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #813788;
             }
         }
         &-search {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #ffc91b;
             }
         }
         &-guard {
-            &::after , &::before{
+            &::after,
+            &::before {
                 background: #ff9e22;
             }
         }
         &-account {
-            &::after, &::before {
+            &::after,
+            &::before {
                 background: #8f95e6;
             }
         }
@@ -304,6 +329,10 @@
     @include mobileL {
         height: 52px;
     }
+    @include mobileM {
+        height: 43px;
+        padding: 6px 7px;
+    }
     h1 {
         margin-left: 11px;
     }
@@ -320,7 +349,6 @@
         width: 100%;
         height: 56px;
         margin-left: 15px;
-      
     }
     &__item {
         display: flex;
@@ -340,14 +368,14 @@
         background-color: $color-white;
         padding: 2px;
         border-radius: 30px;
-        img{
+        img {
             height: 100%;
             width: auto;
             object-fit: cover;
         }
     }
-    &__itemName{
-        margin-left: -12px;   
+    &__itemName {
+        margin-left: -12px;
         z-index: 0;
         width: 100%;
         background-color: $color-white;

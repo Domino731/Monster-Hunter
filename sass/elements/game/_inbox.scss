@@ -236,6 +236,9 @@
         font-size: 1.25rem;
         border-left: 4px solid $color-gray-dark;
         overflow: hidden;
+        @include mobileM {
+            font-size: 12px;
+        }
     }
     &__closeMail {
         position: absolute;
