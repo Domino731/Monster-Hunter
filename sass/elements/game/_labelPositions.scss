@@ -1154,7 +1154,7 @@
     }
 }
 
-// blacksmith backpack -> mobile L 
+// blacksmith backpack -> mobile M
 @include mobileM {
     .profile__backpack .profile__itemSpecs {
         &-backpackSlot1,
@@ -1196,6 +1196,52 @@
             &-backpackSlot10 {
               
                 margin-top: 72px;
+            }
+    }
+}
+
+// blacksmith backpack -> mobile S
+@include mobileM {
+    .profile__backpack .profile__itemSpecs {
+        &-backpackSlot1,
+        &-backpackSlot6 {
+            transform: translate(-1px, -100%);
+        }
+        &-backpackSlot2 {
+            transform: translate(-30px, -100%);
+        }
+        &-backpackSlot3 {
+            transform: translate(-42px, -100%);
+        }
+        &-backpackSlot4 {
+            transform: translate(-65px, -100%);
+        }
+        &-backpackSlot5 {
+            transform: translate(-81px, -100%);
+        }
+        &-backpackSlot7 {
+            transform: translate(63px, -100%);
+        }
+        &-backpackSlot8 {
+            transform: translate(49px, -100%);
+            &::after {
+                left: 50%;
+            }
+        }
+        &-backpackSlot9 {
+            transform: translate(33px, -100%);
+        }
+        &-backpackSlot10 {
+            transform: translate(93px, -100%);
+        }
+        
+            &-backpackSlot6,
+            &-backpackSlot7,
+            &-backpackSlot8,
+            &-backpackSlot9,
+            &-backpackSlot10 {
+              
+                margin-top: 62px;
             }
     }
 }
