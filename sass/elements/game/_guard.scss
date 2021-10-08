@@ -21,6 +21,9 @@
         @media screen and (max-height: 540px) {
             align-items: flex-start;
         }
+        @include mobileM {
+           overflow-x: hidden;
+        }
     }
     &-city {
         height: 100%;
@@ -33,6 +36,9 @@
         @include tablet {
             background-size: 167% 100%;
             background-position: 50%;
+        }
+        @include mobileL {
+            background-size: 270% 100%;
         }
     }
 
@@ -77,12 +83,19 @@
             border-radius: 13px;
             width: 350px;
         }
+        @include mobileS {
+            border-radius: 10px;
+            width: 296px;
+        }
     }
     &__kingWrapper {
         width: 35%;
         @include mobileL {
             width: auto;
             height: 172px;
+        }
+        @include mobileS {
+            height: 147px;
         }
     }
 
@@ -129,6 +142,9 @@
         @include mobileM {
             font-size: 35px;
         }
+        @include mobileS {
+         font-size: 28px;
+        }
     }
     &__text {
         font-size: 1.25rem;
@@ -139,7 +155,7 @@
         }
         @include mobileL {
             width: 100%;
-            text-align: center;
+            text-align: justify;
         }
     }
     &__award {
