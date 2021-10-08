@@ -67,6 +67,9 @@
             @include mobileL {
                 height: 387px;
             }
+            @include mobileM {
+                height: 344px;
+            }
         }
         &-currentUser {
             @include desktopM {
@@ -88,6 +91,9 @@
             }
             @include mobileL {
                 height: 387px;
+            }
+            @include mobileM {
+                height: 344px;
             }
         }
     }
@@ -163,7 +169,7 @@
             margin-top: 64px;
         }
         @include mobileM {
-            margin-top: 79px;
+            margin-top: 60px;
         }
     }
     &__portraitActionBar {
@@ -265,6 +271,11 @@
             border-radius: 16px;
             padding: 6px;
             width: 270px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+            padding: 4px;
+            width: 217px;
         }
         &-common {
             border: 4px solid $color-blue;
@@ -573,6 +584,10 @@
             height: 29px;
             margin-bottom: 7px;
         }
+        @include mobileM {
+            height: 23px;
+            margin-bottom: 5px;
+        }
     }
     &__equipmentItemSellWrapper {
         height: 30px;
@@ -831,6 +846,10 @@
             width: 93%;
             padding: 12px;
         }
+        @include mobileM {
+            border: 3px solid $color-red;
+            height: 253px;
+        }
     }
 
     &__backpack {
@@ -872,7 +891,6 @@
                 width: 86%;
                 height: 86%;
             }
-          
         }
         &:hover {
             cursor: pointer;
@@ -940,6 +958,15 @@
                 top: 0;
             }
         }
+        @include tablet {
+            width: 768px;
+        }
+        @include mobileL {
+            width: 410px;
+        }
+        @include mobileM {
+            width: 360px;
+        }
     }
     &__general {
         display: flex;
@@ -959,6 +986,10 @@
         width: 151px;
         @include tablet {
             margin-top: 10px;
+        }
+        @include mobileM {
+            width: 85px;
+            margin-top: 6px;
         }
     }
 
@@ -1006,6 +1037,11 @@
             height: 96px;
             border: 5px solid $color-wood-dark;
         }
+        @include mobileM {
+            width: 86px;
+            height: 86px;
+            border: 4px solid #aa6615;
+        }
     }
     &__generalText {
         width: 120px;
@@ -1039,9 +1075,15 @@
         }
         @include mobileL {
             width: 96px;
-    padding: 4px 0;
-    margin-top: 6px;
-    margin-bottom: 4px;
+            padding: 4px 0;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+        @include mobileM {
+            width: 86px;
+            padding: 3px 0;
+            margin-top: 5px;
+            margin-bottom: 2px;
         }
     }
     &__goldBar {
@@ -1498,7 +1540,7 @@
         }
     }
 }
-#searched_user_root{
+#searched_user_root {
     @include mobileL {
         height: 103%;
     }

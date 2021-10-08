@@ -276,6 +276,9 @@
         @include mobileL {
             transform: translate(96px, -92%);
         }
+        @include mobileM {
+            transform: translate(65px, 86px);
+        }
     }
     &-2 {
         transform: translate(454px, -100%);
@@ -303,6 +306,9 @@
         @include mobileL {
             transform: translate(199px, -92%);
         }
+        @include mobileM {
+            transform: translate(155px, 86px);
+        }
     }
     &::after {
         width: 30px;
@@ -325,6 +331,10 @@
             height: 18px;
             bottom: -16px;
         }
+        @include mobileM {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            top: -16px;
+        }
     }
     @include laptopL {
         width: 225px;
@@ -345,6 +355,11 @@
         width: 214px;
         padding: 6px;
         border-radius: 16px;
+    }
+    @include mobileL {
+        width: 208px;
+        padding: 3px;
+        border-radius: 13px;
     }
 }
 
@@ -993,7 +1008,7 @@
     }
 }
 
-// profile backpack -> tablet
+// profile backpack -> mobileL
 @include mobileL {
     .profile__backpackLabel {
         &-1 {
@@ -1026,6 +1041,43 @@
         }
         &-10 {
             transform: translate(141px, 71px);
+        }
+    }
+}
+
+// profile backpack -> mobile M
+@include mobileM {
+    .profile__backpackLabel {
+        &-1 {
+            transform: translate(2px, -9px);
+        }
+        &-2 {
+            transform: translate(75px, -9px);
+        }
+        &-3 {
+            transform: translate(74px, -9px);
+        }
+        &-4 {
+            transform: translate(76px, -9px);
+        }
+        &-5 {
+            transform: translate(144px, -9px);
+        }
+
+        &-6 {
+            transform: translate(2px, 60px);
+        }
+        &-7 {
+            transform: translate(75px, 60px);
+        }
+        &-8 {
+            transform: translate(74px, 60px);
+        }
+        &-9 {
+            transform: translate(76px, 60px);
+        }
+        &-10 {
+            transform: translate(144px, 60px);
         }
     }
 }

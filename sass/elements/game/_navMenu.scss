@@ -361,6 +361,9 @@
         @include mobileL {
             height: 38px;
         }
+        @include mobileM {
+            height: 32px;
+        }
     }
     &__itemIcon {
         z-index: 1;
@@ -389,6 +392,11 @@
             font-size: 16px;
             padding: 6px;
             padding-left: 13px;
+        }
+        @include mobileM {
+            font-size: 14px;
+            padding: 5px;
+            padding-left: 14px;
         }
     }
 }
