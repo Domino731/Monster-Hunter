@@ -113,6 +113,12 @@
                 margin-top: 0;
             }
         }
+        @include mobileS {
+            margin-top: -34px;
+            &:first-child {
+                margin-top: -15px;
+            }
+        }
     }
 
     &__icon {
@@ -183,6 +189,7 @@
             height: 43px;
             font-size: 19px;
             width: 76%;
+            
         }
         @include mobileM {
             height: 36px;
@@ -265,6 +272,11 @@
                 margin-right: 16px;
                 padding-bottom: 6px;
                 border-radius: 30px;
+                text-indent: 12px;
+            }
+
+            @include mobileS {
+                text-indent: 16px;
             }
         }
         &-mission {
@@ -376,6 +388,7 @@
         @include mobileM {
             height: 32px;
         }
+        
     }
     &__itemIcon {
         z-index: 1;
