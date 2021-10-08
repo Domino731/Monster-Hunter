@@ -672,6 +672,15 @@
         @include mobileL {
             transform: translate(45px, -92%);
         }
+        @include mobileM {
+            border-radius: 13px;
+            transform: translate(20px, -92%);
+            &::after{
+                top: auto;
+                bottom: -16px;
+                clip-path: polygon(50% 100%, 0 0, 100% 0);
+            }
+        }
     }
     .potion__label-2 {
         @include laptopL {
@@ -691,6 +700,15 @@
         }
         @include mobileL {
             transform: translate(183px, -92%);
+        }
+        @include mobileM {
+            transform: translate(159px, -92%);
+            &::after{
+                top: auto;
+                bottom: -16px;
+                clip-path: polygon(50% 100%, 0 0, 100% 0);
+                
+            }
         }
     }
     .profile__portraitImg {
@@ -713,11 +731,11 @@
             margin-top: 70px;
         }
         @include mobileL {
-            margin-top: 65px;
+            margin-top: 64px;
         }
-        @include tablet {
-            transform: translate(405px, -92%);
-        }
+       @include mobileM {
+           margin-top: 50px;
+       }
     }
     @include laptopL {
         padding: 6px;
@@ -731,6 +749,9 @@
         }
         @include mobileL {
             border-radius: 16px;
+        }
+        @include mobileM {
+            border-radius: 13px;
         }
     }
 }

@@ -1433,6 +1433,9 @@
         @include tablet {
             flex-direction: row;
         }
+        @include mobileM {
+            flex-direction: column;
+        }
     }
     &__statsTable {
         color: $color-white;
@@ -1470,6 +1473,10 @@
         @include mobileL {
             border-radius: 12px;
             font-size: 12px;
+        }
+        @include mobileM {
+            font-size: 15px;
+            width: 100%;
         }
     }
     &__actionBar {

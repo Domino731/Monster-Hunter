@@ -149,8 +149,11 @@
             }
             @include mobileL {
                 font-size: 15px;
-                
              }
+             @include mobileM {
+                font-size: 13px;
+                margin-left: 2px;
+            }
         }
         @include laptopL {
             width: 89%;
@@ -170,6 +173,10 @@
         @include mobileL {
             width: 90%;
             height: 27px;
+        }
+        @include mobileM {
+            width: 89%;
+            height: 25px;
         }
     }
     &__nick {
@@ -208,7 +215,10 @@
             @include mobileL {
                font-size: 15px;
                margin-left: 10px;
-
+            }
+            @include mobileM {
+                font-size: 13px;
+                margin-left: 8px;
             }
         }
         &::after {
@@ -231,6 +241,9 @@
             }
             @include mobileL {
                 width: 41px;
+            }
+            @include mobileM {
+                width: 38px;
             }
         }
         @include desktopS {
@@ -257,6 +270,11 @@
         @include mobileL {
             width: 86%;
             height: 27px;
+        }
+        @include mobileM {
+            margin-left: 19px;
+            width: 84%;
+            height: 25px;
         }
     }
     &__level {
@@ -317,6 +335,9 @@
             @include ipadPro {
                 margin-right: -4px;
             }
+            @include mobileM {
+                margin-right: -2px;
+            }
         }
 
         @include laptopL {
@@ -342,6 +363,10 @@
         @include mobileL {
             height: 27px;
             font-size: 12px;
+        }
+        @include mobileM {
+            font-size: 10px;
+            height: 25px;
         }
     }
 }
@@ -445,6 +470,9 @@
             }
             @include mobileL {
                 height: 35px;
+            }
+            @include mobileM {
+                height: 33px;
             }
         }
         td {
