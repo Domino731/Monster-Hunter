@@ -118,7 +118,7 @@ export class Wizard extends View {
         // remove spinning animation and show won item
        // setTimeout(() => {
          //   this.dom.spinningWheel.classList.remove('spinningWheel__content-animation');
-            this.dom.wonItemLabel.innerHTML = getWonItemLabel(foo);
+          //  this.dom.wonItemLabel.innerHTML = getWonItemLabel(foo);
         //    this.dom.wonItemLabel.classList.remove('disabled');
        // }, 10000);
     }

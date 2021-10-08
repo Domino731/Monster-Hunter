@@ -129,6 +129,11 @@
         }
         @include mobileM {
             font-size: 28px;
+            margin-bottom: 8px;
+        }
+        @include mobileS {
+            font-size: 24px;
+            margin-bottom: 6px;
         }
     }
     &__text {
@@ -284,6 +289,10 @@
             width: 73px;
             margin-bottom: 80px;
         }
+        @include mobileS {
+            width: 62px;
+            margin-bottom: 76px;
+        }
     }
 }
 .spinningWheel__content {
@@ -324,6 +333,11 @@
     @include mobileM {
         width: 360px;
         height: 360px;
+    }
+    @include mobileS {
+        border: 4px solid #ffd26a;
+        width: 310px;
+        height: 310px;
     }
     &-animation {
         animation: 10s an__spinning_wheel_rotate infinite;
@@ -366,6 +380,10 @@
         @include mobileM {
             width: 144px;
             left: 101px;
+        }
+        @include mobileS {
+            width: 127px;
+            left: 88px;
         }
     }
 
@@ -521,7 +539,7 @@
         }
         .market__itemDsc,
         .itemDsc {
-             font-size: 11px;
+            font-size: 11px;
             margin-top: 2px;
         }
         .market__itemStats td {
