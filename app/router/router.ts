@@ -108,7 +108,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Wizard()
+    const developmentRender = new Pets()
     window.addEventListener("popstate", router);
 };
 
