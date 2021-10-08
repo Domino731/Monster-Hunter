@@ -279,6 +279,9 @@
         @include mobileM {
             transform: translate(65px, 86px);
         }
+        @include mobileS {
+            transform: translate(20px, 75px);
+        }
     }
     &-2 {
         transform: translate(454px, -100%);
@@ -308,6 +311,9 @@
         }
         @include mobileM {
             transform: translate(155px, 86px);
+        }
+        @include mobileS {
+            transform: translate(101px, 75px);
         }
     }
     &::after {
@@ -681,6 +687,10 @@
                 clip-path: polygon(50% 100%, 0 0, 100% 0);
             }
         }
+        @include mobileS {
+            border-radius: 10px;
+            transform: translate(20px, -92%);
+        }
     }
     .potion__label-2 {
         @include laptopL {
@@ -709,6 +719,10 @@
                 clip-path: polygon(50% 100%, 0 0, 100% 0);
                 
             }
+        }
+        @include mobileS {
+            border-radius: 10px;
+            transform: translate(101px, 75px);
         }
     }
     .profile__portraitImg {
@@ -752,6 +766,9 @@
         }
         @include mobileM {
             border-radius: 13px;
+        }
+        @include mobileS {
+            border-radius: 10px;
         }
     }
 }
@@ -1201,7 +1218,7 @@
 }
 
 // blacksmith backpack -> mobile S
-@include mobileM {
+@include mobileS {
     .profile__backpack .profile__itemSpecs {
         &-backpackSlot1,
         &-backpackSlot6 {
@@ -1243,6 +1260,41 @@
               
                 margin-top: 62px;
             }
+    }
+}
+@include mobileS {
+    .profile__backpackLabel {
+        &-1 {
+            transform: translate(2px, -5px);
+        }
+        &-2 {
+            transform: translate(62px, -5px);
+        }
+        &-3 {
+            transform: translate(49px, -5px);
+        }
+        &-4 {
+            transform: translate(33px, -5px);
+        }
+        &-5 {
+            transform: translate(92px, -5px);
+        }
+
+        &-6 {
+            transform: translate(2px, 53px);
+        }
+        &-7 {
+            transform: translate(62px, 53px);
+        }
+        &-8 {
+            transform: translate(49px, 53px);
+        }
+        &-9 {
+            transform: translate(33px, 53px);
+        }
+        &-10 {
+            transform: translate(92px, 53px);
+        }
     }
 }
 @include mobileM {

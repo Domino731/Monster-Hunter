@@ -672,7 +672,7 @@ export class Profile extends View {
         // backpack
         //   const equipmentItem = this.userData.equipmentItems[0]
         //   this.dom.backpackLabel.root.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
-        //   this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${10}`)
+        //   this.dom.backpackLabel.root.classList.add(`profile__backpackLabel-${7}`)
         //   this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
         //   this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
         //   this.dom.backpackLabel.root.classList.remove('disabled')
@@ -680,7 +680,7 @@ export class Profile extends View {
         const firstPotion = potionsData[4];
         this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
         this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-        this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 2);
+        this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
     }
     initScripts() {
         this.mobile();
