@@ -32,6 +32,9 @@
         height: 100%;
         object-fit: cover;
         transition: 0.5s;
+        @media screen and (max-height: 512px) {
+            margin-top: 10px;
+        }
         @include ipadPro {
             width: 320px;
             height: auto;
@@ -46,6 +49,9 @@
         }
         @include mobileM {
             width: 300px;
+        }
+        @include mobileS {
+            width: 200px;
         }
     }
     &__character {
@@ -186,6 +192,10 @@
             width: 117px;
             height: 117px;
         }
+        @include mobileS {
+            width: 100px;
+            height: 110px;
+        }
     }
     &__slotWrapper {
         display: flex;
@@ -215,6 +225,9 @@
             @include mobileM {
                 height: 118%;
             }
+            @include mobileS {
+                height: 127%;
+            }
         }
 
         &-wizard {
@@ -243,6 +256,9 @@
         }
         @include mobileM {
             width: 375px;
+        }
+        @include mobileS {
+            width: 320px;
         }
     }
     &__itemInfo {
@@ -507,6 +523,12 @@
             margin-top: 6px;
             font-size: 21px;
         }
+        @include mobileL {
+            font-size: 18px;
+        }
+        @include mobileM {
+            font-size: 16px;
+        }
     }
     &__itemStats {
         width: 100%;
@@ -623,6 +645,11 @@
             width: 161px;
             height: 37px;
             font-size: 10px;
+        }
+        @include mobileS {
+            width: 136px;
+            height: 34px;
+            font-size: 9px;
         }
     }
     &__deliveryTitle {

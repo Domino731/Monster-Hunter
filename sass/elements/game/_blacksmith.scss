@@ -65,6 +65,9 @@
         @include mobileM {
             width: 375px;
         }
+        @include mobileS {
+            width: 320px;
+        }
     }
     &__frame{
         background-image: url('/images/blacksmith_item_frame.png');
