@@ -309,6 +309,9 @@
             height: 40px;
             border: 2px solid $color-gray_dark;
         }
+        @include mobileM {
+            height: 35px;
+        }
     }
     &__date {
         font-size: 20px;
