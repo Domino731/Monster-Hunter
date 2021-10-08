@@ -134,6 +134,10 @@
             height: 46px;
             border: 4px solid $color-gold;
         }
+        @include mobileM {
+            height: 37px;
+            border: 3px solid $color-gold;
+        }
     }
     &__progressBar {
         position: absolute;
@@ -162,6 +166,9 @@
         }
         @include mobileL {
             font-size: 28px;
+        }
+        @include mobileM {
+            font-size: 23px;
         }
     }
     &__cancelBtn {

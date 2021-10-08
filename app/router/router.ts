@@ -12,6 +12,7 @@ import { Guard } from '../views/guard';
 import { MonsterFight } from '../views/monsterFight';
 import { Tavern } from '../views/tavern';
 import { AdminPanel } from '../views/adminPanel';
+import { auth } from '../firebase/index';
 let x;
 export const router = async () => {
     const routes: route[] = [
@@ -105,9 +106,9 @@ export const initRouter = () => {
             navigateTo(e.target.href);
         };
     });
-
+ console.log(auth.currentUser.uid)
     // for development
-    const developmentRender = new Inbox()
+    const developmentRender = new Guard()
     window.addEventListener("popstate", router);
 };
 

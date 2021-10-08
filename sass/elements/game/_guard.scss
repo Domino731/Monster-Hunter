@@ -10,9 +10,16 @@
         justify-content: center;
         align-items: center;
         position: relative;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
         @include tablet {
             background-size: 150% 100%;
             background-position: 50%;
+        }
+        @media screen and (max-height: 540px) {
+            align-items: flex-start;
         }
     }
     &-city {
@@ -43,6 +50,9 @@
         &:hover {
             backdrop-filter: blur(4px);
         }
+        @media screen and (max-height: 540px) {
+            margin-top: 20px;
+        }
         @include desktopS {
             border-radius: 16px;
         }
@@ -62,6 +72,10 @@
         }
         @include mobileL {
             border-radius: 16px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+            width: 350px;
         }
     }
     &__kingWrapper {
@@ -112,6 +126,9 @@
             font-size: 42px;
             text-align: center;
         }
+        @include mobileM {
+            font-size: 35px;
+        }
     }
     &__text {
         font-size: 1.25rem;
@@ -143,6 +160,9 @@
         }
         @include mobileL {
             justify-content: center;
+        }
+        @include mobileM {
+            margin-top: 19px;
         }
     }
 
@@ -209,7 +229,7 @@
         @include mobileL {
             height: calc(100% - 88px);
         }
-        @media screen and (max-height: 420px){
+        @media screen and (max-height: 420px) {
             height: 90vh;
             margin-top: 20px;
         }
@@ -229,6 +249,9 @@
         @include mobileL {
             border-radius: 16px;
         }
+        @include mobileM {
+            border-radius: 13px;
+        }
     }
     &__summaryIcon {
         height: 190px;
@@ -243,7 +266,7 @@
         @include tablet {
             height: 209px;
         }
-        @media screen and (max-height: 420px){
+        @media screen and (max-height: 420px) {
             display: block;
             margin: 0 auto;
             height: 36vh;
@@ -321,6 +344,10 @@
             width: 54px;
             height: 54px;
         }
+        @include mobileM {
+            width: 42px;
+            height: 42px;
+        }
     }
     .field {
         position: relative;
@@ -369,6 +396,9 @@
         }
         @include ipadPro {
             height: 32px;
+        }
+        @include mobileM {
+            height: 23px;
         }
     }
     .value {
@@ -426,6 +456,10 @@
                     height: 40px;
                     border: 3px solid #53433f;
                 }
+                @include mobileM {
+                    width: 32px;
+                    height: 32px;
+                }
             }
             @include desktopS {
                 line-height: 3.2rem;
@@ -443,6 +477,11 @@
                 width: 42px;
                 line-height: 48px;
             }
+            @include mobileM {
+                font-size: 14px;
+                width: 38px;
+                line-height: 42px;
+            }
         }
         @include laptopM {
             margin-bottom: 61px;
@@ -452,6 +491,9 @@
         }
         @include ipadPro {
             margin-bottom: 64px;
+        }
+        @include mobileM {
+            margin-bottom: 54px;
         }
     }
 }
@@ -478,6 +520,9 @@
     }
     @include ipadPro {
         height: 32px;
+    }
+    @include mobileM {
+        height: 28px;
     }
 }
 .progressBar-1 {
