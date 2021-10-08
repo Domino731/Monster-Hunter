@@ -145,6 +145,10 @@
         @include mobileM {
             width: 46px;
         }
+        @include mobileS {
+            width: 37px;
+            margin-bottom: -10px;
+        }
     }
     &__link {
         position: relative;
@@ -184,6 +188,11 @@
             height: 36px;
             font-size: 18px;
             width: 80%;
+        }
+        @include mobileS {
+            height: 29px;
+            font-size: 15px;
+            width: 82%;
         }
 
         &::after {
