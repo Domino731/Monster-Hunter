@@ -226,6 +226,8 @@ export class Friends extends View {
       this.dom.friendsContainer.classList.remove('disabled');
       this.dom.closeBranchIcon.className = 'closeIcon disabled' ;
       this.dom.branch.innerHTML = '';
+      this.secondView = null;
+      this.dom.closeBtn.classList.add('disabled');
     })
   }
   hideFriendView() {

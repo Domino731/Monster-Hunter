@@ -4,6 +4,9 @@
     background-size: 100% 100%;
     display: flex;
 
+    @include mobileL {
+        background-size: 180% 100%;
+    }
     .searchFriend__input {
         @include desktopS {
             width: 353px;
@@ -337,6 +340,10 @@
         @include mobileL {
             height: 254px;
         }
+        @include mobileM {
+            width: 50%;
+            height: 260px;
+        }
     }
 }
 
@@ -397,6 +404,9 @@
         @include mobileL {
             height: 139px;
         }
+        @include mobileM {
+            height: 168px;
+        }
     }
     &__portrait {
         width: 50%;
@@ -422,6 +432,9 @@
         }
         @include mobileL {
             margin-bottom: 20px;
+        }
+        @include mobileM {
+            margin-bottom: 24px;
         }
     }
     &__name {
@@ -484,7 +497,10 @@
             flex-direction: column;
             align-items: center;
             height: 63px;
-          
+        }
+        @include mobileM {
+            flex-direction: row;
+            height: 40px;
         }
     }
     &__actionBtn {
@@ -511,6 +527,12 @@
                  flex-direction: row-reverse;
                 img{
                     margin-left: 5px;
+                }
+            }
+            @include mobileM {
+                flex-direction: row;
+                img{
+                    margin-left: 0;
                 }
             }
         }
@@ -544,6 +566,10 @@
         }
         @include mobileL {
             height: 27px;
+        }
+        @include mobileM {
+            height: 29px;
+            margin-right: 3px;
         }
     }
 }
