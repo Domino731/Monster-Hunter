@@ -561,6 +561,9 @@
             @include mobileL {
                 font-size: 13px;
             }
+            @include mobileS {
+                font-size: 11px;
+            }
             
         }
         @include laptopM {
