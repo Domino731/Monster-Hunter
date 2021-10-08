@@ -8,11 +8,11 @@
     position: relative;
     overflow: auto;
     @media screen and (max-height: 500px) {
-       align-items: center;
-       justify-content: flex-start;
-       flex-direction: column;
-       padding-top: 30px;
-    } 
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding-top: 30px;
+    }
     &__item {
         width: 441px;
         padding: 5px 10px;
@@ -34,6 +34,11 @@
             width: 389px;
             border-radius: 16px;
             padding: 3px 6px;
+        }
+        @include mobileM {
+            width: 348px;
+            border-radius: 13px;
+            padding: 2px 5px;
         }
     }
     &__title {
@@ -64,6 +69,9 @@
         }
         @include mobileL {
             font-size: 31px;
+        }
+        @include mobileM {
+            font-size: 29px;
         }
     }
     &__element {
@@ -267,10 +275,10 @@
         }
         @media screen and (max-height: 500px) {
             position: relative;
-            right:auto;
+            right: auto;
             bottom: auto;
             margin-top: 25px;
-         } 
+        }
     }
     &__deleteCode {
         text-align: center;
