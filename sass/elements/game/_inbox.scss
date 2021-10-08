@@ -51,8 +51,9 @@
         }
         @include mobileM {
             height: 33px;
-            border-bottom: 4px solid $color-gold;
+            border-bottom: 3px solid $color-gold;
         }
+
     }
     &__mailIcon {
         height: 100%;
@@ -193,6 +194,11 @@
             height: 42px;
             margin-bottom: 4px;
         }
+        @include mobileS {
+            padding: 0px 7px;
+            height: 36px;
+            margin-bottom: 3px;
+        }
     }
 
     &__listTitle {
@@ -238,6 +244,9 @@
         overflow: hidden;
         @include mobileM {
             font-size: 12px;
+        }
+        @include mobileS {
+            font-size: 9px;
         }
     }
     &__closeMail {
