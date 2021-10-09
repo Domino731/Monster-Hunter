@@ -110,7 +110,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Account()
+    const developmentRender = new Inbox()
     window.addEventListener("popstate", router);
 };
 

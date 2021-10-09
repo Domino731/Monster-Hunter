@@ -10,20 +10,21 @@
     &__item {
         width: 50%;
         height: 100%;
-        &:first-child {
-            border-right: 6px solid $color-gray-dark;
-            @include desktopS {
-                border-right: 4px solid $color-gray-dark;
-            }
-            @include ipadPro {
-                border-right: 10px solid $color-gray-dark;
-            }
-            @include tablet {
-                border-right: none;
-            }
+        border-right: 6px solid $color-gray-dark;
+        @include desktopS {
+            border-right: 4px solid $color-gray-dark;
+        }
+        @include ipadPro {
+            border-right: 10px solid $color-gray-dark;
+        }
+        @include tablet {
+            border-right: none;
         }
         @include tablet {
             width: 100%;
+        }
+        &:last-child {
+            border-right: none;
         }
     }
     &__header {
@@ -53,7 +54,6 @@
             height: 33px;
             border-bottom: 3px solid $color-gold;
         }
-
     }
     &__mailIcon {
         height: 100%;
