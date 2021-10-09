@@ -6,6 +6,7 @@ import { View } from './view';
 import { db, auth } from '../firebase/index';
 import { getStatusImgSrc } from '../functions/getStatusImgSrc';
 import { SearchedUser } from './sub_views/specificUser';
+import { getNeededExp } from '../functions/getNeededExp';
 export class SearchFriend extends View {
 
    private allUsersData: SearchedUserData[]
@@ -41,6 +42,7 @@ export class SearchFriend extends View {
    }
    // fetch all user's data from firestore, in order to create list of this user's, and find specific user later
    async getAllUsers() {
+
       await db.collection('users').get().then((querySnapshot) => {
          querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
@@ -58,7 +60,8 @@ export class SearchFriend extends View {
                lastVisit: doc.data().lastVisit,
                id: doc.id,
                pet: doc.data().pet,
-               confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0
+               confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0,
+               nextLevelAt: getNeededExp(doc.data().level)
             }
             this.allUsersData.push(data);
          });
@@ -67,20 +70,25 @@ export class SearchFriend extends View {
          const userIndex: number = this.allUsersData.findIndex(el => el.id === auth.currentUser.uid)
          this.allUsersData.splice(userIndex, 1);
 
-         let html: string = '';
+
          // create list of user's
          this.allUsersData.forEach(el => {
-            const newElement = `
-            <tr data-user-id='${el.id}'>
+
+
+            const tableRow: HTMLTableRowElement = document.createElement('tr');
+
+            tableRow.innerHTML = `
             <td><div class='searchFriend__status searchFriend__status-an'> <img src='${getStatusImgSrc(el.status)}'/><strong>${el.status}</strong></div></td>
             <td><div class='searchFriend__nick'><div class='searchFriend__level'>${el.level}</div><strong>${el.nick}</strong></div></td>
             <td><div class='searchFriend__lastVisit searchFriend__lastVisit-an'>${formatDate(el.lastVisit)} <img src='./images/computer.png'/></div></td>
-            </tr>
-            `
-            html += newElement;
-         });
+             `
+            tableRow.addEventListener('click', () => {
+               this.showSpecificUserEvent(el.id);
+               tableRow.children[1].firstElementChild.classList.add('searchFriend__nick-selected');
+            });
 
-         this.dom.allUsersList.innerHTML = html;
+            this.dom.allUsersList.appendChild(tableRow);
+         });
          this.dom.allUsersRow = document.querySelectorAll('#all_users tr');
          this.dom.nicks = document.querySelectorAll('#all_users .searchFriend__nick strong')
       }
@@ -88,32 +96,24 @@ export class SearchFriend extends View {
       );
    }
 
-   // show general view of specific user
-   showSpecificUserEvent() {
-      this.dom.allUsersRow.forEach(el => el.addEventListener('click', () => {
-         // remove all previous nick marks 
-         this.dom.nicks.forEach(el => el.parentElement.classList.remove('searchFriend__nick-selected'));
-         const element: HTMLElement = el as HTMLElement;
-         // find user
-         const userIndex: number = this.allUsersData.findIndex(el => el.id === element.dataset.userId)
-         const searchedUser: SearchedUserData = this.allUsersData[userIndex]
-         // create view 
-         const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
-         // mark this row
-         const nick = element.querySelector('.searchFriend__nick');
-         nick.classList.add('searchFriend__nick-selected');
-
-         if (window.innerWidth < 1024) {
-            this.toogleView();
-         }
-      }));
+   showSpecificUserEvent(id: string) {
+      // remove all previous nick marks 
+      this.dom.nicks.forEach(el => el.parentElement.classList.remove('searchFriend__nick-selected'));
+      // find user
+      const userIndex: number = this.allUsersData.findIndex(el => el.id === id)
+      const searchedUser: SearchedUserData = this.allUsersData[userIndex]
+      // create view 
+      const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+      if (window.innerWidth < 1024) {
+         this.toogleView();
+      }
    }
 
    findFriend() {
 
       const scrollToFriend = (target: HTMLInputElement) => {
 
-        // find searched friend in order to scroll to his postion in table
+         // find searched friend in order to scroll to his postion in table
          const friend = this.allUsersData[this.allUsersData.findIndex(el => el.nick === target.value)];
          if (friend !== undefined) {
             // create view 
@@ -185,8 +185,8 @@ export class SearchFriend extends View {
       const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
    }
 
-   hideSearchedFrindEvent(){
-      this.dom.closeViewIcon.addEventListener('click', ()=> {
+   hideSearchedFrindEvent() {
+      this.dom.closeViewIcon.addEventListener('click', () => {
          this.dom.searchedUserContainer.classList.add('disabled');
          this.dom.usersContainer.classList.remove('disabled');
          this.dom.closeViewIcon.classList.add('disabled');
@@ -197,7 +197,6 @@ export class SearchFriend extends View {
          .then(() => {
             this.hideSearchedFrindEvent();
             this.mobile();
-            this.showSpecificUserEvent();
             this.findFriend();
             this.searchFriendEvent();
             this.rwd();

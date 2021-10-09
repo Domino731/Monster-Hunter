@@ -127,7 +127,7 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
                <div id='specificUser_equipment_label_wrapper'></div>         
     </div>
 
-     <div class='profile__level'>
+     <div class='profile__level' title='Level exp: ${searchedUser.exp}/${searchedUser.nextLevelAt}'>
      <div class='profile__levelProgress' style='width: ${Math.floor(searchedUser.exp * 100 / getNeededExp(searchedUser.level))}%'></div>
       <i>${searchedUser.level}</i>
       </div>

@@ -217,6 +217,7 @@ export interface SearchedUserData {
         luck: number
     }
     confirmedFriend: boolean
+    nextLevelAt: number;
 }
 export interface MessageData {
     content: string[];

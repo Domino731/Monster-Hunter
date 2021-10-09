@@ -161,21 +161,24 @@
         align-items: center;
     }
     &__portraitImg {
-        margin-top: 37px;
+        margin-top: 32px;
         width: 60%;
         height: auto;
         object-fit: cover;
+        @include desktopM {
+            margin-top: 35px;
+        }
         @include desktopS {
-            margin-top: 59px;
+            margin-top: 54px;
         }
         @include laptopL {
-            margin-top: 32px;
+            margin-top: 28px;
         }
         @include laptopM {
-            margin-top: 39px;
+            margin-top: 34px;
         }
         @include laptopS {
-            margin-top: 44px;
+            margin-top: 42px;
         }
         @include tablet {
             margin-top: 72px;
@@ -1585,7 +1588,7 @@
 
         @include desktopM {
             height: 92%;
-            font-size: 18px;
+            font-size: 16px;
             border-radius: 16px;
         }
         @include laptopL {
