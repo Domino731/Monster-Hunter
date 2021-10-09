@@ -28,7 +28,10 @@ export class MobileNav {
     }
 
     hideNav(){
-      this.dom.links.forEach(el => el.addEventListener('click', () => this.dom.navContainer.style.display = 'none'));
+        if(window.innerHeight >= 1000 || window.innerWidth < 1024){
+              this.dom.links.forEach(el => el.addEventListener('click', () => this.dom.navContainer.style.display = 'none'));
+        }
+    
     }
     init(){
        this.toogleNav();

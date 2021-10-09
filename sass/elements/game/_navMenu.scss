@@ -213,8 +213,15 @@
             right: -100%;
             transform: rotate(21deg);
             transition: 0.4s;
+            z-index: -1;
             @include desktopM {
                 width: 55px;
+            }
+            @include desktopS {
+                width: 40px;
+                height: 40px;
+                bottom: -10px;
+                
             }
             @include ipadPro {
                 width: 157px;
@@ -228,6 +235,7 @@
                 bottom: -21px;
                 right: -32px;
             }
+            
         }
         &::before {
             content: "";
