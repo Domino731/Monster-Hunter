@@ -10,10 +10,33 @@
     &__item {
         width: 50%;
         height: 100%;
+
+        @include ipadPro {
+            width: 100%;
+        }
         &:last-child {
             overflow: auto;
+            margin: 0 auto;
             &::-webkit-scrollbar {
                 width: 0;
+            }
+            @include ipadPro {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 1024px;
+            }
+            @include tablet {
+                width: 768px;
+            }
+            @include mobileL {
+                width: 425px;
+            }
+            @include mobileM {
+                width: 375px;
+            }
+            @include mobileS {
+                width: 320px;
             }
         }
         &-search {
@@ -32,9 +55,6 @@
         &-result {
             background: rgba(255, 255, 255, 0.5);
             padding: 10px;
-        }
-        @include ipadPro {
-            width: 100%;
         }
     }
     &__searchBar {
@@ -152,8 +172,8 @@
             }
             @include mobileL {
                 font-size: 15px;
-             }
-             @include mobileM {
+            }
+            @include mobileM {
                 font-size: 13px;
                 margin-left: 2px;
             }
@@ -223,8 +243,8 @@
                 font-size: 1.6rem;
             }
             @include mobileL {
-               font-size: 15px;
-               margin-left: 10px;
+                font-size: 15px;
+                margin-left: 10px;
             }
             @include mobileM {
                 font-size: 13px;
@@ -281,7 +301,7 @@
             width: 89%;
         }
         @include tablet {
-                height: 42px;
+            height: 42px;
         }
         @include mobileL {
             width: 86%;

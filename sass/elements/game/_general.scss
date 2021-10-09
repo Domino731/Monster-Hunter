@@ -235,6 +235,12 @@
             height: 24px;
             right: calc(50% - 12px);
         }
+        @include mobileS {
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            right: calc(50% - 9px);
+        }
     }
     &__chat {
         top: 2px;
