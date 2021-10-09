@@ -42,6 +42,9 @@
         @include mobileM {
             width: 370px;
         }
+        @include mobileS {
+            width: 318px;
+        }
     }
 
     &__characterWrapper {
@@ -90,6 +93,10 @@
         @include mobileM {
             width: 136px;
         }
+        @include mobileS {
+            width: 110px;
+            border-radius: 7px;
+        }
      
     }
     &__characterImg {
@@ -99,6 +106,12 @@
         margin-bottom: 15px;
         @include laptopM {
             margin-bottom: 7px;
+        }
+        @include mobileL {
+            margin-bottom: 5px;
+        }
+        @include mobileS {
+            margin-bottom: 3px;
         }
     }
     &__healthBar {
@@ -130,6 +143,9 @@
             height: 27px;
             border: 2px solid #343a40;
         }
+        @include mobileS {
+            height: 18px;
+        }
     }
     &__healthPoints {
         display: block;
@@ -143,6 +159,9 @@
         }
         @media screen and (max-width: 599px) {
             font-size: 13px;
+        }
+        @include mobileS {
+            font-size: 10px;
         }
     }
     &__health {
@@ -177,6 +196,9 @@
             @include mobileM {
                 font-size: 10px;
             }
+            @include mobileS {
+                font-size: 7px;
+            }
         }
         tr {
             display: table-row;
@@ -184,6 +206,9 @@
             border-color: inherit;
             td {
                 padding-bottom: 0.313rem;
+                @include mobileS {
+                    padding-bottom: 2px;
+                }
             }
             td:first-child {
                 vertical-align: top;
@@ -192,6 +217,12 @@
         }
         @include laptopM {
             margin-top: 7px;
+        }
+        @include mobileL {
+            margin-bottom: 5px;
+        }
+        @include mobileS {
+            margin-bottom: 3px;
         }
     }
     &__weaponWrapper {
@@ -286,8 +317,14 @@
             border-radius: 16px;
         }
         @include mobileM {
+            border: 8px solid $color-gold;
             width: 243px;
             border-radius: 13px;
+        }
+        @include mobileS {
+            border: 6px solid $color-gold;
+            width: 215px;
+            border-radius: 10px;
         }
     }
     &__summaryTitle {
@@ -391,6 +428,9 @@
         @media screen and (max-width: 599px) {
             animation: 0.8s an__monster_attack-mobileL forwards;
         }
+        @include mobileS {
+            animation: 0.8s an__monster_attack-mobileS forwards;
+        }
     }
     &__explosionWrapper {
         display: flex;
@@ -413,6 +453,11 @@
             width: 100px;
             height: 100px;
             left: -140px;
+        }
+        @include mobileS {
+            width: 80px;
+            height: 80px;
+            left: -110px;
         }
     }
     &__explosionImg {
@@ -464,6 +509,9 @@
         @include mobileM {
             animation: 1.5s an__sword_attack-mobileM forwards;
         }
+        @include mobileS {
+            animation: 1.5s an__sword_attack-mobileS forwards;
+        }
     }
     @include laptopS {
         top: 70px;
@@ -488,6 +536,11 @@
         width: 90px;
         top: 50px;
         left: 40px;
+    }
+    @include mobileS {
+        height: 70px;
+        width: 70px;
+        left: 50px;
     }
 }
 // monster attack
@@ -552,7 +605,11 @@
         transform: translateX(-80px);
     }
 }
-
+@keyframes  an__monster_attack-mobileS {
+    100% {
+        transform: translateX(-90px);
+    }
+}
 
 // user attack
 @keyframes an__sword_attack {
@@ -637,6 +694,14 @@
     }
     100% {
         transform: translate(230px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-mobileS {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(200px, 0%) scale(100%);
     }
 }
 
