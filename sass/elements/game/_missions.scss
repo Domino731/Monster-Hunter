@@ -191,6 +191,9 @@
         @include mobileM {
             width: 33%;
             margin-top: 10px;
+            &:last-child {
+                margin-top: 20px;
+            }
         }
     }
     &__willingnessBarWrapper {
@@ -362,6 +365,9 @@
         @include mobileM {
             box-shadow: -13px 0 #f7dab4 inset;
         }
+        @include mobileS {
+            height: 102%;
+        }
     }
     &__general {
         display: flex;
@@ -531,6 +537,10 @@
             height: 30px;
             width: 17px;
         }
+        @include mobileS {
+            height: 22px;
+    width: 12px;
+        }
     }
     &::before {
         border-radius: 15px 0 0 15px;
@@ -547,6 +557,11 @@
         @media screen and (max-width: 600px) {
             left: 8px;
         }
+        @include mobileS {
+            left:  6px;
+            border-radius: 5px 0  0 5px ;
+
+        }
     }
     &::after {
         border-radius: 0 15px 15px 0;
@@ -562,6 +577,11 @@
         }
         @media screen and (max-width: 600px) {
             right: 8px;
+        }
+        @include mobileS {
+            right:  6px;
+            border-radius: 0 5px 5px 0;
+
         }
     }
     @include desktopS {
@@ -586,5 +606,9 @@
     @include mobileL {
         box-shadow: -48px 0 #b27a49 inset;
         height: 13px;
+    }
+    @include mobileS {
+        box-shadow: -41px 0 #b27a49 inset;
+    height: 11px;
     }
 }
