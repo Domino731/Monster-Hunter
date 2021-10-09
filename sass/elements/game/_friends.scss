@@ -7,23 +7,7 @@
     @include mobileL {
         background-size: 180% 100%;
     }
-    .searchFriend__input {
-        @include desktopS {
-            width: 353px;
-        }
-        @include desktopS {
-            width: 290px;
-        }
-        @include laptopS {
-            width: 222px;
-        }
-        @include ipadPro {
-            width: 305px;
-        }
-        @include mobileL {
-            width: 261px;
-        }
-    }
+
     .searchFriend__searchIcon {
         @include ipadPro {
             margin-left: -27px;
@@ -160,7 +144,9 @@
                 width: 251px;
                 right: 24px;
             }
-            
+            @include mobileS {
+                width: 208px;
+            }
         }
         &::after {
             content: "";
@@ -274,6 +260,9 @@
             right: 58px;
             border: 2px solid #e80054;
         }
+        @include mobileS {
+            width: 146px;
+        }
     }
     &__list {
         box-sizing: border-box;
@@ -344,6 +333,9 @@
             width: 50%;
             height: 260px;
         }
+        @include mobileS {
+            height: 220px;
+        }
     }
 }
 
@@ -359,12 +351,21 @@
     overflow: hidden;
     @include laptopL {
         padding-top: 7px;
+        border-radius: 12px;
     }
+
     @include laptopM {
         width: 90%;
     }
+    @include ipadPro {
+        border-radius: 15px;
+    }
     @include mobileL {
         width: 92%;
+        border-radius: 12px;
+    }
+    @include mobileS {
+        border-radius: 10px;
     }
     &:hover {
         backdrop-filter: blur(4px);
@@ -407,6 +408,9 @@
         @include mobileM {
             height: 168px;
         }
+        @include mobileS {
+            height: 140px;
+        }
     }
     &__portrait {
         width: 50%;
@@ -430,11 +434,21 @@
             margin-bottom: 28px;
             width: 52%;
         }
+        @include tablet {
+            margin-bottom: 33px;
+            width: 119px;
+        }
         @include mobileL {
             margin-bottom: 20px;
+            width: 95px;
         }
         @include mobileM {
             margin-bottom: 24px;
+            width: 85px;
+        }
+        @include mobileS {
+            margin-bottom: 20px;
+            width: 76px;
         }
     }
     &__name {
@@ -502,6 +516,9 @@
             flex-direction: row;
             height: 40px;
         }
+        @include mobileS {
+            height: 32px;
+        }
     }
     &__actionBtn {
         display: flex;
@@ -518,20 +535,19 @@
         &-profile {
             text-shadow: 0.125rem 0.125rem #e80054;
             @include mobileL {
-              
             }
         }
         &-chat {
             text-shadow: 0.125rem 0.125rem #fdd33a;
             @include mobileL {
-                 flex-direction: row-reverse;
-                img{
+                flex-direction: row-reverse;
+                img {
                     margin-left: 5px;
                 }
             }
             @include mobileM {
                 flex-direction: row;
-                img{
+                img {
                     margin-left: 0;
                 }
             }
@@ -570,6 +586,29 @@
         @include mobileM {
             height: 29px;
             margin-right: 3px;
+        }
+        @include mobileS {
+            height: 23px;
+        }
+    }
+    .searchFriend__input {
+        @include desktopS {
+            width: 353px;
+        }
+        @include desktopS {
+            width: 290px;
+        }
+        @include laptopS {
+            width: 222px;
+        }
+        @include ipadPro {
+            width: 305px;
+        }
+        @include mobileL {
+            width: 261px;
+        }
+        @include mobileS {
+            width: 192px;
         }
     }
 }
@@ -623,6 +662,9 @@
     }
     @include mobileL {
         height: 25px;
+    }
+    @include mobileS {
+        height: 20px;
     }
 }
 #friends_branch {

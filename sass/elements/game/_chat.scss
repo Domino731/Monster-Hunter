@@ -3,7 +3,12 @@
     height: 100%;
     border-radius: 12px;
     overflow: hidden;
-
+    @include tablet {
+        border-radius: 10px;
+    }
+    @include mobileM {
+        border-radius: 7px;
+    }
     &__topBar {
         padding: 3px 0;
         height: 37px;
@@ -32,6 +37,9 @@
             height: 31px;
             border-bottom: 3px solid $color-blue;
         }
+        @include mobileS {
+            height: 24px;
+        }
     }
     &__friendNick {
         font-size: 1.375rem;
@@ -41,6 +49,9 @@
         margin-left: 0.75rem;
         @include mobileL {
             font-size: 19px;
+        }
+        @include mobileS {
+            font-size: 15px;
         }
     }
     &__portrait {
@@ -85,6 +96,9 @@
         @include mobileL {
             height: calc(100% - 71px);
         }
+        @include mobileS {
+            height: calc(100% - 56px);
+        }
     }
     &__botBar {
         position: relative;
@@ -106,10 +120,19 @@
         }
         @include tablet {
             height: 65px;
+            border-radius: 0 0 10px 10px;
         }
+
         @include mobileL {
             height: 40px;
             border-top: 3px solid $color-blue;
+        }
+        @include mobileM {
+            border-radius: 0 0 7px 7px;
+        }
+
+        @include mobileS {
+            height: 32px;
         }
     }
     &__emojiIcon {
@@ -242,6 +265,9 @@
         @include mobileL {
             height: 22px;
         }
+        @include mobileS {
+            height: 17px;
+        }
     }
     &__emojiContainer {
         z-index: 2;
@@ -312,6 +338,9 @@
         @include mobileM {
             height: 35px;
         }
+        @include mobileS {
+            height: 29px;
+        }
     }
     &__date {
         font-size: 20px;
@@ -334,6 +363,12 @@
         &-user {
             padding-right: 7px;
             align-items: flex-end;
+            @include mobileL {
+                padding-right: 5px;
+            }
+            @include mobileS {
+                padding-right: 3px;
+            }
         }
         strong {
             font-size: 1.4em;
@@ -352,6 +387,9 @@
         }
         @include mobileL {
             font-size: 7px;
+        }
+        @include mobileS {
+            font-size: 6px;
         }
     }
     &__nick {

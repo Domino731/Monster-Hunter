@@ -249,6 +249,10 @@
             width: 28px;
             height: 28px;
         }
+        @include mobileS {
+            width: 18px;
+    height: 18px;
+        }
     }
     &__mail {
         top: 2px;
