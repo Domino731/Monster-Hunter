@@ -19,6 +19,7 @@
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(2px);
         border-radius: 20px;
+        padding-bottom: 10px;
         @include laptopM {
             width: 360px;
             border-radius: 16px;
@@ -33,17 +34,18 @@
         @include mobileL {
             width: 389px;
             border-radius: 16px;
-            padding: 3px 6px;
+            padding: 6px 6px;
+          
         }
         @include mobileM {
             width: 348px;
             border-radius: 13px;
-            padding: 2px 5px;
+            padding: 4px 5px;
         }
         @include mobileS {
             width: 310px;
             border-radius: 10px;
-            padding: 1px 3px;
+            padding: 3px 3px;
         }
     }
     &__title {
@@ -101,6 +103,9 @@
             height: 66px;
         }
         @include tablet {
+            height: 66px;
+        }
+        @include mobileL {
             height: 49px;
         }
         @include mobileS {

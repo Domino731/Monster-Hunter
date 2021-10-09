@@ -20,6 +20,7 @@
         }
         @media screen and (max-height: 540px) {
             align-items: flex-start;
+            padding-bottom: 20px;
         }
         @include mobileM {
            overflow-x: hidden;
@@ -85,7 +86,7 @@
         }
         @include mobileS {
             border-radius: 10px;
-            width: 296px;
+            width: 310px;
         }
     }
     &__kingWrapper {
