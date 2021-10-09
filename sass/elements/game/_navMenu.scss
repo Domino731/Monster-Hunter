@@ -350,6 +350,7 @@
     display: none;
     padding: 7px 16px;
     z-index: 4;
+    border-top: 2px solid $color-red;
     @include mobileL {
         height: 52px;
     }

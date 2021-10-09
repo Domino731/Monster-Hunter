@@ -100,10 +100,12 @@ const navigateTo = (url: string) => {
 
 
 export const initRouter = () => {
+    
     document.addEventListener("click", (e: any) => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
             navigateTo(e.target.href);
+            
         };
     });
 
