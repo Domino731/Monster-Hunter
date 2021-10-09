@@ -110,7 +110,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new SearchFriend()
+    const developmentRender = new Pets()
     window.addEventListener("popstate", router);
 };
 
