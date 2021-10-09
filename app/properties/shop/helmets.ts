@@ -172,7 +172,7 @@ export const helmetsData: ShopItem[] = [
     {
         type: 'helmet',
         rarity: 'legendary',
-        description: `Made of gold, that's all you know, and looks cool`,
+        description: `Made of gold, that's all we know, and looks cool`,
         name: 'Golden Head',
         src: './images/shop/helmets/golden_head.png',
         initialCost: 150,

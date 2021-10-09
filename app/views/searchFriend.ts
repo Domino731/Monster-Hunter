@@ -92,8 +92,7 @@ export class SearchFriend extends View {
    showSpecificUserEvent() {
       this.dom.allUsersRow.forEach(el => el.addEventListener('click', () => {
          // remove all previous nick marks 
-         this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
-
+         this.dom.nicks.forEach(el => el.parentElement.classList.remove('searchFriend__nick-selected'));
          const element: HTMLElement = el as HTMLElement;
          // find user
          const userIndex: number = this.allUsersData.findIndex(el => el.id === element.dataset.userId)
@@ -113,10 +112,8 @@ export class SearchFriend extends View {
    findFriend() {
 
       const scrollToFriend = (target: HTMLInputElement) => {
-         // remove all previous nick marks 
-         this.dom.nicks.forEach(el => el.classList.remove('searchFriend__nick-selected'));
 
-         // find searched friend in order to scroll to his postion in table
+        // find searched friend in order to scroll to his postion in table
          const friend = this.allUsersData[this.allUsersData.findIndex(el => el.nick === target.value)];
          if (friend !== undefined) {
             // create view 
@@ -157,7 +154,6 @@ export class SearchFriend extends View {
                   elements.push(el.parentElement.parentElement.parentElement)
                }
             })
-            console.log(elements)
             this.dom.allUsersRow.forEach(el => el.classList.add('disabled'))
             elements.forEach(el => el.classList.remove('disabled'))
          }

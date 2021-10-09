@@ -12,19 +12,17 @@ const getDifferenceInDays = (date1: Date, date2: Date): number => {
 
 export const formatDate = (date: Date): string => {
 
-     console.log(date.getDay() === today.getDay())
-
     if (date.getDay() === today.getDay()) {
         return `Today`
     }
-    else if (getDifferenceInDays(date, today) === 7) {
+    else if (getDifferenceInDays(date, today) === 1) {
         return `Yesterday`
     }
     else if (getDifferenceInDays(date, today) < 7) {
         return `${days[date.getDay()]}`
     }
     else {
-        return `${months[date.getMonth()]}`
+        return `${date.getDate()} ${months[date.getMonth()]}`
     }
 }
 
