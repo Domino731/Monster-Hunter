@@ -6,17 +6,18 @@ import { updateUserData } from '../firebase/operations';
 import { Travel } from './travel';
 import { setCountdown } from '../functions/countdown';
 export class Tavern extends View {
-    private selectedMission: MissionData | null
+    private selectedMission: MissionData | null;
     private dom: {
-        startMissionBtn: HTMLButtonElement | null
-        missionList: NodeListOf<Element> | null
-        missionContentWrapper: HTMLElement
-        missionDetails: HTMLElement
-        character: HTMLImageElement
-        willingnessBarGreen: HTMLElement
-        missionError: HTMLElement
-        willingnessBarWrapper: HTMLElement
-        countdown: HTMLElement
+        startMissionBtn: HTMLButtonElement | null;
+        missionList: NodeListOf<Element> | null;
+        missionsListWrapper: HTMLElement | null;
+        missionContentWrapper: HTMLElement| null;
+        missionDetails: HTMLElement| null;
+        character: HTMLImageElement| null;
+        willingnessBarGreen: HTMLElement| null;
+        missionError: HTMLElement| null;
+        willingnessBarWrapper: HTMLElement| null;
+        countdown: HTMLElement | null;
     }
     constructor() {
         super()
@@ -29,24 +30,21 @@ export class Tavern extends View {
             willingnessBarGreen: document.querySelector(' .tavern__willingnessBar-green'),
             missionError: document.querySelector('.tavern__missionError'),
             willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper'),
-            countdown: document.querySelector('.tavern__countdownWrapper span')
+            countdown: document.querySelector('.tavern__countdownWrapper span'),
+            missionsListWrapper: document.querySelector('.tavern__listWrapper')
         }
         this.selectedMission = null
     }
 
-    selectMissionEvent() {
+    chooseMission( missinId: string) {
 
-
-        let mission : MissionData | null = null;
-        this.dom.missionList.forEach(el => el.addEventListener('click', () => {
-            const element = el as HTMLElement;
-
+            let mission : MissionData | null = null;
             // remove error 
             this.dom.missionError.innerText = ``;
             // clear mission content
             this.dom.missionContentWrapper.classList.add('disabled');
             // find specific mission from user's data
-            const missionIndex: number = this.userData.availableMissions.findIndex(el => el.id === element.dataset.missionId)
+            const missionIndex: number = this.userData.availableMissions.findIndex(el => el.id === missinId)
             mission = this.userData.availableMissions[missionIndex];
       
             // create details about this mission
@@ -58,13 +56,10 @@ export class Tavern extends View {
             this.dom.missionContentWrapper.scrollIntoView();
             // set selected mission
             this.selectedMission = mission;
-        }))
     }
     startMission() {
         this.dom.startMissionBtn.addEventListener('click', () => {
-            const x = true
-            //this.selectedMission !== null
-            if (x) {
+            if (this.selectedMission !== null) {
                 // check if user have enough willingness to start new mission, then add new mission to user's data, else 
                 // show error
                 if (this.selectedMission.time <= this.userData.missionWillingness) {
@@ -84,13 +79,12 @@ export class Tavern extends View {
                         start,
                         end
                     }
-                    console.log(newMission)
                     this.userData.currentMission = newMission;
                     this.userData.status = 'mission';
                     this.userData.missionWillingness -= this.selectedMission.time;
 
                     updateUserData(this.userData)
-                    // create new mission travel section
+                    // create new travel section
                     const travel = new Travel();
                 }
 
@@ -105,7 +99,16 @@ export class Tavern extends View {
             }
         })
     }
+    renderAvailbleMissions(){
+      this.userData.availableMissions.forEach(el => {
+          const mission : HTMLImageElement = document.createElement('img');
+          mission.src= el.papyrus;
+          mission.className = 'tavern__papyrus';
+          mission.addEventListener('click', ()=> this.chooseMission(el.id));
+          this.dom.missionsListWrapper.appendChild(mission);
+      })
 
+    } 
     onBtnHover() {
         this.dom.startMissionBtn.addEventListener('mouseover', () => {
             this.dom.willingnessBarGreen.style.height = `${this.userData.missionWillingness - this.selectedMission.time}%`
@@ -126,14 +129,15 @@ export class Tavern extends View {
             willingnessBarGreen: document.querySelector(' .tavern__willingnessBar-green'),
             missionError: document.querySelector('.tavern__missionError'),
             willingnessBarWrapper: document.querySelector('.tavern__willingnessBarWrapper'),
-            countdown: document.querySelector('.tavern__countdownWrapper span')
+            countdown: document.querySelector('.tavern__countdownWrapper span'),
+            missionsListWrapper: document.querySelector('.tavern__listWrapper')
         }
     }
     initScripts() {
         setCountdown(this.dom.countdown);
+        this.renderAvailbleMissions();
         this.onBtnHover();
         this.startMission();
-        this.selectMissionEvent();
     }
     render() {
         this.root.innerHTML = getTavernHTMLCode(this.userData);
