@@ -47,6 +47,9 @@
         color: $color-white;
         letter-spacing: 0.125rem;
         margin-left: 0.75rem;
+        strong {
+            color: $color-red;
+        };
         @include mobileL {
             font-size: 19px;
         }

@@ -1,14 +1,19 @@
 import { emojiData } from './../properties/emoji/emoji';
 import { SearchedUserData } from '../types';
-const foo = `licabo ipsam, debitis dolores, `
-export const getChatHTMLCode = (friend: SearchedUserData): string => {
+import { auth } from '../firebase/index';
 
+export const getChatHTMLCode = (friend: SearchedUserData): string => {
+   console.log(auth.currentUser.uid)
     return `
     <section class='chat'> 
        <div class='chat__topBar'>
          <div class=' chat__portrait chat__portrait-small'>
             <img src='${friend.portrait}'/>
-            <h3 class='chat__friendNick'>${friend.nick}</h3>
+            <h3 class='chat__friendNick'>
+            ${friend.nick}
+            ${friend.confirmedFriend ? '' : '<strong>(Not accepted yet)</strong>'}
+            </h3>
+            
          </div>
        </div>
 

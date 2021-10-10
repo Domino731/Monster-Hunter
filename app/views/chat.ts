@@ -67,7 +67,8 @@ export class Chat {
             .onSnapshot((snapshot) => {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
-                        this.conversation = change.doc.data() as Conversation
+                        this.conversation.messages = change.doc.data().messages;
+                        console.log('user', change.doc.data().messages)
                         this.renderChat();
 
                     }
@@ -81,7 +82,8 @@ export class Chat {
             .onSnapshot((snapshot) => {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
-                        this.conversation = change.doc.data() as Conversation
+                        this.conversation.messages = change.doc.data().messages;
+                        console.log('friend', change.doc.data().messages)
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -91,7 +93,13 @@ export class Chat {
             });
     }
     async getChatroomData() {
-        let conversation: Conversation | null = null;
+        let conversation: Conversation = {
+            messages: [],
+            createdAt: new Date(),
+            participants: [],
+            updatedAt: new Date(),
+            recipientId: ''
+        }
 
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
@@ -102,6 +110,7 @@ export class Chat {
                 querySnapshot.forEach(function (doc) {
                     conversation = doc.data() as Conversation;
                 });
+
             })
             .catch(err => console.log(err))
 
@@ -113,6 +122,8 @@ export class Chat {
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     conversation.messages.push(...doc.data().messages)
+                    conversation.participants = doc.data().participants
+                    console.log(doc.data().participants)
                 });
             })
             .catch(err => console.log(err))
@@ -122,7 +133,7 @@ export class Chat {
         this.conversation = conversation;
     }
 
-    general(){
+    general() {
 
     }
     renderChat() {
@@ -139,44 +150,44 @@ export class Chat {
     }
     sendMessageEvent() {
         this.dom.sendMessageBtn.addEventListener('click', () => {
-            
-            const messageText: string = this.dom.newMessageText.innerHTML;
-            if(messageText !== ''){
-            const newMessage = () => {
-                const data: MessageData = {
-                    content: [],
-                    createdAt: new Date,
-                    nick: this.currentUser.nick,
-                    userId: auth.currentUser.uid
-                }
-                data.content.push(messageText)
-                this.dom.sendMessageBtn.classList.add('disabled');
-                this.conversation.messages.push(data);
-            }
-            const currentTime: Date = new Date();
-            const index: number = this.conversation.messages.length - 1;
 
-            if (this.conversation.messages[index]) {
-                const lastUpdate: Date = this.conversation.messages[index].createdAt;
-                let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
-                const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-                if (minutes <= 3) {
-                    let oldContent: string[] = this.conversation.messages[index].content;
+            const messageText: string = this.dom.newMessageText.innerHTML;
+            if (messageText !== '') {
+                const newMessage = () => {
+                    const data: MessageData = {
+                        content: [],
+                        createdAt: new Date,
+                        nick: this.currentUser.nick,
+                        userId: auth.currentUser.uid
+                    }
+                    data.content.push(messageText)
                     this.dom.sendMessageBtn.classList.add('disabled');
-                    oldContent.push(messageText);
-                    this.updateChatData(this.conversation);
+                    this.conversation.messages.push(data);
+                }
+                const currentTime: Date = new Date();
+                const index: number = this.conversation.messages.length - 1;
+
+                if (this.conversation.messages[index]) {
+                    const lastUpdate: Date = this.conversation.messages[index].createdAt;
+                    let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
+                    const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
+                    if (minutes <= 3 && this.conversation.messages[index].nick === this.currentUser.nick) {
+                        let oldContent: string[] = this.conversation.messages[index].content;
+                        this.dom.sendMessageBtn.classList.add('disabled');
+                        oldContent.push(messageText);
+                        this.updateChatData(this.conversation);
+                    }
+                    else {
+                        newMessage();
+                        this.updateChatData(this.conversation);
+                    }
                 }
                 else {
                     newMessage();
                     this.updateChatData(this.conversation);
                 }
-            }
-            else {
-                newMessage();
-                this.updateChatData(this.conversation);
-            }
 
-        }
+            }
         });
     }
     addEmoji() {
@@ -248,7 +259,7 @@ export class Chat {
     // initialization of scripts
     initScripts() {
         this.dataChangeListener();
-        this.renderChat();
+         this.renderChat();
         this.toogleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();

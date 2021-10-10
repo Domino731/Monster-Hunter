@@ -99,7 +99,7 @@ export class Friends extends View {
             lastVisit: doc.data().lastVisit,
             id: doc.id,
             pet: doc.data().pet,
-            confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0,
+            confirmedFriend: friends.indexOf(auth.currentUser.uid) !== -1,
             nextLevelAt: getNeededExp(doc.data().level)
           }
           this.friendsList.push(data);
