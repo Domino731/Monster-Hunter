@@ -68,7 +68,6 @@ export class Chat {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
                         this.conversation.messages = change.doc.data().messages;
-                        console.log('user', change.doc.data().messages)
                         this.renderChat();
 
                     }
@@ -83,7 +82,6 @@ export class Chat {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
                         this.conversation.messages = change.doc.data().messages;
-                        console.log('friend', change.doc.data().messages)
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -100,7 +98,7 @@ export class Chat {
             updatedAt: new Date(),
             recipientId: ''
         }
-
+        const friendNick = this.friend.nick
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
             .collection('conversations')
@@ -121,9 +119,11 @@ export class Chat {
             .get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                    conversation.messages.push(...doc.data().messages)
+                    // prevent of messages duplication
+                    const  messages  =  doc.data().messages.filter(el => el.nick === friendNick)
+                    conversation.messages.push(...messages) 
                     conversation.participants = doc.data().participants
-                    console.log(doc.data().participants)
+                    // console.log(doc.data().participants)
                 });
             })
             .catch(err => console.log(err))
