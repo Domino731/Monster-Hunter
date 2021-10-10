@@ -5,6 +5,7 @@ import { getRandomMission } from '../functions/missionGenerator';
 import { getNeededExp } from '../functions/getNeededExp';
 import { Tavern } from './tavern';
 import { updateUserData } from '../firebase/operations';
+import { UserStats } from '../types';
 
 export class MonsterFight extends View {
     private fightInterval: null | ReturnType<typeof setInterval>
@@ -66,12 +67,20 @@ export class MonsterFight extends View {
         this.monsterHP -= Math.ceil(damage);
     }
     monsterDamage() {
-        const userDefence: number = (this.userStats.defence * 100 / 4 / this.userData.currentMission.monster.defence);
-        let damage: number = (this.userData.currentMission.monster.damage - userDefence) / 10
-        let random = Math.floor(Math.random() * 10) + 1;
-        damage = Math.ceil(damage + (damage * (random * 10) / 100))
-        this.userHP -= Math.ceil(damage);
+        const monsterDefence: number = 100 - (this.userData.currentMission.monster.defence * 100 / this.userStats.defence);
+        let luck: number = 100 - (this.userData.currentMission.monster.luck * 100 / this.userStats.luck);
+        luck = (Math.floor(Math.random() * luck)) + 1;
+        const userDamage: number = (this.userStats.damage * monsterDefence / 100 + (this.userStats.damage * luck / 100)) / 2;
 
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+          }
+
+        const minMonsterDamage = Math.floor(userDamage * 0.7) + 1;  
+        const monsterDamage = getRandomInt(minMonsterDamage, userDamage)
+        this.userHP -= Math.ceil(monsterDamage);
     }
     // if user defeated the monster, then show summary panel, create new mission, and update user's data in firestore with new exp, gold, mission
     successfulMission() {
@@ -98,8 +107,8 @@ export class MonsterFight extends View {
         }
         // set status
         this.userData.status = 'free';
-        this.userData.currentMission = null;
-      //  updateUserData(this.userData);
+        // this.userData.currentMission = null;
+        updateUserData(this.userData);
     }
 
     // if user defeated the monster, then show summary panel, create new mission, and update user's data in firestore
@@ -117,8 +126,8 @@ export class MonsterFight extends View {
         this.userData.availableMissions[index] = getRandomMission(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats, this.userData.pet);
         // set status
         this.userData.status = 'free';
-        this.userData.currentMission = null;
-        // updateUserData(this.userData);
+      //  this.userData.currentMission = null;
+        updateUserData(this.userData);
 
     }
 
@@ -139,6 +148,7 @@ export class MonsterFight extends View {
 
     // check if user he defeated the monster, and set monster's hp
     checkMonsterHP() {
+        
         const HP = Math.floor((this.monsterHP / this.userData.currentMission.monster.health) * 100);
         if (HP > 0) {
             this.dom.monster.HP.innerText = `${this.monsterHP}`;
@@ -177,9 +187,8 @@ export class MonsterFight extends View {
         this.userDamage();
         // set monster health bar
         setTimeout(() => {
-         //   this.checkMonsterHP();
+            this.checkMonsterHP();
         }, 1500)
-        //  this.checkMonsterHP();
 
         setTimeout(() => {
             if (this.monsterHP > 0) {
@@ -193,8 +202,8 @@ export class MonsterFight extends View {
 
                 // set user's health bar
                 setTimeout(() => {
-                  //  this.checkUserHP();
-                }, 1700)
+                    this.checkUserHP();
+                }, 1700);
             }
 
 
@@ -205,14 +214,14 @@ export class MonsterFight extends View {
 
     fightAnimations() {
         this.attackAnimation();
-       this.fightInterval = setInterval(() => {
-          //  if (this.userHP > 0 && this.monsterHP > 0) {
+        this.fightInterval = setInterval(() => {
+            if (this.userHP > 0 && this.monsterHP > 0) {
                 this.attackAnimation();
-          //  }
-          //  else {
-            //    clearInterval(this.fightInterval)
-            //}
-       }, 4000)
+            }
+            else {
+                clearInterval(this.fightInterval);
+            }
+        }, 4000)
     }
 
     general() {
@@ -248,29 +257,3 @@ export class MonsterFight extends View {
     }
 }
 // <a href='https://www.freepik.com/vectors/nature'>Nature vector created by brgfx - www.freepik.com</a>
-
-/* 
-  monsterAttack() {
-        this.monsterInterval = setInterval(()=> {
-           this.dom.monster.explosion.classList.add('monster__explosionImg-an');
-           this.dom.monster.wrapper.classList.add('monster-an');
-           setTimeout(()=> {
-            this.dom.monster.explosion.classList.remove('monster__explosionImg-an');
-            this.dom.monster.wrapper.classList.remove('monster-an');
-           }, 1900)
-        }, 3800 + 1381)
-    }
-    userAttack(){
-        this.userInterval = setInterval(()=> {
-         this.dom.user.explosion.classList.add('fight__explosion-an');
-         this.dom.user.sword.classList.add('fight__sword-an');
-         this.dom.user.weaponWrapper.classList.add('fight__weaponWrapper-an')
-
-         setTimeout(()=> {
-            this.dom.user.explosion.classList.remove('fight__explosion-an');
-            this.dom.user.sword.classList.remove('fight__sword-an');
-            this.dom.user.weaponWrapper.classList.remove('fight__weaponWrapper-an')
-         }, 2100)
-        }, 3800 + 1381) 
-    }
-*/
