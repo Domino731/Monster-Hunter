@@ -85,7 +85,7 @@
         }
         @include laptopS {
             padding-top: 6px;
-            height: calc(100% - 51px);
+            height: calc(100% - 54px);
         }
         @include ipadPro {
             height: calc(100% - 93px);
@@ -108,7 +108,7 @@
         border-top: 4px solid $color-blue;
         @include desktopS {
             border-radius: 0 0 12px 12px;
-            height: 40px;
+            height: 37px;
             border-top: 3px solid $color-blue;
         }
         @include laptopS {
@@ -251,10 +251,10 @@
             letter-spacing: 0.125rem;
         }
         @include desktopS {
-            height: 22px;
+            height: 20px;
         }
         @include laptopS {
-            height: 19px;
+            height: 17px;
         }
         @include ipadPro {
             height: 30px;

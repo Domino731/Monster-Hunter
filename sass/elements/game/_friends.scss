@@ -66,6 +66,18 @@
         @include desktopS {
             margin-left: -9px;
         }
+        @include laptopM {
+            margin-left: -20px;
+        }
+        @include laptopS {
+            margin-left: -16px;
+        }
+        @include tablet {
+            margin-left: -1px;
+        }
+        @include mobileS {
+            margin-left: 3px;
+        }
     }
     &__searchIcon {
         width: auto;

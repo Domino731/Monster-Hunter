@@ -9,33 +9,42 @@ $laptopL: 1439px;
 $desktopS: 1599px;
 $desktopM: 1919px;
 
+// 1600px
 @mixin desktopM {
-  @media (max-width: $desktopM) {
+  @media (max-width: 1919px) {
     @content;
   }
 }
+
+// 1440px
 @mixin desktopS {
-    @media (max-width: $desktopS) {
+    @media (max-width: 1599px) {
       @content;
     }
 }
+
+// 1336px
 @mixin laptopL {
-    @media (max-width: $laptopL) {
+    @media (max-width: 1439px) {
       @content;
     }
 }
+
+// 1280px
 @mixin laptopM {
-    @media (max-width: $laptopM) {
+    @media (max-width:  1335px) {
       @content;
     }
 }
+// 1024px
 @mixin laptopS {
-  @media (max-width: $laptopS) {
+  @media (max-width: 1279px) {
     @content;
   }
 }
+
 @mixin ipadPro {
-  @media (max-width: $laptopS) and (min-height: 1000px) {
+  @media (max-width: 1024) and (min-height: 1000px) {
     @content;
   }
   @media  (max-width: 1023px) and (min-height: 1px){
