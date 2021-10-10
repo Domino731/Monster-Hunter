@@ -110,7 +110,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Pets()
+    const developmentRender = new Missions()
     window.addEventListener("popstate", router);
 };
 

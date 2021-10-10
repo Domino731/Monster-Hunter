@@ -27,16 +27,6 @@ export class Travel extends View {
     onDataChange() {
 
     }
-    chackTravel() {
-        // check if the user's travel time has ended, then redirect him to fight with the monster
-        if (this.userData.currentMission.end < new Date()) {
-           const monsterFight = new MonsterFight();  
-
-        }
-        else {
-            this.travelCountdown();
-        }
-    }
     travelCountdown() {
     const guardStart: any = new Date();
     const guardEnd: any = this.userData.currentMission.end;
@@ -121,6 +111,6 @@ export class Travel extends View {
     }
     initScripts() {
         this.cancelMissionEvent();
-        this.chackTravel();
+        this.travelCountdown();
     }
 }

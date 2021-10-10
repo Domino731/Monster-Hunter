@@ -2,6 +2,7 @@ import { Tavern } from './tavern';
 import { View } from './view';
 import { OnGuardTavern } from './onGuardTavern';
 import { Travel } from './travel';
+import { MonsterFight } from './monsterFight';
 export class Missions extends View{
 
     constructor() {
@@ -11,6 +12,7 @@ export class Missions extends View{
     
     render() {
         let render;
+        const currentTime = new Date().getTime();
         if(this.userData.status === 'free'){
              render = new Tavern();
         }
@@ -18,7 +20,12 @@ export class Missions extends View{
              render = new OnGuardTavern();
         }
         else if (this.userData.status === 'mission'){
-            render = new Travel();
+            if(this.userData.currentMission.end.getTime() > currentTime){
+                   render = new Travel();  
+            }
+            else if(this.userData.currentMission.end.getTime() <= currentTime){
+                    render = new MonsterFight();
+            }
         }
     }
     initScripts(){

@@ -438,16 +438,21 @@
         align-items: center;
         position: absolute;
         top: 24%;
-        left: -200px;
+        left: -310px;
         width: 200px;
         height: 200px;
         @include desktopM {
             width: 170px;
             height: 170px;
+            left: -270px;
+        }
+        @include laptopL {
+            left: -250px;
         }
         @include laptopS {
             width: 150px;
             height: 150px;
+            left: -210px;
         }
         @media screen and (max-width: 599px) {
             width: 100px;
@@ -494,6 +499,9 @@
         @include laptopM {
             animation: 1.5s an__sword_attack-laptopM forwards;
         }
+        @include laptopS {
+            animation: 1.5s an__sword_attack-laptopS forwards;
+        }
         @include ipadPro {
             animation: 1.5s an__sword_attack-ipadPro forwards;
         }
@@ -512,6 +520,9 @@
         @include mobileS {
             animation: 1.5s an__sword_attack-mobileS forwards;
         }
+    }
+    @include laptopM {
+        left: 120px;
     }
     @include laptopS {
         top: 70px;
@@ -617,7 +628,7 @@
         transform: scale(50%);
     }
     100% {
-        transform: translate(830px, 0%) scale(100%);
+        transform: translate(920px, 0%) scale(100%);
     }
 }
 @keyframes an__sword_attack-desktopM {
@@ -633,7 +644,7 @@
         transform: scale(50%);
     }
     100% {
-        transform: translate(640px, 0%) scale(100%);
+        transform: translate(680px, 0%) scale(100%);
     }
 }
 @keyframes an__sword_attack-laptopL {
@@ -641,11 +652,19 @@
         transform: scale(50%);
     }
     100% {
-        transform: translate(540px, 0%) scale(100%);
+        transform: translate(610px, 0%) scale(100%);
     }
 }
 
 @keyframes an__sword_attack-laptopM {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(640px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-laptopS {
     30% {
         transform: scale(50%);
     }
