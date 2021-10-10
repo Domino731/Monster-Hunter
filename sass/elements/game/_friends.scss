@@ -59,6 +59,13 @@
         align-items: center;
         box-sizing: border-box;
         height: 100%;
+        margin-left: -6px;
+        @include desktopM {
+            margin-left: -11px;
+        }
+        @include desktopS {
+            margin-left: -9px;
+        }
     }
     &__searchIcon {
         width: auto;
@@ -88,8 +95,20 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        margin-right: 53px;
+        margin-right: 21px;
         position: relative;
+        @include desktopM {
+            margin-right: 11px;
+        }
+        @include desktopS {
+            margin-right: 15px;
+        }
+        @include laptopL {
+            margin-right: 11px;
+        }
+        @include laptopM {
+            margin-right: -3px;
+        }
         @include laptopS {
             margin-right: -4px;
         }
@@ -129,6 +148,13 @@
         z-index: 3;
 
         &:last-child {
+            @include desktopS {
+                right : 22px;
+                width: 322px;
+            }
+            @include laptopL {
+                width: 287px;
+            }
             @include laptopS {
                 width: 232px;
                 border: 2px solid #ffdc00;
@@ -226,6 +252,7 @@
         @include desktopS {
             top: 55px;
             right: 62px;
+            width: 229px;
         }
         @include laptopL {
             width: 209px;

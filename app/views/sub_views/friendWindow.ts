@@ -1,7 +1,6 @@
 import { SearchedUserData } from "../../types"
 export const friendWindow = (friend: SearchedUserData): string => {
     return `
-    <div class='friends__item'> 
             <div class='friend' data-user-id='${friend.id}'> 
               <div class='friend__portraitWrapper'>
                    <img src='${friend.portrait}' alt='portait' class='friend__portrait'/>
@@ -16,6 +15,5 @@ export const friendWindow = (friend: SearchedUserData): string => {
                </div>
                  </div>
             </div>
-        </div>
     `
 }

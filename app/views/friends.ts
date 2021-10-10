@@ -6,6 +6,7 @@ import { db, auth } from '../firebase/index';
 import { friendWindow } from './sub_views/friendWindow';
 import { Chat } from './chat';
 import firebase from 'firebase/app';
+import { getNeededExp } from '../functions/getNeededExp';
 export class Friends extends View {
 
   private dom: {
@@ -14,8 +15,6 @@ export class Friends extends View {
     sortForm: HTMLElement;
     filterForm: HTMLElement;
     branch: HTMLElement;
-    profileBtns: NodeListOf<Element>;
-    chatBtns: NodeListOf<Element>;
     friendsList: HTMLElement;
     friendsWindows: NodeListOf<Element>;
     sortCheckboxes: NodeListOf<Element>;
@@ -44,8 +43,6 @@ export class Friends extends View {
       sortForm: document.querySelector('#friends_sort_form'),
       filterForm: document.querySelector('#friends_filter_form'),
       branch: document.querySelector('#friends_branch'),
-      profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
-      chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
@@ -102,11 +99,13 @@ export class Friends extends View {
             lastVisit: doc.data().lastVisit,
             id: doc.id,
             pet: doc.data().pet,
-            confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0
+            confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0,
+            nextLevelAt: getNeededExp(doc.data().level)
           }
           this.friendsList.push(data);
           // array with friends, which is needed to return all friends when user remove filter
           this.friendsListBackup.push(data);
+          this.createFriendWindow(data);
         }
 
       });
@@ -126,9 +125,9 @@ export class Friends extends View {
         this.friendsList = this.friendsList.sort((a, b) => a.level - b.level);
       }
       // rerender view 
-      this.renderFriendsList();
+      this.rerenderFriendsList();
       this.getDOMElements();
-      this.showFriendProfile();
+
       // remove form after animations ends
       setTimeout(() => {
         this.dom.sortForm.classList.add('disabled')
@@ -151,9 +150,8 @@ export class Friends extends View {
         this.friendsList = this.friendsListBackup
       }
       // rerender view 
-      this.renderFriendsList();
+      this.rerenderFriendsList();
       this.getDOMElements();
-      this.showFriendProfile();
       // remove form after animations ends
       setTimeout(() => {
         this.dom.filterForm.classList.add('disabled')
@@ -165,52 +163,47 @@ export class Friends extends View {
     this.dom.closeBtn.addEventListener("click", () => this.hideFriendView())
     this.secondView = null;
   }
-  renderFriendsList() {
-    let html: string = '';
-    this.friendsList.forEach(el => {
-      html += friendWindow(el);
-    })
-    this.dom.friendsList.innerHTML = html;
+  rerenderFriendsList() {
+    this.dom.friendsList.innerHTML = ''
+    this.friendsList.forEach(el => this.createFriendWindow(el))
   }
-  showFriendProfile() {
-    this.dom.profileBtns.forEach(el => el.addEventListener('click', () => {
-      // show close icon in order to give user ability to close friend profile component 
-      this.dom.closeBtn.classList.remove('disabled');
+  createFriendWindow(friend: SearchedUserData) {
+    const wrapper: HTMLElement = document.createElement('div');
+    wrapper.className = 'friends__item';
+    wrapper.innerHTML = friendWindow(friend);
 
-      // find friend
-      const element: HTMLElement = el as HTMLElement;
-      const userId: string = element.parentElement.parentElement.dataset.userId;
-      const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
-
-      // create view of friend's profile
-      this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
-      this.shrinkFriendsList();
-
-      if(window.innerWidth < 1024){
-        this.dom.closeBranchIcon.className = 'closeIcon closeIcon__searchFriend';
-      }
-
-    }))
+    const chatBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-chat');
+    const profileBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-profile');
+    chatBtn.addEventListener('click', () => this.showChat(friend))
+    profileBtn.addEventListener('click', () => this.showFriendProfile(friend));
+    this.dom.friendsList.appendChild(wrapper);
   }
-  showChat() {
-    this.dom.chatBtns.forEach(el => el.addEventListener('click', () => {
+
+
+  showFriendProfile(friend: SearchedUserData) {
+    // show close icon in order to give user ability to close friend profile component 
+    this.dom.closeBtn.classList.remove('disabled');
+    // create view of friend's profile
+    this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
+    this.shrinkFriendsList();
+
+    if (window.innerWidth < 1024) {
+      this.dom.closeBranchIcon.className = 'closeIcon closeIcon__searchFriend';
+    }
+  };
+
+  showChat(friend: SearchedUserData) {
       // show close icon in order to give user ability to close chat
       this.dom.closeBtn.classList.remove('disabled');
-
-      // find friend
-      const element: HTMLElement = el as HTMLElement;
-      const userId: string = element.parentElement.parentElement.dataset.userId;
-      const friend: SearchedUserData = this.friendsList[this.friendsList.findIndex(el => el.id === userId)];
 
       this.shrinkFriendsList();
       this.secondView = new Chat(this.dom.branch, this.userData, friend);
 
-
-      if(window.innerWidth < 1024){
+      if (window.innerWidth < 1024) {
         this.dom.closeBranchIcon.className = 'closeIcon closeIcon__chat';
       }
-    }))
   }
+
   shrinkFriendsList() {
     this.dom.branch.classList.remove('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
@@ -224,7 +217,7 @@ export class Friends extends View {
     this.dom.closeBranchIcon.addEventListener('click', () => {
       this.dom.branch.classList.add('disabled');
       this.dom.friendsContainer.classList.remove('disabled');
-      this.dom.closeBranchIcon.className = 'closeIcon disabled' ;
+      this.dom.closeBranchIcon.className = 'closeIcon disabled';
       this.dom.branch.innerHTML = '';
       this.secondView = null;
       this.dom.closeBtn.classList.add('disabled');
@@ -263,28 +256,22 @@ export class Friends extends View {
     this.initScripts();
   }
   // for rwd develop
-  rwd(){
+  rwd() {
     // const x = new Chat(this.dom.branch, this.userData, this.friendsList[0]);
-        // this.shrinkFriendsList();
-        //
+    // this.shrinkFriendsList();
+    //
 
-        // 
+    // 
   }
   initScripts() {
     this.getFriendsData()
       .then(() => {
-
-        this.renderFriendsList();
         this.getDOMElements();
-        
-        
         this.hideBranchEvent();
-        this.showFriendProfile();
         this.showFormsEvents();
         this.sortFriends();
         this.filterFriends();
         this.closeViewEvent();
-        this.showChat();
         this.searchFriendEvent();
         this.rwd();
       })
@@ -306,8 +293,6 @@ export class Friends extends View {
       closeBtn: document.querySelector('#friends_close_btn'),
       filterForm: document.querySelector('#friends_filter_form'),
       branch: document.querySelector('#friends_branch'),
-      profileBtns: document.querySelectorAll('.friend__actionBtn-profile'),
-      chatBtns: document.querySelectorAll('.friend__actionBtn-chat'),
       friendsList: document.querySelector('.friends__list'),
       friendsWindows: document.querySelectorAll('.friend'),
       sortCheckboxes: document.querySelectorAll('#friends_sort_form input'),
