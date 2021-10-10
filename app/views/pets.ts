@@ -5,19 +5,31 @@ import { petsData } from '../properties/pets/petsData';
 import { updateUserData } from '../firebase/operations';
 export class Pets extends View {
 
-  private countdownInterval: null | ReturnType<typeof setInterval>
+  private countdownInterval: null | ReturnType<typeof setInterval>;
   private dom: {
-    rentBtns: NodeListOf<HTMLButtonElement> | null
-    goldAmount: HTMLElement | null
-    goldSubtract: HTMLElement | null
-    petsWrappers: NodeListOf<Element> | null
-    countdownWrappers: NodeListOf<Element> | null
+    rentBtns: NodeListOf<Element>
+    rent: {
+      cat: HTMLButtonElement;
+      scorpion: HTMLButtonElement;
+      cheetah: HTMLButtonElement;
+      dragon: HTMLElement;
+    };
+    goldAmount: HTMLElement | null;
+    goldSubtract: HTMLElement | null;
+    petsWrappers: NodeListOf<Element> | null;
+    countdownWrappers: NodeListOf<Element> | null;
   }
   constructor() {
     super()
     this.countdownInterval = null
     this.dom = {
       rentBtns: document.querySelectorAll('.pets__buy button'),
+      rent: {
+        cat: document.querySelector(`.pets__buy button[data-pet-name='cat']`),
+        scorpion:  document.querySelector(`.pets__buy button[data-pet-name='scorpion']`),
+        cheetah:  document.querySelector(`.pets__buy button[data-pet-name='cheetah']`),
+        dragon:  document.querySelector(`.pets__buy button[data-pet-name='dragon']`)
+      },
       goldAmount: document.querySelector('.pets__userGoldAmount'),
       goldSubtract: document.querySelector('.pets__goldSubtract'),
       petsWrappers: document.querySelectorAll('.pets__item'),
@@ -92,7 +104,9 @@ export class Pets extends View {
           // remove pet
           this.userData.pet = null;
           clearInterval(this.countdownInterval);
-          updateUserData(this.userData)
+          updateUserData(this.userData).then(()=> {
+            location.reload();
+          })
         }
         countdownWrapper.classList.remove('disabled');
       }, 1000)
@@ -102,16 +116,12 @@ export class Pets extends View {
     }
   }
 
-
-  setPetRentEvents() {
-    this.dom.rentBtns.forEach(el => {
-  
-      const pet: PetData = petsData[petsData.findIndex(e => e.id === el.dataset.petId)]
+  setNewPet(petName : 'cat' | 'scorpion' | 'cheetah' | 'dragon'){
+      const pet: PetData = petsData[petsData.findIndex(el => el.name === petName)]
       const cost: number = Math.floor(pet.initialCost * this.userData.guardPayout);
-      el.addEventListener('click', () => {
-  
 
-        const setNewPet = () => {
+
+      const setNewPet = () => {
             // subtract gold
             this.userData.gold -= cost;
             // set user pet
@@ -127,7 +137,10 @@ export class Pets extends View {
               this.dom.goldSubtract.innerText = ``
               this.dom.goldSubtract.classList.add('disabled');
             }, 1500);
-        }
+        };
+      
+
+
         if (this.userData.gold >= cost) {
           if (this.userData.pet === null) {
             setNewPet();
@@ -152,28 +165,31 @@ export class Pets extends View {
             }
           }
         };
-      }
-  
-      );
-    });
+  }
+  setPetRentEvents() {
+     this.dom.rent.cat.addEventListener('click', () => this.setNewPet('cat'));
+     this.dom.rent.scorpion.addEventListener('click', () => this.setNewPet('scorpion'));
+     this.dom.rent.cheetah.addEventListener('click', () => this.setNewPet('cheetah'));
+     this.dom.rent.dragon.addEventListener('click', () => this.setNewPet('dragon'));
   }
 
   setStyles() {
 
     this.dom.rentBtns.forEach(el => {
-      const pet: PetData = petsData[petsData.findIndex(e => e.id === el.dataset.petId)]
+      const button : HTMLButtonElement = el as HTMLButtonElement
+      const pet: PetData = petsData[petsData.findIndex(e => e.name === button.dataset.petName)];
       const cost: number = Math.floor(pet.initialCost * this.userData.guardPayout);
       // reset styles
-      el.className = ''
+      el.className = '';
       // add new style which is according to user has enough gold
-      el.classList.add(this.userData.gold >= cost ? 'pets__buy-afford' : 'pets__buy-notAfford')
+      el.classList.add(this.userData.gold >= cost ? 'pets__buy-afford' : 'pets__buy-notAfford');
     })
 
     this.dom.petsWrappers.forEach((el) => {
-      const element = el as HTMLElement
-      element.classList.remove('pets__current')
+      const element = el as HTMLElement;
+      element.classList.remove('pets__current');
       if (this.userData.pet !== null) {
-        this.userData.pet.name === element.dataset.petName && el.classList.add('pets__current')
+        this.userData.pet.name === element.dataset.petName && el.classList.add('pets__current');
       }
       else {
 
@@ -194,6 +210,12 @@ export class Pets extends View {
   getDOMElements() {
     this.dom = {
       rentBtns: document.querySelectorAll('.pets__buy button'),
+      rent: {
+        cat: document.querySelector(`.pets__buy button[data-pet-name='cat']`),
+        scorpion:  document.querySelector(`.pets__buy button[data-pet-name='scorpion']`),
+        cheetah:  document.querySelector(`.pets__buy button[data-pet-name='cheetah']`),
+        dragon:  document.querySelector(`.pets__buy button[data-pet-name='dragon']`)
+      },
       goldAmount: document.querySelector('.pets__userGoldAmount'),
       goldSubtract: document.querySelector('.pets__goldSubtract'),
       petsWrappers: document.querySelectorAll('.pets__item'),
@@ -210,5 +232,64 @@ export class Pets extends View {
     this.setPetRentEvents();
   }
 }
+// setPetRentEvents() {
+//   this.dom.rentBtns.forEach(el => {
 
+//     const pet: PetData = petsData[petsData.findIndex(e => e.id === el.dataset.petId)]
+//     const cost: number = Math.floor(pet.initialCost * this.userData.guardPayout);
+
+
+
+    
+//     el.addEventListener('click', () => {
+
+
+//       const setNewPet = () => {
+//           // subtract gold
+//           this.userData.gold -= cost;
+//           // set user pet
+//           this.userData.pet = pet;
+//           this.userData.pet.rentEnd = new Date();
+//           this.userData.pet.rentEnd.setHours(this.userData.pet.rentEnd.getHours() + (7 * 24));
+//           updateUserData(this.userData);
+//           // add gold subtract animation
+//           this.dom.goldSubtract.innerText = `-${cost}`;
+//           this.dom.goldSubtract.classList.remove('disabled');
+//           // remove this animation after 1.5s
+//           setTimeout(() => {
+//             this.dom.goldSubtract.innerText = ``
+//             this.dom.goldSubtract.classList.add('disabled');
+//           }, 1500);
+//       };
+
+
+//       if (this.userData.gold >= cost) {
+//         if (this.userData.pet === null) {
+//           setNewPet();
+//         }
+//         else {
+//           // check if user already has a pet check if rent time is no exceed over 100 days
+//           // differences between current and end rent date
+//           const end: number = this.userData.pet.rentEnd.getTime();
+//           const start: number = new Date().getTime();
+//           const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24));
+//           console.log(diffDays)
+//           if (diffDays <= 100 && this.userData.pet.id === pet.id) {
+//             this.userData.gold -= cost;
+//             this.userData.pet.rentEnd.setHours(this.userData.pet.rentEnd.getHours() + (7 * 24));
+//             updateUserData(this.userData)
+//           }
+//           else if (diffDays <= 100 && this.userData.pet.id !== pet.id) {
+//             setNewPet();
+//           }
+//           else {
+//             window.alert('You have reached maxiumum rent time.')
+//           }
+//         }
+//       };
+//     }
+
+//     );
+//   });
+// }
 // <a href='https://www.freepik.com/vectors/background'>Background vector created by upklyak - www.freepik.com</a>

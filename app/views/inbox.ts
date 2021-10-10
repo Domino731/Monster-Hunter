@@ -35,7 +35,10 @@ export class Inbox extends View {
       e.preventDefault();
       const element: HTMLElement = el as HTMLElement;
       const mail: MailData = this.userData.inbox[this.userData.inbox.findIndex(el => el.id === element.dataset.mailId)];
-      this.dom.mailContainer.innerHTML = mail.content;
+      if(mail){
+        this.dom.mailContainer.innerHTML = mail.content;
+      }
+     
 
       if (window.innerWidth < 1024) {
         this.toogleMail();

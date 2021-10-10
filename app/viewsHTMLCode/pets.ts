@@ -44,7 +44,7 @@ export const getPetsHTMLCode = (user: UserData): string => {
 
             <div class='pets__buy'><button class='
             ${user.gold >= Math.floor(el.initialCost * user.guardPayout) ? 'pets__buy-afford' : ' pets__buy-notAfford'} 
-            ' data-pet-id=${el.id}>
+            ' data-pet-name=${el.name}>
             
             Rent for 7 days
             </button></div>

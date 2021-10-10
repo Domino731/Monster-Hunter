@@ -3,17 +3,18 @@ export class MobileNav {
         navContainer: HTMLElement;
         navIcon: HTMLImageElement;
         links: NodeListOf<Element>;
+        mobileNavContainer: HTMLElement;
     }
     constructor(){
         this.dom = {
             navContainer: document.querySelector('.nav'),
             navIcon: document.querySelector('.mobileNav__icon'),
-            links: document.querySelectorAll('.nav a')
+            links: document.querySelectorAll('.nav a'),
+            mobileNavContainer: document.querySelector('.mobileNav')
         }
         this.init();
     }
     toogleNav(){
-        console.log(this.dom.links)
         this.dom.navIcon.addEventListener('click', ()=> {
            const flag : boolean = this.dom.navContainer.style.display === 'block';
            if(flag){
@@ -28,10 +29,12 @@ export class MobileNav {
     }
 
     hideNav(){
-        if(window.innerHeight >= 1000 || window.innerWidth < 1024){
-              this.dom.links.forEach(el => el.addEventListener('click', () => this.dom.navContainer.style.display = 'none'));
-        }
-    
+              this.dom.links.forEach(el => el.addEventListener('click', () => {             
+                 if(this.dom.navContainer.style.display === 'block'){
+                    this.dom.navContainer.style.display = 'none'; 
+                 } 
+                 this.dom.navIcon.src = './images/menu.png';
+              }));
     }
     init(){
        this.toogleNav();
