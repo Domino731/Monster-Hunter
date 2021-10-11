@@ -16,7 +16,9 @@ export class Chat {
         sendMessageBtn: HTMLElement | null
         chatContainer: HTMLElement | null
     }
-    private currentUser: UserData
+    private currentUser: UserData;
+    private messages: any;
+    private userConversation: Conversation | null;
     constructor(root: HTMLElement, currentUser: UserData, friend: SearchedUserData) {
         this.root = root;
         this.friend = friend;
@@ -29,7 +31,8 @@ export class Chat {
             newMessageText: document.querySelector('.chat__message'),
             sendMessageBtn: document.querySelector('.chat__btn'),
             chatContainer: document.querySelector('.chat__content')
-        }
+        };
+        this.userConversation = null;
         this.init();
     }
 
@@ -99,6 +102,8 @@ export class Chat {
             recipientId: ''
         }
         const friendNick = this.friend.nick
+        let userMessages : Conversation | null = null;
+        let  friendMessages : MessageData [] | null = null;
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
             .collection('conversations')
@@ -106,7 +111,13 @@ export class Chat {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach(function (doc) {
-                    conversation = doc.data() as Conversation;
+                    userMessages = doc.data() as Conversation
+                    userMessages.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                    conversation.messages.push(...userMessages.messages);
+                    conversation.createdAt = doc.data().createdAt;
+                    conversation.updatedAt = doc.data().updatedAt;
+                    conversation.participants =  doc.data().participants; 
+                    
                 });
 
             })
@@ -119,17 +130,16 @@ export class Chat {
             .get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                    // prevent of messages duplication
-                    const  messages  =  doc.data().messages.filter(el => el.nick === friendNick)
-                    conversation.messages.push(...messages) 
-                    conversation.participants = doc.data().participants
-                    // console.log(doc.data().participants)
+                    friendMessages = doc.data().messages as MessageData [];
+                    friendMessages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                    conversation.messages.push(...friendMessages)
                 });
             })
             .catch(err => console.log(err))
 
         // sort by date
-        conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        this.userConversation = userMessages;
+        conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.conversation = conversation;
     }
 
@@ -162,29 +172,29 @@ export class Chat {
                     }
                     data.content.push(messageText)
                     this.dom.sendMessageBtn.classList.add('disabled');
-                    this.conversation.messages.push(data);
+                    this.userConversation.messages.push(data);
                 }
                 const currentTime: Date = new Date();
-                const index: number = this.conversation.messages.length - 1;
-
-                if (this.conversation.messages[index]) {
+                const index: number =  this.userConversation.messages.length - 1;
+                const allMessagesIndex: number = this.conversation.messages.length - 1;
+                if (this.userConversation.messages[index] && this.conversation.messages[allMessagesIndex].nick === this.currentUser.nick) {
                     const lastUpdate: Date = this.conversation.messages[index].createdAt;
                     let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
                     const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-                    if (minutes <= 3 && this.conversation.messages[index].nick === this.currentUser.nick) {
-                        let oldContent: string[] = this.conversation.messages[index].content;
+                    if (minutes <= 3) {
+                        let oldContent: string[] = this.userConversation.messages[index].content;
                         this.dom.sendMessageBtn.classList.add('disabled');
                         oldContent.push(messageText);
-                        this.updateChatData(this.conversation);
+                        this.updateChatData(this.userConversation);
                     }
                     else {
                         newMessage();
-                        this.updateChatData(this.conversation);
+                        this.updateChatData(this.userConversation);
                     }
                 }
                 else {
                     newMessage();
-                    this.updateChatData(this.conversation);
+                    this.updateChatData(this.userConversation);
                 }
 
             }
