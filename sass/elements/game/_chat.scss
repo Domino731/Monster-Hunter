@@ -408,7 +408,7 @@
         letter-spacing: 0.1em;
         word-spacing: 0.1em;
         padding: 0.6em;
-        margin-bottom: 0.4em;
+        margin-bottom: 0.2em;
         font-size: 1.8em;
         word-wrap: break-word;
         div {
@@ -422,12 +422,12 @@
         &-friend {
             color: $color-black;
             background: $color-white;
-            border-radius: 0.3em 1.375rem 1.375rem 0.3em;
+            border-radius: 0.3em 1.375em 1.375em 0.3em;
             &First {
-                border-radius:  1.375rem 1.375rem 1.375rem 0;
+                border-radius:  1.375em 1.375em 1.375em  0.3em;
             }
             &Last {
-                border-radius: 0 1.375rem 1.375rem 1.375rem;
+                border-radius:  0.3em 1.375em 1.375em 1.375em;
             }
         }
         &-user {
@@ -435,10 +435,10 @@
             background: $color-blue;
             border-radius:  1.375rem 0.3em 0.3em 1.375rem ;
             &First {
-                border-radius: 1.375rem  1.375rem 0 1.375rem;
+                border-radius: 1.375rem  1.375rem  0.3em 1.375rem;
             }
             &Last {
-                border-radius: 1.375rem 0 1.375rem 1.375rem;
+                border-radius: 1.375rem  0.3em 1.375rem 1.375rem;
             }
         }
         @include ipadPro {

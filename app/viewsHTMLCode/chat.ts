@@ -1,10 +1,10 @@
 import { getMessageCode } from './../views/sub_views/messages';
 import { emojiData } from './../properties/emoji/emoji';
 import { SearchedUserData, MessageData } from '../types';
-import { auth } from '../firebase/index';
 
-export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messeges: MessageData[]): string => {
-   console.log(auth.currentUser.uid)
+
+export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messages: MessageData[]): string => {
+   messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     return `
     <section class='chat'> 
        <div class='chat__topBar'>
@@ -19,7 +19,7 @@ export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messeges:
        </div>
 
        <div class='chat__content'> 
-                 ${messeges.map((el) => `
+                 ${messages.map((el) => `
                  <div class='message'>
                  ${getMessageCode(friend, currentUser, el)}
                  </div>

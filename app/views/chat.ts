@@ -76,7 +76,7 @@ export class Chat {
             .onSnapshot((snapshot) => {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
-                         this.conversation.user = change.doc.data() as Conversation;
+                        this.conversation.user = change.doc.data() as Conversation;
                         this.conversation.general.messages = change.doc.data().messages;
                         this.conversation.general.messages.push(...this.conversation.friend.messages);
                         this.renderChat();
@@ -94,7 +94,7 @@ export class Chat {
                     if (change.type === "modified") {
                         this.conversation.friend = change.doc.data() as Conversation;
                         this.conversation.general.messages = change.doc.data().messages;
-                        this.conversation.general.messages.push(...this.conversation.user.messages);
+                        this.conversation.general.messages.push(...this.conversation.user.messages);          
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -157,20 +157,21 @@ export class Chat {
         this.conversation.general = conversation;
     }
 
-    general() {
 
-    }
     renderChat() {
+        console.log()
         // sort by date
-        this.conversation.general.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+        this.conversation.general.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        
         let html = '';
         this.conversation.general.messages.forEach(el => {
-           // html += getMessageCode(this.friend, this.currentUser, el)
+           html += ` <div class='message'>${getMessageCode(this.friend, this.currentUser, el)}</div>`
 
         });
         this.dom.chatContainer.innerHTML = html;
 
         this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
+        console.log(this.dom.chatContainer.scrollHeight)
 
     }
     sendMessageEvent() {
@@ -225,7 +226,6 @@ export class Chat {
             let messageHTML: string = this.dom.newMessageText.innerHTML
             messageHTML += `<img src='${emoji.src}'/>`
             this.dom.newMessageText.innerHTML = messageHTML;
-            console.log(this.dom.newMessageText.innerHTML)
         }))
     }
 
@@ -268,6 +268,9 @@ export class Chat {
         this.dom.newMessageText.addEventListener('change', check);
     }
 
+    general(){
+        this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
+    }
     // method which is responsible for injecting html code into game root
     render() {
         this.root.innerHTML = getChatHTMLCode(this.friend,this.currentUser, this.conversation.general.messages);
@@ -288,7 +291,6 @@ export class Chat {
     // initialization of scripts
     initScripts() {
         this.dataChangeListener();
-      //   this.renderChat();
         this.toogleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();
@@ -303,50 +305,8 @@ export class Chat {
                 this.render();
                 this.getDOMElements();
                 this.initScripts();
+                this.general();
             })
             .catch(err => console.log(err))
     }
 }
-// sendMessageEvent() {
-//     this.dom.sendMessageBtn.addEventListener('click', () => {
-
-//         const messageText: string = this.dom.newMessageText.innerHTML;
-//         if (messageText !== '') {
-//             const newMessage = () => {
-//                 const data: MessageData = {
-//                     content: [],
-//                     createdAt: new Date,
-//                     nick: this.currentUser.nick,
-//                     userId: auth.currentUser.uid
-//                 }
-//                 data.content.push(messageText)
-//                 this.dom.sendMessageBtn.classList.add('disabled');
-//                 this.conversation.user.messages.push(data);
-//             }
-//             const currentTime: Date = new Date();
-//             const index: number =  this.conversation.user.messages.length - 1;
-//             const allMessagesIndex: number = this.conversation.general.messages.length - 1;
-//             if (this.conversation.user.messages[index] && this.conversation.general.messages[allMessagesIndex].nick === this.currentUser.nick) {
-//                 const lastUpdate: Date = this.conversation.general.messages[index].createdAt;
-//                 let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
-//                 const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-//                 if (minutes <= 3 && this.conversation.general.messages[allMessagesIndex].nick === this.currentUser.nick) {
-//                     let oldContent: string[] = this.conversation.user.messages[index].content;
-//                     this.dom.sendMessageBtn.classList.add('disabled');
-//                     oldContent.push(messageText);
-//                     console.log(oldContent)
-//                     this.updateChatData(this.conversation.user);
-//                 }
-//                 else {
-//                     newMessage();
-//                     this.updateChatData(this.conversation.user);
-//                 }
-//             }
-//             else {
-//                 newMessage();
-//                 this.updateChatData(this.conversation.user);
-//             }
-
-//         }
-//     });
-// }

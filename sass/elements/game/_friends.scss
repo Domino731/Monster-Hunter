@@ -66,6 +66,9 @@
         @include desktopS {
             margin-left: -9px;
         }
+        @include laptopL {
+            
+        }
         @include laptopM {
             margin-left: -20px;
         }
@@ -635,8 +638,9 @@
             width: 353px;
         }
         @include desktopS {
-            width: 290px;
+            width: 270px;
         }
+      
         @include laptopS {
             width: 222px;
         }
