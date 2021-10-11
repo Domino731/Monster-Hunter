@@ -19,6 +19,7 @@ export class Chat {
     private currentUser: UserData;
     private messages: any;
     private userConversation: Conversation | null;
+    private friendConversation: Conversation | null
     constructor(root: HTMLElement, currentUser: UserData, friend: SearchedUserData) {
         this.root = root;
         this.friend = friend;
@@ -33,6 +34,7 @@ export class Chat {
             chatContainer: document.querySelector('.chat__content')
         };
         this.userConversation = null;
+        this.friendConversation = null;
         this.init();
     }
 
@@ -71,6 +73,7 @@ export class Chat {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
                         this.conversation.messages = change.doc.data().messages;
+                        this.conversation.messages.push(...this.friendConversation.messages)
                         this.renderChat();
 
                     }
@@ -85,6 +88,7 @@ export class Chat {
                 snapshot.docChanges.forEach((change) => {
                     if (change.type === "modified") {
                         this.conversation.messages = change.doc.data().messages;
+                        this.conversation.messages.push(...this.userConversation.messages)
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -93,6 +97,9 @@ export class Chat {
                 });
             });
     }
+
+
+
     async getChatroomData() {
         let conversation: Conversation = {
             messages: [],
@@ -103,7 +110,7 @@ export class Chat {
         }
         const friendNick = this.friend.nick
         let userMessages : Conversation | null = null;
-        let  friendMessages : MessageData [] | null = null;
+        let  friendMessages : Conversation | null = null;
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
             .collection('conversations')
@@ -130,15 +137,16 @@ export class Chat {
             .get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                    friendMessages = doc.data().messages as MessageData [];
-                    friendMessages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-                    conversation.messages.push(...friendMessages)
+                    friendMessages = doc.data() as Conversation 
+                    friendMessages.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                    conversation.messages.push(...friendMessages.messages)
                 });
             })
             .catch(err => console.log(err))
 
         // sort by date
         this.userConversation = userMessages;
+        this.friendConversation = friendMessages;
         conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.conversation = conversation;
     }
