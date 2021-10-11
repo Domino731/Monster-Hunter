@@ -165,12 +165,13 @@ export class Chat {
         this.conversation.general.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
         let html = '';
         this.conversation.general.messages.forEach(el => {
-            html += getMessageCode(this.friend, this.currentUser, el)
+           // html += getMessageCode(this.friend, this.currentUser, el)
 
         });
         this.dom.chatContainer.innerHTML = html;
 
         this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
+
     }
     sendMessageEvent() {
         this.dom.sendMessageBtn.addEventListener('click', () => {
@@ -269,7 +270,7 @@ export class Chat {
 
     // method which is responsible for injecting html code into game root
     render() {
-        this.root.innerHTML = getChatHTMLCode(this.friend);
+        this.root.innerHTML = getChatHTMLCode(this.friend,this.currentUser, this.conversation.general.messages);
     }
 
     // getting the dom elements of newly injected html code
@@ -287,7 +288,7 @@ export class Chat {
     // initialization of scripts
     initScripts() {
         this.dataChangeListener();
-         this.renderChat();
+      //   this.renderChat();
         this.toogleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();

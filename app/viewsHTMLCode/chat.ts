@@ -1,8 +1,9 @@
+import { getMessageCode } from './../views/sub_views/messages';
 import { emojiData } from './../properties/emoji/emoji';
-import { SearchedUserData } from '../types';
+import { SearchedUserData, MessageData } from '../types';
 import { auth } from '../firebase/index';
 
-export const getChatHTMLCode = (friend: SearchedUserData): string => {
+export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messeges: MessageData[]): string => {
    console.log(auth.currentUser.uid)
     return `
     <section class='chat'> 
@@ -18,7 +19,13 @@ export const getChatHTMLCode = (friend: SearchedUserData): string => {
        </div>
 
        <div class='chat__content'> 
-                 
+                 ${messeges.map((el) => `
+                 <div class='message'>
+                 ${getMessageCode(friend, currentUser, el)}
+                 </div>
+                 `
+                  
+                  ).join('')}
        </div>
 
        <div class='chat__botBar'> 
