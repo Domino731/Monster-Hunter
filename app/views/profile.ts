@@ -592,8 +592,14 @@ export class Profile extends View {
                 const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
                 replaceBtn.addEventListener('click', () => this.replaceItemInEquipment(el))
 
-                newLabel.addEventListener('mouseover', ()=> clearInterval(toogleLabel));
-                newLabel.addEventListener('mouseleave', ()=> this.dom.backpackLabel.root.innerHTML = '');
+                newLabel.addEventListener('mouseover', ()=> {
+                    equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+                    return clearInterval(toogleLabel);
+                });
+                newLabel.addEventListener('mouseleave', ()=> {
+                   this.dom.backpackLabel.root.innerHTML = '';
+                   equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse"); 
+                });
 
                 this.dom.backpackLabel.root.classList.remove('disabled');
                 this.dom.backpackLabel.root.appendChild(newLabel);

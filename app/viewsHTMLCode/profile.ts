@@ -96,14 +96,7 @@ export const getProfileHTMLCode = (user: UserData): string => {
 
 
             <div class='profile__backpackLabelWrapper'>   
-               <div class='profile__itemSpecs profile__itemSpecs-backpackSlot disabled' id='profile_backpack_item_label'> 
-                     <div id='profile_backpack_label_wrapper'> </div> 
-                     <div class='profile__actionError' id='profile_backpack_move_item_error'></div>
-                     <div class='profile__actionWrapper' id='profile_backpack_move_item_btn'>
-                       <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='profile_backpack_replace_item_icon'/>
-                       <strong class='profile__actionName'>Equip</strong>
-                    </div>
-               </div>
+             
             </div>
 
             <div class='profile__backpackRow'>
