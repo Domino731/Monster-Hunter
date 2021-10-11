@@ -110,7 +110,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new SearchFriend();
+    const developmentRender = new Profile();
     window.addEventListener("popstate", router);
 };
 

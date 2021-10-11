@@ -1,10 +1,9 @@
-import { ShopItem } from "../../types";
-import { compareStats } from "./compareStats";
+import { ShopItem } from "../../types"
+import { compareStats } from "./compareStats"
 
-export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem): string => {
+export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem) : string => {
     if (currentItem === undefined) {
         return `
-
 
         <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
         
@@ -50,15 +49,21 @@ export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem
 
           </tbody>
         </table>
-        
-        
-        `
 
+        <div class='profile__actionError' id='profile_backpack_move_item_error'></div>
+        <div class='profile__actionWrapper' id='profile_backpack_move_item_btn'>
+          <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='profile_backpack_replace_item_icon'/>
+          <strong class='profile__actionName'>Equip</strong>
+        </div>
+    
+        `
 
 
     }
     else {
         return `
+
+        
         <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
         
         ${item.name}
@@ -99,7 +104,12 @@ export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem
                 : ``}
           </tbody>
         </table>
+
+        <div class='profile__actionError' id='profile_backpack_move_item_error'></div>
+        <div class='profile__actionWrapper' id='profile_backpack_move_item_btn'>
+          <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='profile_backpack_replace_item_icon'/>
+          <strong class='profile__actionName'>Equip</strong>
+        </div>
         `
     }
-
 }
