@@ -533,43 +533,10 @@ export class Profile extends View {
             clearInterval(toogleLabel);
             this.dom.backpackLabel.root.classList.remove('disabled');
         });
-
-        // remove label when focus was losed
-        this.dom.backpackLabel.root.addEventListener('mouseleave', () => {
-            this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-        });
-
-       
-        this.dom.backpackLabel.moveItem.addEventListener('click', () => {
-            equipmentSlot.innerHTML = `<img src='${currentItem.src}' class='profile__equipmentIcon' data-current-item-id='${currentItem.id}'/>`
-
-            const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
-            const backpackItemIndex: number = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
-
-            if (equipmentItemIndex !== -1) {
-                // remove item from backpack
-                this.userData.backpackItems.splice(backpackItemIndex, 1);
-                // add to backpack new equipment item (which is replaced by new) 
-                this.userData.backpackItems.push(this.userData.equipmentItems[equipmentItemIndex])
-                // add to equipment selected item
-                this.userData.equipmentItems[equipmentItemIndex] = currentItem;
-                // update user's data in firestore
-                updateUserData(this.userData);
-                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-            }
-            else {
-                // remove item from backpack
-                this.userData.backpackItems.splice(backpackItemIndex, 1);
-                // add new item to equipment
-                this.userData.equipmentItems.push(currentItem);
-                updateUserData(this.userData);
-                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
-            }
-        })
     }
 
-     // replace item in equipment
-    replaceItemInEquipment(currentItem: ShopItem){
+    // transferring item  the backpack to equipment
+    replaceItemInEquipment(currentItem: ShopItem) {
         const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
         const backpackItemIndex: number = this.userData.backpackItems.findIndex(el => el.id === currentItem.id)
         if (equipmentItemIndex !== -1) {
@@ -594,6 +561,8 @@ export class Profile extends View {
     }
 
     setUserBackpack() {
+        let toogleLabel: ReturnType<typeof setInterval> | null = null
+        let equipmentSlot: HTMLElement;
         // clear previous 
         this.dom.backpackSlots.forEach(el => {
             el.innerHTML = ''
@@ -601,19 +570,44 @@ export class Profile extends View {
 
         this.userData.backpackItems.forEach((el, num) => {
 
-          this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
+            this.dom.backpackSlots[num].innerHTML = `<img src='${el.src}' data-backpack-item-id='${el.id}' data-slot-name='${el.type}'/>`
 
-          this.dom.backpackSlots[num].addEventListener('mouseover', () => {
-              this.dom.backpackLabel.root.innerHTML = '';
-              const newLabel : HTMLElement = document.createElement('div');
-              newLabel.className = `profile__itemSpecs profile__itemSpecs-backpackSlot profile__backpackLabel-${num + 1}`;
-              newLabel.innerHTML = getProfileBackpackLabel(el, el);
-             
-              const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
-              replaceBtn.addEventListener('click', ()=> this.replaceItemInEquipment(el))
-              this.dom.backpackLabel.root.classList.remove('disabled');
-              this.dom.backpackLabel.root.appendChild(newLabel);
-          })
+            this.dom.backpackSlots[num].addEventListener('mouseover', () => {
+
+                // prevent of label hide
+                clearInterval(toogleLabel);
+
+                   // find specific slot in equipment which is equal to current shop item type, needed to compare items
+                equipmentSlot = document.querySelector(`#profile_equipment_slots div[data-slot-name = ${el.type}]`)
+                // show slot in equipment by adding pulse animation
+                equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+
+                // create new label
+                this.dom.backpackLabel.root.innerHTML = '';
+                const newLabel: HTMLElement = document.createElement('div');
+                newLabel.className = `profile__itemSpecs profile__itemSpecs-backpackSlot profile__backpackLabel-${num + 1}`;
+                newLabel.innerHTML = getProfileBackpackLabel(el, el);
+              
+                // add a function responsible for  transferring item  the backpack to equipment
+                const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
+                replaceBtn.addEventListener('click', () => this.replaceItemInEquipment(el))
+
+                newLabel.addEventListener('mouseover', ()=> clearInterval(toogleLabel));
+                newLabel.addEventListener('mouseleave', ()=> this.dom.backpackLabel.root.innerHTML = '');
+
+                this.dom.backpackLabel.root.classList.remove('disabled');
+                this.dom.backpackLabel.root.appendChild(newLabel);
+            })
+
+            // remove label with delay -> after 0.8s
+            this.dom.backpackSlots[num].addEventListener('mouseleave', () => {
+                // hide label
+                toogleLabel = setInterval(() => {
+                    this.dom.backpackLabel.root.innerHTML = ''
+                }, 800);
+                // remove pulse effect
+                equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+            });
 
         })
     }
@@ -721,7 +715,7 @@ export class Profile extends View {
     // for rwd development
     rwd() {
         // equipment
-         const currentItem = helmetsData[12]
+        const currentItem = helmetsData[12]
         // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
         // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-chestPlate`)
         // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
@@ -741,7 +735,7 @@ export class Profile extends View {
     }
     initScripts() {
         this.mobile();
-      //  this.labelForBackpackEvent();
+        //  this.labelForBackpackEvent();
         this.setUserEquipment();
         this.setGeneral();
         this.setUserBackpack();
