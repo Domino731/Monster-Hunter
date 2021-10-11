@@ -158,20 +158,6 @@ export class SearchedUser {
       });
   }
 
-  async deleteChat() {
-     await db.collection('chat')
-    .doc(`${auth.currentUser.uid}`)
-    .collection('conversations')
-    .where('recipientId', '==', `${this.searchedUser.id}`)
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        doc.ref.delete();
-      });
-    })
-    .catch(err => console.log(err))
-  }
-
 
   // add or remove searched user to friends
   addOrRemoveFriendEvent() {
@@ -194,7 +180,7 @@ export class SearchedUser {
       else {
         this.currentUser.friends.splice(friendIndex, 1);
         this.dom.friendAction.src = './images/add_friend.png';
-        this.deleteChat();
+
         updateUserData(this.currentUser);
       }
     });
@@ -273,9 +259,9 @@ export class SearchedUser {
     //   this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
     //   this.dom.backpackLabel.root.classList.remove('disabled')
     // potions
-        const firstPotion = potionsData[0]
-        this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-        this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 2);
+        // const firstPotion = potionsData[0]
+        // this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        // this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 2);
 }
   initScripts() {
 

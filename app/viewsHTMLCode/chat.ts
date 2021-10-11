@@ -3,8 +3,7 @@ import { emojiData } from './../properties/emoji/emoji';
 import { SearchedUserData, MessageData } from '../types';
 
 
-export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messages: MessageData[]): string => {
-   messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+export const getChatHTMLCode = (friend: SearchedUserData): string => {
     return `
     <section class='chat'> 
        <div class='chat__topBar'>
@@ -19,13 +18,7 @@ export const getChatHTMLCode = (friend: SearchedUserData, currentUser, messages:
        </div>
 
        <div class='chat__content'> 
-                 ${messages.map((el) => `
-                 <div class='message'>
-                 ${getMessageCode(friend, currentUser, el)}
-                 </div>
-                 `
-                  
-                  ).join('')}
+                 
        </div>
 
        <div class='chat__botBar'> 

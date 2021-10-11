@@ -5,7 +5,6 @@ import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
 import { friendWindow } from './sub_views/friendWindow';
 import { Chat } from './chat';
-import firebase from 'firebase/app';
 import { getNeededExp } from '../functions/getNeededExp';
 export class Friends extends View {
 
@@ -28,12 +27,14 @@ export class Friends extends View {
   private friendsList: SearchedUserData[];
   private friendsListBackup: SearchedUserData[];
   private secondView: SearchedUser | Chat | null;
+  private friendNick: string | null
 
   constructor() {
     super();
     this.secondView = null;
     this.friendsList = [];
     this.friendsListBackup = [];
+    this.friendNick = null;
     this.dom = {
       closeBranchIcon: document.querySelector('.closeIcon'),
       friendsContainer: document.querySelector('#friends_container'),
@@ -127,7 +128,7 @@ export class Friends extends View {
       // rerender view 
       this.rerenderFriendsList();
       this.getDOMElements();
-
+      this.markFriend();
       // remove form after animations ends
       setTimeout(() => {
         this.dom.sortForm.classList.add('disabled')
@@ -152,6 +153,7 @@ export class Friends extends View {
       // rerender view 
       this.rerenderFriendsList();
       this.getDOMElements();
+      this.markFriend();
       // remove form after animations ends
       setTimeout(() => {
         this.dom.filterForm.classList.add('disabled')
@@ -165,7 +167,12 @@ export class Friends extends View {
   }
   rerenderFriendsList() {
     this.dom.friendsList.innerHTML = ''
-    this.friendsList.forEach(el => this.createFriendWindow(el))
+    this.friendsList.forEach(el => this.createFriendWindow(el));
+    if (this.secondView !== null) {
+
+
+      this.shrinkFriendsList();
+    }
   }
   createFriendWindow(friend: SearchedUserData) {
     const wrapper: HTMLElement = document.createElement('div');
@@ -174,39 +181,59 @@ export class Friends extends View {
 
     const chatBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-chat');
     const profileBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-profile');
-    chatBtn.addEventListener('click', () => this.showChat(friend))
-    profileBtn.addEventListener('click', () => this.showFriendProfile(friend));
+    chatBtn.addEventListener('click', () => this.showChat(friend, chatBtn.parentElement.previousElementSibling as HTMLElement))
+    profileBtn.addEventListener('click', () => this.showFriendProfile(friend, chatBtn.parentElement.previousElementSibling as HTMLElement));
     this.dom.friendsList.appendChild(wrapper);
   }
 
+  unmarkFriends() {
+    const nicks: NodeListOf<Element> = document.querySelectorAll('.friend__name-active');
+    nicks.forEach(el => el.classList.remove('friend__name-active'));
+  }
+  markFriend() {
+    const nicks: NodeListOf<Element> = document.querySelectorAll('.friend__name');
+    nicks.forEach(el => el.innerHTML === this.friendNick && el.classList.add('friend__name-active'))
+  }
 
-  showFriendProfile(friend: SearchedUserData) {
+  showFriendProfile(friend: SearchedUserData, nickWrapper: HTMLElement) {
+    this.unmarkFriends();
     // show close icon in order to give user ability to close friend profile component 
     this.dom.closeBtn.classList.remove('disabled');
     // create view of friend's profile
     this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
     this.shrinkFriendsList();
+    this.friendNick = friend.nick;
+    // mark selected user
+    nickWrapper.classList.add('friend__name-active');
 
     if (window.innerWidth < 1024) {
       this.dom.closeBranchIcon.className = 'closeIcon closeIcon__searchFriend';
     }
   };
 
-  showChat(friend: SearchedUserData) {
-      // show close icon in order to give user ability to close chat
-      this.dom.closeBtn.classList.remove('disabled');
+  showChat(friend: SearchedUserData, nickWrapper: HTMLElement) {
+    this.unmarkFriends();
 
-      this.shrinkFriendsList();
-      this.secondView = new Chat(this.dom.branch, this.userData, friend);
+    // show close icon in order to give user ability to close chat
+    this.dom.closeBtn.classList.remove('disabled');
 
-      if (window.innerWidth < 1024) {
-        this.dom.closeBranchIcon.className = 'closeIcon closeIcon__chat';
-      }
+    this.shrinkFriendsList();
+    this.secondView = new Chat(this.dom.branch, this.userData, friend);
+    this.friendNick = friend.nick;
+
+    // mark selected user
+    nickWrapper.classList.add('friend__name-active');
+
+    if (window.innerWidth < 1024) {
+      this.dom.closeBranchIcon.className = 'closeIcon closeIcon__chat';
+    }
+
   }
 
   shrinkFriendsList() {
     this.dom.branch.classList.remove('disabled');
-    this.dom.friendsWindows.forEach(el => el.parentElement.classList.add('friends__item-active'));
+    const friends: NodeListOf<Element> = document.querySelectorAll('.friend')
+    friends.forEach(el => el.parentElement.classList.add('friends__item-active'));
 
     if (window.innerWidth < 1024) {
       this.hideFriendsContainer();
@@ -221,6 +248,7 @@ export class Friends extends View {
       this.dom.branch.innerHTML = '';
       this.secondView = null;
       this.dom.closeBtn.classList.add('disabled');
+      this.unmarkFriends();
     })
   }
   hideFriendView() {
@@ -229,7 +257,9 @@ export class Friends extends View {
     // clear view 
     this.dom.branch.classList.add('disabled');
     this.dom.friendsWindows.forEach(el => el.parentElement.classList.remove('friends__item-active'));
-    this.dom.branch.innerHTML = '';
+    this.showFriendsContainer();
+    this.unmarkFriends();
+    this.secondView = null;
 
   }
   searchFriendEvent() {
@@ -254,6 +284,7 @@ export class Friends extends View {
   onDataChange() {
     this.hideFriendView();
     this.initScripts();
+    this.rerenderFriendsList();
   }
   // for rwd develop
   rwd() {
@@ -279,6 +310,10 @@ export class Friends extends View {
   }
   hideFriendsContainer() {
     this.dom.friendsContainer.classList.add('disabled');
+  }
+  showFriendsContainer(){
+    this.dom.friendsContainer.classList.remove('disabled');
+    this.dom.closeBranchIcon.classList.add('disabled');
   }
   render() {
     this.root.innerHTML = getFriendsHTMLCode(this.userData.friends);

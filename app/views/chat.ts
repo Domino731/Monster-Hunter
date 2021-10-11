@@ -78,7 +78,7 @@ export class Chat {
                     if (change.type === "modified") {
                         this.conversation.user = change.doc.data() as Conversation;
                         this.conversation.general.messages = change.doc.data().messages;
-                        this.conversation.general.messages.push(...this.conversation.friend.messages);
+                        this.conversation.friend !== null && this.conversation.general.messages.push(...this.conversation.friend.messages);
                         this.renderChat();
                     }
                 });
@@ -94,7 +94,7 @@ export class Chat {
                     if (change.type === "modified") {
                         this.conversation.friend = change.doc.data() as Conversation;
                         this.conversation.general.messages = change.doc.data().messages;
-                        this.conversation.general.messages.push(...this.conversation.user.messages);          
+                        this.conversation.user !== null &&   this.conversation.general.messages.push(...this.conversation.user.messages);          
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -130,7 +130,7 @@ export class Chat {
                     conversation.createdAt = doc.data().createdAt;
                     conversation.updatedAt = doc.data().updatedAt;
                     conversation.participants =  doc.data().participants; 
-                    
+                    console.log(2)
                 });
 
             })
@@ -146,6 +146,7 @@ export class Chat {
                     friendMessages = doc.data() as Conversation 
                     friendMessages.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
                     conversation.messages.push(...friendMessages.messages)
+                    console.log(1)
                 });
             })
             .catch(err => console.log(err))
@@ -155,6 +156,7 @@ export class Chat {
         this.conversation.friend = friendMessages;
         conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.conversation.general = conversation;
+        console.log(this.conversation)
     }
 
 
@@ -199,7 +201,7 @@ export class Chat {
                     const lastUpdate: Date = this.conversation.general.messages[allMessagesIndex].createdAt;
                     let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
                     const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-                 
+                    console.log(minutes)
                     if (minutes <= 3 && this.conversation.general.messages[allMessagesIndex].nick === this.currentUser.nick) {
                         let oldMessage: MessageData = this.conversation.user.messages[index];
                         this.dom.sendMessageBtn.classList.add('disabled');
@@ -273,7 +275,7 @@ export class Chat {
     }
     // method which is responsible for injecting html code into game root
     render() {
-        this.root.innerHTML = getChatHTMLCode(this.friend,this.currentUser, this.conversation.general.messages);
+        this.root.innerHTML = getChatHTMLCode(this.friend);
     }
 
     // getting the dom elements of newly injected html code
@@ -291,6 +293,7 @@ export class Chat {
     // initialization of scripts
     initScripts() {
         this.dataChangeListener();
+        this.renderChat();
         this.toogleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();

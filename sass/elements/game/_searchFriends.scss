@@ -228,13 +228,23 @@
             }
         }
         strong {
-            margin-left: 9px;
+            margin-left: 5px;
             font-weight: bold;
             font-size: 1.438rem;
             z-index: 1;
             letter-spacing: 0.063rem;
+            @include desktopM {
+                margin-left: 6px;
+            }
             @include desktopS {
-                margin-left: 16px;
+                margin-left: 6px;
+            }
+            @include laptopL {
+              margin-left: 10px;
+            }
+           
+            @include laptopS {
+                margin-left: 12px;
             }
             @include ipadPro {
                 margin-left: 12px;
@@ -244,11 +254,11 @@
             }
             @include mobileL {
                 font-size: 15px;
-                margin-left: 10px;
+                margin-left: 8px;
             }
             @include mobileM {
                 font-size: 13px;
-                margin-left: 8px;
+                margin-left: 6px;
             }
             @include mobileS {
                 font-size: 11px;
@@ -334,8 +344,29 @@
         text-shadow: 0.125rem 0.125rem $color-gray_dark;
         position: relative;
         z-index: 1;
+        text-indent: -11px;
+        @include desktopS {
+            
+            text-indent: -8px;
+        }
+        @include laptopL {
+            text-indent: -7px;
+        }
+        @include laptopM {
+            text-indent: -8px;
+        }
+        @include laptopS {
+            text-indent: -9px;
+            color: red;
+        }
         @include laptopS {
             text-indent: -12px;
+        }
+        @include mobileL {
+            text-indent: -9px;
+        }
+        @include mobileM {
+            text-indent: -10px;
         }
     }
     &__lastVisit {

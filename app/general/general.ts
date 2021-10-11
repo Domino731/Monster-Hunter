@@ -41,6 +41,6 @@ export class General {
     }
     init() {
         this.logoutEvent();
-        this.mobile();
+      // this.mobile();
     };
 };
