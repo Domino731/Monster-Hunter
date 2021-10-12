@@ -1,6 +1,6 @@
 import { potionsData } from '../properties/shop/potions';
-import { FullUserStats, PetProperties, ShopItem, UserData } from '../types';
-export const getFullUserStats = (userData: UserData) : FullUserStats => {
+import { FullUserStats, PetProperties, SearchedUserData, ShopItem, UserData } from '../types';
+export const getFullUserStats = (userData: UserData | SearchedUserData) : FullUserStats => {
       // reset stats
       const userStats : FullUserStats = {
         strength: 0,

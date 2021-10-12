@@ -141,7 +141,6 @@ export class SearchFriend extends View {
    mobile() {
       if (window.innerWidth < 1024) {
          this.dom.searchedUserContainer.classList.add('disabled');
-         console.log(this.dom.searchedUserContainer, this.dom.usersContainer)
       }
    }
 
@@ -180,7 +179,7 @@ export class SearchFriend extends View {
    }
    // for rwd works
    rwd() {
-      const searchedUser = this.allUsersData[3];
+      const searchedUser = this.allUsersData[0];
       // development
       const specificUserView = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
    }

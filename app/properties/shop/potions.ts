@@ -73,10 +73,39 @@ export const potionsData: ShopItem[] = [
         initialCost: 5,
         properties: {
             luck: 10,
-            physicalEndurance: 0,
-            strength: 0,
-            defence: 0
+            physicalEndurance: null,
+            strength: null,
+            defence: null
         },
         id: '1e06bfdb-1326-43a6-991f-b9c6fabdca5c'
     },
 ];
+
+
+/* 
+    labelForPotions() {
+        // find potions
+        if (this.searchedUser.potions.first !== null) {
+            const potion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id === this.searchedUser.potions.first.id)];
+            this.dom.general.potionImgFirst.addEventListener('mouseover', () => {
+                this.dom.potionLabel.innerHTML = getPotionLabel(potion, 1);
+            });
+            this.dom.general.potionImgFirst.addEventListener('mouseleave', () => {
+                this.dom.potionLabel.innerHTML = '';
+            })
+        }
+        if (this.searchedUser.potions.second !== null) {
+            const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id ===this.searchedUser.potions.second.id)];
+            // check if user have potion
+            if (secondPotion !== undefined) {
+                this.dom.general.potionImgSecond.addEventListener('mouseover', () => {
+                    this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
+                });
+                this.dom.general.potionImgSecond.addEventListener('mouseleave', () => {
+                    this.dom.potionLabel.innerHTML = '';
+                })
+            }
+        }
+
+      }
+*/

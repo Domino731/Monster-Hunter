@@ -3,6 +3,7 @@ import { potionsData } from '../properties/shop/potions';
 import { SearchedUserData, UserData, ShopItem, FullUserStats, PetProperties } from '../types';
 import { SearchedUser } from '../views/sub_views/specificUser';
 import { setUserStats } from '../functions/setStats';
+import { getFullUserStats } from '../functions/getFullUserStats';
 
 
 export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[], searchedUser: SearchedUserData): string => {
@@ -49,7 +50,7 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
     critical: 0
  }
 
-  stats = setUserStats(searchedUser, stats)
+  stats = getFullUserStats(searchedUser)
 
   // function that will set statistics based on equipment, potions and pet
   
