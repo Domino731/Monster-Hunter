@@ -182,7 +182,7 @@ export class SearchedUser {
       else {
         this.currentUser.friends.splice(friendIndex, 1);
         this.dom.friendAction.src = './images/add_friend.png';
-
+        this.dom.friendAction.title = 'Add to friends'
         updateUserData(this.currentUser);
       }
     });
@@ -218,10 +218,12 @@ export class SearchedUser {
       if (flag) {
         this.dom.general.wrapper.classList.remove('disabled');
         this.dom.description.classList.add('disabled');
+        this.dom.switch.title = 'Switch to description'
       }
       else {
         this.dom.general.wrapper.classList.add('disabled');
         this.dom.description.classList.remove('disabled');
+        this.dom.switch.title = 'Switch to stats'
       }
     })
   }

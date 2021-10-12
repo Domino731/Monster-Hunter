@@ -726,33 +726,7 @@
         }
 
     }
-    .profile__portraitImg {
-     
-        @include desktopM {
-            margin-top: 25px;
-        }
-        @include desktopS {
-            margin-top: 45px;
-        }
-        @include laptopL {
-            margin-top: 29px;
-        }
-        @include laptopM {
-            margin-top: 35px;
-        }
-        @include laptopS {
-            margin-top: 32px;
-        }
-        @include tablet {
-            margin-top: 70px;
-        }
-        @include mobileL {
-            margin-top: 64px;
-        }
-       @include mobileM {
-           margin-top: 50px;
-       }
-    }
+
     @include laptopL {
         padding: 6px;
     }

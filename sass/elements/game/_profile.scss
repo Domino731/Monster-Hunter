@@ -57,33 +57,7 @@
         @include laptopS {
             border-bottom: 4px solid $color-gold;
         }
-        &-specificUser {
-            @include desktopM {
-                height: 436px;
-            }
-            @include laptopL {
-                height: 380px;
-            }
-            @include laptopS {
-                height: 310px;
-            }
-            @include ipadPro {
-                height: 407px;
-            }
-            @include tablet {
-                height: 606px;
-            }
-            @include mobileL {
-                height: 387px;
-            }
-            @include mobileM {
-                height: 344px;
-            }
-            @include mobileS {
-                height: 282px;
-            }
-        }
-        &-currentUser {
+       
             @include desktopM {
                 height: 454px;
             }
@@ -110,7 +84,7 @@
             @include mobileS {
                 height: 282px;
             }
-        }
+
     }
 
     &__equipmentItem {

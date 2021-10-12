@@ -134,7 +134,7 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
       </div>
     <strong class='profile__nickname'>${searchedUser.nick}</strong>
     <div class='searchedUser__actionBar'> 
-       <img src='./images/switch.png' class='searchedUser__actionIcon' id='searched_user_switch' title='Switch'/>
+       <img src='./images/switch.png' class='searchedUser__actionIcon' id='searched_user_switch' title='Switch to description'/>
        <img src='${checkFriend()}' class='searchedUser__actionIcon' id='searched_user_friend_action' title='Add to friends'/>
     </div>
 
