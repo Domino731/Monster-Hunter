@@ -108,20 +108,20 @@ export const getProfileHTMLCode = (user: UserData): string => {
             
         
             <div class='profile__generalItem' id='profile_general_gold'>
-                <div class='profile__generalImg'> <img src="/images/profile_coins.png" alt="Your coins" /></div>
+                <div class='profile__generalImg'> <img src="/images/profile_coins.png" title="Your gold" /></div>
                 <strong class='profile__generalText'></strong>
             </div>
             <div class='profile__generalItem' id='profile_general_pet'>
-                <div class='profile__generalImg'> <img src="/images/profile_pet_slot.png" alt="Pet slot" /></div>
+                <div class='profile__generalImg'> <img src="/images/profile_pet_slot.png" title="Pet slot" /></div>
                 <strong class='profile__generalText'></strong>
             </div>
             <div class='profile__generalItem' id='profile_general_potion_first'>
-                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #1" />
+                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" title="Elixir slot #1" />
                 </div>
                 <strong class='profile__generalText'></strong>
             </div>
             <div class='profile__generalItem' id='profile_general_potion_second'>
-                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" alt="Elixir slot #2" />
+                <div class='profile__generalImg'> <img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />
                 </div>
                 <strong class='profile__generalText'></strong>
             </div>

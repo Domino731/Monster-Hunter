@@ -41,17 +41,17 @@ export class View {
    checkPetAndPotions(){
       const today : Date = new Date;
        if(this.userData.pet !== null){
-         if(this.userData.pet.rentEnd <= today){
+         if(this.userData.pet.rentEnd.getTime() <= today.getTime()){
             this.userData.pet = null;
          } 
        }
        if(this.userData.potions.first !== null){
-          if(this.userData.potions.first.end <= today){
+          if(this.userData.potions.first.end.getTime() <= today.getTime()){
              this.userData.potions.first = null;
           }
        }
        if(this.userData.potions.second !== null){
-         if(this.userData.potions.second.end <= today){
+         if(this.userData.potions.second.end.getTime() <= today.getTime()){
             this.userData.potions.second = null;
          }
       }
@@ -234,7 +234,7 @@ export class View {
    dateOperations() {
 
       const today: Date = new Date();
-      
+      this.checkPetAndPotions();
       if (this.userData.lastVisit.getDay() !== today.getDay()) {
          // set new shop
          this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
@@ -248,9 +248,9 @@ export class View {
          this.userData.lastVisit = today;
          // reset mission willingness
          this.userData.missionWillingness = 100;
-         updateUserData(this.userData);
-
+         
       }
+      updateUserData(this.userData);
 
    }
    // abstact method which is responsible for operations when data has changed

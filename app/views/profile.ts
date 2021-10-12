@@ -13,6 +13,7 @@ import { helmetsData } from '../properties/shop/helmets';
 import { backgroundsData } from '../properties/missions/backgroundsData';
 import { getProfileBackpackLabel } from './sub_views/backpackLabel';
 import { getProfileEquipmentLabel } from './sub_views/profileEquipment';
+import { isThisTypeNode } from 'typescript';
 export class Profile extends View {
 
     private petRentInterval: null | ReturnType<typeof setInterval>
@@ -83,6 +84,11 @@ export class Profile extends View {
         potion: ReturnType<typeof setInterval> | null;
         equipment: ReturnType<typeof setInterval> | null;
         backpack: ReturnType<typeof setInterval> | null;
+    }
+    generalInterval: {
+        pet: ReturnType<typeof setInterval> | null;
+        potionFirst: ReturnType<typeof setInterval> | null;
+        potionSecond: ReturnType<typeof setInterval> | null;
     }
 
     constructor() {
@@ -157,7 +163,11 @@ export class Profile extends View {
             equipment: null,
             backpack: null
         }
-
+        this.generalInterval = {
+            pet: null,
+            potionFirst: null,
+            potionSecond: null
+        }
     }
 
 
@@ -165,32 +175,37 @@ export class Profile extends View {
 
     // events responsible for potion label
     labelForPotions() {
-
         // find potions
-        const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
-        const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
-        // check if user have potion
-        if (firstPotion !== undefined) {
+        if (this.userData.potions.first !== null) {
+            const potion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.first.id)];
             this.dom.general.potionImgFirst.addEventListener('mouseover', () => {
-                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-                this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
+                this.dom.equipmentLabel.root.classList.add('disabled');
+                this.dom.backpackLabel.root.classList.add('disabled');
+                this.dom.potionLabel.innerHTML = getPotionLabel(potion, 1);
             });
             this.dom.general.potionImgFirst.addEventListener('mouseleave', () => {
+                this.dom.potionLabel.innerHTML = '';
+            })
+        }
+        if (this.userData.potions.second !== null) {
+            const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.second.id)];
+            // check if user have potion
+            if (secondPotion !== undefined) {
+                this.dom.general.potionImgSecond.addEventListener('mouseover', () => {
+                    this.dom.equipmentLabel.root.classList.add('disabled');
+                    this.dom.backpackLabel.root.classList.add('disabled');
+                    this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
+                });
+                this.dom.general.potionImgSecond.addEventListener('mouseleave', () => {
+                    this.dom.potionLabel.innerHTML = '';
+                })
+            }
+        }
 
-                this.dom.potionLabel.innerHTML = '';
-            })
-        }
-        if (secondPotion !== undefined) {
-            this.dom.general.potionImgSecond.addEventListener('mouseover', () => {
-                this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-                this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-                this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
-            });
-            this.dom.general.potionImgSecond.addEventListener('mouseleave', () => {
-                this.dom.potionLabel.innerHTML = '';
-            })
-        }
+
+
+
+
 
     }
     increaseStatistic(statistic: 'strength' | 'physicalEndurance' | 'defence' | 'luck', statCost: HTMLElement) {
@@ -288,67 +303,61 @@ export class Profile extends View {
         this.dom.general.goldAmount.innerText = `${this.userData.gold}`
         // set pet 
         if (this.userData.pet !== null) {
-            this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} alt=${this.userData.pet.name}/>`;
+            this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} title='Pet slot' />`;
             this.dom.general.petImg.classList.add('profile__generalImg-item');
-            this.setCountdown(this.petRentInterval,
+    
+            this.generalInterval.pet = this.setCountdown(
                 this.userData.pet.rentEnd,
                 this.dom.general.petRentTime,
-                this.resetPet
+                'pet'
             )
         }
         else {
-            this.dom.general.petRentTime.innerText = 'No pet'
+            this.dom.general.petRentTime.innerText = 'No pet';
+
         }
         // set first potion
         if (this.userData.potions.first !== null) {
             const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.first.id)]
-            this.dom.general.potionImgFirst.innerHTML = `<img src=${potion.src} alt=${potion.name}/>`;
+            this.dom.general.potionImgFirst.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
             this.dom.general.potionImgFirst.classList.add('profile__generalImg-item');
-            this.setCountdown(this.potionFirstTimeInterval,
+            this.generalInterval.potionFirst = this.setCountdown(
                 this.userData.potions.first.end,
                 this.dom.general.potionTimeFirst,
-                this.resetFirstPotion
+                'potion1'
             )
         }
         else {
-            this.dom.general.potionTimeFirst.innerText = 'No potion'
+            this.dom.general.potionTimeFirst.innerText = 'No potion';
         }
 
         // set second potion
         if (this.userData.potions.second !== null) {
             const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.second.id)]
-            this.dom.general.potionImgSecond.innerHTML = `<img src=${potion.src} alt=${potion.name}/>`;
+            this.dom.general.potionImgSecond.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
             this.dom.general.potionImgSecond.classList.add('profile__generalImg-item');
-            this.setCountdown(this.potionSecondTimeInterval,
+            this.generalInterval.potionSecond = this.setCountdown(
                 this.userData.potions.second.end,
                 this.dom.general.potionTimeSecond,
-                this.resetSecondPotion
+                'potion2'
             )
         }
         else {
-            this.dom.general.potionTimeSecond.innerText = 'No potion'
+            this.dom.general.potionTimeSecond.innerText = 'No potion';
         }
 
     }
-    resetFirstPotion() {
-        this.userData.potions.first = null
-    }
-    resetSecondPotion() {
-        this.userData.potions.second = null
-    }
-    resetPet() {
-        this.userData.pet = null
-    }
-    setCountdown(interval: null | ReturnType<typeof setInterval>, end, counterWrapper: HTMLElement, callback: () => void) {
+
+    setCountdown(end, counterWrapper: HTMLElement, item: 'potion1' | 'potion2' | 'pet') {
         const start: any = new Date();
         // milliseconds between start and end of guard
         const diffMs = (end - start);
-        const minutes = Math.floor((diffMs / 1000) / 60);
+        const minutes = ((diffMs / 1000) / 60);
         // set the countdown date
         const target_date = new Date().getTime() + ((minutes * 60) * 1000);
 
         // start a countdown 
-        interval = setInterval(() => {
+        return setInterval(() => {
             // variables for time units
             let hours, minutes, seconds;
             // find the amount of "seconds" between now and target
@@ -365,30 +374,44 @@ export class Profile extends View {
 
 
                 // differences between current and end rent date
-                const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24));
+                const diffDays = Math.floor(Math.abs(end - start) / (1000 * 60 * 60 * 24));
                 // set time
                 if (diffDays !== 0) {
-                    diffDays % 2 === 0 ?
+                    diffDays === 1 ?
                         counterWrapper.innerText = `${diffDays} Day left`
                         :
-                        counterWrapper.innerText = `${diffDays} Days left`;
+                        counterWrapper.innerText = `${diffDays} Days left`
                 }
                 else {
-                    counterWrapper.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s left`;
+                    counterWrapper.innerText = `${hours !== 0 ? hours + 'h : ' : ''} ${minutes}m : ${seconds}s`;
                 }
 
             }
 
             else {
                 // remove pet
-                callback();
-                clearInterval(interval);
+                if (item === 'pet') {
+                    this.dom.general.petRentTime.innerText = 'No pet';
+                    this.dom.general.petImg.innerHTML = `<img src="/images/profile_pet_slot.png" title="Pet slot" />`;
+                    this.dom.general.petImg.classList.remove('profile__generalImg-item');
+                    clearInterval(this.generalInterval.pet);
+                }
+                else if (item === 'potion1'){
+                    this.dom.general.potionTimeFirst.innerText = 'No potion';
+                    this.dom.general.potionImgFirst.innerHTML = '<img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />';
+                    this.dom.general.potionImgFirst.classList.remove('profile__generalImg-item');
+                    clearInterval(this.generalInterval.potionFirst);
+                }
+                else if (item === 'potion2'){
+                    this.dom.general.potionTimeSecond.innerText = 'No potion';
+                    this.dom.general.potionImgSecond.innerHTML = '<img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />';
+                    this.dom.general.potionImgSecond.classList.remove('profile__generalImg-item');
+                    clearInterval(this.generalInterval.potionSecond);
+                }
                 updateUserData(this.userData)
             }
         }, 1000);
     }
-
-
     generalOnUpdate() {
         // set level
         this.dom.level.innerHTML = ` <div class='profile__levelProgress'
@@ -399,7 +422,6 @@ export class Profile extends View {
         // set gold
         this.dom.general.goldAmount.innerText = `${this.userData.gold}`;
     }
-
     // transferring item  the backpack to equipment
     replaceItemInEquipment(currentItem: ShopItem) {
         const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)
@@ -429,7 +451,7 @@ export class Profile extends View {
         let equipmentSlot: HTMLElement;
         // clear previous 
         this.dom.backpackSlots.forEach(el => {
-            el.innerHTML = ''
+            el.innerHTML = '';
         })
 
         this.userData.backpackItems.forEach((el, num) => {
@@ -479,7 +501,9 @@ export class Profile extends View {
                 equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
             });
 
-        })
+        });
+
+
     }
     clearEquipmentSlots() {
         this.dom.equipmentSlots.forEach(el => {
@@ -487,9 +511,7 @@ export class Profile extends View {
             el.innerHTML = `<img src='${getEquipmentIconSrc(element.dataset.slotName)}' class='profile__equipmentIcon'/>`
         });
     }
-
-
-    equipmentLabel( item: ShopItem) {
+    equipmentLabel(item: ShopItem) {
         // prevent of label hiding 
         clearInterval(this.hideLabelInterval.equipment)
         // hide backpack label
@@ -513,7 +535,7 @@ export class Profile extends View {
 
         const btn: HTMLElement = this.dom.equipmentLabel.root.querySelector('#profile_equipment_move_item_btn');
         const error: HTMLElement = this.dom.equipmentLabel.root.querySelector('#profile_equipment_move_item_error');
-         btn.addEventListener('click', () => {
+        btn.addEventListener('click', () => {
             // check if user have free slot in backpack (backpack have 10 slots)
             if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
                 // remove this item from user equipment
@@ -538,15 +560,37 @@ export class Profile extends View {
 
     }
     removeEvents() {
-        const equipment = document.querySelector('.profile__equipment');
+        const equipment: HTMLElement = document.querySelector('.profile__equipment');
         equipment.replaceWith(equipment.cloneNode(true));
         this.dom.equipmentLabel.root = document.querySelector('#profile_equipment__item_label');
         this.dom.equipmentSlots = document.querySelectorAll('#profile_equipment_slots div[data-slot-name]');
+
+        const backpack: HTMLElement = document.querySelector('#profile_backpack_slots');
+        backpack.replaceWith(backpack.cloneNode(true));
+        this.dom.backpackLabel.root = document.querySelector('.profile__backpackLabelWrapper');
+        this.dom.backpackSlots = document.querySelectorAll('#profile_backpack_slots .profile__backpackItem');
+
+        const generalContainer = document.querySelector('.profile__general');
+        generalContainer.replaceWith(generalContainer.cloneNode(true));
+        this.dom.potionLabel = document.querySelector('.profile__generalLabelWrapper');
+
+        this.dom.general = {
+            goldAmount: document.querySelector('#profile_general_gold .profile__generalText'),
+            petImg: document.querySelector('#profile_general_pet .profile__generalImg'),
+            petRentTime: document.querySelector('#profile_general_pet .profile__generalText'),
+            potionImgFirst: document.querySelector('#profile_general_potion_first .profile__generalImg'),
+            potionTimeFirst: document.querySelector('#profile_general_potion_first .profile__generalText'),
+            potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
+            potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText')
+        },
+            clearInterval(this.generalInterval.pet);
+        clearInterval(this.generalInterval.potionFirst);
+        clearInterval(this.generalInterval.potionSecond);
     }
     setUserEquipment() {
         this.clearEquipmentSlots();
         this.userData.equipmentItems.forEach(el => {
-            
+
             // find slot in equipment in order to inject item graphic and add function reponsible for transfering item from equipment to backpack
             const equipmentSlot: HTMLElement = document.querySelector(`#profile_equipment_slots div[data-slot-name = '${el.type}']`);
             // set slot
@@ -554,11 +598,11 @@ export class Profile extends View {
 
             // create equipment label with button responsible for transfering item
             equipmentSlot.addEventListener('mouseover', () => {
-              this.equipmentLabel(el)  
+                this.equipmentLabel(el)
             })
 
-            
-  
+
+
 
             // hide label when equipment slot loses his focus
             equipmentSlot.addEventListener('mouseleave', (e) => {
@@ -574,20 +618,16 @@ export class Profile extends View {
     }
 
 
-
-
-
-
-
-
-
     onDataChange() {
+        this.setHeroStats();
         this.removeEvents();
         this.generalOnUpdate();
         this.setUserBackpack();
         this.setUserEquipment();
         this.setHeroStats();
         this.setTableStats();
+        this.setGeneral();
+        this.labelForPotions();
 
     }
     render() {
