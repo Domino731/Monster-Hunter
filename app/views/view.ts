@@ -79,6 +79,7 @@ export class View {
          if (el.properties.strength !== null) {
             this.userStats.strength = Math.floor(this.userData.rawStats.strength + el.properties.strength);
             this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+      
          }
          if (el.properties.luck !== null) {
             this.userStats.luck = Math.floor(this.userData.rawStats.luck + el.properties.luck);

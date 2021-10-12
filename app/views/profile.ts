@@ -305,7 +305,7 @@ export class Profile extends View {
         if (this.userData.pet !== null) {
             this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} title='Pet slot' />`;
             this.dom.general.petImg.classList.add('profile__generalImg-item');
-    
+
             this.generalInterval.pet = this.setCountdown(
                 this.userData.pet.rentEnd,
                 this.dom.general.petRentTime,
@@ -396,13 +396,13 @@ export class Profile extends View {
                     this.dom.general.petImg.classList.remove('profile__generalImg-item');
                     clearInterval(this.generalInterval.pet);
                 }
-                else if (item === 'potion1'){
+                else if (item === 'potion1') {
                     this.dom.general.potionTimeFirst.innerText = 'No potion';
                     this.dom.general.potionImgFirst.innerHTML = '<img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />';
                     this.dom.general.potionImgFirst.classList.remove('profile__generalImg-item');
                     clearInterval(this.generalInterval.potionFirst);
                 }
-                else if (item === 'potion2'){
+                else if (item === 'potion2') {
                     this.dom.general.potionTimeSecond.innerText = 'No potion';
                     this.dom.general.potionImgSecond.innerHTML = '<img src="/images/profile_elixir_slot.png" title="Elixir slot #2" />';
                     this.dom.general.potionImgSecond.classList.remove('profile__generalImg-item');
@@ -447,7 +447,6 @@ export class Profile extends View {
         }
     }
     setUserBackpack() {
-        let toogleLabel: ReturnType<typeof setInterval> | null = null
         let equipmentSlot: HTMLElement;
         // clear previous 
         this.dom.backpackSlots.forEach(el => {
@@ -461,7 +460,7 @@ export class Profile extends View {
             this.dom.backpackSlots[num].addEventListener('mouseover', () => {
 
                 // prevent of label hide
-                clearInterval(toogleLabel);
+                clearInterval(this.hideLabelInterval.backpack);
 
                 // find specific slot in equipment which is equal to current shop item type, needed to compare items
                 equipmentSlot = document.querySelector(`#profile_equipment_slots div[data-slot-name = ${el.type}]`)
@@ -480,7 +479,7 @@ export class Profile extends View {
 
                 newLabel.addEventListener('mouseover', () => {
                     equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
-                    return clearInterval(toogleLabel);
+                    return clearInterval(this.hideLabelInterval.backpack);
                 });
                 newLabel.addEventListener('mouseleave', () => {
                     this.dom.backpackLabel.root.innerHTML = '';
@@ -494,7 +493,7 @@ export class Profile extends View {
             // remove label with delay -> after 0.8s
             this.dom.backpackSlots[num].addEventListener('mouseleave', () => {
                 // hide label
-                toogleLabel = setInterval(() => {
+                this.hideLabelInterval.backpack = setInterval(() => {
                     this.dom.backpackLabel.root.innerHTML = ''
                 }, 800);
                 // remove pulse effect
@@ -582,10 +581,12 @@ export class Profile extends View {
             potionTimeFirst: document.querySelector('#profile_general_potion_first .profile__generalText'),
             potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
             potionTimeSecond: document.querySelector('#profile_general_potion_second .profile__generalText')
-        },
-            clearInterval(this.generalInterval.pet);
-        clearInterval(this.generalInterval.potionFirst);
-        clearInterval(this.generalInterval.potionSecond);
+        }
+        this.dom.portrait = {
+            img: document.querySelector('.profile__portraitImg'),
+            prevBtn: document.querySelector('.profile__portraitBtn-left'),
+            nextBtn: document.querySelector('.profile__portraitBtn-right'),
+        }
     }
     setUserEquipment() {
         this.clearEquipmentSlots();
@@ -617,7 +618,6 @@ export class Profile extends View {
         })
     }
 
-
     onDataChange() {
         this.setHeroStats();
         this.removeEvents();
@@ -628,7 +628,7 @@ export class Profile extends View {
         this.setTableStats();
         this.setGeneral();
         this.labelForPotions();
-
+        this.changePortraitEvents();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);
