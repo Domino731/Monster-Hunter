@@ -8,6 +8,7 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 import { getRandomMissions } from '../functions/missionGenerator';
 import { monstersData } from '../properties/missions/monsters';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class View {
    protected userData: UserData | null
@@ -58,40 +59,55 @@ export class View {
    }
    // function that will set statistics based on equipment, potions and pet
    setHeroStats() {
+      // reset stats
+      const userStats : FullUserStats = {
+         strength: 0,
+         damage: 0,
+         physicalEndurance: 0,
+         health: 0,
+         defence: 0,
+         damageReduce: 0,
+         luck: 0,
+         critical: 0
+      }
        this.checkPetAndPotions();
        // by basic stats
 
        // strenght
-       this.userStats.strength = this.userData.rawStats.strength;
-       this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+       userStats.strength = this.userData.rawStats.strength;
+       userStats.damage = Math.floor(userStats.strength * 0.7);
        // luck
-       this.userStats.luck = this.userData.rawStats.luck;
-       this.userStats.critical = this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+       userStats.luck = this.userData.rawStats.luck;
+       userStats.critical = userStats.critical = Math.floor(this.userStats.luck * 0.3);
        // pe
-       this.userStats.physicalEndurance = this.userData.rawStats.physicalEndurance;
-       this.userStats.health =  Math.floor(this.userStats.physicalEndurance * 0.8);
+       userStats.physicalEndurance = this.userData.rawStats.physicalEndurance;
+       userStats.health =  Math.floor(userStats.physicalEndurance * 0.8);
        // defence
-       this.userStats.defence = this.userData.rawStats.defence;
-       this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+       userStats.defence = this.userData.rawStats.defence;
+       userStats.damageReduce = Math.floor(userStats.defence * 0.5);
+
+
+
 
       // by equipment
+  
       this.userData.equipmentItems.forEach(el => {
+         
          if (el.properties.strength !== null) {
-            this.userStats.strength = Math.floor(this.userData.rawStats.strength + el.properties.strength);
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
-      
+            userStats.strength += el.properties.strength;
+            userStats.damage += Math.floor(userStats.strength * 0.7);
          }
          if (el.properties.luck !== null) {
-            this.userStats.luck = Math.floor(this.userData.rawStats.luck + el.properties.luck);
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+            userStats.luck += el.properties.luck;
+            userStats.critical += Math.floor(userStats.luck * 0.3);
          }
          if (el.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = Math.floor(this.userData.rawStats.physicalEndurance + el.properties.physicalEndurance);
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+            userStats.physicalEndurance = el.properties.physicalEndurance;
+            userStats.health += Math.floor(userStats.physicalEndurance * 0.8);
          }
          if (el.properties.defence !== null) {
-            this.userStats.defence = Math.floor(this.userData.rawStats.defence + el.properties.defence);
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+            userStats.defence += el.properties.defence;
+            userStats.damageReduce = Math.floor(userStats.defence * 0.5);
          }
       });
 
@@ -99,64 +115,29 @@ export class View {
       if (this.userData.pet !== null) {
          const petProps: PetProperties = this.userData.pet.properties
          if (petProps.strength !== null) {
-            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (petProps.strength / 100));
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+            userStats.strength += Math.floor(this.userData.rawStats.strength * (petProps.strength / 100));
+            userStats.damage = Math.floor(userStats.strength * 0.7);
          }
          if (petProps.luck !== null) {
-            this.userStats.luck = this.userStats.luck + Math.floor(this.userData.rawStats.luck * (petProps.luck / 100));
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+            userStats.luck += Math.floor(this.userData.rawStats.luck * (petProps.luck / 100));
+            userStats.critical = Math.floor(this.userStats.luck * 0.3);
          }
          if (petProps.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.physicalEndurance + Math.floor(this.userData.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+            userStats.physicalEndurance += Math.floor(this.userData.rawStats.physicalEndurance * (petProps.physicalEndurance / 100));
+            userStats.health = Math.floor(userStats.physicalEndurance * 0.8);
          }
          if (petProps.defence !== null) {
-            this.userStats.defence = this.userStats.defence + Math.floor(this.userData.rawStats.defence * (petProps.defence / 100));
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+            userStats.defence += Math.floor(this.userData.rawStats.defence * (petProps.defence / 100));
+            userStats.damageReduce = Math.floor(userStats.defence * 0.5);
          }
       }
+
       // by potions       
       const firstPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.first)];
       const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => this.userData.potions.second)];
-      // first potion
-      if (firstPotion !== undefined) {
-         if (firstPotion.properties.strength !== null) {
-            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (firstPotion.properties.strength / 100));
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
-         }
-         if (firstPotion.properties.luck !== null) {
-            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (firstPotion.properties.luck / 100));
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
-         }
-         if (firstPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
-         }
-         if (firstPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (firstPotion.properties.defence / 100));
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
-         }
-      }
-      // second potion
-      if (secondPotion !== undefined) {
-         if (secondPotion.properties.strength !== null) {
-            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (secondPotion.properties.strength / 100));
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
-         }
-         if (secondPotion.properties.luck !== null) {
-            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (secondPotion.properties.luck / 100));
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
-         }
-         if (secondPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
-         }
-         if (secondPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (secondPotion.properties.defence / 100));
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
-         }
 
-      }
+      this.userStats = userStats
+   
    }
 
    // method responsbile for fetching user data, and also this is real time data lisener
@@ -304,3 +285,45 @@ export class View {
 
    }
 }
+
+/*
+   // first potion
+      if (firstPotion !== undefined) {
+         if (firstPotion.properties.strength !== null) {
+            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (firstPotion.properties.strength / 100));
+            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+         }
+         if (firstPotion.properties.luck !== null) {
+            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (firstPotion.properties.luck / 100));
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+         }
+         if (firstPotion.properties.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+         }
+         if (firstPotion.properties.defence !== null) {
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (firstPotion.properties.defence / 100));
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+         }
+      }
+      // second potion
+      if (secondPotion !== undefined) {
+         if (secondPotion.properties.strength !== null) {
+            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (secondPotion.properties.strength / 100));
+            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
+         }
+         if (secondPotion.properties.luck !== null) {
+            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (secondPotion.properties.luck / 100));
+            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
+         }
+         if (secondPotion.properties.physicalEndurance !== null) {
+            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
+            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
+         }
+         if (secondPotion.properties.defence !== null) {
+            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (secondPotion.properties.defence / 100));
+            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
+         }
+
+      }
+*/
