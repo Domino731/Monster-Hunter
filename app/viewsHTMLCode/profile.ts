@@ -53,17 +53,11 @@ export const getProfileHTMLCode = (user: UserData): string => {
             <div class='profile__info'>
 
 
-            <div class='profile__itemSpecs disabled' id='profile_equipment__item_label'>
+            <div class='profile__itemSpecs disabled' id='profile_equipment__item_label'></div>
 
-               <div id='profile_equipment_label_wrapper'> </div> 
-                
-               <div class='profile__actionError' id='profile_equipment_move_item_error'></div>
-               <div class='profile__actionWrapper' id='profile_equipment_move_item_btn'>
-                 <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
-                 <strong class='profile__actionName'>Move to backpack</strong>
-               </div>
-                    
-             </div>
+            
+                  
+             
 
                 <div class='profile__level' title='Level exp: ${user.exp}/${user.nextLevelAt}'>
                 <div class='profile__levelProgress' style='width: ${Math.floor(user.exp * 100 / getNeededExp(user.level))}%'></div>

@@ -1,5 +1,5 @@
 
-export const getEquipmentIconSrc = (itemType: string) : string => {
+export const getEquipmentIconSrc = (itemType: string ) => {
     switch (itemType) {
         case 'helmet':
             return '/images/profile_equipment_helmet.png';
