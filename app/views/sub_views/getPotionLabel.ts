@@ -9,7 +9,7 @@ export const getPotionLabel = (item: ShopItem, classNumber: number) : string => 
    
       </h3>
    
-      ${item.rarity === 'common' ? ` <strong class='market__itemRarity itemRarity market__itemRarity-common'>Common</strong>` : `<strong class='market__itemRarity itemRarity market__itemRarity-legendary'>Legendary</strong>`}
+      <strong class='market__itemRarity itemRarity market__itemRarity-legendary'>Legendary</strong>
       ${item.description !== undefined ? ` <p class='market__itemDsc white'>'${item.description}' </p>` : ''}
       <table class='market__itemStats itemStats'>
         <tbody>
@@ -17,7 +17,7 @@ export const getPotionLabel = (item: ShopItem, classNumber: number) : string => 
 
         ${item.properties.strength !== null ? `<tr>
             <td>Strength</td>
-            <td>${item.properties.strength}</td>
+            <td><strong class='better'> + ${item.properties.strength}%</strong></td>
           </tr>` : ''}
       
            
@@ -25,21 +25,21 @@ export const getPotionLabel = (item: ShopItem, classNumber: number) : string => 
          ${item.properties.physicalEndurance !== null ?
               `<tr>
              <td>Physical endurance</td>
-             <td>${item.properties.physicalEndurance}</td>
+             <td><strong class='better'> + ${item.properties.physicalEndurance}%</strong></td>
             </tr>`
               : ``}   
          
           ${item.properties.defence !== null ? ` 
           <tr>
             <td>Defence</td>
-            <td>${item.properties.defence}</td>
+            <td><strong class='better'> + ${item.properties.defence}%</strong></td>
           </tr>`
               : ``}
           
           ${item.properties.luck !== null ? `
           <tr>
             <td>Luck</td>
-            <td>${item.properties.luck}</td>
+            <td><strong class='better'> + ${item.properties.luck}%</strong></td>
           </tr>
           `
               : ``}

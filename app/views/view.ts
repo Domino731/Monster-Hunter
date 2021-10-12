@@ -45,16 +45,19 @@ export class View {
        if(this.userData.pet !== null){
          if(this.userData.pet.rentEnd.getTime() <= today.getTime()){
             this.userData.pet = null;
+            updateUserData(this.userData);
          } 
        }
        if(this.userData.potions.first !== null){
           if(this.userData.potions.first.end.getTime() <= today.getTime()){
              this.userData.potions.first = null;
+             updateUserData(this.userData);
           }
        }
        if(this.userData.potions.second !== null){
          if(this.userData.potions.second.end.getTime() <= today.getTime()){
             this.userData.potions.second = null;
+            updateUserData(this.userData);
          }
       }
    }
@@ -153,9 +156,9 @@ export class View {
          this.userData.lastVisit = today;
          // reset mission willingness
          this.userData.missionWillingness = 100;
-         
+         updateUserData(this.userData);
       }
-      updateUserData(this.userData);
+      
 
    }
    // abstact method which is responsible for operations when data has changed
@@ -209,44 +212,3 @@ export class View {
    }
 }
 
-/*
-   // first potion
-      if (firstPotion !== undefined) {
-         if (firstPotion.properties.strength !== null) {
-            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (firstPotion.properties.strength / 100));
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
-         }
-         if (firstPotion.properties.luck !== null) {
-            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (firstPotion.properties.luck / 100));
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
-         }
-         if (firstPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (firstPotion.properties.physicalEndurance / 100));
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
-         }
-         if (firstPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (firstPotion.properties.defence / 100));
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
-         }
-      }
-      // second potion
-      if (secondPotion !== undefined) {
-         if (secondPotion.properties.strength !== null) {
-            this.userStats.strength = this.userStats.strength + Math.floor(this.userData.rawStats.strength * (secondPotion.properties.strength / 100));
-            this.userStats.damage = Math.floor(this.userStats.strength * 0.7);
-         }
-         if (secondPotion.properties.luck !== null) {
-            this.userStats.luck = this.userStats.strength + Math.floor(this.userData.rawStats.luck * (secondPotion.properties.luck / 100));
-            this.userStats.critical = Math.floor(this.userStats.luck * 0.3);
-         }
-         if (secondPotion.properties.physicalEndurance !== null) {
-            this.userStats.physicalEndurance = this.userStats.strength + Math.floor(this.userData.rawStats.physicalEndurance * (secondPotion.properties.physicalEndurance / 100));
-            this.userStats.health = Math.floor(this.userStats.physicalEndurance * 0.8);
-         }
-         if (secondPotion.properties.defence !== null) {
-            this.userStats.defence = this.userStats.strength + Math.floor(this.userData.rawStats.defence * (secondPotion.properties.defence / 100));
-            this.userStats.damageReduce = Math.floor(this.userStats.defence * 0.5);
-         }
-
-      }
-*/

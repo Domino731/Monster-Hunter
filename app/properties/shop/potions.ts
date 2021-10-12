@@ -4,7 +4,7 @@ import { ShopItem } from '../../types';
 export const potionsData: ShopItem[] = [
     {
         type: 'potion',
-        rarity: 'common',
+        rarity: 'legendary',
         name: 'Decoction of Cactus',
         description: 'Straight from Texas',
         src: './images/shop/potions/physicalEndurance.png',
@@ -20,7 +20,7 @@ export const potionsData: ShopItem[] = [
 
     {
         type: 'potion',
-        rarity: 'common',
+        rarity: 'legendary',
         name: 'Kraken Blood',
         description: 'It was not easy',
         src: './images/shop/potions/strength.png',
@@ -36,7 +36,7 @@ export const potionsData: ShopItem[] = [
     },
     {
         type: 'potion',
-        rarity: 'common',
+        rarity: 'legendary',
         name: 'Magic of the Forest',
         description: 'Good thing the witch was asleep',
         src: './images/shop/potions/defence.png',
@@ -51,7 +51,7 @@ export const potionsData: ShopItem[] = [
     },
     {
         type: 'potion',
-        rarity: 'common',
+        rarity: 'legendary',
         name: 'Liquid Moon Powder',
         description: 'Imported from Area 51, aliens are still looking for it',
         src: './images/shop/potions/superPotion.png',
@@ -66,7 +66,7 @@ export const potionsData: ShopItem[] = [
     },
     {
         type: 'potion',
-        rarity: 'common',
+        rarity: 'legendary',
         name: 'Mountain Rose',
         description: 'Passed down from generation to generation, and the power is the same.',
         src: './images/shop/potions/luck.png',

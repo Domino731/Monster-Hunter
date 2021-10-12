@@ -1,5 +1,5 @@
 import { ShopItem } from '../../types';
-import { allMarketItems } from '../../properties/shop/allMarketItems';
+
 import { compareStats } from './compareStats';
 export const getBlacksmithItemLabel = (item: ShopItem, currentItem: ShopItem) => {
 
