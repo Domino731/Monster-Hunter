@@ -5,6 +5,8 @@ import { potionsData } from '../../properties/shop/potions';
 import { getPotionLabel } from './getPotionLabel';
 import { updateUserData } from '../../firebase/operations';
 import { db, auth } from '../../firebase/index';
+import { getProfileEquipmentLabel } from './profileEquipment';
+import { getSearchedUserBackpackLabel } from './backpackLabel';
 export class SearchedUser {
   private root: HTMLElement
   private currentUser: UserData
@@ -25,7 +27,10 @@ export class SearchedUser {
       labelWrapper: HTMLElement | null
     }
   }
-
+  hideLabelInterval: {
+    potion: ReturnType<typeof setInterval> | null;
+    equipment: ReturnType<typeof setInterval> | null;
+    }
   /**
    * 
    * @param root - needed to inject html code
@@ -52,64 +57,63 @@ export class SearchedUser {
         potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
       },
     }
+    this.hideLabelInterval = {
+      potion: null,
+      equipment: null
+    }
     this.init();
   }
 
   render() {
     this.root.innerHTML = getSpecificUserHTMLCode(this.currentUser.friends, this.searchedUser);
   }
+  equipmentLabel(item: ShopItem) {
+    // prevent of label hiding 
+    clearInterval(this.hideLabelInterval.equipment)
+    // reset equipement label styles
+    this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
 
-  labelForEquipmentEvent() {
-
-    let toogleLabel;
-    let currentItem: ShopItem | null = null;
-
-    // show label on mouse hover event 
-    this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
-      // prevent of label hiding 
-      clearInterval(toogleLabel)
-      const element: HTMLElement = el.firstElementChild as HTMLElement;
-      // hide backpack label
-      //   this.dom.backpackLabel.root.classList.add('disabled');
-      // reset equipement label styles
-      this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-
-      //find specific item, in order to create label of this item
-      currentItem = this.searchedUser.equipmentItems[this.searchedUser.equipmentItems.findIndex(el => el.id === element.dataset.currentItemId)];
-
-      // if equipement slot has no item inside then hide label
-      if (element.dataset.currentItemId === undefined) {
-        this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      }
-      // set the label
-      if (currentItem !== undefined && element.dataset.currentItemId !== undefined) {
-        this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-        this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${currentItem.type}`)
-        this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-        this.dom.equipmentLabel.root.classList.remove('disabled')
-      }
-
-
-    }))
-
-    // on mouse leave remove label with delay -> after 1s
-    this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseleave', () => {
-      toogleLabel = setInterval(() => {
-        this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled'
-      }, 1000);
-    }));
+    this.dom.equipmentLabel.root.classList.add(item.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common');
+    this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-${item.type}`);
+    this.dom.equipmentLabel.root.innerHTML = getSearchedUserBackpackLabel(item)
+    this.dom.equipmentLabel.root.classList.remove('disabled');
 
     // keep displaying label when user  focus is on label
-    this.dom.equipmentLabel.root.addEventListener('mouseover', () => {
-      clearInterval(toogleLabel);
-    });
-
-    // hide label when focus loss
+    this.dom.equipmentLabel.root.addEventListener('mouseover', () => clearInterval(this.hideLabelInterval.equipment));
+    // hide 
     this.dom.equipmentLabel.root.addEventListener('mouseleave', () => {
-      this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
+        this.dom.equipmentLabel.root.innerHTML = '';
+        this.dom.equipmentLabel.root.classList.add('disabled');
     });
+}
+  setEquipment() {
 
+    this.searchedUser.equipmentItems.forEach(el => {
+
+      // find slot in equipment in order to inject item graphic and add function reponsible for transfering item from equipment to backpack
+      const equipmentSlot: HTMLElement = document.querySelector(`.profile__equipment div[data-slot-name = '${el.type}']`);
+      // set slot
+      equipmentSlot.innerHTML = `  <img src='${el.src}' class="profile__equipmentIcon"/>`;
+
+      // create equipment label with button responsible for transfering item
+      equipmentSlot.addEventListener('mouseover', () => this.equipmentLabel(el))
+
+      // hide label when equipment slot loses his focus
+      equipmentSlot.addEventListener('mouseleave', (e) => {
+          //   equipmentSlot.removeEventListener('mouseover',  this.equipmentLabel)
+          this.hideLabelInterval.equipment = setInterval(() => {
+              this.dom.equipmentLabel.root.innerHTML = '';
+              this.dom.equipmentLabel.root.classList.add('disabled');
+
+          }, 800);
+      });
+      
+  })
+ 
   }
+
+
+  
   // events responsible for potion label
   labelForPotions() {
     // find potions
@@ -136,7 +140,6 @@ export class SearchedUser {
             this.dom.general.potionImgSecond.classList.add('profile__generalImg-item');
         }
     }
-
   }
 
   async createChat() {
@@ -157,7 +160,6 @@ export class SearchedUser {
         console.error("Error writing document: ", error);
       });
   }
-
 
   // add or remove searched user to friends
   addOrRemoveFriendEvent() {
@@ -265,7 +267,7 @@ export class SearchedUser {
 }
   initScripts() {
 
-    this.labelForEquipmentEvent();
+    this.setEquipment();
     this.labelForPotions();
     this.switchElements();
     this.addOrRemoveFriendEvent();

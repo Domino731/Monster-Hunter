@@ -94,22 +94,22 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
 
 
    <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'>
-       ${specificEquipmentItemImg('helmet')}
+   <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'>
-      ${specificEquipmentItemImg('chestPlate')}
+   <img src='/images/profile_equipment_chestPlate.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'>
-      ${specificEquipmentItemImg('gloves')}
+   <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'>
-      ${specificEquipmentItemImg('weapon')}
+   <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'>
-      ${specificEquipmentItemImg('shield')}
+   <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'>
-      ${specificEquipmentItemImg('special')}
+   <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__portrait'>
      <img class='profile__portraitImg' src='${searchedUser.portrait}'/>

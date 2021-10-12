@@ -81,31 +81,3 @@ export const potionsData: ShopItem[] = [
     },
 ];
 
-
-/* 
-    labelForPotions() {
-        // find potions
-        if (this.searchedUser.potions.first !== null) {
-            const potion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id === this.searchedUser.potions.first.id)];
-            this.dom.general.potionImgFirst.addEventListener('mouseover', () => {
-                this.dom.potionLabel.innerHTML = getPotionLabel(potion, 1);
-            });
-            this.dom.general.potionImgFirst.addEventListener('mouseleave', () => {
-                this.dom.potionLabel.innerHTML = '';
-            })
-        }
-        if (this.searchedUser.potions.second !== null) {
-            const secondPotion: ShopItem | undefined = potionsData[potionsData.findIndex(el => el.id ===this.searchedUser.potions.second.id)];
-            // check if user have potion
-            if (secondPotion !== undefined) {
-                this.dom.general.potionImgSecond.addEventListener('mouseover', () => {
-                    this.dom.potionLabel.innerHTML = getPotionLabel(secondPotion, 2);
-                });
-                this.dom.general.potionImgSecond.addEventListener('mouseleave', () => {
-                    this.dom.potionLabel.innerHTML = '';
-                })
-            }
-        }
-
-      }
-*/
