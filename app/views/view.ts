@@ -158,8 +158,7 @@ export class View {
          this.userData.missionWillingness = 100;
          updateUserData(this.userData);
       }
-      
-
+   
    }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {

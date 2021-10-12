@@ -54,13 +54,17 @@ export class Blacksmith extends View {
          moveItemError: HTMLElement;
          replaceIcon: HTMLImageElement;
       }
+      marketSlotsContainer: NodeListOf<Element>
       level: HTMLElement;
       portraitImg: HTMLImageElement;
    }
    private market: ShopItem[]
+   private selectedMarketItem: ShopItem | null;
+   private showBlacksmithLabel: ReturnType<typeof setInterval> | null
    constructor() {
       super(),
          this.dom = {
+            marketSlotsContainer: document.querySelectorAll('.market__shopFrame'),
             blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),
             profileContainer: document.querySelector('.blacksmith__item:first-child'),
             mobileNav: document.querySelector('.mobileNav__content'),
@@ -99,7 +103,9 @@ export class Blacksmith extends View {
             },
             backpackSlots: document.querySelectorAll('#blacksmith_backpack_slots .profile__backpackItem')
          }
-      this.market = []
+      this.market = [];
+      this.selectedMarketItem = null;
+      this.showBlacksmithLabel = null;
    }
 
    render() {
@@ -159,7 +165,6 @@ export class Blacksmith extends View {
             equipmentSlot !== null && equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
          });
       })
-
 
       // keep displaying label on mouse focus
       this.dom.backpackLabel.root.addEventListener('mouseover', () => {
@@ -382,22 +387,26 @@ export class Blacksmith extends View {
             const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === slotElement.dataset.itemId)];
 
             if (marketItem !== undefined) {
-               // find specific slot in equipment which is equal to current shop item type, needed to compare items
-               const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
-               const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+               clearTimeout(this.showBlacksmithLabel)
+               this.showBlacksmithLabel = setTimeout(() => {
+                  // find specific slot in equipment which is equal to current shop item type, needed to compare items
+                  const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${marketItem.type}] img`)
+                  const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
 
-               // check if user have enough gold to buy new item and class
-               this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
-               this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
+                  // check if user have enough gold to buy new item and class
+                  this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
+                  this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 
-               // set the item label
-               this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+                  // set the item label
+                  this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
 
-               // show slot in equipment by adding pulse animation
-               equipmentSlot.classList.add("profile__equipmentIcon-pulse");
+                  // show slot in equipment by adding pulse animation
+                  equipmentSlot.classList.add("profile__equipmentIcon-pulse");
 
-               // show the item label
-               this.dom.itemLabel.classList.remove('disabled');
+                  // show the item label
+                  this.dom.itemLabel.classList.remove('disabled');
+               }, 1000)
+
             }
 
 
@@ -415,10 +424,10 @@ export class Blacksmith extends View {
 
       // removing effects 
       this.dom.market.addEventListener('mouseleave', () => {
-         this.dom.itemLabel.classList.add('disabled')
-         this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
-
-      })
+         // this.dom.itemLabel.classList.add('disabled')
+         // this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
+         clearInterval(this.showBlacksmithLabel)
+      });
 
    }
 
@@ -457,9 +466,7 @@ export class Blacksmith extends View {
       let hoveredEquipmentSlotName: string | null = null;
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
-
          const element: HTMLElement = el.firstElementChild as HTMLElement;
-
          // set currently seleted market slot
          selectedMarketSlot = el as HTMLElement;
          // set currently dragged element
@@ -474,18 +481,16 @@ export class Blacksmith extends View {
          // find current item, in order to add him to equipment,
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
          selectedItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === element.dataset.itemId)];
+      }));
 
-
-      }))
       this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
          e.preventDefault();
-      }))
+      }));
 
       this.dom.marketSlots.forEach(el => el.addEventListener('dragend', (e) => {
          e.preventDefault();
-         // remove item shrink
          el.classList.remove('dragging')
-      }))
+      }));
 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
          const element: HTMLElement = el as HTMLElement
@@ -495,7 +500,7 @@ export class Blacksmith extends View {
          hoveredEquipmentSlotName = element.dataset.slotName
 
          // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
-         if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null) {
+         if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null && selectedItem !== undefined) {
 
             // find current market item to check if the user has enough gold bo buy
             const marketItem: ShopItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === selectedItem.id)];
@@ -584,7 +589,6 @@ export class Blacksmith extends View {
                updateUserData(this.userData);
             }
 
-
             // user doesn't have enough gold
             else if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold) {
                // set class responsible for gold bar animation, to notify user that he cant buy this item
@@ -596,9 +600,11 @@ export class Blacksmith extends View {
                }, 1000)
 
             }
+
+
          }
 
-      }))
+      }));
 
       this.dom.backpack.addEventListener('mouseover', () => {
 
@@ -653,29 +659,11 @@ export class Blacksmith extends View {
                setTimeout(() => {
                   this.dom.error.innerText = '';
                   this.dom.error.classList.add('disabled');
-               }, 3500)
+               }, 3500);
             }
          }
 
-      })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      });
 
       this.dom.body.addEventListener('mouseover', () => {
          selectedMarketSlot = null;
@@ -683,9 +671,127 @@ export class Blacksmith extends View {
          draggedElement = null
          selectedItem = null;
          hoveredEquipmentSlotName = null;
-      })
+      });
+
+
    }
 
+   buyItem(selectedItem: ShopItem) {
+      const general = () => {
+         const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
+
+         // each market slot have only 2 picks in day, when user buy new item, substract one pick
+         const slotIndex: number = this.market.findIndex(el => el.id === selectedItem.id);
+         const picks: number = availablePicks[slotIndex].picks;
+         picks - 1;
+         console.log(picks)
+         // find index of old item in order to replace him by new created one, and to update shop
+         const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+
+         // set new item in this slot
+         const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+
+         // set item statistics
+         newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+            newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+            newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+            newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+
+         this.market[oldItemIndex] = newMarketItem;
+
+         // substract gold and show animation
+         this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+         this.dom.goldSubstract.classList.remove('disabled');
+
+         // remove above animation after 1.3s
+         setTimeout(() => {
+            this.dom.goldSubstract.classList.add('disabled');
+            this.dom.goldSubstract.innerText = ``;
+         }, 1300);
+      };
+
+      const equipmentSlot : ShopItem | undefined  = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)]
+      // check if equipment slot is empty
+      if (equipmentSlot === undefined) {
+        if(this.userData.gold >= selectedItem.initialCost){
+            this.userData.equipmentItems.push(selectedItem);
+            this.userData.gold -= selectedItem.initialCost;
+
+              // substract gold and show animation
+              this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+              this.dom.goldSubstract.classList.remove('disabled');
+
+              // remove above animation after 1.3s
+              setTimeout(() => {
+                 this.dom.goldSubstract.classList.add('disabled');
+                 this.dom.goldSubstract.innerText = ``;
+              }, 1300);
+              general();
+              updateUserData(this.userData);
+        }
+      }
+      else if (this.userData.backpackItems.length <= 10) {
+         if(this.userData.gold >= selectedItem.initialCost){
+           this.userData.backpackItems.push(selectedItem);
+           this.userData.gold -= selectedItem.initialCost;
+
+             // substract gold and show animation
+             this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+             this.dom.goldSubstract.classList.remove('disabled');
+
+             // remove above animation after 1.3s
+             setTimeout(() => {
+                this.dom.goldSubstract.classList.add('disabled');
+                this.dom.goldSubstract.innerText = ``;
+             }, 1300);
+             general();
+             updateUserData(this.userData);
+         }
+        // general();
+      }
+      else {
+         this.dom.error.innerText = 'Your backpack is full';
+         this.dom.error.classList.remove('disabled');
+
+         // remove error after 3.5s
+         setTimeout(() => {
+            this.dom.error.innerText = '';
+            this.dom.error.classList.add('disabled');
+         }, 3500);
+      }
+
+   }
+   buyItemByLabel() {
+      this.dom.marketSlots.forEach(el => el.addEventListener('click', () => {
+         clearInterval(this.showBlacksmithLabel)
+         const element: HTMLElement = el.firstElementChild as HTMLElement;
+         this.selectedMarketItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
+
+         // find specific slot in equipment which is equal to current shop item type, needed to compare items
+         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`)
+         const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+
+         // check if user have enough gold to buy new item and class
+         this.dom.itemLabel.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'afford-yes' : 'afford-no');
+         this.dom.goldAmount.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
+
+         // set the item label
+         this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(this.selectedMarketItem, currentItem);
+
+         // show slot in equipment by adding pulse animation
+         equipmentSlot.classList.add("profile__equipmentIcon-pulse");
+
+         // show the item label
+         this.dom.itemLabel.classList.remove('disabled');
+
+         const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
+
+
+         buyBtn.addEventListener('click', () => this.buyItem(this.selectedMarketItem))
+
+
+      }))
+   }
    setUserBackpack() {
       // clear previous 
       this.dom.backpackSlots.forEach(el => {
@@ -735,10 +841,12 @@ export class Blacksmith extends View {
       this.setUserBackpack();
       this.setUserEquipment();
       this.generalOnDataChange();
+      this.setShop();
    }
 
    getDOMElements() {
       this.dom = {
+         marketSlotsContainer: document.querySelectorAll('.market__shopFrame'),
          blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),
          profileContainer: document.querySelector('.blacksmith__item:first-child'),
          mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
@@ -781,19 +889,19 @@ export class Blacksmith extends View {
    }
 
    toogleView() {
-       this.dom.mobileNavFristSwitch.addEventListener('click', ()=> {
-          this.dom.blacksmithContainer.classList.remove('disabled');
-          this.dom.profileContainer.classList.add('disabled');
-       });
-       this.dom.mobileNavSecondSwitch.addEventListener('click', ()=> {
+      this.dom.mobileNavFristSwitch.addEventListener('click', () => {
+         this.dom.blacksmithContainer.classList.remove('disabled');
+         this.dom.profileContainer.classList.add('disabled');
+      });
+      this.dom.mobileNavSecondSwitch.addEventListener('click', () => {
          this.dom.blacksmithContainer.classList.add('disabled');
          this.dom.profileContainer.classList.remove('disabled');
-       });
+      });
    }
    mobile() {
       if (window.innerWidth < 1024) {
-        this.dom.blacksmithContainer.classList.add('disabled');
-        // this.dom.profileContainer.classList.add('disabled');
+         this.dom.blacksmithContainer.classList.add('disabled');
+         // this.dom.profileContainer.classList.add('disabled');
          this.toogleView();
       }
    }
@@ -805,12 +913,12 @@ export class Blacksmith extends View {
       // blacksmith item label
 
       // set the item label
-       this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
- // show the item label
-  //    this.dom.itemLabel.classList.remove('disabled');
+      this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(marketItem, currentItem);
+      // show the item label
+      //    this.dom.itemLabel.classList.remove('disabled');
 
 
-     
+
       //equipment
 
       // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
@@ -818,10 +926,10 @@ export class Blacksmith extends View {
       // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
       // this.dom.equipmentLabel.root.classList.remove('disabled')
       // backpack
-      const equipmentItem =  helmetsData[12]
+      const equipmentItem = helmetsData[12]
       this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled'
       this.dom.backpackLabel.root.classList.add(`profile__itemSpecs-backpackSlot10`)
-      
+
       this.dom.backpackLabel.replaceIcon.src = getEquipmentIconSrc(currentItem.type)
       this.dom.backpackLabel.labelWrapper.innerHTML = getBlacksmithBackpackLabel(currentItem, equipmentItem);
       this.dom.backpackLabel.root.classList.remove('disabled')
@@ -833,6 +941,7 @@ export class Blacksmith extends View {
       this.setUserBackpack();
       this.setUserEquipment();
       this.setShop();
+      this.buyItemByLabel();
       this.dragEventForMarketSlots();
       this.labelForEquipmentEvent();
       this.labelForBackpackEvent();
