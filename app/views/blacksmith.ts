@@ -137,7 +137,6 @@ export class Blacksmith extends View {
                currentItem = this.userData.backpackItems[this.userData.backpackItems.findIndex(el => el.id === element.dataset.backpackItemId)];
 
                const equipmentItem: ShopItem | null = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === currentItem.type)];
-               console.log(equipmentItem)
                // find specific slot in equipment which is equal to current shop item type, needed to compare items
                equipmentSlot = document.querySelector(`#equipment_slots div[data-slot-name = ${currentItem.type}]`)
                // show slot in equipment by adding pulse animation
@@ -373,6 +372,8 @@ export class Blacksmith extends View {
             slotChild.dataset.slotName = shopItems[num].type
          }
          else {
+            slotChild.removeAttribute('data-slot-name');
+            slotChild.removeAttribute('data-item-id');
             slotChild.innerHTML = `<img src='./images/market_sold_out.png'/>`;
          }
 
@@ -480,7 +481,7 @@ export class Blacksmith extends View {
 
          // find current item, in order to add him to equipment,
          // if user have enough gold and the hovered slot in equipment is the same as the dragging slot
-         selectedItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === element.dataset.itemId)];
+         selectedItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
       }));
 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
@@ -503,7 +504,7 @@ export class Blacksmith extends View {
          if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null && selectedItem !== undefined) {
 
             // find current market item to check if the user has enough gold bo buy
-            const marketItem: ShopItem = allBlacksmithMarketItems[allBlacksmithMarketItems.findIndex(el => el.id === selectedItem.id)];
+            const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === selectedItem.id)];
 
             // prevent of item dupilcations
             // check if user has enough gold to buy, if he has enough add this item to his equipment, and update his profile on firestore -> update gold and equipment
@@ -536,7 +537,7 @@ export class Blacksmith extends View {
                      const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
                      // set new item in this slot
-                     const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+                     const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
 
                      // set item statistics
                      newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
@@ -562,6 +563,10 @@ export class Blacksmith extends View {
                      this.userData.gold -= marketItem.initialCost;
                      // update user equipment
                      const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
+                     // hide label 
+                     this.dom.itemLabel.innerHTML = '';
+                     this.dom.itemLabel.classList.add('disabled');
+
                      if (equipmentItemIndex > -1) {
                         this.userData.equipmentItems[equipmentItemIndex] = marketItem;
                      }
@@ -624,7 +629,7 @@ export class Blacksmith extends View {
                   // find index of old item in order to replace him by new created one, and to update shop
                   const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
                   // set new item in this slot
-                  const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
+                  const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
                   // set item statistics
                   newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
                      newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
@@ -646,6 +651,11 @@ export class Blacksmith extends View {
                   // save picks into user data in firestore
                   availablePicks[slotIndex].picks -= 1;
                   this.userData.shopPicks.blacksmith = availablePicks;
+
+                  // hide label 
+                  this.dom.itemLabel.innerHTML = '';
+                  this.dom.itemLabel.classList.add('disabled');
+
                   updateUserData(this.userData);
                }
 
@@ -677,27 +687,34 @@ export class Blacksmith extends View {
    }
 
    buyItem(selectedItem: ShopItem) {
+
+      const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
+      // each market slot have only 2 picks in day, when user buy new item, substract one pick
+      const slotIndex: number = this.market.findIndex(el => el.id === selectedItem.id);
       const general = () => {
-         const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
 
-         // each market slot have only 2 picks in day, when user buy new item, substract one pick
-         const slotIndex: number = this.market.findIndex(el => el.id === selectedItem.id);
-         const picks: number = availablePicks[slotIndex].picks;
-         picks - 1;
-         console.log(picks)
-         // find index of old item in order to replace him by new created one, and to update shop
-         const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+         if (availablePicks[slotIndex].picks > 0) {
+            // find index of old item in order to replace him by new created one, and to update shop
+            const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
-         // set new item in this slot
-         const newMarketItem: ShopItem = allBlacksmithMarketItems[Math.floor(Math.random() * allBlacksmithMarketItems.length)];
 
-         // set item statistics
-         newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-            newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-            newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-            newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+            // set new item in this slot
+            const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
 
-         this.market[oldItemIndex] = newMarketItem;
+            // set item statistics
+            newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
+               newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+               newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
+               newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+
+            this.market[oldItemIndex] = newMarketItem;
+         }
+
+         availablePicks[slotIndex].picks -= 1;
+
+         // hide label 
+         this.dom.itemLabel.innerHTML = '';
+         this.dom.itemLabel.classList.add('disabled');
 
          // substract gold and show animation
          this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
@@ -710,44 +727,45 @@ export class Blacksmith extends View {
          }, 1300);
       };
 
-      const equipmentSlot : ShopItem | undefined  = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)]
+      const equipmentSlot: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)];
       // check if equipment slot is empty
       if (equipmentSlot === undefined) {
-        if(this.userData.gold >= selectedItem.initialCost){
+         if (this.userData.gold >= selectedItem.initialCost && availablePicks[slotIndex].picks > 0) {
             this.userData.equipmentItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
 
-              // substract gold and show animation
-              this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
-              this.dom.goldSubstract.classList.remove('disabled');
+            // substract gold and show animation
+            this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+            this.dom.goldSubstract.classList.remove('disabled');
 
-              // remove above animation after 1.3s
-              setTimeout(() => {
-                 this.dom.goldSubstract.classList.add('disabled');
-                 this.dom.goldSubstract.innerText = ``;
-              }, 1300);
-              general();
-              updateUserData(this.userData);
-        }
+            // remove above animation after 1.3s
+            setTimeout(() => {
+               this.dom.goldSubstract.classList.add('disabled');
+               this.dom.goldSubstract.innerText = ``;
+            }, 1300);
+            general();
+            updateUserData(this.userData);
+         }
       }
       else if (this.userData.backpackItems.length <= 10) {
-         if(this.userData.gold >= selectedItem.initialCost){
-           this.userData.backpackItems.push(selectedItem);
-           this.userData.gold -= selectedItem.initialCost;
+         if (availablePicks[slotIndex].picks > 0 && this.userData.gold >= selectedItem.initialCost) {
+            this.userData.backpackItems.push(selectedItem);
+            this.userData.gold -= selectedItem.initialCost;
 
-             // substract gold and show animation
-             this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
-             this.dom.goldSubstract.classList.remove('disabled');
+            // substract gold and show animation
+            this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+            this.dom.goldSubstract.classList.remove('disabled');
 
-             // remove above animation after 1.3s
-             setTimeout(() => {
-                this.dom.goldSubstract.classList.add('disabled');
-                this.dom.goldSubstract.innerText = ``;
-             }, 1300);
-             general();
-             updateUserData(this.userData);
+            // remove above animation after 1.3s
+            setTimeout(() => {
+               this.dom.goldSubstract.classList.add('disabled');
+               this.dom.goldSubstract.innerText = ``;
+            }, 1300);
+            general();
+            updateUserData(this.userData);
          }
-        // general();
+
+
       }
       else {
          this.dom.error.innerText = 'Your backpack is full';
@@ -767,27 +785,30 @@ export class Blacksmith extends View {
          const element: HTMLElement = el.firstElementChild as HTMLElement;
          this.selectedMarketItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
 
-         // find specific slot in equipment which is equal to current shop item type, needed to compare items
-         const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`)
-         const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+         if (this.selectedMarketItem !== undefined) {
+            // find specific slot in equipment which is equal to current shop item type, needed to compare items
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`)
+            const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
 
-         // check if user have enough gold to buy new item and class
-         this.dom.itemLabel.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'afford-yes' : 'afford-no');
-         this.dom.goldAmount.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
+            // check if user have enough gold to buy new item and class
+            this.dom.itemLabel.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'afford-yes' : 'afford-no');
+            this.dom.goldAmount.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 
-         // set the item label
-         this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(this.selectedMarketItem, currentItem);
+            // set the item label
+            this.dom.itemLabel.innerHTML = getBlacksmithItemLabel(this.selectedMarketItem, currentItem);
 
-         // show slot in equipment by adding pulse animation
-         equipmentSlot.classList.add("profile__equipmentIcon-pulse");
+            // show slot in equipment by adding pulse animation
+            equipmentSlot.classList.add("profile__equipmentIcon-pulse");
 
-         // show the item label
-         this.dom.itemLabel.classList.remove('disabled');
+            // show the item label
+            this.dom.itemLabel.classList.remove('disabled');
 
-         const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
+            const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
 
 
-         buyBtn.addEventListener('click', () => this.buyItem(this.selectedMarketItem))
+            buyBtn.addEventListener('click', () => this.buyItem(this.selectedMarketItem))
+
+         }
 
 
       }))

@@ -156,9 +156,11 @@ export class View {
          this.userData.lastVisit = today;
          // reset mission willingness
          this.userData.missionWillingness = 100;
-         updateUserData(this.userData);
+           updateUserData(this.userData);
       }
-   
+      // this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+      // this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+      // updateUserData(this.userData);
    }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {
