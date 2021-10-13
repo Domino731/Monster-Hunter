@@ -30,6 +30,10 @@
             margin-top: 3px;
             font-size: 26px;
         }
+        @include mobileS {
+            margin-top: 0px;
+            font-size: 21px;
+        }
     }
     &__container {
         display: flex;
@@ -70,6 +74,9 @@
             @include mobileM {
                 height: 484px;
             }
+            @include mobileS {
+                height: 444px;
+            }
         }
 
         &:hover {
@@ -90,6 +97,9 @@
         }
         @include mobileM {
             width: 360px;
+        }
+        @include mobileS {
+            width: 310px;
         }
     }
     &__itemTitle {
@@ -120,6 +130,9 @@
         }
         @include mobileM {
             font-size: 27px;
+        }
+        @include mobileS {
+            font-size: 19px;
         }
     }
     &__form {
@@ -161,6 +174,11 @@
                 height: 238px;
                 left: 27px;
             }
+            @include mobileS {
+                width: 216px;
+                height: 216px;
+                left: 26px;
+            }
         }
 
         &-left {
@@ -176,6 +194,9 @@
                 @include mobileM {
                     left: 67px;
                 }
+                @include mobileS {
+                    left: 39px;
+                }
             }
         }
         @include desktopS {
@@ -183,6 +204,9 @@
         }
         @include laptopL {
             height: 112px;
+        }
+        @include mobileS {
+            height: 104px;
         }
     }
 
@@ -365,6 +389,10 @@
             top: -12px;
             left: 80px;
         }
+        @include mobileS {
+            top: -24px;
+            left: 75px;
+        }
     }
     input {
         height: 38px;
@@ -392,6 +420,10 @@
             width: 191px;
             font-size: 14px;
         }
+        @include mobileS {
+            width: 175px;
+            font-size: 13px;
+        }
     }
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px #a2abb8 inset;
@@ -409,6 +441,9 @@
         }
         @include mobileM {
             left: 61px;
+        }
+        @include mobileS {
+            left: 32px;
         }
     }
     input {
@@ -457,6 +492,9 @@
     @include tablet {
         margin: 12px auto;
     }
+    @include mobileS {
+        margin: 10px auto;
+    }
 }
 #auth-resetPassword {
     display: none;
@@ -472,9 +510,16 @@
     @include mobileM {
         height: 284px;
     }
+    @include mobileS {
+        padding-top: 57px;
+    }
+
     .auth__inputWrapper::after {
         @include tablet {
             left: 41px;
+        }
+        @include mobileS {
+            left: 36px;
         }
     }
     .auth__inputWrapper label {
@@ -483,6 +528,9 @@
         }
         @include mobileL {
             left: 94px;
+        }
+        @include mobileS {
+            left: 85px;
         }
     }
 }
@@ -502,5 +550,13 @@
         top: 48px;
         font-size: 10px;
         text-align: center;
+    }
+}
+@include mobileS {
+    .register__error,
+    .register__requirement,
+    #register__invalidData-repeatPassword {
+        top: 38px;
+        font-size: 9px;
     }
 }
