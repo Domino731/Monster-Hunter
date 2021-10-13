@@ -23,8 +23,11 @@
         width: 1500px;
         margin-left: auto;
         margin-right: auto;
-        @include desktopS {
+        @include desktopM {
             width: 1336px;
+        }
+        @include laptopM {
+            width: 1024px;
         }
     }
 
@@ -48,6 +51,9 @@
         @include desktopS {
             width: 514px;
         }
+        @include laptopM {
+            width: 441px;
+        }
     }
     &__itemTitle {
         font-size: 50px;
@@ -64,6 +70,9 @@
         @include desktopS {
             font-size: 45px;
             margin-bottom: 33px;
+        }
+        @include laptopM {
+            font-size: 42px;
         }
     }
     &__form {
@@ -99,7 +108,11 @@
             &:after {
                 transform: rotate(225deg);
                 left: 181px;
+                    @include laptopM {
+                        left: 110px;
+                    }
             }
+            
         }
         @include desktopS {
             height: 113px;
@@ -187,6 +200,9 @@
     &-correct {
         color: $color-green;
     }
+    @include laptopM {
+        font-size: 15px;
+    }
 }
 
 .register {
@@ -256,6 +272,9 @@
 .auth__inputWrapper-left {
     label {
         left: 172px;
+        @include laptopM {
+            left: 102px;
+        }
     }
     input {
         text-align: right;
@@ -265,9 +284,16 @@
         @include desktopS {
             left: 74px;
         }
+        @include laptopM {
+            left: 5px;
+        }
+     
     }
     .register__error {
         left: 250px;
+        @include laptopM {
+            left: 175px;
+        }
     }
 }
 

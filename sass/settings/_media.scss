@@ -32,7 +32,7 @@ $desktopM: 1919px;
 
 // 1280px
 @mixin laptopM {
-    @media (max-width:  1335px) {
+    @media (max-width:  1365px) {
       @content;
     }
 }
