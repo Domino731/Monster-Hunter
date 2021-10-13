@@ -49,18 +49,21 @@ const mail: MailData = {
 }
 export class Register extends AuthForm {
 
+    // DOM elements that will display errors if the user provides incorrect data
     private invalid: {
-        eMail: HTMLElement
-        password: HTMLElement
-        repeatPassword: HTMLElement
-        nickname: HTMLElement
+        eMail: HTMLElement;
+        password: HTMLElement;
+        repeatPassword: HTMLElement;
+        nickname: HTMLElement;
     }
+    // inputs nedeed to get thei values, based on this values authAction method will be invoke firebase auth action on this data
     private input: {
-        eMail: HTMLElement
-        password: HTMLElement
-        repeatPassword: HTMLElement
-        nickname: HTMLElement
+        eMail: HTMLElement;
+        password: HTMLElement;
+        repeatPassword: HTMLElement;
+        nickname: HTMLElement;
     }
+
     constructor(root) {
         super(root)
         this.invalid = {
@@ -75,9 +78,6 @@ export class Register extends AuthForm {
             repeatPassword: document.querySelector("#form__register input[name='repeatPassword']"),
             nickname: document.querySelector("#form__register input[name='nickname']"),
         }
-        this.rwd();
-         this.btn.style.display = "none";
-         this.loading.style.display = "block";
     }
 
     // creating new user with his own data in firestore
@@ -204,8 +204,8 @@ export class Register extends AuthForm {
                             })
                     }
                     createData();
-                }
-                )
+                })
+
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
@@ -214,18 +214,20 @@ export class Register extends AuthForm {
                         this.invalid.eMail.innerText = "This e-mail is already in use.";
                         this.input.eMail.style.borderBottomColor = "#e63946";
                     }
+
+                    // show button and hide loading
+                    this.loading.style.display = "none";
+                    this.btn.style.display = "block";
                 });
         }
 
 
-        // show button and hide loading
-        this.loading.style.display = "none";
-        this.btn.style.display = "block";
+
 
         return unlisten();
     }
 
-
+    // set errors in form, this method is invoked in addButtonEvent() method only when isCorrect value is true
     setErrors() {
         // checking email
         if (!validator.isEmail(this.data.eMail)) {
@@ -252,6 +254,7 @@ export class Register extends AuthForm {
         }
     }
 
+    // remove all errors in form
     removeErrors() {
         // for email
         if (validator.isEmail(this.data.eMail)) {
@@ -280,10 +283,12 @@ export class Register extends AuthForm {
 
 
     }
+
+    // check if user's data is correct, if data is incorrect then authAction() wont be triggred and the setErrors() method will be invoke. 
+    // These methods are apllied in addButtonEvent() method.
     checkData() {
-
+        // when user's provides new data remove all errors
         this.removeErrors();
-
         // checking requirements
         if (!validator.isEmail(this.data.eMail)
             || this.data.password.length <= 6
@@ -301,22 +306,4 @@ export class Register extends AuthForm {
             this.invalidData = false;
         }
     }
-    rwd() {
-        // checking email
-        this.invalid.eMail.innerText = "Invalid e-mail.";
-        this.input.eMail.style.borderBottomColor = "#e63946";
-
-        // checking password
-        this.invalid.password.style.color = "#e63946";
-        this.input.password.style.borderBottomColor = "#e63946";
-
-        //checking if the user has entered two identical passwords
-        this.invalid.repeatPassword.innerText = "Passwords should be the same.";
-        this.input.repeatPassword.style.borderBottomColor = "#e63946";
-        this.invalid.nickname.style.color = "#e63946";
-        this.invalid.nickname.innerText = 'Invalid nick,'
-        this.input.nickname.style.borderBottomColor = "#e63946";
-
-    }
-
 }
