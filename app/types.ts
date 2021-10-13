@@ -69,7 +69,6 @@ export interface UserData {
     gold: number ;
     shop: {
         blacksmith: null | ShopItem[] ;
-        wizard: null | ShopItem[]
     } ;
     shopPicks: {
         blacksmith: null | AvailableMarketPicks[] ;
@@ -90,7 +89,6 @@ export interface UserData {
     equipmentItems: ShopItem[]
     backpackItems: ShopItem[]
     lastVisit: Date
-    newShopDate: Date
     status: 'free' | 'guard' | 'mission' ;
     guard: {
         current: Date | null
