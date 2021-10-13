@@ -76,8 +76,8 @@ export class Register extends AuthForm {
             nickname: document.querySelector("#form__register input[name='nickname']"),
         }
         this.rwd();
-        // this.btn.style.display = "none";
-        // this.loading.style.display = "block";
+         this.btn.style.display = "none";
+         this.loading.style.display = "block";
     }
 
     // creating new user with his own data in firestore

@@ -25,7 +25,10 @@
             font-size: 32px;
             -webkit-text-stroke: 1px $color-black;
             text-shadow: 2px 2px $color-black;
-         
+        }
+        @include mobileM {
+            margin-top: 3px;
+            font-size: 26px;
         }
     }
     &__container {
@@ -64,6 +67,9 @@
             @include mobileL {
                 height: 496px;
             }
+            @include mobileM {
+                height: 484px;
+            }
         }
 
         &:hover {
@@ -81,6 +87,9 @@
         @include mobileL {
             border: 4px solid $color-blue;
             width: 398px;
+        }
+        @include mobileM {
+            width: 360px;
         }
     }
     &__itemTitle {
@@ -108,6 +117,9 @@
             text-shadow: 2px 2px $color-black;
             margin-top: -13px;
             margin-bottom: 47px;
+        }
+        @include mobileM {
+            font-size: 27px;
         }
     }
     &__form {
@@ -148,7 +160,6 @@
                 width: 238px;
                 height: 238px;
                 left: 27px;
-               
             }
         }
 
@@ -161,6 +172,9 @@
                 }
                 @include mobileL {
                     left: 105px;
+                }
+                @include mobileM {
+                    left: 67px;
                 }
             }
         }
@@ -179,6 +193,9 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        @include mobileM {
+            width: 100%;
+        }
         button {
             border: none;
             background: none;
@@ -195,6 +212,7 @@
                 cursor: pointer;
                 background: none;
             }
+            
         }
         .tower {
             z-index: 2;
@@ -202,6 +220,10 @@
             height: 65px;
             background-image: url("/images/form_tower.png");
             background-size: cover;
+            @include mobileM {
+                width: 50px;
+                height: 50px;
+            }
         }
         .wall {
             display: flex;
@@ -215,6 +237,10 @@
             transition: 0.3s;
             &:hover {
                 box-shadow: 47px 4px #96a1a8 inset, -47px 4px #96a1a8 inset;
+            }
+            @include mobileM {
+                width: 94%;
+                left: 10px;
             }
         }
     }
@@ -236,6 +262,10 @@
         @include desktopS {
             width: 28px;
             height: 28px;
+        }
+        @include mobileM {
+            width: 19px;
+            height: 19px;
         }
     }
     &__switchBtn {
@@ -377,6 +407,9 @@
         @include mobileL {
             left: 100px;
         }
+        @include mobileM {
+            left: 61px;
+        }
     }
     input {
         text-align: right;
@@ -406,12 +439,21 @@
     font-size: 1.063rem;
     color: #4e5a61;
     transition: 0.2s;
-    &:hover {
+    font-weight: bold;
+    letter-spacing: 0.125rem;
+    @media screen and (min-width: 1024px) {
+          &:hover {
         letter-spacing: 0.063rem;
         cursor: pointer;
         text-decoration: underline;
         text-decoration-color: #4e5a61;
     }
+    @include tablet {
+        text-decoration: underline;
+        text-decoration-color: #4e5a61;
+    }
+    }
+  
     @include tablet {
         margin: 12px auto;
     }
@@ -426,6 +468,9 @@
     }
     @include tablet {
         height: 313px;
+    }
+    @include mobileM {
+        height: 284px;
     }
     .auth__inputWrapper::after {
         @include tablet {
@@ -448,10 +493,9 @@
 }
 
 @include mobileL {
-    .register__error, 
+    .register__error,
     .register__requirement,
-    #register__invalidData-repeatPassword{
-  
+    #register__invalidData-repeatPassword {
         width: 100%;
         display: block;
         left: 0;
