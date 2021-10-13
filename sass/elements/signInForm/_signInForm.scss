@@ -11,6 +11,11 @@
         text-shadow: 4px 4px $color-black;
         z-index: 4;
         margin-bottom: 20px;
+        @include desktopS {
+            font-size: 50px;
+            padding-top: 8px;
+            margin-bottom: 10px;
+        }
     }
     &__container {
         display: flex;
@@ -18,21 +23,30 @@
         width: 1500px;
         margin-left: auto;
         margin-right: auto;
+        @include desktopS {
+            width: 1336px;
+        }
     }
 
     &__item {
-        width: 560px;
-        border-radius: 28px;
+        width: 583px;
+        border-radius: 20px;
         padding: 10px;
         background: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(12px);
         transition: 0.4s;
         &-login {
             height: 500px;
+            @include desktopS {
+                width: 524px;
+            }
         }
 
         &:hover {
             background: rgba(255, 255, 255, 0.4);
+        }
+        @include desktopS {
+            width: 514px;
         }
     }
     &__itemTitle {
@@ -47,6 +61,10 @@
         -webkit-text-stroke: 2px black;
         text-shadow: 4px 4px $color-black;
         z-index: 4;
+        @include desktopS {
+            font-size: 45px;
+            margin-bottom: 33px;
+        }
     }
     &__form {
         width: 100%;
@@ -71,6 +89,10 @@
             background-image: url("/images/form_sword.png");
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            @include desktopS {
+                width: 268px;
+                height: 268px;
+            }
         }
 
         &-left {
@@ -78,6 +100,9 @@
                 transform: rotate(225deg);
                 left: 181px;
             }
+        }
+        @include desktopS {
+            height: 113px;
         }
     }
 
@@ -100,7 +125,7 @@
             letter-spacing: 0.125rem;
             transition: 0.3s;
             &:hover {
-                letter-spacing: 0.25rem;         
+                letter-spacing: 0.25rem;
                 cursor: pointer;
                 background: none;
             }
@@ -122,7 +147,7 @@
             background: #b7c1ca;
             box-shadow: 40px 4px #96a1a8 inset, -40px 4px #96a1a8 inset;
             transition: 0.3s;
-            &:hover{
+            &:hover {
                 box-shadow: 47px 4px #96a1a8 inset, -47px 4px #96a1a8 inset;
             }
         }
@@ -135,29 +160,31 @@
         justify-content: center;
     }
 
-    &__loading{
+    &__loading {
         display: none;
         width: 36px;
         height: 36px;
         animation: an__auth--loading 1s infinite;
         background-image: url("/images/form_loadingIcon.png");
         background-size: cover;
+        @include desktopS {
+            width: 28px;
+            height: 28px;
+        }
     }
-
 }
 
 .auth__notification {
-    
     font-weight: 600;
     letter-spacing: 0.063rem;
     font-size: 17px;
     display: block;
     text-align: center;
-    &-error{
-       color: $color-red;
+    &-error {
+        color: $color-red;
     }
-    
-    &-correct{
+
+    &-correct {
         color: $color-green;
     }
 }
@@ -165,17 +192,27 @@
 .register {
     &__requirement {
         position: absolute;
-        font-size: 0.813rem;
+        font-size: 13px;
         top: 76px;
         left: 125px;
         color: $color-black;
+        @include desktopS {
+            font-size: 10px;
+            top: 37px;
+            left: 111px;
+        }
     }
     &__error {
         position: absolute;
-        font-size: 0.813rem;
+        font-size: 13px;
         top: 76px;
         left: 129px;
         color: $color-red;
+        @include desktopS {
+            font-size: 10px;
+            top: 35px;
+            left: 110px;
+        }
     }
 }
 
@@ -187,6 +224,10 @@
         font-size: 0;
         top: 28px;
         left: 119px;
+        @include desktopS {
+            top: 0;
+            left: 104px;
+        }
     }
     input {
         height: 38px;
@@ -201,6 +242,11 @@
         &::placeholder {
             color: inherit;
         }
+        @include desktopS {
+            height: 30px;
+            width: 217px;
+            border-bottom: 3px solid $color-gold;
+        }
     }
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px #a2abb8 inset;
@@ -209,20 +255,23 @@
 
 .auth__inputWrapper-left {
     label {
-        left: 168px;
+        left: 172px;
     }
     input {
         text-align: right;
     }
     .register__requirement {
         left: 33px;
+        @include desktopS {
+            left: 74px;
+        }
     }
     .register__error {
         left: 250px;
     }
 }
 
-.recoverPassword{
+.recoverPassword {
     width: 184px;
     text-align: center;
     padding: 0.188rem;
@@ -230,20 +279,24 @@
     font-size: 1.063rem;
     color: #4e5a61;
     transition: 0.2s;
-    &:hover{
+    &:hover {
         letter-spacing: 0.063rem;
         cursor: pointer;
         text-decoration: underline;
         text-decoration-color: #4e5a61;
     }
 }
-#auth-resetPassword{
-   display: none;
-   height: 243px;
-   padding: 30px 0;
+#auth-resetPassword {
+    display: none;
+    height: 243px;
+    padding: 30px 0;
+    @include desktopS {
+        height: 286px;
+        padding: 46px 0;
+    }
 }
-@keyframes an__auth--loading{
-    100%{
+@keyframes an__auth--loading {
+    100% {
         transform: rotate(360deg);
     }
 }

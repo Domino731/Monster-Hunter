@@ -9,10 +9,10 @@ import { getBlacksmithItems } from "../functions/getBlacksmithItems";
 import { potionsData } from "../properties/shop/potions";
 import { getRandomShopItem } from "../functions/getRandomShopItem";
 import { getNeededExp } from '../functions/getNeededExp';
-import {  getRandomMissions } from '../functions/missionGenerator';
+import { getRandomMissions } from '../functions/missionGenerator';
 import uniqid from 'uniqid';
 
-const mail : MailData = {
+const mail: MailData = {
     id: uniqid(),
     createdBy: 'admin',
     createdAt: new Date(),
@@ -75,6 +75,9 @@ export class Register extends AuthForm {
             repeatPassword: document.querySelector("#form__register input[name='repeatPassword']"),
             nickname: document.querySelector("#form__register input[name='nickname']"),
         }
+        this.rwd();
+        this.btn.style.display = "none";
+        this.loading.style.display = "block";
     }
 
     // creating new user with his own data in firestore
@@ -135,7 +138,7 @@ export class Register extends AuthForm {
         const unlisten = async () => {
             await auth.createUserWithEmailAndPassword(this.data.eMail, this.data.password)
                 .then((cred) => {
-                      
+
                     const createData = async () => {
                         await db.collection("users")
                             .doc(cred.uid)
@@ -219,8 +222,7 @@ export class Register extends AuthForm {
         this.loading.style.display = "none";
         this.btn.style.display = "block";
 
-        unlisten()
-
+        return unlisten();
     }
 
 
@@ -245,6 +247,7 @@ export class Register extends AuthForm {
 
         if (this.data.nickname.length < 4) {
             this.invalid.nickname.style.color = "#e63946";
+            this.invalid.nickname.innerText = 'Invalid nick,'
             this.input.nickname.style.borderBottomColor = "#e63946";
         }
     }
@@ -297,6 +300,23 @@ export class Register extends AuthForm {
         else {
             this.invalidData = false;
         }
+    }
+    rwd() {
+        // checking email
+        this.invalid.eMail.innerText = "Invalid e-mail.";
+        this.input.eMail.style.borderBottomColor = "#e63946";
+
+        // checking password
+        this.invalid.password.style.color = "#e63946";
+        this.input.password.style.borderBottomColor = "#e63946";
+
+        //checking if the user has entered two identical passwords
+        this.invalid.repeatPassword.innerText = "Passwords should be the same.";
+        this.input.repeatPassword.style.borderBottomColor = "#e63946";
+        this.invalid.nickname.style.color = "#e63946";
+        this.invalid.nickname.innerText = 'Invalid nick,'
+        this.input.nickname.style.borderBottomColor = "#e63946";
+
     }
 
 }
