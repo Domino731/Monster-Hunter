@@ -51,6 +51,7 @@
             }
             @include tablet {
                 display: none;
+                height: 534px;
             }
         }
 
@@ -62,10 +63,9 @@
         }
         @include laptopM {
             width: 441px;
-            
         }
         @include tablet {
-border: 6px solid $color-blue;
+            border: 6px solid $color-blue;
         }
     }
     &__itemTitle {
@@ -128,11 +128,10 @@ border: 6px solid $color-blue;
             &:after {
                 transform: rotate(225deg);
                 left: 181px;
-                    @include laptopM {
-                        left: 110px;
-                    }
+                @include laptopM {
+                    left: 110px;
+                }
             }
-            
         }
         @include desktopS {
             height: 113px;
@@ -205,6 +204,18 @@ border: 6px solid $color-blue;
             height: 28px;
         }
     }
+    &__switchBtn {
+        margin-top: 20px;
+        padding: 4px 0;
+        text-align: center;
+        color: $color-white;
+        letter-spacing: 0.125rem;
+        font-weight: bold;
+        font-size: 20px;
+        width: 100%;
+        border-radius: 20px;
+        background: $color-blue;
+    }
 }
 
 .auth__notification {
@@ -238,10 +249,10 @@ border: 6px solid $color-blue;
             left: 111px;
         }
         @include laptopM {
-            left: 108px; 
+            left: 108px;
         }
-        @include tablet{       
-                left: 97px;
+        @include tablet {
+            left: 97px;
         }
     }
     &__error {
@@ -256,7 +267,7 @@ border: 6px solid $color-blue;
             left: 111px;
         }
         @include laptopM {
-           left: 108px; 
+            left: 108px;
         }
         @include tablet {
             left: 97px;
@@ -327,9 +338,7 @@ border: 6px solid $color-blue;
         }
         @include laptopM {
             left: 5px;
-            
         }
-     
     }
     .register__error {
         left: 250px;
@@ -353,6 +362,9 @@ border: 6px solid $color-blue;
         text-decoration: underline;
         text-decoration-color: #4e5a61;
     }
+    @include tablet {
+        margin: 12px auto;
+    }
 }
 #auth-resetPassword {
     display: none;
@@ -361,6 +373,19 @@ border: 6px solid $color-blue;
     @include desktopS {
         height: 286px;
         padding: 46px 0;
+    }
+    @include tablet {
+        height: 313px;
+    }
+    .auth__inputWrapper::after {
+        @include tablet {
+          left: 41px;   
+        }
+    }
+    .auth__inputWrapper label {
+        @include tablet {
+            left: 101px;  
+        }
     }
 }
 @keyframes an__auth--loading {
