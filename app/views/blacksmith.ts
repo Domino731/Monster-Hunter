@@ -406,6 +406,10 @@ export class Blacksmith extends View {
 
                   // show the item label
                   this.dom.itemLabel.classList.remove('disabled');
+
+                  const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
+
+                 // buyBtn.addEventListener('click', () => this.buyItem(marketItem, selectedMarketSlot));
                }, 1000)
 
             }
@@ -686,11 +690,14 @@ export class Blacksmith extends View {
 
    }
 
-   buyItem(selectedItem: ShopItem) {
+   buyItem(selectedItem: ShopItem, selectedMarketSlot: HTMLElement) {
 
       const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
       // each market slot have only 2 picks in day, when user buy new item, substract one pick
-      const slotIndex: number = this.market.findIndex(el => el.id === selectedItem.id);
+       // each market slot have only 2 picks in day, when user buy new item, substract one pick
+       const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
+        availablePicks[slotIndex].picks;
+
       const general = () => {
 
          if (availablePicks[slotIndex].picks > 0) {
@@ -729,7 +736,12 @@ export class Blacksmith extends View {
 
       const equipmentSlot: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)];
       // check if equipment slot is empty
+      console.log(availablePicks[slotIndex].picks)
       if (equipmentSlot === undefined) {
+         console.log('kupno do eqkupinku')
+         console.log(availablePicks[slotIndex].picks);
+         console.log('index', slotIndex);
+         console.log(availablePicks[slotIndex])
          if (this.userData.gold >= selectedItem.initialCost && availablePicks[slotIndex].picks > 0) {
             this.userData.equipmentItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
@@ -748,6 +760,10 @@ export class Blacksmith extends View {
          }
       }
       else if (this.userData.backpackItems.length <= 10) {
+         console.log('kupno do backpack')
+         console.log(availablePicks[slotIndex].picks);
+         console.log('index', slotIndex);
+         console.log(availablePicks[slotIndex])
          if (availablePicks[slotIndex].picks > 0 && this.userData.gold >= selectedItem.initialCost) {
             this.userData.backpackItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
@@ -785,7 +801,10 @@ export class Blacksmith extends View {
          const element: HTMLElement = el.firstElementChild as HTMLElement;
          this.selectedMarketItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
 
-         if (this.selectedMarketItem !== undefined) {
+          // set currently seleted market slot
+          const selectedMarketSlot : HTMLElement | undefined  = el as HTMLElement;
+
+         if (this.selectedMarketItem !== undefined && selectedMarketSlot !== undefined) {
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
             const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`)
             const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
@@ -806,7 +825,7 @@ export class Blacksmith extends View {
             const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
 
 
-            buyBtn.addEventListener('click', () => this.buyItem(this.selectedMarketItem))
+            buyBtn.addEventListener('click', () => this.buyItem(this.selectedMarketItem, selectedMarketSlot))
 
          }
 
