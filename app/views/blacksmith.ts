@@ -395,6 +395,8 @@ export class Blacksmith extends View {
                   const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
 
                   // check if user have enough gold to buy new item and class
+                  this.dom.itemLabel.classList.remove('afford-yes', 'afford-no');
+                    this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford');
                   this.dom.itemLabel.classList.add(this.userData.gold >= marketItem.initialCost ? 'afford-yes' : 'afford-no');
                   this.dom.goldAmount.classList.add(this.userData.gold >= marketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 
@@ -404,12 +406,12 @@ export class Blacksmith extends View {
                   // show slot in equipment by adding pulse animation
                   equipmentSlot.classList.add("profile__equipmentIcon-pulse");
 
+
                   // show the item label
                   this.dom.itemLabel.classList.remove('disabled');
-
                   const buyBtn = this.dom.itemLabel.querySelector('.market__itemPriceWrapper');
 
-                 // buyBtn.addEventListener('click', () => this.buyItem(marketItem, selectedMarketSlot));
+                  buyBtn.addEventListener('click', () => this.buyItem(marketItem, slot));
                }, 1000)
 
             }
@@ -694,9 +696,9 @@ export class Blacksmith extends View {
 
       const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
       // each market slot have only 2 picks in day, when user buy new item, substract one pick
-       // each market slot have only 2 picks in day, when user buy new item, substract one pick
-       const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
-        availablePicks[slotIndex].picks;
+      // each market slot have only 2 picks in day, when user buy new item, substract one pick
+      const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
+      availablePicks[slotIndex].picks;
 
       const general = () => {
 
@@ -801,15 +803,17 @@ export class Blacksmith extends View {
          const element: HTMLElement = el.firstElementChild as HTMLElement;
          this.selectedMarketItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
 
-          // set currently seleted market slot
-          const selectedMarketSlot : HTMLElement | undefined  = el as HTMLElement;
+         // set currently seleted market slot
+         const selectedMarketSlot: HTMLElement | undefined = el as HTMLElement;
 
          if (this.selectedMarketItem !== undefined && selectedMarketSlot !== undefined) {
             // find specific slot in equipment which is equal to current shop item type, needed to compare items
-            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`)
-            const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)]
+            const equipmentSlot: HTMLElement = document.querySelector(`#equipment_slots div[data-slot-name = ${this.selectedMarketItem.type}] img`);
+            const currentItem: ShopItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === equipmentSlot.dataset.currentItemId)];
 
             // check if user have enough gold to buy new item and class
+            this.dom.itemLabel.classList.remove('afford-yes', 'afford-no');
+            this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford');
             this.dom.itemLabel.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'afford-yes' : 'afford-no');
             this.dom.goldAmount.classList.add(this.userData.gold >= this.selectedMarketItem.initialCost ? 'profile__goldAmount-afford' : 'profile__goldAmount-noAfford');
 

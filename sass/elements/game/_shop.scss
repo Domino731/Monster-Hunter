@@ -490,6 +490,9 @@
 
         font-style: italic;
         text-align: center;
+        @include laptopL {
+            margin-top: 4px;
+        }
         @include laptopM {
             margin-top: 2px;
         }

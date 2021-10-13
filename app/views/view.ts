@@ -160,6 +160,7 @@ export class View {
       }
       // this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
       // this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+      this.userData.gold = 100;
       // updateUserData(this.userData);
    }
    // abstact method which is responsible for operations when data has changed
