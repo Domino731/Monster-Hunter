@@ -7,7 +7,7 @@
         letter-spacing: 1px;
         text-align: center;
         padding-top: 30px;
-        -webkit-text-stroke: 2px black;
+        -webkit-text-stroke: 2px $color-black;
         text-shadow: 4px 4px $color-black;
         z-index: 4;
         margin-bottom: 20px;
@@ -18,6 +18,14 @@
         }
         @include tablet {
             margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        @include mobileL {
+            margin-top: 7px;
+            font-size: 32px;
+            -webkit-text-stroke: 1px $color-black;
+            text-shadow: 2px 2px $color-black;
+         
         }
     }
     &__container {
@@ -53,6 +61,9 @@
                 display: none;
                 height: 534px;
             }
+            @include mobileL {
+                height: 496px;
+            }
         }
 
         &:hover {
@@ -66,6 +77,10 @@
         }
         @include tablet {
             border: 6px solid $color-blue;
+        }
+        @include mobileL {
+            border: 4px solid $color-blue;
+            width: 398px;
         }
     }
     &__itemTitle {
@@ -86,6 +101,13 @@
         }
         @include laptopM {
             font-size: 42px;
+        }
+        @include mobileL {
+            font-size: 38px;
+            -webkit-text-stroke: 1px $color-black;
+            text-shadow: 2px 2px $color-black;
+            margin-top: -13px;
+            margin-bottom: 47px;
         }
     }
     &__form {
@@ -122,6 +144,12 @@
             @include tablet {
                 left: 31px;
             }
+            @include mobileL {
+                width: 238px;
+                height: 238px;
+                left: 27px;
+               
+            }
         }
 
         &-left {
@@ -131,10 +159,16 @@
                 @include laptopM {
                     left: 110px;
                 }
+                @include mobileL {
+                    left: 105px;
+                }
             }
         }
         @include desktopS {
             height: 113px;
+        }
+        @include laptopL {
+            height: 112px;
         }
     }
 
@@ -215,6 +249,10 @@
         width: 100%;
         border-radius: 20px;
         background: $color-blue;
+        @include mobileL {
+            margin-top: 10px;
+            font-size: 17px;
+        }
     }
 }
 
@@ -293,6 +331,10 @@
         @include tablet {
             left: 91px;
         }
+        @include mobileL {
+            top: -12px;
+            left: 80px;
+        }
     }
     input {
         height: 38px;
@@ -315,6 +357,11 @@
         @include tablet {
             font-size: 16px;
         }
+        @include mobileL {
+            height: 26px;
+            width: 191px;
+            font-size: 14px;
+        }
     }
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px #a2abb8 inset;
@@ -326,6 +373,9 @@
         left: 172px;
         @include laptopM {
             left: 102px;
+        }
+        @include mobileL {
+            left: 100px;
         }
     }
     input {
@@ -379,17 +429,34 @@
     }
     .auth__inputWrapper::after {
         @include tablet {
-          left: 41px;   
+            left: 41px;
         }
     }
     .auth__inputWrapper label {
         @include tablet {
-            left: 101px;  
+            left: 101px;
+        }
+        @include mobileL {
+            left: 94px;
         }
     }
 }
 @keyframes an__auth--loading {
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@include mobileL {
+    .register__error, 
+    .register__requirement,
+    #register__invalidData-repeatPassword{
+  
+        width: 100%;
+        display: block;
+        left: 0;
+        top: 48px;
+        font-size: 10px;
+        text-align: center;
     }
 }
