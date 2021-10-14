@@ -1,4 +1,4 @@
-import { UserData } from '../types';
+import { UserData, MailData } from '../types';
 import { formatMailDate } from '../functions/formatDate';
 export const getInboxHTMLCode = (user: UserData) : string => {
     return `
@@ -13,25 +13,7 @@ export const getInboxHTMLCode = (user: UserData) : string => {
              </div>
 
              <ul class='inbox__list'>
-             ${
-                user.inbox.map((el) => {
-                  return `
-                  <li>
-                     <div class='inbox__deleteIcon'>
-                     <i class="fas fa-trash-alt"  data-mail-id='${el.id}'></i>
-                     </div>
-                     <div class='inbox__listItem' data-mail-id='${el.id}' >  
-                     <h2 class='inbox__listTitle'>${el.title}</h2>
-                       <div class='inbox__listSubTitle'>
-                       <span>From: ${el.createdBy}</span>
-                       
-                       </div>
-                     <div class='inbox__listDate'>${formatMailDate(el.createdAt)}<div>
-                     </div>
-                </li>
-                  `
-                }).join('')
-                }
+         
              </ul>
            </div>
 
@@ -42,4 +24,19 @@ export const getInboxHTMLCode = (user: UserData) : string => {
            
         </section>
     `
+}
+export const mailHTMLCode = (mailData: MailData) : string => {
+  return `
+  <div class='inbox__deleteIcon'>
+  <i class="fas fa-trash-alt"></i>
+  </div>
+  <div class='inbox__listItem' >  
+  <h2 class='inbox__listTitle'>${mailData.title}</h2>
+    <div class='inbox__listSubTitle'>
+    <span>From: ${mailData.createdBy}</span>
+    
+    </div>
+  <div class='inbox__listDate'>${formatMailDate(mailData.createdAt)}<div>
+  </div>
+  `
 }

@@ -1,109 +1,130 @@
-import { getInboxHTMLCode } from '../viewsHTMLCode/inbox';
+import { getInboxHTMLCode, mailHTMLCode } from '../viewsHTMLCode/inbox';
 import { View } from './view';
-import { MailData } from '../types';
 import { updateUserData } from '../firebase/operations';
+
+// class responsible for inbox - user can open email and read about game, new features and other...
 export class Inbox extends View {
 
   private dom: {
-    mailListContainer: HTMLElement;
-    closeMailIcon: HTMLElement
-    mails: NodeListOf<Element>;
-    mailContainer: HTMLElement;
-    deleteMailBtns: NodeListOf<Element>;
-    mailList: HTMLElement;
-    mailAmount: HTMLElement
+    // container with all emails and amount of mails, needed to hide this container when user selects a specific mail (only below 1024px) - closeMail() and toogleMails() methods
+    mailListContainer: HTMLElement | null;
+    // icon by which can close email (only below 1024px) - closeMail() and toogleMails() methods
+    closeMailIcon: HTMLElement | null;
+    // container into which the html email code will be inserted - openMail() method
+    emailContainer: HTMLElement | null;
+    // list in which emails will berendered- renderMails() method
+    emailList: HTMLElement | null;
+    // amount of all emails in user's inbox, changing when user deletes mail - deleteMail() method
+    emailAmount: HTMLElement | null;
   }
   constructor() {
     super();
     this.dom = {
       mailListContainer: document.querySelector('.inbox__item:first-child'),
       closeMailIcon: document.querySelector('.closeIcon__mail'),
-      mails: document.querySelectorAll('.inbox__listItem'),
-      mailContainer: document.querySelector('#mail-container'),
-      deleteMailBtns: document.querySelectorAll('.inbox__deleteIcon i'),
-      mailList: document.querySelector('.inbox__list'),
-      mailAmount: document.querySelector('.inbox__mailAmount')
+      emailContainer: document.querySelector('#mail-container'),
+      emailList: document.querySelector('.inbox__list'),
+      emailAmount: document.querySelector('.inbox__mailAmount')
     }
   }
 
-  render() {
-    this.root.innerHTML = getInboxHTMLCode(this.userData);
+  /**
+   * 
+   * @param mailData - email html code which will be inserted into container mail
+   */
+  openEMail(mailCode: string) {
+    // set mail
+    this.dom.emailContainer.innerHTML = mailCode;
+    if (window.innerWidth < 1024) {
+      this.toggleMail();
+    }
   }
 
-  openMail() {
-    this.dom.mails.forEach(el => el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const element: HTMLElement = el as HTMLElement;
-      const mail: MailData = this.userData.inbox[this.userData.inbox.findIndex(el => el.id === element.dataset.mailId)];
-      if(mail){
-        this.dom.mailContainer.innerHTML = mail.content;
-      }
-     
-
-      if (window.innerWidth < 1024) {
-        this.toogleMail();
-      }
-    }))
-  }
-
-  toogleMail() {
-    const flag: boolean = this.dom.mailContainer.classList.contains('disabled')
+  // this method is responsible to toggling between mails list and mail content container (only below 1024px)
+  toggleMail() {
+    const flag: boolean = this.dom.emailContainer.classList.contains('disabled')
     if (flag) {
-      this.dom.mailContainer.classList.remove('disabled');
+      this.dom.emailContainer.classList.remove('disabled');
       this.dom.mailListContainer.classList.add('disabled');
       this.dom.closeMailIcon.classList.remove('disabled');
     }
     else {
-      this.dom.mailContainer.classList.add('disabled');
+      this.dom.emailContainer.classList.add('disabled');
       this.dom.mailListContainer.classList.remove('disabled');
       this.dom.closeMailIcon.classList.add('disabled');
     }
   }
 
-
-
-  deleteMail() {
-    this.dom.deleteMailBtns.forEach(el => el.addEventListener('click', () => {
-      const element: HTMLElement = el as HTMLElement;
-      const index: number = this.userData.inbox.findIndex(el => el.id === element.dataset.mailId);
-      this.userData.inbox.splice(index, 1);
-      this.dom.mailAmount.innerText = `${this.userData.inbox.length}`;
-      updateUserData(this.userData);
-      this.dom.mailList.removeChild(element.parentElement.parentElement);
-    }));
+  /**
+   * method responsible for deleting email from user inbox
+   * @param id - id of email needed to find what email should be deleted
+   */
+  deleteEMail(id: string) {
+    // find and delete email
+    const index: number = this.userData.inbox.findIndex(el => el.id === id);
+    this.userData.inbox.splice(index, 1);
+    this.dom.emailAmount.innerText = `${this.userData.inbox.length}`;
+    // update user data -> renderMails() placed in onDataChange() will rerender emails list
+    updateUserData(this.userData);
   }
-  closeMail(){
-    this.dom.closeMailIcon.addEventListener('click', ()=> {
-      this.dom.mailContainer.classList.add('disabled');
+
+  // method responsible for hiding current selected email container
+  closeEMail() {
+    this.dom.closeMailIcon.addEventListener('click', () => {
+      this.dom.emailContainer.classList.add('disabled');
       this.dom.mailListContainer.classList.remove('disabled');
       this.dom.closeMailIcon.classList.add('disabled');
+    });
+  }
+
+  // hide email container on mobile devices -> emails list will be on full width, and when user click on specific email this list will be hidden and email container will showed (on full width)
+  mobile() {
+    if (window.innerWidth < 1024) {
+      this.dom.emailContainer.classList.add('disabled');
+    }
+  }
+
+  // render mails in list
+  renderMails() {
+    this.dom.emailList.innerHTML = '';
+    this.userData.inbox.forEach(el => {
+      // create list elements
+      const li: HTMLElement = document.createElement('li');
+      li.innerHTML = mailHTMLCode(el);
+
+      // find dom elements in order to add events 
+      const deleteIcon: HTMLElement = li.querySelector('.inbox__deleteIcon i');
+      const mailWrapper: HTMLElement = li.querySelector('.inbox__listItem');
+
+      // add events -> opportunitie to show speficic mail and delete this mail
+      deleteIcon.addEventListener('click', () => this.deleteEMail(el.id));
+      mailWrapper.addEventListener('click', () => this.openEMail(el.content));
+      // update list
+      this.dom.emailList.appendChild(li);
     })
   }
-  mobile() {
-    console.log(this.dom.mailContainer)
-    if (window.innerWidth < 1024) {
-      this.dom.mailContainer.classList.add('disabled')
-    }
-  }
+
 
   initScripts() {
+    this.renderMails();
     this.mobile();
-    this.openMail();
-    this.deleteMail();
-    this.closeMail();
+    this.closeEMail();
   }
 
-  onDataChange() { }
   getDOMElements() {
     this.dom = {
       mailListContainer: document.querySelector('#mail-list'),
       closeMailIcon: document.querySelector('.closeIcon__mail'),
-      mails: document.querySelectorAll('.inbox__listItem'),
-      mailContainer: document.querySelector('#mail-container'),
-      deleteMailBtns: document.querySelectorAll('.inbox__deleteIcon i'),
-      mailList: document.querySelector('.inbox__list'),
-      mailAmount: document.querySelector('.inbox__mailAmount')
+      emailContainer: document.querySelector('#mail-container'),
+      emailList: document.querySelector('.inbox__list'),
+      emailAmount: document.querySelector('.inbox__mailAmount')
     }
+  }
+  render() {
+    this.root.innerHTML = getInboxHTMLCode(this.userData);
+  }
+  onDataChange() {
+    console.log('data changed');
   }
 }
 
