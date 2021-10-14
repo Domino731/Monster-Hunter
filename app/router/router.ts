@@ -110,7 +110,7 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Wizard();
+    const developmentRender = new Profile();
     window.addEventListener("popstate", router);
 };
 

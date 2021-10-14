@@ -6,6 +6,7 @@ import { getNeededExp } from '../functions/getNeededExp';
 import { Tavern } from './tavern';
 import { updateUserData } from '../firebase/operations';
 import { UserStats } from '../types';
+import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
 
 export class MonsterFight extends View {
     private fightInterval: null | ReturnType<typeof setInterval>
@@ -104,6 +105,7 @@ export class MonsterFight extends View {
             this.userData.level++;
             this.userData.nextLevelAt = getNeededExp(this.userData.level);
             this.userData.exp = 0;
+            this.userData.guardPayout = getGuardPaymentValue(this.userData.level);
         }
         // set status
         this.userData.status = 'free';

@@ -1,5 +1,4 @@
-import { getWonItemLabel } from './../views/sub_views/getWonItemLabel';
-import { chestplatesData } from './../properties/shop/chestplates';
+
 import { UserData } from '../types';
 export const getWizardHTMLCode = (user: UserData): string => {
    return `
@@ -9,7 +8,7 @@ export const getWizardHTMLCode = (user: UserData): string => {
         </div>
 
         <div class='wizard__descriptionWrapper'> 
-           <div class='wizard__description'>
+           <div class='wizard__description glass'>
               <h2 class='wizard__title'>try one's fortune </h2>
               <p class='wizard__text'> 
               Here's the magic circle created by the legendary gods. 
