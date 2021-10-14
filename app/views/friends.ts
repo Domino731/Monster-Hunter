@@ -3,7 +3,7 @@ import { getFriendsHTMLCode } from '../viewsHTMLCode/friends';
 import { View } from './view';
 import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
-import { friendWindow } from './sub_views/friendWindow';
+import { friendWindow } from '../viewsHTMLCode/friends';
 import { Chat } from './chat';
 import { getNeededExp } from '../functions/getNeededExp';
 

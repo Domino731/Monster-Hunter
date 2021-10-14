@@ -21,7 +21,7 @@
         &:last-child {
             background: rgba(255, 255, 255, 0.4);
             padding: 10px;
-            backdrop-filter: blur(8px);
+        
         }
         @include tablet {
             width: 100%;
@@ -389,7 +389,6 @@
     height: 100%;
     background: rgba(255, 255, 255, 0.4);
     position: relative;
-    backdrop-filter: blur(2px);
     border-radius: 15px;
     padding-top: 10px;
     transition: 0.2s;
@@ -413,7 +412,7 @@
         border-radius: 10px;
     }
     &:hover {
-        backdrop-filter: blur(4px);
+       
     }
     &__portraitWrapper {
         z-index: 3;
