@@ -44,7 +44,7 @@ $desktopM: 1919px;
 }
 
 @mixin ipadPro {
-  @media (max-width: 1024) and (min-height: 1000px) {
+  @media (max-width: 1024px) and (min-height: 1000px) {
     @content;
   }
   @media  (max-width: 1023px) and (min-height: 1px){

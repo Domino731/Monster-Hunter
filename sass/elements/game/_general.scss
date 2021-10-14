@@ -280,6 +280,10 @@
     }
 }
 .background {
+    @include ipadPro {
+        background-size: 150% 100% !important;
+        background-position: 50% !important;
+    }
     @include tablet {
         background-size: 150% 100% !important;
         background-position: 50% !important;

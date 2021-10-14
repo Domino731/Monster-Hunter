@@ -4,30 +4,40 @@ import { includeNumber, isUpper } from '../functions/other';
 import { View } from './view';
 import { getAccountHTMLCode } from '../viewsHTMLCode/account';
 import uniqid from 'uniqid';
-import { isJSDocThisTag } from 'typescript';
 import { UserData } from '../types';
 
+// class reponsible for account section, by which can change his password, email or delete his account :(
 export class Account extends View {
 
+    // object with data needed to execute firebase auth action, changing in changeDataEvent() method
     private data: {
         email: string;
         password: string;
         passwordRepeat: string;
         deleteCode: string;
     }
-    private backupUserData
+
     private dom: {
-        updateFormInputs: NodeListOf<Element> | null;
+        // inputs nedeed to get their values, based on this values authAction method will be invoke firebase auth action on this data - changeDataEvent() method
+        formInputs: NodeListOf<Element> | null;
+        // button on which firebase auth function is applied - updateEmail() and updatePassword() methods
         actionBtn: HTMLButtonElement | null;
+        // error which displaying error when user provides incorrect data - changeDataEvent(),  updateEmail() and updatePassword() methods
         errorWrapper: HTMLElement | null;
+        // notifications which are displaying on successful execute firebase auth function -  updateEmail() and updatePassword() methods
         successEmailUpdate: HTMLElement | null;
         successPasswordUpdate: HTMLElement | null;
+        // icon needed to toggle between update account and delete account forms - toggleForm() method
         toogleIcon: HTMLImageElement | null;
+        // containers needed to show or hide specific conteiner - toggleForm() method
         updateFormContainer: HTMLElement | null;
         deleteAccountFormContainer: HTMLElement | null;
+        //  button on which firebase auth function is applied - changeDataEvent(), deleteAccountEvent() and toogleForms() methods
         deleteAccountBtn: HTMLButtonElement | null;
     }
-    private deleteCode: string
+
+    // special code which must be prescribe by the user to allow him to delete his account
+    private deleteCode: string;
     constructor() {
         super()
         this.data = {
@@ -40,7 +50,7 @@ export class Account extends View {
         this.dom = {
             updateFormContainer: document.querySelector('#update-account'),
             deleteAccountFormContainer: document.querySelector('#delete-account'),
-            updateFormInputs: document.querySelectorAll('.account__elementContent'),
+            formInputs: document.querySelectorAll('.account__elementContent'),
             actionBtn: document.querySelector('#btn-update-account'),
             errorWrapper: document.querySelector('#update_profile_error'),
             successEmailUpdate: document.querySelector('#update_profile_email'),
@@ -51,12 +61,15 @@ export class Account extends View {
 
     }
 
-
+    // method that is reponsible for deleting user's data from firestore
     deleteAccount() {
+        // firebase auth function is sensitive, when user is logged in game for a long time then this request will be rejected,
+        // if it fails, it's needed to back user's data in firestore, then show notification of fail action (by window alert) then
+        // log the user out
         const backUpData: UserData = this.userData
         return auth.currentUser.delete()
             .then(() => {
-                console.log('Your account has been deleted')
+                console.log('Your account has been deleted');
             })
             .catch((err) => {
                 return db.collection('users')
@@ -72,11 +85,12 @@ export class Account extends View {
                             .catch(err => {
                                 console.log(err)
                             });
-                    })
+                    });
 
             });
     }
 
+    // method that is reponsible for deleting user's account from firestore and firebase auth
     deleteAccountEvent() {
         this.dom.deleteAccountBtn.addEventListener('click', (e: Event) => {
             e.preventDefault();
@@ -91,11 +105,11 @@ export class Account extends View {
 
         })
     }
+
     // toggle between change data form and delete account
     toggleForm() {
         this.dom.toogleIcon.addEventListener('click', () => {
             const flag: boolean = this.dom.updateFormContainer.classList.contains('disabled');
-            console.log(flag)
             if (flag) {
                 this.dom.updateFormContainer.classList.remove('disabled');
                 this.dom.deleteAccountFormContainer.classList.add('disabled');
@@ -114,8 +128,11 @@ export class Account extends View {
     // adding event for each input, which is responsible to changing data
     changeDataEvent() {
 
+        // changing data needed to execute to specific auth action
         const dataChange = (input: HTMLInputElement) => {
-            const { name, value } = input
+
+            // set data
+            const { name, value } = input;
             this.data = {
                 email: this.data.email,
                 password: this.data.password,
@@ -123,27 +140,27 @@ export class Account extends View {
                 deleteCode: this.data.deleteCode,
                 [name]: value
             }
+
+            // remove error
             this.dom.errorWrapper.style.display = "none";
 
+            // if user prescribe correct delete code then show button responsible for deleting account, otherwise hide this button
             if (this.data.deleteCode === this.deleteCode) {
-                this.dom.deleteAccountBtn.classList.remove('disabled')
+                this.dom.deleteAccountBtn.classList.remove('disabled');
             }
             else {
-                this.dom.deleteAccountBtn.classList.add('disabled')
+                this.dom.deleteAccountBtn.classList.add('disabled');
             }
         }
 
-        this.dom.updateFormInputs.forEach(el => el.addEventListener("change", () => {
-            const input: HTMLInputElement = el as HTMLInputElement
-            return dataChange(input)
+        this.dom.formInputs.forEach(el => el.addEventListener("change", () => {
+            const input: HTMLInputElement = el as HTMLInputElement;
+            return dataChange(input);
         }));
-        this.dom.updateFormInputs.forEach(el => el.addEventListener("keyup", () => {
-            const input: HTMLInputElement = el as HTMLInputElement
-            return dataChange(input)
+        this.dom.formInputs.forEach(el => el.addEventListener("keyup", () => {
+            const input: HTMLInputElement = el as HTMLInputElement;
+            return dataChange(input);
         }));
-
-
-
     };
 
     // firebase auth methods - changing email or password
@@ -207,13 +224,13 @@ export class Account extends View {
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
+                    alert("This operation is sensitive and requires recent authentication. Log in again before retrying this request.");
                     return auth.signOut()
                         .then(() => {
-                            console.log('Sign-out successful')
+                            console.log('Sign-out successful');
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err);
                         });
                 });
         }
@@ -222,30 +239,29 @@ export class Account extends View {
             this.dom.errorWrapper.innerText = 'Invalid e-mail';
         }
     }
-    onDataChange() { }
+
     // firebase auth action on button, responsible for update user's profile
     updateProfileEvent() {
         this.dom.actionBtn.addEventListener("click", (e: Event) => {
             e.preventDefault();
             this.updatePassword();
             this.updateEmail();
-
         });
     }
-    // script initzialition
+
+
+
     initScripts() {
         this.changeDataEvent();
         this.updateProfileEvent();
         this.toggleForm();
         this.deleteAccountEvent();
-    };
-
-    // getting dom elements
+    }
     getDOMElements() {
         this.dom = {
             updateFormContainer: document.querySelector('#update-account'),
             deleteAccountFormContainer: document.querySelector('#delete-account'),
-            updateFormInputs: document.querySelectorAll('.account__elementContent'),
+            formInputs: document.querySelectorAll('.account__elementContent'),
             actionBtn: document.querySelector('#btn-update-account'),
             errorWrapper: document.querySelector('#update_profile_error'),
             successEmailUpdate: document.querySelector('#update_profile_email'),
@@ -253,7 +269,10 @@ export class Account extends View {
             toogleIcon: document.querySelector('.account__deleteIcon img'),
             deleteAccountBtn: document.querySelector('#btn-delete-account')
         }
-    };
+    }
+    onDataChange() {
+        console.log('Data changed');
+    }
     render() {
         this.root.innerHTML = getAccountHTMLCode(this.userData.nick, this.deleteCode);
     }

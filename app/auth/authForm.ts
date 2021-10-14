@@ -1,7 +1,7 @@
 // abstract class responsbile for firebase authentication action -> register and login
 export abstract class AuthForm {
 
-    // inputs nedeed to get thei values, based on this values authAction method will be invoke firebase auth action on this data
+    // inputs nedeed to get their values, based on this values authAction method will be invoke firebase auth action on this data
     protected inputs: NodeListOf<Element> | null;
     // root of form, needed to get input in specific form 
     protected root: HTMLElement;
