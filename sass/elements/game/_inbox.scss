@@ -55,13 +55,13 @@
             border-bottom: 3px solid $color-gold;
         }
     }
-    &__mailIcon {
+    &__emailIcon {
         height: 100%;
         width: auto;
         object-fit: cover;
         margin-right: 0.5rem;
     }
-    &__mailAmount {
+    &__emailAmount {
         font-size: 1.75rem;
         font-weight: 700;
     }
@@ -113,7 +113,6 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         padding: 0 13px;
-        backdrop-filter: blur(4px);
         margin-bottom: 12px;
         overflow: hidden;
         &::after,

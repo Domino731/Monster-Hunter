@@ -21,10 +21,10 @@ export class Inbox extends View {
     super();
     this.dom = {
       mailListContainer: document.querySelector('.inbox__item:first-child'),
-      closeMailIcon: document.querySelector('.closeIcon__mail'),
-      emailContainer: document.querySelector('#mail-container'),
+      closeMailIcon: document.querySelector('.closeIcon__email'),
+      emailContainer: document.querySelector('#email-container'),
       emailList: document.querySelector('.inbox__list'),
-      emailAmount: document.querySelector('.inbox__mailAmount')
+      emailAmount: document.querySelector('.inbox__emailAmount')
     }
   }
 
@@ -113,11 +113,11 @@ export class Inbox extends View {
 
   getDOMElements() {
     this.dom = {
-      mailListContainer: document.querySelector('#mail-list'),
-      closeMailIcon: document.querySelector('.closeIcon__mail'),
-      emailContainer: document.querySelector('#mail-container'),
+      mailListContainer: document.querySelector('#email-list'),
+      closeMailIcon: document.querySelector('.closeIcon__email'),
+      emailContainer: document.querySelector('#email-container'),
       emailList: document.querySelector('.inbox__list'),
-      emailAmount: document.querySelector('.inbox__mailAmount')
+      emailAmount: document.querySelector('.inbox__emailAmount')
     }
   }
   render() {

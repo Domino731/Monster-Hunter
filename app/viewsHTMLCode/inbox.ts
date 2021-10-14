@@ -3,13 +3,13 @@ import { formatMailDate } from '../functions/formatDate';
 export const getInboxHTMLCode = (user: UserData) : string => {
     return `
     <section class='inbox background'>
-    <div class='closeIcon closeIcon__mail disabled'> 
+    <div class='closeIcon closeIcon__email disabled'> 
     <img src='./images/close.png' />
      </div>
-           <div class='inbox__item' id='mail-list'>
-             <div class='inbox__header'>
-                <img src='./images/inbox_icon_message.png' alt='_message' class='inbox__mailIcon'/>
-                <strong class='inbox__mailAmount'>${user.inbox.length}</strong>
+           <div class='inbox__item' id='email-list'>
+             <div class='inbox__header glass'>
+                <img src='./images/inbox_icon_message.png' alt='_message' class='inbox__emailIcon' title='Amount of e-mails'/>
+                <strong class='inbox__emailAmount'>${user.inbox.length}</strong>
              </div>
 
              <ul class='inbox__list'>
@@ -18,7 +18,7 @@ export const getInboxHTMLCode = (user: UserData) : string => {
            </div>
 
 
-           <div class='inbox__item' id='mail-container'>
+           <div class='inbox__item' id='email-container'>
         
            </div>
            
@@ -30,8 +30,8 @@ export const mailHTMLCode = (mailData: MailData) : string => {
   <div class='inbox__deleteIcon'>
   <i class="fas fa-trash-alt"></i>
   </div>
-  <div class='inbox__listItem' >  
-  <h2 class='inbox__listTitle'>${mailData.title}</h2>
+  <div class='inbox__listItem glass' >  
+  <h2 class='inbox__listTitle '>${mailData.title}</h2>
     <div class='inbox__listSubTitle'>
     <span>From: ${mailData.createdBy}</span>
     
