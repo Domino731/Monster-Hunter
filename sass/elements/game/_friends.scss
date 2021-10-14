@@ -75,6 +75,9 @@
         @include laptopS {
             margin-left: -16px;
         }
+        @include ipadPro {
+            margin-left: 0;
+        }
         @include tablet {
             margin-left: -1px;
         }
@@ -636,27 +639,6 @@
             height: 23px;
         }
     }
-    .searchFriend__input {
-        @include desktopS {
-            width: 353px;
-        }
-        @include desktopS {
-            width: 270px;
-        }
-      
-        @include laptopS {
-            width: 222px;
-        }
-        @include ipadPro {
-            width: 305px;
-        }
-        @include mobileL {
-            width: 261px;
-        }
-        @include mobileS {
-            width: 192px;
-        }
-    }
 }
 
 .friends__checkboxWrapper {
@@ -804,5 +786,28 @@
     100% {
         box-shadow: 0 0 0 24px #3a86ff inset;
         border: 3px solid #3a86ff;
+    }
+}
+.friends {
+    .searchFriend__input {
+        @include desktopS {
+            width: 353px;
+        }
+        @include desktopS {
+            width: 270px;
+        }
+      
+        @include laptopS {
+            width: 222px;
+        }
+        @include ipadPro {
+            width: 324px;
+        }
+        @include mobileL {
+            width: 261px;
+        }
+        @include mobileS {
+            width: 192px;
+        }
     }
 }

@@ -7,6 +7,8 @@ import { db, auth } from '../firebase/index';
 import { getStatusImgSrc } from '../functions/getStatusImgSrc';
 import { SearchedUser } from './sub_views/specificUser';
 import { getNeededExp } from '../functions/getNeededExp';
+
+// all users list by which current user can find specific users
 export class SearchFriend extends View {
 
    // array with all users data from firestore, based on this data getAllUsers() method will render list with all users
