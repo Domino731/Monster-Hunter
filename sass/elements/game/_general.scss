@@ -102,6 +102,10 @@
         left: 0;
     }
 }
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+}
 .countdown {
     &__wrapper {
         display: flex;
@@ -112,8 +116,6 @@
         border-radius: 40px;
         margin: 4px auto;
         border: 8px solid $color-gold;
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(2px);
         position: relative;
         overflow: hidden;
         @include desktopS {
@@ -145,7 +147,7 @@
         width: 0%;
         left: 0;
         background: $color-green;
-        animation: 15s an_guardCountdownBar  infinite linear;
+        animation: 15s an_guardCountdownBar infinite linear;
         background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
         background-size: 400% 400%;
     }
@@ -251,7 +253,7 @@
         }
         @include mobileS {
             width: 18px;
-    height: 18px;
+            height: 18px;
         }
     }
     &__mail {

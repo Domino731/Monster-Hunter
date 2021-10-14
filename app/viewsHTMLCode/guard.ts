@@ -3,7 +3,7 @@ export const getGuardHTMLCode = () : string => {
     return  `
     <div class='guard__wrapper disabled' id='guard_menu'>
     <section class='guard-menu background'>
-    <div class='guard__item'>
+    <div class='guard__item glass'>
       <div class='guard__kingWrapper'>
          <img src='./images/guard_king.png' alt='King' class='guard__king'/>
       </div>
@@ -47,7 +47,7 @@ export const getGuardHTMLCode = () : string => {
 
    <setion class='guard-city background'> 
        <div class='guard__summaryWrapper'> 
-           <div class='guard__summary'> 
+           <div class='guard__summary glass'> 
               <img class='guard__summaryIcon' src='./images/gold_bag_big.png' alt='gold bag'/>
               <h2 class='guard__summaryTitle'>Your payout</h2>
               <strong class='guard__summaryPayout'></strong>
@@ -56,7 +56,7 @@ export const getGuardHTMLCode = () : string => {
        </div>
 
        <div id='guard_countdown_elements' class='disabled'>
-       <div class='countdown__wrapper'>
+       <div class='countdown__wrapper glass'>
           <div class='countdown__progressBar'>
              
           </div>

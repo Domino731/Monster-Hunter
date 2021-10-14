@@ -49,14 +49,9 @@
         padding: 10px;
 
         z-index: 1;
-        background: rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         position: relative;
-        backdrop-filter: blur(2px);
-        transition: 0.3s;
-        &:hover {
-            backdrop-filter: blur(4px);
-        }
+     
         @media screen and (max-height: 540px) {
             margin-top: 20px;
         }
@@ -253,8 +248,6 @@
     }
     &__summary {
         padding: 15px;
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(4px);
         border-radius: 25px;
         @include laptopM {
             padding: 8px;
