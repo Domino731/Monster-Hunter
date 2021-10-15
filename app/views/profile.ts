@@ -8,10 +8,10 @@ import { portraitsData } from '../properties/portraits/portraits';
 import { getNeededExp } from '../functions/getNeededExp';
 import { getStatCost } from '../functions/getStatCost';
 import { getPotionLabel } from './sub_views/getPotionLabel';
-import { helmetsData } from '../properties/shop/helmets';
 import { getProfileBackpackLabel } from './sub_views/backpackLabel';
 import { getProfileEquipmentLabel } from './sub_views/profileEquipment';
 
+// class responsible for profile veiw
 export class Profile extends View {
 
     private dom: {
@@ -792,26 +792,7 @@ export class Profile extends View {
         }
     }
 
-    // for rwd development
-    rwd() {
-        // equipment
-        const currentItem = helmetsData[12]
-        // this.dom.equipmentLabel.root.classList.add(currentItem.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common')
-        // this.dom.equipmentLabel.root.classList.add(`profile__itemSpecs-chestPlate`)
-        // this.dom.equipmentLabel.labelWrapper.innerHTML = getEquipmentLabel(currentItem);
-        // this.dom.equipmentLabel.root.classList.remove('disabled')
-        // backpack
 
-          this.dom.backpackLabelRoot.className = 'profile__itemSpecs profile__itemSpecs-backpackSlot disabled'
-          this.dom.backpackLabelRoot.classList.add(`profile__backpackLabel-${6}`)
-          this.dom.backpackLabelRoot.innerHTML = getProfileBackpackLabel(currentItem, currentItem);
-          this.dom.backpackLabelRoot.classList.remove('disabled')
-        // potions
-        // const firstPotion = potionsData[4];
-        // this.dom.equipmentLabel.root.className = 'profile__itemSpecs disabled';
-        // this.dom.backpackLabel.root.className = 'profile__itemSpecs disabled';
-        // this.dom.potionLabel.innerHTML = getPotionLabel(firstPotion, 1);
-    }
 
     getDOMElements() {
         this.dom = {
@@ -873,7 +854,6 @@ export class Profile extends View {
         this.setTableStats();
         this.increaseStatisticEvents();
         this.labelForPotions();
-        this.rwd();
     }
     onDataChange() {
         this.setHeroStats();

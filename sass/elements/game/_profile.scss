@@ -933,6 +933,13 @@
             line-height: 1.563rem;
             font-family: $fontFamily-medivalSharp;
         }
+        p {
+            font-weight: 700;
+            font-size: 1.438rem;
+            letter-spacing: 0.063rem;
+            line-height: 1.563rem;
+            font-family: $fontFamily-medivalSharp;
+        }
         @include desktopM {
             height: 34%;
             width: 93%;

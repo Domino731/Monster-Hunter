@@ -1,26 +1,43 @@
-import { SearchedUser } from './sub_views/specificUser';
 import { getChatHTMLCode } from '../viewsHTMLCode/chat';
 import { SearchedUserData, Conversation, MessageData, UserData } from '../types';
 import { auth, db } from '../firebase/index';
 import { getMessageCode } from './sub_views/messages';
 
+// class responsible for chat 
 export class Chat {
-    private root: HTMLElement
-    private friend: SearchedUserData
+
+    // dom element where new created chat will be injected
+    private root: HTMLElement;
+    // friend data needed to get his chat messages  and display his nick
+    private friend: SearchedUserData;
+    // current user data needed to send text messages, 
+    private currentUser: UserData;
+    // chat data, contains all messages and user and friend messages to avoid duplicates in conversations and reduce data size
+    // split user and friend messages to prevent duplicates
     private conversation: {
+        // user and friend messages, based on this data chat will rendered 
+    
         general: Conversation | null;
+        // user messages
         user: Conversation | null;
+        // friend messages
         friend: Conversation | null;
     }
     private dom: {
-        emojiList: NodeListOf<Element> | null
-        emojiBtn: HTMLImageElement | null
-        emojiContainer: HTMLElement | null
+        // list with emoji. When the user clicks on an emoji it will be added to the message -  addEmoji() method
+        emojiList: NodeListOf<Element> | null;
+        // button by which user can toogle list with emoji - toggleEmojiList() method
+        emojiBtn: HTMLImageElement | null;
+        // container with emoji is shown when the user presses the above button- toggleEmojiList() method
+        emojiContainer: HTMLElement | null;
+        // div that serves as an input for creating a new message, it has to be div because you can't put emoticons in the input - sendMessage() and addEmoji() methods
         newMessageText: HTMLElement | null
+        // button by which user can send new message - sendMessage() method
         sendMessageBtn: HTMLElement | null
+        // chat container needed to insert messages inside him - renderChat() method
         chatContainer: HTMLElement | null
     }
-    private currentUser: UserData;
+    
     constructor(root: HTMLElement, currentUser: UserData, friend: SearchedUserData) {
         this.root = root;
         this.friend = friend;
@@ -41,6 +58,8 @@ export class Chat {
         this.init();
     }
 
+    // update user's messages data with friend in firestore, used in sendMessage() method
+    // update data will trigger chatRender() method 
     async updateChatData(newData: Conversation) {
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
@@ -61,8 +80,8 @@ export class Chat {
                         .catch(err => {
                             console.log(err);
                         })
-                })
-            })
+                });
+            });
     }
 
     // listening for chat data updates in firestore
@@ -81,6 +100,9 @@ export class Chat {
                         this.conversation.friend !== null && this.conversation.general.messages.push(...this.conversation.friend.messages);
                         this.renderChat();
                     }
+                    if (change.type === "removed") {
+                        location.reload();
+                    }
                 });
             })
             
@@ -94,7 +116,7 @@ export class Chat {
                     if (change.type === "modified") {
                         this.conversation.friend = change.doc.data() as Conversation;
                         this.conversation.general.messages = change.doc.data().messages;
-                        this.conversation.user !== null &&   this.conversation.general.messages.push(...this.conversation.user.messages);          
+                        this.conversation.user !== null && this.conversation.general.messages.push(...this.conversation.user.messages);          
                         this.renderChat();
                     }
                     if (change.type === "removed") {
@@ -104,9 +126,10 @@ export class Chat {
             });
     }
 
-
-
+    // get chat data in order to create chat basis on this data
     async getChatroomData() {
+
+        // create new converstation data object
         let conversation: Conversation = {
             messages: [],
             createdAt: new Date(),
@@ -114,9 +137,12 @@ export class Chat {
             updatedAt: new Date(),
             recipientId: ''
         }
-        const friendNick = this.friend.nick
+
+        // split user and friend messages to prevent duplicates
         let userMessages : Conversation | null = null;
         let  friendMessages : Conversation | null = null;
+
+        // current user chat
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
             .collection('conversations')
@@ -130,12 +156,12 @@ export class Chat {
                     conversation.createdAt = doc.data().createdAt;
                     conversation.updatedAt = doc.data().updatedAt;
                     conversation.participants =  doc.data().participants; 
-                    console.log(2)
                 });
 
             })
             .catch(err => console.log(err))
 
+        // friend chat    
         await db.collection('chat')
             .doc(`${this.friend.id}`)
             .collection('conversations')
@@ -151,36 +177,42 @@ export class Chat {
             })
             .catch(err => console.log(err))
 
-        // sort by date
+        // set converstation
         this.conversation.user = userMessages;
         this.conversation.friend = friendMessages;
-        conversation.messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.conversation.general = conversation;
-        console.log(this.conversation)
     }
 
-
+    // render messages between user and friend in chatContainer
     renderChat() {
-        console.log()
-        // sort by date
+
+        // sort messages by date
         this.conversation.general.messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
         
+        // create new code
         let html = '';
         this.conversation.general.messages.forEach(el => {
-           html += ` <div class='message'>${getMessageCode(this.friend, this.currentUser, el)}</div>`
+           html += ` <div class='message'>${getMessageCode(this.friend, this.currentUser, el)}</div>`;
 
         });
         this.dom.chatContainer.innerHTML = html;
 
+        // scroll to the bottom of conversation
         this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
-        console.log(this.dom.chatContainer.scrollHeight)
 
     }
-    sendMessageEvent() {
+
+    // send new createad message into user's data in firestore
+    sendMessage() {
         this.dom.sendMessageBtn.addEventListener('click', () => {
 
+            // new message text
             const messageText: string = this.dom.newMessageText.innerHTML;
+
+            // check if message has 1 character at least
             if (messageText !== '') {
+
+                // create new message
                 const newMessage = () => {
                     const data: MessageData = {
                         content: [],
@@ -188,22 +220,37 @@ export class Chat {
                         nick: this.currentUser.nick,
                         userId: auth.currentUser.uid
                     }
-                    data.content.push(messageText)
+
+                    // add message text into all messages array
+                    data.content.push(messageText);
+
+                    // hide button reponsible for sending new message
                     this.dom.sendMessageBtn.classList.add('disabled');
+
+                    // push new message data into user's conversation data
                     this.conversation.user.messages.push(data);
                 }
 
-                // index needed for search last message and check if new message will passed into old old
+                // index needed for search last message and check if new message will passed into old message content - 
+                // if gap between the last message and the new message is less than 3 minutes
                 const currentTime: Date = new Date();
                 const index: number =  this.conversation.user.messages.length - 1;
                 const allMessagesIndex: number = this.conversation.general.messages.length - 1;
+
+
+                // check if the chat is empty, you need to check it because below it is checked if the 
+                // gap between the last message and the new message is less than 3 minut
                 if (this.conversation.user.messages[index]) {
+
+                    // numbers needed to check this gap
                     const lastUpdate: Date = this.conversation.general.messages[allMessagesIndex].createdAt;
-                    let diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
+                    const diffInMilliSeconds: number = Math.abs(lastUpdate.getTime() - currentTime.getTime()) / 1000;
                     const minutes: number = Math.floor(diffInMilliSeconds / 60) % 60;
-                    console.log(minutes)
+
+                    // check if gap between the last message and the new message is less than 3 minutes, 
+                    //if yes then add new message into this last message content, otherwise create new
                     if (minutes <= 3 && this.conversation.general.messages[allMessagesIndex].nick === this.currentUser.nick) {
-                        let oldMessage: MessageData = this.conversation.user.messages[index];
+                        const oldMessage: MessageData = this.conversation.user.messages[index];
                         this.dom.sendMessageBtn.classList.add('disabled');
                         oldMessage.content.push(messageText);
                         oldMessage.createdAt = new Date();
@@ -222,29 +269,35 @@ export class Chat {
             }
         });
     }
+
+    // events  on each emoji which when clicked, they appear in the message
     addEmoji() {
         this.dom.emojiList.forEach(el => el.addEventListener('click', () => {
             const emoji: HTMLImageElement = el as HTMLImageElement;
-            let messageHTML: string = this.dom.newMessageText.innerHTML
+            let messageHTML: string = this.dom.newMessageText.innerHTML;
             messageHTML += `<img src='${emoji.src}'/>`
             this.dom.newMessageText.innerHTML = messageHTML;
-        }))
+        }));
     }
 
-    // scroll to bottom of message, in order when a user selects emoji, know where new emoji is
+    // scroll to bottom of message, in order when a user selects emoji to know where new emoji is
     scrollToBottomMessage() {
 
         const scrollToBottom = () => {
             this.dom.newMessageText.scrollTop = this.dom.newMessageText.scrollHeight;
         }
         this.dom.newMessageText.addEventListener('mouseover', scrollToBottom);
-        this.dom.newMessageText.addEventListener('mouseleave', scrollToBottom)
+        this.dom.newMessageText.addEventListener('mouseleave', scrollToBottom);
+
     }
 
-    toogleEmojiList() {
+    // toggle emoji list 
+    toggleEmojiList() {
         this.dom.emojiBtn.addEventListener('click', () => {
+
             // boolean value, needed to toogle emoji list 
-            const flag: boolean = this.dom.emojiContainer.classList.contains('disabled')
+            const flag: boolean = this.dom.emojiContainer.classList.contains('disabled');
+
             if (flag) {
                 this.dom.emojiContainer.classList.remove('disabled');
                 this.dom.emojiBtn.src = './images/close.png';
@@ -253,10 +306,11 @@ export class Chat {
                 this.dom.emojiContainer.classList.add('disabled');
                 this.dom.emojiBtn.src = './images/chat_emoji_icon.png';
             }
+
         });
     }
 
-    // check if message text has more than 0 letter
+    // check if message text has more than 0 letter, if yes then show button reponsible for sending new message - sendMessageBtn
     checkMessage() {
         const check = () => {
             if (this.dom.newMessageText.innerText.length !== 0) {
@@ -270,9 +324,13 @@ export class Chat {
         this.dom.newMessageText.addEventListener('change', check);
     }
 
+    // general action
     general(){
         this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
     }
+
+
+
     // method which is responsible for injecting html code into game root
     render() {
         this.root.innerHTML = getChatHTMLCode(this.friend);
@@ -294,10 +352,10 @@ export class Chat {
     initScripts() {
         this.dataChangeListener();
         this.renderChat();
-        this.toogleEmojiList();
+        this.toggleEmojiList();
         this.addEmoji();
         this.scrollToBottomMessage();
-        this.sendMessageEvent();
+        this.sendMessage();
         this.checkMessage();
         this.dataChangeListener();
     }
