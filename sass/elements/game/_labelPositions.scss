@@ -57,7 +57,7 @@
         }
     }
     &-4 {
-        transform: translate(262px, -9px);
+        transform: translate(272px, -9px);
         &::after {
             right: 28px;
             top: -26px;
@@ -80,7 +80,7 @@
         }
     }
     &-5 {
-        transform: translate(411px, -9px);
+        transform: translate(426px, -9px);
         &::after {
             right: 28px;
             top: -26px;
@@ -122,7 +122,7 @@
         @include laptopM {
             transform: translate(-1px, 85px);
         }
-        @include desktopM {
+        @include laptopS {
             transform: translate(-1px, 65px);
         }
     }
@@ -989,7 +989,7 @@
 @include tablet {
     .profile__backpackLabel {
         &-1 {
-            transform: translate(4px, -16px);
+            transform: translate(-1px, -16px);
         }
         &-2 {
             transform: translate(139px, -16px);
@@ -1001,11 +1001,11 @@
             transform: translate(323px, -16px);
         }
         &-5 {
-            transform: translate(450px, -16px);
+            transform: translate(463px, -16px);
         }
 
         &-6 {
-            transform: translate(4px, 128px);
+            transform: translate(-1px, 128px);
         }
         &-7 {
             transform: translate(139px, 128px);
@@ -1017,7 +1017,7 @@
             transform: translate(323px, 128px);
         }
         &-10 {
-            transform: translate(450px, 128px);
+            transform: translate(463px, 128px);
         }
     }
 }
@@ -1071,7 +1071,7 @@
 @include mobileL {
     .profile__backpackLabel {
         &-1 {
-            transform: translate(4px, -7px);
+            transform: translate(-1px, -7px);
         }
         &-2 {
             transform: translate(75px, -7px);
@@ -1087,7 +1087,7 @@
         }
 
         &-6 {
-            transform: translate(4px, 71px);
+            transform: translate(-1px, 71px);
         }
         &-7 {
             transform: translate(75px, 71px);
