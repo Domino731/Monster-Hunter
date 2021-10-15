@@ -6,6 +6,9 @@
     &::-webkit-scrollbar {
         width: 0;
     }
+    @include tablet {
+        justify-content: center;
+    }
     &__item {
         overflow: auto;
         height: 100%;

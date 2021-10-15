@@ -90,7 +90,7 @@ export const getProfileHTMLCode = (user: UserData): string => {
 
 
             <div class='profile__backpackLabelWrapper'>   
-             
+              <div id='profile_backpack_item_label'> </div>
             </div>
 
             <div class='profile__backpackRow'>
@@ -109,7 +109,7 @@ export const getProfileHTMLCode = (user: UserData): string => {
         
             <div class='profile__generalItem' id='profile_general_gold'>
                 <div class='profile__generalImg'> <img src="/images/profile_coins.png" title="Your gold" /></div>
-                <strong class='profile__generalText'></strong>
+                <strong class='profile__generalText'>${user.gold}</strong>
             </div>
             <div class='profile__generalItem' id='profile_general_pet'>
                 <div class='profile__generalImg'> <img src="/images/profile_pet_slot.png" title="Pet slot" /></div>
