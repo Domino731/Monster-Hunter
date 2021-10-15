@@ -93,22 +93,22 @@ export const getSpecificUserHTMLCode = (friendsArr: {id: string, nick: string}[]
 
 
 
-   <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet'>
+   <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet' title='Helmet'>
    <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon">
    </div>
-   <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate'>
+   <div class='profile__equipmentItem profile__equipmentItem-armor' data-slot-name='chestPlate' title='Chest plate'>
    <img src='/images/profile_equipment_chestPlate.png' class="profile__equipmentIcon">
    </div>
-   <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves'>
+   <div class='profile__equipmentItem profile__equipmentItem-gloves' data-slot-name='gloves' title='Gloves'>
    <img src='/images/profile_equipment_gloves.png' class="profile__equipmentIcon">
    </div>
-   <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon'>
+   <div class='profile__equipmentItem profile__equipmentItem-weapon' data-slot-name='weapon' title='Weapon'>
    <img src='/images/profile_equipment_weapon.png' class="profile__equipmentIcon">
    </div>
-   <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield'>
+   <div class='profile__equipmentItem profile__equipmentItem-shield' data-slot-name='shield' title='Shield'>
    <img src='/images/profile_equipment_shield.png' class="profile__equipmentIcon">
    </div>
-   <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special'>
+   <div class='profile__equipmentItem profile__equipmentItem-special' data-slot-name='special' title='Special'>
    <img src='/images/profile_equipment_special.png' class="profile__equipmentIcon">
    </div>
    <div class='profile__portrait'>
