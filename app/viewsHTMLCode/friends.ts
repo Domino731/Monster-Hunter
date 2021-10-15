@@ -11,7 +11,7 @@ export const getFriendsHTMLCode = (friendsList: FriendData[]): string => {
      </div>
 
     <div class="friends__itemWrapper" id='friends_container'>
-        <div class="friends__topBar glass">
+        <div class="friends__topBar">
 
             <div class="friends__searchWrapper">
                
