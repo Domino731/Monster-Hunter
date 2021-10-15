@@ -2,7 +2,7 @@ import { getRandomcongratulationsText } from './../properties/missions/congratul
 import { FullUserStats, UserData } from '../types';
 export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: UserData) :string => {
   const weapon = userData.equipmentItems[userData.equipmentItems.findIndex(el => el.type === 'weapon')];
-
+   console.log(userData.currentMission.gold, userData.currentMission.exp)
     return `
      <section class='fight background'> 
 

@@ -109,7 +109,8 @@ export class MonsterFight extends View {
         }
         // set status
         this.userData.status = 'free';
-        // this.userData.currentMission = null;
+        this.userData.currentMission = null;
+         this.userData.currentMission = null;
         updateUserData(this.userData);
     }
 
@@ -128,7 +129,7 @@ export class MonsterFight extends View {
         this.userData.availableMissions[index] = getRandomMission(this.userData.nextLevelAt, this.userData.guardPayout, this.userStats, this.userData.pet);
         // set status
         this.userData.status = 'free';
-      //  this.userData.currentMission = null;
+        this.userData.currentMission = null;
         updateUserData(this.userData);
 
     }
@@ -141,6 +142,7 @@ export class MonsterFight extends View {
 
     // when user click on button on summary panel, he will be redirected to the tavern
     summaryBtnsEvents() {
+        console.log( this.dom.summaryBtns)
         this.dom.summaryBtns.forEach(el => el.addEventListener('click', () => {
             if (this.userData.currentMission === null) {
                 const tavern = new Tavern();
@@ -215,6 +217,7 @@ export class MonsterFight extends View {
 
 
     fightAnimations() {
+      
         this.attackAnimation();
         this.fightInterval = setInterval(() => {
             if (this.userHP > 0 && this.monsterHP > 0) {
