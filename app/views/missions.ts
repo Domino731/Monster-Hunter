@@ -3,13 +3,15 @@ import { View } from './view';
 import { OnGuardTavern } from './onGuardTavern';
 import { Travel } from './travel';
 import { MonsterFight } from './monsterFight';
+
+// class which checks the status of the user and moves it to the appropriate section  
 export class Missions extends View{
 
     constructor() {
-      super() 
+      super(); 
     }
 
-    
+    // check status and create section
     render() {
         let render;
         const currentTime = new Date().getTime();
@@ -28,13 +30,18 @@ export class Missions extends View{
             }
         }
     }
+
+
+
     initScripts(){
-        
+        console.log('script initialization');
     }
     onDataChange(){
-      
+      console.log('Data changed');
     }
-    getDOMElements(){}
+    getDOMElements(){
+        console.log('DOM loaded');
+    }
 
     
 }
