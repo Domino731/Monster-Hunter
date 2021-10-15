@@ -13,14 +13,17 @@
         width: 100%;
         height: 50%;
         display: flex;
-       
-        &:last-child{
+
+        &:last-child {
             @include mobileL {
-            min-height: 300px;
-            @include mobileM {
-                min-height: 355px;
+                min-height: 300px;
             }
-        } 
+            @include mobileM {
+                min-height: 378px;
+            }
+            @include mobileS {
+                min-height: 347px;
+            }
         }
     }
     &__characterWrapper {
@@ -123,14 +126,13 @@
         @include mobileL {
             box-shadow: 7px 7px #a56a43 inset, -7px -7px #a56a43 inset;
         }
-        
     }
     &__listWrapper {
         display: flex;
         justify-content: space-evenly;
         margin-top: 12px;
-        @include mobileM {
-           flex-wrap: wrap;
+        @include mobileL {
+            flex-wrap: wrap;
         }
     }
     &__title {
@@ -189,7 +191,7 @@
             width: 22%;
         }
         @include mobileM {
-            width: 33%;
+            width: 34%;
             margin-top: 10px;
             &:last-child {
                 margin-top: 20px;
@@ -539,7 +541,7 @@
         }
         @include mobileS {
             height: 22px;
-    width: 12px;
+            width: 12px;
         }
     }
     &::before {
@@ -558,9 +560,8 @@
             left: 8px;
         }
         @include mobileS {
-            left:  6px;
-            border-radius: 5px 0  0 5px ;
-
+            left: 6px;
+            border-radius: 5px 0 0 5px;
         }
     }
     &::after {
@@ -579,9 +580,8 @@
             right: 8px;
         }
         @include mobileS {
-            right:  6px;
+            right: 6px;
             border-radius: 0 5px 5px 0;
-
         }
     }
     @include desktopS {
@@ -609,6 +609,6 @@
     }
     @include mobileS {
         box-shadow: -41px 0 #b27a49 inset;
-    height: 11px;
+        height: 11px;
     }
 }

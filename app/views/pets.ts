@@ -3,6 +3,8 @@ import { View } from './view';
 import { PetData } from '../types';
 import { petsData } from '../properties/pets/petsData';
 import { updateUserData } from '../firebase/operations';
+
+// class reponsible for pets component by which user can select his pet
 export class Pets extends View {
 
   // value holding interval 
@@ -23,7 +25,7 @@ export class Pets extends View {
     goldSubtract: HTMLElement | null;
     // pets wrappers needed to set style on specfic pet wrapper in order to know what pet user has - setStyles() method
     petsWrappers: NodeListOf<Element> | null;
-    // countdown wrappers needed to display time needed to display how much time is left to pet rent end - setCountdown() method
+    // countdown wrappers  needed to display how much time is left to pet rent end - setCountdown() method
     countdownWrappers: NodeListOf<Element> | null;
   }
   constructor() {

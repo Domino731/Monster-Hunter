@@ -3,7 +3,7 @@ import { UserData } from '../types';
 export const getTavernHTMLCode = (user: UserData) : string => {
   
     return `
-    <section class='tavern background'>
+    <section class='tavern '>
     <div class='tavern__item'> 
      <div class='tavern__characterWrapper'>
         <div class='tavern__willingnessBarWrapper' title='Mission willingness: ${user.missionWillingness}/100'>
