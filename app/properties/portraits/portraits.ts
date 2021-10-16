@@ -1,3 +1,4 @@
+// array with available portraits sources
 export const portraitsData : string[] = [
     './images/hero_portraits/hero_portrait_1.png',
     './images/hero_portraits/hero_portrait_2.png',
@@ -12,4 +13,4 @@ export const portraitsData : string[] = [
     './images/hero_portraits/hero_portrait_11.png',
     './images/hero_portraits/hero_portrait_12.png',
     './images/hero_portraits/hero_portrait_13.png',
-]
+];

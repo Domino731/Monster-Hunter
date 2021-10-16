@@ -1,4 +1,6 @@
 import { ShopItem } from '../../types';
+
+// array with data about available weapons
 export const weaponsData : ShopItem[] = [
 
     // common items
@@ -436,4 +438,4 @@ export const weaponsData : ShopItem[] = [
         },
         id: '143f458f-6210-4d72-9c93-221a01047e7d'
     },
-]
+];

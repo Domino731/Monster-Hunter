@@ -7,6 +7,7 @@ import { ShopItem, FullUserStats, UserData, MailData } from '../../types';
 import { portraitsData } from "../portraits/portraits";
 import { potionsData } from "../shop/potions";
 
+// set first mail
 const mail: MailData = {
     id: 'c9882f43-8dfb-4929-8d14-97cb97a133d1',
     createdBy: 'admin',
@@ -43,17 +44,16 @@ const mail: MailData = {
     `
 }
 
+// set wizard wheel items
 const wizardWheelItems: ShopItem[] = []
-
-
-// add blacksmith items
 const items: ShopItem[] = getBlacksmithItems({
     strength: 50,
     physicalEndurance: 50,
     defence: 50,
     luck: 50
 }, 100);
-// aslo,  user can get gold
+
+// user also can win gold
 const gold: ShopItem = {
     type: 'gold',
     name: 'Gold',
@@ -70,13 +70,15 @@ const gold: ShopItem = {
     id: ''
 }
 items.push(gold);
+items.push(getRandomShopItem(potionsData));
 
-items.push(getRandomShopItem(potionsData))
-// set won item
+// set won item, which will be added to user's backpack after wheel spin
 const magicWheel = {
     items,
     wonItem: items[Math.floor(Math.random() * items.length)]
 }
+
+// initial user statistics needed to set available missions
 const fullUserStats: FullUserStats = {
     damage: 35,
     health: 35,
@@ -89,68 +91,65 @@ const fullUserStats: FullUserStats = {
 }
 
 
+// initial user data with which the profile will be created in the firestore database
+export const InitialUserProfile: UserData = {
+    lastVisit: new Date(),
+    nick: '',
+    level: 1,
+    guardPayout: 100,
+    gold: 1000,
+    rawStats: {
+        defence: 50,
+        luck: 50,
+        physicalEndurance: 50,
+        strength: 50
+    },
+    stats: {
+        damage: 35,
+        health: 35,
+        damageReduce: 35,
+        critical: 35
+    },
+    shop: {
+        blacksmith: getBlacksmithItems(
+            {
+                defence: 50,
+                luck: 50,
+                physicalEndurance: 50,
+                strength: 50
+            },
+            100
+        )
 
-export const  InitialUserProfile : UserData = {
-        lastVisit: new Date(),
-        nick: '',
-        level: 1,
-        guardPayout: 100,
-        gold: 1000,
-        rawStats: {
-            defence: 50,
-            luck: 50,
-            physicalEndurance: 50,
-            strength: 50
-        },
-        stats: {
-            damage: 35,
-            health: 35,
-            damageReduce: 35,
-            critical: 35
-        },
-        shop: {
-            blacksmith: getBlacksmithItems(
-                {
-                    defence: 50,
-                    luck: 50,
-                    physicalEndurance: 50,
-                    strength: 50
-                },
-                100
-            )
-            
-        },
-        shopPicks: {
-            blacksmith: getBlacksmithPicks(),
-            wizard: null
-        },
-        equipmentItems: [],
-        backpackItems: [],
-        status: 'free',
-        guard: {
-            current: null,
-            start: null,
-            end: null,
-            payout: null
-        },
-        pet: null,
-        potions: {
-            first: null,
-            second: null
-        },
-        description: '',
-        portrait: portraitsData[0],
-        exp: 0,
-        wizardWheelSpin: true,
-        magicWheel,
-        nextLevelAt: getNeededExp(1),
-        missionWillingness: 100,
-        currentMission: null,
-        availableMissions: getRandomMissions(10, 100, fullUserStats, null),
-        friends: [],
-        inbox: [mail]
+    },
+    shopPicks: {
+        blacksmith: getBlacksmithPicks(),
+        wizard: null
+    },
+    equipmentItems: [],
+    backpackItems: [],
+    status: 'free',
+    guard: {
+        current: null,
+        start: null,
+        end: null,
+        payout: null
+    },
+    pet: null,
+    potions: {
+        first: null,
+        second: null
+    },
+    description: '',
+    portrait: portraitsData[0],
+    exp: 0,
+    wizardWheelSpin: true,
+    magicWheel,
+    nextLevelAt: getNeededExp(1),
+    missionWillingness: 100,
+    currentMission: null,
+    availableMissions: getRandomMissions(10, 100, fullUserStats, null),
+    friends: [],
+    inbox: [mail]
 }
 
-function uniqid(): string {
-    throw new Error("Function not implemented.");
-}

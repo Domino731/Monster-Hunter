@@ -33,4 +33,6 @@ const app = initializeApp(firebaseConfig);
 
 // firebase references
 export const auth = firebase.auth();
+
+// data structure is in docs
 export const db = firebase.firestore();

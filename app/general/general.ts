@@ -1,46 +1,45 @@
 import { auth } from '../firebase/index';
+
+// Class responsbile for general actions - logout and refreshing page
 export class General {
-    private btn: {
-        logout: HTMLElement
-    };
-    private timeout: null |  ReturnType<typeof setTimeout>
+
+    // button by which user can log out -  logoutEvent() method
+    private logoutBtn: HTMLElement;
+    // timeout needed to set delay (1s) on window resize - mobile()
+    private timeout: null | ReturnType<typeof setTimeout>;
+
     constructor() {
-        this.btn = {
-            logout: document.querySelector('#btn-logout')
-        }
+        this.logoutBtn = document.querySelector('#btn-logout');
         this.timeout = null;
         this.init();
     };
 
-    // logout the use when he presses a button
+    // logout the user when he presses a button
     logoutEvent() {
-        this.btn.logout.addEventListener("click", () => {
+        this.logoutBtn.addEventListener("click", () => {
             return auth.signOut();
-        })
+        });
     };
 
+    // refresh page on windown resize in order to create  content  which is appropriate for the current browser window size (for ipad and below 1024px)
     mobile() {
         const resize = () => {
-             "use strict";
+            // prevent of page multiple refreshing
             if (this.timeout) {
                 clearTimeout(this.timeout);
             }
-        
             this.timeout = setTimeout(function () {
-              if (window.innerHeight >= 1000 || window.innerWidth < 1024) {
-                location.reload()
-            }
-            }, 500);
+                if (window.innerHeight >= 1000 || window.innerWidth < 1024) {
+                    location.reload();
+                }
+            }, 1000);
         }
         window.addEventListener('resize', resize);
-           
-
-           
-        
-
     }
+
+    // iniclalization of scripts
     init() {
         this.logoutEvent();
-      // this.mobile();
+        this.mobile();
     };
 };

@@ -1,4 +1,6 @@
 import { ShopItem } from '../../types';
+
+// array with data about available helmets
 export const helmetsData: ShopItem[] = [
     // common items
     {
@@ -215,4 +217,4 @@ export const helmetsData: ShopItem[] = [
         },
         id: 'bd01be59-ec34-415b-af5b-40892bd1a5a7'
     },
-]
+];

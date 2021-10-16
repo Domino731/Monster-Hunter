@@ -1,4 +1,6 @@
 import { ShopItem } from '../../types';
+
+// array with data about available shields
 export const shieldsData : ShopItem[] = [
 
     // common items
@@ -221,4 +223,4 @@ export const shieldsData : ShopItem[] = [
         },
         id: '50ebdd07-8ed0-448c-a763-0239323728d6'
     },
-]
+];

@@ -1,3 +1,4 @@
+// array with monsters sources, with which the user will fight
 export const monstersData: string[] = [
     './images/missions/monsters/monster_1.png',
     './images/missions/monsters/monster_2.png',

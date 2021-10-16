@@ -1,4 +1,6 @@
 import { ShopItem } from '../../types';
+
+// array with data about available chest plates
 export const chestplatesData: ShopItem[] = [
     {
         type: "chestPlate",
@@ -60,7 +62,7 @@ export const chestplatesData: ShopItem[] = [
         id: '2c0fbabd-ac53-449e-b81c-8975e455363f'
     },
 
-    
+
     {
         type: "chestPlate",
         name: 'Castle Runner',
@@ -143,7 +145,7 @@ export const chestplatesData: ShopItem[] = [
     },
 
 
-    
+
     {
         type: "chestPlate",
         name: 'Light Warrior',
@@ -223,4 +225,4 @@ export const chestplatesData: ShopItem[] = [
         },
         id: 'b56aded7-e786-494b-8ee2-e9e63681e82b'
     },
-]
+];

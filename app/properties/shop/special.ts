@@ -1,4 +1,6 @@
 import { ShopItem } from '../../types';
+
+// array with data about available special items
 export const specialItemsData : ShopItem[] = [
     
     {
@@ -226,4 +228,4 @@ export const specialItemsData : ShopItem[] = [
         },
         id: 'ddd3d033-d97c-470f-b376-20db1730d5c3'
     },
-]
+];
