@@ -38,8 +38,10 @@ const mail: MailData = {
          <p>
           <strong>Enjoy your game :)</strong>
          </p>
-      
-         
+    </div>
+
+    <div class='mail__freepikAttribute'>
+    <a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>
     </div>
     `
 }

@@ -19,6 +19,7 @@ export class Inbox extends View {
   }
   constructor() {
     super();
+    this.freepikAttribute = `<a href='https://www.freepik.com/vectors/character'>Character vector created by macrovector - www.freepik.com</a>`;
     this.dom = {
       mailListContainer: document.querySelector('.inbox__item:first-child'),
       closeMailIcon: document.querySelector('.closeIcon__email'),
@@ -127,12 +128,6 @@ export class Inbox extends View {
     console.log('data changed');
   }
 }
-
-//dragon background
-//<a href='https://www.freepik.com/vectors/character'>Character vector created by macrovector - www.freepik.com</a>
-
-// friend img
-//<a href='https://www.freepik.com/vectors/abstract'>Abstract vector created by upklyak - www.freepik.com</a>
 
 // introduce img
 // <a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>

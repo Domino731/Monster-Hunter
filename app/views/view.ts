@@ -17,11 +17,15 @@ export class View {
    protected userFriends: SearchedUserData[];
    protected loadingContainer: HTMLElement;
    protected loadingMonster: HTMLImageElement;
-   protected mobileNav: HTMLElement
+   protected mobileNav: HTMLElement;
+   protected freepikAttributeWrapper: HTMLElement;
+   protected freepikAttribute: string;
+   protected bodyBackgroundSrc: string;
    constructor() {
-      this.mobileNav = document.querySelector('.mobileNav__content')
-      this.userData = null
-      this.userFriends = []
+      this.mobileNav = document.querySelector('.mobileNav__content');
+      this.freepikAttributeWrapper = document.querySelector('#freepik-attribute')
+      this.userData = null;
+      this.userFriends = [];
       this.userStats = {
          strength: 0,
          damage: 0,
@@ -32,29 +36,31 @@ export class View {
          luck: 0,
          critical: 0
       }
-      this.root = document.getElementById("game__view")
-      this.loadingContainer = document.querySelector('.loading')
-      this.loadingMonster = document.querySelector('.loading__monster')
+      this.root = document.getElementById("game__view");
+      this.loadingContainer = document.querySelector('.loading');
+      this.loadingMonster = document.querySelector('.loading__monster');
+      this.freepikAttribute = '';
+      this.bodyBackgroundSrc = '';
       this.init();
    }
 
    // check if pet rent time has ended or if potions ended
-   checkPetAndPotions(){
-      const today : Date = new Date;
-       if(this.userData.pet !== null){
-         if(this.userData.pet.rentEnd.getTime() <= today.getTime()){
+   checkPetAndPotions() {
+      const today: Date = new Date;
+      if (this.userData.pet !== null) {
+         if (this.userData.pet.rentEnd.getTime() <= today.getTime()) {
             this.userData.pet = null;
             updateUserData(this.userData);
-         } 
-       }
-       if(this.userData.potions.first !== null){
-          if(this.userData.potions.first.end.getTime() <= today.getTime()){
-             this.userData.potions.first = null;
-             updateUserData(this.userData);
-          }
-       }
-       if(this.userData.potions.second !== null){
-         if(this.userData.potions.second.end.getTime() <= today.getTime()){
+         }
+      }
+      if (this.userData.potions.first !== null) {
+         if (this.userData.potions.first.end.getTime() <= today.getTime()) {
+            this.userData.potions.first = null;
+            updateUserData(this.userData);
+         }
+      }
+      if (this.userData.potions.second !== null) {
+         if (this.userData.potions.second.end.getTime() <= today.getTime()) {
             this.userData.potions.second = null;
             updateUserData(this.userData);
          }
@@ -62,7 +68,7 @@ export class View {
    }
    // function that will set statistics based on equipment, potions and pet
    setHeroStats() {
-    this.userStats = getFullUserStats(this.userData)
+      this.userStats = getFullUserStats(this.userData)
    }
 
    // method responsbile for fetching user data, and also this is real time data lisener
@@ -95,7 +101,7 @@ export class View {
                }
                if (change.type === "removed") {
                   // redirect user to login page
-                 // location.href = '/login.html';
+                  // location.href = '/login.html';
                }
             });
          });
@@ -155,11 +161,11 @@ export class View {
          this.userData.lastVisit = today;
          // reset mission willingness
          this.userData.missionWillingness = 100;
-           updateUserData(this.userData);
+         updateUserData(this.userData);
       }
-      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
-      this.userData.shopPicks.blacksmith = getBlacksmithPicks();
-      updateUserData(this.userData);
+      // this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+      // this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+      // updateUserData(this.userData);
    }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {
@@ -180,34 +186,42 @@ export class View {
       window.alert('This method (initScripts) should be implemented in  inheriting class')
    }
 
-   addLoading(){
+   addLoading() {
       // set random monster
       this.loadingMonster.src = monstersData[Math.floor(Math.random() * monstersData.length)];
       this.loadingContainer.classList.remove('disabled');
    }
-   removeLoading(){
+   removeLoading() {
       this.loadingContainer.classList.add('disabled');
    }
 
-   clearMobileNav(){
+   clearMobileNav() {
       this.mobileNav.innerHTML = ''
    }
 
+   setBodyBackground() {
+      this.freepikAttributeWrapper.innerHTML = this.freepikAttribute;
+
+      const body: HTMLElement = document.querySelector('body');
+      body.style.backgroundImage = `url(${this.bodyBackgroundSrc})`;
+   }
    // initialization 
    init() {
+
       this.clearMobileNav();
       this.addLoading();
       this.getUserData()
          .then(() => {
+            this.setBodyBackground();
             this.dateOperations()
             this.render()
             this.getDOMElements();
             this.initScripts();
          })
-         .then(()=> {
-           this.removeLoading();
+         .then(() => {
+            this.removeLoading();
          })
-         .catch(err => console.log(err))
+         .catch(err => console.error(err))
 
    }
 }

@@ -241,7 +241,7 @@
         font-size: 1.25rem;
         border-left: 4px solid $color-gray-dark;
         overflow: hidden;
-        @include mobileM {
+        @include laptopS {
             font-size: 12px;
         }
         @include mobileS {

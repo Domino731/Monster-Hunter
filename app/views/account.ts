@@ -40,6 +40,8 @@ export class Account extends View {
     private deleteCode: string;
     constructor() {
         super()
+        this.freepikAttribute = `<a href='https://www.freepik.com/vectors/light'>Light vector created by vectorpouch - www.freepik.com</a>`;
+        this.bodyBackgroundSrc = '/images/background_account.jpg';
         this.data = {
             email: auth.currentUser.email,
             password: '',
@@ -277,5 +279,3 @@ export class Account extends View {
         this.root.innerHTML = getAccountHTMLCode(this.userData.nick, this.deleteCode);
     }
 }
-
-//<a href='https://www.freepik.com/vectors/light'>Light vector created by vectorpouch - www.freepik.com</a>
