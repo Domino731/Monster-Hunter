@@ -1,5 +1,5 @@
 import { View } from './view';
-import { getTravelHTMLCode } from '../viewsHTMLCode/travel';
+import { getTravelHTMLCode } from '../HTMLCode/travel';
 import { updateUserData } from '../firebase/operations';
 import { Tavern } from './tavern';
 import { MonsterFight } from './monsterFight';

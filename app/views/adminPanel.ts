@@ -1,5 +1,5 @@
 import { auth } from '../firebase/index';
-import { getAdminPanelHTMLCode } from '../viewsHTMLCode/adminPanel';
+import { getAdminPanelHTMLCode } from '../HTMLCode/adminPanel';
 
 export class AdminPanel{
     private root: HTMLElement

@@ -1,18 +1,13 @@
 import { AvailableMarketPicks, ShopItem, UserData } from '../types';
 import { chestplatesData } from '../properties/shop/chestplates';
 import { helmetsData } from '../properties/shop/helmets';
-import { glovesData } from '../properties/shop/gloves';
-import { weaponsData } from '../properties/shop/weapons';
-import { shieldsData } from '../properties/shop/shields';
-import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
-import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 import { View } from './view';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
 import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
-import { getBlacksmithHTMLCode, blacksmithMobileNavCode } from '../viewsHTMLCode/blacksmith';
+import { getBlacksmithHTMLCode, blacksmithMobileNavCode } from '../HTMLCode/blacksmith';
 import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
 import { getNeededExp } from '../functions/getNeededExp';
@@ -867,7 +862,6 @@ export class Blacksmith extends View {
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
       tomorrow.setHours(0, 0, 0, 0);
-      this.userData.newShopDate = tomorrow;
       this.userData.lastVisit = today;
       updateUserData(this.userData);
    }

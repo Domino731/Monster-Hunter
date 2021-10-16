@@ -1,4 +1,5 @@
 
+// get an icon that represents a specific type of item
 export const getEquipmentIconSrc = (itemType: string ) => {
     switch (itemType) {
         case 'helmet':

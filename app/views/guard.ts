@@ -1,6 +1,6 @@
 import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
 import { View } from './view';
-import { getGuardHTMLCode } from '../viewsHTMLCode/guard';
+import { getGuardHTMLCode } from '../HTMLCode/guard';
 import { updateUserData } from '../firebase/operations';
 
 // A class reposnsible for guard section, with menu by which user can start new gaurd and countdown with displays guard time left 

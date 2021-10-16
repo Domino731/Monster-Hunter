@@ -1,4 +1,6 @@
-import { AvailableMarketPicks } from "../types"
+import { AvailableMarketPicks } from "../types";
+
+// get available blacksmith slots picks, each slot has only 2 picks -> user can only buy 2 items from this slot
 export const getBlacksmithPicks = () : AvailableMarketPicks[] => {
     return [
         {
@@ -25,5 +27,5 @@ export const getBlacksmithPicks = () : AvailableMarketPicks[] => {
             index: 5,
             picks: 2
         },
-    ]
+    ];
 }

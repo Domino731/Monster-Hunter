@@ -7,39 +7,45 @@ import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from './getRandomShopItem';
 import { setItemStats } from './setItemStats';
 import { specialItemsData } from '../properties/shop/special';
-export const getBlacksmithItems = (rawStats : UserStats, guardPayout: number) : ShopItem[] => {
-       // array with shop items, base on which shop will be created
-       let shopItems: ShopItem[] = []
 
-       // pushing random equipment items
+/**
+ *  get array with shop items data for blacksmith
+ * @param rawStats - raw stats needed to sets stats of items
+ * @param guardPayout - guard payout value needed to set price of item
+ */
+export const getBlacksmithItems = (rawStats: UserStats, guardPayout: number): ShopItem[] => {
 
-       // random helmet
-       shopItems.push(getRandomShopItem(helmetsData));
-       // random chest plate
-       shopItems.push(getRandomShopItem(chestplatesData));
-       // random gloves
-       shopItems.push(getRandomShopItem(glovesData));
-       // random weapon
-       shopItems.push(getRandomShopItem(weaponsData));
-       // random shield
-       shopItems.push(getRandomShopItem(shieldsData));
-       // random special item 
-       shopItems.push(getRandomShopItem(specialItemsData));
+      // array with shop items, base on which shop will be created
+      let shopItems: ShopItem[] = [];
 
-       // shuffle the shopItems array
-       shopItems = shopItems.sort(() => Math.random() - .5);
+      // pushing random equipment items
+      // random helmet
+      shopItems.push(getRandomShopItem(helmetsData));
+      // random chest plate
+      shopItems.push(getRandomShopItem(chestplatesData));
+      // random gloves
+      shopItems.push(getRandomShopItem(glovesData));
+      // random weapon
+      shopItems.push(getRandomShopItem(weaponsData));
+      // random shield
+      shopItems.push(getRandomShopItem(shieldsData));
+      // random special item 
+      shopItems.push(getRandomShopItem(specialItemsData));
 
-       // set the item stats
-       shopItems.forEach(el => {
-             const random : number = (Math.floor(Math.random() * 10) + 1) / 100;
-             const itemCost: number = Math.ceil(((el.initialCost + random) * guardPayout / 100));
-             el.properties.strength = setItemStats(el.properties.strength, rawStats.strength),
-             el.properties.defence = setItemStats(el.properties.defence, rawStats.defence),
-             el.properties.physicalEndurance = setItemStats(el.properties.defence, rawStats.defence),
-             el.properties.luck = setItemStats(el.properties.luck, rawStats.luck)
-             el.initialCost = itemCost;
-       });
+      // shuffle the shopItems array
+      shopItems = shopItems.sort(() => Math.random() - .5);
 
-       return shopItems;
+      // set the item stats
+      shopItems.forEach(el => {
+            const random: number = (Math.floor(Math.random() * 10) + 1) / 100;
+            const itemCost: number = Math.ceil(((el.initialCost + random) * guardPayout / 100));
+            el.properties.strength = setItemStats(el.properties.strength, rawStats.strength);
+            el.properties.defence = setItemStats(el.properties.defence, rawStats.defence);
+            el.properties.physicalEndurance = setItemStats(el.properties.defence, rawStats.defence);
+            el.properties.luck = setItemStats(el.properties.luck, rawStats.luck);
+            el.initialCost = itemCost;
+      });
+
+      return shopItems;
 
 }

@@ -1,4 +1,4 @@
-import { getWizardHTMLCode } from '../viewsHTMLCode/wizard';
+import { getWizardHTMLCode } from '../HTMLCode/wizard';
 import { View } from './view';
 import { getWonItemLabel } from './sub_views/getWonItemLabel';
 import { updateUserData } from '../firebase/operations';

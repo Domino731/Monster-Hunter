@@ -1,4 +1,4 @@
-import { getChatHTMLCode } from '../viewsHTMLCode/chat';
+import { getChatHTMLCode } from '../HTMLCode/chat';
 import { SearchedUserData, Conversation, MessageData, UserData } from '../types';
 import { auth, db } from '../firebase/index';
 import { getMessageCode } from './sub_views/messages';

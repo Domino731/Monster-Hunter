@@ -1,20 +1,19 @@
 import { missionTitlesData } from "../properties/missions/missionsTitles";
 import { missionDscData } from '../properties/missions/missionsDsc';
 import uniqid from 'uniqid';
-import { MissionData, UserStats, FullUserStats, PetData } from '../types';
+import { MissionData, FullUserStats, PetData } from '../types';
 import { papyrusSrcData } from '../properties/missions/papyrusSrc';
 import { monstersData } from '../properties/missions/monsters';
 import { charactersData } from "../properties/missions/charactersData";
-import { User } from "firebase";
 import { backgroundsData } from '../properties/missions/backgroundsData';
 
 // arrays with needed data to create mission, everytime when getRandomMission funtion creates new mission 
 // these arrays are reduced due to avoid mission duplicates
-let missionDscArr: string[] = missionDscData
-let missionTitlesArr: string[] = missionTitlesData
-let papyrusSrcArr: string[] = papyrusSrcData
-let monstersArr: string[] = monstersData
-let charactersArr: string[] = charactersData
+let missionDscArr: string[] = missionDscData;
+let missionTitlesArr: string[] = missionTitlesData;
+let papyrusSrcArr: string[] = papyrusSrcData;
+let monstersArr: string[] = monstersData;
+let charactersArr: string[] = charactersData;
 const getRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -48,7 +47,7 @@ export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userS
  */
 export const getRandomMission = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats, userPet: PetData | null): MissionData => {
 
-    // at first check if data ararys aren't empty
+    // at first check if data ararys aren't empty, it they are then restore to factory
     if (missionTitlesArr.length === 0) {
         missionTitlesArr = missionTitlesData;
     }
@@ -94,6 +93,7 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
         }
     }
 
+    // check if user has pet, if he has then reduce travel time
     if (userPet !== null && userPet.properties.travelTime) {
         const newTravelTime = Math.floor(mission.time - (mission.time * userPet.properties.travelTime / 100));
         mission.time = newTravelTime;
@@ -106,5 +106,5 @@ export const getRandomMission = (nextLvlExp: number, guardPayout: number, userSt
     charactersArr.splice(charactersArr.indexOf(mission.character), 1);
     monstersArr.splice(monstersArr.indexOf(mission.monster.src), 1);
 
-    return mission
+    return mission;
 }

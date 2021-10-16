@@ -1,4 +1,4 @@
-import { UserData, ShopItem, PetProperties, FullUserStats, SearchedUserData } from '../types';
+import { UserData, ShopItem, FullUserStats, SearchedUserData } from '../types';
 import { db, auth } from '../firebase/index'
 import { potionsData } from '../properties/shop/potions';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
@@ -8,7 +8,6 @@ import { getRandomShopItem } from '../functions/getRandomShopItem';
 import { allBlacksmithMarketItems } from '../properties/shop/allMarketItems';
 import { getRandomMissions } from '../functions/missionGenerator';
 import { monstersData } from '../properties/missions/monsters';
-import { textChangeRangeIsUnchanged } from 'typescript';
 import { getFullUserStats } from '../functions/getFullUserStats';
 
 export class View {
@@ -158,9 +157,9 @@ export class View {
          this.userData.missionWillingness = 100;
            updateUserData(this.userData);
       }
-      // this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
-      // this.userData.shopPicks.blacksmith = getBlacksmithPicks();
-      // updateUserData(this.userData);
+      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+      this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+      updateUserData(this.userData);
    }
    // abstact method which is responsible for operations when data has changed
    onDataChange() {

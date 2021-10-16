@@ -1,4 +1,4 @@
-import { getOnGuardTavernHTMLCode } from '../viewsHTMLCode/onGuardTavern';
+import { getOnGuardTavernHTMLCode } from '../HTMLCode/onGuardTavern';
 export class OnGuardTavern{
 
     private root: HTMLElement

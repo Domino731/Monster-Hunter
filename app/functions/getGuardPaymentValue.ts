@@ -1,5 +1,5 @@
+// get guard payment value which is according to user's level
 export const getGuardPaymentValue = (userLevel: number): number => {
-
     if (userLevel >= 400){
         return 50000
     }

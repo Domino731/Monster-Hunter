@@ -1,7 +1,7 @@
 
 import { formatDate } from './../functions/formatDate';
 import { SearchedUserData } from './../types';
-import { getSearchFriendHTMLCode } from '../viewsHTMLCode/searchFriend';
+import { getSearchFriendHTMLCode } from '../HTMLCode/searchFriend';
 import { View } from './view';
 import { db, auth } from '../firebase/index';
 import { getStatusImgSrc } from '../functions/getStatusImgSrc';

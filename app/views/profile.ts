@@ -1,4 +1,4 @@
-import { getProfileHTMLCode, profileMobileNavCode } from '../viewsHTMLCode/profile';
+import { getProfileHTMLCode, profileMobileNavCode } from '../HTMLCode/profile';
 import { View } from './view';
 import { updateUserData } from '../firebase/operations';
 import { potionsData } from '../properties/shop/potions';

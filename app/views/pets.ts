@@ -1,4 +1,4 @@
-import { getPetsHTMLCode } from '../viewsHTMLCode/pets';
+import { getPetsHTMLCode } from '../HTMLCode/pets';
 import { View } from './view';
 import { PetData } from '../types';
 import { petsData } from '../properties/pets/petsData';

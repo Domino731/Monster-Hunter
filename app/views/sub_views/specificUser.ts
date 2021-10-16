@@ -1,4 +1,4 @@
-import { getSpecificUserHTMLCode } from '../../viewsHTMLCode/specificUser';
+import { getSpecificUserHTMLCode } from '../../HTMLCode/specificUser';
 import { UserData, SearchedUserData, ShopItem, Conversation } from '../../types';
 import { potionsData } from '../../properties/shop/potions';
 import { getPotionLabel } from './getPotionLabel';

@@ -1,4 +1,4 @@
-import { getInboxHTMLCode, mailHTMLCode } from '../viewsHTMLCode/inbox';
+import { getInboxHTMLCode, mailHTMLCode } from '../HTMLCode/inbox';
 import { View } from './view';
 import { updateUserData } from '../firebase/operations';
 

@@ -1,5 +1,5 @@
 import { View } from './view';
-import { getTavernHTMLCode } from '../viewsHTMLCode/tavern';
+import { getTavernHTMLCode } from '../HTMLCode/tavern';
 import { MissionData, CurrentMission } from '../types';
 import { getMissionDetails } from './sub_views/getMissionDetails';
 import { updateUserData } from '../firebase/operations';

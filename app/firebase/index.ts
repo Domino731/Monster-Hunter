@@ -1,5 +1,4 @@
 // This import loads the firebase namespace.
-// @ts-ignore
 import firebase from 'firebase/app';
 
 // These imports load individual services into the firebase namespace.

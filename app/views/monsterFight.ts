@@ -1,6 +1,6 @@
 
 import { View } from './view';
-import { getMonsterFightHTMLCode } from '../viewsHTMLCode/monsterFight';
+import { getMonsterFightHTMLCode } from '../HTMLCode/monsterFight';
 import { getRandomMission } from '../functions/missionGenerator';
 import { getNeededExp } from '../functions/getNeededExp';
 import { Tavern } from './tavern';

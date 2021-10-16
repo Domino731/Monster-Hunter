@@ -1,8 +1,6 @@
 import { getNeededExp } from '../functions/getNeededExp';
 import { potionsData } from '../properties/shop/potions';
 import { SearchedUserData, UserData, ShopItem, FullUserStats, PetProperties } from '../types';
-import { SearchedUser } from '../views/sub_views/specificUser';
-import { setUserStats } from '../functions/setStats';
 import { getFullUserStats } from '../functions/getFullUserStats';
 
 

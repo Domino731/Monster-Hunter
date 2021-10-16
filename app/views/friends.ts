@@ -1,9 +1,9 @@
 import { SearchedUserData } from './../types';
-import { getFriendsHTMLCode } from '../viewsHTMLCode/friends';
+import { getFriendsHTMLCode } from '../HTMLCode/friends';
 import { View } from './view';
 import { SearchedUser } from './sub_views/specificUser';
 import { db, auth } from '../firebase/index';
-import { friendWindow } from '../viewsHTMLCode/friends';
+import { friendWindow } from '../HTMLCode/friends';
 import { Chat } from './chat';
 import { getNeededExp } from '../functions/getNeededExp';
 

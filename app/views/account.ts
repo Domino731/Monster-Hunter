@@ -2,7 +2,7 @@ import validator from 'validator';
 import { auth, db } from '../firebase/index';
 import { includeNumber, isUpper } from '../functions/other';
 import { View } from './view';
-import { getAccountHTMLCode } from '../viewsHTMLCode/account';
+import { getAccountHTMLCode } from '../HTMLCode/account';
 import uniqid from 'uniqid';
 import { UserData } from '../types';
 
