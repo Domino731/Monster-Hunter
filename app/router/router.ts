@@ -110,6 +110,6 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Guard();
+    const developmentRender = new Blacksmith();
     window.addEventListener("popstate", router);
 };

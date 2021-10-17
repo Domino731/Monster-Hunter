@@ -169,9 +169,6 @@ export class Profile extends Component {
         }
     }
 
-
-
-
     // events responsible for potion label
     labelForPotions() {
 
@@ -569,6 +566,7 @@ export class Profile extends Component {
     }
     // set bacpack items with hover events by which user can display label of specific item and move this item into equipment
     setUserBackpack() {
+
         // clear previous 
         this.dom.backpackSlots.forEach(el => {
             el.innerHTML = '';
@@ -594,9 +592,7 @@ export class Profile extends Component {
                 // remove pulse effect from equipment slot
                 this.dom.equipmentSlots.forEach(el => el.firstElementChild.classList.remove('profile__equipmentIcon-pulse'));
             });
-
         });
-
 
     }
 
@@ -677,7 +673,7 @@ export class Profile extends Component {
 
 
     /**
-     * add backpack label for specific item
+     * add backpack label for specific item, with ability to move this item to equipment
      * @param item - item data basis of which the new item label will be created
      * @param number - slot number in the backpack to add the appropriate class for the label to be displayed
      */

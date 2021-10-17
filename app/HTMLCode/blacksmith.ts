@@ -5,7 +5,7 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
   <div class='blacksmith__item'>
    <div class='game__errorWrapper disabled' id='blacksmith__error'>Your backpack is full</div>
    
-       <div class='profile__equipment profile__equipment-currentUser' id='equipment_slots'>
+       <div class='profile__equipment profile__equipment-currentUser' id='blacksmith_equipment_slots'>
 
             <div class='profile__equipmentItem profile__equipmentItem-helmet' data-slot-name='helmet' title='Helmet'> 
               <img src='/images/profile_equipment_helmet.png' class="profile__equipmentIcon"/>
@@ -111,17 +111,10 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
        <div class='profile__backpackLabelWrapper profile__backpackLabelWrapper-blacksmith'> 
        <div class='profile__itemSpecs  profile__itemSpecs-backpackSlot disabled' id='blacksmith_backpack_item_label'>
        <div id='blacksmith_backpack_label_wrapper'></div> 
+      
        
        <div class='profile__actionError' id='blacksmith_backpack_move_item_error'></div>
-       <div class='profile__actionWrapper' id='blacksmith_backpack_move_item_btn'>
-         <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='blacksmith_backpack_replace_item_icon'/>
-         <strong class='profile__actionName'>Equip</strong>
-       </div>
-                 
-       <div class='profile__equipmentItemSellWrapper'> 
-         <img src='./images/profile_sell_item_icon.png' class='profile__equipmentItemSellIcon'/>
-         <strong class='profile__equipmentItemSellPrice' id='blacksmith_backpack_sell_item_value'></strong>
-       </div>
+      
     
       </div>
        </div>
