@@ -9,20 +9,20 @@ import { Account } from '../views/account';
 import { Friends } from '../views/friends';
 import { SearchFriend } from '../views/searchFriend';
 import { Guard } from '../views/guard';
-import { MonsterFight } from '../views/monsterFight';
-import { Tavern } from '../views/tavern';
 import { AdminPanel } from '../views/adminPanel';
-import { auth } from '../firebase/index';
-let x;
+
+// function which is responsible for router in game. By user navigation user can easly switch game section
 export const router = async () => {
+
+    // array in which each element is including the path needed to find the specific component, and component with logic behind particualr game section
     const routes: route[] = [
-        {
-            path: "/missions",
-            view: Missions
-        },
         {
             path: "/profile",
             view: Profile
+        },
+        {
+            path: "/missions",
+            view: Missions
         },
         {
             path: "/blacksmith",
@@ -60,21 +60,21 @@ export const router = async () => {
             path: "/admin-panel",
             view: AdminPanel
         }
-    ]
+    ];
 
-    // test each router for potential match
+    // check each router for potential match
     const potentialMatches = routes.map(route => {
         return {
             route: route,
             isMatch: location.pathname === route.path
         }
-    })
+    });
 
-
+    // find index of specific route in routes array, then create new component
     let match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)
+    const routeIndex = routes.indexOf(routes.find(el => el.path === match.route.path));
 
-    // find index of specific route in routes array, then create new object and insert html code.
-    const routeIndex = routes.indexOf(routes.find(el => el.path === match.route.path))
+    // check if potentail match exist
     if (match) {
         match = {
             route: new routes[routeIndex].view,
@@ -87,11 +87,14 @@ export const router = async () => {
             isMatch: true
         };
     }
+
+    // add loading which will be removed by component class
+    document.querySelector('.loading').classList.remove('disabled');
 };
 
-/**
- * 
- * @param url - url needed to change the history state
+/** 
+ * navigate to particular game section
+ * @param url - url needed to change the history state -> router() function will create specific game section
  */
 const navigateTo = (url: string) => {
     history.pushState(null, null, url);
@@ -99,13 +102,14 @@ const navigateTo = (url: string) => {
 };
 
 
+
 export const initRouter = () => {
-    
+
+    // add events for links in navigation in order to redirect user to particular game section by using navigate() function
     document.addEventListener("click", (e: any) => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
             navigateTo(e.target.href);
-            
         };
     });
 
