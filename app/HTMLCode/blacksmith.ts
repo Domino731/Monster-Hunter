@@ -85,20 +85,7 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
              <div class='profile__goldSubstract disabled' id='blacksmith_gold_substract'></div>
           </div>
        </div>           
-  
-
-
-
-   <div>
-
-
-
-
-
-
-
-
-   </div>    
+     
    <div class='profile__backpack' id='blacksmith_backpack_slots'>
       <div>
        <div class='profile__backpackRow'>

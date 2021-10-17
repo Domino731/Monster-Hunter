@@ -10,6 +10,7 @@
      }
      @include tablet {
          flex-direction: column;
+         align-items: center;
 
      }
     &::-webkit-scrollbar{
@@ -53,11 +54,23 @@
                 justify-content: flex-start;
             }
         }
+        &:first-child{
+            @include ipadPro {
+                display: flex;
+                flex-direction: row;
+            }
+            @include tablet {
+                flex-direction: column;
+            }
+        }
         @include laptopL {
             padding: 6px;
         }
         @include ipadPro {
-            width: 768px;    
+              width: 1024px;    
+        }
+        @include tablet {
+            width: 768px;  
         }
         @include mobileL {
             width: 425px;
