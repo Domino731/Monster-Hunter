@@ -782,13 +782,24 @@ export class Blacksmith extends Component {
       ${this.userData.level}`;
       this.dom.portraitImg.src = this.userData.portrait
    }
+
+   // when data has changed then onDataChange() method will rerender component so its need to get dom elements 
+   removeEvents(){
+
+     // backpack
+     const backpack: HTMLElement = document.querySelector('#blacksmith_backpack_slots');
+     backpack.replaceWith(backpack.cloneNode(true));
+     this.dom.backpackLabelRoot = document.querySelector('.profile__backpackLabelWrapper');
+     this.dom.backpackSlots = document.querySelectorAll('#blacksmith_backpack_slots .profile__backpackItem');
+   }
    onDataChange() {
+      this.removeEvents();
       this.setShop();
       this.setGoldAmount();
       this.setUserBackpack();
       this.setUserEquipment();
       this.generalOnDataChange();
-      this.setShop();
+
    }
 
    getDOMElements() {

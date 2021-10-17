@@ -634,7 +634,7 @@ export class Profile extends Component {
         });
     }
 
-    // when data has changed then onDataChange() method will rerender component so this method must get dom elements 
+    // when data has changed then onDataChange() method will rerender component so its need to get dom elements 
     removeEvents() {
 
         // equipment
