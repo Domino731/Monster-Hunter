@@ -192,6 +192,9 @@ export class Component {
 
          updateUserData(this.userData);
       }
+
+      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+      this.userData.shopPicks.blacksmith = getBlacksmithPicks();
    }
 
    // remove loading screen

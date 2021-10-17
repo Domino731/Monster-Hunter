@@ -10,6 +10,7 @@ import { setCountdown } from '../functions/countdown';
 import { getBlacksmithItemLabel } from '../functions/getBlacksmithItemLabel';
 import { getBlacksmithEquipmentLabel } from '../functions/equipmentLabel';
 import { getBlacksmithBackpackLabel } from '../functions/backpackLabel';
+import { helmetsData } from '../properties/shop/helmets';
 export class Blacksmith extends Component {
    private dom: {
       blacksmithContainer: HTMLElement;
@@ -332,14 +333,8 @@ export class Blacksmith extends Component {
                      const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
                      // set new item in this slot
-                     const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
-
-                     // set item statistics
-                     newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-                        newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                        newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                        newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
-
+                     const randomItems: ShopItem[] = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+                     const newMarketItem = randomItems[Math.floor(Math.random() * randomItems.length)]
                      this.market[oldItemIndex] = newMarketItem;
 
                      // substract gold and show animation
@@ -384,6 +379,12 @@ export class Blacksmith extends Component {
 
 
                }
+
+               if (window.innerWidth < 1024) {
+                  this.dom.blacksmithContainer.classList.add('disabled');
+                  this.dom.profileContainer.classList.remove('disabled');
+               }
+
                // save picks into user data in firestore
                this.userData.shopPicks.blacksmith = availablePicks;
                updateUserData(this.userData);
@@ -423,13 +424,12 @@ export class Blacksmith extends Component {
                   this.userData.gold -= selectedItem.initialCost;
                   // find index of old item in order to replace him by new created one, and to update shop
                   const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+
                   // set new item in this slot
-                  const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
-                  // set item statistics
-                  newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-                     newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                     newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-                     newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
+                  const randomItems: ShopItem[] = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+                  const newMarketItem = randomItems[Math.floor(Math.random() * randomItems.length)]
+                  this.market[oldItemIndex] = newMarketItem;
+
 
                   // substract gold and show animation
                   this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
@@ -440,7 +440,7 @@ export class Blacksmith extends Component {
                      this.dom.goldSubstract.classList.add('disabled');
                      this.dom.goldSubstract.innerText = ``;
                   }, 1300);
-                  this.market[oldItemIndex] = newMarketItem;
+
                   this.userData.backpackItems.push(selectedItem);
                   console.log(availablePicks)
                   // save picks into user data in firestore
@@ -450,6 +450,11 @@ export class Blacksmith extends Component {
                   // hide label 
                   this.dom.itemLabel.innerHTML = '';
                   this.dom.itemLabel.classList.add('disabled');
+
+                  if (window.innerWidth < 1024) {
+                     this.dom.blacksmithContainer.classList.add('disabled');
+                     this.dom.profileContainer.classList.remove('disabled');
+                  }
 
                   updateUserData(this.userData);
                }
@@ -497,14 +502,8 @@ export class Blacksmith extends Component {
 
 
             // set new item in this slot
-            const newMarketItem: ShopItem = this.market[Math.floor(Math.random() * this.market.length)];
-
-            // set item statistics
-            newMarketItem.properties.strength = setItemStats(newMarketItem.properties.strength, this.userData.rawStats.strength),
-               newMarketItem.properties.defence = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-               newMarketItem.properties.physicalEndurance = setItemStats(newMarketItem.properties.defence, this.userData.rawStats.defence),
-               newMarketItem.properties.luck = setItemStats(newMarketItem.properties.luck, this.userData.rawStats.luck)
-
+            const randomItems: ShopItem[] = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
+            const newMarketItem = randomItems[Math.floor(Math.random() * randomItems.length)]
             this.market[oldItemIndex] = newMarketItem;
          }
 
@@ -523,11 +522,15 @@ export class Blacksmith extends Component {
             this.dom.goldSubstract.classList.add('disabled');
             this.dom.goldSubstract.innerText = ``;
          }, 1300);
+
+         if (window.innerWidth < 1024) {
+            this.dom.blacksmithContainer.classList.add('disabled');
+            this.dom.profileContainer.classList.remove('disabled');
+         }
       };
 
       const equipmentSlot: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)];
       // check if equipment slot is empty
-      console.log(availablePicks[slotIndex].picks)
       if (equipmentSlot === undefined) {
          console.log('kupno do eqkupinku')
          console.log(availablePicks[slotIndex].picks);
@@ -669,7 +672,7 @@ export class Blacksmith extends Component {
       this.dom.equipmentSlots = document.querySelectorAll('#blacksmith_equipment_slots div[data-slot-name]');
    }
 
-   
+
    onDataChange() {
       this.removeEvents();
       this.setShop();
@@ -726,21 +729,37 @@ export class Blacksmith extends Component {
       }
    }
 
+   // events applied on mobile nav buttons by which the user can switch between blacksmith market and profile
    toogleView() {
+
+      const hideNavContainer = () => {
+
+         // hide nav container
+         const navContainer: HTMLElement = document.querySelector('.nav');
+         navContainer.style.display = 'none';
+
+         // change nav icon 
+         const navIcon: HTMLImageElement = document.querySelector('.mobileNav__icon');
+         navIcon.src = './images/menu.png';
+      }
+
+
       this.dom.mobileNavFristSwitch.addEventListener('click', () => {
+         hideNavContainer();
          this.dom.blacksmithContainer.classList.remove('disabled');
          this.dom.profileContainer.classList.add('disabled');
       });
       this.dom.mobileNavSecondSwitch.addEventListener('click', () => {
+         hideNavContainer();
          this.dom.blacksmithContainer.classList.add('disabled');
          this.dom.profileContainer.classList.remove('disabled');
       });
+
    }
 
    mobile() {
       if (window.innerWidth < 1024) {
-         this.dom.blacksmithContainer.classList.add('disabled');
-         // this.dom.profileContainer.classList.add('disabled');
+         this.dom.profileContainer.classList.add('disabled');
          this.toogleView();
       }
    }
@@ -918,49 +937,49 @@ export class Blacksmith extends Component {
 
    }
 
- /////////////////////////////////// equipment ///////////////////////////////////////////
-     /**
-   * add equipment label for specific item
-   * @param item - item data basis of which the new item label will be created
-   */
-      equipmentLabel(item: ShopItem) {
+   /////////////////////////////////// equipment ///////////////////////////////////////////
+   /**
+ * add equipment label for specific item
+ * @param item - item data basis of which the new item label will be created
+ */
+   equipmentLabel(item: ShopItem) {
 
-         // hide backpack label
-         this.dom.backpackLabelRoot.innerHTML = '';
-         this.dom.backpackLabelRoot.classList.add('disabled');
- 
-         // prevent of label hiding 
-         clearInterval(this.hideLabelInterval.equipment);
- 
-         // hide backpack label
-         this.dom.backpackLabelRoot.classList.add('disabled');
- 
-         // reset equipement label styles
-         this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
- 
-         // show label
-         this.dom.equipmentLabelRoot.classList.add(item.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common');
-         this.dom.equipmentLabelRoot.classList.add(`profile__itemSpecs-${item.type}`);
-         this.dom.equipmentLabelRoot.innerHTML = getBlacksmithEquipmentLabel(item);
-         this.dom.equipmentLabelRoot.classList.remove('disabled');
- 
-         // keep displaying label when user  focus is on label
-         this.dom.equipmentLabelRoot.addEventListener('mouseover', () => clearInterval(this.hideLabelInterval.equipment));
- 
-         // hide when equipment slot loses his focus
-         this.dom.equipmentLabelRoot.addEventListener('mouseleave', () => {
-             this.dom.equipmentLabelRoot.innerHTML = '';
-             this.dom.equipmentLabelRoot.classList.add('disabled');
-         });
- 
-         // get elements which are needed for moving item from equipment to backpack
-         const replaceBtn: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_btn');
-         const errorWrapper: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#blacksmith_equipment_move_item_error');
- 
-         // add a event which is responsible for moving item  the equipment to backpack
-         replaceBtn.addEventListener('click', () => this.moveItemToBackpack(item, errorWrapper));
- 
-     }
+      // hide backpack label
+      this.dom.backpackLabelRoot.innerHTML = '';
+      this.dom.backpackLabelRoot.classList.add('disabled');
+
+      // prevent of label hiding 
+      clearInterval(this.hideLabelInterval.equipment);
+
+      // hide backpack label
+      this.dom.backpackLabelRoot.classList.add('disabled');
+
+      // reset equipement label styles
+      this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
+
+      // show label
+      this.dom.equipmentLabelRoot.classList.add(item.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common');
+      this.dom.equipmentLabelRoot.classList.add(`profile__itemSpecs-${item.type}`);
+      this.dom.equipmentLabelRoot.innerHTML = getBlacksmithEquipmentLabel(item);
+      this.dom.equipmentLabelRoot.classList.remove('disabled');
+
+      // keep displaying label when user  focus is on label
+      this.dom.equipmentLabelRoot.addEventListener('mouseover', () => clearInterval(this.hideLabelInterval.equipment));
+
+      // hide when equipment slot loses his focus
+      this.dom.equipmentLabelRoot.addEventListener('mouseleave', () => {
+         this.dom.equipmentLabelRoot.innerHTML = '';
+         this.dom.equipmentLabelRoot.classList.add('disabled');
+      });
+
+      // get elements which are needed for moving item from equipment to backpack
+      const replaceBtn: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_btn');
+      const errorWrapper: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#blacksmith_equipment_move_item_error');
+
+      // add a event which is responsible for moving item  the equipment to backpack
+      replaceBtn.addEventListener('click', () => this.moveItemToBackpack(item, errorWrapper));
+
+   }
 
    // clear equipment slots -> remove items graphics 
    clearEquipmentSlots() {
@@ -1074,8 +1093,19 @@ export class Blacksmith extends Component {
       this.setShop();
       this.buyItemByLabel();
       this.dragEventForMarketSlots();
-      // this.labelForBackpackEvent();
-      //this.rwd();
+    
+      const item = helmetsData[12]
+      const newLabel: HTMLElement = document.createElement('div');
+      newLabel.innerHTML = getBlacksmithBackpackLabel(item, item);
+
+      // set styles
+      this.dom.backpackLabelRoot.className = 'profile__itemSpecs disabled';
+      this.dom.backpackLabelRoot.classList.add(`profile__itemSpecs-backpackSlot${8}`);
+      this.dom.backpackLabel.root.classList.remove('disabled');
+
+       // show this label
+       this.dom.backpackLabelRoot.classList.remove('disabled');
+       this.dom.backpackLabelRoot.appendChild(newLabel);
    }
 }
 

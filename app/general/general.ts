@@ -29,11 +29,11 @@ export class General {
             if (this.timeout) {
                 clearTimeout(this.timeout);
             }
-            this.timeout = setTimeout(function () {
-                if (window.innerHeight >= 1000 || window.innerWidth < 1024) {
-                    location.reload();
-                }
-            }, 1000);
+            // this.timeout = setTimeout(function () {
+            //     if (window.innerHeight >= 1000 || window.innerWidth < 1024) {
+            //         location.reload();
+            //     }
+            // }, 1000);
         }
         window.addEventListener('resize', resize);
     }

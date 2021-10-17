@@ -15,7 +15,8 @@ export const setItemStats = (itemStatistic: number | null, userRawStatistic: num
         const newStat: number = ((userRaw / 100) * itemPercentage);
 
         // add a random number to newStats value, in order to have different statistics based on user stats
-        const result: number = Math.floor((newStat + (Math.random() * newStat))) + Math.random() * userRawStatistic;
+        let result: number = Math.ceil((newStat + (Math.random() * newStat))) + Math.random() * userRawStatistic;
+        result + Math.random() * ((userRawStatistic / 3))
 
         return Math.ceil(result / 8) + 1;
     }

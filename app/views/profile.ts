@@ -769,14 +769,27 @@ export class Profile extends Component {
     // events applied on mobile nav buttons by which the user can switch between profile and backpack
     toogleView() {
 
+        const hideNavContainer = () => {
+
+            // hide nav container
+             const navContainer: HTMLElement = document.querySelector('.nav');
+             navContainer.style.display = 'none';
+   
+             // change nav icon 
+             const navIcon: HTMLImageElement =  document.querySelector('.mobileNav__icon');
+             navIcon.src = './images/menu.png';
+         }
+
         // show backpack container 
         this.dom.mobileNavFristSwitch.addEventListener('click', () => {
+            hideNavContainer();
             this.dom.backpackContainer.classList.add('disabled');
             this.dom.profileContainer.classList.remove('disabled');
         });
 
         // show profile container 
         this.dom.mobileNavSecondSwitch.addEventListener('click', () => {
+            hideNavContainer();
             this.dom.backpackContainer.classList.remove('disabled');
             this.dom.profileContainer.classList.add('disabled');
         });

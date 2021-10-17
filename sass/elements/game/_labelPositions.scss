@@ -379,7 +379,7 @@
         }
     }
     &-backpackSlot2 {
-        transform: translate(151px, -96%);
+        transform: translate(149px, -96%);
         &::after {
             left: 28px;
             bottom: -26px;
@@ -401,28 +401,31 @@
     &-backpackSlot3 {
         transform: translate(215px, -96%);
         &::after {
-            left: 140px;
+            left: 146px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
+            @include laptopL {
+                left: 111px;
+            }
         }
         @include desktopM {
-            transform: translate(153px, -96%);
+            transform: translate(145px, -96%);
         }
         @include desktopS {
-            transform: translate(120px, -96%);
+            transform: translate(114px, -96%);
         }
         @include laptopL {
-            transform: translate(142px, -96%);
-        }
-        @include laptopM {
             transform: translate(133px, -96%);
         }
+        @include laptopM {
+            transform: translate(124px, -96%);
+        }
         @include laptopS {
-            transform: translate(98px, -96%);
+            transform: translate(91px, -96%);
         }
     }
     &-backpackSlot4 {
-        transform: translate(260px, -96%);
+        transform: translate(270px, -96%);
         &::after {
             right: 28px;
             bottom: -26px;
@@ -493,7 +496,7 @@
         }
     }
     &-backpackSlot7 {
-        transform: translate(151px, -100%);
+        transform: translate(149px, -100%);
         margin-top: 160px;
         &::after {
             left: 28px;
@@ -520,34 +523,40 @@
         }
     }
     &-backpackSlot8 {
-        transform: translate(215px, -100%);
+        transform: translate(207px, -100%);
         margin-top: 160px;
         &::after {
-            left: 154px;
+            left: 146px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
+            @include laptopL {
+                left: 111px;
+            }
+            @include laptopS {
+                left: 94px;
+            }
         }
         @include desktopM {
             margin-top: 134px;
         }
         @include desktopM {
-            transform: translate(153px, -100%);
-        }
-        @include desktopS {
-            transform: translate(120px, -100%);
-        }
-        @include laptopL {
             transform: translate(142px, -100%);
         }
-        @include laptopM {
+        @include desktopS {
+            transform: translate(112px, -100%);
+        }
+        @include laptopL {
             transform: translate(133px, -100%);
         }
+        @include laptopM {
+            transform: translate(123px, -100%);
+        }
         @include laptopS {
-            transform: translate(98px, -100%);
+            transform: translate(91px, -100%);
         }
     }
     &-backpackSlot9 {
-        transform: translate(260px, -100%);
+        transform: translate(270px, -100%);
         margin-top: 160px;
         &::after {
             right: 28px;
@@ -681,7 +690,7 @@
         @include mobileM {
             border-radius: 13px;
             transform: translate(20px, -92%);
-            &::after{
+            &::after {
                 top: auto;
                 bottom: -16px;
                 clip-path: polygon(50% 100%, 0 0, 100% 0);
@@ -713,18 +722,16 @@
         }
         @include mobileM {
             transform: translate(159px, -92%);
-            &::after{
+            &::after {
                 top: auto;
                 bottom: -16px;
                 clip-path: polygon(50% 100%, 0 0, 100% 0);
-                
             }
         }
         @include mobileS {
             border-radius: 10px;
             transform: translate(104px, -92%);
         }
-
     }
 
     @include laptopL {
@@ -970,7 +977,7 @@
         }
         &-backpackSlot8 {
             &::after {
-                left: 140px;
+                left: 145px;
             }
         }
         &-backpackSlot9 {
@@ -1022,7 +1029,7 @@
     }
 }
 
-// blacksmith backpack -> mobileL 
+// blacksmith backpack -> mobileL
 @include mobileL {
     .profile__backpack .profile__itemSpecs {
         &-backpackSlot1,
@@ -1056,15 +1063,14 @@
         &-backpackSlot10 {
             transform: translate(139px, -100%);
         }
-        
-            &-backpackSlot6,
-            &-backpackSlot7,
-            &-backpackSlot8,
-            &-backpackSlot9,
-            &-backpackSlot10 {
-              
-                margin-top: 83px;
-            }
+
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10 {
+            margin-top: 83px;
+        }
     }
 }
 // profile backpack -> mobileL
@@ -1181,15 +1187,14 @@
         &-backpackSlot10 {
             transform: translate(142px, -100%);
         }
-        
-            &-backpackSlot6,
-            &-backpackSlot7,
-            &-backpackSlot8,
-            &-backpackSlot9,
-            &-backpackSlot10 {
-              
-                margin-top: 72px;
-            }
+
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10 {
+            margin-top: 72px;
+        }
     }
 }
 
@@ -1227,15 +1232,14 @@
         &-backpackSlot10 {
             transform: translate(93px, -100%);
         }
-        
-            &-backpackSlot6,
-            &-backpackSlot7,
-            &-backpackSlot8,
-            &-backpackSlot9,
-            &-backpackSlot10 {
-              
-                margin-top: 62px;
-            }
+
+        &-backpackSlot6,
+        &-backpackSlot7,
+        &-backpackSlot8,
+        &-backpackSlot9,
+        &-backpackSlot10 {
+            margin-top: 62px;
+        }
     }
 }
 @include mobileS {
