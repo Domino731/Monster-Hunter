@@ -1,5 +1,3 @@
-import { Friends } from './views/friends';
-
 export interface route {
     path: string 
     view: any

@@ -1,4 +1,3 @@
-import { auth } from '../firebase/index';
 import { getAdminPanelHTMLCode } from '../HTMLCode/adminPanel';
 
 export class AdminPanel{
@@ -21,6 +20,5 @@ export class AdminPanel{
         this.render();
         this.getDOMElements();
         this.initScripts();
-        console.log(auth.currentUser.getToken)
     }
 }

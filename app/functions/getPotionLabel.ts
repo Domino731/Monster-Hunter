@@ -1,6 +1,12 @@
-import { potionsData } from '../../properties/shop/potions';
-import { ShopItem } from '../../types';
-export const getPotionLabel = (item: ShopItem, classNumber: number) : string => {
+
+import { ShopItem } from '../types';
+
+/**
+ * get html code for potion label
+ * @param item - data about potion needed to create label of this potion
+ * @param classNumber - number needed to add appropriate class which is responsible for displaying 
+ */
+export const getPotionLabel = (item: ShopItem, classNumber: 1 | 2) : string => {
     return `
       <div class=' profile__itemSpecs potion__label potion__label-${classNumber}'>
       <h3 class='market__itemTitle white  ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
@@ -43,9 +49,6 @@ export const getPotionLabel = (item: ShopItem, classNumber: number) : string => 
           </tr>
           `
               : ``}
-          
-
-
         </tbody>
       </table>
       </div>

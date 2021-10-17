@@ -110,8 +110,6 @@ export const initRouter = () => {
     });
 
     // for development
-    const developmentRender = new Account();
+    const developmentRender = new Guard();
     window.addEventListener("popstate", router);
 };
-
-// <a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>

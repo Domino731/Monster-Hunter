@@ -1,11 +1,17 @@
-import { MissionData } from '../../types';
+import { MissionData } from "../types"
+
+/**
+ * get html code for mission details - title, description, exp, gold, time and enemy
+ * @param mission - data about mission needed to create details about this mission
+ */
 export const getMissionDetails = (mission: MissionData) : string => {
    return `
-   
    <h2 class='mission__title'>${mission.title}</h2>
+
    <p class='mission__description'>
        ${mission.dsc}
    </p>
+
    <div class='mission__general'>
 
        <div>
@@ -27,10 +33,8 @@ export const getMissionDetails = (mission: MissionData) : string => {
                <strong class='mission__detailResult'>${mission.time}</strong>
            </div>
        </div>
-
        <img src='${mission.monster.src}' class='mission__monsterWrapper'> </img>
 
-
    </div>
-   `
+   `;
 }

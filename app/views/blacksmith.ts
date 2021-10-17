@@ -1,18 +1,15 @@
 import { AvailableMarketPicks, ShopItem, UserData } from '../types';
-import { chestplatesData } from '../properties/shop/chestplates';
 import { helmetsData } from '../properties/shop/helmets';
-import { getBlacksmithItemLabel } from './sub_views/getBlacksmithItemLabel';
-import { View } from './view';
+import { Component } from './view';
 import { setItemStats } from '../functions/setItemStats';
 import { updateUserData } from '../firebase/operations';
-import { getEquipmentLabel } from './sub_views/getEquipmentLabel';
 import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { getBlacksmithHTMLCode, blacksmithMobileNavCode } from '../HTMLCode/blacksmith';
-import { getBlacksmithBackpackLabel } from './sub_views/getBlacksmithBackpackLabel';
 import { getBlacksmithItems } from '../functions/getBlacksmithItems';
 import { getNeededExp } from '../functions/getNeededExp';
 import { setCountdown } from '../functions/countdown';
-export class Blacksmith extends View {
+
+export class Blacksmith extends Component {
    private dom: {
       blacksmithContainer: HTMLElement;
       mobileNavFristSwitch: HTMLElement;
@@ -58,6 +55,8 @@ export class Blacksmith extends View {
    private showBlacksmithLabel: ReturnType<typeof setInterval> | null
    constructor() {
       super(),
+      this.freepikAttribute = `<a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>`;
+      this.bodyBackgroundSrc = '/images/pets_background.jpg';
          this.dom = {
             marketSlotsContainer: document.querySelectorAll('.market__shopFrame'),
             blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),
@@ -987,5 +986,16 @@ export class Blacksmith extends View {
    }
 }
 
-// <a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>
+
+function getEquipmentLabel(currentItem: ShopItem): string {
+   throw new Error('Function not implemented.');
+}
+
+function getBlacksmithItemLabel(marketItem: ShopItem, currentItem: ShopItem): string {
+   throw new Error('Function not implemented.');
+}
+
+function getBlacksmithBackpackLabel(currentItem: ShopItem, equipmentItem: ShopItem): string {
+   throw new Error('Function not implemented.');
+}
 

@@ -1,14 +1,14 @@
 import { SearchedUserData } from './../types';
 import { getFriendsHTMLCode } from '../HTMLCode/friends';
-import { View } from './view';
-import { SearchedUser } from './sub_views/specificUser';
+import { Component } from './view';
+import { SearchedUser } from './specificUser';
 import { db, auth } from '../firebase/index';
 import { friendWindow } from '../HTMLCode/friends';
 import { Chat } from './chat';
 import { getNeededExp } from '../functions/getNeededExp';
 
 // class responsbile for friends list, by which user can display friend profile or chat
-export class Friends extends View {
+export class Friends extends Component {
 
   private dom: {
     // buttons by which user can display sort or filter friends form - showFormsEvents() method
@@ -54,6 +54,8 @@ export class Friends extends View {
     this.friendsList = [];
     this.friendsListBackup = [];
     this.friendNick = null;
+    this.freepikAttribute = `<a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>`;
+    this.bodyBackgroundSrc = '/images/background_friends.jpg';
     this.dom = {
       mobileCloseBtn: document.querySelector('.closeIcon'),
       friendsContainer: document.querySelector('#friends_container'),

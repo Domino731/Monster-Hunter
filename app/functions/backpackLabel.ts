@@ -1,7 +1,14 @@
-import { ShopItem } from "../../types"
+import { ShopItem } from "../types"
 import { compareStats } from "./compareStats"
 
-export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem) : string => {
+/**
+ * get html code for the backpack label (for profile section)
+ * @param item - data about the item on the basis of which the label will be created
+ * @param currentItem - data about the actual item in the equipment, needed to compare selected item to current item in equipment
+ */
+export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | undefined) : string => {
+
+    // user may have an empty slot in the equipment 
     if (currentItem === undefined) {
         return `
 
@@ -44,9 +51,7 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem) :
             </tr>
             `
                 : ``}
-            
-
-
+          
           </tbody>
         </table>
 
@@ -56,7 +61,7 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem) :
           <strong class='profile__actionName'>Equip</strong>
         </div>
     
-        `
+        `;
 
 
     }
@@ -110,11 +115,14 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem) :
           <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon' id='profile_backpack_replace_item_icon'/>
           <strong class='profile__actionName'>Equip</strong>
         </div>
-        `
+        `;
     }
 }
 
-
+/**
+ * get label for backpack item (for searched user section)
+ * @param item - data about the item on the basis of which the label will be created
+ */
 export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
   return `
 
@@ -134,8 +142,6 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
         <td>${item.properties.strength}</td>
       </tr>` : ''}
   
-       
-
      ${item.properties.physicalEndurance !== null ?
           `<tr>
          <td>Physical endurance</td>
@@ -157,10 +163,8 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
       </tr>
       `
           : ``}
-      
-
 
     </tbody>
   </table>
-  `
+  `;
 }

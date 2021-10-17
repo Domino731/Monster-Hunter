@@ -1,10 +1,10 @@
-import { getSpecificUserHTMLCode } from '../../HTMLCode/specificUser';
-import { UserData, SearchedUserData, ShopItem, Conversation } from '../../types';
-import { potionsData } from '../../properties/shop/potions';
-import { getPotionLabel } from './getPotionLabel';
-import { updateUserData } from '../../firebase/operations';
-import { db, auth } from '../../firebase/index';
-import { getSearchedUserBackpackLabel } from './backpackLabel';
+import { getSpecificUserHTMLCode } from '../HTMLCode/specificUser';
+import { UserData, SearchedUserData, ShopItem, Conversation } from '../types';
+import { potionsData } from '../properties/shop/potions';
+import { getPotionLabel } from '../functions/getPotionLabel';
+import { updateUserData } from '../firebase/operations';
+import { db, auth } from '../firebase/index';
+import { getSearchedUserBackpackLabel } from '../functions/backpackLabel';
 
 // class responsbile for searched user view
 export class SearchedUser {

@@ -40,5 +40,3 @@ export const getSearchFriendHTMLCode = ( ) : string => {
   `
 }
 
-// freepik
-//      <a href='https://www.freepik.com/vectors/tree'>Tree vector created by upklyak - www.freepik.com</a>

@@ -2,14 +2,14 @@
 import { formatDate } from './../functions/formatDate';
 import { SearchedUserData } from './../types';
 import { getSearchFriendHTMLCode } from '../HTMLCode/searchFriend';
-import { View } from './view';
+import { Component } from './view';
 import { db, auth } from '../firebase/index';
 import { getStatusImgSrc } from '../functions/getStatusImgSrc';
-import { SearchedUser } from './sub_views/specificUser';
+import { SearchedUser } from './specificUser';
 import { getNeededExp } from '../functions/getNeededExp';
 
 // all users list by which current user can find specific users
-export class SearchFriend extends View {
+export class SearchFriend extends Component {
 
    // array with all users data from firestore, based on this data getAllUsers() method will render list with all users
    private allUsersData: SearchedUserData[];
@@ -34,6 +34,8 @@ export class SearchFriend extends View {
    }
    constructor() {
       super();
+      this.freepikAttribute = ` <a href='https://www.freepik.com/vectors/tree'>Tree vector created by upklyak - www.freepik.com</a>`;
+      this.bodyBackgroundSrc = '/images/background_search_friend.jpg';
       this.allUsersData = [];
       this.searchedUser = null;
       this.dom = {

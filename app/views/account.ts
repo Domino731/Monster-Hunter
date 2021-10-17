@@ -1,13 +1,13 @@
 import validator from 'validator';
 import { auth, db } from '../firebase/index';
 import { includeNumber, isUpper } from '../functions/other';
-import { View } from './view';
+import { Component } from './view';
 import { getAccountHTMLCode } from '../HTMLCode/account';
 import uniqid from 'uniqid';
 import { UserData } from '../types';
 
 // class reponsible for account section, by which can change his password, email or delete his account :(
-export class Account extends View {
+export class Account extends Component {
 
     // object with data needed to execute firebase auth action, changing in changeDataEvent() method
     private data: {

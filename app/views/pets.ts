@@ -1,11 +1,11 @@
 import { getPetsHTMLCode } from '../HTMLCode/pets';
-import { View } from './view';
+import { Component } from './view';
 import { PetData } from '../types';
 import { petsData } from '../properties/pets/petsData';
 import { updateUserData } from '../firebase/operations';
 
 // class reponsible for pets component by which user can select his pet
-export class Pets extends View {
+export class Pets extends Component  {
 
   // value holding interval 
   private countdownInterval: null | ReturnType<typeof setInterval>;
@@ -30,6 +30,8 @@ export class Pets extends View {
   }
   constructor() {
     super()
+    this.freepikAttribute = `<a href='https://www.freepik.com/vectors/background'>Background vector created by upklyak - www.freepik.com</a>`;
+    this.bodyBackgroundSrc = '/images/background_blacksmith.jpg';
     this.countdownInterval = null;
     this.dom = {
       rentBtns: document.querySelectorAll('.pets__buy button'),
@@ -255,5 +257,4 @@ export class Pets extends View {
     this.setCountdown();
     this.setGoldAmount();
   }
-
 }

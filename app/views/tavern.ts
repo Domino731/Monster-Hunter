@@ -1,13 +1,13 @@
-import { View } from './view';
+import { Component } from './view';
 import { getTavernHTMLCode } from '../HTMLCode/tavern';
 import { MissionData, CurrentMission } from '../types';
-import { getMissionDetails } from './sub_views/getMissionDetails';
 import { updateUserData } from '../firebase/operations';
 import { Travel } from './travel';
 import { setCountdown } from '../functions/countdown';
+import { getMissionDetails } from '../functions/getMissionDetails';
 
 // class responsible for tavern section by which user can select a mission 
-export class Tavern extends View {
+export class Tavern extends Component {
 
     // When the user clicks on the mission graphic (papyrus) the value will change to mission data ( chooseMission() method).
     // And when user click on the button responsible for starting this mission, this mission will be saved as the current one and the travel will start - startMission() method. 
@@ -35,6 +35,8 @@ export class Tavern extends View {
 
     constructor() {
         super()
+        this.freepikAttribute = `<a href='https://www.freepik.com/vectors/restaurant'>Restaurant vector created by upklyak - www.freepik.com</a>`;
+        this.bodyBackgroundSrc = '/images/background_missions.jpg';
         this.dom = {
             startMissionBtn: document.querySelector('.mission__acceptBtn'),
             missionContentWrapper: document.querySelector('.mission__informations'),

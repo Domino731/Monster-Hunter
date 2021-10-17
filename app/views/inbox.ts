@@ -1,9 +1,9 @@
 import { getInboxHTMLCode, mailHTMLCode } from '../HTMLCode/inbox';
-import { View } from './view';
+import { Component } from './view';
 import { updateUserData } from '../firebase/operations';
 
 // class responsible for inbox - user can open email and read about game, new features and other...
-export class Inbox extends View {
+export class Inbox extends Component {
 
   private dom: {
     // container with all emails and amount of mails, needed to hide this container when user selects a specific mail (only below 1024px) - closeMail() and toogleMails() methods
@@ -20,6 +20,7 @@ export class Inbox extends View {
   constructor() {
     super();
     this.freepikAttribute = `<a href='https://www.freepik.com/vectors/character'>Character vector created by macrovector - www.freepik.com</a>`;
+    this.bodyBackgroundSrc = '/images/background_inbox.jpg';
     this.dom = {
       mailListContainer: document.querySelector('.inbox__item:first-child'),
       closeMailIcon: document.querySelector('.closeIcon__email'),
@@ -128,6 +129,3 @@ export class Inbox extends View {
     console.log('data changed');
   }
 }
-
-// introduce img
-// <a href='https://www.freepik.com/vectors/building'>Building vector created by macrovector - www.freepik.com</a>

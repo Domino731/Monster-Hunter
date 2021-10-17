@@ -60,36 +60,3 @@ export const getTavernHTMLCode = (user: UserData) : string => {
 }
 
 
-// for rwd
-/*
- <h2 class='mission__title'>Dark unicorn</h2>
-   <p class='mission__description'>
-       ${`asdddasddddddddddddddddddddddddd`}
-   </p>
-   <div class='mission__general'>
-
-       <div>
-           <div class='mission__detail'>
-               <img class='mission__detailImg' src='./images/coin.png' alt='coin' />
-               <span class='mission__detailName'>Coins: </span>
-               <strong class='mission__detailResult'>12044</strong>
-           </div>
-           <div class='mission__detail'>
-               <img class='mission__detailImg' src='./images/mission_detail_increase.png'
-                   alt='Level increase' />
-               <span class='mission__detailName'>Experience: </span>
-               <strong class='mission__detailResult'>125</strong>
-           </div>
-           <div class='mission__detail'>
-               <img class='mission__detailImg' src='./images/mission_detail_hourglass.png'
-                   alt='hourglass' />
-               <span class='mission__detailName'>Time: </span>
-               <strong class='mission__detailResult'>10m.</strong>
-           </div>
-       </div>
-
-       <img src='./images/coin.png' class='mission__monsterWrapper'> </img>
-
-
-   </div>*/
-

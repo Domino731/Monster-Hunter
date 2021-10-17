@@ -1,10 +1,10 @@
 import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
-import { View } from './view';
+import { Component} from './view';
 import { getGuardHTMLCode } from '../HTMLCode/guard';
 import { updateUserData } from '../firebase/operations';
 
 // A class reposnsible for guard section, with menu by which user can start new gaurd and countdown with displays guard time left 
-export class Guard extends View {
+export class Guard extends Component {
 
   // amount of gold which will be added to user's account after guard end, this value 
   // is changing by input range in guardSliderEvent() Method. When the user presses button reponsible for guard start, this value
@@ -243,12 +243,18 @@ export class Guard extends View {
       this.dom.menu.className = 'guard__wrapper';
       this.dom.castleCity.className = 'guard__wrapper disabled';
       this.countdownInterval !== null && clearInterval(this.countdownInterval);
+      this.freepikAttribute = `<a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpocket - www.freepik.com</a>`;
+      this.bodyBackgroundSrc = '/images/background_guard.jpg';
+      this.setBodyBackground();
     }
     // if user have active guard show then guard panel with countdown
     else if (this.userData.status === 'guard') {
       this.countdownInterval !== null && clearInterval(this.countdownInterval);
       this.dom.menu.className = 'guard__wrapper disabled';
       this.dom.castleCity.className = 'guard__wrapper';
+      this.freepikAttribute = `<a href='https://www.freepik.com/vectors/book'>Book vector created by upklyak - www.freepik.com</a>`;
+      this.bodyBackgroundSrc = '/images/background_guard_city.jpg';
+      this.setBodyBackground();
       this.guardCountdown();
     }
     // if user have active mission hide button which is responsible for starting new guard
@@ -256,6 +262,9 @@ export class Guard extends View {
       this.dom.menu.className = 'guard__wrapper';
       this.dom.castleCity.className = 'guard__wrapper disabled';
       this.dom.acceptBtn.parentElement.innerHTML = '';
+      this.freepikAttribute = `<a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpocket - www.freepik.com</a>`;
+      this.bodyBackgroundSrc = '/images/background_guard.jpg';
+      this.setBodyBackground();
     }
   }
 

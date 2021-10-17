@@ -1,7 +1,7 @@
 import { getChatHTMLCode } from '../HTMLCode/chat';
 import { SearchedUserData, Conversation, MessageData, UserData } from '../types';
 import { auth, db } from '../firebase/index';
-import { getMessageCode } from './sub_views/messages';
+import { getMessageCode } from '../functions/messages';
 
 // class responsible for chat 
 export class Chat {

@@ -1,7 +1,17 @@
-import { auth } from '../../firebase/index';
-import { MessageData } from '../../types';
-import { formatChatDate } from '../../functions/formatDate';
-export const getMessageCode = (friend, currentUser, message: MessageData): string => {
+import { UserData, SearchedUserData } from '../types';
+import { auth } from '../firebase/index';
+import { formatChatDate } from './formatDate';
+import { MessageData } from '../types';
+
+/**
+ * get html for message
+ * @param friend - data about friend, needed to create message with appropriate styles
+ * @param currentUser - data about current user, needed to create message  with appropriate styles
+ * @param message - data about message
+ */
+export const getMessageCode = (friend: SearchedUserData, currentUser : UserData, message: MessageData): string => {
+
+  // check if message was sent by a friend in order to add appropriate styles
   if (message.userId !== auth.currentUser.uid) {
     return `
     <div class='message__portraitWrapper'>
@@ -20,13 +30,12 @@ export const getMessageCode = (friend, currentUser, message: MessageData): strin
       }
         <strong>${formatChatDate(message.createdAt)}</strong>
     </div>
-    `
+    `;
   }
+
+
   else {
     return `
- 
-   
-
     <div class='message__content message__content-user'> 
       <strong class='message__nick'>You</strong>
       ${message.content.map((el, num) => {
@@ -44,12 +53,17 @@ export const getMessageCode = (friend, currentUser, message: MessageData): strin
          <img src='${currentUser.portrait}'/>
        </div>
     </div>
-
-    `
+    `;
   }
 }
 
-const getFriendCloudClassName = (num: number, last: boolean) => {
+
+/** 
+ *  function responsbile for adding class which is reponsbile for the border radius of message cloud - for friend message
+ * @param num - number needed to check if the message is first
+ * @param last - boolean value needed to check uf the message is last
+ */
+const getFriendCloudClassName = (num: number, last: boolean) : string => {
   if (num === 0) {
     return 'message__cloud-friendFirst'
   }
@@ -57,7 +71,13 @@ const getFriendCloudClassName = (num: number, last: boolean) => {
     return 'message__cloud-friendLast'
   }
 }
- const getUserCloudClassName = (num: number, last: boolean) => {
+
+/** 
+ * function responsbile for adding class which is reponsbile for the border radius of message cloud - for user message
+ * @param num - number needed to check if the message is first
+ * @param last - boolean value needed to check uf the message is last
+ */
+ const getUserCloudClassName = (num: number, last: boolean) : string => {
   if (num === 0) {
     return 'message__cloud-userFirst'
   }

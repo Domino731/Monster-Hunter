@@ -5,7 +5,8 @@ export class General {
 
     // button by which user can log out -  logoutEvent() method
     private logoutBtn: HTMLElement;
-    // timeout needed to set delay (1s) on window resize - mobile()
+
+    // timeout needed to set delay (1s) on window resize - mobile() method
     private timeout: null | ReturnType<typeof setTimeout>;
 
     constructor() {

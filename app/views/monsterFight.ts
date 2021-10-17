@@ -1,5 +1,5 @@
 
-import { View } from './view';
+import { Component} from './view';
 import { getMonsterFightHTMLCode } from '../HTMLCode/monsterFight';
 import { getRandomMission } from '../functions/missionGenerator';
 import { getNeededExp } from '../functions/getNeededExp';
@@ -8,7 +8,7 @@ import { updateUserData } from '../firebase/operations';
 import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
 
 // class reponsible for section with fight between user and monster
-export class MonsterFight extends View {
+export class MonsterFight extends Component {
 
     // interval which contains logic responsbile for fight and is cleared after the fight is over - fightAnimations() method
     private fightInterval: null | ReturnType<typeof setInterval>;
@@ -41,6 +41,8 @@ export class MonsterFight extends View {
 
     constructor() {
         super()
+        this.freepikAttribute = `<a href='https://www.freepik.com/vectors/nature'>Nature vector created by brgfx - www.freepik.com</a>`;
+        this.bodyBackgroundSrc = '/images/background_monster_fight.jpg';
         this.fightInterval = null;
         this.dom = {
             fightContainer: document.querySelector('#fight_container'),

@@ -1,11 +1,11 @@
 import { Tavern } from './tavern';
-import { View } from './view';
+import { Component } from './view';
 import { OnGuardTavern } from './onGuardTavern';
 import { Travel } from './travel';
 import { MonsterFight } from './monsterFight';
 
 // class which checks the status of the user and moves it to the appropriate section  
-export class Missions extends View{
+export class Missions extends Component{
 
     constructor() {
       super(); 

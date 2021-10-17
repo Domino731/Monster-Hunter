@@ -1,5 +1,5 @@
 import { getProfileHTMLCode, profileMobileNavCode } from '../HTMLCode/profile';
-import { View } from './view';
+import { Component } from './view';
 import { updateUserData } from '../firebase/operations';
 import { potionsData } from '../properties/shop/potions';
 import { ShopItem } from '../types';
@@ -7,12 +7,12 @@ import { getEquipmentIconSrc } from '../functions/getEquipmentIcon';
 import { portraitsData } from '../properties/portraits/portraits';
 import { getNeededExp } from '../functions/getNeededExp';
 import { getStatCost } from '../functions/getStatCost';
-import { getPotionLabel } from './sub_views/getPotionLabel';
-import { getProfileBackpackLabel } from './sub_views/backpackLabel';
-import { getProfileEquipmentLabel } from './sub_views/profileEquipment';
+import { getPotionLabel } from '../functions/getPotionLabel';
+import { getProfileBackpackLabel } from '../functions/backpackLabel';
+import { getProfileEquipmentLabel } from '../functions/equipmentLabel';
 
 // class responsible for profile veiw
-export class Profile extends View {
+export class Profile extends Component {
 
     private dom: {
         portrait: {
@@ -89,14 +89,14 @@ export class Profile extends View {
     // his item, if  this label loses his focus then it does not disappear immediately but with a delay (0.8s). h
     // owever when user hovers over a item in a backpack and quickly hovers over another one then clear this 
     //  interval which will help prevent duplicate labels and disappearance
-    hideLabelInterval: {
+    private hideLabelInterval: {
         potion: ReturnType<typeof setInterval> | null;
         equipment: ReturnType<typeof setInterval> | null;
         backpack: ReturnType<typeof setInterval> | null;
     }
 
     // intervals needed to clear specific interval when potion or pet time will end
-    generalInterval: {
+    private generalInterval: {
         pet: ReturnType<typeof setInterval> | null;
         potionFirst: ReturnType<typeof setInterval> | null;
         potionSecond: ReturnType<typeof setInterval> | null;
@@ -104,6 +104,9 @@ export class Profile extends View {
 
     constructor() {
         super()
+        this.freepikAttribute = `   <a href='https://www.freepik.com/vectors/background' target="_black">Background vector created by upklyak -
+        www.freepik.com</a>`;
+        this.bodyBackgroundSrc = '/images/background_profile.jpg';
         this.dom = {
             mobileNavFristSwitch: document.querySelector('.mobileNav__item:first-child'),
             mobileNavSecondSwitch: document.querySelector('.mobileNav__item:last-child'),

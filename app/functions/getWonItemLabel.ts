@@ -1,5 +1,10 @@
-import { chestplatesData } from '../../properties/shop/chestplates';
-import { ShopItem } from '../../types';
+
+import { ShopItem } from "../types";
+
+/**
+ * get html code for won item from wizard magic wheel
+ * @param item - data about the item on the basis of which the label will be created
+ */
 export const getWonItemLabel = (item: ShopItem) : string => {
     return `
     <div class='wonItem__wrapper'> 

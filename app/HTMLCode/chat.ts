@@ -1,7 +1,5 @@
-import { getMessageCode } from './../views/sub_views/messages';
 import { emojiData } from './../properties/emoji/emoji';
-import { SearchedUserData, MessageData } from '../types';
-
+import { SearchedUserData } from '../types';
 
 export const getChatHTMLCode = (friend: SearchedUserData): string => {
     return `

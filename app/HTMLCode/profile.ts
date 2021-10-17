@@ -72,9 +72,7 @@ export const getProfileHTMLCode = (user: UserData): string => {
         <div class='profile__description'>
             <textarea type="textarea" name="user-description" value='${user.description}' placeholder='Your description' maxLength="440"></textarea>
         </div>
-        <a href='https://www.freepik.com/vectors/background' target="_black">Background vector created by upklyak -
-            www.freepik.com</a>
-
+     
     </div>
 
     <div class='profile__item'>

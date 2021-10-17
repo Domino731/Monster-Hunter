@@ -1,11 +1,11 @@
 import { getWizardHTMLCode } from '../HTMLCode/wizard';
-import { View } from './view';
-import { getWonItemLabel } from './sub_views/getWonItemLabel';
+import { Component } from './view';
 import { updateUserData } from '../firebase/operations';
 import { setCountdown } from '../functions/countdown';
+import { getWonItemLabel } from '../functions/getWonItemLabel';
 
 // Class responsible for spinning wheel by which user can earn free equipment item, potion or gold
-export class Wizard extends View {
+export class Wizard extends Component {
 
     private dom: {
         // array with items wrappers need to set available items (setSpinningWheelItems() method) to win in magic wheel
@@ -28,6 +28,8 @@ export class Wizard extends View {
     }
     constructor() {
         super()
+        this.freepikAttribute = `<a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpouch - www.freepik.com</a>`;
+        this.bodyBackgroundSrc = '/images/background_wizard.jpg';
         this.dom = {
             spinningWheel: document.querySelector('.spinningWheel__content'),
             spinningWheelItems: document.querySelectorAll('.spinningWheel__content div[data-spinningWheel]'),
@@ -81,7 +83,6 @@ export class Wizard extends View {
         this.dom.spinBtn.addEventListener('click', () => {
             // check if user's backpack has available slots
             if (this.userData.backpackItems.length < 10) {
-
                 // add animation
                 this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
 
@@ -103,10 +104,10 @@ export class Wizard extends View {
 
                 // add won item to user's account
                 this.addWonItem();
-
             }
             else {
                 this.dom.actionError.innerText = 'Your backpack is full';
+
                 // remove this error after 3s
                 setTimeout(() => {
                     this.dom.actionError.innerText = '';
@@ -136,7 +137,6 @@ export class Wizard extends View {
             countdown: document.querySelector('.wizard__countdown')
         }
     }
-
     render() {
         this.root.innerHTML = getWizardHTMLCode(this.userData);
     }
@@ -155,5 +155,3 @@ export class Wizard extends View {
         console.log('Data changed');
     }
 }
-
-// <a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpouch - www.freepik.com</a>
