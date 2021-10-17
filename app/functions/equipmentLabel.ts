@@ -104,10 +104,13 @@ export const getBlacksmithEquipmentLabel = (itemData: ShopItem) : string => {
                                 }                                  
                           </tbody>
                         </table>
-                        <div class='profile__actionError' id='profile_equipment_move_item_error'></div>
+
+                        <div class='profile__actionError' id='blacksmith_equipment_move_item_error'></div>
                         <div class='profile__actionWrapper' id='profile_equipment_move_item_btn'>
                           <img src='./images/profile_icon_backpack.png' class='profile__equipmentItemSellIcon'/>
                           <strong class='profile__actionName'>Move to backpack</strong>
                         </div>
+
+                        
                         `
 }

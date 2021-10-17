@@ -496,7 +496,7 @@ export class Profile extends Component {
      * moving item from backpack to equipment
      * @param currentItem - current item in backpack, needed to find what item will be replaced
      */
-    replaceItemInEquipment(currentItem: ShopItem) {
+    moveItemInEquipment(currentItem: ShopItem) {
 
         // indexes of items that are needed for moving items
         const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type);
@@ -704,7 +704,7 @@ export class Profile extends Component {
 
         // add a event which is responsible for moving item  the backpack to equipment
         const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
-        replaceBtn.addEventListener('click', () => this.replaceItemInEquipment(item));
+        replaceBtn.addEventListener('click', () => this.moveItemInEquipment(item));
 
         // when the label has his focus keep displaying pulse effect on specifc equipment slot and clear interval which is reponsible for hidding this label
         newLabel.addEventListener('mouseover', () => {
