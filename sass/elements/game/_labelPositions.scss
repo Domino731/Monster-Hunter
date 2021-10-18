@@ -399,13 +399,16 @@
         }
     }
     &-backpackSlot3 {
-        transform: translate(215px, -96%);
+        transform: translate(208px, -96%);
         &::after {
-            left: 146px;
+            left: 148px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
             @include laptopL {
-                left: 111px;
+                left: 114px;
+            }
+            @include laptopS {
+                left: 96px;
             }
         }
         @include desktopM {
@@ -526,11 +529,11 @@
         transform: translate(207px, -100%);
         margin-top: 160px;
         &::after {
-            left: 146px;
+            left: 148px;
             bottom: -26px;
             clip-path: polygon(50% 100%, 0 0, 100% 0);
             @include laptopL {
-                left: 111px;
+                left: 114px;
             }
             @include laptopS {
                 left: 94px;
