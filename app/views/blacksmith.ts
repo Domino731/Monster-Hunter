@@ -32,7 +32,7 @@ export class Blacksmith extends Component {
       backpack: HTMLElement | null;
       // equipment slots, needed to apply at  them functions which are responsible for buying item via grag & drop - dragEventForMarketSlots() method
       equipmentSlots: NodeListOf<Element> | null;
-      // needed to apply event at body ir order t to prevent multiple purchases of the same item - dragEventForMarketSlots() method
+      // needed to apply event at body in order to prevent multiple purchases of the same item - dragEventForMarketSlots() method
       body: HTMLElement | null;
       // Error which is displaying when user want to buy an item from a blacksmith market but there is no free space in his backpack
       error: HTMLElement | null;
@@ -143,7 +143,7 @@ export class Blacksmith extends Component {
 
             if (marketItem !== undefined) {
 
-                // prevention of multiple label hiding 
+               // prevention of multiple label hiding 
                clearTimeout(this.showBlacksmithLabel);
 
                // show label with delay -> 1s
@@ -199,36 +199,45 @@ export class Blacksmith extends Component {
    // get available pick per slot in market, each slot has only 2 picks - user can buy items. 
    // Picks are reset in new day - dataOperations() method in Component class
    getAvailbleMarketPicks(): AvailableMarketPicks[] {
-         const availablePicks: AvailableMarketPicks[] = []
-         this.dom.marketSlots.forEach((el, num) => {
-            availablePicks.push({
-               picks: 2,
-               index: num
-            })
-         });
+      const availablePicks: AvailableMarketPicks[] = []
+      this.dom.marketSlots.forEach((el, num) => {
+         availablePicks.push({
+            picks: 2,
+            index: num
+         })
+      });
 
-         return availablePicks;
+      return availablePicks;
    }
 
    dragEventForMarketSlots() {
 
+      // available market picks needed to check if particular slot in market has available item to buy
       const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
 
       // currently selected market slot
       let selectedMarketSlot: HTMLElement | null = null;
+
       // name of slot which is currently dragging
       let draggedSlotName: string | null = null;
+
       // currently dragged element
-      let draggedElement: HTMLElement | null = null
+      let draggedElement: HTMLElement | null = null;
+
       // currently selected item data
       let selectedItem: ShopItem | null = null;
+
       // name of slot which is currently hovered
       let hoveredEquipmentSlotName: string | null = null;
 
+      // when user starts dragging new element from blacksmith market then create appropriate data
       this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
+
          const element: HTMLElement = el.firstElementChild as HTMLElement;
+
          // set currently seleted market slot
          selectedMarketSlot = el as HTMLElement;
+
          // set currently dragged element
          draggedElement = element;
 
@@ -238,20 +247,22 @@ export class Blacksmith extends Component {
          // set slot name
          draggedSlotName = element.dataset.slotName;
 
-         // find current item, in order to add him to equipment,
-         // if user has enough gold and the hovered slot in equipment is the same as the dragging slot
+         // find data about selected item
          selectedItem = this.market[this.market.findIndex(el => el.id === element.dataset.itemId)];
+
       }));
 
       this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
          e.preventDefault();
       }));
 
+      // remove shrink effect from dragged element
       this.dom.marketSlots.forEach(el => el.addEventListener('dragend', (e) => {
          e.preventDefault();
-         el.classList.remove('dragging')
+         el.classList.remove('dragging');
       }));
 
+      // buying a new item by dragging him to a specific slot in equipment
       this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
          const element: HTMLElement = el as HTMLElement
          const elementImg: HTMLElement = el.firstElementChild as HTMLElement
@@ -259,40 +270,35 @@ export class Blacksmith extends Component {
          // set slot name
          hoveredEquipmentSlotName = element.dataset.slotName
 
-         // check if the dragging item slot name is equal to hovered slot in equipment, if it is then add new item
+         // check if the dragging item slot name is equal to hovered slot in equipment, if it is then trigger logic behind buying new item
          if (draggedSlotName === hoveredEquipmentSlotName && selectedItem !== null && selectedItem !== undefined) {
 
             // find current market item to check if the user has enough gold bo buy
             const marketItem: ShopItem = this.market[this.market.findIndex(el => el.id === selectedItem.id)];
 
             // prevent of item dupilcations
-            // check if user has enough gold to buy, if he has enough add this item to his equipment, and update his profile on firestore -> update gold and equipment
+            // check if user has enough gold to buy, if he has enough then add this item to his equipment
             if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost <= this.userData.gold) {
-
-               // need to inject new item or display sold out icon depending on slot pick amount
-               const parent: HTMLElement = draggedElement.parentElement;
-
-
 
                // each market slot has only 2 picks in day, when user buy new item, substract one pick
                const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
                const picks: number = availablePicks[slotIndex].picks;
 
-
-
-               // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon
+               // check if market slot  has available pick, if yes then add new item into this slot and update user equipment in firestore, else show sold out icon inside this slot
                if (picks > 0) {
 
                   // check if user has free slot in backpack (backpack has 10 slots)
                   if (this.userData.backpackItems.length < 10) {
+
+                     // substract one pick
                      availablePicks[slotIndex].picks -= 1;
 
-                     // find current item in equipment in order to hide him into backpack
-                     const currentEquipmentItem = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === elementImg.dataset.currentItemId)];
+                     // find current item in equipment in order to add him into backpack
+                     const currentEquipmentItem : ShopItem | undefined  = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === elementImg.dataset.currentItemId)];
                      currentEquipmentItem !== undefined && this.userData.backpackItems.push(currentEquipmentItem);
 
 
-                     // find index of old item in order to replace him by new created one, and to update shop
+                     // find index of old item in order to replace him by new created one
                      const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
 
                      // set new item in this slot
@@ -310,16 +316,17 @@ export class Blacksmith extends Component {
                         this.dom.goldSubstract.innerText = ``;
                      }, 1300);
 
-
-
                      // update user data -> subtract the price of item from user's gold 
                      this.userData.gold -= marketItem.initialCost;
+
                      // update user equipment
                      const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
+
                      // hide label 
                      this.dom.itemLabel.innerHTML = '';
                      this.dom.itemLabel.classList.add('disabled');
 
+                     // add new item to the equipment
                      if (equipmentItemIndex > -1) {
                         this.userData.equipmentItems[equipmentItemIndex] = marketItem;
                      }
@@ -328,7 +335,8 @@ export class Blacksmith extends Component {
                      }
 
                   }
-                  // if the backpack doesnt have free slot show error 
+
+                  // if the backpack doesnt has free slot then show error 
                   else {
                      this.dom.error.innerText = 'Your backpack is full';
                      this.dom.error.classList.remove('disabled');
@@ -337,21 +345,21 @@ export class Blacksmith extends Component {
                      setTimeout(() => {
                         this.dom.error.innerText = '';
                         this.dom.error.classList.add('disabled');
-                     }, 3500)
+                     }, 3500);
                   }
-
-
                }
 
+               // hide blacksmith container and show profile so the user knows he has bought a new item
                if (window.innerWidth < 1024) {
                   this.dom.blacksmithContainer.classList.add('disabled');
                   this.dom.profileContainer.classList.remove('disabled');
                }
 
-               // save picks into user data in firestore
+               // set new blacksmith market picks and save new data -> onDataChange() method will rerender component 
                this.userData.shopPicks.blacksmith = availablePicks;
                updateUserData(this.userData);
             }
+
 
             // user doesn't have enough gold to purchase item
             else if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost > this.userData.gold) {
@@ -370,23 +378,26 @@ export class Blacksmith extends Component {
 
       }));
 
+      // buying a new item by gragging him to a backpack
       this.dom.backpack.addEventListener('mouseover', () => {
 
          if (selectedItem !== null) {
 
-            // check if user have free slot in backpack (backpack have 10 slots)
+            // check if user has free slot in backpack (backpack has 10 slots)
             if (this.userData.backpackItems.length < 10) {
 
-               // each market slot have only 2 picks in day, when user buy new item, substract one pick
+               // each market slot has only 2 picks in day, when user buy new item, substract one pick
                const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
                const picks: number = availablePicks[slotIndex].picks;
 
-               // check if market slot  has available pick if yes then add new item into this slot and update user equipment in firestore, else show sold out icon. Also check if user have enough gold
+               // check if market slot  has available pick if yes then add new item into this slot and update user equipment in firestore, else show sold out icon. Also check if user has enough gold
                if (this.userData.gold >= selectedItem.initialCost && picks > 0) {
+
                   // update user data -> subtract the price of item from user's gold 
                   this.userData.gold -= selectedItem.initialCost;
-                  // find index of old item in order to replace him by new created one, and to update shop
-                  const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
+
+                  // find index of old item in order to replace him by new created one
+                  const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id);
 
                   // set new item in this slot
                   const randomItems: ShopItem[] = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
@@ -404,9 +415,11 @@ export class Blacksmith extends Component {
                      this.dom.goldSubstract.innerText = ``;
                   }, 1300);
 
+
+                  // add new item
                   this.userData.backpackItems.push(selectedItem);
-                  console.log(availablePicks)
-                  // save picks into user data in firestore
+
+                  // substract one pick
                   availablePicks[slotIndex].picks -= 1;
                   this.userData.shopPicks.blacksmith = availablePicks;
 
@@ -414,11 +427,13 @@ export class Blacksmith extends Component {
                   this.dom.itemLabel.innerHTML = '';
                   this.dom.itemLabel.classList.add('disabled');
 
-                  if (window.innerWidth < 1024) {
-                     this.dom.blacksmithContainer.classList.add('disabled');
-                     this.dom.profileContainer.classList.remove('disabled');
-                  }
+                  // hide blacksmith container and show profile so the user knows he has bought a new item
+               if (window.innerWidth < 1024) {
+                  this.dom.blacksmithContainer.classList.add('disabled');
+                  this.dom.profileContainer.classList.remove('disabled');
+               }
 
+                  // update user's data - onDataChange() method will rerender component
                   updateUserData(this.userData);
                }
 
@@ -438,6 +453,7 @@ export class Blacksmith extends Component {
 
       });
 
+      // prevention of multiple purchases of the same item 
       this.dom.body.addEventListener('mouseover', () => {
          selectedMarketSlot = null;
          draggedSlotName = null;
@@ -445,8 +461,6 @@ export class Blacksmith extends Component {
          selectedItem = null;
          hoveredEquipmentSlotName = null;
       });
-
-
    }
 
    /**
@@ -524,10 +538,6 @@ export class Blacksmith extends Component {
          }
       }
       else if (this.userData.backpackItems.length <= 10) {
-         console.log('kupno do backpack')
-         console.log(availablePicks[slotIndex].picks);
-         console.log('index', slotIndex);
-         console.log(availablePicks[slotIndex])
          if (availablePicks[slotIndex].picks > 0 && this.userData.gold >= selectedItem.initialCost) {
             this.userData.backpackItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
@@ -547,6 +557,8 @@ export class Blacksmith extends Component {
 
 
       }
+
+
       else {
          this.dom.error.innerText = 'Your backpack is full';
          this.dom.error.classList.remove('disabled');
