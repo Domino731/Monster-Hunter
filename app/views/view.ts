@@ -193,10 +193,11 @@ export class Component {
          updateUserData(this.userData);
       }
 
+    //  this.userData.gold = 4000
       // set last visit
       this.userData.lastVisit = today;
       updateUserData(this.userData);
-      
+
    }
 
    // remove loading screen

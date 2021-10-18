@@ -230,8 +230,11 @@ export class Blacksmith extends Component {
       // name of slot which is currently hovered
       let hoveredEquipmentSlotName: string | null = null;
 
+      const marketSlots: NodeListOf<Element> = document.querySelectorAll("#market_slots .market__slotWrapper");
+      const equipmentSlots: NodeListOf<Element> = document.querySelectorAll('#blacksmith_equipment_slots div[data-slot-name]');
+      const backpack: HTMLElement = document.querySelector('#blacksmith_backpack_slots');
       // when user starts dragging new element from blacksmith market then create appropriate data
-      this.dom.marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
+      marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
 
          const element: HTMLElement = el.firstElementChild as HTMLElement;
 
@@ -252,18 +255,18 @@ export class Blacksmith extends Component {
 
       }));
 
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
+      equipmentSlots.forEach(el => el.addEventListener('dragover', (e) => {
          e.preventDefault();
       }));
 
       // remove shrink effect from dragged element
-      this.dom.marketSlots.forEach(el => el.addEventListener('dragend', (e) => {
+      marketSlots.forEach(el => el.addEventListener('dragend', (e) => {
          e.preventDefault();
          el.classList.remove('dragging');
       }));
 
       // buying a new item by dragging him to a specific slot in equipment
-      this.dom.equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
+      equipmentSlots.forEach(el => el.addEventListener('mouseover', () => {
          const element: HTMLElement = el as HTMLElement
          const elementImg: HTMLElement = el.firstElementChild as HTMLElement
 
@@ -294,7 +297,7 @@ export class Blacksmith extends Component {
                      availablePicks[slotIndex].picks -= 1;
 
                      // find current item in equipment in order to add him into backpack
-                     const currentEquipmentItem : ShopItem | undefined  = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === elementImg.dataset.currentItemId)];
+                     const currentEquipmentItem: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.id === elementImg.dataset.currentItemId)];
                      currentEquipmentItem !== undefined && this.userData.backpackItems.push(currentEquipmentItem);
 
 
@@ -307,17 +310,15 @@ export class Blacksmith extends Component {
                      this.market[oldItemIndex] = newMarketItem;
 
                      // substract gold and show animation
-                     this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`
+                     this.userData.gold -= selectedItem.initialCost;
+                     this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`;
                      this.dom.goldSubstract.classList.remove('disabled');
-
+                  
                      // remove above animation after 1.3s
                      setTimeout(() => {
                         this.dom.goldSubstract.classList.add('disabled');
                         this.dom.goldSubstract.innerText = ``;
                      }, 1300);
-
-                     // update user data -> subtract the price of item from user's gold 
-                     this.userData.gold -= marketItem.initialCost;
 
                      // update user equipment
                      const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === marketItem.type);
@@ -328,11 +329,22 @@ export class Blacksmith extends Component {
 
                      // add new item to the equipment
                      if (equipmentItemIndex > -1) {
+                        this.userData.backpackItems.push(this.userData.equipmentItems[equipmentItemIndex]);
                         this.userData.equipmentItems[equipmentItemIndex] = marketItem;
                      }
                      else {
                         this.userData.equipmentItems.push(marketItem);
                      }
+
+                     // hide blacksmith container and show profile so the user knows he has bought a new item
+                     if (window.innerWidth < 1024) {
+                        this.dom.blacksmithContainer.classList.add('disabled');
+                        this.dom.profileContainer.classList.remove('disabled');
+                     }
+
+                     // set new blacksmith market picks and save new data -> onDataChange() method will rerender component 
+                     this.userData.shopPicks.blacksmith = availablePicks;
+                     updateUserData(this.userData);
 
                   }
 
@@ -349,15 +361,7 @@ export class Blacksmith extends Component {
                   }
                }
 
-               // hide blacksmith container and show profile so the user knows he has bought a new item
-               if (window.innerWidth < 1024) {
-                  this.dom.blacksmithContainer.classList.add('disabled');
-                  this.dom.profileContainer.classList.remove('disabled');
-               }
 
-               // set new blacksmith market picks and save new data -> onDataChange() method will rerender component 
-               this.userData.shopPicks.blacksmith = availablePicks;
-               updateUserData(this.userData);
             }
 
 
@@ -379,7 +383,7 @@ export class Blacksmith extends Component {
       }));
 
       // buying a new item by gragging him to a backpack
-      this.dom.backpack.addEventListener('mouseover', () => {
+      backpack.addEventListener('mouseover', () => {
 
          if (selectedItem !== null) {
 
@@ -428,10 +432,10 @@ export class Blacksmith extends Component {
                   this.dom.itemLabel.classList.add('disabled');
 
                   // hide blacksmith container and show profile so the user knows he has bought a new item
-               if (window.innerWidth < 1024) {
-                  this.dom.blacksmithContainer.classList.add('disabled');
-                  this.dom.profileContainer.classList.remove('disabled');
-               }
+                  if (window.innerWidth < 1024) {
+                     this.dom.blacksmithContainer.classList.add('disabled');
+                     this.dom.profileContainer.classList.remove('disabled');
+                  }
 
                   // update user's data - onDataChange() method will rerender component
                   updateUserData(this.userData);
@@ -944,6 +948,11 @@ export class Blacksmith extends Component {
       equipment.replaceWith(equipment.cloneNode(true));
       this.dom.equipmentLabelRoot = document.querySelector('#blacksmith_equipment__item_label');
       this.dom.equipmentSlots = document.querySelectorAll('#blacksmith_equipment_slots div[data-slot-name]');
+      this.dom.goldSubstract = document.querySelector('#blacksmith_gold_substract');
+      this.dom.error = document.querySelector('#blacksmith__error');
+      this.dom.level = document.querySelector('.profile__level');
+      this.dom.portraitImg = document.querySelector('.profile__portraitImg');
+      this.dom.goldAmount = document.querySelector('#blacksmith_gold_amount');
    }
 
    // set countdown which is displaying time remaining to new market items
@@ -1011,6 +1020,7 @@ export class Blacksmith extends Component {
       this.setUserBackpack();
       this.setUserEquipment();
       this.generalOnDataChange();
+      this.dragEventForMarketSlots();
 
    }
    getDOMElements() {
@@ -1049,5 +1059,6 @@ export class Blacksmith extends Component {
       this.setShop();
       this.buyItemByLabel();
       this.dragEventForMarketSlots();
+      console.log(this.userData.shopPicks.blacksmith)
    }
 }
