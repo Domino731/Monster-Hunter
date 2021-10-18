@@ -45,13 +45,19 @@
                 border-bottom: 10px solid $color-gray_dark;
             }
             @include tablet {
-                padding-top: 0;
+                padding-top: 23px;
                 overflow: auto;
                 flex-direction: column;
                 align-items: center;
                 border-bottom: none;
                 height: auto;
                 justify-content: flex-start;
+            }
+            @include mobileL {
+                height: 582px;
+            }
+            @include mobileS {
+                height: 499px;
             }
         }
         &:first-child{
@@ -74,6 +80,8 @@
         }
         @include mobileL {
             width: 425px;
+           
+            
         }
         @include mobileM {
             width: 375px;
