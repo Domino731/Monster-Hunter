@@ -120,8 +120,7 @@ export class Blacksmith extends Component {
          const slotChild = slot.firstElementChild as HTMLElement
 
          // check if slot has available item
-         const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
-         if (availablePicks[num].picks > 0) {
+         if (this.userData.shopPicks.blacksmith[num].picks > 0) {
             slotChild.dataset.itemId = this.market[num].id;
             slotChild.innerHTML = `<img src='${this.market[num].src}'/>`;
             slotChild.dataset.slotName = this.market[num].type;
@@ -210,10 +209,12 @@ export class Blacksmith extends Component {
       return availablePicks;
    }
 
-   dragEventForMarketSlots() {
+
+   // buy item buy dragging specific item over equipment or backpack
+   dragAndDrop() {
 
       // available market picks needed to check if particular slot in market has available item to buy
-      const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
+      const availablePicks: AvailableMarketPicks[] = this.userData.shopPicks.blacksmith;
 
       // currently selected market slot
       let selectedMarketSlot: HTMLElement | null = null;
@@ -233,6 +234,7 @@ export class Blacksmith extends Component {
       const marketSlots: NodeListOf<Element> = document.querySelectorAll("#market_slots .market__slotWrapper");
       const equipmentSlots: NodeListOf<Element> = document.querySelectorAll('#blacksmith_equipment_slots div[data-slot-name]');
       const backpack: HTMLElement = document.querySelector('#blacksmith_backpack_slots');
+
       // when user starts dragging new element from blacksmith market then create appropriate data
       marketSlots.forEach(el => el.addEventListener('dragstart', (e) => {
 
@@ -313,7 +315,7 @@ export class Blacksmith extends Component {
                      this.userData.gold -= selectedItem.initialCost;
                      this.dom.goldSubstract.innerText = `${selectedItem.initialCost}`;
                      this.dom.goldSubstract.classList.remove('disabled');
-                  
+
                      // remove above animation after 1.3s
                      setTimeout(() => {
                         this.dom.goldSubstract.classList.add('disabled');
@@ -715,13 +717,13 @@ export class Blacksmith extends Component {
       const itemPrice: HTMLElement = newLabel.querySelector('#blacksmith_backpack_sell_item_price');
       itemPrice.innerText = `${Math.ceil((item.initialCost * 0.4))}`;
 
-      // add click event which is responsible for selling backpack item
-      const sellBtn: HTMLElement = newLabel.querySelector('#blacksmith_backpack_sell_item_btn');
-      sellBtn.addEventListener('click', () => this.sellBackpackItem(item));
-
       // set icon which is displaying item type
       const replaceIcon: HTMLImageElement = newLabel.querySelector('#blacksmith_backpack_replace_item_icon');
       replaceIcon.src = getEquipmentIconSrc(item.type);
+
+      // add click event which is responsible for selling backpack item
+      const sellBtn: HTMLElement = newLabel.querySelector('#blacksmith_backpack_sell_item_btn');
+      sellBtn.addEventListener('click', () => this.sellBackpackItem(item));
 
       // add click event which is responsible for moving item from backpack to equipment    
       const replaceBtn: HTMLElement = newLabel.querySelector('#blacksmith_backpack_move_item_btn');
@@ -844,6 +846,14 @@ export class Blacksmith extends Component {
       // add a event which is responsible for moving item  the equipment to backpack
       replaceBtn.addEventListener('click', () => this.moveItemToBackpack(item, errorWrapper));
 
+      // set item price that user can sell the item for
+      const itemPrice: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#blacksmith_equipment_sell_item_price');
+      itemPrice.innerText = `${Math.ceil((item.initialCost * 0.4))}`;
+
+      // add click event which is responsible for selling backpack item
+      const sellBtn = this.dom.equipmentLabelRoot.querySelector('#blacksmith_equipment_sell_item_btn');
+      sellBtn.addEventListener('click', () => this.sellEquipmentItem(item));
+      
    }
 
    // clear equipment slots -> remove items graphics 
@@ -999,15 +1009,12 @@ export class Blacksmith extends Component {
    }
 
    // bugfix for backpack label styles
-   bugfix(){
-     const equipment : HTMLElement = document.querySelector('#blacksmith_backpack_slots');
-     equipment.addEventListener('mouseleave', () => {
-      //   this.dom.backpackLabelRoot.innerHTML = '';
-      //   this.dom.backpackLabelRoot.classList.add('disabled');
-      this.dom.backpackLabelRoot.className = 'profile__itemSpecs disabled';
-      this.dom.backpackLabelRoot.innerHTML = '';
-      console.log(12)
-     })
+   bugfix() {
+      const equipment: HTMLElement = document.querySelector('#blacksmith_backpack_slots');
+      equipment.addEventListener('mouseleave', () => {
+         this.dom.backpackLabelRoot.className = 'profile__itemSpecs disabled';
+         this.dom.backpackLabelRoot.innerHTML = '';
+      })
    }
 
 
@@ -1017,7 +1024,7 @@ export class Blacksmith extends Component {
       this.setUserBackpack();
       this.setUserEquipment();
       this.generalOnDataChange();
-      this.dragEventForMarketSlots();
+      this.dragAndDrop();
       this.bugfix();
 
    }
@@ -1056,7 +1063,7 @@ export class Blacksmith extends Component {
       this.setUserEquipment();
       this.setShop();
       this.buyItemByLabel();
-      this.dragEventForMarketSlots();
+      this.dragAndDrop();
       this.bugfix();
    }
 }
