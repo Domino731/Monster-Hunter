@@ -4,14 +4,14 @@ import { OnGuardTavern } from './onGuardTavern';
 import { Travel } from './travel';
 import { MonsterFight } from './monsterFight';
 
-// class which checks the status of the user and moves it to the appropriate section  
+// class which checks the user status and redirects him to the appropriate game section  
 export class Missions extends Component{
 
     constructor() {
       super(); 
     }
 
-    // check status and create section
+    // check status and  create appropriate section
     render() {
         let render;
         const currentTime = new Date().getTime();
@@ -45,5 +45,3 @@ export class Missions extends Component{
 
     
 }
-
-// <a href='https://www.freepik.com/vectors/restaurant'>Restaurant vector created by upklyak - www.freepik.com</a>

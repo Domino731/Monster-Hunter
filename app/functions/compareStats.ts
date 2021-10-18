@@ -13,7 +13,7 @@ export const compareStats = (selectedItemStat: number, actualItemStat: number | 
         return `<strong class='better'>/ +${difference}</strong>`;
     }
     else if (difference < 0) {
-        return `<strong class='worse'>/ -${difference}</strong>`;
+        return `<strong class='worse'>/ ${difference}</strong>`;
     }
     else {
         return '';

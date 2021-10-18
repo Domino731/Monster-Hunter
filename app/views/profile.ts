@@ -69,15 +69,15 @@ export class Profile extends Component {
         backpackSlots: NodeListOf<Element> | null;
         // textarea, needed to save new description when this textarea loses his focus - changeUserDescription() method
         description: HTMLTextAreaElement | null;
-        // root for equipment label, needed to inject html code on mose hover on equipment slot - equipmentLabel() method
+        // root for equipment label, needed to inject html code on mouse hover on equipment slot - equipmentLabel() method
         equipmentLabelRoot: HTMLElement | null;
-        // root for backpack label, needed to inject html code on mose hover on equipment slot - backpackLabel() method
+        // root for backpack label, needed to inject html code on mouse hover on equipment slot - backpackLabel() method
         backpackLabelRoot: HTMLElement | null;
         // wrapper of level, needed to set level on data change - generalOnUpdate() method 
         level: HTMLElement | null;
         // root for potion label, needed to inject html code on mouse hover on potion slot - labelForPotions() method
         potionLabel: HTMLElement | null;
-        // container needed to toogle content container - backpack or profile only below (1024px) - toogleView() method
+        // containers needed to toogle content in section - backpack or profile only below (1024px) - toogleView() method
         profileContainer: HTMLElement | null;
         backpackContainer: HTMLElement | null;
         // buttons for switching between the backpack and the profile only below (1024px) - toogleView() method
@@ -85,9 +85,9 @@ export class Profile extends Component {
         mobileNavSecondSwitch: HTMLElement | null;
     }
 
-    // when user hovers over an item in inventory, pancake or potion then a label is shown which describes t
-    // his item, if  this label loses his focus then it does not disappear immediately but with a delay (0.8s). h
-    // owever when user hovers over a item in a backpack and quickly hovers over another one then clear this 
+    // when user hovers over an item in inventory, backpack or potion then a label is shown which describes this item
+    // , if  this label loses his focus then it does not disappear immediately but with a delay (0.8s). however
+    //  when user hovers over a item in a backpack and quickly hovers over another one then clear this 
     //  interval which will help prevent duplicate labels and disappearance
     private hideLabelInterval: {
         potion: ReturnType<typeof setInterval> | null;
@@ -796,7 +796,7 @@ export class Profile extends Component {
 
     }
 
-    // hide backpack on mobile devices, user can switch to backpack by the bottom nav bar
+    // hide backpack content container on mobile devices, user can switch to backpack by the bottom nav bar
     mobile() {
         if (window.innerWidth < 1024) {
             this.dom.backpackContainer.classList.add('disabled');

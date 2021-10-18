@@ -193,8 +193,10 @@ export class Component {
          updateUserData(this.userData);
       }
 
-      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
-      this.userData.shopPicks.blacksmith = getBlacksmithPicks();
+      // set last visit
+      this.userData.lastVisit = today;
+      updateUserData(this.userData);
+      
    }
 
    // remove loading screen
