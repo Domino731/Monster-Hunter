@@ -170,27 +170,23 @@ export class Blacksmith extends Component {
                   buyBtn.addEventListener('click', () => this.buyItem(marketItem, slot));
 
                }, 1000);
-
             }
-
-
-         })
+         });
 
          // removing hover effects
          slot.addEventListener('mouseleave', () => {
-            const equipmentSlots = document.querySelectorAll(`#blacksmith_equipment_slots div[data-slot-name]`)
+            const equipmentSlots = document.querySelectorAll(`#blacksmith_equipment_slots div[data-slot-name]`);
             equipmentSlots.forEach(el => {
-               el.firstElementChild.classList.remove("profile__equipmentIcon-pulse")
-            })
-         })
+               el.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+            });
+         });
 
       });
 
       // removing effects 
       this.dom.market.addEventListener('mouseleave', () => {
-         this.dom.itemLabel.classList.add('disabled')
-         this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford')
-         clearInterval(this.showBlacksmithLabel)
+         this.dom.goldAmount.classList.remove('profile__goldAmount-afford', 'profile__goldAmount-noAfford');
+         clearInterval(this.showBlacksmithLabel);
       });
 
    }
@@ -465,16 +461,14 @@ export class Blacksmith extends Component {
    buyItem(selectedItem: ShopItem, selectedMarketSlot: HTMLElement) {
 
       // each market slot has only 2 picks in day, when user buy new item, substract one pick
-      const availablePicks: AvailableMarketPicks[] = this.getAvailbleMarketPicks();
       const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
-      availablePicks[slotIndex].picks;
 
       // general operations when user has purchased  new item
       const general = () => {
 
          // check if slot has available pick, if he has then add new blacksmith item. 
          // If slot doesnt have available, then the graphic which informs about the empty slot will be displayed - setShop() method
-         if (availablePicks[slotIndex].picks > 0) {
+         if (this.userData.shopPicks.blacksmith[slotIndex].picks > 0) {
 
             // find index of old item in order to replace him by new created one, and to update shop
             const oldItemIndex = this.market.findIndex(el => el.id === selectedItem.id)
@@ -487,7 +481,7 @@ export class Blacksmith extends Component {
          }
 
          // substract one pick from this slot
-         availablePicks[slotIndex].picks -= 1;
+         this.userData.shopPicks.blacksmith[slotIndex].picks -= 1;
 
          // hide label 
          this.dom.itemLabel.innerHTML = '';
@@ -512,9 +506,12 @@ export class Blacksmith extends Component {
       };
 
       const equipmentSlot: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(el => el.type === selectedItem.type)];
+
       // check if equipment slot is empty
       if (equipmentSlot === undefined) {
-         if (this.userData.gold >= selectedItem.initialCost && availablePicks[slotIndex].picks > 0) {
+         if (this.userData.gold >= selectedItem.initialCost && this.userData.shopPicks.blacksmith[slotIndex].picks > 0) {
+
+            // add new an item to equipment
             this.userData.equipmentItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
 
@@ -527,12 +524,18 @@ export class Blacksmith extends Component {
                this.dom.goldSubstract.classList.add('disabled');
                this.dom.goldSubstract.innerText = ``;
             }, 1300);
+
             general();
+
+            // update data - onDataChange() method will rerender component
             updateUserData(this.userData);
+
          }
       }
       else if (this.userData.backpackItems.length <= 10) {
-         if (availablePicks[slotIndex].picks > 0 && this.userData.gold >= selectedItem.initialCost) {
+         if (this.userData.shopPicks.blacksmith[slotIndex].picks > 0 && this.userData.gold >= selectedItem.initialCost) {
+
+            // add new an item to backpack
             this.userData.backpackItems.push(selectedItem);
             this.userData.gold -= selectedItem.initialCost;
 
@@ -545,14 +548,14 @@ export class Blacksmith extends Component {
                this.dom.goldSubstract.classList.add('disabled');
                this.dom.goldSubstract.innerText = ``;
             }, 1300);
+
             general();
+
+            // update data - onDataChange() method will rerender component
             updateUserData(this.userData);
+
          }
-
-
       }
-
-
       else {
          this.dom.error.innerText = 'Your backpack is full';
          this.dom.error.classList.remove('disabled');
@@ -782,8 +785,6 @@ export class Blacksmith extends Component {
 
    /////////////////////////////////// equipment ///////////////////////////////////////////
 
-
-
    /**
      * sell specific item from equipment
      * @param item - item that you want to sell
@@ -853,7 +854,7 @@ export class Blacksmith extends Component {
       // add click event which is responsible for selling backpack item
       const sellBtn = this.dom.equipmentLabelRoot.querySelector('#blacksmith_equipment_sell_item_btn');
       sellBtn.addEventListener('click', () => this.sellEquipmentItem(item));
-      
+
    }
 
    // clear equipment slots -> remove items graphics 
@@ -863,7 +864,6 @@ export class Blacksmith extends Component {
          el.innerHTML = `<img src='${getEquipmentIconSrc(element.dataset.slotName)}' class='profile__equipmentIcon'/>`
       });
    }
-
 
    /**
      * moving item from equipement to backpack
