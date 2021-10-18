@@ -336,12 +336,6 @@ export class Blacksmith extends Component {
                         this.userData.equipmentItems.push(marketItem);
                      }
 
-                     // hide blacksmith container and show profile so the user knows he has bought a new item
-                     if (window.innerWidth < 1024) {
-                        this.dom.blacksmithContainer.classList.add('disabled');
-                        this.dom.profileContainer.classList.remove('disabled');
-                     }
-
                      // set new blacksmith market picks and save new data -> onDataChange() method will rerender component 
                      this.userData.shopPicks.blacksmith = availablePicks;
                      updateUserData(this.userData);
@@ -430,12 +424,6 @@ export class Blacksmith extends Component {
                   // hide label 
                   this.dom.itemLabel.innerHTML = '';
                   this.dom.itemLabel.classList.add('disabled');
-
-                  // hide blacksmith container and show profile so the user knows he has bought a new item
-                  if (window.innerWidth < 1024) {
-                     this.dom.blacksmithContainer.classList.add('disabled');
-                     this.dom.profileContainer.classList.remove('disabled');
-                  }
 
                   // update user's data - onDataChange() method will rerender component
                   updateUserData(this.userData);
@@ -826,11 +814,8 @@ export class Blacksmith extends Component {
       this.dom.backpackLabelRoot.innerHTML = '';
       this.dom.backpackLabelRoot.classList.add('disabled');
 
-      // prevent of label hiding 
+      // prevent of multiple label hiding 
       clearInterval(this.hideLabelInterval.equipment);
-
-      // hide backpack label
-      this.dom.backpackLabelRoot.classList.add('disabled');
 
       // reset equipement label styles
       this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
@@ -960,6 +945,7 @@ export class Blacksmith extends Component {
       return setCountdown(this.dom.countdown);
    }
 
+   // general operations when data in firestore has changed
    generalOnDataChange() {
 
       // set gold
@@ -1012,6 +998,17 @@ export class Blacksmith extends Component {
       }
    }
 
+   // bugfix for backpack label styles
+   bugfix(){
+     const equipment : HTMLElement = document.querySelector('#blacksmith_backpack_slots');
+     equipment.addEventListener('mouseleave', () => {
+      //   this.dom.backpackLabelRoot.innerHTML = '';
+      //   this.dom.backpackLabelRoot.classList.add('disabled');
+      this.dom.backpackLabelRoot.className = 'profile__itemSpecs disabled';
+      this.dom.backpackLabelRoot.innerHTML = '';
+      console.log(12)
+     })
+   }
 
 
    onDataChange() {
@@ -1021,6 +1018,7 @@ export class Blacksmith extends Component {
       this.setUserEquipment();
       this.generalOnDataChange();
       this.dragEventForMarketSlots();
+      this.bugfix();
 
    }
    getDOMElements() {
@@ -1059,6 +1057,6 @@ export class Blacksmith extends Component {
       this.setShop();
       this.buyItemByLabel();
       this.dragEventForMarketSlots();
-      console.log(this.userData.shopPicks.blacksmith)
+      this.bugfix();
    }
 }
