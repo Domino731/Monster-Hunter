@@ -1,34 +1,30 @@
-const path = require("path");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const entryPath = ".";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const mode = process.env.NODE_ENV || "development";
+const target = process.env.NODE_ENV === "production" ? "browserslist" : "web";
 
 module.exports = {
+  mode: mode,
+  stats: {
+    children: false,
+  },
   entry: {
-    style: `./${entryPath}/app/style.ts`,
-    signIn: `./app/signIn.ts`,
-    index: `./app/index.ts`
+    auth: `./src/auth.ts`,
+    index: `./src/index.ts`
   },
-  output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, `${entryPath}/build`)
-  },
-  devServer: {
-    contentBase: path.join(__dirname, `${entryPath}`),
-    publicPath: "/build/",
-    compress: true,
-    port: 3001,
-    historyApiFallback: true
-  },
-  plugins: [
-    new MiniCssExtractPlugin()
-  ],
+  plugins: [new MiniCssExtractPlugin()],
+
   module: {
     rules: [
+      // typescript compilation into common js
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        use: {
+          loader: "ts-loader",
+        },
       },
+      // file loader for images
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
         use: [
@@ -37,22 +33,26 @@ module.exports = {
           }
         ]
       },
+      // sass compiler
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(s[ac]|c)ss$/i,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-            },
-          },
-          'css-loader',
-          'sass-loader'
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
         ],
       },
-    ]
+    ],
   },
+  target: target,
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
-},
+    extensions: [".ts", ".js"],
+  },
+  devtool: "source-map",
+  devServer: {
+    contentBase: "./dist",
+    compress: true,
+    port: 3001
+  },
 };

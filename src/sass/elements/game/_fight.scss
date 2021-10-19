@@ -1,0 +1,742 @@
+.fight {
+    height: 100%;
+    background-image: url("../../dist/images/background_monster_fight.jpg");
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    
+    @include tablet {
+        padding: 0;
+    }
+    @media screen and (max-height: 500px) {
+        align-items: flex-start;
+        padding-bottom: 20px;
+    }
+    &__container {
+        width: 100%;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+       
+        @include tablet {
+            width: 758px;
+            margin: 0 auto;
+            overflow: auto;
+        }
+        @include mobileL {
+            width: 600px;
+        }
+        @media screen and (max-width: 599px) {
+            width: 420px;
+        }
+        @include mobileM {
+            width: 370px;
+        }
+        @include mobileS {
+            width: 318px;
+        }
+    }
+
+    &__characterWrapper {
+        width: 400px;
+        padding: 10px;
+        z-index: 0;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        position: relative;
+        backdrop-filter: blur(2px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-monster {
+            position: relative;
+        }
+        @media screen and (max-height: 500px) {
+            margin-top: 20px; 
+        }
+        @include desktopM {
+            width: 310px;
+        }
+        @include desktopS {
+            width: 280px;
+            border-radius: 16px;
+            padding: 6px;
+        }
+        @include laptopM {
+            width: 247px;
+        }
+        @include laptopS {
+            width: 203px;
+            border-radius: 10px;
+        }
+        @include ipadPro {
+            width: 288px;
+            border-radius: 20px;
+        }
+        @include tablet {
+            width: 233px;
+        }
+        @media screen and (max-width: 599px) {
+            border-radius: 10px;
+            width: 159px;
+        }
+        @include mobileM {
+            width: 136px;
+        }
+        @include mobileS {
+            width: 110px;
+            border-radius: 7px;
+        }
+     
+    }
+    &__characterImg {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 15px;
+        @include laptopM {
+            margin-bottom: 7px;
+        }
+        @include mobileL {
+            margin-bottom: 5px;
+        }
+        @include mobileS {
+            margin-bottom: 3px;
+        }
+    }
+    &__healthBar {
+        width: 100%;
+        height: 42px;
+        border: 6px solid $color-gray_dark;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include desktopS {
+            border: 4px solid $color-gray_dark;
+            height: 36px;
+        }
+        @include laptopM {
+            height: 33px;
+            border: 3px solid $color-gray_dark;
+        }
+        @include ipadPro {
+            height: 40px;
+            border: 4px solid $color-gray_dark;
+        }
+        @include tablet {
+            height: 36px;
+            border: 3px solid $color-gray_dark;
+        }
+        @media screen and (max-width: 599px) {
+            height: 27px;
+            border: 2px solid #343a40;
+        }
+        @include mobileS {
+            height: 18px;
+        }
+    }
+    &__healthPoints {
+        display: block;
+        font-weight: bold;
+        font-size: 1.75rem;
+        font-style: italic;
+        letter-spacing: 0.125rem;
+        color: $color-white;
+        @include tablet {
+            font-size: 19px;
+        }
+        @media screen and (max-width: 599px) {
+            font-size: 13px;
+        }
+        @include mobileS {
+            font-size: 10px;
+        }
+    }
+    &__health {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: $color-green;
+        transition: 0.3s;
+    }
+    &__statsTable {
+        width: 100%;
+        border-spacing: 0;
+        margin-top: 15px;
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+            font-weight: bold;
+            font-size: 1.438rem;
+            @include ipadPro {
+                font-size: 1.338rem;
+            }
+            @include tablet {
+                font-size: 16px;
+            }
+            @media screen and (max-width: 599px) {
+                font-size: 12px;
+            }
+            @include mobileM {
+                font-size: 10px;
+            }
+            @include mobileS {
+                font-size: 7px;
+            }
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+            td {
+                padding-bottom: 0.313rem;
+                @include mobileS {
+                    padding-bottom: 2px;
+                }
+            }
+            td:first-child {
+                vertical-align: top;
+                white-space: nowrap;
+            }
+        }
+        @include laptopM {
+            margin-top: 7px;
+        }
+        @include mobileL {
+            margin-bottom: 5px;
+        }
+        @include mobileS {
+            margin-bottom: 3px;
+        }
+    }
+    &__weaponWrapper {
+        z-index: 10;
+        position: absolute;
+        top: 150px;
+        left: 245px;
+        width: 200px;
+        height: 200px;
+        transform: scale(0);
+        &-an {
+            animation: 1.5s an__sword_attack forwards;
+        }
+        @include laptopM {
+            top: 120px;
+            width: 170px;
+            height: 170px;
+        }
+    }
+    &__explosion {
+        transform: scale(0);
+        position: absolute;
+        z-index: 2;
+        width: 80%;
+        height: auto;
+        object-fit: cover;
+        &-an {
+            animation: 0.5s 1s an__attack_explosion forwards, 0.5s 1.5s an__attack_explosion_shrink forwards;
+        }
+        @include desktopM {
+            width: 60%;
+        }
+    }
+    &__sword {
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        &-an {
+            animation: 0.5s 1s an__sword_attack_shrink forwards;
+        }
+    }
+
+    &__summaryWrapper {
+        width: 100%;
+    }
+    &__summary {
+        transform: scale(0);
+        margin: 0 auto;
+        border: 5px solid $color-gold;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        position: relative;
+        backdrop-filter: blur(2px);
+        padding: 10px;
+        transition: 0.3s;
+        animation: 1s an__summary_scale forwards;
+        &:hover {
+            backdrop-filter: blur(4px);
+        }
+        @media screen and (max-height: 500px) {
+            margin-top: 20px; 
+        }
+        @include desktopS {
+            padding: 6px;
+            border-radius: 16px;
+        }
+        @include laptopL {
+            width: 268px;
+        }
+        @include laptopM {
+            width: 228px;
+        }
+        @include laptopS {
+            border-radius: 10px;
+        }
+        @include ipadPro {
+            width: 376px;
+            border: 10px solid $color-gold;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        @include tablet {
+            width: 318px;
+            border-radius: 16px;
+        }
+        @include mobileM {
+            border: 8px solid $color-gold;
+            width: 243px;
+            border-radius: 13px;
+        }
+        @include mobileS {
+            border: 6px solid $color-gold;
+            width: 215px;
+            border-radius: 10px;
+        }
+    }
+    &__summaryTitle {
+        font-size: 1.125rem;
+        font-weight: bold;
+        letter-spacing: 0.063rem;
+        word-spacing: 0.125rem;
+        color: $color-white;
+        text-align: center;
+        @include ipadPro {
+            font-size: 1.55rem;
+        }
+    }
+    &__summaryPayout {
+        margin: 10px 0;
+        div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.438rem;
+        }
+        img {
+            width: 2rem;
+            height: auto;
+            object-fit: cover;
+            margin-right: 0.5rem;
+        }
+        strong {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+    }
+    &__summaryBtn {
+        width: 100%;
+        font-size: 1.25rem;
+        color: $color-white;
+        font-weight: bold;
+        border-radius: 0.625rem;
+        padding: 0.313rem 0;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        &-green {
+            background: $color-green;
+        }
+        &-red {
+            background: $color-red;
+        }
+        &:focus,
+        &:hover {
+            cursor: pointer;
+            letter-spacing: 0.125rem;
+        }
+    }
+    &__failed {
+        font-size: 2.063rem;
+        margin-bottom: 0.688rem;
+        font-weight: bold;
+        letter-spacing: 0.063rem;
+        word-spacing: 0.125rem;
+        text-shadow: 0.125rem 0.125rem $color-red;
+    }
+}
+
+#fight_container {
+    width: 100%;
+}
+
+@keyframes an__summary_scale {
+    100% {
+        transform: scale(100%);
+    }
+}
+
+.monster {
+    &-an {
+        animation: 0.8s an__monster_attack forwards;
+        @include desktopM {
+            animation: 0.8s an__monster_attack-desktopM forwards;
+        }
+        @include desktopS {
+            animation: 0.8s an__monster_attack-desktopS forwards;
+        }
+        @include laptopL {
+            animation: 0.8s an__monster_attack-laptopL forwards;
+        }
+        @include laptopM {
+            animation: 0.8s an__monster_attack-laptopM forwards;
+        }
+        @include laptopS {
+            animation: 0.8s an__monster_attack-laptopS forwards;
+        }
+        @include ipadPro {
+            animation: 0.8s an__monster_attack-ipadPro forwards;
+        }
+        @include tablet {
+            animation: 0.8s an__monster_attack-tablet forwards;
+        }
+        @include mobileL {
+            animation: 0.8s an__monster_attack-mobileXL forwards;
+        }
+        @media screen and (max-width: 599px) {
+            animation: 0.8s an__monster_attack-mobileL forwards;
+        }
+        @include mobileS {
+            animation: 0.8s an__monster_attack-mobileS forwards;
+        }
+    }
+    &__explosionWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 24%;
+        left: -310px;
+        width: 200px;
+        height: 200px;
+        @include desktopM {
+            width: 170px;
+            height: 170px;
+            left: -270px;
+        }
+        @include laptopL {
+            left: -250px;
+        }
+        @include laptopS {
+            width: 150px;
+            height: 150px;
+            left: -210px;
+        }
+        @media screen and (max-width: 599px) {
+            width: 100px;
+            height: 100px;
+            left: -140px;
+        }
+        @include mobileS {
+            width: 80px;
+            height: 80px;
+            left: -110px;
+        }
+    }
+    &__explosionImg {
+        width: 70%;
+        height: auto;
+        object-fit: cover;
+        transform: scale(0%);
+        &-an {
+            animation: 1s 0.8s an__monster_explosion_grow;
+        }
+    }
+}
+
+.fight__sword-an {
+    @include desktopM {
+    }
+}
+.fight__weaponWrapper {
+    @include desktopM {
+        width: 170px;
+        height: 170px;
+        left: 190px;
+    }
+    &-an {
+        @include desktopM {
+            animation: 1.5s an__sword_attack-desktopM forwards;
+        }
+        @include desktopS {
+            animation: 1.5s an__sword_attack-desktopS forwards;
+        }
+        @include laptopL {
+            animation: 1.5s an__sword_attack-laptopL forwards;
+        }
+        @include laptopM {
+            animation: 1.5s an__sword_attack-laptopM forwards;
+        }
+        @include laptopS {
+            animation: 1.5s an__sword_attack-laptopS forwards;
+        }
+        @include ipadPro {
+            animation: 1.5s an__sword_attack-ipadPro forwards;
+        }
+        @include tablet {
+            animation: 1.5s an__sword_attack-tablet forwards;
+        }
+        @include mobileL {
+            animation: 1.5s an__sword_attack-mobileXl forwards;
+        }
+        @media screen and (max-width: 599px) {
+            animation: 1.5s an__sword_attack-mobileL forwards;
+        }
+        @include mobileM {
+            animation: 1.5s an__sword_attack-mobileM forwards;
+        }
+        @include mobileS {
+            animation: 1.5s an__sword_attack-mobileS forwards;
+        }
+    }
+    @include laptopM {
+        left: 120px;
+    }
+    @include laptopS {
+        top: 70px;
+        width: 155px;
+        height: 175px;
+        left: 100px;
+    }
+    @include ipadPro {
+        top: 130px;
+    }
+    @include tablet {
+        top: 90px;
+    }
+    @media screen and (max-width: 599px) {
+        height: 120px;
+        width: 120px;
+        left: 50px;
+        top: 60px;
+    }
+    @include mobileM {
+        height: 90px;
+        width: 90px;
+        top: 50px;
+        left: 40px;
+    }
+    @include mobileS {
+        height: 70px;
+        width: 70px;
+        left: 50px;
+    }
+}
+// monster attack
+@keyframes an__monster_explosion_grow {
+    50% {
+        transform: scale(100%);
+    }
+    100% {
+        transform: scale(0%);
+    }
+}
+
+// moving monster
+@keyframes an__monster_attack {
+    100% {
+        transform: translateX(-630px);
+    }
+}
+@keyframes an__monster_attack-desktopM {
+    100% {
+        transform: translateX(-585px);
+    }
+}
+@keyframes an__monster_attack-desktopS {
+    100% {
+        transform: translateX(-520px);
+    }
+}
+@keyframes an__monster_attack-laptopL {
+    100% {
+        transform: translateX(-440px);
+    }
+}
+@keyframes an__monster_attack-laptopM {
+    100% {
+        transform: translateX(-460px);
+    }
+}
+@keyframes an__monster_attack-laptopS {
+    100% {
+        transform: translateX(-330px);
+    }
+}
+@keyframes an__monster_attack-ipadPro {
+    100% {
+        transform: translateX(-370px);
+    }
+}
+@keyframes an__monster_attack-tablet {
+    100% {
+        transform: translateX(-270px);
+    }
+}
+
+@keyframes an__monster_attack-mobileXL {
+    100% {
+        transform: translateX(-120px);
+    }
+}
+@keyframes an__monster_attack-mobileL {
+    100% {
+        transform: translateX(-80px);
+    }
+}
+@keyframes  an__monster_attack-mobileS {
+    100% {
+        transform: translateX(-90px);
+    }
+}
+
+// user attack
+@keyframes an__sword_attack {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(920px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-desktopM {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(790px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-desktopS {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(680px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-laptopL {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(610px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-laptopM {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(640px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-laptopS {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(540px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-ipadPro {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(590px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-tablet {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(480px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-mobileXl {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(290px, 0%) scale(100%);
+    }
+}
+
+@keyframes an__sword_attack-mobileL {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(230px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-mobileM {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(230px, 0%) scale(100%);
+    }
+}
+@keyframes an__sword_attack-mobileS {
+    30% {
+        transform: scale(50%);
+    }
+    100% {
+        transform: translate(200px, 0%) scale(100%);
+    }
+}
+
+
+@keyframes an__attack_explosion {
+    100% {
+        transform: scale(130%);
+    }
+}
+@keyframes an__attack_explosion_shrink {
+    100% {
+        transform: scale(0%);
+    }
+}
+@keyframes an__sword_attack_shrink {
+    100% {
+        transform: scale(0%);
+    }
+}

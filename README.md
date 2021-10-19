@@ -3,4 +3,4 @@
 
 ### Scripts
 * Developer mode - `npm start`
-* Build mode - `npm build`
+* Build mode - `npm run build-dev`

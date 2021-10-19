@@ -1,0 +1,547 @@
+.wizard {
+    height: 100%;
+    display: flex;
+    background-image: url("../../dist/images/background_wizard.jpg");
+    background-size: 100% 100%;
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    @include ipadPro {
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include mobileL {
+        display: flex;
+        flex-direction: column;
+    }
+    &__characterWrapper {
+        grid-column: 1/1;
+        grid-row: 1/1;
+        padding-left: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        @include ipadPro {
+            grid-column: 1/1;
+            grid-row: 1/3;
+        }
+    }
+    &__characterImg {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        @include ipadPro {
+            width: 75%;
+        }
+        @include mobileM {
+            width: 64%;
+        }
+    }
+    &__descriptionWrapper {
+        display: flex;
+        justify-content: center;
+
+        grid-column: 1/1;
+        grid-row: 2/-1;
+        padding: 20px;
+        max-height: 336px;
+        @include desktopM {
+            padding: 10px;
+        }
+        @include laptopL {
+            padding: 6px;
+        }
+        @include ipadPro {
+            grid-column: 2/2;
+            grid-row: 1/3;
+            max-height: none;
+        }
+    }
+    &__description {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 20px;
+        position: relative;
+        transition: 0.3s;
+        &:hover {
+            backdrop-filter: blur(5px);
+        }
+        @include desktopM {
+            padding: 7px;
+        }
+        @include desktopS {
+            border-radius: 16px;
+        }
+
+        @include laptopL {
+            height: 241px;
+        }
+        @include laptopS {
+            height: 209px;
+            border-radius: 10px;
+        }
+        @include ipadPro {
+            height: 100%;
+            border-radius: 20px;
+        }
+        @include mobileL {
+            height: auto;
+            border-radius: 16px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+        }
+    }
+    &__title {
+        font-size: 37px;
+        letter-spacing: 0.25rem;
+        word-spacing: 0.188rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #e85df5;
+        -webkit-text-stroke: 1px $color-black;
+        @include laptopL {
+            font-size: 35px;
+        }
+        @include laptopM {
+            font-size: 31px;
+        }
+        @include laptopS {
+            font-size: 24px;
+        }
+        @include ipadPro {
+            font-size: 44px;
+        }
+        @include tablet {
+            font-size: 30px;
+        }
+        @include mobileL {
+            font-size: 32px;
+            text-align: center;
+        }
+        @include mobileM {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        @include mobileS {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+    }
+    &__text {
+        font-size: 1.25rem;
+        word-spacing: 0.125rem;
+        line-height: 1.25rem;
+        @include ipadPro {
+            font-size: 1.9rem;
+            line-height: 1.7rem;
+        }
+        @include tablet {
+            font-size: 1.27rem;
+            line-height: 1.4rem;
+        }
+        @include mobileL {
+            font-size: 18px;
+            text-align: justify;
+        }
+        @include mobileM {
+            font-size: 16px;
+        }
+    }
+    &__actionBar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        @include mobileL {
+            position: relative;
+            bottom: auto;
+            right: auto;
+            margin-top: 30px;
+        }
+    }
+    &__actionError {
+        position: absolute;
+        top: -14px;
+        right: 0;
+        color: $color-error;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 0.063rem;
+        -webkit-text-stroke: 1px $color-black;
+    }
+    &__btn {
+        font-size: 1.375rem;
+        border: none;
+        outline: none;
+
+        font-weight: 900;
+        background: #79decf;
+        color: $color-white;
+        padding: 0.313rem 0.75rem;
+        border-radius: 0.625rem;
+        margin-top: 0.625rem;
+        transition: 0.2s;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            letter-spacing: 0.065rem;
+        }
+        @include ipadPro {
+            font-size: 1.875rem;
+        }
+        @include tablet {
+            font-size: 1.375rem;
+        }
+        @include mobileL {
+            width: 100%;
+        }
+    }
+    &__countdownWrapper {
+        position: absolute;
+        text-align: right;
+        bottom: 10px;
+        right: 10px;
+        div:first-child {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.063rem;
+            word-spacing: 0.125rem;
+            text-shadow: 0.063rem 0 #e85df5;
+            @include ipadPro {
+                font-size: 1.85rem;
+            }
+            @include tablet {
+                font-size: 1.55rem;
+            }
+        }
+        @include mobileL {
+            margin-top: 10px;
+            position: relative;
+            bottom: auto;
+            right: auto;
+        }
+    }
+    &__countdown {
+        width: 100%;
+        font-size: 1.875rem;
+        font-weight: 700;
+        word-spacing: 0.125rem;
+        @include ipadPro {
+            font-size: 2.875rem;
+        }
+        @include tablet {
+            font-size: 2.175rem;
+        }
+    }
+}
+.spinningWheel {
+    &__wrapper {
+        grid-column: 2/-1;
+        grid-row: 1/-1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include ipadPro {
+            grid-column: 1/-1;
+            grid-row: 3/-1;
+        }
+        @include mobileL {
+            margin: 23px 0;
+        }
+    }
+    &__itemImg {
+        width: 141px;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 157px;
+        @include laptopL {
+            width: 115px;
+            margin-bottom: 138px;
+        }
+        @include laptopM {
+            width: 101px;
+            margin-bottom: 123px;
+        }
+        @include ipadPro {
+            width: 140px;
+            margin-bottom: 136px;
+        }
+        @include tablet {
+            width: 107px;
+            margin-bottom: 132px;
+        }
+        @include mobileL {
+            width: 71px;
+            margin-bottom: 82px;
+        }
+        @include mobileM {
+            width: 73px;
+            margin-bottom: 80px;
+        }
+        @include mobileS {
+            width: 62px;
+            margin-bottom: 76px;
+        }
+    }
+}
+.spinningWheel__content {
+    width: 700px;
+    height: 700px;
+    background-color: #ccc;
+    border-radius: 50%;
+    border: 15px solid #ffd26a;
+    position: relative;
+    overflow: hidden;
+    transition: 5s;
+    box-sizing: border-box;
+
+    @include laptopL {
+        width: 586px;
+        height: 586px;
+        border: 10px solid #ffd26a;
+    }
+    @include laptopM {
+        width: 510px;
+        height: 510px;
+        border: 8px solid #ffd26a;
+    }
+    @include ipadPro {
+        width: 760px;
+        height: 760px;
+        border: 10px solid #ffd26a;
+    }
+    @include tablet {
+        width: 550px;
+        height: 550px;
+    }
+    @include mobileL {
+        width: 400px;
+        height: 400px;
+        border: 6px solid #ffd26a;
+    }
+    @include mobileM {
+        width: 360px;
+        height: 360px;
+    }
+    @include mobileS {
+        border: 4px solid #ffd26a;
+        width: 310px;
+        height: 310px;
+    }
+    &-animation {
+        animation: 10s an__spinning_wheel_rotate infinite;
+    }
+    div {
+        height: 50%;
+        width: 280px;
+        position: absolute;
+        clip-path: polygon(100% 0, 50% 100%, 0 0);
+        transform: translateX(-50%);
+        transform-origin: bottom;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        background: rgb(230, 243, 255);
+        background: linear-gradient(229deg, rgba(230, 243, 255, 1) 37%, rgba(185, 212, 240, 1) 53%);
+        left: 195px; // 163
+        @include laptopL {
+            width: 236px;
+            left: 163px;
+        }
+        @include laptopM {
+            width: 207px;
+            left: 143px;
+        }
+        @include ipadPro {
+            width: 308px;
+            left: 217px;
+        }
+        @include tablet {
+            width: 221px;
+            left: 154px;
+        }
+        @include mobileL {
+            width: 162px;
+            left: 112px;
+        }
+        @include mobileM {
+            width: 144px;
+            left: 101px;
+        }
+        @include mobileS {
+            width: 127px;
+            left: 88px;
+        }
+    }
+
+    .circle {
+        clip-path: none;
+        position: absolute;
+        top: calc(50% - 40px);
+        left: 50%;
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        background: $color-gray-dark;
+        z-index: 2;
+
+        &-animation {
+            animation: 2s an__spinning_wheel_circle forwards;
+        }
+        @include laptopM {
+            width: 68px;
+            height: 68px;
+            top: calc(50% - 34px);
+        }
+        @include mobileL {
+            width: 46px;
+            height: 46px;
+            top: calc(50% - 23px);
+        }
+    }
+
+    .one {
+        left: 50%;
+    }
+    .two {
+        transform: rotate(45deg);
+    }
+    .three {
+        transform: rotate(90deg);
+    }
+
+    .four {
+        transform: rotate(135deg);
+    }
+    .five {
+        transform: rotate(180deg);
+    }
+    .six {
+        transform: rotate(225deg);
+    }
+    .seven {
+        transform: rotate(270deg);
+    }
+    .eight {
+        transform: rotate(315deg);
+    }
+}
+#wonItem_wrapper {
+    position: absolute;
+    z-index: 10;
+}
+.wonItem {
+    &__wrapper {
+        border: 5px solid $color-gold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 241px;
+        transform: scale(0%);
+        background: $color-white;
+        border-radius: 20px;
+        animation: 1s an__wonItem_wrapper ease-in-out forwards;
+        @include laptopM {
+            width: 204px;
+            border: 3px solid $color-gold;
+        }
+        @include laptopS {
+            border-radius: 16px;
+        }
+        @include ipadPro {
+            width: 314px;
+            border: 5px solid $color-gold;
+            border-radius: 20px;
+        }
+        @include tablet {
+            width: 220px;
+            border: 4px solid $color-gold;
+            border-radius: 16px;
+        }
+        @include mobileM {
+            border: 3px solid $color-gold;
+            border-radius: 13px;
+        }
+    }
+    &__img {
+        width: 96%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 10px;
+        @include desktopM {
+            width: 70%;
+        }
+        @include tablet {
+            width: 46%;
+        }
+        @include mobileL {
+            width: 35%;
+        }
+    }
+    @include tablet {
+        width: 270px;
+    }
+}
+@keyframes an__spinning_wheel_rotate {
+    100% {
+        transform: rotate(3060deg);
+    }
+}
+@keyframes an__wonItem_wrapper {
+    100% {
+        padding: 10px;
+        transform: scale(100%);
+    }
+}
+@keyframes an__spinning_wheel_circle {
+    100% {
+        width: 100%;
+        height: 100%;
+        top: 0;
+    }
+}
+@include mobileL {
+    .wonItem__wrapper {
+        .market__itemRarity {
+            margin-top: 3px;
+            font-size: 17px;
+        }
+        .market__itemDsc,
+        .itemDsc {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .market__itemStats td {
+            font-size: 12px;
+        }
+    }
+}
+
+@include mobileM {
+    .wonItem__wrapper {
+        .market__itemRarity {
+            margin-top: 3px;
+            font-size: 15px;
+        }
+        .market__itemDsc,
+        .itemDsc {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .market__itemStats td {
+            font-size: 10px;
+        }
+    }
+}

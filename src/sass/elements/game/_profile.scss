@@ -1,0 +1,1748 @@
+.profile {
+   background-image: url("../../dist/images/background_profile.jpg");
+    display: flex;
+    overflow: auto;
+    height: 100%;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    @include tablet {
+        justify-content: center;
+    }
+    &__item {
+        overflow: auto;
+        height: 100%;
+        position: relative;
+        padding: 10px;
+        width: 50%;
+        z-index: 1;
+        &:first-child {
+            border-right: 6px solid $color-gray_dark;
+            @include laptopL {
+                border-right: 4px solid $color-gray_dark;
+            }
+            @include ipadPro {
+                border-right: 10px solid $color-gray_dark;
+            }
+            @include tablet {
+                border-right: none;
+            }
+        }
+        @include laptopL {
+            padding: 6px;
+        }
+        @include tablet {
+            width: 768px;
+        }
+        @include mobileL {
+            width: 425px;
+        }
+        @include mobileM {
+            width: 375px;
+        }
+        @include mobileS {
+            width: 320px;
+        }
+    }
+    &__equipment {
+        height: 528px;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 10px solid $color-gold;
+        position: relative;
+        @include desktopM {
+            border-bottom: 7px solid $color-gold;
+        }
+        @include laptopL {
+            border-bottom: 5px solid $color-gold;
+        }
+        @include laptopS {
+            border-bottom: 4px solid $color-gold;
+        }
+       
+            @include desktopM {
+                height: 454px;
+            }
+            @include laptopL {
+                height: 376px;
+            }
+            @include laptopM {
+            }
+            @include laptopS {
+                height: 330px;
+            }
+            @include ipadPro {
+                height: 407px;
+            }
+            @include tablet {
+                height: 606px;
+            }
+            @include mobileL {
+                height: 387px;
+            }
+            @include mobileM {
+                height: 344px;
+            }
+            @include mobileS {
+                height: 282px;
+            }
+
+    }
+
+    &__equipmentItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("../../dist/images/profile_frame_item.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        &-helmet {
+            grid-row: 1/1;
+            grid-column: 1/1;
+        }
+        &-armor {
+            grid-row: 2/2;
+            grid-column: 1/1;
+        }
+        &-gloves {
+            grid-row: 3/3;
+            grid-column: 1/1;
+        }
+        &-weapon {
+            grid-row: 1/1;
+            grid-column: 4/4;
+        }
+        &-shield {
+            grid-row: 2/2;
+            grid-column: 4/4;
+        }
+        &-special {
+            grid-row: 3/3;
+            grid-column: 4/4;
+        }
+    }
+
+    &__portrait {
+      background-image: url("../../dist/images/profile_frame_portrait.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 120% 100%;
+        grid-column: 2/4;
+        grid-row: 1/3;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__portraitImg {
+        margin-top: 32px;
+        width: 60%;
+        height: auto;
+        object-fit: cover;
+        @include desktopM {
+            margin-top: 35px;
+        }
+        @include desktopS {
+            margin-top: 54px;
+        }
+        @include laptopL {
+            margin-top: 28px;
+        }
+        @include laptopM {
+            margin-top: 34px;
+        }
+        @include laptopS {
+            margin-top: 42px;
+        }
+        @include tablet {
+            margin-top: 72px;
+        }
+        @include mobileL {
+            margin-top: 64px;
+        }
+        @include mobileM {
+            margin-top: 60px;
+        }
+        @include mobileS {
+            margin-top: 44px;
+        }
+    }
+    &__portraitActionBar {
+        position: absolute;
+
+        display: flex;
+        bottom: 2px;
+        height: 29px;
+        @include laptopL {
+            height: 21px;
+        }
+    }
+    &__portraitBtn {
+        height: 29px;
+        width: 29px;
+        background: $color-blue;
+        &:hover {
+            cursor: pointer;
+        }
+        &-left {
+            clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+        }
+        &-right {
+            clip-path: polygon(50% 50%, 0 0, 0 100%);
+        }
+        @include laptopL {
+            height: 21px;
+            width: 26px;
+        }
+        @include laptopS {
+            height: 19px;
+            width: 22px;
+        }
+        @include ipadPro {
+            width: 32px;
+        }
+        @include tablet {
+            height: 33px;
+            width: 47px;
+            transform: translateY(-14px);
+        }
+        @include mobileL {
+            height: 20px;
+            width: 28px;
+            transform: translateY(-1px);
+        }
+        @include mobileS {
+            height: 16px;
+            width: 24px;
+            transform: translateY(4px);
+        }
+    }
+    &__portraitActionIcon {
+        width: 27px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 9px;
+        @include laptopS {
+            width: 21px;
+            margin: 2px 5px;
+        }
+        @include tablet {
+            width: auto;
+            height: 33px;
+            margin: -14px 5px;
+        }
+        @include mobileL {
+            height: 21px;
+            margin: -1px 5px;
+        }
+        @include mobileS {
+            height: 17px;
+            margin: 4px 6px;
+        }
+    }
+
+    &__info {
+        grid-column: 2/4;
+        grid-row: 3/4;
+        @include laptopL {
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+    &__itemSpecs {
+        z-index: 10;
+        padding: 10px;
+        border-radius: 18px;
+        width: 325px;
+        background-color: $color-gray_dark;
+        position: absolute;
+        @include laptopL {
+            border-radius: 15px;
+            width: 250px;
+            padding: 6px;
+        }
+        @include laptopS {
+            border-radius: 10px;
+            width: 208px;
+            padding: 6px;
+        }
+        @include ipadPro {
+            width: 301px;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        @include mobileL {
+            border-radius: 16px;
+            padding: 6px;
+            width: 270px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+            padding: 4px;
+            width: 217px;
+        }
+        &-common {
+            border: 4px solid $color-blue;
+            @include laptopL {
+                border: 3px solid $color-blue;
+            }
+            @include laptopS {
+                border: 2px solid $color-blue;
+            }
+            @include ipadPro {
+                border: 4px solid $color-blue;
+            }
+            @include mobileM {
+                border: 3px solid $color-blue;
+            }
+        }
+        &-legendary {
+            border: 4px solid $color-gold;
+            @include laptopL {
+                border: 3px solid $color-gold;
+            }
+            @include laptopS {
+                border: 2px solid $color-gold;
+            }
+            @include ipadPro {
+                border: 4px solid $color-gold;
+            }
+            @include mobileM {
+                border: 3px solid $color-gold;
+            }
+        }
+        &::after {
+            width: 30px;
+            height: 30px;
+            content: "";
+            position: absolute;
+            display: block;
+            background: $color-gray_dark;
+            @include laptopL {
+                width: 24px;
+                height: 24px;
+            }
+            @include laptopS {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        &-helmet {
+            top: 0;
+            left: 189px;
+            &::after {
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
+                }
+            }
+            @include desktopM {
+                left: 160px;
+            }
+            @include laptopL {
+                left: 135px;
+            }
+            @include laptopS {
+                left: 100px;
+            }
+            @include ipadPro {
+                left: 122px;
+            }
+            @include tablet {
+                left: 192px;
+            }
+            @include mobileL {
+                left: 100px;
+            }
+            @include mobileM {
+                left: 94px;
+            }
+            @include mobileS {
+                left: 75px;
+            }
+        }
+        &-weapon {
+            top: 0;
+            right: 189px;
+            &::after {
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
+                }
+            }
+            @include desktopM {
+                right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
+            }
+            @include ipadPro {
+                right: 122px;
+            }
+            @include tablet {
+                right: 192px;
+            }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
+            }
+            @include mobileS {
+                right: 75px;
+            }
+        }
+
+        &-chestPlate {
+            top: 35%;
+            left: 189px;
+            &::after {
+                left: -28px;
+                top: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
+                }
+            }
+            @include desktopM {
+                left: 160px;
+            }
+            @include laptopL {
+                left: 135px;
+            }
+            @include laptopS {
+                left: 100px;
+            }
+            @include ipadPro {
+                left: 122px;
+            }
+            @include tablet {
+                left: 192px;
+            }
+            @include mobileL {
+                left: 100px;
+            }
+            @include mobileM {
+                left: 94px;
+            }
+            @include mobileS {
+                left: 75px;
+            }
+        }
+
+        &-shield {
+            top: 35%;
+            right: 189px;
+            &::after {
+                right: -28px;
+                top: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
+                }
+                @include laptopS {
+                    right: -17px;
+                }
+            }
+            @include desktopM {
+                right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
+            }
+            @include ipadPro {
+                right: 122px;
+            }
+            @include tablet {
+                right: 192px;
+            }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
+            }
+            @include mobileS {
+                right: 75px;
+            }
+        }
+
+        &-gloves {
+            bottom: 10px;
+            left: 189px;
+            &::after {
+                left: -28px;
+                bottom: 21px;
+                clip-path: polygon(0 50%, 100% 100%, 100% 0);
+                @include laptopL {
+                    left: -23px;
+                }
+                @include laptopS {
+                    left: -17px;
+                }
+            }
+            @include desktopM {
+                left: 160px;
+            }
+            @include laptopL {
+                left: 135px;
+            }
+            @include laptopS {
+                left: 100px;
+            }
+            @include ipadPro {
+                left: 122px;
+            }
+            @include tablet {
+                left: 192px;
+            }
+            @include mobileL {
+                left: 100px;
+            }
+            @include mobileM {
+                left: 94px;
+            }
+            @include mobileS {
+                left: 75px;
+            }
+        }
+
+        &-special {
+            bottom: 10px;
+            right: 189px;
+            &::after {
+                right: -28px;
+                bottom: 21px;
+                clip-path: polygon(100% 50%, 0 100%, 0 0);
+                @include laptopL {
+                    right: -23px;
+                }
+                @include laptopS {
+                    right: -17px;
+                }
+            }
+            @include desktopM {
+                right: 160px;
+            }
+            @include laptopL {
+                right: 135px;
+            }
+            @include laptopS {
+                right: 100px;
+            }
+            @include ipadPro {
+                right: 122px;
+            }
+            @include tablet {
+                right: 192px;
+            }
+            @include mobileL {
+                right: 100px;
+            }
+            @include mobileM {
+                right: 94px;
+            }
+            @include mobileS {
+                right: 75px;
+            }
+        }
+        .itemTitle {
+            color: $color-white;
+        }
+        .itemRarity {
+            color: $color-white;
+            border-top: 2px solid $color-gold;
+            @include ipadPro {
+                margin-top: 7px;
+                font-size: 18px;
+            }
+            @include mobileL {
+                font-size: 16px;
+                margin-top: 5px;
+            }
+            @include mobileS {
+                font-size: 14px;
+                margin-top: 3px;
+            }
+        }
+        .itemDsc {
+            color: $color-white;
+        }
+        table {
+            color: $color-white;
+        }
+    }
+    &__potionElement {
+        color: $color-white;
+    }
+    &__potion-common {
+        border-top: 2px solid $color-blue;
+    }
+    &__potion-legendary {
+        border-top: 2px solid $color-gold;
+    }
+    &__actionWrapper {
+        height: 30px;
+        background: $color-white;
+        border-radius: 18px;
+        margin-top: 0.25rem;
+        padding: 0.188rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        margin-bottom: 13px;
+        letter-spacing: 0.063rem;
+        transition: 0.2s;
+        img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+        }
+        &:hover {
+            cursor: pointer;
+            letter-spacing: 0.125rem;
+        }
+        @include desktopS {
+            height: 27px;
+            margin-bottom: 8px;
+        }
+        @include laptopM {
+            height: 25px;
+            margin-bottom: 6px;
+        }
+        @include laptopS {
+            height: 20px;
+            margin-bottom: 1px;
+        }
+        @include ipadPro {
+            margin-top: 12px;
+            height: 28px;
+            margin-bottom: 3px;
+        }
+        @include tablet {
+            margin-top: 12px;
+            height: 35px;
+            margin-bottom: 11px;
+        }
+        @include mobileL {
+            margin-top: 8px;
+            height: 29px;
+            margin-bottom: 7px;
+        }
+        @include mobileM {
+            height: 23px;
+            margin-bottom: 5px;
+        }
+        @include mobileS {
+            margin-bottom: 0px;
+        }
+    }
+    &__equipmentItemSellWrapper {
+        height: 30px;
+        background: $color-white;
+        border-radius: 18px;
+        margin-top: 0.25rem;
+        padding: 0.188rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 0 0.125rem $color-gold inset;
+        }
+        @include desktopS {
+            height: 27px;
+        }
+        @include laptopM {
+            height: 25px;
+        }
+        @include laptopS {
+            height: 20px;
+        }
+        @include ipadPro {
+            height: 28px;
+            margin-bottom: 3px;
+        }
+        @include tablet {
+            height: 35px;
+        }
+        @include mobileL {
+            margin-top: 8px;
+            height: 29px;
+        }
+        @include mobileM {
+            height: 23px;
+        }
+        @include mobileS {
+            margin-top: 4px;
+        }
+    }
+
+    &__actionName {
+        margin-left: 0.438rem;
+        font-weight: 700;
+        color: $color-gray_dark;
+        font-size: 1.438rem;
+    }
+    &__actionError {
+        display: block;
+        color: $color-error;
+        font-weight: 600;
+        font-size: 1.188rem;
+        letter-spacing: 0.063rem;
+        text-align: center;
+    }
+
+    &__equipmentItemSellIcon {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+    }
+    &__equipmentItemSellPrice {
+        margin-left: 0.438rem;
+        font-weight: 900;
+        color: $color-gold;
+        font-size: 1.438rem;
+        letter-spacing: 0.063rem;
+    }
+    &__level {
+        z-index: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        margin: 10px auto;
+        height: 47px;
+        border: 4px solid $color-gray_dark;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.4);
+        color: $color-white;
+        font-size: 51px;
+        font-weight: bold;
+        -webkit-text-stroke: 2px $color-gray_dark;
+        text-shadow: 3px 3px $color-gray_dark;
+        font-style: italic;
+        @include desktopM {
+            height: 38px;
+            font-size: 36px;
+            text-shadow: 2px 2px $color-gray_dark;
+        }
+        @include laptopL {
+            height: 34px;
+            font-size: 31px;
+        }
+        @include laptopS {
+            height: 29px;
+            font-size: 25px;
+            border: 3px solid $color-gray_dark;
+            margin: 5px auto;
+        }
+        @include ipadPro {
+            height: 36px;
+            font-size: 34px;
+            border: 4px solid $color-gray_dark;
+            margin: 5px auto;
+        }
+        @include tablet {
+            height: 53px;
+            font-size: 50px;
+            border: 5px solid $color-gray_dark;
+            margin: 7px auto;
+        }
+        @include mobileL {
+            height: 32px;
+            font-size: 28px;
+            border: 3px solid $color-gray_dark;
+            margin: 4px auto;
+        }
+        @include mobileS {
+            height: 25px;
+            font-size: 20px;
+            margin: 3px auto;
+        }
+    }
+    &__levelProgress {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        background: $color-green;
+        &-1 {
+            width: 90%;
+        }
+    }
+    &__nickname {
+        width: 89%;
+        display: block;
+        background: $color-white;
+        margin: 0 auto;
+        font-size: 1.5rem;
+        padding: 2px 0;
+        text-align: center;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 0.125rem;
+        box-shadow: 0 0 13px $color-red;
+        text-shadow: 1px 1px $color-red;
+        @include desktopM {
+            padding: 1px 0;
+        }
+        @include laptopL {
+            border-radius: 4px;
+        }
+        @include tablet {
+            padding: 6px 0;
+            border-radius: 6px;
+        }
+        @include mobileL {
+            padding: 4px 0;
+            border-radius: 5px;
+        }
+        @include mobileS {
+            padding: 2px 0;
+            border-radius: 4px;
+        }
+    }
+    &__equipmentIcon {
+        width: 43%;
+        height: auto;
+        object-fit: cover;
+        &-pulse {
+            animation: 1s an__equipmentIcon infinite alternate-reverse;
+        }
+    }
+    &__description {
+        position: relative;
+        z-index: -1;
+        width: 90%;
+        margin: 10px auto;
+        height: 30%;
+        border: 5px solid $color-red;
+        border-radius: 8px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(3px);
+        padding: 20px;
+        box-shadow: 0 0 3px $color-black;
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            top: -13px;
+            left: -27px;
+            border-radius: 15px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url("../../dist/images/profile_description_ribbon.png");
+            @include laptopS {
+                height: 38px;
+                width: 38px;
+                left: -22px;
+            }
+            @include ipadPro {
+                height: 54px;
+                width: 54px;
+                left: -30px;
+            }
+            @include mobileL {
+                height: 38px;
+                width: 38px;
+                left: -21px;
+            }
+            @include mobileS {
+                height: 28px;
+                width: 28px;
+                left: -15px;
+            }
+        }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            top: -13px;
+            right: -27px;
+            border-radius: 15px;
+            background-size: cover;
+            background-repeat: no-repeat;
+           background-image: url("../../dist/images/profile_description_ribbon.png");
+            @include laptopS {
+                height: 38px;
+                width: 38px;
+                right: -22px;
+            }
+            @include ipadPro {
+                height: 54px;
+                width: 54px;
+                right: -30px;
+            }
+            @include mobileL {
+                height: 38px;
+                width: 38px;
+                right: -21px;
+            }
+            @include mobileS {
+                height: 28px;
+                width: 28px;
+                right: -15px;
+            }
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            outline: none;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 1.438rem;
+            letter-spacing: 0.063rem;
+            line-height: 1.563rem;
+            font-family: $fontFamily-medivalSharp;
+        }
+        p {
+            font-weight: 700;
+            font-size: 1.438rem;
+            letter-spacing: 0.063rem;
+            line-height: 1.563rem;
+            font-family: $fontFamily-medivalSharp;
+        }
+        @include desktopM {
+            height: 34%;
+            width: 93%;
+            padding: 15px;
+        }
+        @include laptopS {
+            border: 3px solid $color-red;
+        }
+        @include ipadPro {
+            border: 6px solid $color-red;
+        }
+        @include mobileL {
+            border: 4px solid $color-red;
+            height: 26%;
+            width: 93%;
+            padding: 12px;
+        }
+        @include mobileM {
+            border: 3px solid $color-red;
+            height: 253px;
+        }
+        @include mobileS {
+            height: 175px;
+        }
+    }
+
+    &__backpack {
+        position: relative;
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .profile__itemSpecs {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+        }
+    }
+    &__backpackRow {
+        display: flex;
+        &:last-child {
+            @include ipadPro {
+            }
+        }
+    }
+    &__backpackItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 148px;
+        height: 148px;
+        border-left: 3px solid $color-gray_dark;
+        border-top: 3px solid $color-gray_dark;
+        transition: 0.3s;
+        img {
+            width: 90%;
+            height: 90%;
+            @include ipadPro {
+                width: 86%;
+                height: 86%;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        @include desktopM {
+            width: 122px;
+            height: 122px;
+        }
+        @include desktopS {
+            width: 110px;
+            height: 110px;
+        }
+        @include laptopL {
+            width: 103px;
+            height: 103px;
+        }
+        @include laptopM {
+            width: 99px;
+            height: 99px;
+        }
+        @include laptopS {
+            border-left: 2px solid $color-gray_dark;
+            border-top: 2px solid $color-gray_dark;
+            width: 78px;
+            height: 78px;
+        }
+        @include ipadPro {
+            border-left: 4px solid $color-gray_dark;
+            border-top: 4px solid $color-gray_dark;
+            width: 95px;
+            height: 95px;
+        }
+        @include tablet {
+            width: 150px;
+            height: 150px;
+        }
+        @include mobileL {
+            width: 82px;
+            height: 82px;
+            border-left: 2px solid $color-gray_dark;
+            border-top: 2px solid $color-gray_dark;
+        }
+        @include mobileM {
+            width: 72px;
+            height: 72px;
+        }
+        @include mobileS {
+            width: 62px;
+            height: 62px;
+        }
+    }
+
+    &__backpackItemGraphic {
+        width: 70%;
+        height: 70%;
+        object-fit: cover;
+    }
+    &__backpackLabelWrapper {
+        position: absolute;
+        width: 100%;
+        &-blacksmith {
+            top: 0;
+            height: 1px;
+            @include ipadPro {
+                top: 186px;
+            }
+            @include tablet {
+                top: 0;
+            }
+        }
+        @include tablet {
+            width: 768px;
+        }
+        @include mobileL {
+            width: 410px;
+        }
+        @include mobileM {
+            width: 360px;
+        }
+        @include mobileS {
+            width: 310px;
+        }
+    }
+    &__general {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        &-searchedUser {
+            margin-top: 10px;
+            @include desktopM {
+                margin-top: 7px;
+            }
+        }
+    }
+    &__generalItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 151px;
+        @include tablet {
+            margin-top: 10px;
+        }
+        @include mobileM {
+            width: 85px;
+            margin-top: 6px;
+        }
+        @include mobileS {
+            width: 78px;
+            margin-top: 2px;
+        }
+    }
+
+    &__generalImg {
+        border: 7px solid $color-wood-dark;
+        width: 120px;
+        height: 120px;
+        border-radius: 90px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 3px $color-black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 90%;
+            height: auto;
+            object-fit: cover;
+        }
+        &-item {
+            img {
+                width: 67%;
+            }
+        }
+        @include desktopM {
+            width: 100px;
+            height: 100px;
+        }
+        @include laptopL {
+            width: 79px;
+            height: 79px;
+            border: 5px solid $color-wood-dark;
+        }
+        @include ipadPro {
+            width: 118px;
+            height: 118px;
+            border: 7px solid $color-wood-dark;
+        }
+        @include tablet {
+            width: 137px;
+            height: 137px;
+            border: 9px solid $color-wood-dark;
+        }
+        @include mobileL {
+            width: 96px;
+            height: 96px;
+            border: 5px solid $color-wood-dark;
+        }
+        @include mobileM {
+            width: 86px;
+            height: 86px;
+            border: 4px solid #aa6615;
+        }
+        @include mobileS {
+            width: 69px;
+            height: 69px;
+            border: 3px solid #aa6615;
+        }
+    }
+    &__generalText {
+        width: 120px;
+        text-align: center;
+        overflow: hidden;
+        margin-top: 9px;
+        padding: 6px 0;
+        background-color: $color-wood-dark;
+        color: $color-gold;
+        font-weight: 600;
+        letter-spacing: 0.063rem;
+        border-radius: 3px;
+        @include desktopM {
+            margin-top: 5px;
+        }
+        @include laptopL {
+            width: 79px;
+            padding: 3px 0;
+            margin-top: 2px;
+        }
+        @include ipadPro {
+            width: 117px;
+            padding: 5px 0;
+            margin-top: 7px;
+        }
+        @include tablet {
+            width: 137px;
+            padding: 7px 0;
+            margin-top: 9px;
+            margin-bottom: 10px;
+        }
+        @include mobileL {
+            width: 96px;
+            padding: 4px 0;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+        @include mobileM {
+            width: 86px;
+            padding: 3px 0;
+            margin-top: 5px;
+            margin-bottom: 2px;
+        }
+        @include mobileS {
+            width: 69px;
+            padding: 3px 0;
+            margin-top: 4px;
+            margin-bottom: 0px;
+        }
+    }
+    &__goldBar {
+        height: 36px;
+        width: 90%;
+        background: $color-gray_dark;
+        margin: 10px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.313rem 0;
+        border-radius: 50px;
+        &-noAfford {
+            animation: 1s an__goldBar infinite alternate-reverse;
+        }
+        @include laptopL {
+            height: 32px;
+        }
+        @include laptopM {
+            height: 28px;
+        }
+        @include laptopS {
+            height: 26px;
+            margin: 5px auto;
+        }
+        @include tablet {
+            height: 48px;
+            margin: 7px auto;
+        }
+        @include mobileL {
+            height: 30px;
+            margin: 5px auto;
+        }
+        @include mobileS {
+            height: 25px;
+            margin: 5px auto;
+        }
+    }
+    &__goldIcon {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+    }
+    &__goldAmount {
+        font-weight: 900;
+        letter-spacing: 0.063rem;
+        color: $color-gold;
+        font-size: 1.5rem;
+        margin-left: 0.563rem;
+        &-noAfford {
+            text-shadow: 0.188rem 0.188rem 0.125rem $color-error;
+        }
+        &-afford {
+            text-shadow: 0.188rem 0.188rem 0.125rem $color-green;
+        }
+    }
+
+    &__goldSubstract {
+        position: relative;
+        z-index: 11;
+        text-align: center;
+        font-weight: 900;
+        letter-spacing: 0.063rem;
+        color: $color-error;
+        font-size: 1.5rem;
+        transform: translateY(-4px);
+        -webkit-text-stroke: 0.063rem $color-gray_dark;
+        animation: 1.5s an__goldSubstract infinite;
+    }
+}
+.profile__backpackRow {
+    &:first-child .profile__backpackItem:last-child {
+        border-right: 3px solid $color-gray_dark;
+        @include laptopS {
+            border-right: 2px solid $color-gray_dark;
+        }
+    }
+    &:last-child .profile__backpackItem {
+        border-bottom: 3px solid $color-gray_dark;
+        @include laptopS {
+            border-bottom: 2px solid $color-gray_dark;
+        }
+        @include ipadPro {
+            border-bottom: 4px solid $color-gray_dark;
+        }
+        @include mobileL {
+            border-bottom: 2px solid $color-gray_dark;
+        }
+    }
+    &:last-child .profile__backpackItem:last-child {
+        border-right: 3px solid $color-gray_dark;
+        @include laptopS {
+            border-right: 2px solid $color-gray_dark;
+        }
+    }
+    @include ipadPro {
+        &:first-child .profile__backpackItem:last-child {
+            border-right: 4px solid $color-gray_dark;
+        }
+        &:last-child .profile__backpackItem:last-child {
+            border-right: 4px solid $color-gray_dark;
+        }
+    }
+    @include mobileL {
+        &:first-child .profile__backpackItem:last-child {
+            border-right: 2px solid $color-gray_dark;
+        }
+        &:last-child .profile__backpackItem:last-child {
+            border-right: 2px solid $color-gray_dark;
+        }
+    }
+}
+
+.profile__stats {
+    box-sizing: border-box;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100%;
+    color: $color-gold;
+    font-size: 1.563rem;
+    padding: 25px 0;
+
+    border: 3px solid $color-gold;
+    box-shadow: 0 0 3px $color-black;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(3px);
+
+   
+    table {
+        width: 100%;
+        //height: 100%;
+        margin-top: -10px;
+    }
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+    td {
+        padding-top: 5px;
+        @include laptopL {
+            padding-top: 3px;
+        }
+        @include ipadPro {
+            padding-top: 10px;
+        }
+        @include mobileL {
+            padding-top: 9px;
+        }
+        @include mobileS {
+            padding-top: 3px;
+        }
+    }
+    tr {
+        max-height: 30px;
+        margin-left: 0.5rem;
+        &:nth-child(2n) {
+            border-bottom: 2px solid $color-gray_dark;
+            margin-bottom: 4px;
+            padding-bottom: 10px;
+            td {
+                padding-top: 0;
+                padding-bottom: 5px;
+                @include laptopM {
+                    padding-bottom: 3px;
+                }
+            }
+        }
+    }
+    img {
+        width: 1.25rem;
+        height: 1.25rem;
+        object-fit: cover;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    @include desktopM {
+        margin-top: 7px;
+        padding: 10px 0;
+    }
+    @include laptopL {
+        padding: 6px 0;
+    }
+    @include laptopM {
+        padding: 11px 0;
+    }
+    @include laptopS {
+        padding: 11px 0;
+    }
+    @include tablet {
+        padding: 4px 0;
+    }
+    @include mobileS {
+        padding-top: 10px;
+    }
+}
+.profile__generalLabelWrapper {
+    position: absolute;
+    @include tablet {
+        width: 768px;
+    }
+    @include mobileL {
+        width: 410px;
+    }
+    @include mobileM {
+        width: 360px;
+    }
+    @include mobileS {
+        width: 310px;
+    }
+}
+#blacksmith_backpack_item_label,
+#blacksmith_equipment__item_label {
+    z-index: 10;
+}
+@keyframes an__notAfford {
+    100% {
+        background: $color-error;
+        opacity: 0.1;
+    }
+}
+.profile__item--name {
+    display: flex;
+    align-items: center;
+    color: $color-red;
+    font-weight: 700;
+    letter-spacing: 0.063rem;
+    @include tablet {
+        padding: 8px 0;
+    }
+    @include mobileL {
+        padding: 4px 0;
+    }
+}
+.profile__item--nameBlue {
+    color: $color-blue !important;
+    text-decoration-color: $color-blue;
+    margin-left: 0.5rem;
+}
+.profile__item--cost {
+    display: flex;
+    align-items: center;
+}
+.profile__item-notAfford {
+    animation: 1s an__profile__item-notAfford forwards;
+}
+
+.profile__item--amount {
+    font-weight: 600;
+    color: $color-red;
+    text-decoration: underline;
+    text-decoration-color: $color-red;
+}
+.profile__item--buyBtn {
+    button {
+        font-size: 24px;
+        display: block;
+        border: none;
+        padding: 3px 10px;
+        text-align: center;
+        background: $color-red;
+        color: $color-white;
+        border-radius: 8px;
+        @include laptopL {
+            font-size: 18px;
+            padding: 2px 8px;
+            border-radius: 7px;
+        }
+        @include laptopS {
+            font-size: 15px;
+            padding: 1px 6px;
+            border-radius: 6px;
+        }
+        @include ipadPro {
+            font-size: 22px;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+        @include tablet {
+            font-size: 26px;
+            padding: 3px 11px;
+            border-radius: 8px;
+        }
+        @include mobileL {
+            font-size: 18px;
+            padding: 2px 7px;
+            border-radius: 7px;
+        }
+        @include mobileS {
+            font-size: 15px;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+    }
+}
+.white {
+    color: $color-white !important;
+}
+
+.profile {
+    &__mobileTreasureChest {
+        display: none;
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 auto;
+        @include ipadPro {
+            display: block;
+        }
+        @include tablet {
+            display: none;
+        }
+    }
+}
+
+.searchedUser {
+    &__statsWrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+        height: 135px;
+        @include desktopM {
+            height: 120px;
+            padding-bottom: 4px;
+            margin-top: 7px;
+        }
+        @include laptopL {
+            height: 95px;
+        }
+        @include laptopS {
+            flex-direction: column;
+        }
+        @include tablet {
+            flex-direction: row;
+        }
+        @include mobileM {
+            flex-direction: column;
+        }
+    }
+    &__statsTable {
+        color: $color-white;
+        width: 47%;
+        height: 100%;
+        border-radius: 20px;
+        padding: 10px;
+        background: $color-gray_dark;
+        font-size: 20px;
+
+        @include desktopM {
+            height: 92%;
+            font-size: 16px;
+            border-radius: 16px;
+        }
+        @include laptopL {
+            width: 49%;
+            font-size: 15px;
+            border-radius: 13px;
+        }
+        @include laptopS {
+            width: 100%;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+        @include ipadPro {
+            font-size: 19px;
+            border-radius: 20px;
+        }
+        @include tablet {
+            width: 49%;
+            font-size: 17px;
+        }
+        @include mobileL {
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        @include mobileM {
+            font-size: 15px;
+            width: 100%;
+        }
+        @include mobileS {
+            font-size: 11px;
+        }
+    }
+    &__actionBar {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 5px 0;
+        margin: 10px auto;
+        width: 90%;
+        border-radius: 25px;
+        height: 50px;
+        background: $color-gray_dark;
+        @include desktopM {
+            height: 35px;
+            margin: 5px auto;
+            padding: 3px;
+        }
+        @include laptopL {
+            height: 32px;
+            margin: 4px auto;
+        }
+        @include laptopS {
+            height: 26px;
+            margin: 5px auto;
+        }
+        @include ipadPro {
+            height: 40px;
+            margin: 11px auto;
+        }
+        @include tablet {
+            height: 48px;
+        }
+        @include mobileL {
+            height: 30px;
+        }
+        @include mobileS {
+            height: 25px;
+            margin: 5px auto;
+        }
+    }
+    &__actionIcon {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+#searched_user_switch {
+    transition: 0.7s;
+    &:hover {
+        transform: rotate(360deg);
+    }
+}
+.searchedUser__statsTable {
+    td:first-child {
+        padding-top: 10px;
+        @include desktopM {
+            padding-top: 7px;
+        }
+        @include laptopL {
+            padding-top: 4px;
+        }
+        @include laptopS {
+            padding-top: 2px;
+        }
+        @include ipadPro {
+            padding-top: 9px;
+        }
+        @include tablet {
+            padding-top: 5px;
+        }
+        @include mobileL {
+            padding-top: 3px;
+        }
+    }
+    td:last-child {
+        @include laptopS {
+            padding-bottom: 3px;
+        }
+        @include mobileL {
+            padding-bottom: 3px;
+        }
+    }
+    td {
+        padding-left: 10px;
+        @include desktopM {
+            padding-left: 7px;
+        }
+        @include laptopL {
+            padding-left: 4px;
+        }
+        @include laptopS {
+            padding-left: 12px;
+        }
+        @include ipadPro {
+            padding-left: 14px;
+        }
+        @include mobileL {
+            padding-left: 8px;
+        }
+    }
+    tr {
+        font-weight: bold;
+        letter-spacing: 0.125rem;
+        td:last-child {
+            @include tablet {
+                padding-right: 8px;
+                text-align: end;
+            }
+        }
+    }
+}
+
+#searched_user_general{
+    width: 100%;
+}
+@keyframes an__profile__item-notAfford {
+    100% {
+        color: $color-error;
+        font-weight: 900;
+    }
+}
+@keyframes an__equipmentIcon {
+    0% {
+        transform: scale(40%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+@keyframes an__goldBar {
+    100% {
+        box-shadow: 0 0 0 40px $color-red inset;
+    }
+}
+@keyframes an__goldSubstract {
+    100% {
+        transform: translateY(100px);
+    }
+}

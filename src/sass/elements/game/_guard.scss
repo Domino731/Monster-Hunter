@@ -1,0 +1,579 @@
+.guard {
+    &__wrapper {
+        height: 100%;
+    }
+    &-menu {
+        height: 100%;
+        background-image: url("../../dist/images/background_guard.jpg");
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+        @include tablet {
+            background-size: 150% 100%;
+            background-position: 50%;
+        }
+        @media screen and (max-height: 540px) {
+            align-items: flex-start;
+            padding-bottom: 20px;
+        }
+        @include mobileM {
+           overflow-x: hidden;
+        }
+    }
+    &-city {
+        height: 100%;
+        background-image: url("../../dist/images/background_guard_city.jpg");
+        background-size: 100% 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        @include tablet {
+            background-size: 167% 100%;
+            background-position: 50%;
+        }
+        @include mobileL {
+            background-size: 270% 100%;
+        }
+    }
+
+    &__item {
+        display: flex;
+        width: 50%;
+        padding: 10px;
+
+        z-index: 1;
+        border-radius: 20px;
+        position: relative;
+     
+        @media screen and (max-height: 540px) {
+            margin-top: 20px;
+        }
+        @include desktopS {
+            border-radius: 16px;
+        }
+        @include laptopL {
+            padding: 6px;
+        }
+        @include laptopS {
+            border-radius: 10px;
+        }
+        @include ipadPro {
+            width: 78%;
+            border-radius: 20px;
+        }
+        @include mobileL {
+            flex-direction: column;
+            align-items: center;
+        }
+        @include mobileL {
+            border-radius: 16px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+            width: 350px;
+        }
+        @include mobileS {
+            border-radius: 10px;
+            width: 310px;
+        }
+    }
+    &__kingWrapper {
+        width: 35%;
+        @include mobileL {
+            width: auto;
+            height: 172px;
+        }
+        @include mobileS {
+            height: 147px;
+        }
+    }
+
+    &__infoWrapper {
+        width: 65%;
+        @include mobileL {
+            width: 100%;
+        }
+    }
+
+    &__king {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        @include mobileL {
+            height: 100%;
+            width: auto;
+        }
+    }
+    &__title {
+        font-size: 44px;
+        letter-spacing: 0.25rem;
+        word-spacing: 0.188rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: $color-gold;
+        -webkit-text-stroke: 1px $color-black;
+        @include desktopS {
+            font-size: 36px;
+        }
+        @include laptopM {
+            font-size: 31px;
+        }
+        @include laptopS {
+            font-size: 25px;
+        }
+        @include ipadPro {
+            font-size: 52px;
+        }
+        @include mobileL {
+            font-size: 42px;
+            text-align: center;
+        }
+        @include mobileM {
+            font-size: 35px;
+        }
+        @include mobileS {
+         font-size: 28px;
+        }
+    }
+    &__text {
+        font-size: 1.25rem;
+        word-spacing: 0.125rem;
+        line-height: 1.25rem;
+        @include ipadPro {
+            font-size: 1.5rem;
+        }
+        @include mobileL {
+            width: 100%;
+            text-align: justify;
+        }
+    }
+    &__award {
+        display: flex;
+        align-items: center;
+        margin-top: 41px;
+        @include laptopL {
+            margin-top: 36px;
+        }
+        @include laptopM {
+            margin-top: 17px;
+        }
+        @include laptopS {
+            margin-top: 9px;
+        }
+        @include ipadPro {
+            margin-top: 42px;
+        }
+        @include mobileL {
+            justify-content: center;
+        }
+        @include mobileM {
+            margin-top: 19px;
+        }
+    }
+
+    &__awardIcon {
+        width: 2.313rem;
+        height: auto;
+        object-fit: cover;
+    }
+    &__awardAmount {
+        margin-left: 0.625rem;
+
+        font-size: 1.625rem;
+        font-weight: 700;
+        word-spacing: 0.375rem;
+        text-transform: uppercase;
+        letter-spacing: 0.125rem;
+        strong {
+            text-shadow: 0.128rem 0.128rem $color-red;
+        }
+    }
+    &__inputValue {
+        position: absolute;
+        &-left {
+            left: -30px;
+        }
+        &-right {
+            right: -30px;
+        }
+    }
+    &__acceptBtnWrapper {
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__acceptBtn {
+        font-size: 1.375rem;
+        border: none;
+        outline: none;
+        position: relative;
+        font-weight: 900;
+        background: $color-gold;
+        color: $color-black;
+        padding: 0.313rem 0.75rem;
+        border-radius: 0.625rem;
+        margin-top: 0.625rem;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            letter-spacing: 0.065rem;
+        }
+        @include mobileL {
+            width: 100%;
+        }
+    }
+    &__summaryWrapper {
+        width: 100%;
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100% - 131px);
+        @include desktopS {
+            height: calc(100% - 120px);
+        }
+        @include mobileL {
+            height: calc(100% - 88px);
+        }
+        @media screen and (max-height: 420px) {
+            height: 90vh;
+            margin-top: 20px;
+        }
+    }
+    &__summary {
+        padding: 15px;
+        border-radius: 25px;
+        @include laptopM {
+            padding: 8px;
+            border-radius: 16px;
+        }
+        @include ipadPro {
+            border-radius: 20px;
+        }
+        @include mobileL {
+            border-radius: 16px;
+        }
+        @include mobileM {
+            border-radius: 13px;
+        }
+    }
+    &__summaryIcon {
+        height: 190px;
+        width: auto;
+        object-fit: cover;
+        @include laptopM {
+            height: 166px;
+        }
+        @include ipadPro {
+            height: 313px;
+        }
+        @include tablet {
+            height: 209px;
+        }
+        @media screen and (max-height: 420px) {
+            display: block;
+            margin: 0 auto;
+            height: 36vh;
+        }
+    }
+    &__summaryTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.125rem;
+        text-transform: uppercase;
+        text-align: center;
+        color: $color-white;
+        text-shadow: 0.125rem 0.125rem $color-gold;
+        @include ipadPro {
+            font-size: 2rem;
+        }
+    }
+    &__summaryPayout {
+        display: block;
+        text-align: center;
+        font-size: 2.063rem;
+        margin-top: 0.25rem;
+        font-weight: 700;
+        letter-spacing: 0.125rem;
+        color: $color-gold;
+        text-shadow: 0.125rem 0.125rem $color-blue;
+    }
+    &__summaryBtn {
+        display: block;
+        margin: 0.5rem auto;
+        font-size: 1.375rem;
+        border: none;
+        outline: none;
+        position: relative;
+        font-weight: 900;
+        background: $color-blue;
+        color: $color-white;
+        padding: 0.313rem 0.75rem;
+        border-radius: 0.625rem;
+        margin-top: 0.625rem;
+        transition: 0.2s;
+        letter-spacing: 0.068rem;
+        transition: 0.2s;
+        &:hover {
+            letter-spacing: 0.188rem;
+            cursor: pointer;
+        }
+    }
+}
+.guard-menu {
+    .range {
+        margin-top: 8px;
+        height: 80px;
+        width: 100%;
+    }
+    .rangeIcon {
+        position: absolute;
+        appearance: none;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url("../../dist/images/guard_input_range__progress_icon.png");
+        background-size: 100% 100%;
+        transform: translateY(-1px);
+        z-index: 3;
+        @include desktopM {
+            width: 46px;
+            height: 46px;
+        }
+        @include laptopM {
+            width: 39px;
+            height: 39px;
+        }
+        @include ipadPro {
+            width: 54px;
+            height: 54px;
+        }
+        @include mobileM {
+            width: 42px;
+            height: 42px;
+        }
+    }
+    .field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        height: 30px;
+        background: #e5646e;
+        z-index: 1;
+        input {
+            position: absolute;
+            z-index: 3;
+            background: transparent;
+            appearance: none;
+            width: 100%;
+            border: none;
+            &::-webkit-slider-thumb {
+                appearance: none;
+                background: none;
+                border: none;
+                height: 50px;
+                width: 50px;
+            }
+            &::-moz-range-thumb {
+                appearance: none;
+                background: none;
+                border: none;
+                height: 50px;
+                width: 50px;
+            }
+            &::-ms-thumb {
+                appearance: none;
+                height: 50px;
+                width: 50px;
+                appearance: none;
+                background: none;
+                border: none;
+            }
+        }
+        @include desktopS {
+            height: 25px;
+        }
+        @include laptopM {
+            height: 19px;
+        }
+        @include ipadPro {
+            height: 32px;
+        }
+        @include mobileM {
+            height: 23px;
+        }
+    }
+    .value {
+        position: absolute;
+    }
+    .left {
+        left: -43px;
+    }
+    .right {
+        right: -43px;
+    }
+    .sliderValue {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 67px;
+        span {
+            position: absolute;
+            display: block;
+            text-align: center;
+            width: 2.813rem;
+            height: 2.813rem;
+            left: 0%;
+            line-height: 2.5rem;
+            font-weight: bold;
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: -1;
+
+                transform: rotate(45deg);
+                top: 0;
+                display: block;
+                text-align: center;
+                width: 45px;
+                height: 45px;
+
+                background: #f5f2ec;
+                border-top-left-radius: 50%;
+                border-top-right-radius: 50%;
+                border-bottom-left-radius: 50%;
+                border: 3px solid #53433f;
+                @include desktopS {
+                    width: 35px;
+                    height: 35px;
+                }
+                @include laptopS {
+                    width: 30px;
+                    height: 30px;
+                    border: 2px solid #53433f;
+                }
+                @include ipadPro {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid #53433f;
+                }
+                @include mobileM {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+            @include desktopS {
+                line-height: 3.2rem;
+            }
+            @include laptopS {
+                width: 3.3rem;
+                line-height: 3.8rem;
+            }
+            @include tablet {
+                width: 2.9rem;
+                line-height: 2.8rem;
+            }
+            @include mobileL {
+                font-size: 16px;
+                width: 42px;
+                line-height: 48px;
+            }
+            @include mobileM {
+                font-size: 14px;
+                width: 38px;
+                line-height: 42px;
+            }
+        }
+        @include laptopM {
+            margin-bottom: 61px;
+        }
+        @include laptopS {
+            margin-bottom: 50px;
+        }
+        @include ipadPro {
+            margin-bottom: 64px;
+        }
+        @include mobileM {
+            margin-bottom: 54px;
+        }
+    }
+}
+// classes responsible for progress bar
+@for $i from 1 through 10 {
+    .field__progressBar-#{$i} {
+        &::after {
+            width: ($i * 10%) - 3% !important;
+        }
+    }
+}
+.progressBar {
+    z-index: -1;
+    display: block;
+    background: $color-gold;
+    z-index: 2;
+    width: 8%;
+    left: 0;
+    position: absolute;
+    border-radius: 40px;
+    height: 30px;
+    @include laptopM {
+        height: 19px;
+    }
+    @include ipadPro {
+        height: 32px;
+    }
+    @include mobileM {
+        height: 28px;
+    }
+}
+.progressBar-1 {
+    width: 8%;
+}
+.progressBar-2 {
+    width: 18%;
+}
+.progressBar-3 {
+    width: 28%;
+}
+.progressBar-4 {
+    width: 38%;
+}
+.progressBar-5 {
+    width: 48%;
+}
+.progressBar-6 {
+    width: 59%;
+}
+
+.progressBar-7 {
+    width: 68%;
+}
+.progressBar-8 {
+    width: 78%;
+}
+.progressBar-9 {
+    width: 90%;
+}
+.progressBar-10 {
+    width: 100%;
+}
+@keyframes an_guardCountdownBar {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
