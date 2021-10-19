@@ -201,14 +201,17 @@
             font-size: 15px;
             width: 82%;
         }
-
+         &-active{
+             &::after{
+                right: 0 !important;
+             }
+         }
         &::after {
             content: "";
             display: block;
             position: absolute;
             width: 84px;
             height: 90px;
-            background: red;
             bottom: -34px;
             right: -100%;
             transform: rotate(21deg);
@@ -219,7 +222,7 @@
             }
             @include desktopS {
                 width: 40px;
-                height: 40px;
+                height: 53px;
                 bottom: -10px;
                 
             }
@@ -348,6 +351,14 @@
             }
         }
     }
+    &__copyright{
+        font-size: 0.938rem;
+        letter-spacing: 0.063rem;
+        font-weight: 600;
+        color: $color-white;
+        margin-top: 0.563rem;
+        text-align: center;
+    }
 }
 .mobileNav {
     width: 100%;
@@ -435,6 +446,11 @@
     }
 }
 #freepik-attribute{
-    font-size: 14px;
-    color: red;
+    font-size: 0.875rem;
+    text-align: center;
+     margin-top: 0.563rem;
+    a{
+       
+         color: $color-red;
+    }
 }

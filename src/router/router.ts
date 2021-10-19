@@ -57,7 +57,7 @@ export const router = async () => {
         },
     ];
 
-    // check each router for potential match
+
     const potentialMatches = routes.map(route => {
         return {
             route: route,
@@ -66,21 +66,19 @@ export const router = async () => {
     });
 
     // find index of specific route in routes array, then create new component
-    let match = potentialMatches.find(potentialMatches => potentialMatches.isMatch)
-    const routeIndex = routes.indexOf(routes.find(el => el.path === match.route.path));
+    let match = potentialMatches.find(potentialMatches => {
+        return potentialMatches.isMatch
+    })
 
     // check if potentail match exist
     if (match) {
-        match = {
-            route: new routes[routeIndex].view,
-            isMatch: true
-        }
+        const routeIndex = routes.indexOf(routes.find(el => el.path === match.route.path));
+        new routes[routeIndex].view;
+
     }
     else {
-        match = {
-            route: new routes[0].view,
-            isMatch: true
-        };
+        new routes[0].view;
+         
     }
 
     // add loading which will be removed by component class
@@ -91,22 +89,29 @@ export const router = async () => {
  * navigate to particular game section
  * @param url - url needed to change the history state -> router() function will create specific game section
  */
-const navigateTo = (url: string) => {
+export const navigateTo = (url: string) => {
+
+     // mark active section
+    const links: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav a');
+    links.forEach(el =>  el.dataset.link === window.location.pathname && el.classList.add('nav__link-active'));  
+    
     history.pushState(null, null, url);
     return router();
 };
 
 
-
 export const initRouter = () => {
 
+    window.addEventListener('popstate', () => router);
+
+   
     // add events for links in navigation in order to redirect user to particular game section by using navigate() function
     document.addEventListener("click", (e: any) => {
         if (e.target.matches("[data-link]")) {
-            e.preventDefault();
             navigateTo(e.target.href);
         };
     });
 
     window.addEventListener("popstate", router);
 };
+
