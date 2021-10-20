@@ -92,7 +92,6 @@ export class SearchFriend extends Component {
          tableRow.children[1].firstElementChild.classList.add('searchFriend__nick-selected');
       });
 
-      console.log(1)
       // add new created elemement to all users list
       this.dom.allUsersList.appendChild(tableRow);
 

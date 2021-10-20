@@ -62,15 +62,17 @@ export class Inbox extends Component {
    * @param id - id of email needed to find what email should be deleted
    */
   deleteEMail(id: string) {
+
     // find and delete email
     const index: number = this.userData.inbox.findIndex(el => el.id === id);
     this.userData.inbox.splice(index, 1);
     this.dom.emailAmount.innerText = `${this.userData.inbox.length}`;
+
     // update user data -> renderMails() placed in onDataChange() will rerender emails list
     updateUserData(this.userData);
   }
 
-  // method responsible for hiding current selected email container
+  // method responsible for hiding current selected email container (mainly for devices below 1024px)
   closeEMail() {
     this.dom.closeMailIcon.addEventListener('click', () => {
       this.dom.emailContainer.classList.add('disabled');
@@ -79,17 +81,20 @@ export class Inbox extends Component {
     });
   }
 
-  // hide email container on mobile devices -> emails list will be on full width, and when user click on specific email this list will be hidden and email container will showed (on full width)
+  // hide email container on mobile devices -> emails list will be on full width, and when user click on specific email this list will be hidden and email container will showed (on full device width)
   mobile() {
     if (window.innerWidth < 1024) {
       this.dom.emailContainer.classList.add('disabled');
     }
   }
 
-  // render mails in list
-  renderMails() {
+  // render e-mails in list
+  renderEMails() {
+
+    // clear previous list (mainly for situation when user deletes e-mail)
     this.dom.emailList.innerHTML = '';
     this.userData.inbox.forEach(el => {
+
       // create list elements
       const li: HTMLElement = document.createElement('li');
       li.innerHTML = mailHTMLCode(el);
@@ -101,18 +106,19 @@ export class Inbox extends Component {
       // add events -> opportunitie to show speficic mail and delete this mail
       deleteIcon.addEventListener('click', () => this.deleteEMail(el.id));
       mailWrapper.addEventListener('click', () => this.openEMail(el.content));
+
       // update list
       this.dom.emailList.appendChild(li);
     })
   }
 
 
+
   initScripts() {
-    this.renderMails();
+    this.renderEMails();
     this.mobile();
     this.closeEMail();
   }
-
   getDOMElements() {
     this.dom = {
       mailListContainer: document.querySelector('#email-list'),
@@ -126,6 +132,6 @@ export class Inbox extends Component {
     this.root.innerHTML = getInboxHTMLCode(this.userData);
   }
   onDataChange() {
-    console.log('data changed');
+    this.renderEMails();
   }
 }

@@ -4,6 +4,8 @@ import { includeNumber, isUpper } from '../functions/other';
 import { Component } from './view';
 import { getAccountHTMLCode } from '../HTMLCode/account';
 import { UserData } from '../types';
+import uniqid from 'uniqid';
+
 
 // class reponsible for account section, by which can change his password, email or delete his account :(
 export class Account extends Component {
@@ -15,7 +17,8 @@ export class Account extends Component {
         passwordRepeat: string;
         deleteCode: string;
     }
-
+    // special code which must be prescribe by the user to allow him to delete his account
+    private deleteCode: string;
     private dom: {
         // inputs nedeed to get their values, based on this values authAction method will be invoke firebase auth action on this data - changeDataEvent() method
         formInputs: NodeListOf<Element> | null;
@@ -35,8 +38,7 @@ export class Account extends Component {
         deleteAccountBtn: HTMLButtonElement | null;
     }
 
-    // special code which must be prescribe by the user to allow him to delete his account
-    private deleteCode: string;
+    
     constructor() {
         super()
         this.freepikAttribute = `<a href='https://www.freepik.com/vectors/light'>Light vector created by vectorpouch - www.freepik.com</a>`;
@@ -47,7 +49,7 @@ export class Account extends Component {
             passwordRepeat: '',
             deleteCode: ''
         }
-        this.deleteCode = uniqid('', 'delete');
+       this.deleteCode = uniqid('', 'delete')
         this.dom = {
             updateFormContainer: document.querySelector('#update-account'),
             deleteAccountFormContainer: document.querySelector('#delete-account'),
@@ -107,7 +109,7 @@ export class Account extends Component {
         })
     }
 
-    // toggle between change data form and delete account
+    // click events applied on toogleIcon in order to toggle between change data form and delete account
     toggleForm() {
         this.dom.toogleIcon.addEventListener('click', () => {
             const flag: boolean = this.dom.updateFormContainer.classList.contains('disabled');
@@ -126,7 +128,7 @@ export class Account extends Component {
         })
     }
 
-    // adding event for each input, which is responsible to changing data
+    // adding change events for each input, which is responsible to changing data
     changeDataEvent() {
 
         // changing data needed to execute to specific auth action
@@ -241,7 +243,7 @@ export class Account extends Component {
         }
     }
 
-    // firebase auth action on button, responsible for update user's profile
+    // event applied on actionBtn with firebase auth action, responsible for update user's profile
     updateProfileEvent() {
         this.dom.actionBtn.addEventListener("click", (e: Event) => {
             e.preventDefault();
@@ -272,13 +274,11 @@ export class Account extends Component {
         }
     }
     onDataChange() {
-        console.log('Data changed');
+        return true;
     }
     render() {
         this.root.innerHTML = getAccountHTMLCode(this.userData.nick, this.deleteCode);
     }
 }
-function uniqid(arg0: string, arg1: string): string {
-    throw new Error('Function not implemented.');
-}
+
 

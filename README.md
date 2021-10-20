@@ -283,4 +283,29 @@ Class which is responsible for creating list with all players, where user can di
 * `searchFriend()` - Search for specific user by his nick.
 * `toogleView()` - Toogle between all user's list and searched user view (mainly for devices below 1024px).
 * `hideSearchedFriend()` - Hide searched user view (only below 1024px).  
-* `` 
+
+### `Inbox (extends Component class)`
+Class which is responsible for inbox section, where user can read e-mails. This section is created for further development, (for example: giveways and others).
+#### ***Methods***
+* `openEMail()` - Method applied with click event on each. By this method can open specific mail.
+* `deleteEMail()` - Method applied with click event on each. By this method can delete specific mail.
+* `closeEMail()` - Method responsible for hiding current selected email container, applied on closeMailIcon which is displays only on mobile devices.
+* `toggleEMail()` -  This method is responsible to toggling between mails list and mail content container (only for devices below 1024px)
+* `mobile()` - Hide email container on mobile devices -> emails list will be on full width, and when user click on specific email this list will be hidden and email container will showed (on full device width).
+* `renderMails()` - render e-mails in list and add click event by which user can open specific email (`openEMail` method) and click event for deleting email(`deleteEMail()` method)
+* `onDataChange()` - Operations when data in firestore has changed.
+    * rerender list with e-mails - `renderEMails()` method
+
+### `Account (extends Component class)`
+Class which is for section where user can change his email or password, or delete his account :(
+#### ***Constructor***
+* `data` - Object with data needed to execute firebase auth action, changing in changeDataEvent() method  
+* `deleteCode` - Special code which must be prescribe by the user to allow him to delete his account
+#### ***Methods***
+* `toggleForm()` - Click events applied on toogleIcon in order to toggle between change data form and delete account.
+* `updateProfileEvent()` - Event applied on actionBtn with firebase auth action, responsible for update user's profile.
+* `updatePassword()` - Upadate user's password.
+* `updateEmail` - Update user's email.
+* `ChangeDataEvent` - Adding change events for each input, which is responsible to changing data.
+* `DeleteAccountEvent` -  Method that is reponsible for deleting user's account from firestore and firebase auth.
+* `deleteAccount` - Method that is reponsible for deleting user's data from firestore.
