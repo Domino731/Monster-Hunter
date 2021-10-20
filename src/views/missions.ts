@@ -11,7 +11,7 @@ export class Missions extends Component{
       super(); 
     }
 
-    // check status and  create appropriate section
+    // check status and create appropriate section
     render() {
         let render;
         const currentTime = new Date().getTime();
@@ -37,7 +37,7 @@ export class Missions extends Component{
         console.log('script initialization');
     }
     onDataChange(){
-      console.log('Data changed');
+      return true;
     }
     getDOMElements(){
         console.log('DOM loaded');

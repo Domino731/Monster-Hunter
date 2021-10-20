@@ -1,29 +1,28 @@
 import { getOnGuardTavernHTMLCode } from '../HTMLCode/onGuardTavern';
+import { Component } from './view';
 
 // class responsible for tavern section when user is on guard
-export class OnGuardTavern {
+export class OnGuardTavern extends Component {
 
-    // need to inject html code - render() method 
-    private root: HTMLElement
     constructor() {
-        this.root = document.getElementById("game__view");
-        this.init();
+        super();
+        this.freepikAttribute = `<a href='https://www.freepik.com/vectors/restaurant'>Restaurant vector created by upklyak - www.freepik.com</a>`;
+        this.bodyBackgroundSrc = `/images/background_missions.jpg`;
     }
 
-    // inject html code into root element
     render() {
         this.root.innerHTML = getOnGuardTavernHTMLCode();
     }
 
-    // set body background with freepik attribute
-    setBodyBackground() {
-        document.querySelector('#freepik-attribute').innerHTML = `<a href='https://www.freepik.com/vectors/restaurant'>Restaurant vector created by upklyak - www.freepik.com</a>`;
-        document.querySelector('body').style.backgroundImage = '/images/background_missions.jpg';
+    onDataChange(){
+        return true;
     }
-
-    // initialization of scripts
-    init() {
-        this.render();
-        this.setBodyBackground();
+    initScripts(){
+        return true;
     }
+    getDOMElements(){
+        return true;
+    }
+    
+  
 } 

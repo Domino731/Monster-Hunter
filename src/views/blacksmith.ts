@@ -10,7 +10,7 @@ import { getBlacksmithItemLabel } from '../functions/getBlacksmithItemLabel';
 import { getBlacksmithEquipmentLabel } from '../functions/equipmentLabel';
 import { getBlacksmithBackpackLabel } from '../functions/backpackLabel';
 
-// Class responsible for blacksmith section by which user can purchase new items to his equipment or backpack
+// Class responsible for blacksmith section by which user can purchase (or sold) new items to his equipment or backpack
 export class Blacksmith extends Component {
    private dom: {
       // when user hovers over or clicks on an item then a class is added that shows if the user has enough gold to buy the new item and
@@ -53,12 +53,12 @@ export class Blacksmith extends Component {
       mobileNavFristSwitch: HTMLElement | null;
       mobileNavSecondSwitch: HTMLElement | null;
    }
-   // array with blacksmith items that are available to buy
+   // array with data about blacksmith items that are available to buy
    private market: ShopItem[]
    // selected blacksmith item, when user clicks one of slot in market then this value is change, and when he presses the button on label, which is responsible for purchasing new item then new item with this data
    // will be added to user's backpack or equipment - buyItemByLabel() method
    private selectedMarketItem: ShopItem | null;
-   // intarval which helps to set delay on blacksmith item label display
+   // intarval that helps to set delay on blacksmith item label display
    private showBlacksmithLabel: ReturnType<typeof setInterval> | null;
    // when user hovers over an item in inventory, backpack0 or potion then a label is shown which describes this item,
    //  if  this label loses his focus then it does not disappear immediately but with a delay (0.8s). however
@@ -73,7 +73,7 @@ export class Blacksmith extends Component {
    constructor() {
       super(),
          this.freepikAttribute = `<a href='https://www.freepik.com/vectors/frame'>Frame vector created by upklyak - www.freepik.com</a>`;
-      this.bodyBackgroundSrc = '/images/pets_background.jpg';
+      this.bodyBackgroundSrc = '/images/background_blacksmith.jpg';
       this.dom = {
          portraitImg: document.querySelector('.profile__portraitImg'),
          level: document.querySelector('.profile__level'),
@@ -106,8 +106,7 @@ export class Blacksmith extends Component {
       }
    }
 
-
-   // set items which are availble to buy 
+   // set items which are availble to buy with hover event which is responsbile for displaying blacksmith label 
    setShop() {
 
       // set today's market in order to access to his data later -> when a user wants to buy a new item
@@ -191,7 +190,7 @@ export class Blacksmith extends Component {
 
    }
 
-   // get available pick per slot in market, each slot has only 2 picks - user can buy items. 
+   // get available pick per slot in market, each slot has only 2 picks - user can buy only 2 items from one slot. 
    // Picks are reset in new day - dataOperations() method in Component class
    getAvailbleMarketPicks(): AvailableMarketPicks[] {
       const availablePicks: AvailableMarketPicks[] = []
@@ -282,7 +281,7 @@ export class Blacksmith extends Component {
             if (selectedItem.id !== elementImg.dataset.currentItemId && marketItem.initialCost <= this.userData.gold) {
 
                // each market slot has only 2 picks in day, when user buy new item, substract one pick
-              
+
                // @ts-ignore 
                const slotIndex: number = [...marketSlotsArr].indexOf(selectedMarketSlot);
                const picks: number = availablePicks[slotIndex].picks;
@@ -385,7 +384,7 @@ export class Blacksmith extends Component {
             if (this.userData.backpackItems.length < 10) {
 
                // each market slot has only 2 picks in day, when user buy new item, substract one pick
-                // @ts-ignore 
+               // @ts-ignore 
                const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
                const picks: number = availablePicks[slotIndex].picks;
 
@@ -464,7 +463,7 @@ export class Blacksmith extends Component {
    buyItem(selectedItem: ShopItem, selectedMarketSlot: HTMLElement) {
 
       // each market slot has only 2 picks in day, when user buy new item, substract one pick
-       // @ts-ignore 
+      // @ts-ignore 
       const slotIndex: number = [...this.dom.marketSlots].indexOf(selectedMarketSlot);
 
       // general operations when user has purchased  new item
@@ -573,7 +572,7 @@ export class Blacksmith extends Component {
 
    }
 
-   // add click event on each market in order to create capability to buy new blacksmith item via button which is placed in label
+   // add click event on each market in order to create capability to buy new blacksmith item via button which is placed in blacksmith label
    buyItemByLabel() {
       this.dom.marketSlots.forEach(el => el.addEventListener('click', () => {
 
@@ -687,7 +686,7 @@ export class Blacksmith extends Component {
    }
 
    /**
-     * add backpack label for the specific item, with ability to move this item to equipment
+     * add backpack label for the specific item, with ability  to sell or to  move this item to equipment
      * @param item - item data basis of which the new item label will be created
      * @param number - slot number in the backpack to add the appropriate class for the label to be displayed
      */
@@ -812,7 +811,39 @@ export class Blacksmith extends Component {
    }
 
    /**
- * add equipment label for specific item
+       * moving item from equipement to backpack
+       * @param item - item which will be moved to backpack
+       * @param errorWrapper - wrapper where an error message will be displayed if item moved fails
+       */
+   moveItemToBackpack(item: ShopItem, errorWrapper: HTMLElement) {
+
+      // check if user have free slot in backpack (backpack have 10 slots)
+      if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
+
+         // remove this item from user equipment
+         const itemIndex = this.userData.equipmentItems.findIndex(e => e.id === item.id);
+         this.userData.equipmentItems.splice(itemIndex, 1);
+
+         // add current item to user's backpack
+         this.userData.backpackItems.push(item);
+
+         // update user data -> equipment and backpack will be rerendered by onDataChange() method
+         updateUserData(this.userData);
+
+         // hide label
+         this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
+
+      }
+
+      // notify user about no available slot in backpack
+      else {
+         errorWrapper.innerText = 'Your backpack is full';
+      }
+
+   }
+
+   /**
+ *  add backpack label for the specific item, with ability  to sell or to  move this item to backpack
  * @param item - item data basis of which the new item label will be created
  */
    equipmentLabel(item: ShopItem) {
@@ -861,44 +892,13 @@ export class Blacksmith extends Component {
 
    }
 
+
    // clear equipment slots -> remove items graphics 
    clearEquipmentSlots() {
       this.dom.equipmentSlots.forEach(el => {
          const element: HTMLElement = el as HTMLElement;
          el.innerHTML = `<img src='${getEquipmentIconSrc(element.dataset.slotName)}' class='profile__equipmentIcon'/>`
       });
-   }
-
-   /**
-     * moving item from equipement to backpack
-     * @param item - item which will be moved to backpack
-     * @param errorWrapper - wrapper where an error message will be displayed if item moved fails
-     */
-   moveItemToBackpack(item: ShopItem, errorWrapper: HTMLElement) {
-
-      // check if user have free slot in backpack (backpack have 10 slots)
-      if (this.userData.backpackItems.length < this.dom.backpackSlots.length) {
-
-         // remove this item from user equipment
-         const itemIndex = this.userData.equipmentItems.findIndex(e => e.id === item.id);
-         this.userData.equipmentItems.splice(itemIndex, 1);
-
-         // add current item to user's backpack
-         this.userData.backpackItems.push(item);
-
-         // update user data -> equipment and backpack will be rerendered by onDataChange() method
-         updateUserData(this.userData);
-
-         // hide label
-         this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
-
-      }
-
-      // notify user about no available slot in backpack
-      else {
-         errorWrapper.innerText = 'Your backpack is full';
-      }
-
    }
 
    // set user backpack where each item can be sold (sellEquipmentItem() method) or moved (moveItemToBackpack() method) to the backpack
@@ -1030,8 +1030,8 @@ export class Blacksmith extends Component {
       this.generalOnDataChange();
       this.dragAndDrop();
       this.bugfix();
-
    }
+   
    getDOMElements() {
       this.dom = {
          blacksmithContainer: document.querySelector('.blacksmith__item:last-child'),

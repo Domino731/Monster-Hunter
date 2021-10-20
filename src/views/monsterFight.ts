@@ -1,5 +1,5 @@
 
-import { Component} from './view';
+import { Component } from './view';
 import { getMonsterFightHTMLCode } from '../HTMLCode/monsterFight';
 import { getRandomMission } from '../functions/missionGenerator';
 import { getNeededExp } from '../functions/getNeededExp';
@@ -10,7 +10,7 @@ import { getGuardPaymentValue } from '../functions/getGuardPaymentValue';
 // class reponsible for section with fight between user and monster
 export class MonsterFight extends Component {
 
-    // interval which contains logic responsbile for fight and is cleared after the fight is over - fightAnimations() method
+    // contains logic responsbile for fight and is cleared after the fight is over - fightAnimations() method
     private fightInterval: null | ReturnType<typeof setInterval>;
     // health points that are there to check if the fight is over - checkMonsterHP() and checkUserHP() methods
     private monsterHP: number;
@@ -105,7 +105,7 @@ export class MonsterFight extends Component {
         updateUserData(this.userData);
     }
 
-    // if user defeated the monster, then show summary panel, create new mission, and update user's data in firestore
+    // if monster defeated the user, then show summary panel, create new mission, and update user's data in firestore
     failedMission() {
 
         // hide fight container and show failed mission summary panel
@@ -205,7 +205,7 @@ export class MonsterFight extends Component {
         this.userHP -= Math.ceil(monsterDamage);
     }
 
-    // fight animation between user and monster
+    // single fight animation between user and monster
     fightAnimation() {
 
         // add animation for user
@@ -250,7 +250,7 @@ export class MonsterFight extends Component {
 
     }
 
-    // set interval responsible for logic behind fight
+    // set interval responsible for attack animations and logic behind fight
     fightAnimationInterval() {
 
         this.fightAnimation();
@@ -267,6 +267,7 @@ export class MonsterFight extends Component {
 
     }
 
+    // set monster and user health points
     general() {
         this.monsterHP = this.userData.currentMission.monster.health;
         this.userHP = this.userStats.health;
@@ -276,9 +277,6 @@ export class MonsterFight extends Component {
 
     render() {
         this.root.innerHTML = getMonsterFightHTMLCode(this.userStats, this.userData);
-    }
-    onDataChange() {
-        console.log('Data changed')
     }
     getDOMElements() {
         this.dom = {
@@ -310,5 +308,8 @@ export class MonsterFight extends Component {
             this.fightAnimationInterval();
         }, 2000);
     }
+    onDataChange() {
+        return true;
+    }
 }
-// <a href='https://www.freepik.com/vectors/nature'>Nature vector created by brgfx - www.freepik.com</a>
+

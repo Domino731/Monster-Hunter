@@ -14,7 +14,7 @@ export class Travel extends Component {
         // button needed to apply at him click event responsible for mission cancellation - cancelMissionEvent() method
         cancelBtn: HTMLElement | null
     }
-    // value which is includes interval which will be cleaned when travel ends or if user cancel mission
+    // includes interval which will be cleaned when travel ends or if user cancel mission
     private countdownInterval: null | ReturnType<typeof setInterval>;
     constructor() {
         super();
@@ -86,11 +86,7 @@ export class Travel extends Component {
         }, 1000);
     }
 
-    onDataChange() {
-        console.log('Data changed');
-    }
-
-    // cancel current mission
+    // click event applied on button by which user can cancel current mission
     cancelMissionEvent() {
         this.dom.cancelBtn.addEventListener('click', () => {
 
@@ -110,7 +106,7 @@ export class Travel extends Component {
         });
     }
 
-    // set body background with freepik attribute in nav
+    // set body background with freepik author attribute in nav
     setBackground() {
         this.freepikAttribute = this.userData.currentMission.background.attribute;
         this.bodyBackgroundSrc = this.userData.currentMission.background.src;
@@ -133,5 +129,8 @@ export class Travel extends Component {
         this.cancelMissionEvent();
         this.travelCountdown();
         this.setBackground();
+    }
+    onDataChange() {
+        return true
     }
 }

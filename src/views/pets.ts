@@ -31,7 +31,7 @@ export class Pets extends Component  {
   constructor() {
     super()
     this.freepikAttribute = `<a href='https://www.freepik.com/vectors/background'>Background vector created by upklyak - www.freepik.com</a>`;
-    this.bodyBackgroundSrc = '/images/background_blacksmith.jpg';
+    this.bodyBackgroundSrc = '/images/pets_background.jpg';
     this.countdownInterval = null;
     this.dom = {
       rentBtns: document.querySelectorAll('.pets__buy button'),

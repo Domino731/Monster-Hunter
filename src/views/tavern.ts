@@ -52,7 +52,7 @@ export class Tavern extends Component {
     }
 
     /**
-     * set selectedMission with specific mission data, based on this 
+     * set selectedMission with specific mission data, based on this data
      * when the user presses the button a new mission with this data will be started
      * @param missinId - id of mission needed to find specific mission
      */
@@ -82,10 +82,10 @@ export class Tavern extends Component {
         this.dom.missionContentWrapper.scrollIntoView();
     }
 
-    // start new mission (if user has enough willingness to start new mission) and move the user to travel section
+    // start new mission (if user has enough willingness to start new mission) and redirect the user to travel section
     startMission() {
         this.dom.startMissionBtn.addEventListener('click', () => {
-            if (this.selectedMission !== null) {
+            if (this.selectedMission !== null && this.userData.status === 'free') {
                 // check if user have enough willingness to start new mission, then add new mission to user's data, else show error
                 if (this.selectedMission.time <= this.userData.missionWillingness) {
 
@@ -154,8 +154,11 @@ export class Tavern extends Component {
         });
     }
 
+
+
     onDataChange() {
-        console.log('Data changed');
+        // set willingness bar
+        this.dom.willingnessBarGreen.style.height = `${this.userData.missionWillingness}%`;
     }
     getDOMElements() {
         this.dom = {
@@ -171,6 +174,7 @@ export class Tavern extends Component {
         }
     }
     initScripts() {
+        // set countdown which is counts to mission willingness bar reset
         setCountdown(this.dom.countdown);
         this.renderAvailableMissions();
         this.onBtnHover();

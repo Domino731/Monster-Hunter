@@ -11,7 +11,7 @@ import { getPotionLabel } from '../functions/getPotionLabel';
 import { getProfileBackpackLabel } from '../functions/backpackLabel';
 import { getProfileEquipmentLabel } from '../functions/equipmentLabel';
 
-// class responsible for profile veiw
+// class responsible for profile view
 export class Profile extends Component {
 
     private dom: {
@@ -84,7 +84,6 @@ export class Profile extends Component {
         mobileNavFristSwitch: HTMLElement | null;
         mobileNavSecondSwitch: HTMLElement | null;
     }
-
     // when user hovers over an item in inventory, backpack or potion then a label is shown which describes this item
     // , if  this label loses his focus then it does not disappear immediately but with a delay (0.8s). however
     //  when user hovers over a item in a backpack and quickly hovers over another one then clear this 
@@ -94,7 +93,6 @@ export class Profile extends Component {
         equipment: ReturnType<typeof setInterval> | null;
         backpack: ReturnType<typeof setInterval> | null;
     }
-
     // intervals needed to clear specific interval when potion or pet time will end
     private generalInterval: {
         pet: ReturnType<typeof setInterval> | null;
@@ -283,8 +281,8 @@ export class Profile extends Component {
 
     }
 
-    // change hero portrait
-    changePortraitEvents() {
+    // adding events on buttons which are to change hero portrait
+    changePortrait() {
 
         // value which is user to change portrait
         let portraitIndex: number = portraitsData.indexOf(this.userData.portrait);
@@ -317,7 +315,6 @@ export class Profile extends Component {
 
     }
 
-
     // update user description when textarea loses his focus
     changeUserDescription() {
         this.dom.description.addEventListener('focusout', () => {
@@ -326,83 +323,12 @@ export class Profile extends Component {
         })
     }
 
-    // set general elements - potions, pet and description
-    setGeneral() {
-
-        // set pet 
-        if (this.userData.pet !== null) {
-
-            // set graphic
-            this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} title='Pet slot' />`;
-            this.dom.general.petImg.classList.add('profile__generalImg-item');
-
-            // start countdown which is displaying the remaining time
-            this.generalInterval.pet = this.setCountdown(
-                this.userData.pet.rentEnd,
-                this.dom.general.petRentTime,
-                'pet'
-            );
-
-        }
-        else {
-            this.dom.general.petRentTime.innerText = 'No pet';
-        }
-
-        // set first potion
-        if (this.userData.potions.first !== null) {
-
-            // find potion
-            const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.first.id)];
-
-            // set graphic
-            this.dom.general.potionImgFirst.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
-            this.dom.general.potionImgFirst.classList.add('profile__generalImg-item');
-
-            // start countdown which is displaying the remaining time
-            this.generalInterval.potionFirst = this.setCountdown(
-                this.userData.potions.first.end,
-                this.dom.general.potionTimeFirst,
-                'potion1'
-            );
-
-        }
-        else {
-            this.dom.general.potionTimeFirst.innerText = 'No potion';
-        }
-
-
-        // set second potion
-        if (this.userData.potions.second !== null) {
-
-            // find potion
-            const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.second.id)];
-
-            // set graphic
-            this.dom.general.potionImgSecond.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
-            this.dom.general.potionImgSecond.classList.add('profile__generalImg-item');
-
-            // start countdown which is displaying the remaining time
-            this.generalInterval.potionSecond = this.setCountdown(
-                this.userData.potions.second.end,
-                this.dom.general.potionTimeSecond,
-                'potion2'
-            );
-        }
-        else {
-            this.dom.general.potionTimeSecond.innerText = 'No potion';
-        }
-
-        // set description
-        this.dom.description.value = this.userData.description;
-
-    }
-
     /**
-     * Countdown which displays the remaining time
-     * @param end - item expiry date
-     * @param counterWrapper - wrapper when where the remaining time is to be shown
-     * @param item - the name of the item needed to delete its graphics after countdown ends
-     */
+        * Countdown which displays the remaining time
+        * @param end - item expiry date
+        * @param counterWrapper - wrapper when where the remaining time is to be shown
+        * @param item - the name of the item needed to delete its graphics after countdown ends
+        */
     setCountdown(end: Date, counterWrapper: HTMLElement, item: 'potion1' | 'potion2' | 'pet'): ReturnType<typeof setInterval> {
 
         const start: number = new Date().getTime();
@@ -476,6 +402,77 @@ export class Profile extends Component {
 
     }
 
+    // set general elements - potions, pet and description
+    setGeneral() {
+
+        // set pet 
+        if (this.userData.pet !== null) {
+
+            // set graphic
+            this.dom.general.petImg.innerHTML = `<img src=${this.userData.pet.imgSmallSrc} title='Pet slot' />`;
+            this.dom.general.petImg.classList.add('profile__generalImg-item');
+
+            // start countdown which is displaying the remaining time
+            this.generalInterval.pet = this.setCountdown(
+                this.userData.pet.rentEnd,
+                this.dom.general.petRentTime,
+                'pet'
+            );
+
+        }
+        else {
+            this.dom.general.petRentTime.innerText = 'No pet';
+        }
+
+        // set first potion
+        if (this.userData.potions.first !== null) {
+
+            // find potion
+            const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.first.id)];
+
+            // set graphic
+            this.dom.general.potionImgFirst.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
+            this.dom.general.potionImgFirst.classList.add('profile__generalImg-item');
+
+            // start countdown which is displaying the remaining time
+            this.generalInterval.potionFirst = this.setCountdown(
+                this.userData.potions.first.end,
+                this.dom.general.potionTimeFirst,
+                'potion1'
+            );
+
+        }
+        else {
+            this.dom.general.potionTimeFirst.innerText = 'No potion';
+        }
+
+
+        // set second potion
+        if (this.userData.potions.second !== null) {
+
+            // find potion
+            const potion: ShopItem = potionsData[potionsData.findIndex(el => el.id === this.userData.potions.second.id)];
+
+            // set graphic
+            this.dom.general.potionImgSecond.innerHTML = `<img src=${potion.src} title='Elixir slot #1'/>`;
+            this.dom.general.potionImgSecond.classList.add('profile__generalImg-item');
+
+            // start countdown which is displaying the remaining time
+            this.generalInterval.potionSecond = this.setCountdown(
+                this.userData.potions.second.end,
+                this.dom.general.potionTimeSecond,
+                'potion2'
+            );
+        }
+        else {
+            this.dom.general.potionTimeSecond.innerText = 'No potion';
+        }
+
+        // set description
+        this.dom.description.value = this.userData.description;
+
+    }
+
     // general actions when data has changed
     generalOnUpdate() {
 
@@ -496,7 +493,7 @@ export class Profile extends Component {
      * moving item from backpack to equipment
      * @param currentItem - current item in backpack, needed to find what item will be replaced
      */
-    moveItemInEquipment(currentItem: ShopItem) {
+    moveItemToEquipment(currentItem: ShopItem) {
 
         // indexes of items that are needed for moving items
         const equipmentItemIndex: number = this.userData.equipmentItems.findIndex(el => el.type === currentItem.type);
@@ -564,6 +561,101 @@ export class Profile extends Component {
         }
 
     }
+
+    /**
+        * add backpack label for specific item, with ability to move this item to equipment
+        * @param item - item data basis of which the new item label will be created
+        * @param number - slot number in the backpack to add the appropriate class for the label to be displayed
+        */
+    backpackLabel(item: ShopItem, number: number) {
+
+        // remove pulse from previous equipment slot
+        this.dom.equipmentSlots.forEach(el => el.firstElementChild.classList.remove('profile__equipmentIcon-pulse'));
+
+        // remove equipment label
+        this.dom.equipmentLabelRoot.innerHTML = '';
+        this.dom.equipmentLabelRoot.classList.add('disabled');
+
+        // prevent of label hide
+        clearInterval(this.hideLabelInterval.backpack);
+
+        // find specific slot in equipment which is equal to current shop item type, needed to compare items
+        const equipmentSlot = document.querySelector(`#profile_equipment_slots div[data-slot-name = ${item.type}]`);
+
+        // show slot in equipment by adding pulse animation
+        equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+
+        // create new label
+        this.dom.backpackLabelRoot.innerHTML = '';
+        const currentItemInEq: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(e => e.type === item.type)];
+        const newLabel: HTMLElement = document.createElement('div');
+        newLabel.className = `profile__itemSpecs profile__itemSpecs-backpackSlot profile__backpackLabel-${number + 1}`;
+        newLabel.innerHTML = getProfileBackpackLabel(item, currentItemInEq);
+
+        // add a event which is responsible for moving item  the backpack to equipment
+        const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
+        replaceBtn.addEventListener('click', () => this.moveItemToEquipment(item));
+
+        // when the label has his focus keep displaying pulse effect on specifc equipment slot and clear interval which is reponsible for hidding this label
+        newLabel.addEventListener('mouseover', () => {
+            equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
+            return clearInterval(this.hideLabelInterval.backpack);
+        });
+
+        // when label loses his focus then hide this label and remove pulse effect from specific equipment slot
+        newLabel.addEventListener('mouseleave', () => {
+            this.dom.backpackLabelRoot.innerHTML = '';
+            equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
+        });
+
+        // show this label
+        this.dom.backpackLabelRoot.classList.remove('disabled');
+        this.dom.backpackLabelRoot.appendChild(newLabel);
+    }
+
+    /**
+   * add equipment label for specific item,  with ability to move this item to backpack
+   * @param item - item data basis of which the new item label will be created
+   */
+    equipmentLabel(item: ShopItem) {
+
+        // hide backpack label
+        this.dom.backpackLabelRoot.innerHTML = '';
+        this.dom.backpackLabelRoot.classList.add('disabled');
+
+        // prevent of label hiding 
+        clearInterval(this.hideLabelInterval.equipment);
+
+        // hide backpack label
+        this.dom.backpackLabelRoot.classList.add('disabled');
+
+        // reset equipement label styles
+        this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
+
+        // show label
+        this.dom.equipmentLabelRoot.classList.add(item.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common');
+        this.dom.equipmentLabelRoot.classList.add(`profile__itemSpecs-${item.type}`);
+        this.dom.equipmentLabelRoot.innerHTML = getProfileEquipmentLabel(item);
+        this.dom.equipmentLabelRoot.classList.remove('disabled');
+
+        // keep displaying label when user  focus is on label
+        this.dom.equipmentLabelRoot.addEventListener('mouseover', () => clearInterval(this.hideLabelInterval.equipment));
+
+        // hide when equipment slot loses his focus
+        this.dom.equipmentLabelRoot.addEventListener('mouseleave', () => {
+            this.dom.equipmentLabelRoot.innerHTML = '';
+            this.dom.equipmentLabelRoot.classList.add('disabled');
+        });
+
+        // get elements which are needed for moving item from equipment to backpack
+        const replaceBtn: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_btn');
+        const error: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_error');
+
+        // add a event which is responsible for moving item  the equipment to backpack
+        replaceBtn.addEventListener('click', () => this.moveItemToBackpack(item, error));
+
+    }
+
     // set bacpack items with hover events by which user can display label of specific item and move this item into equipment
     setUserBackpack() {
 
@@ -672,113 +764,19 @@ export class Profile extends Component {
     }
 
 
-    /**
-     * add backpack label for specific item, with ability to move this item to equipment
-     * @param item - item data basis of which the new item label will be created
-     * @param number - slot number in the backpack to add the appropriate class for the label to be displayed
-     */
-    backpackLabel(item: ShopItem, number: number) {
-
-        // remove pulse from previous equipment slot
-        this.dom.equipmentSlots.forEach(el => el.firstElementChild.classList.remove('profile__equipmentIcon-pulse'));
-
-        // remove equipment label
-        this.dom.equipmentLabelRoot.innerHTML = '';
-        this.dom.equipmentLabelRoot.classList.add('disabled');
-
-        // prevent of label hide
-        clearInterval(this.hideLabelInterval.backpack);
-
-        // find specific slot in equipment which is equal to current shop item type, needed to compare items
-        const equipmentSlot = document.querySelector(`#profile_equipment_slots div[data-slot-name = ${item.type}]`);
-
-        // show slot in equipment by adding pulse animation
-        equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
-
-        // create new label
-        this.dom.backpackLabelRoot.innerHTML = '';
-        const currentItemInEq: ShopItem | undefined = this.userData.equipmentItems[this.userData.equipmentItems.findIndex(e => e.type === item.type)];
-        const newLabel: HTMLElement = document.createElement('div');
-        newLabel.className = `profile__itemSpecs profile__itemSpecs-backpackSlot profile__backpackLabel-${number + 1}`;
-        newLabel.innerHTML = getProfileBackpackLabel(item, currentItemInEq);
-
-        // add a event which is responsible for moving item  the backpack to equipment
-        const replaceBtn: HTMLElement = newLabel.querySelector('#profile_backpack_move_item_btn');
-        replaceBtn.addEventListener('click', () => this.moveItemInEquipment(item));
-
-        // when the label has his focus keep displaying pulse effect on specifc equipment slot and clear interval which is reponsible for hidding this label
-        newLabel.addEventListener('mouseover', () => {
-            equipmentSlot.firstElementChild.classList.add("profile__equipmentIcon-pulse");
-            return clearInterval(this.hideLabelInterval.backpack);
-        });
-
-        // when label loses his focus then hide this label and remove pulse effect from specific equipment slot
-        newLabel.addEventListener('mouseleave', () => {
-            this.dom.backpackLabelRoot.innerHTML = '';
-            equipmentSlot.firstElementChild.classList.remove("profile__equipmentIcon-pulse");
-        });
-
-        // show this label
-        this.dom.backpackLabelRoot.classList.remove('disabled');
-        this.dom.backpackLabelRoot.appendChild(newLabel);
-    }
-
-    /**
-   * add equipment label for specific item
-   * @param item - item data basis of which the new item label will be created
-   */
-    equipmentLabel(item: ShopItem) {
-
-        // hide backpack label
-        this.dom.backpackLabelRoot.innerHTML = '';
-        this.dom.backpackLabelRoot.classList.add('disabled');
-
-        // prevent of label hiding 
-        clearInterval(this.hideLabelInterval.equipment);
-
-        // hide backpack label
-        this.dom.backpackLabelRoot.classList.add('disabled');
-
-        // reset equipement label styles
-        this.dom.equipmentLabelRoot.className = 'profile__itemSpecs disabled';
-
-        // show label
-        this.dom.equipmentLabelRoot.classList.add(item.rarity === 'legendary' ? 'profile__itemSpecs-legendary' : 'profile__itemSpecs-common');
-        this.dom.equipmentLabelRoot.classList.add(`profile__itemSpecs-${item.type}`);
-        this.dom.equipmentLabelRoot.innerHTML = getProfileEquipmentLabel(item);
-        this.dom.equipmentLabelRoot.classList.remove('disabled');
-
-        // keep displaying label when user  focus is on label
-        this.dom.equipmentLabelRoot.addEventListener('mouseover', () => clearInterval(this.hideLabelInterval.equipment));
-
-        // hide when equipment slot loses his focus
-        this.dom.equipmentLabelRoot.addEventListener('mouseleave', () => {
-            this.dom.equipmentLabelRoot.innerHTML = '';
-            this.dom.equipmentLabelRoot.classList.add('disabled');
-        });
-
-        // get elements which are needed for moving item from equipment to backpack
-        const replaceBtn: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_btn');
-        const error: HTMLElement = this.dom.equipmentLabelRoot.querySelector('#profile_equipment_move_item_error');
-
-        // add a event which is responsible for moving item  the equipment to backpack
-        replaceBtn.addEventListener('click', () => this.moveItemToBackpack(item, error));
-
-    }
-
-    // events applied on mobile nav buttons by which the user can switch between profile and backpack
+    // click events applied on mobile nav buttons by which the user can switch between profile and backpack
     toogleView() {
 
         const hideNavContainer = () => {
 
             // hide nav container
-             const navContainer: HTMLElement = document.querySelector('.nav');
-             navContainer.style.display = 'none';
-   
-             // change nav icon 
-             const navIcon: HTMLImageElement =  document.querySelector('.mobileNav__icon');
-             navIcon.src = './images/menu.png';
-         }
+            const navContainer: HTMLElement = document.querySelector('.nav');
+            navContainer.style.display = 'none';
+
+            // change nav icon 
+            const navIcon: HTMLImageElement = document.querySelector('.mobileNav__icon');
+            navIcon.src = './images/menu.png';
+        }
 
         // show backpack container 
         this.dom.mobileNavFristSwitch.addEventListener('click', () => {
@@ -803,8 +801,6 @@ export class Profile extends Component {
             this.toogleView();
         }
     }
-
-
 
     getDOMElements() {
         this.dom = {
@@ -862,22 +858,21 @@ export class Profile extends Component {
         this.setGeneral();
         this.setUserBackpack();
         this.changeUserDescription();
-        this.changePortraitEvents();
+        this.changePortrait();
         this.setTableStats();
         this.increaseStatisticEvents();
         this.labelForPotions();
     }
     onDataChange() {
         this.setHeroStats();
+        this.setTableStats();
         this.removeEvents();
         this.generalOnUpdate();
         this.setUserBackpack();
         this.setUserEquipment();
-        this.setHeroStats();
-        this.setTableStats();
         this.setGeneral();
         this.labelForPotions();
-        this.changePortraitEvents();
+        this.changePortrait();
     }
     render() {
         this.root.innerHTML = getProfileHTMLCode(this.userData);

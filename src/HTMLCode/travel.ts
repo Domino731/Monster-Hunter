@@ -12,10 +12,6 @@ export const getTravelHTMLCode = (user: UserData) : string => {
               </div>
               <button class='countdown__cancelBtn'>Cancel</button>
             </div>
-
-            <div class='travel__freepikAttribute'>
-               ${user.currentMission.background.attribute}
-            </div>
     </section>
     `
 }
