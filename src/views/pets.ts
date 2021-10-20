@@ -5,9 +5,9 @@ import { petsData } from '../properties/pets/petsData';
 import { updateUserData } from '../firebase/operations';
 
 // class reponsible for pets component by which user can select his pet
-export class Pets extends Component  {
+export class Pets extends Component {
 
-  // value holding interval 
+  // interval responsible for how much time left to pet rent end - setCountdown
   private countdownInterval: null | ReturnType<typeof setInterval>;
   private dom: {
     // buttons needed to set their styles -> red button if user doesn't have enough gold to rend a pet and green if he has -  setStyles() method
@@ -195,7 +195,7 @@ export class Pets extends Component  {
     this.dom.rent.dragon.addEventListener('click', () => this.setNewPet('dragon'));
   }
 
-  // set styles on buttons and mark current pet
+  // set styles on buttons (to mark if user has enough gold for pet) and mark current pet container
   setStyles() {
 
     // styles for buttons -> if user has enough gold to rent pet then button is green otherwise is red
@@ -212,7 +212,7 @@ export class Pets extends Component  {
     // mark current pet
     this.dom.petsWrappers.forEach((el) => {
       const element = el as HTMLElement;
-      
+
       // when user selects new pet then remove mark from previous
       element.classList.remove('pets__current');
       // mark pet
@@ -228,10 +228,10 @@ export class Pets extends Component  {
     this.dom.goldAmount.innerText = `${this.userData.gold}`;
   }
 
-
   render() {
     this.root.innerHTML = getPetsHTMLCode(this.userData);;
   }
+
   getDOMElements() {
     this.dom = {
       rentBtns: document.querySelectorAll('.pets__buy button'),

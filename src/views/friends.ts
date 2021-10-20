@@ -38,14 +38,14 @@ export class Friends extends Component {
     friendsContainer: HTMLElement | null;
   }
 
-  // array with friends data, which is needed to sort (sortFriends) and filter (filterFriends()) friends list  
+  // array with data about friends, which is needed to sort (sortFriends() method) and filter (filterFriends() method) friends list  
   private friendsList: SearchedUserData[];
-  // when user filter friends list by higher or lower lever, then above array with data is filtered by selected filter and and removes other friends
+  // when user filter friends list by higher or lower level, then above array with data is filtered by selected filter and and removes other friends data
   // this friendsListBackup is an array containing all friends which is assigned back to the friendsList array when the user turns off filtering
   private friendsListBackup: SearchedUserData[];
   // value handling class reponsible for friend view or chat
   private secondView: SearchedUser | Chat | null;
-  // nick of current selected friend, needed to mark this friend - showChat() or showFriendProfile()
+  // nick of current selected friend, needed to mark this friend when user start chat with friend (showChat() method ) or display his profile (byshowFriendProfile() method)
   private friendNick: string | null
 
   constructor() {
@@ -74,11 +74,12 @@ export class Friends extends Component {
     };
   }
 
-  // show filter form or sort form
+  // click events applied on buttons (filterBtn and sortBtn) by which user can display filter or sort form 
   showFormsEvents() {
+
     // toogle filter form
     this.dom.filterBtn.addEventListener("click", () => {
-
+    
       //hide sort form
       this.dom.sortForm.classList.add('disabled');
 
@@ -98,9 +99,87 @@ export class Friends extends Component {
       const flag: boolean = this.dom.sortForm.classList.contains('disabled');
       flag ? this.dom.sortForm.classList.remove('disabled') : this.dom.sortForm.classList.add('disabled');
     });
+
   }
 
-  // get friends data and create friends wrappers
+  /**
+   * Create friend profile view
+   * @param friend - friend data needed to create SearchedUser class
+   * @param nickWrapper - wrapper of friend nick which will be marked
+   */
+   showFriendProfile(friend: SearchedUserData, nickWrapper: HTMLElement) {
+
+    // unmark previous friend nick
+    this.unmarkFriends();
+
+    // show close icon in order to give user ability to close friend profile component 
+    this.dom.closeBtn.classList.remove('disabled');
+
+    // create view of friend's profile
+    this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
+    this.shrinkFriendsList();
+
+    // save selected friend nick in order to remove nick mark
+    this.friendNick = friend.nick;
+
+    // mark selected user
+    nickWrapper.classList.add('friend__name-active');
+
+    // on mobile show close btn
+    if (window.innerWidth < 1024) {
+      this.dom.mobileCloseBtn.className = 'closeIcon closeIcon__searchFriend';
+    }
+  };
+
+  /**
+ * Craete chat with friend
+ * @param friend - friend data needed to create SearchedUser class
+ * @param nickWrapper - wrapper of friend nick which will be marked
+ */
+  showChat(friend: SearchedUserData, nickWrapper: HTMLElement) {
+    // unmark previous friend nick
+    this.unmarkFriends();
+
+    // show close icon in order to give user ability to close chat
+    this.dom.closeBtn.classList.remove('disabled');
+
+    // create chat
+    this.shrinkFriendsList();
+    this.secondView = new Chat(this.dom.branch, this.userData, friend);
+
+    // save selected friend nick in order to remove nick mark
+    this.friendNick = friend.nick;
+
+    // mark selected user
+    nickWrapper.classList.add('friend__name-active');
+
+    // on mobile show close btn
+    if (window.innerWidth < 1024) {
+      this.dom.mobileCloseBtn.className = 'closeIcon closeIcon__chat';
+    }
+
+  }
+
+ // create friend wrapper with click events applied on buttons with opportunity to create chat (showChat() method) or create profile view (showFriendProfile() method)
+  createFriendWrapper(friend: SearchedUserData) {
+
+    // create element
+    const wrapper: HTMLElement = document.createElement('div');
+    wrapper.className = 'friends__item';
+    wrapper.innerHTML = friendWindow(friend);
+
+    // add events by which user can open chat or friend profile
+    const chatBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-chat');
+    const profileBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-profile');
+    chatBtn.addEventListener('click', () => this.showChat(friend, chatBtn.parentElement.previousElementSibling as HTMLElement));
+    profileBtn.addEventListener('click', () => this.showFriendProfile(friend, chatBtn.parentElement.previousElementSibling as HTMLElement));
+
+    // add this element to the friends list
+    this.dom.friendsList.appendChild(wrapper);
+
+  }
+
+  // fetch friends data and create friends list 
   async getFriendsData() {
     this.friendsList = [];
     await db.collection('users').get().then((querySnapshot: any) => {
@@ -126,8 +205,10 @@ export class Friends extends Component {
             nextLevelAt: getNeededExp(doc.data().level)
           }
           this.friendsList.push(data);
+
           // array with friends, which is needed to return all friends when user remove filter
           this.friendsListBackup.push(data);
+
           // create friend wrapper with opportunities to create chat or create profile view
           this.createFriendWrapper(data);
         }
@@ -192,10 +273,23 @@ export class Friends extends Component {
     }));
   }
 
-  // hide friend profile or chat
+  // add click event at closeBtn in order to give user hide opportunity to hide friend profile or chat
   closeViewEvent() {
-    this.dom.closeBtn.addEventListener("click", () => this.hideFriendView())
-    this.secondView = null;
+
+    // for devices above 1024px
+    this.dom.closeBtn.addEventListener("click", () => this.hideFriendView());
+  
+    // for devices below 1024px
+    this.dom.mobileCloseBtn.addEventListener('click', () => {
+      this.dom.branch.classList.add('disabled');
+      this.dom.friendsContainer.classList.remove('disabled');
+      this.dom.mobileCloseBtn.className = 'closeIcon disabled';
+      this.dom.branch.innerHTML = '';
+      this.secondView = null;
+      this.dom.closeBtn.classList.add('disabled');
+      this.unmarkFriends();
+      this.growFriendList();
+    })
   }
 
   // rerender list with friends 
@@ -207,25 +301,6 @@ export class Friends extends Component {
     if (this.secondView !== null) {
       this.shrinkFriendsList();
     }
-  }
-
-  // create friend wrapper with opportunities to create chat or create profile view
-  createFriendWrapper(friend: SearchedUserData) {
-
-    // create element
-    const wrapper: HTMLElement = document.createElement('div');
-    wrapper.className = 'friends__item';
-    wrapper.innerHTML = friendWindow(friend);
-
-    // add events by which user can open chat or friend profile
-    const chatBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-chat');
-    const profileBtn: HTMLElement = wrapper.querySelector('.friend__actionBtn-profile');
-    chatBtn.addEventListener('click', () => this.showChat(friend, chatBtn.parentElement.previousElementSibling as HTMLElement));
-    profileBtn.addEventListener('click', () => this.showFriendProfile(friend, chatBtn.parentElement.previousElementSibling as HTMLElement));
-
-    // add this element to the friends list
-    this.dom.friendsList.appendChild(wrapper);
-
   }
 
   // unmark all friends nicks
@@ -240,65 +315,8 @@ export class Friends extends Component {
     nicks.forEach(el => el.innerHTML === this.friendNick && el.classList.add('friend__name-active'))
   }
 
-  /**
-   * Craete friend profile view
-   * @param friend - friend data needed to create SearchedUser class
-   * @param nickWrapper - wrapper of friend nick which will be marked
-   */
-  showFriendProfile(friend: SearchedUserData, nickWrapper: HTMLElement) {
 
-    // unmark previous friend nick
-    this.unmarkFriends();
-
-    // show close icon in order to give user ability to close friend profile component 
-    this.dom.closeBtn.classList.remove('disabled');
-
-    // create view of friend's profile
-    this.secondView = new SearchedUser(this.dom.branch, this.userData, friend);
-    this.shrinkFriendsList();
-
-    // save selected friend nick in order to remove nick mark
-    this.friendNick = friend.nick;
-
-    // mark selected user
-    nickWrapper.classList.add('friend__name-active');
-
-    // on mobile show close btn
-    if (window.innerWidth < 1024) {
-      this.dom.mobileCloseBtn.className = 'closeIcon closeIcon__searchFriend';
-    }
-  };
-
-  /**
- * Craete chat with friend
- * @param friend - friend data needed to create SearchedUser class
- * @param nickWrapper - wrapper of friend nick which will be marked
- */
-  showChat(friend: SearchedUserData, nickWrapper: HTMLElement) {
-    // unmark previous friend nick
-    this.unmarkFriends();
-
-    // show close icon in order to give user ability to close chat
-    this.dom.closeBtn.classList.remove('disabled');
-
-    // create chat
-    this.shrinkFriendsList();
-    this.secondView = new Chat(this.dom.branch, this.userData, friend);
-
-    // save selected friend nick in order to remove nick mark
-    this.friendNick = friend.nick;
-
-    // mark selected user
-    nickWrapper.classList.add('friend__name-active');
-
-    // on mobile show close btn
-    if (window.innerWidth < 1024) {
-      this.dom.mobileCloseBtn.className = 'closeIcon closeIcon__chat';
-    }
-
-  }
-
-  // shrink friends wrappes
+  // shrink friends wrappers
   shrinkFriendsList() {
     this.dom.branch.classList.remove('disabled');
     const friends: NodeListOf<Element> = document.querySelectorAll('.friend')
@@ -308,25 +326,13 @@ export class Friends extends Component {
       this.hideFriendsContainer();
     }
   }
+
   // grow friends wrappers
   growFriendList() {
     const friends: NodeListOf<Element> = document.querySelectorAll('.friend')
     friends.forEach(el => el.parentElement.classList.remove('friends__item-active'));
   }
 
-  // hide friend chat or profile on mobile
-  hideBranchEvent() {
-    this.dom.mobileCloseBtn.addEventListener('click', () => {
-      this.dom.branch.classList.add('disabled');
-      this.dom.friendsContainer.classList.remove('disabled');
-      this.dom.mobileCloseBtn.className = 'closeIcon disabled';
-      this.dom.branch.innerHTML = '';
-      this.secondView = null;
-      this.dom.closeBtn.classList.add('disabled');
-      this.unmarkFriends();
-      this.growFriendList();
-    })
-  }
 
   // hide friend chat or profile
   hideFriendView() {
@@ -389,7 +395,6 @@ export class Friends extends Component {
     this.getFriendsData()
       .then(() => {
         this.getDOMElements();
-        this.hideBranchEvent();
         this.showFormsEvents();
         this.sortFriends();
         this.filterFriends();

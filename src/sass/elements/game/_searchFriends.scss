@@ -228,19 +228,19 @@
             }
         }
         strong {
-            margin-left: 5px;
+            margin-left: 10px;
             font-weight: bold;
             font-size: 1.438rem;
             z-index: 1;
             letter-spacing: 0.063rem;
             @include desktopM {
-                margin-left: 6px;
+                margin-left: 11px;
             }
             @include desktopS {
-                margin-left: 6px;
+                margin-left: 11px;
             }
             @include laptopL {
-              margin-left: 10px;
+              margin-left: 17px;
             }
            
             @include laptopS {
@@ -254,15 +254,15 @@
             }
             @include mobileL {
                 font-size: 15px;
-                margin-left: 8px;
+                margin-left: 12px;
             }
             @include mobileM {
                 font-size: 13px;
                 margin-left: 6px;
             }
             @include mobileS {
-                margin-left: 9px;
-                font-size: 11px;
+                margin-left: 7px;
+                font-size: 13px;
             }
         }
         &::after {

@@ -10,7 +10,7 @@ export class Guard extends Component {
   // is changing by input range in guardSliderEvent() Method. When the user presses button reponsible for guard start, this value
   // will be added to his data in firestore, so after guard end user will be know amout of gold which he has erned
   private guardPayout: number;
-  // time of guard, changing in  by input range in guardSliderEvent() Method
+  // time of guard, changing by input range in guardSliderEvent() Method, needed to set end of guard 
   private guardTime: number;
   // guard interval, needed to remove the interval at the end of the guard
   private countdownInterval: null | ReturnType<typeof setInterval>;
@@ -113,7 +113,7 @@ export class Guard extends Component {
     };
   }
 
-  // method that applied function on acceptBtn which is reponsible to start new guard, update user data in firestore and show countdown section
+  // method that is adding click event  with function on acceptBtn which is reponsible to start new guard, update user data in firestore and show countdown section
   startGuard() {
     this.dom.acceptBtn.addEventListener('click', () => {
       // avoiding situation when user has mission and guard at the same time
@@ -132,7 +132,7 @@ export class Guard extends Component {
     })
   }
 
-  // setting up an interval
+  // setting up an interval which is displaying how much time is left to guard end
   guardCountdown() {
     // remove summary
     this.dom.summary.classList.add('disabled');
@@ -192,7 +192,7 @@ export class Guard extends Component {
     }, 1000);
   }
 
-  // get gold for guard, and update user's data in firestore, also redirect user to guard menu
+  // click event applied on summaryBtn ir order to get gold for guard, and update user's data in firestore, also redirect user to guard menu
   getGuardPayout() {
     this.dom.summaryBtn.addEventListener('click', () => {
       if (this.userData.guard.payout !== null && this.userData.guard.end.getTime() <= new Date().getTime()) {
@@ -213,7 +213,7 @@ export class Guard extends Component {
     })
   }
 
-  // cancel actual guard and clear guard status in user's data in firestore
+  // click event applied on cancelGuardBtn in order cancel actual guard and clear guard status in user's data in firestore
   cancelGuardEvent() {
     this.dom.cancelGuardBtn.addEventListener('click', () => {
       // clear user status
@@ -236,7 +236,7 @@ export class Guard extends Component {
 
   // method that checks user's status, if he has active mission then hide button reposnible for starting new guard,
   // else if he has active guard then show countdown section
-  // else if he has no actiov mission or guard then show guard menu
+  // else if he has no active mission or guard then show guard menu
   checkStatus() {
     // show menu onlu when user doesnt have active guard
     if (this.userData.status === 'free') {
@@ -270,6 +270,7 @@ export class Guard extends Component {
 
   // general actions
   general() {
+    
     // set default guardt payout (for 1h guard)
     this.guardPayout = parseFloat((getGuardPaymentValue(this.userData.level) * 0.1).toFixed());
     this.dom.guardPayout.innerHTML = `Reward: <strong>${this.guardPayout}</strong>`;
@@ -312,9 +313,3 @@ export class Guard extends Component {
     this.getGuardPayout();
   }
 }
-
-// menu
-//<a href='https://www.freepik.com/vectors/background'>Background vector created by vectorpocket - www.freepik.com</a>
-
-// guard
-// <a href='https://www.freepik.com/vectors/book'>Book vector created by upklyak - www.freepik.com</a>

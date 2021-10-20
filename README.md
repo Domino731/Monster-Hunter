@@ -195,3 +195,92 @@ Picks are reset in new day by `dataOperations()` method in Component class.
    * set equipment and backpack - `setBackpack`, `setEquipment` methods
    * set portrait, gold and level - `generalOnDataChange()` method
    * init drag&drop event - `dragAndDrop` method
+
+### `Pets (extends Component class)`
+Class responsible for pets, user can choose one of 4 available pets. Each pet has his own properties which are affect to statistics, or reduce mission time. Max pet rent time is 100 days.
+#### ***Constructor***
+* `countdownInterval` - Interval responsible for how much time left to pet rent end -  `setCountdown()` method.
+#### ****Methods****
+* `setCountdown()` - Set countdown which is displaying how much time is left to pet rent end.
+* `setNewPet()` - Method that is responsible for setting new pet, applied on every button (by `setPetRentEvents()` method).
+* `setPetRentEvents()` - Appling events on buttons which are responsible for setting new pet.
+* `setStyles()` - Set styles on buttons (to mark if user has enough gold for pet) and mark current pet container.
+* `setGoldAmount()` - Set gold amount in gold wrapper.
+*  `onDataChange()` - Operations when data in firestore has changed.
+   * mark current pet and set styles for buttons - `setStyles()` method.
+   * set countdown which is displaying how time left for pet rent end - `setCountdown` method.
+   * set new gold amount - `setGoldAmount` method.
+
+
+### `Wizard (extends Component class)`   
+Class responsible for wizard section where user can spin a wheel and win random item. Magic wheel has only 1 spin per day (reset on new day by `dataOperations` in `Component` class)
+#### ***Methods***
+* `addWonItem()` - Add won item to user's data (this method is invoke when user click spin button).
+* `startSpinningEvent()` - Click event applied on spinBtn by which user can spin the wheel.
+* `setSpinningWheelItems()` - Set graphics of available items to win.
+
+### `Guard (extends Component class)`
+Depending on the user status, the appropriate subcomponent will be displayed - guard countdown or guard menu. In the guard menu the user can select the gaurd time 
+#### ***Constructor***
+* `guardPayout` - Amount of gold which will be added to user's account after guard end, this value 
+   is changing by input range in guardSliderEvent() Method. When the user presses button reponsible for guard start, this value
+   will be added to his data in firestore, so after guard end user will be know amout of gold which he has erned.
+* `guardTime` - Time of guard, changing by input range in guardSliderEvent() Method, needed to set end of guard.
+* `countdownInterval` - Guard interval, needed to remove the interval at the end of the guard.
+#### ***Methods***
+* `guardSlider()` - Method that applied function on range input, reponsbile for changing guardPayout, guardTime values and setting of input progress bar styles.
+* `startGuard()` - Method that is adding click event  with function on acceptBtn which is reponsible to start new guard, update user data in firestore and show countdown section.
+* `guardCountdown()` - Setting up an interval which is displaying how much time is left to guard end.
+* `getGuardPayout()` - Click event applied on summaryBtn ir order to get gold for guard, and update user's data in firestore, also redirect user to guard menu.
+* `cancelGuardEvent()` - Click event applied on cancelGuardBtn in order cancel actual guard and clear guard status in user's data in firestore.
+* `checkStatus()` -  Method that checks user's status, if he has active mission then hide button reposnible for starting new guard,
+   else if he has active guard then show countdown section, 
+   else if he has no active mission or guard then show guard menu. This method is nested in `onDataChange()` method, and invoking when data was changed (when user starts new guard or end current).
+* `general()` - display guard payout for 1 hour and set peyout value.
+* `onDataChange()` - Operations when data in firestore has changed.
+    * check if user has active guard then redirect him to guard countdown section - `checkStatus()` method.
+
+### `Friends (extends Component class)`    
+Class which is responsible for displaying list with friends. This list can be also filtered or sorted. Each friend wrapper has 2 buttons, first - profile button by which user can display friend profile (by `SearchedUser` class), and the second button - chat by which user can start chatting with specific friend (by `Chat` class).
+#### ***Constructor***
+* `friendsList` - Array with data about friends, which is needed to sort (by `sortFriends()` method) and filter (by `filterFriends()` method) friends list.  
+* `friendsListBackup` - When user filter friends list by higher or lower level, then above array with data is filtered by selected filter and and removes other friends data
+ this friendsListBackup is an array containing all friends which is assigned back to the friendsList array when the user turns off filtering.
+* `secondView` - Value handling class reponsible for friend view or chat
+* `friendNick` - Nick of current selected friend, needed to mark this friend when user start chat with friend (`showChat()` method ) or display his profile (by * * * `showFriendProfile()` method).
+#### ***Methods***
+* `showFormsEvents()` -  Click events applied on buttons (filterBtn and sortBtn) by which user can display filter or sort form.
+* `getFriendsData()` - Fetch friends data and create friends list .
+* `createFriendWrapper()` - Create friend wrapper with click events applied on buttons with opportunity to create chat (`showChat()` method) or create profile view (`showFriendProfile()` method).
+* `sortFriends()` - Events on checkboxes, responsbile for sorting list with friends. 
+* `filterFriends()` - Events on checkboxes, responsbile for filtering list with friends.
+* `closeViewEvent()` - Add click event at closeBtn in order to give user hide opportunity to hide friend profile or chat.
+* `rerenderFriendsList()` - Rerender friends list, used in `sortFriends()` and `filterFriends()` methods.
+* `unmarkFriends()` - Unmark selected friend (by removing class).
+* `markFriend()` - Mark selected friend.
+* `showFriendProfile()` - Craete friend profile view, this method is applied on every 'friendBtn' button with click event.
+* `showChat()` - Craete chat with friend, this method is applied on every 'chatBtn' button with click event.  
+* `shrinkFriendsList()` - Shrink friends wrappers (mainly for devices above 1024px).
+* `growFriendList()` - remove shrink effect from friends wrappers (mainly for devices above 1024px).
+* `hideFriendsContainer()`, `showFriendsContainer()` - toogle content
+* `onDataChange()` - Operations when data in firestore has changed.
+    * hide second view - chat or friend profile - `hideFriendView()` method
+    * trigger new scripts - `initScripts()` method
+    * rerender friends list - `rerenderFriendsList()` method
+
+### `SearchFriend (extends Component class)`
+Class which is responsible for creating list with all players, where user can display every profile of specific user (by `SearchedUser` class) 
+#### ***Constructor***
+* `allUsersData` - Array with data about all users from firestore, based on this data `getAllUsers()` method will render list with all users.
+* `searchedUser` -  Value handling class which created seached user view after click on specific user.
+#### ***Methods***
+* `createFriendTableElement()` - Create table element, with click event by user can display profile of specific user.
+* `getAllUsers()` - Fetch all user's data from firestore, in order to create list of this users (by `createFriendTableElement()` method), and find specific user later.
+* `showSearchedUserEvent()` - Create (by `SeachedUser` class) and display profile of searched user. This method is applied on every table row with click event (`createFriendTableElement()` method ).
+* `mobile()` - 
+    Hide the searched user container below 1024px, then the list of all users will be full width and the searched user container also
+   will be full width. When user click on a specific user, the list will be hidden and this specific user will be shown by `toogleView()` method (only for devices below 1024px).
+* `searchFriend()` - Search for specific user by his nick.
+* `toogleView()` - Toogle between all user's list and searched user view (mainly for devices below 1024px).
+* `hideSearchedFriend()` - Hide searched user view (only below 1024px).  
+* `` 

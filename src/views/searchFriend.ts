@@ -11,7 +11,7 @@ import { getNeededExp } from '../functions/getNeededExp';
 // all users list by which current user can find specific users
 export class SearchFriend extends Component {
 
-   // array with all users data from firestore, based on this data getAllUsers() method will render list with all users
+   // array with data about all users from firestore, based on this data getAllUsers() method will render list with all users
    private allUsersData: SearchedUserData[];
    // value handling class which created seached user view after click on specific user
    private searchedUser: SearchedUser | null
@@ -50,7 +50,55 @@ export class SearchFriend extends Component {
       }
    }
 
-   // fetch all user's data from firestore, in order to create list of this users, and find specific user later
+   // create and display profile of searched user
+   showSearchedUserEvent(id: string) {
+      // remove all previous nick marks 
+      this.dom.nicks.forEach(el => el.parentElement.classList.remove('searchFriend__nick-selected'));
+
+      // find user
+      const userIndex: number = this.allUsersData.findIndex(el => el.id === id);
+      const searchedUser: SearchedUserData = this.allUsersData[userIndex];
+
+      // create view 
+      this.searchedUser = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
+
+      // on mobile devices hide all users list, user can hide this searched user view after clicking on icon  hideSearchedFrind() method
+      if (window.innerWidth < 1024) {
+         this.toogleView();
+      }
+   }
+
+   /**
+    * Create table element, with click event by user can display profile of specific user
+    * @param data - data about user, needed to create new element with event which is responsible for displaying profile of specific user
+    */
+   createFriendTableElement(data: SearchedUserData) {
+
+      // create new table row with this user
+      const tableRow: HTMLTableRowElement = document.createElement('tr');
+
+      // insert html
+      tableRow.innerHTML = `
+         <td><div class='searchFriend__status searchFriend__status-an'> <img src='${getStatusImgSrc(data.status)}'/><strong>${data.status}</strong></div></td>
+         <td><div class='searchFriend__nick'><div class='searchFriend__level'>${data.level}</div><strong>${data.nick}</strong></div></td>
+         <td><div class='searchFriend__lastVisit searchFriend__lastVisit-an'>${formatDate(data.lastVisit)} <img src='./images/computer.png'/></div></td>`;
+
+
+      // event by which user can open view of specific user
+      tableRow.addEventListener('click', () => {
+         // create view of searched user
+         this.showSearchedUserEvent(data.id);
+         // mark selected user
+         tableRow.children[1].firstElementChild.classList.add('searchFriend__nick-selected');
+      });
+
+      console.log(1)
+      // add new created elemement to all users list
+      this.dom.allUsersList.appendChild(tableRow);
+
+   }
+
+   // fetch all user's data from firestore, in order to create list of this users (by createFriendTableElement() method), and find specific user later
    async getAllUsers() {
 
       // get data 
@@ -74,34 +122,13 @@ export class SearchFriend extends Component {
                confirmedFriend: friends.indexOf(auth.currentUser.uid) >= 0,
                nextLevelAt: getNeededExp(doc.data().level)
             }
-            this.allUsersData.push(data);
-         });
 
-         // remove current logged user from this list
-         const userIndex: number = this.allUsersData.findIndex(el => el.id === auth.currentUser.uid)
-         this.allUsersData.splice(userIndex, 1);
+            // check if fetching data is not data about current user
+            if (data.id !== auth.currentUser.uid) {
+               this.allUsersData.push(data);
+               this.createFriendTableElement(data)
+            }
 
-         // create list of user's
-         this.allUsersData.forEach(el => {
-            // create new table row with this user
-            const tableRow: HTMLTableRowElement = document.createElement('tr');
-            tableRow.innerHTML = `
-            <td><div class='searchFriend__status searchFriend__status-an'> <img src='${getStatusImgSrc(el.status)}'/><strong>${el.status}</strong></div></td>
-            <td><div class='searchFriend__nick'><div class='searchFriend__level'>${el.level}</div><strong>${el.nick}</strong></div></td>
-            <td><div class='searchFriend__lastVisit searchFriend__lastVisit-an'>${formatDate(el.lastVisit)} <img src='./images/computer.png'/></div></td>
-             `;
-
-
-            // event by which user can open view of specific user
-            tableRow.addEventListener('click', () => {
-               // create view of searched user
-               this.showSearchedUserEvent(el.id);
-               // mark selected user
-               tableRow.children[1].firstElementChild.classList.add('searchFriend__nick-selected');
-            });
-
-            // add new created elemement to all users list
-            this.dom.allUsersList.appendChild(tableRow);
          });
 
          // elements needed later in searchFriend() method -> table rows and nicks are needed to hide them while user is searching for a specific user by input
@@ -111,25 +138,7 @@ export class SearchFriend extends Component {
       );
    }
 
-   // create and show specific user view
-   showSearchedUserEvent(id: string) {
-      // remove all previous nick marks 
-      this.dom.nicks.forEach(el => el.parentElement.classList.remove('searchFriend__nick-selected'));
-
-      // find user
-      const userIndex: number = this.allUsersData.findIndex(el => el.id === id);
-      const searchedUser: SearchedUserData = this.allUsersData[userIndex];
-
-      // create view 
-      this.searchedUser = new SearchedUser(this.dom.userRoot, this.userData, searchedUser);
-
-      // on mobile devices hide all users list, user can hide this searched user view after clicking on icon  hideSearchedFrind() method
-      if (window.innerWidth < 1024) {
-         this.toogleView();
-      }
-   }
-
-   //  hide the searched user container below 1024px, then the list of all users will be full width and the searched user container also
+   // hide the searched user container below 1024px, then the list of all users will be full width and the searched user container also
    // will be full width. When user click on a specific user, the list will be hidden and this specific user will be shown - toogleView() method
    mobile() {
       if (window.innerWidth < 1024) {
@@ -139,6 +148,7 @@ export class SearchFriend extends Component {
 
    // search for specific user by his nick
    searchFriend() {
+
       /**
        * Function that is showing and marking searched user row in table (all users list )
        * @param nick - user nick needed to find row in table
@@ -170,7 +180,7 @@ export class SearchFriend extends Component {
       this.dom.searchFriendInput.addEventListener('keyup', () => search(this.dom.searchFriendInput.value));
    }
 
-   // toogle between all user's list and searched user view
+   // toogle between all user's list and searched user view (mainly for devices below 1024px)
    toogleView() {
       const flag: boolean = this.dom.usersContainer.classList.contains('disabled');
       if (flag) {
@@ -186,7 +196,7 @@ export class SearchFriend extends Component {
    }
 
    // hide searched user view (only below 1024px)
-   hideSearchedFrind() {
+   hideSearchedFriend() {
       this.dom.closeViewIcon.addEventListener('click', () => {
          this.dom.searchedUserContainer.classList.add('disabled');
          this.dom.usersContainer.classList.remove('disabled');
@@ -199,13 +209,13 @@ export class SearchFriend extends Component {
    initScripts() {
       this.getAllUsers()
          .then(() => {
-            this.hideSearchedFrind();
+            this.hideSearchedFriend();
             this.mobile();
             this.searchFriend();
          })
    }
    onDataChange() {
-      console.log('Data changed')
+      return true;
    }
    getDOMElements() {
       this.dom = {

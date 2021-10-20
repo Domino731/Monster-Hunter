@@ -42,7 +42,7 @@ export class Wizard extends Component {
         }
     }
 
-    // add won item to user's data
+    // add won item to user's data (this method is invoke when user click spin button)
     addWonItem() {
         // remove spin from user account, next spin will be available at next day
         this.userData.wizardWheelSpin = false;
@@ -78,11 +78,13 @@ export class Wizard extends Component {
         updateUserData(this.userData);
     }
 
-    // event applied on spinBtn by which user can spin the wheel
+    // click event applied on spinBtn by which user can spin the wheel
     startSpinningEvent() {
-        this.dom.spinBtn.addEventListener('click', () => {
-            // check if user's backpack has available slots
+
+        const spin = () => {
+ // check if user's backpack has available slots
             if (this.userData.backpackItems.length < 10) {
+
                 // add animation
                 this.dom.spinningWheel.classList.add('spinningWheel__content-animation');
 
@@ -113,7 +115,12 @@ export class Wizard extends Component {
                     this.dom.actionError.innerText = '';
                 }, 3000);
             }
+        }
+
+        this.dom.spinBtn.addEventListener('click', () => {
+           this.userData.wizardWheelSpin && spin();
         });
+
     }
 
     // set graphics of available items to win
@@ -142,16 +149,19 @@ export class Wizard extends Component {
     }
     initScripts() {
         this.setSpinningWheelItems();
+
         // check if user has available spin
         if (this.userData.wizardWheelSpin) {
             this.startSpinningEvent();
         }
         else {
+
+            // set countdown to next spin
             setCountdown(this.dom.countdown);
         }
 
     }
     onDataChange() {
-        console.log('Data changed');
+       return true;
     }
 }

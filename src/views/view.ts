@@ -223,7 +223,6 @@ export class Component {
 
    }
 
-   ///////////////////// ABSTRACT METHODS ////////////////////////////////////
 
    // abstact method which is responsible for operations when data has changed
    onDataChange() {
@@ -242,9 +241,7 @@ export class Component {
    initScripts() {
       window.alert('initScripts method  should be implemented in inheriting class');
    }
-
-   //////////////////////////////////////////////////////////////////////////////
-
+   
    // initialization 
    init() {
       this.clearMobileNav();
