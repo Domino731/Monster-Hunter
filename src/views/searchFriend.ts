@@ -143,6 +143,22 @@ export class SearchFriend extends Component {
       if (window.innerWidth < 1024) {
          this.dom.searchedUserContainer.classList.add('disabled');
       }
+
+      window.addEventListener('resize', () => {
+
+             // mobile devices
+            if(window.innerWidth < 1024){
+               this.dom.searchedUserContainer.classList.add('disabled');
+               this.dom.usersContainer.classList.remove('disabled');
+               this.dom.closeViewIcon.classList.add('disabled');
+            }
+
+            else if (window.innerWidth >= 1024){
+               this.dom.searchedUserContainer.classList.remove('disabled');
+            }
+          
+           
+      });
    }
 
    // search for specific user by his nick

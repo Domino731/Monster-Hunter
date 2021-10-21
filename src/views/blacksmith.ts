@@ -1010,6 +1010,17 @@ export class Blacksmith extends Component {
          this.dom.profileContainer.classList.add('disabled');
          this.toogleView();
       }
+
+      window.addEventListener('resize', ()=> {
+         if (window.innerWidth < 1024) {
+            this.dom.profileContainer.classList.add('disabled');
+            !this.dom.profileContainer.classList.contains('disabled') && this.toogleView();
+         }
+         else if (window.innerWidth >= 1024){
+            this.dom.profileContainer.classList.remove('disabled');
+            this.dom.blacksmithContainer.classList.remove('disabled');
+         }
+      });
    }
 
    // bugfix for backpack label styles

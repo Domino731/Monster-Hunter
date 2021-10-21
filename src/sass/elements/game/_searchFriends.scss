@@ -290,7 +290,7 @@
                 width: 38px;
             }
             @include mobileS {
-                width: 35px;
+                width: 36px;
             }
         }
         @include desktopS {
@@ -308,8 +308,8 @@
         }
         @include ipadPro {
             height: 34px;
-            margin-left: 17px;
-            width: 89%;
+            margin-left: 19px;
+            width: 90%;
         }
         @include tablet {
             height: 42px;

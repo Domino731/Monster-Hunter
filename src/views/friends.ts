@@ -386,6 +386,26 @@ export class Friends extends Component {
     this.dom.mobileCloseBtn.classList.add('disabled');
   }
 
+  // creating appropriate styles for the component on window resize
+  mobile(){
+     if(window.innerWidth < 1024){
+       this.dom.branch.classList.add('disabled');
+     }
+
+     window.addEventListener('resize', ()=> {
+       if(window.innerWidth < 1024){
+         this.dom.branch.classList.add('disabled');
+         this.unmarkFriends();
+         this.showFriendsContainer();
+       }
+       else if (window.innerWidth >= 1024){
+         this.unmarkFriends();
+         this.dom.branch.classList.add('disabled');
+         this.growFriendList();
+       }
+     });
+  }
+
   onDataChange() {
     this.hideFriendView();
     this.initScripts();
@@ -400,6 +420,7 @@ export class Friends extends Component {
         this.filterFriends();
         this.closeViewEvent();
         this.searchFriend();
+        this.mobile();
       })
   }
   render() {

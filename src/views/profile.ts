@@ -800,6 +800,17 @@ export class Profile extends Component {
             this.dom.backpackContainer.classList.add('disabled');
             this.toogleView();
         }
+
+        window.addEventListener('resize', ()=> {
+            if (window.innerWidth < 1024) {
+                this.dom.backpackContainer.classList.add('disabled');
+                !this.dom.backpackContainer.classList.contains('disabled') && this.toogleView();
+            }
+            else if(window.innerWidth >= 1024){
+                this.dom.backpackContainer.classList.remove('disabled');
+                this.dom.profileContainer.classList.remove('disabled');
+            }
+        });
     }
 
     getDOMElements() {

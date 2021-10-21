@@ -88,7 +88,7 @@ export class Inbox extends Component {
     }
   
     window.addEventListener('resize', ()=> {
-      if(! this.dom.emailContainer.classList.contains('disabled')){
+      if(!this.dom.emailContainer.classList.contains('disabled')){
         this.dom.emailContainer.classList.add('disabled');
       }
     });
