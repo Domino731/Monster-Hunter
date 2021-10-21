@@ -1,51 +1,52 @@
 import { emojiData } from './../properties/emoji/emoji';
 import { SearchedUserData } from '../types';
 
+/**
+ * get html code for chat section
+ * @param friend - data about friend
+ */
 export const getChatHTMLCode = (friend: SearchedUserData): string => {
     return `
-    <section class='chat'> 
-       <div class='chat__topBar'>
-         <div class=' chat__portrait chat__portrait-small'>
-            <img src='${friend.portrait}'/>
+    <section class='chat'>
+
+    <div class='chat__topBar'>
+
+        <div class=' chat__portrait chat__portrait-small'>
+            <img src='${friend.portrait}' />
             <h3 class='chat__friendNick'>
-            ${friend.nick}
-            ${friend.confirmedFriend ? '' : '<strong>(Not accepted yet)</strong>'}
+                ${friend.nick}
+                ${friend.confirmedFriend ? '' : '<strong>(Not accepted yet)</strong>'}
             </h3>
-            
-         </div>
-       </div>
+        </div>
 
-       <div class='chat__content'> 
-                 
-       </div>
+    </div>
 
-       <div class='chat__botBar'> 
+    <div class='chat__content'> </div>
 
-         <div class='chat__emojiContainer disabled'>
-          ${
+    <div class='chat__botBar'>
+
+        <div class='chat__emojiContainer disabled'>
+            ${
             emojiData.map((el) => {
-              return `<img src='${el}'/>`
+            return `<img src='${el}' />`
             }).join('')
             }
-          </div> 
+        </div>
 
-          <div class='chat__emojiIcon'> 
-             <img src='./images/chat_emoji_icon.png'/>
-          </div>
-          <div class='chat__form'>
-             <img src='./images/chat_text_icon.png' class='chat__textIcon'/>
-             <div class='chat__messageWrapper' style='border: none; outline: none;'> 
-           
-            <div class='chat__message' contenteditable='true'>
-               
-            </div> 
+        <div class='chat__emojiIcon'>
+            <img src='./images/chat_emoji_icon.png' />
+        </div>
 
-            
-             
-             </div>
-             <button class='chat__btn disabled'>SEND</button>
-          </div>
-       </div>
-    </section>
-    `
+        <div class='chat__form'>
+            <img src='./images/chat_text_icon.png' class='chat__textIcon' />
+            <div class='chat__messageWrapper' style='border: none; outline: none;'>
+                <div class='chat__message' contenteditable='true'></div>
+            </div>
+            <button class='chat__btn disabled'>SEND</button>
+        </div>
+
+    </div>
+    
+</section>
+    `;
 }

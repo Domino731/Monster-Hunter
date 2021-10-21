@@ -403,7 +403,7 @@ export class Friends extends Component {
       })
   }
   render() {
-    this.root.innerHTML = getFriendsHTMLCode(this.userData.friends);
+    this.root.innerHTML = getFriendsHTMLCode();
   }
   getDOMElements() {
     this.dom = {
