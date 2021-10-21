@@ -34,6 +34,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 9px;
+       box-shadow: 0 0 5px $color-black;
         @include desktopS {
             height: 40px;
             padding: 6px;
@@ -392,6 +393,7 @@
     border-radius: 15px;
     padding-top: 10px;
     transition: 0.2s;
+    box-shadow: 0 0 5px $color-black;
     overflow: hidden;
     @include laptopL {
         padding-top: 7px;

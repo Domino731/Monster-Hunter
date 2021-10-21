@@ -126,7 +126,6 @@ export const InitialUserProfile: UserData = {
     },
     shopPicks: {
         blacksmith: getBlacksmithPicks(),
-        wizard: null
     },
     equipmentItems: [],
     backpackItems: [],

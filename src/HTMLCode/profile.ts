@@ -7,7 +7,7 @@ import { getNeededExp } from '../functions/getNeededExp';
  */
 export const getProfileHTMLCode = (user: UserData): string => {
     return `
-    <section class='game__section profile background'>
+    <section class=' profile background'>
 
     <div class='profile__item'>
         <div class='game__errorWrapper disabled' id='profile__error'></div>

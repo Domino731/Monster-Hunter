@@ -5,13 +5,12 @@ export class General {
 
     // button by which user can log out -  logoutEvent() method
     private logoutBtn: HTMLElement;
-
-    // timeout needed to set delay (1s) on window resize - mobile() method
-    private timeout: null | ReturnType<typeof setTimeout>;
+    // container with navigation, needed to avoid hiding navigation on window resize
+    private nav: HTMLElement
 
     constructor() {
         this.logoutBtn = document.querySelector('#btn-logout');
-        this.timeout = null;
+        this.nav = document.querySelector('.nav');
         this.init();
     };
 
@@ -22,21 +21,16 @@ export class General {
         });
     };
 
-    // refresh page on window resize in order to create  content  which is appropriate for the current browser window size (devices under 1024px have different content display (blacksmith,
-    // profile, friends, search friend, inbox sections)
+    // prevent of hiding navigation
     mobile() {
         const resize = () => {
+            if (window.innerHeight <= 1000 && window.innerWidth >= 1024) {
 
-            // prevent of page multiple refreshing
-            if (this.timeout) {
-                clearTimeout(this.timeout);
+                // check if navigation is hide
+                if (this.nav.style.display === 'none') {
+                    this.nav.style.display = 'block';
+                }
             }
-            // this.timeout = setTimeout(function () {
-            //     if (window.innerHeight >= 1000 || window.innerWidth < 1024) {
-            //         location.reload();
-            //     }
-            // }, 1000);
-
         }
         window.addEventListener('resize', resize);
     }

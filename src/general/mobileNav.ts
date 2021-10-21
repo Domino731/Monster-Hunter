@@ -33,6 +33,8 @@ export class MobileNav {
              this.dom.navIcon.src = './images/close.png';
            }
         });
+
+        
     }
 
     // click events applied on each link in navigation, when user click one of these links then hide container with navigation

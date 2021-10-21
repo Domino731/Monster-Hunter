@@ -18,7 +18,7 @@
     @include mobileM {
         height: calc(100% - 43px);
     }
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 0;
     }
     &__titleWrapper {
@@ -202,9 +202,16 @@
             width: 82%;
         }
          &-active{
-             &::after{
+             @media screen and (min-width: 768px) {
+              &::after{
                 right: 0 !important;
+                @include laptopL {
+                    right: -4px !important;
+                }
+               }   
              }
+           
+             
          }
         &::after {
             content: "";
@@ -222,9 +229,12 @@
             }
             @include desktopS {
                 width: 40px;
-                height: 53px;
-                bottom: -10px;
+                height: 75px;
+                bottom: -27px;
                 
+            }
+            @include laptopL {
+               transform: rotate(20deg);
             }
             @include ipadPro {
                 width: 157px;
@@ -252,14 +262,30 @@
                 top: -21px;
                 left: -32px;
             }
+          
         }
 
         &:hover::after {
             @media screen and (min-width: 764px) {
                 right: 0;
             }
+           @include laptopL {
+               right: -4px;
+           }
         }
 
+
+        @media screen and (max-width: 767px) {
+            &-active{
+                 &::after{
+                width: 100px;
+            }
+            &::before{
+                width: 100px;
+            } 
+            }
+          
+        }
         &-reverse {
             border-radius: 30px 0 0 30px;
             margin-left: 0;

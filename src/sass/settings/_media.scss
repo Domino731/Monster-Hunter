@@ -1,74 +1,65 @@
-$mobileS: 320px;
-$mobileM: 375px;
-$mobileL: 425px;
-$tablet: 768px;
-$laptopS: 1024px;
-$laptopSM: 1279px;
-$laptopM: 1335px;
-$laptopL: 1439px;
-$desktopS: 1599px;
-$desktopM: 1919px;
+
 
 // 1600px
 @mixin desktopM {
-  @media (max-width: 1919px) {
+  @media screen and (max-width: 1919px) {
     @content;
   }
 }
 
 // 1440px
 @mixin desktopS {
-    @media (max-width: 1599px) {
+    @media screen and  (max-width: 1599px) {
       @content;
     }
 }
 
 // 1336px
 @mixin laptopL {
-    @media (max-width: 1439px) {
+    @media screen and (max-width: 1439px) {
       @content;
     }
 }
 
 // 1280px
 @mixin laptopM {
-    @media (max-width:  1365px) {
+    @media screen and (max-width:  1365px) {
       @content;
     }
 }
 // 1024px
 @mixin laptopS {
-  @media (max-width: 1279px) {
+  @media screen and (max-width: 1279px) {
     @content;
   }
 }
 
 @mixin ipadPro {
-  @media (max-width: 1024px) and (min-height: 1000px) {
+  @media screen and (max-width: 1024px) and (min-height: 1000px) {
     @content;
   }
-  @media  (max-width: 1023px) and (min-height: 1px){
+  @media screen and  (max-width: 1023px) and (min-height: 1px){
     @content;
   }
 }
 @mixin tablet {
-    @media (max-width: 1023px) {
+    @media screen and (max-width: 1023px) {
       @content;
     }
 }
 
 @mixin mobileL {
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
       @content;
     }
 }
 @mixin mobileM {
-    @media (max-width: 424px) {
+    @media screen and  (max-width: 424px) {
       @content;
     }
 }
 @mixin mobileS {
-    @media (max-width: 374px) {
+    @media screen and  (max-width: 374px) {
       @content;
     }
 }

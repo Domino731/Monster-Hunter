@@ -108,8 +108,8 @@ Class responsible for fight between user and monster, after fight ends successfu
 * `fightAnimationInterval()` - Set interval responsible for attack animations and logic behind fight.
 * `monsterDamage()` - calculate damage for user from monster.
 * `userDamage()` - calculate damage for monster from user.
-* ` checkUserHP(), checkMonsterHP()` - check for user and monster hp, if health of one of them is 0
-* ` successfulMission(), failedMission()` -  show summary panel, create new mission, and update user's data in firestore with new exp, gold, mission (if user has defeated monster).
+* `checkUserHP(), checkMonsterHP()` - check for user and monster hp, if health of one of them is 0
+* `successfulMission(), failedMission()` -  show summary panel, create new mission, and update user's data in firestore with new exp, gold, mission (if user has defeated monster).
 
 
 
@@ -352,7 +352,7 @@ A class which is responsible for chat section between current logged user and fr
 Class which is responsible for click event applied on logout button, and for resfreshing page on resize.
 #### ***Methods***
 * `logoutEvent()` - Click event applied on button in order to logout the user when he presses a button.
-* `mobile()` - Refresh page on window resize in order to create  content  which is appropriate for the current browser window size (devices under 1024px have different content display (blacksmith,
+* `mobile()` - Prevent of hiding navigation. 
     profile, friends, search friend, inbox sections).
 * `init()` - Iniclalization of scripts.
 

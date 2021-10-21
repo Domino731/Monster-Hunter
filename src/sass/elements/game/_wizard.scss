@@ -69,9 +69,7 @@
         border-radius: 20px;
         position: relative;
         transition: 0.3s;
-        &:hover {
-            backdrop-filter: blur(5px);
-        }
+        box-shadow: 0 0 10px $color-black;
         @include desktopM {
             padding: 7px;
         }

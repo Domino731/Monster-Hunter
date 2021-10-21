@@ -83,9 +83,15 @@ export class Inbox extends Component {
 
   // hide email container on mobile devices -> emails list will be on full width, and when user click on specific email this list will be hidden and email container will showed (on full device width)
   mobile() {
-    if (window.innerWidth < 1024) {
+    if(window.innerWidth < 1024){
       this.dom.emailContainer.classList.add('disabled');
     }
+  
+    window.addEventListener('resize', ()=> {
+      if(! this.dom.emailContainer.classList.contains('disabled')){
+        this.dom.emailContainer.classList.add('disabled');
+      }
+    });
   }
 
   // render e-mails in list
