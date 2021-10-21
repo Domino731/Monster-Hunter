@@ -2,7 +2,7 @@ import { compareStats } from './compareStats';
 import { ShopItem } from '../types';
 
 /**
- * get html code for item label with informations about this item
+ * get html code for blacksmith item label
  * @param item - data about the item on the basis of which the label will be created
  * @param currentItem - data about the actual item in the equipment, needed to compare selected item to current item in equipment
  */

@@ -6,7 +6,6 @@ export class Login extends AuthForm {
 
     // notification which is displaying when data passed by user is invalid
     private invalid: HTMLElement;
-
     // inputes nedeed to get thei values, based on this values authAction method will be invoke firebase auth action on this data
     private input: {
         eMail: HTMLElement;
@@ -63,7 +62,7 @@ export class Login extends AuthForm {
 
     }
 
-    // checking data
+    // checking data passed by user
     checkData() {
         // there is no needed to checking data entered by user, 
         // because authAction method will check that data by auth.signInWithEmailAndPassword
@@ -79,6 +78,6 @@ export class Login extends AuthForm {
 
     // authAction will set errors
     setErrors() {
-        console.log('Invalid data')
+        console.error('Invalid data')
     }
 }

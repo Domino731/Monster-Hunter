@@ -6,11 +6,11 @@ import { compareStats } from "./compareStats"
  * @param item - data about the item on the basis of which the label will be created
  * @param currentItem - data about the actual item in the equipment, needed to compare selected item to current item in equipment
  */
-export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | undefined) : string => {
+export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | undefined): string => {
 
-    // user may have an empty slot in the equipment 
-    if (currentItem === undefined) {
-        return `
+  // user may have an empty slot in the equipment 
+  if (currentItem === undefined) {
+    return `
 
         <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
         
@@ -31,18 +31,18 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
              
 
            ${item.properties.physicalEndurance !== null ?
-                `<tr>
+        `<tr>
                <td>Physical endurance</td>
                <td>${item.properties.physicalEndurance}</td>
               </tr>`
-                : ``}   
+        : ``}   
            
             ${item.properties.defence !== null ? ` 
             <tr>
               <td>Defence</td>
               <td>${item.properties.defence}</td>
             </tr>`
-                : ``}
+        : ``}
             
             ${item.properties.luck !== null ? `
             <tr>
@@ -50,7 +50,7 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
               <td>${item.properties.luck}</td>
             </tr>
             `
-                : ``}
+        : ``}
           
           </tbody>
         </table>
@@ -64,9 +64,9 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
         `;
 
 
-    }
-    else {
-        return `
+  }
+  else {
+    return `
 
         
         <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
@@ -87,18 +87,18 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
              
 
            ${item.properties.physicalEndurance !== null ?
-                `<tr>
+        `<tr>
                <td>Physical endurance</td>
                <td>${item.properties.physicalEndurance} ${currentItem.properties.physicalEndurance !== null ? compareStats(item.properties.physicalEndurance, currentItem.properties.physicalEndurance) : ''}</td>
               </tr>`
-                : ``}   
+        : ``}   
            
             ${item.properties.defence !== null ? ` 
             <tr>
               <td>Defence</td>
               <td>${item.properties.defence} ${currentItem.properties.defence !== null ? compareStats(item.properties.defence, currentItem.properties.defence) : ''}</td>
             </tr>`
-                : ``}
+        : ``}
             
             ${item.properties.luck !== null ? `
             <tr>
@@ -106,7 +106,7 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
               <td>${item.properties.luck} ${currentItem.properties.luck !== null ? compareStats(item.properties.luck, currentItem.properties.luck) : ''}</td>
             </tr>
             `
-                : ``}
+        : ``}
           </tbody>
         </table>
 
@@ -116,14 +116,14 @@ export const getProfileBackpackLabel = (item: ShopItem, currentItem: ShopItem | 
           <strong class='profile__actionName'>Equip</strong>
         </div>
         `;
-    }
+  }
 }
 
 /**
- * get label for backpack item (for searched user section)
+ * get html code for  backpack label (for searched user section)
  * @param item - data about the item on the basis of which the label will be created
  */
-export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
+export const getSearchedUserBackpackLabel = (item: ShopItem): string => {
   return `
 
   <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
@@ -143,18 +143,18 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
       </tr>` : ''}
   
      ${item.properties.physicalEndurance !== null ?
-          `<tr>
+      `<tr>
          <td>Physical endurance</td>
          <td>${item.properties.physicalEndurance}</td>
         </tr>`
-          : ``}   
+      : ``}   
      
       ${item.properties.defence !== null ? ` 
       <tr>
         <td>Defence</td>
         <td>${item.properties.defence}</td>
       </tr>`
-          : ``}
+      : ``}
       
       ${item.properties.luck !== null ? `
       <tr>
@@ -162,7 +162,7 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
         <td>${item.properties.luck}</td>
       </tr>
       `
-          : ``}
+      : ``}
 
     </tbody>
   </table>
@@ -170,13 +170,13 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
 }
 
 /**
- * get label for backpack item (for blacksmith section)
+ * get html code for backpack label (for blacksmith section with equipment and sell buttons)
  * @param item - data about the item on the basis of which the label will be created
  * @param currentItem - data about the actual item in the equipment, needed to compare selected item to current item in equipment
  */
- export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem): string => {
+export const getBlacksmithBackpackLabel = (item: ShopItem, currentItem: ShopItem): string => {
   if (currentItem === undefined) {
-      return `
+    return `
       <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
       
       ${item.name}
@@ -193,18 +193,18 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
       
            
          ${item.properties.physicalEndurance !== null ?
-              `<tr>
+        `<tr>
              <td>Physical endurance</td>
              <td>${item.properties.physicalEndurance}</td>
             </tr>`
-              : ``}   
+        : ``}   
          
           ${item.properties.defence !== null ? ` 
           <tr>
             <td>Defence</td>
             <td>${item.properties.defence}</td>
           </tr>`
-              : ``}
+        : ``}
           
           ${item.properties.luck !== null ? `
           <tr>
@@ -212,7 +212,7 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
             <td>${item.properties.luck}</td>
           </tr>
           `
-              : ``}
+        : ``}
           
         </tbody>
       </table>
@@ -232,7 +232,7 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
 
   }
   else {
-      return `
+    return `
       <h3 class='market__itemTitle itemTitle ${item.rarity === 'common' ? 'market__itemTitle-common' : 'market__itemTitle-legendary'}'>
       
       ${item.name}
@@ -248,18 +248,18 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
       
            
          ${item.properties.physicalEndurance !== null ?
-              `<tr>
+        `<tr>
              <td>Physical endurance</td>
              <td>${item.properties.physicalEndurance} ${currentItem.properties.physicalEndurance !== null ? compareStats(item.properties.physicalEndurance, currentItem.properties.physicalEndurance) : ''}</td>
             </tr>`
-              : ``}   
+        : ``}   
          
           ${item.properties.defence !== null ? ` 
           <tr>
             <td>Defence</td>
             <td>${item.properties.defence} ${currentItem.properties.defence !== null ? compareStats(item.properties.defence, currentItem.properties.defence) : ''}</td>
           </tr>`
-              : ``}
+        : ``}
           
           ${item.properties.luck !== null ? `
           <tr>
@@ -267,7 +267,7 @@ export const getSearchedUserBackpackLabel = (item: ShopItem) : string => {
             <td>${item.properties.luck} ${currentItem.properties.luck !== null ? compareStats(item.properties.luck, currentItem.properties.luck) : ''}</td>
           </tr>
           `
-              : ``}
+        : ``}
         </tbody>
       </table>
 

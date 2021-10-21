@@ -4,7 +4,7 @@ import { includeNumber, isUpper } from '../functions/other';
 import { auth, db } from "../firebase/index";
 import { InitialUserProfile } from "../properties/initialUserProfile/initialUserProfile";
 
-
+// Class for creating new user account in firebase
 export class Register extends AuthForm {
 
     // DOM elements that will display errors if the user provides incorrect data
@@ -38,7 +38,7 @@ export class Register extends AuthForm {
         }
     }
 
-    // creating new user with his own data in firestore
+    // creating new user with initial data (InitialUserProfile) in firestore
     authAction() {
 
         // hide button and show loading
@@ -68,6 +68,7 @@ export class Register extends AuthForm {
                 })
 
                 .catch((error) => {
+
                     // set errors and notify user about them
                     const errorCode = error.code;
                     const errorMessage = error.message;
@@ -82,6 +83,7 @@ export class Register extends AuthForm {
                     this.btn.style.display = "block";
                 });
         }
+        
         // check if nickname lenght is no bigget than 10 characters
         if (this.data.nickname.length <= 10) {
             return unlisten();
@@ -92,7 +94,7 @@ export class Register extends AuthForm {
 
     }
 
-    // set errors in form, this method is invoked in addButtonEvent() method only when isCorrect value is true
+    // display errors in form, this method is invoked in addButtonEvent() method only when isCorrect value is true
     setErrors() {
         // checking email
         if (!validator.isEmail(this.data.eMail)) {

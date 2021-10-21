@@ -3,20 +3,18 @@ import { SearchedUserData, Conversation, MessageData, UserData } from '../types'
 import { auth, db } from '../firebase/index';
 import { getMessageCode } from '../functions/messages';
 
-// class responsible for chat 
+// class responsible for chat section
 export class Chat {
 
-    // dom element where new created chat will be injected
+    // Container where new created component will be injected.
     private root: HTMLElement;
-    // friend data needed to get his chat messages  and display his nick
+    // friend data needed to get his chat messages and display his nick
     private friend: SearchedUserData;
-    // current user data needed to send text messages, 
+    // current user data needed to get his chat messages and to send text messages, 
     private currentUser: UserData;
-    // chat data, contains all messages and user and friend messages to avoid duplicates in conversations and reduce data size
-    // split user and friend messages to prevent duplicates
+    // object with conversation data, contains all messages and user and friend messages. These data is splited to avoid duplicates in conversations and reduce data size.
     private conversation: {
         // user and friend messages, based on this data chat will rendered 
-    
         general: Conversation | null;
         // user messages
         user: Conversation | null;
@@ -59,7 +57,7 @@ export class Chat {
     }
 
     // update user's messages data with friend in firestore, used in sendMessage() method
-    // update data will trigger chatRender() method 
+    // update data will trigger chatRender() method and conversation will be rerendered 
     async updateChatData(newData: Conversation) {
         await db.collection('chat')
             .doc(`${auth.currentUser.uid}`)
@@ -84,7 +82,7 @@ export class Chat {
             });
     }
 
-    // listening for chat data updates in firestore
+    // listening for chat data updates in firestore, when the date changes then renderChat() method will rerender chat
     async dataChangeListener() {
 
         // current user
@@ -126,7 +124,7 @@ export class Chat {
             });
     }
 
-    // get chat data in order to create chat basis on this data
+    // get chat data in order to display chat basis on this data
     async getChatroomData() {
 
         // create new converstation data object
@@ -270,7 +268,7 @@ export class Chat {
         });
     }
 
-    // events  on each emoji which when clicked, they appear in the message
+    // click event added on each emoji which when clicked, they appear in the message
     addEmoji() {
         this.dom.emojiList.forEach(el => el.addEventListener('click', () => {
             const emoji: HTMLImageElement = el as HTMLImageElement;
@@ -280,7 +278,7 @@ export class Chat {
         }));
     }
 
-    // scroll to bottom of message, in order when a user selects emoji to know where new emoji is
+    // scroll to bottom of new message, in order when a user selects emoji to know where new emoji is
     scrollToBottomMessage() {
 
         const scrollToBottom = () => {
@@ -291,7 +289,7 @@ export class Chat {
 
     }
 
-    // toggle emoji list 
+    // click event applied on emojiBtn by which user can toggle emoji list 
     toggleEmojiList() {
         this.dom.emojiBtn.addEventListener('click', () => {
 
@@ -310,7 +308,7 @@ export class Chat {
         });
     }
 
-    // check if message text has more than 0 letter, if yes then show button reponsible for sending new message - sendMessageBtn
+    // check if message text has more than 0 characters, if yes then show button reponsible for sending new message - sendMessageBtn. This method is triggered when user type new message in order to avoid empty messages
     checkMessage() {
         const check = () => {
             if (this.dom.newMessageText.innerText.length !== 0) {
@@ -326,6 +324,7 @@ export class Chat {
 
     // general action
     general(){
+        // scroll to the latest message
         this.dom.chatContainer.scrollTop = this.dom.chatContainer.scrollHeight;
     }
 

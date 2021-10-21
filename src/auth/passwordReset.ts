@@ -40,11 +40,10 @@ export class PasswordRecover {
             invalid: document.querySelector("#passwordReset-invalidData"),
             correct: document.querySelector("#passwordReset-correctData")
         }
-
         this.init()
     }
 
-    // when user click on btn show reset form and hide login and register forms
+    // when user click on btn show recover password form and hide login and register forms
     hideAuthFormsEvent() {
         this.buttons.show.addEventListener("click", () => {
             this.forms.recoverPassword.style.display = "block";

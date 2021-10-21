@@ -18,8 +18,8 @@ export class MobileNav {
         this.init();
     }
 
-    // event applied on nav button by which user can toggle container with navigation
-    toogleNav(){
+    // click event applied on button by which user can toggle container with navigation
+    toggleNav(){
         this.dom.navIcon.addEventListener('click', ()=> {
 
            // check if nav container is active
@@ -35,7 +35,7 @@ export class MobileNav {
         });
     }
 
-    // events applied on each link in navigation, when user click one of these links then hide container with navigation
+    // click events applied on each link in navigation, when user click one of these links then hide container with navigation
     hideNav(){
               this.dom.links.forEach(el => el.addEventListener('click', () => {             
                  if(this.dom.navContainer.style.display === 'block'){
@@ -47,7 +47,7 @@ export class MobileNav {
 
     // initialization of scripts
     init(){
-       this.toogleNav();
+       this.toggleNav();
        this.hideNav();
     }
 }

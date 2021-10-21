@@ -2,9 +2,8 @@ import { potionsData } from '../properties/shop/potions';
 import { FullUserStats, PetProperties, SearchedUserData, ShopItem, UserData } from '../types';
 
 /**
- * That function is resonsible for creating full user stats based on equipment, pet, potions
- * @param userData - user's data needed to create stats (current equipement, pet and potions)
- * @returns 
+ * That function is responsible for creating full user stats based on equipment, pet, potions
+ * @param userData - user's data needed to create stats (current equipement, pet and potions) 
  */
 export const getFullUserStats = (userData: UserData | SearchedUserData): FullUserStats => {
 

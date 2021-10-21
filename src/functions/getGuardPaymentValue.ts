@@ -1,22 +1,26 @@
-// get guard payment value which is according to user's level
+
+/**
+ * get guard payout value which is according to user's level
+ * @param userLevel - level needed to return appropriate payout
+ */
 export const getGuardPaymentValue = (userLevel: number): number => {
     if (userLevel >= 400) {
-        return 9000
+        return 9000;
     }
     else if (userLevel >= 300) {
-        return 8000
+        return 8000;
     }
     else if (userLevel >= 250) {
-        return 7000
+        return 7000;
     }
     else if (userLevel >= 250) {
-        return 6000
+        return 6000;
     }
     else if (userLevel >= 200) {
-        return 5000
+        return 5000;
     }
     else if (userLevel >= 160) {
-        return 4000
+        return 4000;
     }
     else if (userLevel >= 130) {
         return 3000;

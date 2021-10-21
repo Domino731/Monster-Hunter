@@ -9,7 +9,7 @@ import { setItemStats } from './setItemStats';
 import { specialItemsData } from '../properties/shop/special';
 
 /**
- *  get array with shop items data for blacksmith
+ * get array with random items data for blacksmith section (item data is based on user stats and guard payout)
  * @param rawStats - raw stats needed to sets stats of items
  * @param guardPayout - guard payout value needed to set price of item
  */

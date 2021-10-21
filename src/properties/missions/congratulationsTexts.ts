@@ -1,4 +1,6 @@
-// array with texts which are will displayed after successful mission
+/**
+ *  array with texts which are will displayed after successful mission
+ *  */
 export const congratulationsTexts : string[] = [
     `I know it wasn't easy, but you did it`,
     `I know it was hard, but at least your work will be well rewarded`,
@@ -9,5 +11,7 @@ export const congratulationsTexts : string[] = [
     `Good work`
 ]
 
-// ger random congratulation text
+/**
+ *  get random congratulation text
+ */
 export const getRandomcongratulationsText = () : string => congratulationsTexts[Math.floor(Math.random() * congratulationsTexts.length)]

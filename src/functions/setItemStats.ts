@@ -1,5 +1,5 @@
 /**
- * this function sets item statistics
+ * this function is returning particular item statistics (based on user statistic)
  * @param itemStatistic - statistic that you want to set
  * @param userRawStatistic - needed to set statistic, which is based on this value
  * @returns 

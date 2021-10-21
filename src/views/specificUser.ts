@@ -6,15 +6,20 @@ import { updateUserData } from '../firebase/operations';
 import { db, auth } from '../firebase/index';
 import { getSearchedUserBackpackLabel } from '../functions/backpackLabel';
 
-// class responsbile for searched user view
+// class responsbile for searched user section
 export class SearchedUser {
 
   // container where new created component will be injected
   private root: HTMLElement;
-  // currend logged user data needed to add friend to his account (addOrRemoveFriend() method) and create chatroom with this friend by createChat() method and 
+  // currend logged user data needed to add friend to his account (addOrRemoveFriend() method) and create chatroom with this friend by createChat() method 
   private currentUser: UserData;
   // search user data based on this data, the component will be rendered
   private searchedUser: SearchedUserData;
+  // intervals responsible for hiding label with delay
+  private hideLabelInterval: {
+    potion: ReturnType<typeof setInterval> | null;
+    equipment: ReturnType<typeof setInterval> | null;
+  }
   private dom: {
     // potion label root needed to display label of this potion - labelForPotions() method
     potionLabel: HTMLElement | null;
@@ -36,11 +41,7 @@ export class SearchedUser {
       
     
   }
-  // intervals responsible for hiding label with delay
-  hideLabelInterval: {
-    potion: ReturnType<typeof setInterval> | null;
-    equipment: ReturnType<typeof setInterval> | null;
-  }
+  
 
   /**
    * @param root - needed to inject html code
@@ -51,6 +52,10 @@ export class SearchedUser {
     this.root = root;
     this.currentUser = currentUser;
     this.searchedUser = searchedUser;
+     this.hideLabelInterval = {
+      potion: null,
+      equipment: null
+    }
     this.dom = {
       switch: document.querySelector('#searched_user_switch'),
       friendAction: document.querySelector('#searched_user_friend_action'),
@@ -64,10 +69,7 @@ export class SearchedUser {
         potionImgSecond: document.querySelector('#profile_general_potion_second .profile__generalImg'),
       },
     }
-    this.hideLabelInterval = {
-      potion: null,
-      equipment: null
-    }
+   
     this.init();
   }
 
@@ -125,7 +127,7 @@ export class SearchedUser {
     });
   }
 
-  // events responsible for potion label
+  // hover events applied on potion slots, which are responsible for potion label
   labelForPotions() {
 
     // check if user has active first potion 
@@ -165,7 +167,7 @@ export class SearchedUser {
     }
   }
 
-  // create new conversation with friend
+  // create new chat data with friend (data structure is describe in docs)
   async createChat() {
 
     // set initial converstation data
@@ -191,10 +193,11 @@ export class SearchedUser {
   // add or remove searched user from friends 
   addOrRemoveFriendEvent() {
     this.dom.friendAction.addEventListener('click', () => {
+
       // index which is needed to check if user already has this searched user in friends
       const friendIndex: number = this.currentUser.friends.findIndex(el => el.id === this.searchedUser.id);
 
-      // is not yet a friend
+      // is not yet a friend, then add to friends
       if (friendIndex < 0) {
 
         // add friend so that in the friends section it will be possible to retrieve his data
@@ -209,9 +212,9 @@ export class SearchedUser {
         this.createChat();
         updateUserData(this.currentUser);
       }
-      // already a friend
+
+      // already a friend, then remove this friend
       else {
-        // remove friend
         this.currentUser.friends.splice(friendIndex, 1);
         this.dom.friendAction.src = './images/add_friend.png';
         this.dom.friendAction.title = 'Add to friends'
@@ -242,9 +245,7 @@ export class SearchedUser {
     });
   }
 
-
-
-  // event which makes it possible to switch between description and user general view
+  // click event applied on switch button, which makes it possible to switch between description and user general view
   switchElements() {
     this.dom.switch.addEventListener('click', () => {
       const flag: boolean = this.dom.general.wrapper.classList.contains('disabled');
@@ -253,20 +254,20 @@ export class SearchedUser {
       if (flag) {
         this.dom.general.wrapper.classList.remove('disabled');
         this.dom.description.classList.add('disabled');
-        this.dom.switch.title = 'Switch to description'
+        this.dom.switch.title = 'Switch to description';
       }
 
       // switch to description
       else {
         this.dom.general.wrapper.classList.add('disabled');
         this.dom.description.classList.remove('disabled');
-        this.dom.switch.title = 'Switch to stats'
+        this.dom.switch.title = 'Switch to stats';
       }
-    })
+    });
   }
 
 
-
+  
   render() {
     this.root.innerHTML = getSpecificUserHTMLCode(this.currentUser.friends, this.searchedUser);
   }
@@ -284,7 +285,6 @@ export class SearchedUser {
       },
     }
   }
-
   initScripts() {
     this.setEquipment();
     this.labelForPotions();
@@ -292,7 +292,6 @@ export class SearchedUser {
     this.addOrRemoveFriendEvent();
     this.changeFriendIconEvents();
   }
-
   init() {
     this.render();
     this.getDOMElements();

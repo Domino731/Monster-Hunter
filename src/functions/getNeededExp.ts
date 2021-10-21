@@ -1,4 +1,8 @@
-// get experience value needed to level up
+
+/**
+ * get experience value which is needed to level up
+ * @param level - current user level
+ */
 export const getNeededExp = (level: number): number => {
     if (level === 1) {
         return 10;

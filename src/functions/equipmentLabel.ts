@@ -1,8 +1,8 @@
 import { ShopItem } from "../types"
 
 /**
- * get html code for the equipment label (for profile section)
- * @param item - data about the item on the basis of which the label will be created
+ * get html code for the equipment label (for profile section with backpack button)
+ * @param itemData - data about the item on the basis of which the label will be created
  */
 export const getProfileEquipmentLabel = (itemData: ShopItem): string => {
   return `
@@ -58,6 +58,10 @@ export const getProfileEquipmentLabel = (itemData: ShopItem): string => {
     `
 }
 
+/**
+ * get html code for the equipment label (for blacksmith section with backpack and sell buttons)
+ * @param itemData - data about the item on the basis of which the label will be created
+ */
 export const getBlacksmithEquipmentLabel = (itemData: ShopItem): string => {
   return `
     <h3 class='market__itemTitle itemTitle ${itemData.rarity === 'legendary' ? 'market__itemTitle-legendary' : 'market__itemTitle-common'}'>${itemData.name}</h3>

@@ -1,4 +1,4 @@
-// abstract class responsbile for firebase authentication action -> register and login
+// abstract class responsbile for firebase authentication action
 export abstract class AuthForm {
 
     // inputs nedeed to get their values, based on this values authAction method will be invoke firebase auth action on this data
@@ -9,14 +9,14 @@ export abstract class AuthForm {
     protected btn: HTMLElement;
     // loading element, will be displayed while authAction will be invoke
     protected loading: HTMLElement;
-    // boolean value which will block the invoke of authAction method when data passed by user is incorrect
-    protected invalidData: boolean;
+   
     // buttons by which user can toogle form (only below 1024px)
     protected loginSwitch: HTMLElement;
     protected registerSwitch: HTMLElement;
     // containers which are needed to hide or show specific form r (only below 1024px)
     protected loginContainer: HTMLElement;
     protected registerContainer: HTMLElement
+
     // data passed by user in inputs, changing by changeData() method
     protected data: {
         eMail: string;
@@ -24,7 +24,9 @@ export abstract class AuthForm {
         repeatPassword?: string;
         nickname?: string;
     };
-
+    // boolean value which will block the invoke of authAction method when data passed by user is incorrect
+    protected invalidData: boolean;
+    
     constructor(root: string) {
         this.root = document.querySelector(root);
         this.inputs = this.root.querySelectorAll('input');
@@ -97,7 +99,7 @@ export abstract class AuthForm {
         });
     };
 
-    // function apply on form button. If user passed correct data then trigger authAction() method otherwise set errors
+    // click evebt with function applied on form button. If user passed correct data then trigger authAction() method otherwise set errors
     addButtonEvent() {
         this.btn.addEventListener("click", (e: Event) => {
             e.preventDefault();
@@ -117,7 +119,7 @@ export abstract class AuthForm {
         });
     }
 
-    // scripts initialization
+    // initialization of scripts 
     init() {
         this.changeData();
         this.addButtonEvent();

@@ -1,7 +1,6 @@
 /**
  * Get graphic which is representing user's status 
  * @param status - the status on the basis of which the appropriate graphics will be returned
- * @returns 
  */
 export const getStatusImgSrc = (status: 'free' | 'guard' | 'mission') : string => {
    if(status === 'mission'){

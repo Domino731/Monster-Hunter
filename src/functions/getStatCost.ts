@@ -1,5 +1,5 @@
 /**
- * function that return cost of statistic
+ * function that return cost of statistic (based on gaurd payout value and statistic amount)
  * @param statAmount - needed to calculate cost
  * @param guardPayout - needed to calculate cost
  * @returns 

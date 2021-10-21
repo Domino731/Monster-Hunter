@@ -21,9 +21,9 @@ const getRandomInt = (min: number, max: number): number => {
 }
 
 /**
- * Function that returns an array with random missions (3 missions)
+ * Function that returns an array with data about random missions (3 missions)
  * @param nextLvlExp - experience needed to level up
- * @param guardPayout - guard payout value
+ * @param guardPayout - guard payout value (needed to set mission payout)
  */
 export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats, userPet: PetData | null): MissionData[] => {
     const missions: MissionData[] = [];
@@ -39,7 +39,7 @@ export const getRandomMissions = (nextLvlExp: number, guardPayout: number, userS
 /**
  * Function that returns random mission 
  * @param nextLvlExp - experience needed to level up
- * @param guardPayout - guard payout value
+ * @param guardPayout -  guard payout value (needed to set mission payout)
  * @param userStats - user statistics on the basis of which statistics for the monster will be created
  */
 export const getRandomMission = (nextLvlExp: number, guardPayout: number, userStats: FullUserStats, userPet: PetData | null): MissionData => {

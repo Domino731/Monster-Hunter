@@ -1,6 +1,6 @@
 
 /**
- * function that counts timeto the end of the day
+ * function that counts time to the end of the day
  * @param element - wrapper where you want to inster this countdown
  */
 export const setCountdown = (element: HTMLElement) => {

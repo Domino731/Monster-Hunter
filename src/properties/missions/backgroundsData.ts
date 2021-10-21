@@ -1,5 +1,5 @@
 // available backgrounds for the missions that will be displayed during traval
-// each background include his source and freepik attribute
+// each background include his source and freepik author attribute
 export const backgroundsData: { attribute: string, src: string }[] = [
     {
         attribute: `<a href='https://www.freepik.com/vectors/tree'>Tree vector created by upklyak - www.freepik.com</a>`,

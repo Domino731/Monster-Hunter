@@ -25,7 +25,6 @@ Project is created with:
 
 ## Compontents
 
-
 ### `Component (abstract class)`
 This is class which is expaneded by all components in game, is a bit like the class component from react. His task is to provide base methods responsible for logic behind component. 
 #### ***Constructor***
@@ -307,5 +306,198 @@ Class which is for section where user can change his email or password, or delet
 * `updatePassword()` - Upadate user's password.
 * `updateEmail` - Update user's email.
 * `ChangeDataEvent` - Adding change events for each input, which is responsible to changing data.
-* `DeleteAccountEvent` -  Method that is reponsible for deleting user's account from firestore and firebase auth.
+* `DeleteAccountEvent` - Method that is reponsible for deleting user's account from firestore and firebase auth.
 * `deleteAccount` - Method that is reponsible for deleting user's data from firestore.
+
+## Sub components
+
+### `SearchedUser`
+A class which is responsible for searched user view. This component is nested in search friend section and in friends section. By this component user display view of any user in game and add this user to his friends (or remove).
+
+#### ***Constructor***
+* `root` - Container where new created component will be injected.
+* `currentUser` - Data about current logged user, needed to add friend to his account (`addOrRemoveFriend()` method) and create chatroom with this friend by `createChat()` method,
+* `searchedUser` - Data about specific user that you want to display, based on this data component will be rendered.
+* `hideLabelInterval` - Intervals responsible for hiding label with delay, and they also used to avoid multiple label hiding.
+
+#### ***Methods***
+* `equipmentLabel()` - Equipment label for specific item.
+* `setEquipment()` - Set equipment slots with ability to display label of specific item.
+* `labelForPotions()` - Hover events applied on potion slots, which are responsible for potion label.
+* `createChat()` - Create new chat data with friend (data structure is describe in docs).
+* `addOrRemoveFriendEvent()` - Add or remove searched user from friends.
+* `changeFriendIconEvents()`  - Changing friend icon on mouse hover and leave.
+* `switchElements()` - Click event applied on switch button, which makes it possible to switch between description and user general view.
+
+### `Chat`
+A class which is responsible for chat section between current logged user and friend. 
+#### ***Constructor***
+* `root` - Container where new created component will be injected.
+* `friend` - Friend data needed to get his chat messages and display his nick.
+* `currentUser` - Current user data needed to get his chat messages and to send text messages.
+* `conversation` - Chat data, contains all messages and user and friend messages. These data is splited to avoid duplicates in conversations and reduce data size.
+#### ***Method***
+* `renderChat()` - Render messages between user and friend in chatContainer.
+* `sendMessage()` - Send new createad message into user's data in firestore.
+* `addEmoji()` -  Click event added on each emoji which when clicked, they appear in the message.
+* `scrollToBottomMessage()` - Scroll to bottom of new message, in order when a user selects emoji to know where new emoji is.
+* `toggleEmojiList()` - Click event applied on emojiBtn by which user can toggle emoji list.
+* `checkMessage()` -  Check if message text has more than 0 characters, if yes then show button reponsible for sending new message - sendMessageBtn. This method is triggered when user type new message in order to avoid empty messages.
+* `getChatromData()` -  Get chat data in order to display chat basis on this data
+* `dataChangeListener()` - Listening for chat data updates in firestore, when the date changes then `renderChat()` method will rerender chat.
+
+## General
+
+### `General`
+Class which is responsible for click event applied on logout button, and for resfreshing page on resize.
+#### ***Methods***
+* `logoutEvent()` - Click event applied on button in order to logout the user when he presses a button.
+* `mobile()` - Refresh page on window resize in order to create  content  which is appropriate for the current browser window size (devices under 1024px have different content display (blacksmith,
+    profile, friends, search friend, inbox sections).
+* `init()` - Iniclalization of scripts.
+
+### `MobileNav`
+ Class responsible for mobile navigation which is displaying below 1024px.
+ #### ***Methods***
+ * `toogleNav()` - Click event applied on button by which user can toggle container with navigation.
+ * `hideNav()` - Click events applied on each link in navigation, when user click one of these links then hide container with navigation.
+ * `init()` -  Iniclalization of scripts.
+
+### How to add new emoji ? 
+* 1 - Add new graphic in emoji folder
+* 2 - Add source of above emoji in `emojiData` array (***properties/emoji/emoji.ts***)
+
+### How to add shop item
+* 1 - Add graphic of new item in appropriate folder (shop folder)
+* 2 - Add this item into appropriate array with data -> chestplates, glovesData, helmetsData, potionsData, shieldsData, specialData, weaponsData (***properties/shop/* ***)
+* 3 - Set item name, description, rarity, id, graphic source,  properties (percentage of user stats, 
+`getBlacksmithItems()` function will set item properties based on user stats.) and initial cost (percentage of user gaurd payout, `getBlacksmithItems()` function will set cost). 
+
+## Authorization
+The Firebase service is providing by google and is responsible for the backend of this project. Operations which are responsible for authorization are in sub page - /login
+
+
+
+### `AuthForm`
+Abstract class responsbile for firebase authentication action. 
+#### ***Constructor***
+* `data` - Data passed by user in inputs, changing by `changeData()` method.
+* `invalidData` - Boolean value which will block the invoke of authAction method when data passed by user is incorrect 
+#### ***Methods***
+* ***abstract*** `authAction()` - Responsible for firebase authentication operation - create new user or sign in.
+* ***abstract*** `checkData()` - Responsible for catching errors in invalid data.
+* ***abstract*** `setErrors()` - Responsible for setting errors in form.
+* `changeData()` - Adding events for inputs in order to get their values on change and pass this value into data, so authAction() method
+   will be have data to invoke specific auth action.
+* `addButtonEvent()` - Click evebt with function applied on form button. If user passed correct data then trigger authAction() method otherwise set errors.
+* `toggleForm()` - Toggle between form and login form (only below 1024px)
+* `init()` - Initialization of scripts.
+
+### `Login (extends AuthForm class)`
+Class responsible for loggin user.
+#### ***Methods***
+* `authAction()` - Logging user.
+* `checkData()` - Checking data passed by user.
+
+### `Register (extends AuthForm class)`
+Class for creating new user account in firebase.
+ #### ***Methods***
+ * `authAction()` - Creating new user with initial data (`InitialUserProfile`) in firestore.
+ * `setErrors()`- Display errors in form, this method is invoked in `addButtonEvent()` method only when `isCorrect` is true
+ * `removeErrors()` - Remove all errors from form, (this method is triggered when user pass new data)
+ * `checkData()` - Check if user's data is correct, if data is incorrect then `authAction()` wont be triggred and the `setErrors()` method will be invoke. 
+   These methods are apllied in `addButtonEvent()` method.
+
+### `PasswordRecover` 
+Class responsible for recovering user's password.
+####  ***Methods***
+* `hideAuthFormsEvent()` -  When user click on btn show recover password form and hide login and register forms
+* `showFormsEvent()` - When user click on btn hide reset form and show login and register forms, or show only login form (only below 1024px).
+* `removeErrorsEvent()` - When user type new data remove error.
+* `authAction()` - firebase authorization operation responsible for recovering user's password
+
+## Available functions
+ * `getProfileBackpackLabel()` - Get HTML code for the backpack label (for profile section with equipment button).
+ * `getBlacksmithBackpackLabel()` - Get HTML code for backpack label (for blacksmith section with equipment and sell buttons).
+ * `getSearchedUserBackpackLabel()` - Get HTML code for  backpack label (for searched user section). 
+ * `compareStats()` - Compare statistic between selected and actual item in equipment.
+ * `setCountdown()` - Function that counts time to the end of the day.
+ * `getProfileEquipmentLabel()` - Get HTML code for the equipment label (for profile section with backpack button).
+ * `getBlacksmithEquipmentLabel()` - Get HTML code for the equipment label (for blacksmith section with backpack and sell buttons).
+ * `formatDate()` - General date format.
+ * `formatChatDate()` - Date format for chat.
+ * `formatMailDate()` - Date format for mail.
+ * `getBlacksmithItemLabel()` - Get HTML code for blacksmith item label.
+ * `getBlacksmithItems()` - Get an array with random items data for blacksmith section (item data is based on user stats and guard payout).
+ * `getBlacksmithPicks()` - Get available blacksmith picks per slot, each slot has only 2 picks (user can only buy 2 items from one slot).
+ * `getEquipmentIconSrc()` - Get an icon that represents a specific type of item.
+ * `getFullUserStats()` -  That function is responsible for creating full user stats based on equipment, pet, potions.
+ * `getGuardPaymentValue()` - Get guard payout value which is according to user's level.
+ * `getMissionDetails()` - Get HTML code for mission details - title, description, exp, gold, time and enemy.
+  * `getRandomcongratulationsText()` - get random congratulation text
+ * `getNeededExp()` - Get experience value which is needed to level up.
+ * `getPotionLabel()` - Get HTML code for potion label.
+ * `getStatCost()` - Function that return cost of statistic (based on gaurd payout value and statistic amount).
+ * `getStatusImgSrc()` -  Get graphic which is representing user's status.
+ * `getWonItemLabel()` - Get html code for won item from wizard magic wheel.
+ * `getMessageCode()` - HTML code for message.
+ * `getRandomMissions()` - Function that returns an array with data about random missions (3 missions).
+ * `getRandomMission()` - Function that returns random mission.
+ * `setItemStatistic` - This function is returning particular item statistics (based on user statistic).
+ * `isUpper()` - Check if string has an upper letter.
+ * `includeNumber()` - Check if string has a number. 
+
+## Properties
+* `emojiData` - Array with emoji sources. All emotes are rendered automatically in `getChatHTMLCode` function.
+* `allBlacksmithMarketItems` - Array with data about all blacksmith items (helmets, chest plates, gloves, specials, weapons and shields).
+* `chestplatesData` - Array with chest plates data.
+* `glovesData` - Array with gloves data.
+* `helmetsData` - Array with helmets data.
+* `potionsData` - Array with potions data.
+* `shieldsData` - Array with shields data.
+* `specialItemsData` - Array with special items data.
+* `weaponsData` - Array with weapons data.
+* `portraitsData` - Array with available portraits sources (user can change his hero portrait in profile section)
+* `petsData` - Array with pets data, which are displaying in pets component. Each pet has diffrent skills.
+* `backgroundsData` - Available backgrounds for the missions that will be displayed during traval
+each background include his source and freepik author attribute.
+* `charactersData` - Array with mission characters which are displaying in tavern after user selects a mission and after successful mission.
+* `congratulationsTexts` -  Array with texts which are will displayed after successful mission.
+* `missionDscData` - Array with missions description.
+* `missionTitlesData` - Array with mission titles.
+* `monstersData` -  Array with monsters graphic sources.
+* `papyrusSrcData` - array with papyrus sources, which are displaying in tavern.
+* `InitialUserProfile` - object with  initial user data with which the profile will be created in the firestore database
+
+## Firestore data structure
+### ***Colections***
+* users - all data about users.
+* chat - all data about user chatrooms. Each user has his own document in this collection with conversation data. Base on this data `Chat` will be render chat with particular friend.
+
+### ***users***
+each user has: 
+* level - needed to set guard payout by this value.
+* nextLevelAt - experience required to level up.
+* exp - current experience.
+* nick - nickname of user.
+* guardPayout - gaurd payout value also needed to set mission payout, pet cost, and blacksmith items cost.
+* gold - amount of gold, needed to buy items available in blacksmith section and increase stats.
+* equipmentItems - items in user's  equipment, base on this items all user statistics (`fullUserStats` in `Component` class) will be created by `getFullUserStats()` function.
+* backpackItems - items in user's backpack.
+* lastVisit - date of last visit, used `dateOperations` in `Component` class. Last visit is also displaying in search friend section
+* status - current user status (mission, free or on guard). If user has mission status he cant start guard and vice versa. Status is also displaying in search friend section
+* portrait - hero portrait.
+* wizardWheelSpin - boolean value that allows to spin the wheel in wizard section (reset on new day by `dateOperations` in `Component` class).
+* availableMissions - available mission in tavern, generated by `getRandomMissions()` function.
+* missionWillingness - willingness for mission, 100 minutes per day (reset on new day by `dateOperations` in `Component` class).
+* currentMission - current mission data (exp, gold, monster, title...)
+* friends - array with id of current friends, needed to render content in friends section.
+* inbox - array with e-mails
+* shop.blacksmith - array with available blacksmith items, generated by `getBlacksmithItems()` function (reset on new day by `dateOperations` in `Component` class).
+* shopPicks.blacksmith - array with available pick pet slot, each slot has only 2 picks per day. (reset on new day by `dateOperations` in `Component` class).
+* rawStats - base user statistics, which can be only increased in profile section. Base on this date `getFullUserStats()` function will set all users stats (`fullUserStats` in `Component` class).
+* guard - data about current guard - start, end and payout
+* pet - data about current pet (each pet has diffrent abilities that increase stats)
+* potions - data about current potions.
+* magicWheel.wonItem - data about won item (change on new day by `dateOperations` in `Component` class).
+* magicWheel.items - an array with data about all items in magic wheel (change on new day by `dateOperations` in `Component` class) 
