@@ -508,8 +508,10 @@ each document has nested collection 'conversations', where each has:
 * participants - id's of participants, needed to secure data by firestore rules
 * updatedAt - date of last update
 * recipientId - id of recipient
+* createdBy - id of user's which created this data, needed to secure data by firestore rules
 * messages - array with messages
      * message.content - array with texts of message
      * message.createdAt - date of message creation
      * message.nick - nick of message sender
      * message.id - id of message sender
+

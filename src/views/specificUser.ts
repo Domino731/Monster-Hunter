@@ -1,5 +1,5 @@
 import { getSpecificUserHTMLCode } from '../HTMLCode/specificUser';
-import { UserData, SearchedUserData, ShopItem, Conversation } from '../types';
+import { UserData, SearchedUserData, ShopItem, Conversation} from '../types';
 import { potionsData } from '../properties/shop/potions';
 import { getPotionLabel } from '../functions/getPotionLabel';
 import { updateUserData } from '../firebase/operations';
@@ -171,16 +171,35 @@ export class SearchedUser {
   async createChat() {
 
     // set initial converstation data
-    const conversation: Conversation = {
+    const conversation = {
+       // @ts-ignore
       messages: [],
       createdAt: new Date,
       participants: [`${auth.currentUser.uid}`, `${this.searchedUser.id}`],
       updatedAt: new Date,
-      recipientId: this.searchedUser.id
+      recipientId: this.searchedUser.id,
+      createdBy: auth.currentUser.uid
     }
 
+   
+    // check if the user has already created a conversation with this user
+    let isFriend: boolean;
+    await db.collection('chat').
+    doc(auth.currentUser.uid)
+    .collection('conversations')
+    .where('recipientId', '==', this.searchedUser.id)
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach(() => {
+          isFriend = true;
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+
     // add this converstation to user's data in firestore in order to read messages from this conversation
-    await db.collection('chat').doc(`${auth.currentUser.uid}`).collection('conversations').add(conversation)
+    !isFriend && await db.collection('chat').doc(auth.currentUser.uid).collection('conversations').add(conversation)
       .then(() => {
         console.log("Document successfully written!");
       })

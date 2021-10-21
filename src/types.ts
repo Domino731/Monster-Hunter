@@ -223,11 +223,13 @@ export interface MessageData {
     userId: string;
     nick: string;
 }
+
 export interface Conversation {
     messages: MessageData[];
     createdAt: Date;
     participants: string[];
     updatedAt: Date;
+    createdBy: string
     recipientId: string;
 }
 export interface MailData {
