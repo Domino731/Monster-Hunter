@@ -501,3 +501,15 @@ each user has:
 * potions - data about current potions.
 * magicWheel.wonItem - data about won item (change on new day by `dateOperations` in `Component` class).
 * magicWheel.items - an array with data about all items in magic wheel (change on new day by `dateOperations` in `Component` class) 
+
+### ***Chat***
+each document has nested collection 'conversations', where each has: 
+* createdAt - date of conversation creation
+* participants - id's of participants, needed to secure data by firestore rules
+* updatedAt - date of last update
+* recipientId - id of recipient
+* messages - array with messages
+     * message.content - array with texts of message
+     * message.createdAt - date of message creation
+     * message.nick - nick of message sender
+     * message.id - id of message sender
