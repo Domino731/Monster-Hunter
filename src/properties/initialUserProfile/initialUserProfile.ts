@@ -99,7 +99,7 @@ export const InitialUserProfile: UserData = {
     nick: '',
     level: 1,
     guardPayout: 100,
-    gold: 1000,
+    gold: 400,
     rawStats: {
         defence: 50,
         luck: 50,

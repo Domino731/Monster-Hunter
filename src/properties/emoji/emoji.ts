@@ -1,5 +1,8 @@
-// array with emoji src, which are rendered in the chat component.
-// if you want to add new emoji just add src of this new emoji to this array 
+
+/**
+ *  array with emoji src, which are rendered in the chat component.
+ * if you want to add new emoji just add src of this new emoji to this array 
+ */
 export const emojiData : string[] = [
  './images/emoji/emoji_1.png',
  './images/emoji/emoji_2.png',

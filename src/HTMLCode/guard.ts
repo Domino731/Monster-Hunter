@@ -1,4 +1,7 @@
-// get html code for guard section 
+/**
+ * get html code for guard section
+ * @returns 
+ */ 
 export const getGuardHTMLCode = () : string => {
 
     return  `

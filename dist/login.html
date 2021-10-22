@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <meta name="description"
+    content="Become a monster hunter and go to help those in need, see if you can handle this challenge?. A lot of fun is waiting for you">
+  <link rel="icon" type="image/png" href="images/page_icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,900;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./index.css" type="text/css">
+
+  <style>
+    html {
+      height: 100vh;
+    }
+
+    body {
+      background: url(images/summer_landscape.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    body::-webkit-scrollbar {
+      width: 0;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <main>
+    <h1 class="auth__title">Your journey begins here</h1>
+
+    <div class="auth__container">
+
+      <div class="auth__item auth__item-login" id="auth-login">
+        <h2 class="auth__itemTitle">Login</h2>
+        <form class="auth__form" id="form__login">
+
+          <div class="auth__inputWrapper">
+            <label>E-mail
+              <input type="email" name="eMail" placeholder="E-mail">
+            </label>
+          </div>
+
+          <div class="auth__inputWrapper auth__inputWrapper-left">
+            <label>Password
+              <input type="password" name="password" placeholder="Password">
+            </label>
+          </div>
+
+          <strong class=" auth__notification auth__notification-error" id="login__invalidData-password"></strong>
+          <div class="auth__submitWrapper">
+            <div class="auth__submitWrapper">
+              <div class="tower"></div>
+              <div class="wall">
+                <button id="btn__login" type="button">Login</button>
+                <div class="auth__loading"></div>
+              </div>
+              <div class="tower"></div>
+            </div>
+          </div>
+
+          <div class='auth__switchBtn' id='login-switch'>
+            Switch to register form
+          </div>
+
+          <div class="recoverPassword" id="auth-forgotPassword">
+            I forgot my password
+          </div>
+
+        </form>
+      </div>
+
+      <div class="auth__item" id="auth-register">
+        <h2 class="auth__itemTitle">Register</h2>
+        <form class="auth__form" id="form__register">
+
+
+          <div class="auth__inputWrapper">
+            <strong class="register__error" id="register__invalidData-email"></strong>
+            <label>E-mail
+              <input type="email" name="eMail" placeholder="E-mail">
+            </label>
+          </div>
+
+
+          <div class="auth__inputWrapper auth__inputWrapper-left">
+            <label>Password
+              <input type="password" name="password" placeholder="Password">
+            </label>
+            <span class="register__requirement" id="register__invalidData-password">*Password should have at least 6
+              characters, 1 capital letter, 1 number.</span>
+          </div>
+
+          <div class="auth__inputWrapper auth__inputWrapper-left">
+
+            <label>Repeat password
+              <input type="password" name="repeatPassword" placeholder="Repeat password">
+            </label>
+            <strong class="register__error" id="register__invalidData-repeatPassword"></strong>
+          </div>
+
+
+          <div class="auth__inputWrapper">
+
+            <label>Nickname
+              <input type="email" name="nickname" placeholder="Nickname" maxlength="10">
+            </label>
+            <span class="register__requirement" id="register__invalidData-nickname">*Nickname should be at least 4
+              characters long.</span>
+          </div>
+
+          <div class="auth__submitWrapper">
+            <div class="tower"></div>
+            <div class="wall">
+              <button id="btn__register" type="button">Register</button>
+              <div class="auth__loading"></div>
+            </div>
+            <div class="tower"></div>
+          </div>
+
+          <div class='auth__switchBtn' id='register-switch'>
+            Switch to login form
+          </div>
+
+
+        </form>
+      </div>
+
+      <div class="auth__item auth__item-login" id="auth-resetPassword">
+        <form class="auth__form" id="form__reset">
+
+          <div class="auth__inputWrapper">
+            <label>E-mail
+              <input type="email" name="eMail" placeholder="E-mail" id="resetPassword-input">
+            </label>
+          </div>
+
+          <strong class=" auth__notification auth__notification-error" id="passwordReset-invalidData"></strong>
+          <strong class=" auth__notification auth__notification-correct" id="passwordReset-correctData"></strong>
+
+          <div class="auth__submitWrapper">
+            <div class="tower"></div>
+            <div class="wall">
+              <button id="btn__resetPassword" type="button">Reset password </button>
+              <div class="auth__loading"></div>
+            </div>
+            <div class="tower"></div>
+          </div>
+
+          <div class="recoverPassword" id="auth-backToForms">
+            Back
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="auth__freepikAttribute">
+    <a href='https://www.freepik.com/vectors/summer' target="_black">Summer vector created by upklyak -
+      www.freepik.com</a>
+  </div>
+
+  <script src="./auth.js"></script>
+</body>
+
+</html>

@@ -4,7 +4,6 @@ import { UserData } from '../types';
 /**
  * update user's data in firestore
  * @param newData - new user data that you want to update
- * @returns 
  */
 export const updateUserData = (newData: UserData) => db.collection('users')
    .doc(auth.currentUser.uid)

@@ -1,6 +1,7 @@
 import { ShopItem } from '../../types';
-
-// array with data about available chest plates
+/**
+ * array with data about available chest plates
+ */
 export const chestplatesData: ShopItem[] = [
     {
         type: "chestPlate",

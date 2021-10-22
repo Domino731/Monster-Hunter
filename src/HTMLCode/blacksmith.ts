@@ -184,7 +184,9 @@ export const getBlacksmithHTMLCode = (user: UserData) => {
   `;
 }
 
-// get html code blacksmith navigation on mobile devices
+/**
+ * get html code blacksmith navigation on mobile devices
+ */
 export const blacksmithMobileNavCode : string = `
 <div class='mobileNav__item'>
 

@@ -1,6 +1,8 @@
 import { auth } from '../firebase/index';
 
-// Class responsbile for general operations - logout and refreshing page on resize
+/**
+ * Class responsbile for general operations - logout and refreshing page on resize
+ *  */ 
 export class General {
 
     // button by which user can log out -  logoutEvent() method

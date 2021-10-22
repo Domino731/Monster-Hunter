@@ -4,13 +4,18 @@ const months: string[] = ["January", "February", "March", "April", "May", "June"
 const today: Date = new Date();
 
 
-// get differences between the dates
+/**
+ * get differences between the dates
+ */
 const getDifferenceInDays = (date1: Date, date2: Date): number => {
     const diffInMs: number = Math.abs(date2.getTime() - date1.getTime());
     return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 }
 
-// general date format
+/**
+ * general date format
+ * @param date - date that you want format
+ */
 export const formatDate = (date: Date): string => {
 
     if (date.getDay() === today.getDay()) {
@@ -27,7 +32,10 @@ export const formatDate = (date: Date): string => {
     }
 }
 
-// date format for chat
+/**
+ * date format for chat
+ * @param date - date that you want format
+ */
 export const formatChatDate = (date: Date): string => {
     const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
     if (date.getDay() === today.getDay()) {
@@ -44,7 +52,10 @@ export const formatChatDate = (date: Date): string => {
     }
 }
 
-// date format fo mails
+/**
+ * date format fo mails
+ * @param date - date that you want format
+ */
 export const formatMailDate = (date: Date): string => {
     const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
     if (date.getDay() === today.getDay()) {

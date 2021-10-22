@@ -1,6 +1,7 @@
-import { ShopItem } from '../../types';
-
-// array with data about available helmets
+import { ShopItem } from '../../types'; 
+/**
+ * array with data about available helmets
+ */
 export const helmetsData: ShopItem[] = [
     // common items
     {

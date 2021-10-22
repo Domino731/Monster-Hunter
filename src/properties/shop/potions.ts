@@ -1,6 +1,7 @@
-import { ShopItem } from '../../types';
-
-// array with data about available potions
+import { ShopItem } from '../../types'; 
+/**
+ * array with data about available potions
+ */
 export const potionsData: ShopItem[] = [
     {
         type: 'potion',

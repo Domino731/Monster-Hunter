@@ -1,4 +1,6 @@
-// array with papyrus sources, which are displaying in tavern
+/**
+ *  array with papyrus sources, which are displaying in tavern
+ */
 export const papyrusSrcData : string[] = [
   './images/missions/papyrus/papyrus_1.png',
   './images/missions/papyrus/papyrus_2.png',

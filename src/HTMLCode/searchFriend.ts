@@ -1,3 +1,6 @@
+/**
+ * get html code for search friend section
+ */
 export const getSearchFriendHTMLCode = ( ) : string => {
 
   return `

@@ -49,9 +49,9 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
   },
-  devtool: "source-map",
+ // devtool: "source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./dist/",
     compress: true,
     port: 3001,
     historyApiFallback: true,

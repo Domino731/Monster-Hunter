@@ -1,6 +1,7 @@
 import { ShopItem } from '../../types';
-
-// array with data about available special items
+/**
+ * array with data about available special items
+ */
 export const specialItemsData : ShopItem[] = [
     
     {

@@ -43,7 +43,9 @@ export class PasswordRecover {
         this.init()
     }
 
-    // when user click on btn show recover password form and hide login and register forms
+    /**
+     * when user click on btn show recover password form and hide login and register forms
+     *  */ 
     hideAuthFormsEvent() {
         this.buttons.show.addEventListener("click", () => {
             this.forms.recoverPassword.style.display = "block";
@@ -52,7 +54,9 @@ export class PasswordRecover {
         });
     }
 
-    // when user click on btn hide reset form and show login and register forms, or show only login form (only below 1024px)
+    /**
+     * when user click on btn hide reset form and show login and register forms, or show only login form (only below 1024px)
+     */
     showFormsEvent() {
         this.buttons.hide.addEventListener("click", () => {
             if (window.innerWidth < 1024) {
@@ -67,8 +71,10 @@ export class PasswordRecover {
             }
         });
     }
-
-    // when user type new data remove error
+ 
+    /**
+     * when user type new data remove error
+     */
     removeErrorsEvent() {
         const removeError = () => {
             this.notifications.invalid.innerText = "";
@@ -78,7 +84,9 @@ export class PasswordRecover {
         this.input.addEventListener("change", removeError);
     }
 
-    // recovering user's password
+    /**
+     * recovering user's password
+     */
     authAction() {
         this.buttons.action.addEventListener("click", (e: Event) => {
             e.preventDefault();

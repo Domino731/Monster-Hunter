@@ -1,4 +1,6 @@
-// array with mission titles
+/**
+ * array with mission titles
+ */
 export const missionTitlesData : string[] = [
     `Broken swords`,
     `The Smoke Forest`,

@@ -14,7 +14,6 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
     return `
     <section class='fight background'>
 
-
     <div id='fight_container'>
 
         <div class='fight__container'>
@@ -107,9 +106,6 @@ export const getMonsterFightHTMLCode = (userStats: FullUserStats, userData: User
         </div>
 
     </div>
-
-
-
 
     <div class='fight__summaryWrapper disabled' id='successful_fight_summary'>
 

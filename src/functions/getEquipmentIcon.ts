@@ -1,5 +1,8 @@
-
-// get an icon that represents a specific type of item
+/**
+ * get an icon that represents a specific type of item
+ * @param itemType - type of item (helmet, shield, special, weapon, chestPlate, gloves)
+ * @returns 
+ */
 export const getEquipmentIconSrc = (itemType: string ) => {
     switch (itemType) {
         case 'helmet':

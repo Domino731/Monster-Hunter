@@ -10,7 +10,9 @@ import { getFullUserStats } from '../functions/getFullUserStats';
  */
 export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }[], searchedUser: SearchedUserData): string => {
 
-    // get potion name
+    /**
+     * get first potion name
+     */
     const firstPotionName = (): string => {
 
         // find specific potion
@@ -18,7 +20,10 @@ export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }
         return potion.name;
     }
 
-    // get potion name
+    /**
+     * get potion name
+     * @returns 
+     */
     const secondPotionName = (): string => {
 
         // find specific potion
@@ -26,7 +31,10 @@ export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }
         return potion.name;
     }
 
-    // get pet graphic source
+    /**
+     * get pet graphic source
+     * @returns 
+     */
     const petImgSrc = (): string => {
 
         // check if user has active pet
@@ -53,7 +61,9 @@ export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }
     stats = getFullUserStats(searchedUser)
 
 
-    // function that check if searched user is already your friend, and returns appropriate source of image graphic. User will be know if he has this friend in his friends
+    /**
+     * function that check if searched user is already your friend, and returns appropriate source of image graphic. User will be know if he has this friend in his friends
+     *  */ 
     const checkFriend = (): string => {
         const friendIndex = friendsArr.findIndex(el => el.id === searchedUser.id);
         if (friendIndex < 0) {
@@ -64,7 +74,9 @@ export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }
         }
     }
 
-    // get image source for potion
+    /**
+     * get image source for potion
+     */
     const firstPotionImg = () => {
 
         // find specific potion
@@ -76,8 +88,11 @@ export const getSpecificUserHTMLCode = (friendsArr: { id: string, nick: string }
             return `<img src="/images/profile_elixir_slot.png" title="Elixir slot #1" />`;
         }
     }
-
-    // get image source for potion
+ 
+    /**
+     * get image source for potion
+     * @returns 
+     */
     const secondPotionImg = () => {
 
         // find specific potion

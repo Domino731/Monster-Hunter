@@ -1,6 +1,7 @@
 import { PetData } from '../../types';
-
-// array with pets data, which are displaying in pets component
+/**
+ * array with pets data
+ */
 export const petsData : PetData[] =[
     {
         name: 'cat',

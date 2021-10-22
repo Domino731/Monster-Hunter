@@ -1,4 +1,6 @@
-// Array with monsters graphic sources
+/**
+ * Array with monsters graphic sources
+ */
 export const monstersData: string[] = [
     './images/missions/monsters/monster_1.png',
     './images/missions/monsters/monster_2.png',

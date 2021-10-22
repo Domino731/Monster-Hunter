@@ -1,6 +1,7 @@
 import { ShopItem } from '../../types';
-
-// array with data about available shields
+/**
+ *  array with data about available shields
+ */
 export const shieldsData : ShopItem[] = [
 
     // common items

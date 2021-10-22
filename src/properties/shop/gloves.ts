@@ -1,6 +1,7 @@
 import { ShopItem } from '../../types';
-
-// array with data about available gloves
+/**
+ *  array with data about available gloves
+ */
 export const glovesData: ShopItem[] = [
 
     // common items

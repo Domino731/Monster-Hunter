@@ -1,4 +1,6 @@
-// array with missions description
+/**
+ * array with descriptions for missions
+ */
 export const missionDscData: string[] = [
 
     `I've been meaning to reach out to you for a long time. 

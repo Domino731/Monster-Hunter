@@ -9,7 +9,7 @@ export abstract class AuthForm {
     protected btn: HTMLElement;
     // loading element, will be displayed while authAction will be invoke
     protected loading: HTMLElement;
-   
+
     // buttons by which user can toogle form (only below 1024px)
     protected loginSwitch: HTMLElement;
     protected registerSwitch: HTMLElement;
@@ -26,7 +26,7 @@ export abstract class AuthForm {
     };
     // boolean value which will block the invoke of authAction method when data passed by user is incorrect
     protected invalidData: boolean;
-    
+
     constructor(root: string) {
         this.root = document.querySelector(root);
         this.inputs = this.root.querySelectorAll('input');
@@ -47,29 +47,39 @@ export abstract class AuthForm {
         this.toggleForm();
     };
 
-    // abstract method - responsible for firebase authentication - create new user or sign in
+
+    /**
+     * abstract method - responsible for firebase authentication - create new user or sign in 
+     */
     authAction() {
         console.error(
             "This method authAction() should be implemented in  inheriting class"
         );
     };
 
-    // abstract method - responsible for catching errors in invalid data
+    /**
+     * abstract method - responsible for catching errors in invalid data
+     */
     checkData() {
         console.error(
             "This method checkData() should be implemented in  inheriting class"
         );
     };
 
-    // abstract method - responsible for setting errors in form
+    /**
+     * abstract method - responsible for setting errors in form
+     *  */
     setErrors() {
         console.error(
             "This method setErrors() should be implemented in  inheriting class"
         );
     };
 
-    // adding events for inputs in order to get their values on change and pass this value into data, so authAction() method
-    //  will be have data to invoke specific auth action
+
+    /**
+     * adding events for inputs in order to get their values on change and pass this value into data, so authAction() method
+     * will be have data to invoke specific auth action
+     */
     changeData() {
         this.inputs.forEach(el => {
 
@@ -99,15 +109,19 @@ export abstract class AuthForm {
         });
     };
 
-    // click evebt with function applied on form button. If user passed correct data then trigger authAction() method otherwise set errors
+    /**
+     * click event with function applied on form button. If user passed correct data then trigger authAction() method otherwise set errors
+     */
     addButtonEvent() {
         this.btn.addEventListener("click", (e: Event) => {
             e.preventDefault();
             this.invalidData ? this.setErrors() : this.authAction()
         });
     }
-
-    // toggle between form and login form (only below 1024px)
+ 
+    /**
+     * toggle between form and login form (only below 1024px)
+     */
     toggleForm() {
         this.registerSwitch.addEventListener('click', () => {
             this.loginContainer.style.display = 'block';
@@ -119,7 +133,9 @@ export abstract class AuthForm {
         });
     }
 
-    // initialization of scripts 
+    /**
+     * initialization of scripts 
+     *  */ 
     init() {
         this.changeData();
         this.addButtonEvent();

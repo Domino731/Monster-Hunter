@@ -1,4 +1,6 @@
-// array with mission characters which are displaying in tavern after user selects a mission and after successful mission
+/**
+ *  array with mission characters which are displaying in tavern after user selects a mission and after successful mission
+ */
 export const charactersData : string[] = [
     './images/missions/characters/character_1.png',
     './images/missions/characters/character_2.png',

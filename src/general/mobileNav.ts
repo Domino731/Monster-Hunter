@@ -1,4 +1,6 @@
-// class responsible for mobile nav which is displaying below 1024px
+/**
+ * class responsible for mobile nav which is displaying below 1024px
+ */ 
 export class MobileNav {
 
     private dom: {

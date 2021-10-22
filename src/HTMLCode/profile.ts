@@ -146,7 +146,7 @@ export const getProfileHTMLCode = (user: UserData): string => {
                     </tr>
 
                     <tr id='profile_damage_stat'>
-                        <td class='profile__item--name profile__item--nameBlue'><strong></strong></td>
+                        <td class='profile__item--name profile__item--nameBlue'><strong>Damage</strong></td>
                         <td class='profile__item--amount profile__item--nameBlue'></td>
                     </tr>
 
@@ -223,7 +223,9 @@ export const getProfileHTMLCode = (user: UserData): string => {
     `
 }
 
-// get  html code for mobile navigation in profile section
+/**
+ * html code for mobile navigation in profile section
+ */
 export const profileMobileNavCode = `
 <div class='mobileNav__item'>
 

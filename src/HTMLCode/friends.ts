@@ -1,6 +1,9 @@
 import { SearchedUserData } from '../types';
 
-// get html code for friends section
+
+/**
+ *  get html code for friends section
+ */
 export const getFriendsHTMLCode = (): string => {
 
     return `

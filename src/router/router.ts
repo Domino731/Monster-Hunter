@@ -1,14 +1,14 @@
-import { Blacksmith } from './../views/blacksmith';
+import { Blacksmith } from '../components/blacksmith';
 import { route } from './../types';
-import { Profile } from '../views/profile';
-import { Missions } from '../views/missions';
-import { Wizard } from '../views/wizard';
-import { Inbox } from '../views/inbox';
-import { Pets } from '../views/pets';
-import { Account } from '../views/account';
-import { Friends } from '../views/friends';
-import { SearchFriend } from '../views/searchFriend';
-import { Guard } from '../views/guard';
+import { Profile } from '../components/profile';
+import { Missions } from '../components/missions';
+import { Wizard } from '../components/wizard';
+import { Inbox } from '../components/inbox';
+import { Pets } from '../components/pets';
+import { Account } from '../components/account';
+import { Friends } from '../components/friends';
+import { SearchFriend } from '../components/searchFriend';
+import { Guard } from '../components/guard';
 
 // function which is responsible for router in game. By user navigation user can easly switch game section
 export const router = async () => {
@@ -101,17 +101,6 @@ export const navigateTo = (url: string) => {
 
 
 export const initRouter = () => {
-
-    window.addEventListener('popstate', () => router);
-
-   
-    // add events for links in navigation in order to redirect user to particular game section by using navigate() function
-    document.addEventListener("click", (e: any) => {
-        if (e.target.matches("[data-link]")) {
-            navigateTo(e.target.href);
-        };
-    });
-
     window.addEventListener("popstate", router);
 };
 

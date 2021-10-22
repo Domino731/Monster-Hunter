@@ -120,5 +120,5 @@ export const getFullUserStats = (userData: UserData | SearchedUserData): FullUse
       }
 
    }
-   return userStats
+   return userStats;
 }
