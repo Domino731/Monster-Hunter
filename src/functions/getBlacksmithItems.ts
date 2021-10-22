@@ -7,7 +7,8 @@ import { shieldsData } from '../properties/shop/shields';
 import { getRandomShopItem } from './getRandomShopItem';
 import { setItemStats } from './setItemStats';
 import { specialItemsData } from '../properties/shop/special';
-
+import uniqid from 'uniqid';
+const cloneDeep = require('lodash.clonedeep');
 /**
  * get array with random items data for blacksmith section (item data is based on user stats and guard payout)
  * @param rawStats - raw stats needed to sets stats of items
@@ -37,13 +38,14 @@ export const getBlacksmithItems = (rawStats: UserStats, guardPayout: number): Sh
 
       // set the item stats
       shopItems.forEach(el => {
-            const random: number = (Math.floor(Math.random() * 10) + 1) / 100;
-            const itemCost: number = Math.ceil(((el.initialCost + random) * guardPayout / 100));
+            const random: number = (Math.floor(Math.random() * 10) + 1);
             el.properties.strength = setItemStats(el.properties.strength, rawStats.strength);
             el.properties.defence = setItemStats(el.properties.defence, rawStats.defence);
             el.properties.physicalEndurance = setItemStats(el.properties.defence, rawStats.defence);
             el.properties.luck = setItemStats(el.properties.luck, rawStats.luck);
-            el.initialCost = itemCost;
+            el.initialCost = Math.ceil(((el.initialCost + random) * guardPayout / 100)) + Math.ceil((el.initialCost / 5) * random / 10);
+            el.id = uniqid();
+
       });
 
       return shopItems;

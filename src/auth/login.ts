@@ -21,9 +21,8 @@ export class Login extends AuthForm {
         }
     }
 
-    /**
-     * logging user
-     *  */ 
+    
+   /** logging user */  
     authAction() {
 
         // hide button and show loading
@@ -64,9 +63,8 @@ export class Login extends AuthForm {
 
     }
  
-    /**
-     * checking data passed by user
-     */
+    
+   /** checking data passed by user */
     checkData() {
         // there is no needed to checking data entered by user, 
         // because authAction method will check that data by auth.signInWithEmailAndPassword
