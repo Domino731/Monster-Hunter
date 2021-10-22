@@ -4,7 +4,7 @@
  * @returns 
  */
 export const isUpper = (string: string): boolean => {
-    return !/[a-z]/.test(string) && /[A-Z]/.test(string);
+    return  /[A-Z]/.test(string);
 }
 
 /**

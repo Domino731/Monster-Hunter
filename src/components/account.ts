@@ -21,7 +21,7 @@ export class Account extends Component {
     private deleteCode: string;
     private dom: {
         // inputs nedeed to get their values, based on this values authAction method will be invoke firebase auth action on this data - changeDataEvent() method
-        formInputs: NodeListOf<Element> | null;
+        formInputs: NodeListOf<HTMLInputElement> | null;
         // button on which firebase auth function is applied - updateEmail() and updatePassword() methods
         actionBtn: HTMLButtonElement | null;
         // error which displaying error when user provides incorrect data - changeDataEvent(),  updateEmail() and updatePassword() methods
@@ -38,7 +38,7 @@ export class Account extends Component {
         deleteAccountBtn: HTMLButtonElement | null;
     }
 
-    
+
     constructor() {
         super()
         this.freepikAttribute = `<a href='https://www.freepik.com/vectors/light'>Light vector created by vectorpouch - www.freepik.com</a>`;
@@ -49,7 +49,7 @@ export class Account extends Component {
             passwordRepeat: '',
             deleteCode: ''
         }
-       this.deleteCode = uniqid('', 'delete')
+        this.deleteCode = uniqid('', 'delete')
         this.dom = {
             updateFormContainer: document.querySelector('#update-account'),
             deleteAccountFormContainer: document.querySelector('#delete-account'),
@@ -66,7 +66,7 @@ export class Account extends Component {
 
     /**
      * method that is reponsible for deleting user's data from firestore
-     *  */ 
+     *  */
     deleteAccount() {
         // firebase auth function is sensitive, when user is logged in game for a long time then this request will be rejected,
         // if it fails, it's needed to back user's data in firestore, then show notification of fail action (by window alert) then
@@ -102,6 +102,7 @@ export class Account extends Component {
         this.dom.deleteAccountBtn.addEventListener('click', (e: Event) => {
             e.preventDefault();
             if (this.deleteCode === this.data.deleteCode) {
+                console.log(1)
                 const uid: string = auth.currentUser.uid
                 return db.collection('users').doc(uid).delete()
                     .then(() => {
@@ -153,7 +154,7 @@ export class Account extends Component {
             }
 
             // remove error
-            this.dom.errorWrapper.style.display = "none";
+            this.dom.errorWrapper.classList.add('disabled');
 
             // if user prescribe correct delete code then show button responsible for deleting account, otherwise hide this button
             if (this.data.deleteCode === this.deleteCode) {
@@ -173,7 +174,7 @@ export class Account extends Component {
             return dataChange(input);
         }));
     };
- 
+
     /**
      * firebase auth methods - changing email or password
      */
@@ -186,8 +187,27 @@ export class Account extends Component {
             return auth.currentUser.updatePassword(this.data.password)
                 .then(() => {
                     console.log('Password updated successfully');
+
+                     // clear password inputs
+                     const input1: HTMLInputElement = document.querySelector(`.account__element input[name='password']`);
+                     const input2: HTMLInputElement = document.querySelector(`.account__element input[name='passwordRepeat']`)
+                     input1.value = '';
+                     input2.value = '';
+
+                     // hide error
+                     this.dom.errorWrapper.classList.add('disabled');
+
+                    // notify the user
                     this.dom.successPasswordUpdate.classList.remove('disabled');
+
+                    // hide button
                     this.dom.actionBtn.classList.add('disabled');
+
+                    // remove above operations with delay
+                    setTimeout(()=> {
+                        this.dom.actionBtn.classList.remove('disabled');
+                        this.dom.successPasswordUpdate.classList.add('disabled');
+                    },3000)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -229,13 +249,28 @@ export class Account extends Component {
      * updating user e-mail 
      */
     updateEmail() {
+
         // update only when user enter new
         if (auth.currentUser.email !== this.data.email && validator.isEmail(this.data.email) && this.data.email.length !== 0) {
+
             return auth.currentUser.updateEmail(this.data.email)
                 .then(() => {
                     console.log('Email updated successfully');
+
+                    // hide error
+                    this.dom.errorWrapper.classList.add('disabled');
+
+                    // notify the user
                     this.dom.successEmailUpdate.classList.remove('disabled');
+
+                    // hide button
                     this.dom.actionBtn.classList.add('disabled');
+
+                     // remove above operations with delay
+                     setTimeout(()=> {
+                        this.dom.actionBtn.classList.remove('disabled');
+                        this.dom.successEmailUpdate.classList.add('disabled');
+                    },3000)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -250,11 +285,12 @@ export class Account extends Component {
                 });
         }
         if (!validator.isEmail(this.data.email) && this.data.email.length !== 0) {
+            console.log(this.dom.errorWrapper);
             this.dom.errorWrapper.classList.remove('disabled');
             this.dom.errorWrapper.innerText = 'Invalid e-mail';
         }
     }
- 
+
     /**
      * event applied on actionBtn with firebase auth action, responsible for update user's profile
      */

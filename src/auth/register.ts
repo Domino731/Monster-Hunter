@@ -38,7 +38,7 @@ export class Register extends AuthForm {
         }
     }
 
-    // creating new user with initial data (InitialUserProfile) in firestore
+    /** creating new user with initial data (InitialUserProfile) in firestore */ 
     authAction() {
 
         // hide button and show loading
@@ -94,8 +94,9 @@ export class Register extends AuthForm {
 
     }
 
-    // display errors in form, this method is invoked in addButtonEvent() method only when isCorrect value is true
+    /** display errors in form, this method is invoked in addButtonEvent() method only when isCorrect value is true */ 
     setErrors() {
+
         // checking email
         if (!validator.isEmail(this.data.eMail)) {
             this.invalid.eMail.innerText = "Invalid e-mail.";
@@ -103,7 +104,7 @@ export class Register extends AuthForm {
         }
 
         // checking password
-        if (this.data.password.length <= 6 && !includeNumber(this.data.password) && !isUpper(this.data.password)) {
+        if (this.data.password.length <= 6 || !includeNumber(this.data.password) || !isUpper(this.data.password)) {
             this.invalid.password.style.color = "#e63946";
             this.input.password.style.borderBottomColor = "#e63946";
         }
@@ -116,13 +117,14 @@ export class Register extends AuthForm {
 
         if (this.data.nickname.length < 4) {
             this.invalid.nickname.style.color = "#e63946";
-            this.invalid.nickname.innerText = 'Invalid nick,'
+            this.invalid.nickname.innerText = 'Invalid nick';
             this.input.nickname.style.borderBottomColor = "#e63946";
         }
     }
 
-    // remove all errors in form
+    /** remove all errors in form */
     removeErrors() {
+
         // for email
         if (validator.isEmail(this.data.eMail)) {
             this.invalid.eMail.innerText = "";
@@ -145,17 +147,17 @@ export class Register extends AuthForm {
         if (this.data.nickname.length >= 4) {
             this.invalid.nickname.style.color = "#03071e";
             this.input.nickname.style.borderBottomColor = "#ffcd00";
+            this.invalid.nickname.innerText = '*Nickname should be at least 4 characters long';     
         }
-
-
-
     }
 
-    // check if user's data is correct, if data is incorrect then authAction() wont be triggred and the setErrors() method will be invoke. 
-    // These methods are apllied in addButtonEvent() method.
+    /** check if user's data is correct, if data is incorrect then authAction() wont be triggred and the setErrors() method will be invoke. 
+    These methods are apllied in addButtonEvent() method. */
     checkData() {
+
         // when user's provides new data remove all errors
         this.removeErrors();
+
         // checking requirements
         if (!validator.isEmail(this.data.eMail)
             || this.data.password.length <= 6
