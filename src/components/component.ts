@@ -197,7 +197,6 @@ export class Component {
       }
 
       // set last visit
-      this.userData.shop.blacksmith = getBlacksmithItems(this.userData.rawStats, this.userData.guardPayout);
       this.userData.lastVisit = today;
       updateUserData(this.userData);
 
