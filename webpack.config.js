@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const path = require("path");
 const mode = process.env.NODE_ENV || "development";
 const target = process.env.NODE_ENV === "production" ? "browserslist" : "web";
 
@@ -49,9 +49,10 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
   },
- // devtool: "source-map",
+  devtool: "source-map",
   devServer: {
-    contentBase: "./dist/",
+    contentBase: path.join(__dirname),
+    publicPath: "./dist/",
     compress: true,
     port: 3001,
     historyApiFallback: true,

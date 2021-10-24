@@ -4,7 +4,7 @@
     }
     &-menu {
         height: 100%;
-        background-image: url("../../dist/images/background_guard.jpg");
+        background-image: url(../../images/background_guard.jpg);
         background-size: 100% 100%;
         display: flex;
         justify-content: center;
@@ -23,12 +23,12 @@
             padding-bottom: 20px;
         }
         @include mobileM {
-           overflow-x: hidden;
+            overflow-x: hidden;
         }
     }
     &-city {
         height: 100%;
-        background-image: url("../../dist/images/background_guard_city.jpg");
+        background-image: url(../../images/background_guard_city.jpg);
         background-size: 100% 100%;
         width: 100%;
         display: flex;
@@ -139,7 +139,7 @@
             font-size: 35px;
         }
         @include mobileS {
-         font-size: 28px;
+            font-size: 28px;
         }
     }
     &__text {
@@ -339,7 +339,7 @@
         left: 0;
         width: 50px;
         height: 50px;
-        background-image: url("../../dist/images/guard_input_range__progress_icon.png");
+        background-image: url(../../images/guard_input_range__progress_icon.png);
         background-size: 100% 100%;
         transform: translateY(-1px);
         z-index: 3;

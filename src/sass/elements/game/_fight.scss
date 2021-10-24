@@ -1,6 +1,6 @@
 .fight {
     height: 100%;
-    background-image: url("../../dist/images/background_monster_fight.jpg");
+    background-image: url(../../images/background_monster_fight.jpg);
     background-size: 100% 100%;
     display: flex;
     align-items: center;
@@ -10,7 +10,7 @@
     &::-webkit-scrollbar {
         width: 0;
     }
-    
+
     @include tablet {
         padding: 0;
     }
@@ -27,7 +27,7 @@
         &::-webkit-scrollbar {
             width: 0;
         }
-       
+
         @include tablet {
             width: 758px;
             margin: 0 auto;
@@ -62,7 +62,7 @@
             position: relative;
         }
         @media screen and (max-height: 500px) {
-            margin-top: 20px; 
+            margin-top: 20px;
         }
         @include desktopM {
             width: 310px;
@@ -97,7 +97,6 @@
             width: 110px;
             border-radius: 7px;
         }
-     
     }
     &__characterImg {
         width: 100%;
@@ -291,7 +290,7 @@
             backdrop-filter: blur(4px);
         }
         @media screen and (max-height: 500px) {
-            margin-top: 20px; 
+            margin-top: 20px;
         }
         @include desktopS {
             padding: 6px;
@@ -616,7 +615,7 @@
         transform: translateX(-80px);
     }
 }
-@keyframes  an__monster_attack-mobileS {
+@keyframes an__monster_attack-mobileS {
     100% {
         transform: translateX(-90px);
     }
@@ -723,7 +722,6 @@
         transform: translate(200px, 0%) scale(100%);
     }
 }
-
 
 @keyframes an__attack_explosion {
     100% {

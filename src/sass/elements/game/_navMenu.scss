@@ -193,7 +193,6 @@
             height: 43px;
             font-size: 19px;
             width: 76%;
-            
         }
         @include mobileM {
             height: 36px;
@@ -205,18 +204,16 @@
             font-size: 15px;
             width: 82%;
         }
-         &-active{
-             @media screen and (min-width: 768px) {
-              &::after{
-                right: 0 !important;
-                @include laptopL {
-                    right: -4px !important;
+        &-active {
+            @media screen and (min-width: 768px) {
+                &::after {
+                    right: 0 !important;
+                    @include laptopL {
+                        right: -4px !important;
+                    }
                 }
-               }   
-             }
-           
-             
-         }
+            }
+        }
         &::after {
             content: "";
             display: block;
@@ -235,17 +232,15 @@
                 width: 40px;
                 height: 75px;
                 bottom: -27px;
-                
             }
             @include laptopL {
-               transform: rotate(20deg);
+                transform: rotate(20deg);
             }
             @include ipadPro {
                 width: 104px;
                 bottom: -28px;
             }
             @include laptopL {
-
             }
             @include tablet {
                 width: 78px;
@@ -256,7 +251,6 @@
                 bottom: -21px;
                 right: -32px;
             }
-            
         }
         &::before {
             content: "";
@@ -270,29 +264,26 @@
                 top: -21px;
                 left: -32px;
             }
-          
         }
 
         &:hover::after {
             @media screen and (min-width: 764px) {
                 right: 0;
             }
-           @include laptopL {
-               right: -4px;
-           }
+            @include laptopL {
+                right: -4px;
+            }
         }
 
-
         @media screen and (max-width: 767px) {
-            &-active{
-                 &::after{
-                width: 100px;
+            &-active {
+                &::after {
+                    width: 100px;
+                }
+                &::before {
+                    width: 100px;
+                }
             }
-            &::before{
-                width: 100px;
-            } 
-            }
-          
         }
         &-reverse {
             border-radius: 30px 0 0 30px;
@@ -385,7 +376,7 @@
             }
         }
     }
-    &__copyright{
+    &__copyright {
         font-size: 0.938rem;
         letter-spacing: 0.063rem;
         font-weight: 600;
@@ -442,7 +433,6 @@
         @include mobileM {
             height: 32px;
         }
-        
     }
     &__itemIcon {
         z-index: 1;
@@ -479,12 +469,11 @@
         }
     }
 }
-#freepik-attribute{
+#freepik-attribute {
     font-size: 0.875rem;
     text-align: center;
-     margin-top: 0.563rem;
-    a{
-       
-         color: $color-red;
+    margin-top: 0.563rem;
+    a {
+        color: $color-red;
     }
 }

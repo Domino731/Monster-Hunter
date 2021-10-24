@@ -1,7 +1,7 @@
 .searchFriend {
     display: flex;
     height: 100%;
-    background-image: url("../../dist/images/background_search_friend.jpg");
+    background-image: url(../../images/background_search_friend.jpg);
     background-size: 100% 100%;
     position: relative;
     @include tablet {
@@ -240,9 +240,9 @@
                 margin-left: 11px;
             }
             @include laptopL {
-              margin-left: 17px;
+                margin-left: 17px;
             }
-           
+
             @include laptopS {
                 margin-left: 12px;
             }
@@ -347,7 +347,6 @@
         z-index: 1;
         text-indent: -11px;
         @include desktopS {
-            
             text-indent: -8px;
         }
         @include laptopL {

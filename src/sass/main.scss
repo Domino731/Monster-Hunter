@@ -1,27 +1,24 @@
 @import "./generic/reset";
- @import "./settings/colors";
- @import "./settings/media";
- @import "./settings/all";
+@import "./settings/colors";
+@import "./settings/media";
+@import "./settings/all";
 @import "./elements/signInForm/signInForm";
 
-
- @import "./elements/game/general";
- @import "./elements/game/navMenu";
- @import "./elements/game/profile";
- @import "./elements/game/pets";
- @import "./elements/game/blacksmith";
- @import "./elements/game/wizard";
- @import "./elements/game/shop";
- @import "./elements/game/tavern";
- @import "./elements/game/guard";
+@import "./elements/game/general";
+@import "./elements/game/navMenu";
+@import "./elements/game/profile";
+@import "./elements/game/pets";
+@import "./elements/game/blacksmith";
+@import "./elements/game/wizard";
+@import "./elements/game/shop";
+@import "./elements/game/tavern";
+@import "./elements/game/guard";
 @import "./elements/game/searchFriends";
- @import "./elements/game/friends";
-  @import "./elements/game/inbox";
- @import "./elements/game/account";
- @import "./elements/game/travel";
+@import "./elements/game/friends";
+@import "./elements/game/inbox";
+@import "./elements/game/account";
+@import "./elements/game/travel";
 @import "./elements/game/fight";
- @import "./elements/game/chat";
- @import './elements/game/loading';
- @import './elements/game/labelPositions';
-
- 
+@import "./elements/game/chat";
+@import "./elements/game/loading";
+@import "./elements/game/labelPositions";
