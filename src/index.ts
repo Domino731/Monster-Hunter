@@ -6,6 +6,7 @@ import { MobileNav } from './general/mobileNav';
 
 window.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged((user: any) => {
+        console.log(12)
         if(user){
             navigateTo(window.location.pathname)
             initRouter();

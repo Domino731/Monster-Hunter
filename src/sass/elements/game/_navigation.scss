@@ -238,9 +238,7 @@
             }
             @include ipadPro {
                 width: 104px;
-                bottom: -28px;
-            }
-            @include laptopL {
+                bottom: -25px;
             }
             @include tablet {
                 width: 78px;
@@ -270,7 +268,7 @@
             @media screen and (min-width: 764px) {
                 right: 0;
             }
-            @include laptopL {
+            @media screen and (max-width: 1439px) and (min-width: 764px) {
                 right: -4px;
             }
         }
@@ -302,6 +300,7 @@
             &:hover::after {
                 left: -2px;
             }
+
             @include mobileL {
                 margin: 0;
                 padding: 0;

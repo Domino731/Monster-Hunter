@@ -12,6 +12,10 @@ module.exports = {
     auth: `./src/auth.ts`,
     index: `./src/index.ts`
   },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, `./dist/`)
+  },
   plugins: [new MiniCssExtractPlugin()],
 
   module: {
@@ -52,7 +56,7 @@ module.exports = {
   devtool: "source-map",
   devServer: {
     contentBase: path.join(__dirname),
-    publicPath: "./dist/",
+    publicPath: "/dist/",
     compress: true,
     port: 3001,
     historyApiFallback: true,
