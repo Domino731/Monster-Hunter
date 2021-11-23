@@ -10,7 +10,16 @@ Project is created with:
 * Webpack
 * Sass
 * Firebase
-
+## Table of contests
+* 1. [Available sections in game](#available-sections-in-game)
+* 2. [Component](#component)
+* 2. [Missions](#missions)
+* 2. [Tavern](#tavern)
+* 2. [onGuardTavern](#onguardtavern)
+* 2. [Travel](#travel)
+* 2. [Component](#component)
+* 2. [Component](#component)
+* 1. [Available sections in game](#available-sections-in-game)
 ## Available sections in game
 *  Tavern - A Place where user can select mission followed by a fight with a monster.
 *  Profile - View where the user can see his profile, equipment, backpack, potions, pet. In this section user can also increase his hero statistics.
@@ -23,7 +32,7 @@ Project is created with:
 *  Inbox - An email inbox, this is a to further development of the game for example to give away prizes to a random player.
 *  Account - Panel where user can change his password, email or delete his account :( 
 
-## Compontents
+## Components
 
 ### `Component (abstract class)`
 This is class which is expaneded by all components in game, is a bit like the class component from react. His task is to provide base methods responsible for logic behind component. 
@@ -80,7 +89,7 @@ This class is responsible for redirecting user's to the appropriate section base
     * Set willingness bar styles.
 
 ### `onGuardTavern (extends Component class)`
-Class responsible for tavern section when user is on guard
+Class responsible for tavern section when user is on guard, notifies about current guard
  
 ### `Travel (extends Component class)`    
 
