@@ -52,6 +52,11 @@ export class Login extends AuthForm {
                     this.invalid.innerText = "Invalid e-mail";
                     this.input.eMail.style.borderBottomColor = "#e63946";
                 }
+                else if (errorCode === 'auth/too-many-requests'){
+                    this.input.password.style.borderBottomColor = "#e63946";
+                    this.input.eMail.style.borderBottomColor = "#e63946";
+                    this.invalid.innerText = "Too manu requests";
+                }
                 else {
                     this.invalid.innerText = "Invalid e-mail or password";
                     this.input.password.style.borderBottomColor = "#e63946";
