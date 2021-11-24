@@ -13,13 +13,28 @@ Project is created with:
 ## Table of contests
 * 1. [Available sections in game](#available-sections-in-game)
 * 2. [Component](#component)
-* 2. [Missions](#missions)
-* 2. [Tavern](#tavern)
-* 2. [onGuardTavern](#onguardtavern)
-* 2. [Travel](#travel)
-* 2. [Component](#component)
-* 2. [Component](#component)
-* 1. [Available sections in game](#available-sections-in-game)
+* 3. [Missions](#missions)
+* 4. [Tavern](#tavern)
+* 5. [onGuardTavern](#onguardtavern)
+* 6. [Travel](#travel)
+* 7. [MonsterFight](#monsterfight)
+* 8. [Profile](#profile)
+* 9. [Blacksmith](#blacksmith)
+* 10. [Pets](#pets)
+* 11. [Wizard](#wizard)
+* 12. [Guard](#guard)
+* 13. [Friends](#friends)
+* 14. [SearchFriend](#searchfriend)
+* 15. [Inbox](#inbox)
+* 16. [Account](#account)
+* 17. [SearchedUser](#searcheduser)
+* 18. [Chat](#chat)
+* 19. [General](#general)
+* 20. [Chat](#chat)
+* 21. [Authorization](#authorization)
+* 22. [Available functions](#available-functions)
+* 23. [Properties](#properties)
+* 24. [Firestore data structure](#firestore-data-structure)
 ## Available sections in game
 *  Tavern - A Place where user can select mission followed by a fight with a monster.
 *  Profile - View where the user can see his profile, equipment, backpack, potions, pet. In this section user can also increase his hero statistics.
@@ -383,9 +398,7 @@ Class which is responsible for click event applied on logout button, and for res
 `getBlacksmithItems()` function will set item properties based on user stats.) and initial cost (percentage of user gaurd payout, `getBlacksmithItems()` function will set cost). 
 
 ## Authorization
-The Firebase service is providing by google and is responsible for the backend of this project. Operations which are responsible for authorization are in sub page - /login
-
-
+The Firebase service is providing backend for this project,  and this service is responsible for the backend of this project. Operations which are responsible for authorization are in sub page - /login
 
 ### `AuthForm`
 Abstract class responsbile for firebase authentication action. 
