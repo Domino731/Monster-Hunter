@@ -1,6 +1,6 @@
 # Monster Hunter
 
-Game based on components that resemble those available in react. Moving between the components is available by router. The whole database and authorization process was achieved by using Firebase by google. The game has 10 sections where each is different in order to provide the user a lot of fun. Game also has a chat with friends. While creating this game I was inspired by a popular game available in browsers - shakes & fidget. Available at https://upbeat-saha-eacb87.netlify.app/login.html
+Game based on components that resemble those available in react. Moving between the components is available by router. The whole database and authorization process was achieved by using Firebase by google. The game has 10 sections where each is different in order to provide the user a lot of fun. Game also has a chat with friends. While creating this game I was inspired by a popular game available in browsers - shakes & fidget. Available at https://nostalgic-wiles-e97517.netlify.app
 
 ## Technologies
 
